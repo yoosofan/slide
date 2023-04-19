@@ -28,21 +28,6 @@ class complexCls{
     c.i = a.i - b.i;
     return c;
   }
-  complexCls operator++(void)   // ++a
-  { i++; r++; return *this;  }
-  complexCls operator++(int dummy) // a++
-  {complexCls result=*this; r++; i++; return result;}
-  complexCls operator--(void)   // --a
-  { i--; r--; return *this;  }
-  complexCls operator--(int dummy) // a--
-  {complexCls result=*this; r--; i--; return result;}
-  friend complexCls operator*(const complexCls& a,
-      const complexCls& b){
-    complexCls c;
-    c.r = a.r * b.r - a.i * b.i;
-    c.i = a.r * b.i + a.i * b.r;
-    return c;
-  }
  complexCls operator=(const complexCls& b){
     r = b.r;
     i = b.i;
@@ -64,6 +49,22 @@ class complexCls{
   {return a == b ? false: true;}
   bool operator!(void)
   {return r == 0 && i == 0 ? true: false;}
+
+  complexCls operator++(void)   // ++a
+  { i++; r++; return *this;  }
+  complexCls operator++(int dummy) // a++
+  {complexCls result=*this; r++; i++; return result;}
+  complexCls operator--(void)   // --a
+  { i--; r--; return *this;  }
+  complexCls operator--(int dummy) // a--
+  {complexCls result=*this; r--; i--; return result;}
+  friend complexCls operator*(const complexCls& a,
+      const complexCls& b){
+    complexCls c;
+    c.r = a.r * b.r - a.i * b.i;
+    c.i = a.r * b.i + a.i * b.r;
+    return c;
+  }
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);

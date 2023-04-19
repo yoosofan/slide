@@ -360,6 +360,27 @@ ComplexCls(VIII) / Operator ++ --
     :end-line: 89
 
 
+-----
+
+:class: t2c
+
+ComplexCls(VIII) / Operator ++ --
+==================================================
+.. include:: src/op/1130.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1130.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
 ---
 
 END

@@ -2634,7 +2634,7 @@ MyArray(II-1) - Error
 ----
 
 MyArray(III-1) - Error Output
-============================
+==============================
 .. code:: sh
 
     In function ‘int main()’:

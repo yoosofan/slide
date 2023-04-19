@@ -38,7 +38,4 @@ void f1(void){
   c = a + 2;  c.Show();
   c = a - 2;  c.Show();
 }
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}
