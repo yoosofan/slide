@@ -1,0 +1,28 @@
+
+
+1. send - block ,   recieve - block
+2. send - nonblock, recieve - block
+3. send - block,    recieve - nonblock
+4. send - nonblock, recieve - nonblock
+blocking  مسدود شوند   ,  nonblocking  مسدود نشونده
+
+
+
+Inter Process Communication (IPC)
+Remote Procedure Call  (RPC)
+Java Methode Invocation (JMI)
+MPICH
+Send(destination, message) -- blocking ,  nonblocking
+Recieve(source , message)  -- blocking ,  nonblocking
+
+
+
+
+Send( destination, Message)
+Send(* , Message)
+receive(*, message)
+* – to/from all precesses in the system OR processes in my group
+gid --- group ID 
+Message length – limited , unlimited
+fixed  , variable
+

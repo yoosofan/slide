@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="8cm" height="14cm" viewBox="51 8 149 266" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs/>
+  <g id="Background">
+    <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="52" y="21" width="57" height="45" rx="0" ry="0"/>
+    <text font-size="9.07627" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="75.5" y="16.5">
+      <tspan x="75.5" y="16.5">R0</tspan>
+    </text>
+    <ellipse style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" cx="175" cy="45" rx="23" ry="23"/>
+    <text font-size="9.64071" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="171" y="49">
+      <tspan x="171" y="49">P0</tspan>
+    </text>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="82.296" y1="43.5" x2="139.999" y2="44.4337"/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="139.918,49.433 149.998,44.5955 140.08,39.4343 "/>
+    </g>
+    <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="54.7" y="91" width="57" height="45" rx="0" ry="0"/>
+    <text font-size="9.07627" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="79.2" y="85.5">
+      <tspan x="79.2" y="85.5">R1</tspan>
+    </text>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="81.996" y1="107" x2="143.765" y2="52.2932"/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="147.08,56.0362 151.251,45.663 140.45,48.5501 "/>
+    </g>
+    <ellipse style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" cx="170.7" cy="143" rx="23" ry="23"/>
+    <text font-size="9.64071" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="165.7" y="146">
+      <tspan x="165.7" y="146">P1</tspan>
+    </text>
+    <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="53.8" y="162" width="57" height="45" rx="0" ry="0"/>
+    <text font-size="9.07627" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="78.3" y="156.5">
+      <tspan x="78.3" y="156.5">R2</tspan>
+    </text>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="80.75" y1="185.5" x2="138.413" y2="148.895"/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="141.093,153.117 146.856,143.536 135.733,144.674 "/>
+    </g>
+    <rect style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x="53.5" y="226" width="57" height="45" rx="0" ry="0"/>
+    <text font-size="9.07627" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="78" y="221.5">
+      <tspan x="78" y="221.5">R3</tspan>
+    </text>
+    <ellipse style="fill: #ffffff; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" cx="167.8" cy="249" rx="23" ry="23"/>
+    <text font-size="9.64071" style="fill: #000000; fill-opacity: 1; stroke: none;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="163.8" y="253">
+      <tspan x="163.8" y="253">P2</tspan>
+    </text>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="83.396" y1="234" x2="134.114" y2="246.39"/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="132.928,251.247 143.829,248.763 135.301,241.532 "/>
+    </g>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="80.75" cy="185.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="82.2962" cy="43.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="81.9962" cy="107.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="80.6962" cy="122.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="83.3962" cy="234.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="84.0962" cy="261.25" rx="0.24998" ry="0.24998"/>
+    <ellipse style="fill: none; stroke-opacity: 1; stroke-width: 6; stroke: #000000" cx="83.7962" cy="249.25" rx="0.24998" ry="0.24998"/>
+    <g>
+      <line style="fill: none; stroke-opacity: 1; stroke-width: 2; stroke: #000000" x1="80.6962" y1="122" x2="138.41" y2="140.088"/>
+      <polygon style="fill: #000000; fill-opacity: 1; stroke-opacity: 1; stroke-width: 2; stroke: #000000" fill-rule="evenodd" points="145.566,142.331 134.529,144.112 138.41,140.088 137.519,134.569 "/>
+    </g>
+  </g>
+</svg>

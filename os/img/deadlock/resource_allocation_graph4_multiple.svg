@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by diasvg.py -->
+<svg width="7.400cm" height="13.248cm" viewBox="2.550 0.402 9.950 13.650"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect x="2.600" y="1.050" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.600" y="1.050" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.775" y="0.825"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R0</text>
+<ellipse cx="8.750" cy="2.250" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.750" cy="2.250" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.750" cy="2.250" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.550" y="2.450"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P0</text>
+<line x1="4.115" y1="2.175" x2="7.000" y2="2.222" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="6.996,2.472 7.500,2.230 7.004,1.972 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="6.996,2.472 7.500,2.230 7.004,1.972 "/>
+<rect x="2.735" y="4.550" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.735" y="4.550" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.960" y="4.275"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R1</text>
+<line x1="4.100" y1="5.350" x2="7.188" y2="2.615" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="7.354,2.802 7.563,2.283 7.023,2.428 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="7.354,2.802 7.563,2.283 7.023,2.428 "/>
+<ellipse cx="8.535" cy="7.150" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.535" cy="7.150" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.535" cy="7.150" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.285" y="7.300"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P1</text>
+<line x1="7.385" y1="7.150" x2="4.561" y2="6.286" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="4.634,6.047 4.083,6.140 4.488,6.525 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="4.634,6.047 4.083,6.140 4.488,6.525 "/>
+<rect x="2.690" y="8.100" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.690" y="8.100" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.915" y="7.825"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R2</text>
+<line x1="4.037" y1="9.275" x2="6.921" y2="7.445" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="7.055,7.656 7.343,7.177 6.787,7.234 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="7.055,7.656 7.343,7.177 6.787,7.234 "/>
+<rect x="2.675" y="11.300" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.675" y="11.300" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.900" y="11.075"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R3</text>
+<ellipse cx="8.390" cy="12.450" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.390" cy="12.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.390" cy="12.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.190" y="12.650"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P2</text>
+<line x1="4.170" y1="11.700" x2="6.706" y2="12.319" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="6.646,12.562 7.191,12.438 6.765,12.077 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="6.646,12.562 7.191,12.438 6.765,12.077 "/>
+<ellipse cx="4.037" cy="9.262" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.037" cy="9.262" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.115" cy="2.162" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.115" cy="2.162" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.100" cy="5.362" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.100" cy="5.362" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.035" cy="6.112" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.035" cy="6.112" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.170" cy="11.712" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.170" cy="11.712" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.205" cy="13.062" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.205" cy="13.062" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.190" cy="12.462" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /><ellipse cx="4.190" cy="12.462" rx="0.012" ry="0.012" fill="none" stroke="#000000"  stroke-width="0.300" /></svg>

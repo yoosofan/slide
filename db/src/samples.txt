@@ -1,0 +1,6 @@
+/*
+ * http://www.datanamic.com/support/lt-dez005-introduction-db-modeling.html
+ * https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html
+ * search keywords:
+ *    shopping database customer table sale table address
+*/

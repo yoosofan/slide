@@ -1,0 +1,12 @@
+A → B 'EOF'
+B → 'BEGIN' '\n' L 'END' '\n'
+L → 'LET' 'ID' = E
+L → 'PRINT' E
+L → 'WHILE' E '\n' B 
+E → T E'
+E' → + T E' | -T E' | λ
+T  → F T'
+T' → * F T' | / F T' | λ
+F  → 'NUMBER'
+F  → 'ID'
+F  → ( E )

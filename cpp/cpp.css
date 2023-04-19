@@ -1,0 +1,104 @@
+:root {
+ --yoo-gantt-chart-width: 450px;
+}
+ol.trace-code {justify-self: start; /*background-color: #BEF648;*/}
+pre.code { justify-self: center;}
+tr, td, th{border: 1px solid;}
+
+.yoo-gantt-chart > ul.withborder > li:nth-of-type(odd){
+  background-color: black;
+}
+.yoo-gantt-chart li{
+  list-style-type: none;
+  text-align: center;
+}
+
+/*
+ * cpu-burst-io-id
+*/
+
+div#c2cpp01-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#struct-name01-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#c2cpp-variable-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#c2cpp22-struct02-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#c2cpp22-struct02-01-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#cout14-multiple-output-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#cout16-multiple-output-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#cout18-multiple-output-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#c2cpp42-function-signature02-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#c2cpp42-function-signature06-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.two-column-yoosofan{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+div#polym01-id{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#polym02-id {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+div#ma100400-id {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.t2c > h1:nth-of-type(1){ grid-area: slidetitle; justify-self:center;}
+.t2c > pre:nth-of-type(1){ grid-area: p1code;}
+.t2c > pre:nth-of-type(2){ grid-area: p2code;}
+.t2c{
+  display: grid;
+  grid-template-areas:
+    'slidetitle slidetitle'
+    'p1code p2code'
+    ;
+  justify-items: start;
+  align-items: center;
+  gap: 2px;
+}

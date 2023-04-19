@@ -1,0 +1,60 @@
+#include<iostream>
+using namespace std;
+class complexCls{
+  double re = 0, img = 0; 
+ public:
+  complexCls(double r = 0, double i = 0){
+    img = i;
+    re = r;
+    cout << "constructor:"; print();
+  }
+  complexCls(const complexCls& a){
+    img = a.img;
+    re  = a.re;
+    cout << "copy constructor "; print();
+  }
+  double getRe(void) {return re;}
+  double getImg(void) {return img;}
+  void setRe(double a)  {re = a;}
+  ~complexCls()
+  {cout << "destructor:"; print();}
+  void print(void){
+    cout << '(' << re << ',' 
+      << img << ')' << endl;
+  }
+};
+void f4(complexCls);
+complexCls f2(complexCls);
+int main(){
+  complexCls c1(1, 2);
+  f4(c1);  
+  return 0;
+}
+complexCls f2(complexCls p){
+  p.print();
+  p.setRe(16);
+  return p;
+}
+void f4(complexCls p1){
+  p1.print();
+  complexCls p2(3, 4);
+  complexCls p3(5, 6);
+  p3 = f2(p2);  
+  p3.print();  
+}/*
+constructor:(1,2)
+copy constructor (1,2)
+(1,2)
+constructor:(3,4)
+constructor:(5,6)
+copy constructor (3,4)
+(3,4)
+copy constructor (16,4)
+destructor:(16,4)
+destructor:(16,4)
+(16,4)
+destructor:(16,4)
+destructor:(3,4)
+destructor:(1,2)
+destructor:(1,2)
+*/

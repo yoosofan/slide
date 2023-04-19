@@ -1,0 +1,16 @@
+/* Use these two if the main document direction is RTL */
+body { direction: rtl; font-family: Nazli; font-size: 0.7em}
+div.sidebar { float: left !important; font-family: Nazli;font-size: 0.7em}
+
+/* The next 3 rules are very useful in documents containing pieces
+of code in english */
+/* Use this if you all your literal blocks (::) are LTR */
+pre {direction: ltr; unicode-bidi: embed; font-size: 0.7em }
+/* Use this if you all your inline literals (``) are LTR */
+tt {direction: ltr; unicode-bidi: embed; font-size: 0.7em }
+/* Use this if you all your interpretted text (`) is LTR */
+cite {direction: ltr; unicode-bidi: embed;font-size: 0.7em  }
+
+/* Allow manual direction override by class directive and roles */
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }

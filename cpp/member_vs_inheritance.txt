@@ -1,0 +1,75 @@
+Ahmad Yoosofan, [06.03.16 12:05]
+[In reply to حسینی ، سید جواد ، کارشناسی ۹۴ کاشان]
+شکل زیبایی درست کرده‌ای و خوب است. گرچه کمی نیز ابهام دارد ولی  خیلی خوب است که به فکر نمایش بصری آن نیز هستی
+شاید شکل دقیق‌تر آن زمانی است که به شکل درختی نمایش دهی یعنی برای زماین که ارث بری در برنامه نویسی به کار می‌بریم این دو با هم ارتباط ارث بری دارند ولی در حالت عضو بودن این ارتباط به شکل ارث بری و درختی نیست که  کتابدار نوعی شحص باشد.
+باز هم تکرار می‌کنم درک مفهوم ارث بری اهمیت اصلی دارد ادامه‌ی کارها در برنامه نویسی به کارگیری سودمندی ارتباط ارث بری و قانون‌ها و حالت‌های گوناگون به کارگیری آن در یک زبان برنامه نویسی خاص است.
+
+Ahmad Yoosofan, [06.03.16 15:12]
+http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-096-introduction-to-c-january-iap-2011/lecture-notes/MIT6_096IAP11_lec07.pdf
+
+Ahmad Yoosofan, [06.03.16 15:13]
+تفاوت میان Is_a و Has_a در صفحه‌ی چهارم
+
+Ahmad Yoosofan, [06.03.16 15:17]
+https://en.wikiversity.org/wiki/C%2B%2B/Classes_and_Inheritance
+
+Ahmad Yoosofan, [06.03.16 15:20]
+asatid/Yoosofan/course/cpp/slides/inheritance-1-140808074959-phpapp02.ppt
+از
+http://www.slideshare.net/arslanwaseembhutta/inheritance-object-oriented-programming
+
+Ahmad Yoosofan, [06.03.16 15:24]
+asatid/Yoosofan/course/cpp/slides/ganinherit-110918030314-phpapp02.pptx
+از
+http://www.slideshare.net/MuraleedharSundararajan/inheritance-c
+
+Ahmad Yoosofan, [06.03.16 15:27]
+asatid/Yoosofan/course/cpp/slides/04inheritance-1222262145218028-9.ppt
+از
+http://www.slideshare.net/pohjus/c-inheritance-presentation
+
+Ahmad Yoosofan, [06.03.16 15:29]
+asatid/Yoosofan/course/cpp/slides/inheritance-140409115405-phpapp01.pptx
+از
+http://www.slideshare.net/laxmanpuri71/inheritance-in-c-33330217
+
+Ahmad Yoosofan, [06.03.16 15:32]
+http://www.ntu.edu.sg/home/ehchua/programming/cpp/cp6_Inheritance.html
+
+Ahmad Yoosofan, [06.03.16 15:34]
+asatid/Yoosofan/course/cpp/slides/blg252e_complete.pdf
+از
+http://web.itu.edu.tr/bkurt/Courses/blg252e/blg252e_complete.pdf
+
+Ahmad Yoosofan, [06.03.16 15:35]
+http://web.itu.edu.tr/bkurt/Courses/blg252e/
+
+Ahmad Yoosofan, [06.03.16 15:37]
+http://www.tutorialspoint.com/cplusplus/cpp_inheritance.htm
+
+Ahmad Yoosofan, [06.03.16 15:38]
+https://en.wikipedia.org/wiki/Inheritance_%28object-oriented_programming%29
+
+Ahmad Yoosofan, [06.03.16 15:39]
+http://www.tenouk.com/Module14.html
+
+Ahmad Yoosofan, [06.03.16 15:41]
+https://en.wikibooks.org/wiki/C%2B%2B_Programming/Classes
+
+Ahmad Yoosofan, [06.03.16 15:43]
+http://stackoverflow.com/questions/2070567/object-oriented-programming-inheritance-copy-constructor/2070786
+
+Ahmad Yoosofan, [06.03.16 15:48]
+asatid/Yoosofan/course/cpp/slides/Chapter14.pdf
+از
+http://www-personal.engin.umd.umich.edu/~shen/course/cis150/Chapter14.pdf
+
+Ahmad Yoosofan, [07.03.16 09:49]
+از سایت مکتبخانه ویدئوهای آموزشی جدیدی برای این درس را گرفته‌ام و در نشانی زیر گذاشته‌ام.
+
+Ahmad Yoosofan, [07.03.16 09:49]
+asatid/Yoosofan/course/cpp/video.course/Ramtin.Khosravi.fall.1394
+
+Ahmad Yoosofan, [07.03.16 09:50]
+حتما بردارید و در زمان های خارج از کلاس و تعطیلات ببینید تا بحث‌های کلاس تکمیل شود و در این گروه پرسش‌هایتان را در این زمینه بپرسید
+

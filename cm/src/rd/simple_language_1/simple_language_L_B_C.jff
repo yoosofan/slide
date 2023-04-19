@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 6.4.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>66.0</x>
+			<y>83.0</y>
+		</state>
+		<state id="1" name="q1">
+			<x>194.0</x>
+			<y>82.0</y>
+		</state>
+		<state id="2" name="q2">
+			<x>336.0</x>
+			<y>85.0</y>
+		</state>
+		<state id="3" name="q3">
+			<x>488.0</x>
+			<y>82.0</y>
+		</state>
+		<state id="4" name="q4">
+			<x>87.0</x>
+			<y>169.0</y>
+		</state>
+		<state id="5" name="q5">
+			<x>227.0</x>
+			<y>168.0</y>
+		</state>
+		<state id="6" name="q6">
+			<x>58.0</x>
+			<y>252.0</y>
+		</state>
+		<state id="7" name="q7">
+			<x>180.0</x>
+			<y>247.0</y>
+		</state>
+		<state id="8" name="q8">
+			<x>247.0</x>
+			<y>335.0</y>
+		</state>
+		<state id="9" name="q9">
+			<x>443.0</x>
+			<y>251.0</y>
+		</state>
+		<state id="10" name="q10">
+			<x>544.0</x>
+			<y>175.0</y>
+		</state>
+		<state id="11" name="q11">
+			<x>607.0</x>
+			<y>107.0</y>
+		</state>
+		<state id="12" name="q12">
+			<x>676.0</x>
+			<y>77.0</y>
+		</state>
+		<state id="13" name="q13">
+			<x>758.0</x>
+			<y>65.0</y>
+		</state>
+		<state id="14" name="q14">
+			<x>642.0</x>
+			<y>187.0</y>
+		</state>
+		<state id="15" name="q15">
+			<x>725.0</x>
+			<y>177.0</y>
+		</state>
+		<state id="16" name="q16">
+			<x>541.0</x>
+			<y>270.0</y>
+		</state>
+		<state id="17" name="q17">
+			<x>602.0</x>
+			<y>306.0</y>
+		</state>
+		<state id="18" name="q18">
+			<x>677.0</x>
+			<y>308.0</y>
+		</state>
+		<state id="19" name="q19">
+			<x>770.0</x>
+			<y>307.0</y>
+		</state>
+		<state id="20" name="q20">
+			<x>833.0</x>
+			<y>301.0</y>
+		</state>
+		<state id="21" name="q21">
+			<x>903.0</x>
+			<y>300.0</y>
+		</state>
+		<state id="22" name="q22">
+			<x>985.0</x>
+			<y>300.0</y>
+		</state>
+		<state id="23" name="q23">
+			<x>863.0</x>
+			<y>62.0</y>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>20</from>
+			<to>21</to>
+			<read>B</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>16</to>
+			<read>WHILE</read>
+		</transition>
+		<transition>
+			<from>7</from>
+			<to>8</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>6</from>
+			<to>7</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>L</read>
+		</transition>
+		<transition>
+			<from>13</from>
+			<to>23</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>21</from>
+			<to>22</to>
+			<read>END</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>6</to>
+			<read>PRINT</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>14</to>
+			<read>PRINT</read>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>6</to>
+			<read>LET</read>
+		</transition>
+		<transition>
+			<from>14</from>
+			<to>15</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>17</from>
+			<to>18</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>16</from>
+			<to>17</to>
+			<read>E</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read/>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>9</to>
+			<read/>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>13</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>C</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>5</to>
+			<read>B</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>12</to>
+			<read>ID</read>
+		</transition>
+		<transition>
+			<from>8</from>
+			<to>6</to>
+			<read>WHILE</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>LET</read>
+		</transition>
+		<transition>
+			<from>19</from>
+			<to>20</to>
+			<read>\n</read>
+		</transition>
+		<transition>
+			<from>18</from>
+			<to>19</to>
+			<read>BEGIN</read>
+		</transition>
+	</automaton>
+</structure>

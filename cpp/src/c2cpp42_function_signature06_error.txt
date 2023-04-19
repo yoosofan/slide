@@ -1,0 +1,7 @@
+7:5: error: ambiguating new declaration of ‘int input()’
+    7 | int input(void)
+      |     ^~~~~
+:4:6: note: old declaration ‘date input()’
+    4 | date input(void);
+      |      ^~~~~
+Compilation failed.

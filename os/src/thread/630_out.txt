@@ -1,0 +1,7 @@
+thread$ g++ -std=c++17 -pthread 630.cpp 
+thread$ ./a.out
+In main
+second in main
+terminate called without an active exception
+Aborted (core dumped)
+thread$ 

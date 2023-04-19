@@ -1,0 +1,2 @@
+In F3: Enter n : 3
+n: 3

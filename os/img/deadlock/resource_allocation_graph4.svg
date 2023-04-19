@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by diasvg.py -->
+<svg width="7.325cm" height="10.500cm" viewBox="2.625 1.150 9.950 11.650"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect x="2.800" y="1.200" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.800" y="1.200" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.925" y="2.475"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R0</text>
+<ellipse cx="8.750" cy="2.350" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.750" cy="2.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.750" cy="2.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.600" y="2.500"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P0</text>
+<line x1="5.650" y1="2.325" x2="7.000" y2="2.336" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="6.998,2.586 7.500,2.340 7.002,2.086 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="6.998,2.586 7.500,2.340 7.002,2.086 "/>
+<rect x="2.735" y="3.850" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.735" y="3.850" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.960" y="5.075"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R1</text>
+<line x1="5.585" y1="4.975" x2="7.265" y2="2.786" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="7.463,2.939 7.570,2.390 7.067,2.634 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="7.463,2.939 7.570,2.390 7.067,2.634 "/>
+<ellipse cx="8.535" cy="6.450" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.535" cy="6.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.535" cy="6.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.385" y="6.600"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P1</text>
+<line x1="7.385" y1="6.450" x2="6.010" y2="5.324" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="6.169,5.130 5.624,5.007 5.852,5.517 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="6.169,5.130 5.624,5.007 5.852,5.517 "/>
+<rect x="2.690" y="6.600" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.690" y="6.600" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.865" y="7.775"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R2</text>
+<line x1="5.655" y1="7.600" x2="6.927" y2="6.754" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="7.065,6.963 7.343,6.478 6.789,6.546 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="7.065,6.963 7.343,6.478 6.789,6.546 "/>
+<rect x="2.675" y="9.350" width="2.850" height="2.250" fill="#FFFFFF" stroke="none" stroke-width="0"/>
+<rect x="2.675" y="9.350" width="2.850" height="2.250" fill="none" stroke="#000000" stroke-width="0.100" />
+<text x="3.850" y="10.725"  fill="#000000" text-anchor="start" font-size="0.57" font-family="sans" font-style="normal" font-weight="400">
+R3</text>
+<ellipse cx="8.390" cy="10.350" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="8.390" cy="10.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="8.390" cy="10.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="8.190" y="10.550"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P2</text>
+<line x1="5.525" y1="10.475" x2="6.691" y2="10.390" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="6.710,10.639 7.190,10.354 6.673,10.141 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="6.710,10.639 7.190,10.354 6.673,10.141 "/>
+</svg>

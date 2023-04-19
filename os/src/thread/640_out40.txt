@@ -1,0 +1,12 @@
+thread$ ./a.out
+In thread In main
+In thread 
+
+In thread In thread 
+
+the next output
+the next outputthe next output
+second in main
+the next output
+
+thread$ 

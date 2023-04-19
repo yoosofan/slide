@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.14: http://docutils.sourceforge.net/" />
+<title>پایگاه داده : نوع‌های پایه</title>
+<meta content="fa" http-equiv="Content-Language" />
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="id1">
+<h1 class="title">پایگاه داده : نوع‌های پایه</h1>
+
+<p>احمد یوسفان</p>
+<p>دانشگاه کاشان</p>
+<div class="section" id="basic-data-types">
+<h1><a class="toc-backref" href="#id3">1&nbsp;&nbsp;&nbsp;Basic data types</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>CHARACTER(n)</td>
+<td>VARCHAR(n)</td>
+<td>CHARACTER VARYING(n)</td>
+<td>BINARY(n)</td>
+</tr>
+<tr><td>BOOLEAN</td>
+<td>VARBINARY(n)</td>
+<td>BINARY VARYING(n)</td>
+<td>INTEGER(p)</td>
+</tr>
+<tr><td>SMALLINT</td>
+<td>INTEGER</td>
+<td>BIGINT</td>
+<td>DECIMAL(p,s)</td>
+</tr>
+<tr><td>NUMERIC(p,s)</td>
+<td>FLOAT(p)</td>
+<td>REAL</td>
+<td>FLOAT</td>
+</tr>
+<tr><td>DOUBLE PRECISION</td>
+<td>DATE</td>
+<td>TIME</td>
+<td>TIMESTAMP</td>
+</tr>
+<tr><td>INTERVAL</td>
+<td>ARRAY</td>
+<td>MULTISET</td>
+<td>XML</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="postgresql-data-types">
+<h1><a class="toc-backref" href="#id4">2&nbsp;&nbsp;&nbsp;PostgreSQL data types</a></h1>
+<p><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype.html">http://www.postgresql.org/docs/9.1/static/datatype.html</a></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="16%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Aliases</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>bigint</td>
+<td>int8</td>
+<td>signed eight-byte integer</td>
+</tr>
+<tr><td>bigserial</td>
+<td>serial8</td>
+<td>autoincrementing eight-byte integer</td>
+</tr>
+<tr><td>bit [ (n) ]</td>
+<td>&nbsp;</td>
+<td>fixed-length bit string</td>
+</tr>
+<tr><td>bit varying [ (n) ]</td>
+<td>&nbsp;</td>
+<td>varbit  variable-length bit string</td>
+</tr>
+<tr><td>boolean</td>
+<td>bool</td>
+<td>logical Boolean (true/false)</td>
+</tr>
+<tr><td>box</td>
+<td>&nbsp;</td>
+<td>rectangular box on a plane</td>
+</tr>
+<tr><td>bytea</td>
+<td>&nbsp;</td>
+<td>binary data (&quot;byte array&quot;)</td>
+</tr>
+<tr><td>character varying [ (n) ]</td>
+<td>varchar [ (n) ]</td>
+<td>variable-length character string</td>
+</tr>
+<tr><td>character [ (n) ]</td>
+<td>char [ (n) ]</td>
+<td>fixed-length character string</td>
+</tr>
+<tr><td>cidr</td>
+<td>&nbsp;</td>
+<td>IPv4 or IPv6 network address</td>
+</tr>
+<tr><td>circle</td>
+<td>&nbsp;</td>
+<td>circle on a plane</td>
+</tr>
+<tr><td>date</td>
+<td>&nbsp;</td>
+<td>calendar date (year, month, day)</td>
+</tr>
+<tr><td>double precision</td>
+<td>float8</td>
+<td>double precision floating-point number (8 bytes)</td>
+</tr>
+<tr><td>inet</td>
+<td>&nbsp;</td>
+<td>IPv4 or IPv6 host address</td>
+</tr>
+<tr><td>integer</td>
+<td>int, int4</td>
+<td>signed four-byte integer</td>
+</tr>
+<tr><td>interval [fields] [(p)]</td>
+<td>time span</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>line</td>
+<td>&nbsp;</td>
+<td>infinite line on a plane</td>
+</tr>
+<tr><td>lseg</td>
+<td>&nbsp;</td>
+<td>line segment on a plane</td>
+</tr>
+<tr><td>macaddr</td>
+<td>&nbsp;</td>
+<td>MAC (Media Access Control) address</td>
+</tr>
+<tr><td>money</td>
+<td>&nbsp;</td>
+<td>currency amount</td>
+</tr>
+<tr><td>numeric [ (p, s) ]</td>
+<td>decimal [(p, s)]</td>
+<td>exact numeric of selectable precision</td>
+</tr>
+<tr><td>path</td>
+<td>&nbsp;</td>
+<td>geometric path on a plane</td>
+</tr>
+<tr><td>point</td>
+<td>&nbsp;</td>
+<td>geometric point on a plane</td>
+</tr>
+<tr><td>polygon</td>
+<td>&nbsp;</td>
+<td>closed geometric path on a plane</td>
+</tr>
+<tr><td>real</td>
+<td>float4</td>
+<td>single precision floating-point number (4 bytes)</td>
+</tr>
+<tr><td>smallint</td>
+<td>int2</td>
+<td>signed two-byte integer</td>
+</tr>
+<tr><td>serial</td>
+<td>serial4</td>
+<td>autoincrementing four-byte integer</td>
+</tr>
+<tr><td>text</td>
+<td>&nbsp;</td>
+<td>variable-length character string</td>
+</tr>
+<tr><td>time [(p)] [without time zone]</td>
+<td>&nbsp;</td>
+<td>time of day (no time zone)</td>
+</tr>
+<tr><td>time [(p)] with time zone</td>
+<td>timetz</td>
+<td>time of day, including time zone</td>
+</tr>
+<tr><td>timestamp [(p)] [without time zone]</td>
+<td>&nbsp;</td>
+<td>date and time (no time zone)</td>
+</tr>
+<tr><td>timestamp [(p)] with time zone</td>
+<td>timestamptz</td>
+<td>date and time, including time zone</td>
+</tr>
+<tr><td>tsquery</td>
+<td>&nbsp;</td>
+<td>text search query</td>
+</tr>
+<tr><td>tsvector</td>
+<td>&nbsp;</td>
+<td>text search document</td>
+</tr>
+<tr><td>txid_snapshot</td>
+<td>&nbsp;</td>
+<td>user-level transaction ID snapshot</td>
+</tr>
+<tr><td>uuid</td>
+<td>&nbsp;</td>
+<td>universally unique identifier</td>
+</tr>
+<tr><td>xml</td>
+<td>&nbsp;</td>
+<td>XML data</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="numeric-types">
+<h2><a class="toc-backref" href="#id5">2.1&nbsp;&nbsp;&nbsp;Numeric types</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="23%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Storage Size</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>smallint</td>
+<td>2 bytes</td>
+<td>small-range integer</td>
+<td>-32768 to +32767</td>
+</tr>
+<tr><td>integer</td>
+<td>4 bytes</td>
+<td>typical choice for integer</td>
+<td>-2147483648 to +2147483647</td>
+</tr>
+<tr><td>bigint</td>
+<td>8 bytes</td>
+<td>large-range integer</td>
+<td>-9223372036854775808 to 9223372036854775807</td>
+</tr>
+<tr><td>decimal</td>
+<td>variable</td>
+<td>user-specified precision, exact</td>
+<td>up to 131072 digits before the decimal point; up to 16383 digits after the decimal point</td>
+</tr>
+<tr><td>numeric</td>
+<td>variable</td>
+<td>user-specified precision, exact</td>
+<td>up to 131072 digits before the decimal point; up to 16383 digits after the decimal point</td>
+</tr>
+<tr><td>real</td>
+<td>4 bytes</td>
+<td>variable-precision, inexact</td>
+<td>6 decimal digits precision</td>
+</tr>
+<tr><td>double precision</td>
+<td>8 bytes</td>
+<td>variable-precision, inexact</td>
+<td>15 decimal digits precision</td>
+</tr>
+<tr><td>serial</td>
+<td>4 bytes</td>
+<td>autoincrementing integer</td>
+<td>1 to 2147483647</td>
+</tr>
+<tr><td>bigserial</td>
+<td>8 bytes</td>
+<td>large autoincrementing integer</td>
+<td>1 to 9223372036854775807</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="monetary-types">
+<h2><a class="toc-backref" href="#id6">2.2&nbsp;&nbsp;&nbsp;Monetary Types</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="18%" />
+<col width="16%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Storage Size</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>money</td>
+<td>8 bytes</td>
+<td>currency amount</td>
+<td>-92233720368547758.08 to +92233720368547758.07</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="character-types">
+<h2><a class="toc-backref" href="#id7">2.3&nbsp;&nbsp;&nbsp;Character Types</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>character varying(n), varchar(n)</td>
+<td>variable-length with limit</td>
+</tr>
+<tr><td>character(n), char(n)</td>
+<td>fixed-length, blank padded</td>
+</tr>
+<tr><td>text</td>
+<td>variable unlimited length</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="binary-data-types">
+<h2><a class="toc-backref" href="#id8">2.4&nbsp;&nbsp;&nbsp;Binary Data Types</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="53%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Storage Size</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>bytea</td>
+<td>1 or 4 bytes plus the actual binary string</td>
+<td>variable-length binary string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="date-time-types">
+<h2><a class="toc-backref" href="#id9">2.5&nbsp;&nbsp;&nbsp;Date/Time Types</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="9%" />
+<col width="24%" />
+<col width="11%" />
+<col width="10%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Storage Size</th>
+<th class="head">Description</th>
+<th class="head">Low Value</th>
+<th class="head">High Value</th>
+<th class="head">Resolution</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>timestamp [ (p) ] [ without time zone ]</td>
+<td>8 bytes</td>
+<td>both date and time (no time zone)</td>
+<td>4713 BC</td>
+<td>294276 AD</td>
+<td>1 microsecond / 14 digits</td>
+</tr>
+<tr><td>timestamp [ (p) ] with time zone</td>
+<td>8 bytes</td>
+<td>both date and time, with time zone</td>
+<td>4713 BC</td>
+<td>294276 AD</td>
+<td>1 microsecond / 14 digits</td>
+</tr>
+<tr><td>date</td>
+<td>4 bytes</td>
+<td>date (no time of day)</td>
+<td>4713 BC</td>
+<td>5874897 AD</td>
+<td>1 day</td>
+</tr>
+<tr><td>time [ (p) ] [ without time zone ]</td>
+<td>8 bytes</td>
+<td>time of day (no date)</td>
+<td>00:00:00</td>
+<td>24:00:00</td>
+<td>1 microsecond / 14 digits</td>
+</tr>
+<tr><td>time [ (p) ] with time zone</td>
+<td>12 bytes</td>
+<td>times of day only, with time zone</td>
+<td>00:00:00+1459</td>
+<td>24:00:00-1459</td>
+<td>1 microsecond / 14 digits</td>
+</tr>
+<tr><td>interval [ fields ] [ (p) ]</td>
+<td>16 bytes</td>
+<td>time interval</td>
+<td>-178000000 years</td>
+<td>178000000 years</td>
+<td>1 microsecond / 14 digits</td>
+</tr>
+</tbody>
+</table>
+<p>TIMESTAMP '2004-10-19 10:23:54'</p>
+<p>TIMESTAMP '2004-10-19 10:23:54+02'</p>
+<p>TIMESTAMP WITH TIME ZONE '2004-10-19 10:23:54+02'</p>
+<div class="section" id="date-input">
+<h3>2.5.1&nbsp;&nbsp;&nbsp;Date Input</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Example</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1999-01-08</td>
+<td>ISO 8601; January 8 in any mode (recommended format)</td>
+</tr>
+<tr><td>January 8, 1999</td>
+<td>unambiguous in any datestyle input mode</td>
+</tr>
+<tr><td>1/8/1999</td>
+<td>January 8 in MDY mode; August 1 in DMY mode</td>
+</tr>
+<tr><td>1/18/1999</td>
+<td>January 18 in MDY mode; rejected in other modes</td>
+</tr>
+<tr><td>01/02/03</td>
+<td>January 2, 2003 in MDY mode; February 1, 2003 in DMY mode; February 3, 2001 in YMD mode</td>
+</tr>
+<tr><td>1999-Jan-08</td>
+<td>January 8 in any mode</td>
+</tr>
+<tr><td>Jan-08-1999</td>
+<td>January 8 in any mode</td>
+</tr>
+<tr><td>08-Jan-1999</td>
+<td>January 8 in any mode</td>
+</tr>
+<tr><td>99-Jan-08</td>
+<td>January 8 in YMD mode, else error</td>
+</tr>
+<tr><td>08-Jan-99</td>
+<td>January 8, except error in YMD mode</td>
+</tr>
+<tr><td>Jan-08-99</td>
+<td>January 8, except error in YMD mode</td>
+</tr>
+<tr><td>19990108</td>
+<td>ISO 8601; January 8, 1999 in any mode</td>
+</tr>
+<tr><td>990108</td>
+<td>ISO 8601; January 8, 1999 in any mode</td>
+</tr>
+<tr><td>1999.008</td>
+<td>year and day of year</td>
+</tr>
+<tr><td>J2451187</td>
+<td>Julian day</td>
+</tr>
+<tr><td>January 8, 99 BC</td>
+<td>year 99 BC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="time-input">
+<h3>2.5.2&nbsp;&nbsp;&nbsp;Time Input</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Example</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>04:05:06.789</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05:06</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>040506</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05 AM</td>
+<td>same as 04:05; AM does not affect value</td>
+</tr>
+<tr><td>04:05 PM</td>
+<td>same as 16:05; input hour must be &lt;= 12</td>
+</tr>
+<tr><td>04:05:06.789-8</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05:06-08:00</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05-08:00</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>040506-08</td>
+<td>ISO 8601</td>
+</tr>
+<tr><td>04:05:06 PST</td>
+<td>time zone specified by abbreviation</td>
+</tr>
+<tr><td>2003-04-12 04:05:06 America/New_York</td>
+<td>time zone specified by full name</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="time-zone-input">
+<h3>2.5.3&nbsp;&nbsp;&nbsp;Time Zone Input</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Example</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>PST</td>
+<td>Abbreviation (for Pacific Standard Time)</td>
+</tr>
+<tr><td>America/New_York</td>
+<td>Full time zone name</td>
+</tr>
+<tr><td>PST8PDT</td>
+<td>POSIX-style time zone specification</td>
+</tr>
+<tr><td>-8:00</td>
+<td>ISO-8601 offset for PST</td>
+</tr>
+<tr><td>-800</td>
+<td>ISO-8601 offset for PST</td>
+</tr>
+<tr><td>-8</td>
+<td>ISO-8601 offset for PST</td>
+</tr>
+<tr><td>zulu</td>
+<td>Military abbreviation for UTC</td>
+</tr>
+<tr><td>z</td>
+<td>Short form of zulu</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="time-stamps">
+<h3>2.5.4&nbsp;&nbsp;&nbsp;Time Stamps</h3>
+<ul class="simple">
+<li>1999-01-08 04:05:06</li>
+<li>1999-01-08 04:05:06 -8:00</li>
+<li>January 8 04:05:06 1999 PST</li>
+<li>TIMESTAMP '2004-10-19 10:23:54'</li>
+<li>TIMESTAMP '2004-10-19 10:23:54+02'</li>
+<li>TIMESTAMP WITH TIME ZONE '2004-10-19 10:23:54+02'</li>
+</ul>
+</div>
+<div class="section" id="special-date-time-inputs">
+<h3>2.5.5&nbsp;&nbsp;&nbsp;Special Date/Time Inputs</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="27%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Input String</th>
+<th class="head">Valid Types</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>epoch</td>
+<td>date, timestamp</td>
+<td>1970-01-01 00:00:00+00 (Unix system time zero)</td>
+</tr>
+<tr><td>infinity</td>
+<td>date, timestamp</td>
+<td>later than all other time stamps</td>
+</tr>
+<tr><td>-infinity</td>
+<td>date, timestamp</td>
+<td>earlier than all other time stamps</td>
+</tr>
+<tr><td>now</td>
+<td>date, time, timestamp</td>
+<td>current transaction's start time</td>
+</tr>
+<tr><td>today</td>
+<td>date, timestamp</td>
+<td>midnight today</td>
+</tr>
+<tr><td>tomorrow</td>
+<td>date, timestamp</td>
+<td>midnight tomorrow</td>
+</tr>
+<tr><td>yesterday</td>
+<td>date, timestamp</td>
+<td>midnight yesterday</td>
+</tr>
+<tr><td>allballs</td>
+<td>time</td>
+<td>00:00:00.00 UTC</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="date-time-output-styles">
+<h3>2.5.6&nbsp;&nbsp;&nbsp;Date/Time Output Styles</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="31%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Style Specification</th>
+<th class="head">Description</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>ISO</td>
+<td>ISO 8601/SQL standard</td>
+<td>1997-12-17 07:37:16-08</td>
+</tr>
+<tr><td>SQL</td>
+<td>traditional style</td>
+<td>12/17/1997 07:37:16.00 PST</td>
+</tr>
+<tr><td>POSTGRES</td>
+<td>original style</td>
+<td>Wed Dec 17 07:37:16 1997 PST</td>
+</tr>
+<tr><td>German</td>
+<td>regional style</td>
+<td>17.12.1997 07:37:16.00 PST</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="date-order-conventions">
+<h3>2.5.7&nbsp;&nbsp;&nbsp;Date Order Conventions</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="24%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">datestyle Setting</th>
+<th class="head">Input Ordering</th>
+<th class="head">Example Output</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>SQL, DMY</td>
+<td>day/month/year</td>
+<td>17/12/1997 15:37:16.00 CET</td>
+</tr>
+<tr><td>SQL, MDY</td>
+<td>month/day/year</td>
+<td>12/17/1997 07:37:16.00 PST</td>
+</tr>
+<tr><td>Postgres, DMY</td>
+<td>day/month/year</td>
+<td>Wed 17 Dec 07:37:16 1997 PST</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="iso-8601-interval-unit-abbreviations">
+<h3>2.5.8&nbsp;&nbsp;&nbsp;ISO 8601 Interval Unit Abbreviations</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Abbreviation</th>
+<th class="head">Meaning</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Y</td>
+<td>Years</td>
+</tr>
+<tr><td>M</td>
+<td>Months (in the date part)</td>
+</tr>
+<tr><td>W</td>
+<td>Weeks</td>
+</tr>
+<tr><td>D</td>
+<td>Days</td>
+</tr>
+<tr><td>H</td>
+<td>Hours</td>
+</tr>
+<tr><td>M</td>
+<td>Minutes (in the time part)</td>
+</tr>
+<tr><td>S</td>
+<td>Seconds</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="interval-input">
+<h3>2.5.9&nbsp;&nbsp;&nbsp;Interval Input</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Example</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>1-2</td>
+<td>SQL standard format: 1 year 2 months</td>
+</tr>
+<tr><td>3 4:05:06</td>
+<td>SQL standard format: 3 days 4 hours 5 minutes 6 seconds</td>
+</tr>
+<tr><td>1 year 2 months</td>
+<td>3 days 4 hours 5 minutes 6 seconds  Traditional Postgres format: 1 year 2 months 3 days 4 hours 5 minutes 6 seconds</td>
+</tr>
+<tr><td>P1Y2M3DT4H5M6S</td>
+<td>ISO 8601 &quot;format with designators&quot;: same meaning as above</td>
+</tr>
+<tr><td>P0001-02-03T04:05:06</td>
+<td>ISO 8601 &quot;alternative format&quot;: same meaning as above</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="interval-output-style-examples">
+<h3>2.5.10&nbsp;&nbsp;&nbsp;Interval Output Style Examples</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="26%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Style Specification</th>
+<th class="head">Year-Month Interval</th>
+<th class="head">Day-Time Interval</th>
+<th class="head">Mixed Interval</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>sql_standard</td>
+<td>1-2</td>
+<td>3 4:05:06</td>
+<td>-1-2 +3 -4:05:06</td>
+</tr>
+<tr><td>postgres</td>
+<td>1 year 2 mons</td>
+<td>3 days 04:05:06</td>
+<td>-1 year -2 mons +3 days -04:05:06</td>
+</tr>
+<tr><td>postgres_verbose</td>
+<td>&#64; 1 year 2 mons</td>
+<td>&#64; 3 days 4 hours 5 mins 6 secs</td>
+<td>&#64; 1 year 2 mons -3 days 4 hours 5 mins 6 secs ago</td>
+</tr>
+<tr><td>iso_8601</td>
+<td>P1Y2M</td>
+<td>P3DT4H5M6S</td>
+<td>P-1Y-2M3DT-4H-5M-6S</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="boolean-type">
+<h2><a class="toc-backref" href="#id10">2.6&nbsp;&nbsp;&nbsp;Boolean Type</a></h2>
+<div class="section" id="boolean-data-type">
+<h3>2.6.1&nbsp;&nbsp;&nbsp;Boolean Data Type</h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="29%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Storage Size</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>boolean</td>
+<td>1 byte</td>
+<td>state of true or false</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">TRUE</th>
+<th class="head">FALSE</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>'t'</td>
+<td>'f'</td>
+</tr>
+<tr><td>'true'</td>
+<td>'false'</td>
+</tr>
+<tr><td>'y'</td>
+<td>'n'</td>
+</tr>
+<tr><td>'yes'</td>
+<td>'no'</td>
+</tr>
+<tr><td>'on'</td>
+<td>'off'</td>
+</tr>
+<tr><td>'1'</td>
+<td>'0'</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h1><a class="toc-backref" href="#id11">3&nbsp;&nbsp;&nbsp;References</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.0/static/sql-createtype.html">http://www.postgresql.org/docs/9.0/static/sql-createtype.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-enum.html">http://www.postgresql.org/docs/9.1/static/datatype-enum.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-geometric.html">http://www.postgresql.org/docs/9.1/static/datatype-geometric.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-net-types.html">http://www.postgresql.org/docs/9.1/static/datatype-net-types.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-bit.html">http://www.postgresql.org/docs/9.1/static/datatype-bit.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html">http://www.postgresql.org/docs/9.1/static/datatype-textsearch.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-uuid.html">http://www.postgresql.org/docs/9.1/static/datatype-uuid.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-xml.html">http://www.postgresql.org/docs/9.1/static/datatype-xml.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/arrays.html">http://www.postgresql.org/docs/9.1/static/arrays.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/rowtypes.html">http://www.postgresql.org/docs/9.1/static/rowtypes.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-oid.html">http://www.postgresql.org/docs/9.1/static/datatype-oid.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/datatype-pseudo.html">http://www.postgresql.org/docs/9.1/static/datatype-pseudo.html</a></li>
+<li><a class="reference external" href="http://www.postgresql.org/docs/9.1/static/sql-createtable.html">http://www.postgresql.org/docs/9.1/static/sql-createtable.html</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/SQL#Data_types">https://en.wikipedia.org/wiki/SQL#Data_types</a></li>
+<li><a class="reference external" href="http://www.informit.com/library/content.aspx?b=STY_Sql_24hours&amp;seqNum=11">http://www.informit.com/library/content.aspx?b=STY_Sql_24hours&amp;seqNum=11</a></li>
+<li><a class="reference external" href="http://www.techonthenet.com/sql/datatypes.php">http://www.techonthenet.com/sql/datatypes.php</a></li>
+<li><a class="reference external" href="http://www.w3schools.com/SQL/sql_datatypes_general.asp">http://www.w3schools.com/SQL/sql_datatypes_general.asp</a></li>
+<li><a class="reference external" href="http://www.w3schools.com/sql/sql_datatypes_general.asp">http://www.w3schools.com/sql/sql_datatypes_general.asp</a></li>
+<li><a class="reference external" href="https://en.wikipedia.org/wiki/SQL">https://en.wikipedia.org/wiki/SQL</a></li>
+<li><a class="reference external" href="http://www.informit.com/library/content.aspx?b=STY_Sql_24hours&amp;seqNum=19">http://www.informit.com/library/content.aspx?b=STY_Sql_24hours&amp;seqNum=19</a></li>
+<li><a class="reference external" href="https://msdn.microsoft.com/en-us/library/ms378878%28v=sql.110%29.aspx">https://msdn.microsoft.com/en-us/library/ms378878%28v=sql.110%29.aspx</a></li>
+</ul>
+<p>شهرهایی را به دست آورید که عرضه کنندگان آن شهرها بیشتر از ۱۰۰ باشد</p>
+<p>نام و مجموعه عرضه‌های قطعه‌ها را به دست آورید</p>
+<p>نام شهر قطعه‌هایی به دست آورید که بیشتر از دو عرضه کننده آنها را عرضه کننده، آنها را عرضه کرده باشد</p>
+<p>نام قطعه‌هایی را به دست آورید که در بیشتر از دو شهر عرضه شده باشند</p>
+<p>نام و مجموع وزن قطعه‌هایی را به دست آورید که در بیشتر از دو شهر عرضه شده باشند</p>
+<p>شماره و نام عرضه کنندگانی را به دست آورید که مچموع عرضه آنها بیشتر از ۵۰ و بیشتر</p>
+<p>شهرهایی را به دست آورید که عرضه کنندگان آن شهرها بیشتر از ۱۰۰ باشد</p>
+<p>نام و مجموعه عرضه‌های قطعه‌ها را به دست آورید</p>
+<p>نام شهر قطعه‌هایی به دست آورید که بیشتر از دو عرضه کننده آنها را عرضه کننده، آنها را عرضه کرده باشد</p>
+<p>نام قطعه‌هایی را به دست آورید که در بیشتر از دو شهر عرضه شده باشند</p>
+<p>نام و مجموع وزن قطعه‌هایی را به دست آورید که در بیشتر از دو شهر عرضه شده باشند</p>
+<p>شماره و نام عرضه کنندگانی را به دست آورید که مچموع عرضه آنها بیشتر از ۵۰ و بیشتر</p>
+<div class="contents topic" id="id2">
+<p class="topic-title first">فهرست مطالب</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#basic-data-types" id="id3">1&nbsp;&nbsp;&nbsp;Basic data types</a></li>
+<li><a class="reference internal" href="#postgresql-data-types" id="id4">2&nbsp;&nbsp;&nbsp;PostgreSQL data types</a><ul class="auto-toc">
+<li><a class="reference internal" href="#numeric-types" id="id5">2.1&nbsp;&nbsp;&nbsp;Numeric types</a></li>
+<li><a class="reference internal" href="#monetary-types" id="id6">2.2&nbsp;&nbsp;&nbsp;Monetary Types</a></li>
+<li><a class="reference internal" href="#character-types" id="id7">2.3&nbsp;&nbsp;&nbsp;Character Types</a></li>
+<li><a class="reference internal" href="#binary-data-types" id="id8">2.4&nbsp;&nbsp;&nbsp;Binary Data Types</a></li>
+<li><a class="reference internal" href="#date-time-types" id="id9">2.5&nbsp;&nbsp;&nbsp;Date/Time Types</a></li>
+<li><a class="reference internal" href="#boolean-type" id="id10">2.6&nbsp;&nbsp;&nbsp;Boolean Type</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references" id="id11">3&nbsp;&nbsp;&nbsp;References</a></li>
+</ul>
+</div>
+<!-- comment:
+
+rst2s5.py rsts5.txt rsts5.html -d -t - -section-numbering - -stylesheet=farsi.css,html4css1.css
+rst2html  datatype.postgresql.rst   datatype.postgresql.html - -stylesheet=../../tools/farsi.css,html4css1.css -->
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+first(A) = {BEGIN}
+first(B) = first(L) = {LET , PRINT , WHILE}
+first(L) = {LET , PRINT , WHILE}
+first(C) = {LET , PRINT , WHILE , λ}
+first(E) = first(T) = {ID , ( }
+first(T) = first(F) = {ID , ( }
+first(f) = {ID , ( }
+first(E')= {+ , - , λ }
+first(T')= {* , / , λ }

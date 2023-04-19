@@ -1,0 +1,283 @@
+div#thread-in-python-i-id{
+  display: grid;
+  grid-template-areas:  "h1 h1 h1 h1"
+                        "code1 code1 code2 code2"
+                        "output0 output1 output2 output3";
+  gap: 1px;
+}
+div#thread-in-python-i-id > h1:nth-of-type(1) {
+  grid-area: h1;
+  /*align-self:center;   justify-self: center;  */
+}
+/* https://css-tricks.com/the-difference-between-nth-child-and-nth-of-type/ */
+div#thread-in-python-i-id > pre:nth-of-type(1) {
+  grid-area: code1;
+}
+div#thread-in-python-i-id > pre:nth-of-type(2) {
+  grid-area: code2;
+}
+div#thread-in-python-i-id > pre:nth-of-type(3) {
+  grid-area: output0;
+}
+div#thread-in-python-i-id > pre:nth-of-type(4) {
+  grid-area: output1;
+}
+div#thread-in-python-i-id > pre:nth-of-type(5) {
+  grid-area: output2;
+}
+
+div#thread-in-python-i-id > pre:nth-of-type(6) {
+  grid-area: output3;
+}
+
+/* slide */
+div#thread-in-python-ii-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1 h1'
+        'code22 output25 output35'
+        'code22 output45 output55 '
+        '. output65 .';
+      gap: 1px;
+}
+div#thread-in-python-ii-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(2) {
+  grid-area: output25;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(3) {
+  grid-area: output35;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(4) {
+grid-area: output45;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(5) {
+  grid-area: output55;
+}
+div#thread-in-python-ii-id > pre:nth-of-type(6) {
+  grid-area: output65;
+}
+
+/* slide */
+div#thread-in-python-iii-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1 h1'
+        'code22 code22 output25'
+        'code22 code22 output35'
+        'output45 output55 output65';
+      gap: 1px;
+}
+div#thread-in-python-iii-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(2) {
+  grid-area: output25;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(3) {
+  grid-area: output35;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(4) {
+grid-area: output45;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(5) {
+  grid-area: output55;
+}
+div#thread-in-python-iii-id > pre:nth-of-type(6) {
+  grid-area: output65;
+}
+
+/* slide */
+div#thread-in-python-join-i-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1'
+        'code22 code32';
+      gap: 1px;
+}
+div#thread-in-python-join-i-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-join-i-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-join-i-id > pre:nth-of-type(2) {
+  grid-area: code32;
+}
+
+/* slide */
+div#thread-in-python-join-ii-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1'
+        'code22 code32';
+      gap: 1px;
+}
+div#thread-in-python-join-ii-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-join-ii-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-join-ii-id > pre:nth-of-type(2) {
+  grid-area: code32;
+}
+/* slide */
+div#thread-in-python-parameter-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1'
+        'code22 code32';
+      gap: 1px;
+}
+div#thread-in-python-parameter-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-parameter-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-parameter-id > pre:nth-of-type(2) {
+  grid-area: code32;
+}
+
+/* slide */
+div#thread-in-python-sharing-id {
+      display: grid;
+      grid-template-areas:
+        'h1 h1'
+        'code22 code32';
+      gap: 1px;
+}
+div#thread-in-python-sharing-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#thread-in-python-sharing-id > pre:nth-of-type(1) {
+  grid-area: code22;
+}
+div#thread-in-python-sharing-id > pre:nth-of-type(2) {
+  grid-area: code32;
+}
+div#paralell-func-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1 h1 h1 '
+    'code22 code22 code22 code22'
+    'code82 code84 code86 code88'
+    'code32 codee32 code42 code42'
+    '.  code52 . .'
+  ;
+  gap: 1px;
+}
+div#paralell-func-id > h1:nth-of-type(1) {
+  grid-area: h1;
+}
+div#paralell-func-id > pre:nth-of-type(1) {
+  grid-area: code22;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(2) {
+  grid-area: code82;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(3) {
+  grid-area: code84;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(4) {
+  grid-area: code86;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(5) {
+  grid-area: code88;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(6) {
+  grid-area: code32;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(7) {
+  grid-area: code42;
+  justify-self: center;
+}
+div#paralell-func-id > pre:nth-of-type(8) {
+  grid-area: code52;
+  justify-self: center;
+}
+div#cpp-thread-id {
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-id > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-id > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-id > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}
+
+div#cpp-thread-join-id {
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-join-id  > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-join-id  > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-join-id  > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}
+
+div#cpp-thread-func-array-id {
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-func-array-id  > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-func-array-id  > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-func-array-id  > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}
+
+div#cpp-thread-func-array-out-id {
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-func-array-out-id  > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-func-array-out-id  > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-func-array-out-id  > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}
+
+div#cpp-thread-func-array-out2-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-func-array-out2-id  > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-func-array-out2-id  > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-func-array-out2-id  > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}
+
+div#cpp-thread-func-array-out4-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'code22 code32'
+  ;
+  gap: 1px;
+}
+div#cpp-thread-func-array-out4-id  > h1:nth-of-type(1)  { grid-area: h1;}
+div#cpp-thread-func-array-out4-id  > pre:nth-of-type(1) { grid-area: code22; justify-self: center;}
+div#cpp-thread-func-array-out4-id  > pre:nth-of-type(2) { grid-area: code32; justify-self: center;}

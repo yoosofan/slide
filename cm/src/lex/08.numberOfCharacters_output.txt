@@ -1,0 +1,2 @@
+Int::10     Double::0      String::12     Line::6 
+Dot::0    Other::0 

@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" >
+<head>
+<title>Deadlock</title>
+<meta http-equiv="Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="copyright"
+content="Copyright &#169; 2020 University of Kashan (Ahmad Yoosofan)" />
+<meta name="author" content="Ahmad Yoosofan" />
+<link rel="stylesheet" type="text/css" media="screen, projection, print" href="../../tools/Slidy2/styles/slidy.css" />
+<script src="../../tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
+<link href="../../tools/yoosofan_slides.css" rel="stylesheet" type="text/css" />
+<link href="deadlock.css" rel="stylesheet" type="text/css" />
+<meta name="font-size-adjustment" content="-1" />
+<!-- <meta name="duration" content="5" /> -->
+</head>
+<body>
+<!--
+<div class="background">
+  <img id="head-icon" alt="graphic with four colored squares"
+    src="http://www.w3.org/Talks/Tools/Slidy2/graphics/icon-blue.png" />
+  <object id="head-logo" title="W3C logo" type="image/svg+xml"
+    data="http://www.w3.org/Talks/Tools/Slidy2/graphics/w3c-logo-white.svg"><img
+   src="http://www.w3.org/Talks/Tools/Slidy2/graphics/w3c-logo-white.gif"
+   alt="W3C logo" id="head-logo-fallback" /></object>
+</div>
+-->
+<div class="slide cover" style="text-align:center;"><br /><br /><br /><br /><br />
+  <p><h1>
+    Operating Systems
+  </h1></p><br />
+  <p><h2>Deadlock</h2></p><br /><br /><br />
+  <p><a href="http://yoosofan.github.io/">Ahmad Yoosofan</a></p>
+  <p> Spring 2022 </p>
+  <p>University of Kashan </p>
+  <p><a href="yoosofan@mail.com">yoosofan@mail.com</a></p>
+</div>
+
+<div class="slide"><br /><br /><p></p><p><h1>Deadlock in real situations</h1></p><br /><br />
+<table><tr><td>
+  <img src="img/deadlock/deadlock_automobiles.png" height="95%" width="95%" />
+</td><td>
+  <img src="img/deadlock/trafficDeadlock1.gif" height="95%" width="95%" />
+</td></tr></table></div>
+<!--http://cs.nyu.edu/~gottlieb/courses/2000-01-spring/os/chapters/chapter-6.html-->
+
+<div class="slide"><br /><br /><p><h1>Resource-Allocation Graph</h1></p>
+<table><tr><td><ul class="incremental">
+  <li>The set of Processes: P = {P<sub>0</sub>, P<sub>1</sub>, P<sub>2</sub>}</li>
+  <li>The set of Resources: R = {R<sub>0</sub>, R<sub>1</sub>, R<sub>2</sub>, R<sub>3</sub>}</li>
+  <li>The set of Edges: E = {
+    <ul><li>R<sub>0</sub> → P<sub>0</sub>,</li></ul>
+  </li></ul></td><td class="incremental">
+    <img src="img/deadlock/resource_allocation_graph1.svg" />
+  </td></tr>
+</table></div>
+
+<div class="slide"><br /><br /><p><h1>Resource-Allocation Graph</h1></p>
+<table><tr><td><ul>
+  <li>The set of Processes: P = {P<sub>0</sub>, P<sub>1</sub>, P<sub>2</sub>}</li>
+  <li>The set of Resources: R = {R<sub>0</sub>, R<sub>1</sub>, R<sub>2</sub>, R<sub>3</sub>}</li>
+  <li>The set of Edges: E = {
+  <ul>
+    <li>R<sub>0</sub> → P<sub>0</sub>,</li>
+    <li>R<sub>1</sub> → P<sub>0</sub>,</li>
+  </ul>
+  }</li></ul></td>
+  <td><img src="img/deadlock/resource_allocation_graph2.svg" /></td>
+</tr></table></div>
+
+<div class="slide"><br /><br /><p><h1>Request</h1></p>
+<table><tr><td><ul>
+  <li>The set of Processes: P = {P<sub>0</sub>, P<sub>1</sub>, P<sub>2</sub>}</li>
+  <li>The set of Resources: R = {R<sub>0</sub>, R<sub>1</sub>, R<sub>2</sub>, R<sub>3</sub>}</li>
+  <li>The set of Edges: E = {
+  <ul>
+    <li>R<sub>0</sub> → P<sub>0</sub>,</li>
+    <li>R<sub>1</sub> → P<sub>0</sub>,</li>
+    <li>P<sub>1</sub> → R<sub>1</sub>,</li>
+  </ul>
+  }</li></ul></td>
+  <td><img src="img/deadlock/resource_allocation_graph3.svg" /></td>
+</tr></table></div>
+
+<div class="slide"><br /><br /><p><h1>Resource-Allocation Graph</h1></p>
+<table><tr><td><ul>
+  <li>The set of Processes: P = {P<sub>0</sub>, P<sub>1</sub>, P<sub>2</sub>}</li>
+  <li>The set of Resources: R = {R<sub>0</sub>, R<sub>1</sub>, R<sub>2</sub>, R<sub>3</sub>}</li>
+  <li>The set of Edges: E = {
+  <ul>
+    <li>R<sub>0</sub> → P<sub>0</sub>,</li>
+    <li>R<sub>1</sub> → P<sub>0</sub>,</li>
+    <li>P<sub>1</sub> → R<sub>1</sub>,</li>
+    <li>R<sub>2</sub> → P<sub>1</sub>,</li>
+    <li>R<sub>3</sub> → P<sub>2</sub> </li>
+  </ul>
+  }
+  </li></ul></td>
+  <td><img src="img/deadlock/resource_allocation_graph4.svg" /></td>
+</tr></table></div>
+
+<div class="slide"><br /><br /><br /><h1>Deadlock Example</h1><br />
+<img class= "incremental" src="img/deadlock/deadlock_avoidance_not_safe1.svg" class="cover" height="500px" width="500px" />
+</div>
+
+<div class="slide"><br /><br /><br /><p><h1>Wait-For Graph</h1></p>
+<table style="margin:auto;">
+  <tr><td>Resource-Allocation Graph</td><td>Wait-For Graph</td></tr>
+  <tr><td>
+    <img src="img/deadlock/resource_allocation_graph4.svg" />
+  </td><td>
+    <img src="img/deadlock/wait_for_graph.svg" width="300px" height="300px" />
+</td></tr></table></div>
+
+<div class="slide"><br /><br /><p><h1>Multiple Instances</h1></p>
+<table><tr><td><ul>
+  <li>The set of Processes; P = {P<sub>0</sub>, P<sub>1</sub>, P<sub>2</sub>}</li>
+  <li>The set of Resources; R = {R<sub>0</sub>, R<sub>1</sub>, R<sub>2</sub>, R<sub>3</sub>}</li>
+  <li>The set of Edges    ; E = {
+  <ul>
+    <li>R<sub>0</sub> → P<sub>0</sub>,</li>
+    <li>R<sub>1</sub> → P<sub>0</sub>,</li>
+    <li>P<sub>1</sub> → R<sub>1</sub>,</li>
+    <li>R<sub>2</sub> → P<sub>1</sub>,</li>
+    <li>R<sub>3</sub> → P<sub>2</sub> </li>
+    <li>}</li>
+  </ul>
+  <li>One instances of resource type R0</li>
+  <li>Two instances of resource type R1</li>
+  <li>One instances of resource type R2</li>
+  <li>Three instances of resource type R3</li>
+  </ul></td><td>
+    <img src="img/deadlock/resource_allocation_graph4_multiple.svg" />
+</td></tr></table></div>
+
+<div class="slide"><p><h1>Deadlock</h1></p><br /><br />
+<table><tr><td>Non deadlock</td><td>Deadlock</td></tr>
+  <tr><td>
+    <img src="img/deadlock/deadlock_detection_not_deadlock.svg" />
+  </td><td>
+    <img src="img/deadlock/deadlock_detection_deadlock1.svg" />
+</td></tr></table></div>
+
+<div class="slide"><p><h1>Deadlock</h1></p><br /><br />
+<table><tr><td>Non deadlock</td><td>Deadlock</td></tr>
+  <tr><td>
+    <img src="img/deadlock/deadlock_detection_not_deadlock.svg" />
+  </td><td>
+    <img src="img/deadlock/deadlock_detection_deadlock2.svg" />
+</td></tr></table></div>
+
+<div class="slide"><br /><br /><br /><p><h1>Necessary Conditions of deadlock</h1></p><br /><br />
+<p><p><ol class="incremental">
+  <li>Mutual exclusion</li>
+  <li>Hold and wait</li>
+  <li>No preemption</li>
+  <li>Circular wait
+  <ul class="incremental">
+    <li>R0 &lt; R1 &lt; R2 &lt;  ...  &lt; Rm</li>
+  </ul></li>
+</ol></p></p></div>
+
+<div class="slide"><br /><br /><br /><p><h1>Deadlock Detection</h1></p><br /><br />
+<ol class="incremental">
+  <li>Single Instance of Each Resource Type
+  <ul class="incremental"><li>Finding loop in a graph</li></ul></li>
+  <li>Several Instances of a Resource Type
+  <ul class="incremental">
+    <li>Available. A vector of length m indicates the number of available resources
+of each type.
+    <ul class="incremental">
+      <li>Avail = [ R<sub>0</sub>, R<sub>1</sub>, ... , R<sub>m</sub> ]</li>
+    </ul></li>
+    <li>Allocation. An (n * m) matrix defines the number of resources of each type
+currently allocated to each process.</li>
+    <li>Request. An (n * m) matrix indicates the current request of each process.
+If Request<sub>i,j</sub> equals k, then process P<sub>i</sub> is requesting k more instances of
+resource type R<sub>j</sub>.</li>
+</ul></li></ol></div>
+
+<div class="slide"><h1>Example of Resource-Allocation</h1>
+<table>
+  <tr>
+    <td><img src="img/deadlock/deadlock_detection_not_deadlock.svg" /></td>
+    <td>
+      <table>
+        <tr>
+          <td class="incremental">Resources = </td>
+          <td class="incremental">
+            <table>
+              <tr>
+                <th>R<sub>0</sub></th>
+                <th>R<sub>1</sub></th>
+                <th>R<sub>2</sub></th>
+                <th>R<sub>3</sub></th>
+              </tr>
+              <tr class="incremental">
+                <td class="incremental">2</td>
+                <td class="incremental">1</td>
+                <td class="incremental">2</td>
+                <td class="incremental">2</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="incremental">
+          <td>Avaiable = </td>
+          <td>
+            <table>
+              <tr>
+                <th>R<sub>0</sub></th>
+                <th>R<sub>1</sub></th>
+                <th>R<sub>2</sub></th>
+                <th>R<sub>3</sub></th>
+              </tr>
+              <tr>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">1</td>
+              </tr>
+            </table>
+          </td>
+        <tr class="incremental">
+          <td>Allocation = </td>
+          <td class="incremental">
+            <table>
+              <tr>
+                <th> </th>
+                <th>R<sub>0</sub></th>
+                <th>R<sub>1</sub></th>
+                <th>R<sub>2</sub></th>
+                <th>R<sub>3</sub></th>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>0</sub></th>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>1</sub></th>
+                <td class="incremental">1</td>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>2</sub></th>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>3</sub></th>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">1</td>
+                <td class="incremental">1</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr class="incremental">
+          <td>Request = </td>
+          <td>
+            <table>
+              <tr>
+                <th> </th>
+                <th>R<sub>0</sub></th>
+                <th>R<sub>1</sub></th>
+                <th>R<sub>2</sub></th>
+                <th>R<sub>3</sub></th>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>0</sub></th>
+                <td class="incremental">0</td>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>1</sub></th>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>2</sub></th>
+                <td class="incremental">1</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+              </tr>
+              <tr class="incremental">
+                <th>P<sub>3</sub></th>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+                <td class="incremental">0</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div class="slide"><small><h1>Example of Resource-Allocation</h1></small>
+<table>
+<tr>
+<td>
+  <table>
+    <tr>
+      <td>Resources = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Avaiable = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    <tr>
+      <td>Allocation = </td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    <tr>
+    <td>Request = </td>
+    <td>
+      <table>
+        <tr>
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+          <th>R<sub>3</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>3</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</td>
+<td>
+  <ol class ="incremental">
+    <li> Process 3
+      <ul class="incremental">
+        <li>finish[3] == false and Request[3] &le; work</li>
+        <li>finish[3] = true; work += Allocatin[3];</li>
+        <li>work = { 0, 0, 1, 2 }</li>
+      </ul>
+      </li>
+  </ol>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="slide"><small><small><h1>Example of Resource-Allocation</h1></small></small>
+<table>
+<tr>
+<td>
+  <table>
+    <tr>
+      <td>Resources = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Avaiable = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    <tr>
+      <td>Allocation = </td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    <tr>
+    <td>Request = </td>
+    <td>
+      <table>
+        <tr>
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+          <th>R<sub>3</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>3</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</td>
+<td>
+  <ol>
+    <li> Process 3
+      <ul>
+        <li>finish[3] == false and Request[3] &le; work</li>
+        <li>finish[3] = true; work += Allocation[3];</li>
+        <li>work = { 0, 0, 1, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 1
+      <ul class="incremental">
+        <li>finish[1] == false and Request[1] &le; work</li>
+        <li>finish[1] = true; work += Allocation[1];</li>
+        <li>work = { 1, 1, 1, 2 }</li>
+      </ul>
+      </li>
+  </ol>
+</td>
+</tr>
+</table>
+</div>
+
+<div class="slide"><small><small><h1>Example of Resource-Allocation</h1></small></small>
+<table>
+<tr>
+<td>
+  <table>
+    <tr>
+      <td>Resources = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Avaiable = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    <tr>
+      <td>Allocation = </td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    <tr>
+    <td>Request = </td>
+    <td>
+      <table>
+        <tr>
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+          <th>R<sub>3</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>3</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</td>
+<td>
+  <ol>
+    <li> Process 3
+      <ul>
+        <li>finish[3] == false and Request[3] &le; work</li>
+        <li>finish[3] = true; work += Allocation[3];</li>
+        <li>work = { 0, 0, 1, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 1
+      <ul>
+        <li>finish[1] == false and Request[1] &le; work</li>
+        <li>finish[1] = true; work += Allocation[1];</li>
+        <li>work = { 1, 1, 1, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 2
+      <ul class="incremental">
+        <li>finish[2] == false and Request[2] &le; work</li>
+        <li>finish[2] = true; work += Allocation[2];</li>
+        <li>work = { 1, 1, 2, 2 }</li>
+      </ul>
+      </li>
+  </ol>
+</td>
+</tr>
+</table>
+</div>
+<div class="slide"><small><small><h1>Example of Resource-Allocation</h1></small></small>
+<table>
+<tr>
+<td>
+  <table>
+    <tr>
+      <td>Resources = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Avaiable = </td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    <tr>
+      <td>Allocation = </td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>1</td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    <tr>
+    <td>Request = </td>
+    <td>
+      <table>
+        <tr>
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+          <th>R<sub>3</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>3</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</td>
+<td>
+  <small>
+  <ol>
+    <li> Process 3
+      <ul>
+        <li>finish[3] == false and Request[3] &le; work</li>
+        <li>finish[3] = true; work += Allocation[3];</li>
+        <li>work = { 0, 0, 1, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 1
+      <ul>
+        <li>finish[1] == false and Request[1] &le; work</li>
+        <li>finish[1] = true; work += Allocation[1];</li>
+        <li>work = { 1, 1, 1, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 2
+      <ul>
+        <li>finish[2] == false and Request[2] &le; work</li>
+        <li>finish[2] = true; work += Allocation[2];</li>
+        <li>work = { 1, 1, 2, 2 }</li>
+      </ul>
+      </li>
+    <li> Process 0
+      <ul class="incremental">
+        <li>finish[0] == false and Request[0] &le; work</li>
+        <li>finish[0] = true;  work += Allocation[0];</li>
+        <li>work = { 2, 1, 2, 2 }</li>
+      </ul>
+      </li>
+      <li class="incremental">Sequence of execution: 3, 1, 2, 0</li>
+      <li class="incremental">Sequence of execution: 3, 1, 0, 2</li>
+  </ol>
+  </small>
+</td>
+</tr>
+</table>
+</div>
+<div class="slide"><h1>Deadlock Example 1</h1>
+<table>
+<tr>
+<td>
+  <img src="img/deadlock/deadlock_detection_deadlock1.svg"/>
+</td>
+<td>
+  <table>
+    <tr>
+      <td class="incremental">Resources</td><td class="incremental">=</td>
+      <td class="incremental">
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr class="incremental">
+            <td class="incremental">2</td>
+            <td class="incremental">1</td>
+            <td class="incremental">2</td>
+            <td class="incremental">2</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="incremental">
+      <td>Avaiable</td><td class="incremental">=</td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+            <td class="incremental">1</td>
+          </tr>
+        </table>
+    </td>
+    <tr class="incremental">
+      <td>Allocation</td><td class="incremental">=</td>
+      <td class="incremental">
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr class="incremental">
+            <th>P<sub>0</sub></th>
+            <td class="incremental">1</td>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+          </tr>
+          <tr class="incremental">
+            <th>P<sub>1</sub></th>
+            <td class="incremental">1</td>
+            <td class="incremental">1</td>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+          </tr>
+          <tr class="incremental">
+            <th>P<sub>2</sub></th>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+            <td class="incremental">1</td>
+            <td class="incremental">0</td>
+          </tr>
+          <tr class="incremental">
+            <th>P<sub>3</sub></th>
+            <td class="incremental">0</td>
+            <td class="incremental">0</td>
+            <td class="incremental">1</td>
+            <td class="incremental">1</td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    <tr class="incremental">
+    <td>Request</td><td class="incremental">=</td>
+    <td>
+      <table>
+        <tr>
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+          <th>R<sub>3</sub></th>
+        </tr>
+        <tr class="incremental">
+          <th>P<sub>0</sub></th>
+          <td class="incremental">0</td>
+          <td class="incremental">1</td>
+          <td class="incremental">0</td>
+          <td class="incremental">0</td>
+        </tr>
+        <tr class="incremental">
+          <th>P<sub>1</sub></th>
+          <td class="incremental">0</td>
+          <td class="incremental">0</td>
+          <td class="incremental">1</td>
+          <td class="incremental">0</td>
+        </tr>
+        <tr class="incremental">
+          <th>P<sub>2</sub></th>
+          <td class="incremental">1</td>
+          <td class="incremental">0</td>
+          <td class="incremental">0</td>
+          <td class="incremental">0</td>
+        </tr>
+        <tr class="incremental">
+          <th>P<sub>3</sub></th>
+          <td class="incremental">0</td>
+          <td class="incremental">1</td>
+          <td class="incremental">0</td>
+          <td class="incremental">0</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</td>
+</tr>
+<tr><td class="incremental">There is no process which its Request[i] &le; work</td></tr>
+</table>
+</div>
+
+<div class="slide"><h1>Deadlock Example 2</h1>
+<table>
+<tr>
+<td>
+  <img src="img/deadlock/deadlock_detection_deadlock2.svg" />
+</td>
+<td>
+  <small>
+  <table>
+    <tr>
+      <td>Resources</td><td>=</td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Avaiable</td><td>=</td>
+      <td>
+        <table>
+          <tr>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Allocation</td><td>=</td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>1</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>Request</td><td>=</td>
+      <td>
+        <table>
+          <tr>
+            <th> </th>
+            <th>R<sub>0</sub></th>
+            <th>R<sub>1</sub></th>
+            <th>R<sub>2</sub></th>
+            <th>R<sub>3</sub></th>
+          </tr>
+          <tr>
+            <th>P<sub>0</sub></th>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>1</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>2</sub></th>
+            <td>1</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>P<sub>3</sub></th>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>1</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  </small>
+</td>
+</tr>
+</table>
+<small>
+<ul class="incremental">
+  <li>Process P3: Request[3] &le; work ⇒ work = { 0 , 0 , 0 , 2 }</li>
+  <li>There is not another process which satisfy in this conditoin. P<sub>0</sub>, P<sub>1</sub>, and P<sub>2</sub> are in deadlock</li>
+</ul>
+</small>
+</div>
+
+<div class="slide"><br /><h1>Deadlock </h1><br /><br />
+<ol class="incremental">
+ <li>Initialize Work = Available.<br /> 
+  <pre>
+     for i in range(0, n): 
+       if Allocation[i] <> 0: 
+         Finish[i] = false. 
+       else: 
+         Finish[i] = true.
+  </pre>
+ </li>
+ <li> Find an index i such that<br />
+        a. Finish[i] == false <br />
+        b. Request[i] ≤ Work <br />
+       If no such i exists, go to step 4.
+  </li>
+  <li>Work += Allocation[i]<br />
+      Finish[i] = true <br />
+      Go to step 2.
+  <li>If Finish[i] == false for some i, 0 ≤ i &lt; n, then the system is in a deadlock
+ </li>
+</ul>
+</div>
+
+<!--src/deadlock/deadlock_detection_algorithm.cpp-->
+<div class="slide"><h1>Deadlock detection (Psudo C++ code) </h1>
+<div class="highlight"><pre><span></span><span class="cm">/* ********************* 1   ************************** */</span>
+<span class="kt">bool</span> <span class="n">finish</span><span class="p">[</span><span class="n">N</span><span class="p">];</span> <span class="kt">int</span> <span class="n">work</span><span class="p">[</span><span class="n">M</span><span class="p">];</span>  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span> <span class="kt">bool</span> <span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+<span class="n">work</span> <span class="o">=</span> <span class="n">Available</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">Allocation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>    <span class="n">finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+  <span class="k">else</span>                    <span class="n">finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+<span class="cm">/* ********************* 2   ************************** */</span>
+<span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+<span class="k">while</span><span class="p">(</span><span class="n">flag</span><span class="o">==</span><span class="nb">true</span><span class="p">){</span>
+  <span class="n">flag</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span> <span class="p">(</span><span class="n">finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">Request</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">work</span><span class="p">){</span>
+          <span class="n">finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+          <span class="n">work</span> <span class="o">+=</span> <span class="n">Allocation</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+          <span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="cm">/* ********************* 3   ************************** */</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">finish</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">){</span> <span class="n">flag</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span>    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;process &quot;</span><span class="o">&lt;&lt;</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&quot; is deadlocked.&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>  <span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="o">==</span><span class="nb">true</span><span class="p">)</span>  <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;The system is deadlocked&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+<span class="k">else</span> <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;The system is not deadlocked&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+</pre></div>
+</div>
+
+<!--src/deadlock/deadlock_detection_algorithm.py-->
+<div class="slide"><h1>Deadlock detection (Python code) </h1>
+<pre>
+N = 100 # number of Processes
+M = 200 # number of Resources
+Available = [0] * M # array(M)
+Allocation = [[0] * M] * N # array(N,M)
+Request = [[0] * M] * N # array(N,M)
+################################################
+finish  = [False] * N #array(N)
+work = Available.copy()
+flag = True
+for i in range(0, N):
+  if all(k == 0 for k in Allocation[i]):
+    finish[i] = True
+################################################
+while flag == True:
+  flag = False
+  for i in range(0, N):
+    if finish[i] == False and all(k<=m for k, m in zip(Request[i], work)):
+      finish[i] = True
+      work = [x+y for x, y in zip(work, Allocation[i])]
+      flag = True
+################################################
+deadlocked = [i for i in range(0, N) if finish[i] == False]
+if len(deadlocked) !=0:
+  print("The system is deadlocked")
+else:
+  print("The system is not deadlocked")
+</pre>
+</div>
+
+<div class="slide"><br /><h1>Recovery from Deadlock</h1><br />
+<ol class="incremental">
+ <li> Process Termination
+    <ol class="incremental">
+        <li>Abort all deadlocked processes.</li>
+        <li>Abort one process at a time until the deadlock cycle is eliminated.<br />
+        <ol class="incremental">
+          <li>
+          What the priority of the process is
+          </li><li>
+          How long the process has computed and how much longer the process will compute before completing its designated task
+          </li><li>
+          How many and what types of resources the process has used (for example, whether the resources are simple to preempt)
+          </li><li>
+          How many more resources the process needs in order to complete
+          </li><li>
+          How many processes will need to be terminated
+          </li><li>
+          Whether the process is interactive or batch
+          </li>
+    </ol> </li>   </ol>
+ </li>
+ <li> Resource Preemption
+    <ol class="incremental" ><li>Selecting a victim.
+    </li><li>Rollback.
+    </li><li>Starvation.
+    </li></ol>
+  </li>
+</ol>
+</div>
+
+<div class="slide"><h1>Deadlock Avoidance(Banker's Algorithm) 1</h1>
+<table>
+  <tr>
+    <td >
+      <img class= "incremental" src="img/deadlock/deadlock_avoidance_not_safe1.svg" height="250px" width="250px" />
+    </td>
+    <td >
+      <img class="incremental" src="img/deadlock/deadlock_avoidance_not_safe2.svg" height="250px" width="250px" />
+    </td>
+    <td>
+      <img class="incremental" src="img/deadlock/deadlock_avoidance_safe1.svg" height="250px" width="250px" />
+    </td>
+  </tr>
+  <tr>
+    <td class="incremental">MAX =
+      <table>
+        <tr >
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+      </table>
+      <span class="incremental" >Claim edge</span>
+    </td>
+    <td>
+      <img class="incremental" src="img/deadlock/deadlock_avoidance_not_safe2_need.svg" height="250px" width="250px" />
+    </td>
+    <td>
+      <img class= "incremental" src="img/deadlock/deadlock_avoidance_safe1_need.svg" height="250px" width="250px" />
+    </td>
+  </tr>
+</table>
+</div>
+
+<div class="slide"><small><h1>Deadlock Avoidance(Banker's Algorithm) 2</h1>
+<table>
+<tr>
+  <td class="incremental">MAX =
+      <table>
+        <tr >
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+      </table>
+
+  </td>
+  <td>
+    <img class="incremental" src="img/deadlock/deadlock_avoidance_not_safe2_need.svg" height="300px" width="300px" />
+  </td>
+  <td>
+    <img class= "incremental" src="img/deadlock/deadlock_avoidance_safe1_need.svg" height="300px" width="300px" />
+  </td>
+</tr>
+
+<tr>
+  <td class="incremental">
+    Need = MAX - Allocation
+  </td>
+
+  <td class="incremental">Need =
+      <table>
+        <tr >
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+
+      </table>
+  <span class="incremental">Avaiable=[ 0 , 0 , 0 ]</span>
+  </td>
+
+  <td class="incremental">Need =
+      <table>
+        <tr >
+          <th> </th>
+          <th>R<sub>0</sub></th>
+          <th>R<sub>1</sub></th>
+          <th>R<sub>2</sub></th>
+        </tr>
+        <tr>
+          <th>P<sub>0</sub></th>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th>P<sub>1</sub></th>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th>P<sub>2</sub></th>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+
+      </table>
+  <span class="incremental">Avaiable=[ 0 , 0 , 1 ]</span><br />
+  <span class="incremental">Safe Sequence P1 , P0 , P2</span>
+  </td>
+
+</tr>
+
+</table>
+</div>
+
+<div class="slide"><br /><h1>Safety Algorithm</h1><br /><br />
+  <ol class ="incremental">
+    <li>Variables
+    <ul>
+      <li>
+        int work[m] = Avaiable
+      </li>
+      <li>
+        bool Finish[n]={false}
+      </li>
+      <li>
+        int Need[n][m] = MAX - Allocation
+      </li>
+    </ul>
+  </li>
+  <li>
+    while exists i such that ( (Finish[i] == false) and  ( Need[i] &le; Work) )
+    <ul>
+      <li>Work = Work + Allocation[i] </li>
+      <li>Finish[i] = true </li>
+    </ul>
+  <li>
+    If Finish[i] ==true for all i, then the system is in a safe state.
+  </li>
+  </ol>
+</div>
+
+<div class="slide"><br /><br /><h1>Resource-Request Algorithm </h1><br /><br /><br />
+  <ol class ="incremental">
+    <li>If Request &le; Need;, go to step 2. Otherwise, raise an error condition, since
+the process has exceeded its maximum claim.
+
+</li>
+
+  <li>
+    If Request<sub>i</sub> &le; Available, go to step 3. Otherwise, P; must wait, since the
+resources are not available.
+</li>
+<li>
+  Have the system pretend to have allocated the requested resources to
+process P; by modifying the state as follows:
+
+  <ul>
+  <li>  Available= Available- Request<sub>i</sub> </li>
+  <li>  Allocation<sub>i</sub> =Allocation<sub>i</sub> +Request<sub>i</sub>   </li>
+  <li>Need<sub>i</sub>  =Need<sub>i</sub> - Request<sub>i</sub> </li>
+  </ul>
+ </li>
+  <li>
+If the resulting resource-allocation state is safe, the transaction is com-
+pleted, and process P; is allocated its resources. However, if the new state
+is unsafe, then P; must wait for Request;, and the old resource-allocation
+state is restored
+
+  </li>
+  </ol>
+
+</div>
+
+<div class="slide">
+<h1>END</h1>
+</div>
+
+<div class="slide">
+<!--
+  https://developer.mozilla.org/en-US/docs/Web/MathML/Authoring
+  https://github.com/fred-wang/TeXZilla
+  http://fred-wang.github.io/TeXZilla/
+-->
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo lspace="0em" rspace="0em">lim</mo><mrow><mi>n</mi><mo stretchy="false">→</mo><mn>∞</mn></mrow></munder><mfrac><mrow><mi>n</mi><mo>!</mo><mspace width="0.2777777777777778em"></mspace><msup><mi>n</mi><mi>t</mi></msup></mrow><mrow><mi>t</mi><mspace width="0.2777777777777778em"></mspace><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>⋯</mo><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mi>t</mi></mfrac><munderover><mo>∏</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mn>∞</mn></munderover><mfrac><msup><mrow><mo>(</mo><mrow><mn>1</mn><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow><mo>)</mo></mrow><mi>t</mi></msup><mrow><mn>1</mn><mo>+</mo><mfrac><mi>t</mi><mi>n</mi></mfrac></mrow></mfrac><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mo>−</mo><mi>γ</mi><mi>t</mi></mrow></msup><mi>t</mi></mfrac><munderover><mo>∏</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mn>∞</mn></munderover><msup><mrow><mo>(</mo><mrow><mn>1</mn><mo>+</mo><mfrac><mi>t</mi><mi>n</mi></mfrac></mrow><mo>)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mfrac><mi>t</mi><mi>n</mi></mfrac></msup></mrow><annotation encoding="TeX">\Gamma(t) = \lim_{n \to \infty} \frac{n! \; n^t}{t \; (t+1)\cdots(t+n)}= \frac{1}{t} \prod_{n=1}^\infty \frac{\left(1+\frac{1}{n}\right)^t}{1+\frac{t}{n}} = \frac{e^{-\gamma t}}{t} \prod_{n=1}^\infty \left(1 + \frac{t}{n}\right)^{-1} e^{\frac{t}{n}}</annotation></semantics>
+</math>
+</div>
+
+<div class="slide">
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mtable>
+      <mtr>
+        <mtd>
+          <msub>
+                  <mi>R</mi>
+                <mn>0</mn>
+          </msub>
+        </mtd>
+        <mtd>
+          <msub>
+                  <mi>R</mi>
+                <mn>1</mn>
+          </msub>
+        </mtd>
+        <mtd>
+          <msub>
+                  <mi>R</mi>
+                <mn>2</mn>
+          </msub>
+        </mtd>
+        <mtd>
+          <msub>
+                  <mi>R</mi>
+                <mn>3</mn>
+          </msub>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd>
+          <msub>
+                  <mi>P</mi>
+                <mn>0</mn>
+          </msub>
+        </mtd>
+        <mtd>
+          <mrow>
+            <mtable>
+              <mtr>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+                <mtd>
+                  <mn>2</mn>
+                </mtd>
+                <mtd>
+                  <mn>3</mn>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+                <mtd>
+                  <mn>0</mn>
+                </mtd>
+                <mtd>
+                  <mn>1</mn>
+                </mtd>
+              </mtr>
+            </mtable>
+          </mrow>
+        </mtd>
+        <mtd>
+        </mtd>
+        <mtd>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd>
+          <msub>
+                  <mi>P</mi>
+                <mn>1</mn>
+          </msub>
+        </mtd>
+        <mtd>
+        </mtd>
+        <mtd>
+        </mtd>
+        <mtd>
+        </mtd>
+      </mtr>
+      <mtr>
+        <mtd>
+          <msub>
+                  <mi>P</mi>
+                <mn>2</mn>
+          </msub>
+        </mtd>
+        <mtd>
+        </mtd>
+        <mtd>
+        </mtd>
+        <mtd>
+        </mtd>
+      </mtr>
+    </mtable>
+  </mrow>
+  </math>
+</div>
+
+<div class="slide" dir="rtl"><br /><br /><h1>
+  الگوریتم تخصیص منابع
+  </h1><br /><br />
+  <ol class ="incremental">
+    <li>
+       اگر
+       Need &le; Request
+       آن‌گاه خطایی را ایجاد کن زیرا فرایند بیشتر از مقدار حداکثری که
+       گفته است منبع می‌خواهد دریافت کند وگرنه به گام ۲ برو
+</li>
+
+  <li>
+    اگر فرایندی با شمارهٔ i یافت شد که
+    Request<sub>i</sub> &le; Available,
+    باشد آن‌گاه
+    به گام ۳ برو وگرنه فرایند i ام باید منتظر بماند زیرا منبع درخواستی‌اش
+    در دسترس نیست.
+</li>
+<li>
+  فرض می‌کنیم که منابع مورد نیاز فرایند را در اختیارش بگذاریم یعنی
+  کارهای زیر را انجام دهیم
+  <ul dir="ltr" class="incremental">
+  <li>  Available= Available- Request<sub>i</sub> </li>
+  <li>  Allocation<sub>i</sub> =Allocation<sub>i</sub> +Request<sub>i</sub>   </li>
+  <li>Need<sub>i</sub>  =Need<sub>i</sub> - Request<sub>i</sub> </li>
+  </ul>
+ </li>
+  <li>
+    الگوریتم امن بودن را روی وضعیت شبیه‌سازی شدهٔ کنونی اجرا می‌کنیم
+  </li>   <li>
+    اگر وضعیت امن بود تخصیص واقعی را انجام می‌دهیم وگرنه تخصیص را انجام نمی‌دهیم
+    و وضعیت آرایه‌ها و ماتریس‌ها را به حالت پیش از تغییر در گام ۳ برمی‌گردانیم
+    </li>
+  </ol>
+</div>
+</body> </html>

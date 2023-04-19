@@ -1,0 +1,8 @@
+./a.out
+n : 5	 rn : 5
+n : 8	 rn : 8
+n : 16	 rn : 16
+n : 4	 rn : 4
+n : 4	 rn : 4
+n : 4	 rn : 4
+n : 8	 rn : 8

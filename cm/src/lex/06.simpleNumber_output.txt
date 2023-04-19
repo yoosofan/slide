@@ -1,0 +1,12 @@
+Int : 12
+Int : 234
+Real: 434.45
+Real: 676.45
+AAA : aa
+SSS : ss
+ABC : abc
+ABC : abc
+Int : 654
+Int : 123
+AAA : aa
+

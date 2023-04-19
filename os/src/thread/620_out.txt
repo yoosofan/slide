@@ -1,0 +1,4 @@
+In main
+second in main
+In thread 
+the next output in thread

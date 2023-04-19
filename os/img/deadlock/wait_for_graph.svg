@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created by diasvg.py -->
+<svg width="2.415cm" height="6.500cm" viewBox="4.135 1.150 6.550 7.650"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+<ellipse cx="5.350" cy="2.350" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="5.350" cy="2.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="5.350" cy="2.350" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="5.100" y="2.650"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P0</text>
+<ellipse cx="5.335" cy="6.450" rx="1.150" ry="1.150" fill="#FFFFFF" stroke="none"  /><ellipse cx="5.335" cy="6.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><ellipse cx="5.335" cy="6.450" rx="1.150" ry="1.150" fill="none" stroke="#000000"  stroke-width="0.100" /><text x="5.085" y="6.650"  fill="#000000" text-anchor="start" font-size="0.60" font-family="sans" font-style="normal" font-weight="400">
+P1</text>
+<line x1="5.335" y1="5.300" x2="5.345" y2="4.050" stroke="#000000" stroke-width="0.100" />
+<polygon fill="#000000" stroke="none" stroke-width="0.100" points="5.595,4.052 5.350,3.550 5.095,4.048 "/>
+<polygon fill="none" stroke="#000000" stroke-width="0.100"  points="5.595,4.052 5.350,3.550 5.095,4.048 "/>
+</svg>

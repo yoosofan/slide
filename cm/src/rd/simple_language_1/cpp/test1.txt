@@ -1,0 +1,25 @@
+BEGIN
+LET I = 12
+PRINT I
+LET I = I - (2-(3-2)/(3-(2-1)/(5-2*2))-1+2)
+PRINT I+ 2-(3-2)/(3-(2-1)/(5-2*2))-1+2
+LET I=19
+WHILE I-8
+BEGIN
+   PRINT I
+   LET I=I-1
+END
+LET I=3
+WHILE I
+BEGIN
+   PRINT I
+   LET J=6
+   WHILE J
+   BEGIN
+     LET J=J-2
+     PRINT J
+   END
+   LET I=I-1
+END
+
+END

@@ -1,0 +1,9 @@
+verb am
+verb is
+verb are
+prep at
+prep /*  dfgdfgdf*/of
+prep in
+prep to
+/*dfgfd */
+My name is Ahmad./*  sdfsdfdsfsd */ I'm a lecturer at the university of Kashan.

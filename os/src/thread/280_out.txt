@@ -1,0 +1,105 @@
+thread$ python3 280.py 
+0 __This is a test
+1 __This is a test
+0 __The second function is called
+2 __This is a test
+1 __The second function is called
+3 __This is a test
+2 __The second function is called
+4 __This is a test
+3 __The second function is called
+5 __This is a test
+4 __The second function is called
+6 __This is a test
+5 __The second function is called
+7 __This is a test
+6 __The second function is called
+8 __This is a test
+7 __The second function is called
+9 __This is a test
+8 __The second function is called
+10 __This is a test
+9 __The second function is called
+11 __This is a test
+10 __The second function is called
+12 __This is a test
+11 __The second function is called
+13 __This is a test
+12 __The second function is called
+14 __This is a test
+15 __This is a test
+16 __This is a test
+17 __This is a test
+18 __This is a test
+13 __The second function is called
+14 __The second function is called
+19 __This is a test
+15 __The second function is called
+20 __This is a test
+16 __The second function is called
+21 __This is a test
+17 __The second function is called
+22 __This is a test
+18 __The second function is called
+23 __This is a test
+19 __The second function is called
+24 __This is a test
+20 __The second function is called
+25 __This is a test
+21 __The second function is called
+26 __This is a test
+22 __The second function is called
+27 __This is a test
+23 __The second function is called
+28 __This is a test
+24 __The second function is called
+29 __This is a test
+25 __The second function is called
+30 __This is a test
+26 __The second function is called
+31 __This is a test
+27 __The second function is called
+32 __This is a test
+28 __The second function is called
+33 __This is a test
+29 __The second function is called
+34 __This is a test
+30 __The second function is called
+35 __This is a test
+31 __The second function is called
+36 __This is a test
+32 __The second function is called
+37 __This is a test
+33 __The second function is called
+38 __This is a test
+39 __This is a test
+34 __The second function is called
+40 __This is a test
+35 __The second function is called
+41 __This is a test
+36 __The second function is called
+42 __This is a test
+37 __The second function is called
+43 __This is a test
+38 __The second function is called
+44 __This is a test
+39 __The second function is called
+45 __This is a test
+40 __The second function is called
+46 __This is a test
+41 __The second function is called
+47 __This is a test
+42 __The second function is called
+48 __This is a test
+43 __The second function is called
+49 __This is a test
+44 __The second function is called
+50 __This is a test
+45 __The second function is called
+0 __In main AAA
+46 __The second function is called
+47 __The second function is called
+48 __The second function is called
+49 __The second function is called
+0 __In main BBB
+thread$ python3 280.py 
