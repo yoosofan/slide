@@ -5,12 +5,7 @@ class complexCls{//1140
   double r, i;
  public:
   complexCls(int m = 0, int n = 0):r(m), i(n){}
-  double operator()(int index){
-    if(index < 0 || index > 1)
-      cout << "Index out of range" << endl;
-    if(index) return r;
-    return i;
-  }
+
   friend ostream& operator<<(ostream& o1, 
       const complexCls& a){
     o1 << a.r << "+i" << a.i;
@@ -72,6 +67,13 @@ class complexCls{//1140
   {return a == b ? false: true;}
   bool operator!(void)
   {return r == 0 && i == 0 ? true: false;}
+
+  double operator()(int index){
+    if(index < 0 || index > 1)
+      cout << "Index out of range" << endl;
+    if(index) return r;
+    return i;
+  }
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);

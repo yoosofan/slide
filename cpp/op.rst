@@ -364,7 +364,7 @@ ComplexCls(VIII) / Operator ++ --
 
 :class: t2c
 
-ComplexCls(VIII) / Operator ++ --
+ComplexCls(VIII) / << >>
 ==================================================
 .. include:: src/op/1130.cpp
     :code: cpp
@@ -374,6 +374,111 @@ ComplexCls(VIII) / Operator ++ --
     :end-line: 57
 
 .. include:: src/op/1130.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+ComplexCls(VIII) /  ( )
+==================================================
+.. include:: src/op/1140.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1140.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+ComplexCls(VIII) /  
+==================================================
+.. include:: src/op/1150.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1150.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+MyArray /  =
+==================================================
+.. include:: src/op/1240.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1240.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+MyArray /  = Error
+==================================================
+.. include:: src/op/1250.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1250.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+MyArray /  = 
+==================================================
+.. include:: src/op/1260.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1260.cpp
     :code: cpp
     :number-lines: 57
     :class: ltr
