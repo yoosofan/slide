@@ -91,7 +91,7 @@ http://euler.vcsu.edu/curt.hill/Computer.html
 بخش‌های درونی یک فرآیند در حالت کلی
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_precess_addressing_parts.png
+.. image:: img/memory/memory_precess_addressing_parts.png
    :align: center
 
 
@@ -106,11 +106,11 @@ https://www2.humusoft.cz/www/papers/tcb10/065_liska.pdf
 مشخص شدن آدرس‌های حافظهٔ یک فرایند از زمان نوشته شدن برنامه تا زمان اجرای فرآیند
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_program_address_binding.png
+.. image:: img/memory/memory_program_address_binding.png
    :align: center
 
 
-.. image:: img/memory_linking_loading_scenario.png
+.. image:: img/memory/memory_linking_loading_scenario.png
    :align: center
    :scale: 90%
 
@@ -118,7 +118,7 @@ https://www2.humusoft.cz/www/papers/tcb10/065_liska.pdf
 address binding, loader
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_address_binding_loader.png
+.. image:: img/memory/memory_address_binding_loader.png
    :align: center
    :scale: 90%
 
@@ -126,7 +126,7 @@ address binding, loader
 address binding, linker
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_address_binding_linker.png
+.. image:: img/memory/memory_address_binding_linker.png
    :align: center
    :scale: 90%
 
@@ -134,7 +134,7 @@ address binding, linker
 address binding, absolute and relocate loader
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_absolute_relocate_loader.png
+.. image:: img/memory/memory_absolute_relocate_loader.png
    :align: center
    :scale: 90%
 
@@ -142,7 +142,7 @@ address binding, absolute and relocate loader
 چگونگی کارکرد پیوند زدن تابع‌ها از پرونده‌های گوناگون
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/memory_linking_function.png
+.. image:: img/memory/memory_linking_function.png
    :align: center
 
 
@@ -154,7 +154,7 @@ address binding, absolute and relocate loader
 -------------------------------------------------------------------------------------------------------------
 
 
-.. image:: img/memory_fixed_partitioning.png
+.. image:: img/memory/memory_fixed_partitioning.png
    :align: center
 
 
@@ -162,7 +162,7 @@ address binding, absolute and relocate loader
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/memory_fixed_allocation.png
+.. image:: img/memory/memory_fixed_allocation.png
    :align: center
 
 
@@ -175,14 +175,14 @@ address binding, absolute and relocate loader
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/base_limit_register.png
+.. image:: img/memory/base_limit_register.png
    :align: center
 
 حفاظت از حافظه به کمک ثبات‌های پایه و حد
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/hardware_address_protection.png
+.. image:: img/memory/hardware_address_protection.png
    :align: center
 
 بخش‌بندی پویای حافظه
@@ -193,7 +193,7 @@ address binding, absolute and relocate loader
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/memory_management_pc.png
+.. image:: img/memory/memory_management_pc.png
    :align: center
 
 
@@ -204,7 +204,7 @@ address binding, absolute and relocate loader
 ارتباط میان آدرس فیزیکی و آدرس منطقی در آدرس دهی نسبی به کمکِ واحد مدیریت حافظه (MMU)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/relocation_register_mmu.png
+.. image:: img/memory/relocation_register_mmu.png
    :align: center
 
 
@@ -212,14 +212,14 @@ address binding, absolute and relocate loader
 حافظهٔ فرآیندها در سیستم عامل CTSS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/memory_of_CTSS.png
+.. image:: img/memory/memory_of_CTSS.png
    :align: center
 
 
 اثر به کارگیری حافظهٔ پویا
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/memory_effect_of_dynamic_partitioning.png
+.. image:: img/memory/memory_effect_of_dynamic_partitioning.png
    :align: center
 
 
@@ -233,7 +233,7 @@ address binding, absolute and relocate loader
 
 
 
-.. image:: img/memory_select_part_for_allocation.png
+.. image:: img/memory/memory_select_part_for_allocation.png
    :align: center
 
 
@@ -246,19 +246,19 @@ address binding, absolute and relocate loader
 حافظهٔ پویای رفاقتی Buddy system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/memory_buddy_system1.png
+.. image:: img/memory/memory_buddy_system1.png
    :align: center
 
 
 
-.. image:: img/memory_buddy_system2.png
+.. image:: img/memory/memory_buddy_system2.png
    :align: center
    :scale: 90%
 
 الگوریتم اجرا
 
 
-.. image:: img/memory_buddy_system3.png
+.. image:: img/memory/memory_buddy_system3.png
    :align: center
 
 
@@ -269,7 +269,7 @@ address binding, absolute and relocate loader
 جابجا کردن فرآیند میان حافظهٔ‌اصلی و حافظهٔ جانبی (دیسک)، شکل ساده‌ای از حافظهٔ مجازی
 -------------------------------------------------------------------------------------------------------------
 
-.. image:: img/swapping_processes.png
+.. image:: img/memory/swapping_processes.png
    :align: center
 
 روی هم انداختن بخش‌های یک فرآیند (overlay)
@@ -284,39 +284,39 @@ address binding, absolute and relocate loader
 ------------------------------------------------------------------------------------------
 
 
-.. image:: img/paging_model.png
+.. image:: img/memory/paging_model.png
    :align: center
 
 
-.. image:: img/memory_paging_model_address.png
+.. image:: img/memory/memory_paging_model_address.png
    :align: center
 
 
-.. image:: img/memory_paging_from_disk.png
+.. image:: img/memory/memory_paging_from_disk.png
    :align: center
    :scale: 70%
 
 سخت‌افزار صفحه‌بندی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_hardware.png
+.. image:: img/memory/paging_hardware.png
    :align: center
 
 بخش‌بندی ثبات آدرس در حافظهٔ صفحه‌بندی شده
 ------------------------------------------------------------------------------------------
 
-.. image:: img/page_number_offset.png
+.. image:: img/memory/page_number_offset.png
    :align: center
 
 
-.. image:: img/memory_paging_typical_page_table_entry.png
+.. image:: img/memory/memory_paging_typical_page_table_entry.png
    :align: center
    :scale: 60%
 
 یک حافظهٔ ۳۲ بایتی با صفحه‌های ۴ بایتی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_example_32_bytes_memory.png
+.. image:: img/memory/paging_example_32_bytes_memory.png
    :align: center
 
 
@@ -324,7 +324,7 @@ address binding, absolute and relocate loader
 تغییرات فضاهای آزاد پیش و پس از تخصیص حافظه به یک فرآیند
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_free_frames_before_after.png
+.. image:: img/memory/paging_free_frames_before_after.png
    :align: center
 
 
@@ -332,24 +332,24 @@ address binding, absolute and relocate loader
 تغییرات حافظه برای چند فرآیند
 ------------------------------------------------------------------------------------------
 
-.. image:: img/memory_paging_process.png
+.. image:: img/memory/memory_paging_process.png
    :align: center
 
 
 
-.. image:: img/memory_paging_process_page_tables.png
+.. image:: img/memory/memory_paging_process_page_tables.png
    :align: center
 
 تبدیل آدرس منطقی به آدرس فیزیکی در حافظهٔ صفحه‌بندی شده
 ------------------------------------------------------------------------------------------
 
 
-.. image:: img/memory_paging_logical_address_to_physical_address.png
+.. image:: img/memory/memory_paging_logical_address_to_physical_address.png
    :align: center
 
 
 
-.. image:: img/memory_paging_logical_address_to_physical_address_detail.png
+.. image:: img/memory/memory_paging_logical_address_to_physical_address_detail.png
    :align: center
 
 
@@ -364,7 +364,7 @@ address binding, absolute and relocate loader
 حفاظت از حافظهٔ صفحه‌بندی شده
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_valid_invalid.png
+.. image:: img/memory/paging_valid_invalid.png
    :align: center
 
 
@@ -372,11 +372,11 @@ address binding, absolute and relocate loader
 اشتراک گذاری در حافظهٔ صفحه‌بندی شده
 ------------------------------------------------------------------------------------------
 
-.. image:: img/memory_paging_share_pages.png
+.. image:: img/memory/memory_paging_share_pages.png
    :align: center
    :scale: 70%
 
-.. image:: img/paging_sharing_code.png
+.. image:: img/memory/paging_sharing_code.png
    :align: center
 
 
@@ -396,7 +396,7 @@ address binding, absolute and relocate loader
 تبدیل آدرس منطقی به فیزیکی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/memory_pagin_address_translation.png
+.. image:: img/memory/memory_paging_address_translation.png
    :align: center
    :scale: 80%
 
@@ -406,7 +406,7 @@ address binding, absolute and relocate loader
 سلسه مراتب حافظه
 ------------------------------------------------------------------------------------------
 
-.. image:: img/memory_hierarchy.png
+.. image:: img/memory/memory_hierarchy.png
    :align: center
 
 زمان دسترسی مؤثر Effective Access Time (EAT) بدون صفحه‌بندی
@@ -452,7 +452,7 @@ address binding, absolute and relocate loader
 نمودار اثر به کارگیری حافظهٔ نهان در افزایش سرعت کار با حافظه
 ------------------------------------------------------------------------------------------
 
-.. image:: img/memory_effect_of_cache.png
+.. image:: img/memory/memory_effect_of_cache.png
    :align: center
 
 
@@ -462,7 +462,7 @@ address binding, absolute and relocate loader
 ------------------------------------------------------------------------------------------
 
 
-.. image:: img/memory_paging_page_table_and_cache.png
+.. image:: img/memory/memory_paging_page_table_and_cache.png
    :align: center
    :scale: 70%
 
@@ -484,7 +484,7 @@ address binding, absolute and relocate loader
 حافظهٔ اصلی با TLB
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_hardware_with_TLB.png
+.. image:: img/memory/paging_hardware_with_TLB.png
    :align: center
    :scale: 70%
 
@@ -525,7 +525,7 @@ address binding, absolute and relocate loader
 صفحه‌بندی دو سطحی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_two_level.png
+.. image:: img/memory/paging_two_level.png
    :align: center
 
 
@@ -534,25 +534,25 @@ address binding, absolute and relocate loader
 آدرس‌دهی در صفحه‌بندی دو سطحی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_address_translation_32bit.png
+.. image:: img/memory/paging_address_translation_32bit.png
    :align: center
 
 
-.. image:: img/paging_two_level_32bit_address.png
+.. image:: img/memory/paging_two_level_32bit_address.png
    :align: center
 
-.. image:: img/memory_paging_Address_Translation_in_a_Two_Level_Paging_System.png
+.. image:: img/memory/memory_paging_Address_Translation_in_a_Two_Level_Paging_System.png
    :align: center
    :scale: 90%
 
-.. image:: img/memory_paging_Two_Level_Hierarchical_Page_Table.png
+.. image:: img/memory/memory_paging_Two_Level_Hierarchical_Page_Table.png
    :align: center
 
 
 صفحه‌بندی دو سطحی ۶۴ بیتی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_two_level_64bit.png
+.. image:: img/memory/paging_two_level_64bit.png
    :align: center
 
 
@@ -564,7 +564,7 @@ address binding, absolute and relocate loader
 صفحه‌بندی سه سطحی ۶۴ بیتی
 ------------------------------------------------------------------------------------------
 
-.. image:: img/paging_three_level_64bit_address.png
+.. image:: img/memory/paging_three_level_64bit_address.png
    :align: center
 
 
@@ -576,7 +576,7 @@ address binding, absolute and relocate loader
 
 
 
-.. image:: img/memory_paging_Inverted_Page_Table_Structure.png
+.. image:: img/memory/memory_paging_Inverted_Page_Table_Structure.png
    :align: center
 
 
@@ -587,40 +587,40 @@ address binding, absolute and relocate loader
 ====================================================================================================
 
 
-.. image:: img/memory_virtual_memory_general.png
+.. image:: img/memory/memory_virtual_memory_general.png
    :align: center
    :scale: 70%
 
-.. image:: img/virtual_memory_concept.png
+.. image:: img/memory/virtual_memory_concept.png
    :align: center
 
 آدرس‌دهی حافظهٔ مجازی
 ------------------------------------------------------------------------------------------
 
 
-.. image:: img/virtual_memory_addressing.png
+.. image:: img/memory/virtual_memory_addressing.png
    :align: center
 
 
-.. image:: img/memory_virtual_with_TLB.png
+.. image:: img/memory/memory_virtual_with_TLB.png
    :align: center
 
 
 Operation of Paging and Translation Lookaside Buffer
 
-.. image:: img/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
+.. image:: img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
    :align: center
 
 
 
-.. image:: img/memory_virtual_valid_invalid.png
+.. image:: img/memory/memory_virtual_valid_invalid.png
    :align: center
    :scale: 70%
 
 
 مراحل برخورد با نبود صفحه (نقص صفحه Page fault)
 
-.. image:: img/memory_virtual_handling_page_fault.png
+.. image:: img/memory/memory_virtual_handling_page_fault.png
    :align: center
    :scale: 70%
 
@@ -672,22 +672,22 @@ Operation of Paging and Translation Lookaside Buffer
 -------------------------------------------------------
 
 
-.. image:: img/memory_virtual_copy_on_write_before.png
+.. image:: img/memory/memory_virtual_copy_on_write_before.png
    :align: center
    :scale: 70%
 
-.. image:: img/memory_virtual_copy_on_write_after.png
+.. image:: img/memory/memory_virtual_copy_on_write_after.png
    :align: center
    :scale: 70%
 
 جایگزینی صفحه
 ---------------------------------------------------------
 
-.. image:: img/memory_virtual_need4replacement.png
+.. image:: img/memory/memory_virtual_need4replacement.png
    :align: center
    :scale: 80%
 
-.. image:: img/memory_virtual_page_replacement.png
+.. image:: img/memory/memory_virtual_page_replacement.png
    :align: center
    :scale: 80%
 
@@ -707,14 +707,14 @@ Operation of Paging and Translation Lookaside Buffer
 
 تعداد خطای صفحه بسته به تعداد قاب‌های تخصیص داده شده
 
-.. image:: img/memory_virtual_page_fault_per_frame_allocated.png
+.. image:: img/memory/memory_virtual_page_fault_per_frame_allocated.png
    :align: center
    :scale: 80%
 
 الگوریتم جایگزینی FIFO
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/memory_virtual_page_replacement_FIFO.png
+.. image:: img/memory/memory_virtual_page_replacement_FIFO.png
    :align: center
    :scale: 70%
 
@@ -722,7 +722,7 @@ Operation of Paging and Translation Lookaside Buffer
 
     Belady’s anomaly: for some page-replacement algorithms, the page-fault rate may increase as the number of allocated frames increases. We would expect that giving more memory to a process would improve its performance. In some early research, investigators noticed that this assumption was not always true. Belady’s anomaly was discovered as a result.
 
-.. image:: img/memory_virtual_page_replacement_FIFO_Blady_anomaly.png
+.. image:: img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png
    :align: center
    :scale: 90%
 
@@ -730,7 +730,7 @@ Operation of Paging and Translation Lookaside Buffer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/memory_virtual_page_replacement_Optimal.png
+.. image:: img/memory/memory_virtual_page_replacement_Optimal.png
    :align: center
    :scale: 70%
 
@@ -738,7 +738,7 @@ Operation of Paging and Translation Lookaside Buffer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-.. image:: img/memory_virtual_page_replacement_LRU.png
+.. image:: img/memory/memory_virtual_page_replacement_LRU.png
    :align: center
    :scale: 70%
 
@@ -750,7 +750,7 @@ Operation of Paging and Translation Lookaside Buffer
 
     Figure 9.16 Use of a stack to record the most recent page references.
 
-.. image:: img/memory_virtual_page_replacement_LRU_stack.png
+.. image:: img/memory/memory_virtual_page_replacement_LRU_stack.png
    :align: center
 
 الگوریتم جایگزینی کمترین فراوانی LFU
@@ -774,7 +774,7 @@ Not Recently Used Page Replacement Algorithm
 
 بیت دسترسی access bit یا بیت ارجاع reference bit یا بیت استفاده use bit
 
-.. image:: img/memory_virtual_page_replacement_second_chance.png
+.. image:: img/memory/memory_virtual_page_replacement_second_chance.png
    :align: center
    :scale: 80%
 
@@ -802,12 +802,12 @@ Not Recently Used Page Replacement Algorithm
 
 
 
-.. image:: img/memory_virtual_thrashing.png
+.. image:: img/memory/memory_virtual_thrashing.png
    :align: center
 
 اصل محلی بودن
 
-.. image:: img/memory_virtual_locality_principle.png
+.. image:: img/memory/memory_virtual_locality_principle.png
    :align: center
    :width:  40em
    :height: 30em
@@ -815,16 +815,16 @@ Not Recently Used Page Replacement Algorithm
 روش شناسایی کوبیدگی به کمک مدل مجموعهٔ کاری
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/memory_virtual_thrashing_working_set_model.png
+.. image:: img/memory/memory_virtual_thrashing_working_set_model.png
    :align: center
    :scale: 80%
 
-.. image:: img/memory_virtual_thrashing_working_set_model_example.png
+.. image:: img/memory/memory_virtual_thrashing_working_set_model_example.png
    :align: center
    :scale: 60%
 
 
-.. image:: img/memory_virtual_thrashing_working_set_model_graph.png
+.. image:: img/memory/memory_virtual_thrashing_working_set_model_graph.png
    :align: center
    :scale: 70%
 
@@ -833,7 +833,7 @@ Not Recently Used Page Replacement Algorithm
 
 page-fault frequency ( PFF )
 
-.. image:: img/memory_virtual_thrashing_page_fault_frequency.png
+.. image:: img/memory/memory_virtual_thrashing_page_fault_frequency.png
    :align: center
    :scale: 60%
 
@@ -846,7 +846,7 @@ page-fault frequency ( PFF )
 پرونده‌های نگاشت شده به حافظه (Memory-Mapped Files)
 ------------------------------------------------------------------------------
 
-.. image:: img/memory_virtual_memory_mapped_files.png
+.. image:: img/memory/memory_virtual_memory_mapped_files.png
    :align: center
    :scale: 60%
 
@@ -877,19 +877,19 @@ page-fault frequency ( PFF )
 قطعه‌بندی (segmentation)
 ======================================================================================================
 
-.. image:: img/memory_segmentation_logical_address.png
+.. image:: img/memory/memory_segmentation_logical_address.png
    :align: center
    :scale: 80%
 
-.. image:: img/memory_segmentation_example.png
+.. image:: img/memory/memory_segmentation_example.png
    :align: center
    :scale: 80%
 
-.. image:: img/memory_segmentation_hardware.png
+.. image:: img/memory/memory_segmentation_hardware.png
    :align: center
    :scale: 80%
 
-.. image:: img/memory_segmentation_logical2physical_address.png
+.. image:: img/memory/memory_segmentation_logical2physical_address.png
    :align: center
 
 اشتراک گذاری در قطعه‌بندی
@@ -904,11 +904,11 @@ page-fault frequency ( PFF )
 ساختار حافظهٔ قطعه‌بندی شده در پردازنده‌های اینتل ۳۲ بیتی (IA32)
 ===================================================================================================
 
-.. image:: img/memory_real_hardware_example_IA-32_segmentation_logical2physical.png
+.. image:: img/memory/memory_real_hardware_example_IA-32_segmentation_logical2physical.png
    :align: center
    :scale: 70%
 
-.. image:: img/memory_real_hardware_example_IA-32_segmentation.png
+.. image:: img/memory/memory_real_hardware_example_IA-32_segmentation.png
    :align: center
 
 *  بیشترین حافظه‌ای که می‌تواند پشتیبانی کند: 4GB
@@ -941,15 +941,15 @@ page-fault frequency ( PFF )
 
 
 
-.. image:: img/memory_real_hardware_example_IA-32_paging_4KB.png
+.. image:: img/memory/memory_real_hardware_example_IA-32_paging_4KB.png
    :align: center
 
 
-.. image:: img/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png
+.. image:: img/memory/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png
    :align: center
    :scale: 70%
 
-.. image:: img/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png
+.. image:: img/memory/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png
    :align: center
    :scale: 120%
 
@@ -959,7 +959,7 @@ page-fault frequency ( PFF )
 ===================================================================================================
 
 
-.. image:: img/memory_real_hardware_example_x86_64_4KB_page_size.png
+.. image:: img/memory/memory_real_hardware_example_x86_64_4KB_page_size.png
    :align: center
    :scale: 70%
 
@@ -968,7 +968,7 @@ page-fault frequency ( PFF )
 ===================================================================================================
 
 
-.. image:: img/memory_real_hardware_example_ARM32.png
+.. image:: img/memory/memory_real_hardware_example_ARM32.png
    :align: center
    :scale: 70%
 

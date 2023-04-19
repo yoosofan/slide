@@ -21,14 +21,14 @@
 ساختار دیسک
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Moving_head_disk_mechanism.png
+.. image:: img/disk/disk_Moving_head_disk_mechanism.png
    :align: center
 
 
 دیسک روی شبکه (SAN)
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Storage_area_network.png
+.. image:: img/disk/disk_Storage_area_network.png
    :align: center
 
 سامانهٔ مدیریت پروندهٔ سیستم عامل
@@ -44,28 +44,28 @@
 نمونهٔ ساده‌ای از دسترسی به یک پرونده به کمک شاخص
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Example_of_index_and_relative_files.png
+.. image:: img/disk/disk_Example_of_index_and_relative_files.png
    :align: center
    :scale: 90%
 
 نمونهٔ ساده‌ای از سازماندهی دیسک و پوشه‌ها
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_A_typical_file_system_organization.png
+.. image:: img/disk/disk_A_typical_file_system_organization.png
    :align: center
    :scale: 90%
 
 ساختار پوشهٔ یک سطحی
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Single_level_directory.png
+.. image:: img/disk/disk_Single_level_directory.png
    :align: center
    :scale: 80%
 
 ساختار پوشهٔ دو سطحی
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Two_level_directory_structure.png
+.. image:: img/disk/disk_Two_level_directory_structure.png
    :align: center
    :scale: 80%
 
@@ -73,35 +73,35 @@
 ساختار پوشه به صورت گراف بدون چرخه
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Acyclic_graph_directory_structure.png
+.. image:: img/disk/disk_Acyclic_graph_directory_structure.png
    :align: center
 
 
 ساختار پوشه به صورت گراف عمومی
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_General_graph_directory.png
+.. image:: img/disk/disk_General_graph_directory.png
    :align: center
    :scale: 90%
 
 سامانهٔ پروندهٔ چند لایه
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Layered_file_system.png
+.. image:: img/disk/disk_Layered_file_system.png
    :align: center
 
 
 نمونه‌ای از بلاک کنترل پرونده
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_A_typical_file_control_block.png
+.. image:: img/disk/disk_A_typical_file_control_block.png
    :align: center
 
 
 ساختار پرونده در حافظه
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_In_memory_file_system_structures_a_File_open_b_File_read.png
+.. image:: img/disk/disk_In_memory_file_system_structures_a_File_open_b_File_read.png
    :align: center
    :scale: 70%
 
@@ -113,7 +113,7 @@
 
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Schematic_view_of_a_virtual_file_system.png
+.. image:: img/disk/disk_Schematic_view_of_a_virtual_file_system.png
    :align: center
    :scale: 70%
 
@@ -125,7 +125,7 @@
 ------------------------------------------------------------------------------------------------------
 
 
-.. image:: img/disk_Contiguous_allocation_of_disk_space.png
+.. image:: img/disk/disk_Contiguous_allocation_of_disk_space.png
    :align: center
 
 *  تکه تکه شدن یا پراکندگی خارجی
@@ -135,25 +135,25 @@
 تخصیص به صورت لیست پیوندی
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Linked_allocation_of_disk_space.png
+.. image:: img/disk/disk_Linked_allocation_of_disk_space.png
    :align: center
 
 ساختار پرونده FAT
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/disk_File_allocation_table.png
+.. image:: img/disk/disk_File_allocation_table.png
    :align: center
 
 تخصیص به کمک نمایه (شاخص Index)
 -------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Indexed_allocation_of_disk_space.png
+.. image:: img/disk/disk_Indexed_allocation_of_disk_space.png
    :align: center
 
 تخصیص به کمک نمایه-پیوسته
 -------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Indexed_Allocation_with_Variable_Length_Portions.png
+.. image:: img/disk/disk_Indexed_Allocation_with_Variable_Length_Portions.png
    :align: center
    :scale: 80%
 
@@ -161,14 +161,14 @@
 ساختار پروندهٔ یونیکس
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: img/disk_The_UNIX_inode.png
+.. image:: img/disk/disk_The_UNIX_inode.png
    :align: center
    :scale: 75%
 
 مقایسهٔ تخصیص‌های گوناگون
 -------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_File_Allocation_Methods.png
+.. image:: img/disk/disk_File_Allocation_Methods.png
    :align: center
    :scale: 60%
 
@@ -179,7 +179,7 @@
 لیست پیوندی
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_free_Linked_space_list_on_disk.png
+.. image:: img/disk/disk_free_Linked_space_list_on_disk.png
    :align: center
 
 
@@ -193,14 +193,14 @@
 گذرگاه کامپیوتر
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/IO_A_typical_PC_bus_structure.png
+.. image:: img/disk/IO_A_typical_PC_bus_structure.png
    :align: center
    :scale: 80%
 
 پورت‌ها
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/IO_Device_I_O_port_locations_on_PCs_partial.png
+.. image:: img/disk/IO_Device_I_O_port_locations_on_PCs_partial.png
    :align: center
    :scale: 80%
 
@@ -208,7 +208,7 @@
 وضعیت درخواست‌های دیسک
 ------------------------------------------------------------------------------------------------------
 
-.. image:: img/IO_Device_status_table.png
+.. image:: img/disk/IO_Device_status_table.png
    :align: center
    :scale: 70%
 
@@ -228,7 +228,7 @@
 زمان‌بندی دیسک به روش FCFS
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_FCFS_disk_scheduling.png
+.. image:: img/disk/disk_FCFS_disk_scheduling.png
    :align: center
 
 
@@ -236,7 +236,7 @@
 زمان‌بندی دیسک به روش SSTF
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_SSTF_disk_scheduling.png
+.. image:: img/disk/disk_SSTF_disk_scheduling.png
    :align: center
 
 
@@ -244,14 +244,14 @@
 زمان‌بندی دیسک به روش SCAN
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_SCAN_disk_scheduling.png
+.. image:: img/disk/disk_SCAN_disk_scheduling.png
    :align: center
 
 
 زمان‌بندی دیسک به روش C-SCAN
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_C_SCAN_disk_scheduling.png
+.. image:: img/disk/disk_C_SCAN_disk_scheduling.png
    :align: center
 
 زمان‌بندی دیسک به روش Look
@@ -271,7 +271,7 @@
 چند الگوریتم زمان‌بندی دیسک
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Disk_Scheduling_Algorithms.png
+.. image:: img/disk/disk_Disk_Scheduling_Algorithms.png
    :align: center
    :scale: 60%
 
@@ -279,7 +279,7 @@
 نمونه‌ای از مقایسهٔ چند الگوریتم
 -----------------------------------------------------------------------------------------------------
 
-.. image:: img/disk_Comparison_of_Disk_Scheduling_Algorithms.png
+.. image:: img/disk/disk_Comparison_of_Disk_Scheduling_Algorithms.png
    :align: center
    :scale: 60%
 
@@ -287,7 +287,7 @@
 انجام ورودی/خروجی‌ها
 =======================================================================================================
 
-.. image:: img/IO_The_life_cycle_of_an_I_O_request.png
+.. image:: img/disk/IO_The_life_cycle_of_an_I_O_request.png
    :align: center
 
 
@@ -295,7 +295,7 @@
 RAID
 =======================================================================================================
 
-.. image:: img/disk_raid_levels.png
+.. image:: img/disk/disk_raid_levels.png
    :align: center
    :scale: 130%
 

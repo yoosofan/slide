@@ -17,7 +17,7 @@ Who gets to run next?
 Paul Krzyzanowski
 February 18, 2015
 
---------
+---
 
 operating system memory management base register
 
@@ -32,9 +32,9 @@ linux gprof sample
 http://www.thegeekstuff.com/2012/08/gprof-tutorial/
 gcc -Wall -pg test_gprof.c test_gprof_new.c -o test_gprof
 ./test_gprof 
- gprof test_gprof gmon.out > analysis.txt
+gprof test_gprof gmon.out > analysis.txt
 
--------------------- 
+---
 http://stackoverflow.com/questions/375913/what-can-i-use-to-profile-c-code-in-linux/378024#378024
 
 http://stackoverflow.com/questions/2497211/how-to-profile-multi-threaded-c-application-on-linux

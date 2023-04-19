@@ -15,13 +15,13 @@
 
 Monitor
 ===================================================
-.. image:: img/process_synchronization/monitor.png
+.. image:: img/ps/monitor.png
 
 ----
 
 Dining-Philosophers
 ============================
-.. image:: img/process_synchronization/An_illustration_of_the_dining_philosophers_problem_small_wikipedia.png
+.. image:: img/ps/An_illustration_of_the_dining_philosophers_problem_small_wikipedia.png
 
 ----
 
@@ -122,7 +122,7 @@ Dining-Philosophers
 
 ----
 
-.. image:: img/process_synchronization/dining_philosohoer_original_from_silbershatz.png
+.. image:: img/ps/dining_philosohoer_original_from_silbershatz.png
 
 
 ----
@@ -195,24 +195,24 @@ Message passing
 
 ----
 
-.. image:: img/process_synchronization/message_passing_send.png
+.. image:: img/ps/message_passing_send.png
 
 ----
 
-.. image:: img/process_synchronization/message_box_receive.png
+.. image:: img/ps/message_box_receive.png
 
 ----
 
-.. image:: img/process_synchronization/message_all.png
+.. image:: img/ps/message_all.png
 
 ----
 
 
-.. image:: img/process_synchronization/message_indirect.png
+.. image:: img/ps/message_indirect.png
 
 ----
 
-.. image:: img/process_synchronization/message_format.png
+.. image:: img/ps/message_format.png
 
 ----
 
