@@ -68,7 +68,7 @@ University of Kashan
     :math:`I_0` E(17) :math:`I_1`, $
     acc
 
-.. image:: image/semantic/Ea-LR-parse-id.png
+.. image:: img/semantic/Ea-LR-parse-id.png
 
 .. :
 
@@ -111,7 +111,7 @@ University of Kashan
     :math:`I_0` E(19) :math:`I_1`, $,
     acc
 
-.. image:: image/semantic/Ea-LR-parse-id-semantic.png
+.. image:: img/semantic/Ea-LR-parse-id-semantic.png
     :width: 340px
     :height: 341px
 
@@ -121,12 +121,12 @@ University of Kashan
 
 Anotated parse tree
 ==========================
-.. image:: image/semantic/anotated_parse_tree.png
+.. image:: img/semantic/anotated_parse_tree.png
     :align: center
 
 ----
 
-.. image:: image/semantic/Anotated_parse_tree1.png
+.. image:: img/semantic/Anotated_parse_tree1.png
     :align: center
 
 ----
@@ -161,7 +161,7 @@ Anotated parse tree
     :start-line: 38
     :end-line: 58
 
-.. image:: image/semantic/anotated_parse_tree.png
+.. image:: img/semantic/anotated_parse_tree.png
     :height: 300px
 
 
@@ -186,7 +186,7 @@ Syntax-Directed Definition
 Dependency Graph
 =========================
 
-.. image:: image/semantic/dependency_graph1.png
+.. image:: img/semantic/dependency_graph1.png
     :align: center
 
 ----
@@ -266,7 +266,7 @@ Dependency Graph for declaration
 =====================================
 real a, b, c
 
-.. image:: image/semantic/dependency_graph_for_declaration.png
+.. image:: img/semantic/dependency_graph_for_declaration.png
     :align: center
 
 ----
@@ -297,12 +297,12 @@ real a, b, c
 
 ----
 
-.. image:: image/semantic/constructing_syntax_tree_for_simple.png
+.. image:: img/semantic/constructing_syntax_tree_for_simple.png
     :align: center
 
 ----
 
-.. image:: image/semantic/constructing_syntax_tree_for_simple_syntax_tree.png
+.. image:: img/semantic/constructing_syntax_tree_for_simple_syntax_tree.png
     :align: center
 
 ----
@@ -343,27 +343,27 @@ a b + c +
 
     5 * 7 * 2
     
-.. image:: image/semantic/sdd_top_down_expression.png
+.. image:: img/semantic/sdd_top_down_expression.png
     :align: center
 
 
 
-.. image:: image/semantic/sdd_top_down_expression_dependency_graph.png
-    :align: center
-
-----
-
-.. image:: image/semantic/type_definition_grammar.png
+.. image:: img/semantic/sdd_top_down_expression_dependency_graph.png
     :align: center
 
 ----
 
-.. image:: image/semantic/constructing_tree_top_down_parsing.png
+.. image:: img/semantic/type_definition_grammar.png
     :align: center
 
 ----
 
-.. image:: image/semantic/constructing_tree_top_down_parsing_dependency_graph.png
+.. image:: img/semantic/constructing_tree_top_down_parsing.png
+    :align: center
+
+----
+
+.. image:: img/semantic/constructing_tree_top_down_parsing_dependency_graph.png
     :align: center
 
 ----
@@ -405,7 +405,7 @@ circular dependency
 
     "A → B", "A.s = B.i  ,   B.i = A.s + 1"
 
-.. image:: image/semantic/The_circular_dependency.png
+.. image:: img/semantic/The_circular_dependency.png
     :align: center
 
 ----
@@ -505,7 +505,7 @@ Translation Scheme vs SDD
 
 SDD for typesetting boxes
 
-.. image:: image/semantic/SDD_for_typesetting_boxes.png
+.. image:: img/semantic/SDD_for_typesetting_boxes.png
     :align: center
 
 ----
