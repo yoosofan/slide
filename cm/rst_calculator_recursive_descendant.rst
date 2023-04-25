@@ -33,7 +33,7 @@ E → a + E | a
 
     A diagram for E
     
-    .. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple.png
+    .. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple.png
         :align: center
 
     
@@ -41,7 +41,7 @@ E → a + E | a
 
 ----
 
-.. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple.png
+.. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple.png
     :align: center
 
 .. include:: src/recursive.descendant.method/calculator/python/wrong_grammar1_simple_calculator_1.py
@@ -62,24 +62,24 @@ Convert it to Calculator
 NonRecursive I
 ===============================
 
-.. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple.png
+.. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple.png
     :align: center
 
 .. class:: substep
 
-    .. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive.png
+    .. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive.png
         :align: center
 
 ----
 
 NonRecursive II
 ===============================
-.. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive.png
+.. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive.png
     :align: center
 
 .. class:: substep
 
-    .. image:: image/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive2.png
+    .. image:: img/recursive.descendant.method/calculator/wrong_grammar_simple_no_recursive2.png
         :align: center
 
 ----
