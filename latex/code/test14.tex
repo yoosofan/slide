@@ -1,0 +1,240 @@
+documentclass[a4paper]{article}
+
+%\usepackage{lscape}
+\usepackage[landscape,dvips]{geometry}
+
+\usepackage{pstricks}
+\usepackage{pst-grad}
+\usepackage{pst-xkey}
+\usepackage{multido}
+
+\makeatletter
+% "pspicture" environment or not?
+\newif\ifPst at PstPicture
+\define at key[psset]{}{PstPicture}[true]{%
+\@nameuse{Pst at PstPicture#1}}
+
+% Intervals to show?
+\newif\ifPst at GanttChartShowIntervals
+\define at key[psset]{}{ChartShowIntervals}[true]{%
+\@nameuse{Pst at GanttChartShowIntervals#1}}
+
+% Style for the tasks
+\define at key[psset]{}{TaskStyle}{\def\psk at GanttTaskStyle{#1}}
+% left/right for the tasks
+\define at key[psset]{}{TaskPos}{\def\psk at GanttTaskPos{#1}}
+
+% Name for unit interval
+\define at key[psset]{}{ChartUnitIntervalName}{%
+\def\psk at GanttChartUnitIntervalName{#1}}
+
+% Name for basic unit
+\define at key[psset]{}{ChartUnitBasicIntervalName}{%
+\def\psk at GanttChartUnitBasicIntervalName{#1}}
+
+% Unit interval for the tasks (7 for a week, 30 for a month, etc.)
+% Warning: define it before "TaskUnitType"!
+\define at key[psset]{}{TaskUnitIntervalValue}{%
+\pst at cntg=#1\relax
+\edef\psk at GanttTaskUnitIntervalValue{\the\pst at cntg}}
+
+% Unit type for the tasks (UnitIntervalName or UnitBasicIntervalName)
+\define at key[psset]{}{TaskUnitType}{%
+\edef\psk at GanttTaskUnitValue{#1}%
+% Validation of the parameter
+\ifx\psk at GanttTaskUnitValue\psk at GanttChartUnitIntervalName
+  \edef\psk at GanttTaskUnitValue{\psk at GanttTaskUnitIntervalValue}%
+\else
+  \ifx\psk at GanttTaskUnitValue\psk at GanttChartUnitBasicIntervalName
+    \def\psk at GanttTaskUnitValue{1}%
+  \else
+    {\@pstrickserr{GanttTaskUnitType must be 
+`\psk at GanttChartUnitIntervalName'
+                   or `\psk at GanttChartUnitBasicIntervalName'
+                  (and not `\psk at GanttTaskUnitValue')}\@eha}%
+  \fi
+\fi}
+
+% Outside label for the tasks
+\define at key[psset]{}{TaskOutsideLabel}{\def\psk at GanttTaskOutsideLabel{#1}}
+
+% Inside label for the tasks
+\define at key[psset]{}{TaskInsideLabel}{\def\psk at GanttTaskInsideLabel{#1}}
+
+% Maximum outside size label for the tasks (in unit TaskUnitType !)
+\define at key[psset]{}{TaskOutsideLabelMaxSize}{%
+\pst at cntg=#1
+\edef\psk at GanttTaskOutsideLabelMaxSize{\the\pst at cntg}}
+
+% Default values
+% --------------
+% pspicture environment, don't show intervals, default task style,
+% unit for tasks is a week (so 7 days), no outside and inside labels
+\psset{%
+   PstPicture=true,ChartShowIntervals=true,TaskStyle=TaskStyleDefault,%
+   ChartUnitIntervalName=Month,ChartUnitBasicIntervalName=Month,%
+   TaskUnitIntervalValue=7,TaskUnitType=Month,%
+   TaskOutsideLabel={},TaskInsideLabel={},TaskOutsideLabelMaxSize=0}
+
+\newpsstyle{TaskStyleDefault}{fillstyle=solid,fillcolor=yellow}
+
+% The environment \PstGanttChart
+% ------------------------------
+
+% Syntax: \PstGanttChart[parameters]{Number of tasks}{Number of days}
+\def\PstGanttChart{\@ifnextchar[\PstGanttChart at i{\PstGanttChart at i[]}}
+
+\def\PstGanttChart at i[#1]#2#3{%
+\begingroup
+\psset{unit=0.1,#1}    % Affectation of local parameters
+%
+\ifPst at PstPicture               % "pspicture" environment
+  \pst at cnta=\psk at GanttTaskOutsideLabelMaxSize
+  \multiply\pst at cnta\psk at GanttTaskUnitValue
+  %
+  \pst at cntb=#2
+  \multiply\pst at cntb by 5
+  \advance\pst at cntb\@ne
+  %
+  \pst at cntc=#3
+  \multiply\pst at cntc\psk at GanttTaskUnitValue
+  \advance\pst at cntc\tw@
+  %
+  \ifPst at GanttChartShowIntervals
+    \pspicture(-\pst at cnta,-\pst at cntb)(\pst at cntc,2)
+  \else
+    \pspicture(-\pst at cnta,-\pst at cntb)(\pst at cntc,0)
+  \fi
+\fi
+\psframe(0,-\pst at cntb)(\pst at cntc,0)
+%
+\ifPst at GanttChartShowIntervals
+  % We will show the intervals
+  \pst at cnta=#3
+  \multiply\pst at cnta\psk at GanttTaskUnitValue
+  \divide\pst at cnta\psk at GanttTaskUnitIntervalValue
+  \advance\pst at cnta\@ne
+  %
+  \pst at cntb=#2
+  \multiply\pst at cntb by 5
+  \advance\pst at cntb\@ne
+  %
+  \pst at dima=\psk at GanttTaskUnitIntervalValue pt
+  \divide\pst at dima\tw@
+  \advance\pst at dima\@ne pt
+  \pst at dimtonum{\pst at dima}{\pst at tempa}
+  \advance\pst at cnta\@ne
+  %
+  \multido{\iInterval=1+1,\iIntervalPos=1+\psk at GanttTaskUnitIntervalValue,
+ 
+\nIntervalPos=\pst at tempa+\psk at GanttTaskUnitIntervalValue.0}{\pst at cnta}{%
+    \rput(\nIntervalPos,1){\psk at GanttChartUnitIntervalName\space\iInterval}
+    \psline(\iIntervalPos,0)(\iIntervalPos,1.5)
+    \ifnum\iInterval<\pst at cnta
+      \psline[linestyle=dotted](\iIntervalPos,-\pst at cntb)(\iIntervalPos,0)
+    \fi}
+\fi}
+
+\def\endPstGanttChart{%
+\ifPst at PstPicture
+  \endpspicture                 % End of "pspicture" environment
+\fi
+\endgroup}
+
+% The macro \PstGanttTask
+% -----------------------
+
+\newcount\pst at GanttTaskCnt
+\pst at GanttTaskCnt=\z@
+
+% Syntax: \PstGanttTask[parameters]{Start}{Length}
+\def\PstGanttTask{\@ifnextchar[\PstGanttTask at i{\PstGanttTask at i[]}}
+
+\def\PstGanttTask at i[#1]#2#3{
+\advance\pst at GanttTaskCnt\m at ne
+\begingroup
+\psset{#1}%            % Affectation of local parameters
+% Frame
+\pst at cnta=\psk at GanttTaskUnitValue
+\multiply\pst at cnta by #2
+\advance\pst at cnta\@ne
+%
+\pst at cntb=\psk at GanttTaskUnitValue
+\multiply\pst at cntb by #3
+\advance\pst at cntb\pst at cnta
+%
+\pst at cntc=\pst at GanttTaskCnt
+\multiply\pst at cntc by 5
+%
+\pst at cntd=\pst at cntc
+\advance\pst at cntd by 4
+%
+\psframe[style=\psk at GanttTaskStyle](\pst at cnta,\pst at cntc)(\pst at cntb,\pst at cntd)
+% Inside label
+\ifx\psk at GanttTaskInsideLabel\empty
+\else
+  \pst at dima=\pst at cnta pt
+  \advance\pst at dima\pst at cntb pt
+  \divide\pst at dima\tw@
+  \pst at dimtonum{\pst at dima}{\pst at tempa}
+  %
+  \pst at dimb=\pst at cntc pt
+  \advance\pst at dimb\pst at cntd pt
+  \divide\pst at dimb\tw@
+  \pst at dimtonum{\pst at dimb}{\pst at tempb}
+  %
+  \rput(\pst at tempa,\pst at tempb){\psk at GanttTaskInsideLabel}
+\fi
+% Outside label
+\ifx\psk at GanttTaskOutsideLabel\empty
+\else
+  \pst at dimb=\pst at cntc pt
+  \advance\pst at dimb\pst at cntd pt
+  \divide\pst at dimb\tw@
+  \pst at dimtonum{\pst at dimb}{\pst at tempb}
+  \rput[l](51.5,\pst at tempb){\psk at GanttTaskOutsideLabel}&& !!!! Labels 
+on the right
+% \rput[r](-1.5,\pst at tempb){\psk at GanttTaskOutsideLabel}
+\fi
+\endgroup}
+
+\makeatother
+
+
+\begin{document}
+
+\definecolor{LightCyan}   {rgb}{0.88,1.,1.}
+\definecolor{Orange}      {rgb}{1.,0.65,0.}
+\definecolor{PaleGreen}   {rgb}{0.6,0.98,0.6}
+\definecolor{Pink}        {rgb}{1.,0.75,0.8}
+
+\psset{gradmidpoint=0,fillstyle=gradient,gradbegin=LightCyan,gradend=white}
+\newpsstyle{TaskStyleA}{gradbegin=cyan,gradend=blue}
+\newpsstyle{TaskStyleB}{gradbegin=red,gradend=Pink}
+\newpsstyle{TaskStyleC}{gradbegin=yellow,gradend=Orange}
+\newpsstyle{TaskStyleD}{gradbegin=green,gradend=PaleGreen}
+
+%\begin{landscape}
+\begin{PstGanttChart}[yunit=2.5,xunit=3,
+                      ChartUnitBasicIntervalName=Jour,TaskUnitType=Jour,
+                      ChartShowIntervals]{7}{48}
+  \psset{gradangle=90,TaskStyle=TaskStyleA}
+  \PstGanttTask[TaskOutsideLabel={\shortstack{Test ölçüleri\\ve 
+değerlendirme}}]{4}{4}
+  \PstGanttTask[TaskOutsideLabel={\shortstack{1. 
+kampanya\\değerlendirme}}]{8}{6}
+  \PstGanttTask[TaskOutsideLabel={\shortstack{2. 
+kampanya\\değerlendirme}},TaskStyle=TaskStyleA]{18}{6}
+  \PstGanttTask[TaskOutsideLabel={\shortstack{3. 
+kampanya\\değerlendirme}},TaskStyle=TaskStyleA]{28}{6}
+
+\PstGanttTask[TaskOutsideLabel={\shortstack{Troposferik\\modelleme}},TaskStyle=TaskStyleB]{14}{24}
+
+\PstGanttTask[TaskOutsideLabel={\shortstack{Sonuçların\\karşılaştırılması}},TaskStyle=TaskStyleC]{28}{14}
+  \PstGanttTask[TaskOutsideLabel={\shortstack{Sonuç değerlendirme\\ve 
+rapor hazırlama}},TaskStyle=TaskStyleD]{42}{6}
+\end{PstGanttChart}
+%\end{landscape}
+
+\end{document}
+

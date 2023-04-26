@@ -1,6 +1,7 @@
 :data-transition-duration: 1
 :skip-help: true
 :css: style.css cpu.css
+:js: test1.js
 :substep: true
 :slide-numbers: true
 :skip-help: true
@@ -9,6 +10,12 @@
 
 .. role:: raw-html(raw)
    :format: html
+
+.. |nbsp| unicode:: 0xA0 
+
+.. :
+
+   :trim:
 
 ----
 
@@ -102,53 +109,52 @@ First-Come, First-Served (FCFS)
   :math:`p_2`, 2, 3
   :math:`p_3`, 1, 4
 
-.. raw:: html
+.. container:: yoo-gantt-chart
 
-  <div class="yoo-gantt-chart">
+    .. class:: withborder 
 
-.. class:: withborder 
+    * 
+    * :math:`P_0`
+    * 
+    * :math:`P_1`
+    * 
+    * :math:`P_2`
+    * 
+    * :math:`P_3`
+    * 
 
-* 
-* :math:`P_0`
-* 
-* :math:`P_1`
-* 
-* :math:`P_2`
-* 
-* :math:`P_3`
-* 
+    .. class:: yoo-x-numbers
 
-.. class:: yoo-x-numbers
-
-* 0
-* 
-* 2
-* 
-* 3
-* 
-* 5
-* 
-* 7
-
-.. raw:: html
-
-  </div>
+    * 0
+    * 
+    * 2
+    * 
+    * 3
+    * 
+    * 5
+    * 
+    * 6
 
 .. class:: substep
 
 *  t = 0: ready queue(q) = [:math:`p_0`, :math:`p_1`]
-*  t = 2: q = [:math:`p_1`, :math:`p_2`]
+*  t = 2: q = [:math:`p_1`]
 *  t = 3: q = [:math:`p_2`]
 *  t = 5: q = [:math:`p_3`]
 
 ----
 
 .. csv-table:: cpu
-  :header-rows: 1
-  :widths: 10, 20, 10, 30, 10
+  :class: yoo-gantt-chart-set-width-based-on-data
 
-  :math:`P_0`,:math:`P_1`,:math:`P_2` , :math:`P_3`,
-  0, 2, 3, 5, 7
+  :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
+  0, , 2, , 3, , 5, , 6 
+
+.. csv-table:: cpu
+  :class: yoo-gantt-chart-set-width-based-on-data
+
+  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
+  0, , 2, , 3, , 5, , 6 
 
 ----
 
@@ -164,7 +170,7 @@ Average Waiting Time
   :math:`p_2`, 2, 3
   :math:`p_3`, 1, 4
 
-.. container:: yoo-gantt-chart 
+.. container:: yoo-gantt-chart  substep
 
   .. class:: withborder 
 
@@ -188,7 +194,7 @@ Average Waiting Time
   * 
   * 5
   * 
-  * 7
+  * 6
 
 .. class:: substep
 

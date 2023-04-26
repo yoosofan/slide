@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{xepersian}
+\settextfont[Scale=1.2]{Nazli}
+\setlatintextfont[Scale=1.1]{Times New Roman}
+\newcommand{\site}[1]{\texttt{#1}} % and \newcommand{\CTAN} % {http://ctan.org} in the preamble and \site{\CTAN} in the body text
+%\hyphenation{acro-nym}
+%\hyphenation{ac-ro-nym ac-ro-nym-ic a-cro-nym-i-cal-ly}
+%\hyphenation{indivisible}
+%\usepackage{microtype}
+%\usepackage[noligatures]{microtype}
+%\usepackage{parskip}
+\begin{document}
+\begin{latin}
+\site{www.tug.org}\\
+\site[ftp]{www.gnu.org}\\[2cm]
+\url{www.yoosofan.github.io}
+\parbox{1.5cm}{My name is Ahmad Yoosofan. }
+\parbox{1.8cm}{\LaTeX  is an intersting tool for typing.} 
+\parbox{1.6cm}{Learning \LaTeX is not easy.} 
+This is not a parbox.1
+\\ \par\noindent
+\url{www.yoosofan.kashanu.ac.ir} \\
+test
+\quad\parbox[b]{1.8cm}{My name is Ahmad Yoosofan. }
+\quad\parbox{1.8cm}{\LaTeX  is an intersting tool for typing.} 
+\quad\parbox[t]{1.6cm}{Learning \LaTeX is not easy.} \\
+This is a parbox with 3 centimeter width.
+\\ \par\noindent
+%c t b s
+Text line\footnote{This is footnote in this page.}
+\quad\parbox[b]{1.8cm}{this parbox is aligned at its bottom line}
+\quad\parbox{1.5cm}{center-aligned parbox}
+\quad\parbox[t]{2cm}{another parbox aligned at its top line}
+\par\noindent
+\begin{minipage}{3cm}
+My name is Ahmad Yoosofan, \LaTeX is an interesting tool for typing. Learning \LaTeX is 
+difficult\footnote{minipage can be used for long box.}. Simple text.
+\end{minipage}\\
+\mbox{3cm}{indivisible.\\My name is Ahmad Yoosofan, \LaTeX is an interesting tool for typing. Learning \LaTeX is difficult\footnote{minipage can be used for long box.}. Simple text.
+} \par\noindent
+ff fi flffiffl -- ---  \\
+f\/f f\/i f\/l f\/f\/i f\/f\/l -\/- -\/-\/- \\
+Here are three dots... compare them to the ellipsis\ldots \\
+\'{a} \`{o} \^{a}  \"{u} \~{n}  \={o} \.{a} \v{e} \H{e} \t{aa} \c{b} \d{n}  \b{i} \~{m} \t{a} \t{bb} \\
+\\
+\end{latin}
+سلام
+\\
+\begin{latin}
+Não compreendo. Há aqui alguém que fale inglês?
+Comment çava? Où se trouve l'aéroport? \\
+\quad\parbox{2cm}{\raggedright
+My name is Ahmad Yoosofan. I am trying to learn \LaTeX.  This parbox is not justified by using raggedright.
+}
+\quad\parbox{2cm}{\raggedleft
+My name is Ahmad Yoosofan. I am trying to learn \LaTeX.  This parbox is not justified by using raggedleft.
+}  \\
+{\centering
+\huge\bfseries Centered text \\
+\Large\normalfont written by me \\
+\normalsize\today
+}
+\par \noindent This is the beginning of a poem
+by Edgar Allan Poe:
+\begin{center}
+\emph{Annabel Lee}
+\end{center}
+\begin{center}
+It was many and many a year ago,\\
+In a kingdom by the sea,\\
+That a maiden there lived whom you may know\\
+By the name of Annabel Lee
+\end{center}
+The complete poem can be read on
+\url{http://www.online-literature.com/poe/576/}.\\
+Which of the following designates the end of a paragraph.
+\end{latin}
+\end{document}

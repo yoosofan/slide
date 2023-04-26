@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{pstricks}
+\usepackage{pst-bar}
+\usepackage{pstricks-add}
+\usepackage{filecontents}
+
+\begin{document}
+
+\begin{filecontents*}{dev.csv}
+5/18, 5/25, 6/1, 6/15, 6/22
+230, 243, 252, 267, 269
+\end{filecontents*}
+
+\psset{xunit=0.4in,yunit=0.004in}
+\begin{pspicture}(0,-100)(5,500)
+\psframe[fillstyle=solid,fillcolor=black!10,linestyle=solid](0,0)(5,500)
+\psaxes[yticksize=0 5,ticks=y,labels=y,Dx=1,Dy=100](0,0)(0,0)(5,500)
+\readpsbardata[header=true]{\data}{dev.csv}
+\psbarchart[barstyle=blue]{\data}
+\rput{90}(-1,250){PPG Regular Gasoline}
+\rput(2.5,-75){Year}
+\end{pspicture}
+
+\end{document}

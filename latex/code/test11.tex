@@ -1,0 +1,17 @@
+\documentclass[12pt]{article}
+\usepackage{pst-gantt}
+\begin{document}
+
+\newpsstyle{Important}{fillstyle=solid,
+fillcolor=red}
+\newpsstyle{NotImportant}{fillstyle=vlines}
+\begin{PstGanttChart}{3}{6}
+\PstGanttTask{0}{3}
+\PstGanttTask{2}{1}
+\PstGanttTask[TaskStyle=Important,
+TaskInsideLabel=Important]{2}{5}
+\PstGanttTask[TaskStyle=NotImportant]{4}{2}
+\PstGanttTask{3}{2}
+\end{PstGanttChart}
+
+\end{document}

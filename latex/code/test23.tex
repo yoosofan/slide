@@ -1,0 +1,26 @@
+\listfiles
+\documentclass{article}
+\usepackage{filecontents}
+\usepackage{pst-bar}
+\usepackage{pstricks-add}
+
+\begin{filecontents*}{asch.csv}
+ großzügig, weise, humorvoll, altruistisch, phantasievoll
+ 91, 65, 90, 94, 77
+ 8, 25, 34, 17, 13
+\end{filecontents*}
+
+
+\begin{document}
+
+
+\psset{xAxisLabel={Attribut},xAxisLabelPos={c,-0.7in},%
+       yAxisLabel={Nennung in \%},yAxisLabelPos={-0.4in,c}}
+\psrotateright{
+\begin{psgraph}[labels=y,dy=20,Dy=20,Oy=0,yticksize=5](0,0)(5,100){5cm}{10cm}
+\psaxes[labels=none,ticks=y,axesstyle=frame,Dy=10,yticksize=5](0,0)(5,100)
+ \readpsbardata[header=true]{\data}{asch.csv}
+  \psbarchart[barstyle={red,blue},chartstyle=cluster,barlabelrot=90]{\data}
+\end{psgraph}}
+
+\end{document}

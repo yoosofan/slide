@@ -1,0 +1,22 @@
+\documentclass[letterpaper,10pt]{memoir}
+\usepackage{pst-gantt}
+\usepackage{auto-pst-pdf}
+
+\begin{document}
+
+\begin{postscript}
+\newpsstyle{Important}{fillstyle=solid,fillcolor=red}
+\newpsstyle{NotImportant}{fillstyle=vlines}
+
+\psrotateright{%
+\begin{PstGanttChart}[unit=2,TaskOutsideLabelMaxSize=1,ChartShowIntervals]{5}{7}
+\PstGanttTask[TaskOutsideLabel={Task 1}]{0}{3}
+\PstGanttTask[TaskOutsideLabel={Task 2},TaskUnitType=Day]{15}{3}
+\PstGanttTask[TaskStyle=Important,TaskOutsideLabel={Task 3},
+    TaskInsideLabel={\Large\textcolor{white}{\textbf{Important}}}]{2}{5}
+\PstGanttTask[TaskStyle=NotImportant,TaskOutsideLabel={Task 4}]{4}{2}
+\PstGanttTask[TaskOutsideLabel={Task 5}]{5}{2}
+\end{PstGanttChart}}
+\end{postscript}
+
+\end{document}

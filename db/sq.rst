@@ -3474,6 +3474,8 @@ group by
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
 شمارهٔ قطعات با وزن بیشتر از ۱۲ را همراه با جمع عرضه‌های هر کدام بیابید به شرطی که بیشتر از دو عرضه کننده آنها را عرضه کرده باشند
@@ -3483,7 +3485,7 @@ group by
 
   select pn, sum(qty) as sqt
   from sp join p using(pn)
-  where weight>10
+  where weight>12
   group by pn
   having count(sn)>2
   ;
@@ -3499,6 +3501,26 @@ group by
     pn, sqt
     p2, 1350
 
+.. :
+
+    .. code:: sql
+      :number-lines:
+
+      select pname
+      from sp join p using(pn)
+      where exists(
+        select *
+        from sp as T
+        where T.sn <> sp.sn and
+          T.pn = sp.pn and exists(
+            select *
+            from sp as T2
+            where T.sn <> sp.sn and
+              T2.sn <> sp.sn and
+              T2.pn = sp.pn
+          )
+      )
+
 ----
 
 :class: t2c
@@ -3506,12 +3528,12 @@ group by
 .. class:: rtl-h1
 
   گام به گام
-  
+
 .. code:: sql
 
   select pn, qty as sqt
   from sp join p using(pn)
-  where weight>10
+  where weight>12
   ;
 
 
@@ -3519,21 +3541,21 @@ group by
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  pn,	sn,	qty
-  p1,	s1,	300
-  p1,	s2,	300
+  pn, sn, qty
+  p1, s1, 300
+  p1, s2, 300
 
 
 ..  csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  pn,	sn,	qty
-  p2,	s1,	200
-  p2,	s2,	400
-  p2,	s3,	200
-  p2,	s4,	200
-  p2,	s6,	350
+  pn, sn, qty
+  p2, s1, 200
+  p2, s2, 400
+  p2, s3, 200
+  p2, s4, 200
+  p2, s6, 350
 
 .. container::
 
@@ -3541,35 +3563,82 @@ group by
     :header-rows: 1
     :class: substep smallerelementwithfullborder
 
-    pn,	sn,	qty
-    p3,	s1,	400
+    pn, sn, qty
+    p3, s1, 400
 
   .
-  
+
   ..  csv-table::
     :header-rows: 1
     :class: substep smallerelementwithfullborder
 
-    pn,	sn,	qty
-    p6,	s1,	100
+    pn, sn, qty
+    p6, s1, 100
 
 
 ..  csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  pn,	sn,	qty
-  p4,	s1,	200
-  p4,	s4,	300
+  pn, sn, qty
+  p4, s1, 200
+  p4, s4, 300
 
 ..  csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  pn,	sn,	qty
-  p5,	s1,	100
-  p5,	s4,	400
-  
+  pn, sn, qty
+  p5, s1, 100
+  p5, s4, 400
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  نام قطعاتی را بیابید که بیشتر از دو عرضه کننده آنها را عرضه کرده باشند
+
+.. code:: sql
+  :number-lines:
+
+  select distinct pname
+  from sp join p using(pn)
+  where exists(
+    select *
+    from sp as T
+    where T.sn <> sp.sn and
+      T.pn = sp.pn and exists(
+        select *
+        from sp as T2
+        where T.sn <> sp.sn and
+          T2.sn <> sp.sn and
+          T2.sn <> T.sn and
+          T2.pn = sp.pn
+      )
+  )
+
+.. code:: sql
+  :number-lines:
+
+  select distinct pname
+  from p natural join (
+    select pn
+    from sp join p using(pn)
+    group by pn
+    having count(distinct sn) > 2
+  );
+
+  -- Second solution
+  select distinct pname
+  from p join sp using(pn) join
+    sp as T1 using(pn) join
+    sp as T2 using(pn)
+  where T1.sn <> sp.sn and
+    T2.sn <> sp.sn and
+    T2.sn <> T1.sn;
+
 ----
 
 :class: t2c
@@ -3605,7 +3674,7 @@ group by
     join s using(sn)
   where status > 10
   group by p.city
-  having sum(qty) > 10
+  having sum(qty) > 20
   ;
 
 .. code:: sql
@@ -3613,33 +3682,51 @@ group by
   :number-lines:
 
   select p.city as pcity
-  from p 
+  from p
   where exists(
     select *
     from sp join s using(sn)
-    where p.pn = sp.pn and 
+    where p.pn = sp.pn and
       status > 10
   )
   ;
+
+.. :
+
+    .. code:: sql
+      :class: substep
+      :number-lines:
+
+      select p.city as pcity
+      from p
+      where exists(
+        select *
+        from sp join s using(sn)
+        where p.pn = sp.pn and
+          status > 10
+      ) and exists(
+        select p.city
+        from sp
+        where sp.pn = p.pn
+        group by p.city
+        having sum(qty) > 20
+      )
+      ;
 
 .. code:: sql
   :class: substep
   :number-lines:
 
   select p.city as pcity
-  from p 
+  from p natural join sp
   where exists(
     select *
-    from sp join s using(sn)
-    where p.pn = sp.pn and 
+    from s
+    where s.sn = sp.sn and
       status > 10
-  ) and exists(
-    select p.city
-    from sp
-    where sp.pn = p.pn
-    group by p.city
-    having sum(qty) > 20
   )
+  group by p.city
+  having sum(qty) > 20
   ;
 
 ----
@@ -3654,7 +3741,7 @@ group by
   :class: substep
   :number-lines:
 
-  select p.city   --- نادرست
+  select p.city
   from p join sp using(pn)
   where exists (
       select *
@@ -3739,6 +3826,21 @@ group by
     Oslo
     Paris
 
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from sp join p using(pn) natural join
+    (
+      select sn
+      from s
+      where status > 10
+    )
+  group by p.city
+  having sum(qty) > 20
+  ;
+
 ----
 
 :class: t2c
@@ -3751,7 +3853,7 @@ group by
   :class: substep
   :number-lines:
 
-  select jname -- نادرست
+  select jname
   from spj join j using(jn)
     join p using(pn)
   where exists (
@@ -3764,22 +3866,6 @@ group by
   having(sum(weight*qty)>100)
   ;
 
-.. code:: sql
-  :class: substep
-  :number-lines:
-
-  select jname
-  from spj join j using(jn)
-    join p using(pn)
-  where exists (
-      select *
-      from (s natural join spj) at T
-      where T.jn = j.jn and
-        T.status > 20
-    )
-  group by jn
-  having(sum(weight*qty)>100)
-  ;
 
 ----
 
@@ -3804,7 +3890,18 @@ group by
   :class: substep
   :number-lines:
 
-  select pn, sum(qty)
+  select pn, sum(qty) -- same result
+  from sp natural join p
+  where p.weight > 12
+  group by pn
+  having count(distinct sn)>2
+  ;
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pn, sum(qty) -- wrong
   from spj natural join p
   where p.weight > 12
   group by pn
@@ -3852,9 +3949,10 @@ group by
     SELECT p.city  -- wrong answer
     FROM p NATURAL JOIN sp
     WHERE EXISTS(
-    SELECT * FROM s NATURAL JOIN sp
-    WHERE s.sn=sp.sn AND p.city=s.city AND s.status>10
-    )
+      SELECT * FROM s NATURAL JOIN sp
+      WHERE s.sn=sp.sn AND p.city=s.city
+        AND s.status > 10
+      )
     GROUP by pn
     HAVING count(pn)>2 and sum(qty)>20
     ;
@@ -3867,13 +3965,13 @@ group by
   from p join sp using(pn)
   where exists(
       select *
-      from s natural join (sp as T)
+      from s -- Mohammad Javad Akbari
       where status > 10 and
-        T.pn = p.pn
+        s.sn = sp.sn
     )
   group p.city
   having sum(qty) > 20 and
-    count(distinct pn) > 2
+    count(pn) > 2
   ;
 
 .. :
@@ -3917,7 +4015,7 @@ group by
 
 .. class:: rtl-h1
 
-  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن پروژه بیشتر از ۱۰۰ باشد
+  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن نام پروژه (یا پروژه‌ها) بیشتر از ۱۰۰ باشد
 
 .. class:: substep rtl-h2
 
@@ -3933,38 +4031,89 @@ group by
     p using(pn)
   where exists(
       select *
-      from s natural join (spj as T)
-      where T.pn = p.pn
+      from s
+      where s.sn = spj.sn
         and s.status > 20
     )
   group by jname
   having(sum(weight*qty)>100)
+  ;
+
 
 ----
 
+:class: t2c
 
 .. class:: rtl-h1
 
-  پرس‌وجو درون یک پرس‌وجوی دیگر
+  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن پروژه (و نه همراه با هم‌نام‌هایش) بیشتر از ۱۰۰ باشد
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select jname
+  from spj join j on
+    spj.jn = j.jn join
+    p using(pn)
+  where exists(
+      select *
+      from s
+      where s.sn = spj.sn
+        and s.status > 20
+    )
+  group by jn
+  having(sum(weight*qty)>100)
+  ;
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select jname
+  from j natural join (
+    select jn
+      from spj join j on
+        spj.jn = j.jn join
+        p using(pn)
+      where exists(
+          select *
+          from s
+          where s.sn = spj.sn
+            and s.status > 20
+        )
+      group by jn
+      having(sum(weight*qty)>100)
+    )
+  ;
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  دسته‌بندی در یک گروه
+
 
 .. code:: sql
   :number-lines:
 
-  select distinct pname, sn
-  from p natural join (
-      select city, sn
-      from s
-      where status < 12
-    )
+  -- Totally wrong
+  select pn, count(distinct pn)
+  from p natural join sp
+  group by pname
+  -- having count(distinct pn) > 1
   ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
+.. code:: sql
+  :number-lines:
 
-  pname, sn
-  Bolt,  S2
-  Cam,   S2
+  select pname, count(sn)
+  from p natural join sp
+  group by pn
+  -- having count(distinct pn) > 1
+  ;
 
 ----
 
@@ -3973,7 +4122,7 @@ group by
 
 .. class:: rtl-h1
 
-جمع وزن قطعه‌هایی را بیابید که عرضه کننده‌ای از پاریس نیز آنها را عرضه کرده باشد
+جمع وزن قطعه‌هایی را بیابید که دستِ‌کم عرضه کننده‌ای از پاریس نیز آنها را عرضه کرده باشد.
 
 .. code:: sql
   :class: substep
@@ -4033,9 +4182,62 @@ group by
       swg
       29
 
-    .. class:: substep
+.. :
 
-      `بحث اصلی <#/sum-sample-weight-paris-id>`_
+    distinct does not help
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+جمع وزن قطعه‌هایی را بیابید که دستِ‌کم عرضه کننده‌ای از پاریس نیز آنها را عرضه کرده باشد.
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select sum(weight) as swg
+  from p natural join sp
+  where exists(
+      select *
+      from s
+      where s.sn = sp.sn and
+        s.city = 'Paris'
+    )
+  ;
+
+..  csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  swg
+  46
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select sum(weight) as swg
+  from (
+      select distinct pn, weight
+      from (p natural join sp)
+        join s using(sn)
+      where s.city = 'Paris'
+    )
+  ;
+
+..  csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  swg
+  29
+
+.. class:: substep
+
+  `بحث اصلی <#/sum-sample-weight-paris-id>`_
 
 .. :
 
@@ -4081,11 +4283,11 @@ LIMIT
 
 ----
 
-:id: scalar-value-1-id
+:class: t2c
 
 Scalar value(I)
 =================
-.. class:: rtl-h2
+.. class:: rtl-h1
 
 شماره و وزن قطعاتی را بیابید که وزن آنها از میانگین وزن همهٔ قطعات بیشتر است.
 
@@ -4100,10 +4302,22 @@ Scalar value(I)
     )
   ;
 
-.. image:: img/scalar_weight_avg.png
-    :class: substep
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
 
-.. class:: substep rtl-h2
+  pn, weight
+  p2, 17
+  p3, 17
+  p6, 19
+
+----
+
+:class: t2c
+
+Scalar value(II)
+======================
+.. class:: rtl-h1
 
 شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
 
@@ -4117,9 +4331,21 @@ Scalar value(I)
       from p
   );
 
-.. image:: img/scalar_p_weight_min.png
-    :class: substep
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
 
+  pn, weight
+  p1, 12
+  p5, 12
+
+
+----
+
+:class: t2c
+
+Scalar value(V)
+=================
 .. code:: sql
   :class: substep
   :number-lines:
@@ -4140,21 +4366,41 @@ Scalar value(I)
 
 ----
 
-:id: scalar-value-2-id
+:class: t2c
 
-.. class:: rtl-h2
+.. class:: rtl-h1
 
-شمارهٔ همهٔ قطعات را همراه با جمع تعداد عرضه‌های (qty) آن قطعات بیابید.
+شمارهٔ همهٔ قطعات را همراه با جمع تعداد عرضه‌های (qty) آن قطعات بیابید(۱).
 
 .. code:: sql
   :class: substep
 
   select pn, sum(qty) as sqty
   from sp
-  group by pn; -- wrong
+  group by pn;
 
-.. image:: img/scalar2_sum_qty_wrong.png
-    :class: substep
+  -- wrong
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, sqty
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+شمارهٔ همهٔ قطعات را همراه با جمع تعداد عرضه‌های (qty) آن قطعات بیابید(۲).
 
 .. code:: sql
   :class: substep
@@ -4166,8 +4412,19 @@ Scalar value(I)
     ) as sqty
   from p
 
-.. image:: img/scalar2_sum_qty.png
-    :class: substep
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, sqty
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+  p7,
+  p8,
 
 ----
 
@@ -4183,7 +4440,7 @@ Scalar value(I)
     select pn,
        (select sum(status)
         from s
-        where s.city=p.city
+        where s.city = p.city
        ) as sum_status,
        city
     from p
@@ -4198,7 +4455,7 @@ Scalar value(I)
     pn, sum_status, city
     p6, 40,   London
     p2, 40,   Paris
-    p3,   , Oslo
+    p3,   ,   Oslo
     p4, 40,   London
     p1, 40,   London
     p5, 40,   Paris
@@ -4207,9 +4464,9 @@ Scalar value(I)
 
 ----
 
-:id: left-outer-join1-id
+:class: t2c
 
-.. class:: rtl-h2
+.. class:: rtl-h1
 
 شمارهٔ همهٔ قطعات را همراه جمع تعداد عرضه‌های آنها بیابید.
 
@@ -4239,31 +4496,48 @@ Scalar value(I)
     :class: substep
 
 
-.. code:: sql
-    :class: substep
+----
 
-    select pn, sum(qty) as sqty
-    from p natural left outer join sp
-    group by pn;
+:class: t2c
+
+Left Outer Join(I)
+======================
+.. container::
+
+  .. code:: sql
+      :class: substep
+
+      select pn, sum(qty) as sqty
+      from p natural left outer join sp
+      group by pn;
+
+  .. code:: sql
+      :class: substep
+
+      select pn, sum(qty) as sqty
+      from p left outer join sp using(pn)
+      group by pn;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, sqty
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+  p7,
+  p8,
 
 ----
 
-LEFT OUTER join
-======================
-.. code:: sql
-    :class: substep
+:class: t2c
 
-    select pn, sum(qty) as sqty
-    from p natural left outer join sp
-    group by pn;
-
-.. code:: sql
-    :class: substep
-
-    select pn, sum(qty) as sqty
-    from p left outer join sp using(pn)
-    group by pn;
-
+Left Outer Join(II)
+=======================
 .. code:: sql
     :class: substep
 
@@ -4271,12 +4545,23 @@ LEFT OUTER join
     from p left outer join sp on p.pn = sp.pn
     group by p.pn;
 
+
+.. code:: sql
+    :class: substep
+
+    select pn, (
+        select sum(qty)
+        from sp
+        where sp.pn = p.pn
+      ) as sqty
+    from p;
+
 ----
 
 :class: t2c
 
-Full Outer Join
-================
+Full Outer Join(I)
+====================
 .. code:: sql
     :class: substep
 
@@ -4305,6 +4590,12 @@ Full Outer Join
     from p natural left outer join s;
 
 
+----
+
+:class: t2c
+
+Full Outer Join(II)
+====================
 .. code:: sql
     :class: substep
 
@@ -4359,6 +4650,43 @@ Full Outer Join
 
 :class: t2c
 
+.. class:: rtl-h1
+
+  نام همهٔ شهرهای عرضه کنندگان را در کنار نام شهر قطعاتی که همشهری آنها هستند بنویسید و اگر قطعه‌ای همشهری آن عرضه کننده نبود نام شهر عرضه کننده همراه با null بیاید
+
+.. code:: sql
+  :class: substep
+
+  select s.city as scity, p.city as pcity
+  from s left outer join p using(city);
+
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  scity   pcity
+  London, London
+  London, London
+  London, London
+  London, London
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  London, London
+  London, London
+  London, London
+  London, London
+  Athens,
+  کاشان ,
+
+----
+
+:class: t2c
+
 is null / is not null
 ==========================
 .. code:: sql
@@ -4377,21 +4705,139 @@ is null / is not null
 
 :class: t2c
 
+Scalar value(III)
+======================
+.. class:: rtl-h1
+
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pn, weight -- wrong
+  from p
+  order by weight asc
+  limit 1
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, weight
+  p7,
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pn, weight -- wrong
+  from p
+  where weight is not null
+  order by weight asc
+  limit 1
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, weight
+  p1, 12
+
+
+----
+
+:class: t2c
+
+Scalar value(IV)
+====================
+.. class:: rtl-h1
+
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
+
+.. code:: sql
+  :number-lines:
+
+  select pn, weight -- wrong
+  from p
+  where weight is not null
+  order by weight asc
+  limit 1
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  pn, weight
+  p1, 12
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pn, weight
+  from p
+  where weight = (
+      select weight
+      from p
+      where weight is not null
+      order by weight asc
+      limit 1
+    )
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, weight
+  p1, 12
+  p5, 12
+
+----
+
+:class: t2c
+
 .. class:: rtl-h1
 
     نام قطعات و شمارهٔ عرضه‌کنندگان همشهری را بیابید.
 
-.. code:: sql
-    :class: substep
+.. container::
 
-    select pname, sn
-    from p natural join (select city, sn from s);
+  .. code:: sql
+      :class: substep
 
-.. code:: sql
-    :class: substep
+      select pname, sn
+      from p natural join (select city, sn from s);
 
-    select pname, sn
-    from p natural join s;
+  .. code:: sql
+      :class: substep
+
+      select pname, sn
+      from p natural join s;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pname, sn
+  Nut,   s1
+  Nut,   s4
+  Bolt,  s2
+  Bolt,  s3
+  Screw, s1
+  Screw, s4
+  Cam,   s2
+  Cam,   s3
+  Cog,   s1
+  Cog,   s4
+  Nut,   s1
+  Nut,   s4
+  Bolt,  s2
+  Bolt,  s3
 
 ----
 
@@ -4594,6 +5040,10 @@ Update(II)
       else status
     end
 
+----
+
+Condition on delete
+======================
 .. code:: sql
   :class: substep
 
@@ -4708,21 +5158,23 @@ Unknown
   where weight > 13 or city = 'Paris'
   ;
 
-.. code:: sql
+.. container::
 
-  select n, d
-  from t
-  where n/nullif(d,0) > 1
-  ;
+  .. code:: sql
 
-.. code:: sql
+    select n, d
+    from t
+    where n / nullif(d, 0) > 1
+    ;
 
-  expression IS TRUE
-  expression IS NOT TRUE
-  expression IS FALSE
-  expression IS NOT FALSE
-  expression IS UNKNOWN
-  expression IS NOT UNKNOWN
+  .. code:: sql
+
+    expression IS TRUE
+    expression IS NOT TRUE
+    expression IS FALSE
+    expression IS NOT FALSE
+    expression IS UNKNOWN
+    expression IS NOT UNKNOWN
 
 .. :
 
@@ -4922,6 +5374,8 @@ vacuum
 * vacuum
 
 ----
+
+:class: t2c
 
 All
 =====

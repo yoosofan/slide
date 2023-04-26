@@ -1,0 +1,6 @@
+
+http://texstudio.sourceforge.net/
+texmakerx
+http://texmakerx.sourceforge.net/#downloads
+texmaker
+latexdraw

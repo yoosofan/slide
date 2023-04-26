@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage{pst-3dplot,pstricks-add}
+\begin{document}
+
+\centering
+\begin{pspicture}(-8,-8)(8,8)
+\pstThreeDCoor[xMin=-6,yMin=-9,zMin=-1,
+                xMax=10,yMax=8,zMax=12,
+                nameX=$x_1$,nameY=$x_2$,nameZ=$x_3$,
+                IIIDticks=true,IIIDxticksep=-1,
+                ,linewidth=1pt,drawing=true,linecolor=black]
+\end{pspicture}
+
+\psset{unit=1cm}
+\pspicture(0,0)(9,7)
+\psaxes[Dx=1,dx=1cm,Dy=1,dy=1cm]{->}(0,0)(7,5)
+\endpspicture
+
+\end{document}

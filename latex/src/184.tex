@@ -1,0 +1,28 @@
+\documentclass[a4paper, 12pt]{book}
+\usepackage[english]{babel}
+\usepackage{blindtext}
+\usepackage{geometry}
+\geometry{
+  a4paper,  
+  inner=1.5cm, 
+  outer=3cm, 
+  top=2cm, 
+  bottom=3cm, 
+  bindingoffset=1cm
+}
+%\usepackage[onehalfspacing]{setspace}
+%\usepackage[doublespacing]{setspace}
+\usepackage[singlespacing]{setspace}
+\begin{document}
+\chapter{Exploring the page layout}
+In this chapter we will study the layout pages.
+\section{Some filler text}
+\blindtext
+\section{A lot more filler text}
+More dummy text will follow. 
+\begin{spacing}{2.4}
+This text is stretched by a factor of 2.4.
+\end{spacing}
+\subsection{Plenty of filler text}
+\blindtext[10]
+\end{document}

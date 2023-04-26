@@ -1,0 +1,54 @@
+documentclass{book}
+\pagestyle{empty}
+
+\begin{filecontents}{chlora.dat}
+2.5 0.0006 -0.00006 0.00006
+5 0.0023 -0.00030 0.00030
+8 0.0043 -0.00087 0.00087
+12 0.0070 -0.00038 0.00038
+24 0.0260 -0.00282 0.00282
+96 0.1070 -0.01009 0.01009
+\end{filecontents}
+
+\begin{filecontents}{chlorb.dat}
+2.5 0.000125 -0.000019 0000019
+5 0.000871 -0.000115 0.000115
+8 0.001662 -0.000363 0.000363
+12 0.002551 -0.000074 0.000074
+24 0.010362 -0.000791 0.000791
+96 0.041813 -0.003139 0.003139
+\end{filecontents}
+
+%\StartShownPreambleCommands
+\usepackage{pstricks,pst-plot}
+\SpecialCoor\makeatletter
+\def\errorLine{\@ifnextchar[{\pst at errorLine}{\pst at errorLine[]}}
+\def\pst at errorLine[#1](#2)#3#4{{%
+  \def\pst at tempa{#1}\ifx\pst at tempa\@empty\else\psset{#1}\fi
+  \pst at getcoor{#2}\pst at tempb
+  \psline{|-|}(!\pst at tempb\space pop \pst at number\psxunit div
+    \pst at tempb\space exch pop \pst at number\psyunit div #3\space add)
+  (!\pst at tempb\space pop \pst at number\psxunit div
+    \pst at tempb\space exch pop \pst at number\psyunit div #4\space add )}}
+\def\GetCoordinates#1{\expandafter\GetCoordinates at i#1}
+\def\GetCoordinates at i #1{\GetCoordinates at ii#1}
+\def\GetCoordinates at ii#1 #2 #3 #4 #5 #6 #7 #8 {%
+  \DoCoordinate{#2}{#4}\errorLine[linecolor=red,linewidth=.5pt](#2,#4){#6}{#8}% <<<<<
+  \@ifnextchar D{\GetCoordinates at ii}{}}
+\makeatother
+%\StopShownPreambleCommands
+
+\psset{xunit=0.15cm,yunit=40cm,runit=1cm}
+
+\begin{document}
+\readdata{\Data}{chlora.dat}\psset{dotscale=.8}
+%\readdata{\Data}{chlorb.dat}\psset{dotscale=.8}
+\begin{pspicture}(-.1,-.1)(100,0.15)
+  \psaxes[Dx=5,Dy=0.02]{->}(100,0.15)
+\listplot[plotstyle=line,showpoints=true]{\Data}
+\def\DoCoordinate#1#2{\psdot(#1,#2)}\GetCoordinates{\Data}
+%\listplot[plotstyle=line,showpoints=true]{\Data}
+%\def\DoCoordinate#1#2{\psdot(#1,#2)}\GetCoordinates{\Data}
+   
+\end{pspicture}
+\end{document}

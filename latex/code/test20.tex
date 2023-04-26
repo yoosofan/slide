@@ -1,0 +1,13 @@
+\documentclass{article}
+\usepackage{pstricks}
+\usepackage{pst-plot,pstricks-add}
+\begin{document}
+\psset{yunit=2mm,xunit=5mm}
+\begin{pspicture}(-1,-1)(21,41)
+\psaxes[axesstyle=axes,Dx=2,Dy=10]{->}(21,41)
+\readdata{\mydata}{data9.csv}
+\pstScalePoints(1,1){.225576 sub 1000000 mul}{}% time values now run 0  
+to 20
+\listplot[plotstyle=line]{\mydata}
+\end{pspicture}
+\end{document}

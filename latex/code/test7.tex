@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{pst-plot,pst-node,multido}
+\usepackage{pst-gantt}
+\usepackage{auto-pst-pdf}
+
+\SpecialCoor
+\begin{document}
+
+\begin{pspicture}(-1,-1)(5,5)
+\psaxes[ticksize=0 -4pt]{->}(5,5)
+\psparametricplot[algebraic,linewidth=1.5pt,linecolor=blue]{0}{5}{2*sqrt(t)|sin(t)+t}
+\psparametricplot[algebraic,linewidth=1.5pt,linecolor=red]{0}{5}{2*sqrt(t)|cos(t)+t}
+% define nodes P0..P19 on first curve, nodes Q0..Q19 on second
+\curvepnodes[plotpoints=20]{0}{5}{2*sqrt(t)|sin(t)+t}{P}
+\curvepnodes[plotpoints=20]{0}{5}{2*sqrt(t)|cos(t)+t}{Q}
+\multido{\i=0+1}{20}{%
+ \psline{<->}(P\i)(Q\i)}
+\end{pspicture}
+
+\end{document}

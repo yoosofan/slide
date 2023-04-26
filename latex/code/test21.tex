@@ -1,0 +1,25 @@
+\documentclass[10pt]{article}
+
+\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\psset{xunit=1.0cm,yunit=1.0cm,algebraic=true,dotstyle=*,dotsize=3pt 0,linewidth=0.8pt,arrowsize=3pt 2,arrowinset=0.25}
+
+\begin{pspicture*}(-4.36,-3.84)(7.14,7.66)
+
+\psaxes[labelFontSize=\scriptstyle,xAxis=true,yAxis=true,Dx=1,Dy=1,ticksize=-2pt 0,subticks=2]{->}(0,0)(-4.36,-3.84)(7.14,7.66)
+
+\pscircle(1.24,2.38){4}
+
+\psdots[linecolor=blue](1.24,2.38)
+
+\rput[bl](1.32,2.5){\blue{$A$}}
+
+\rput[bl](-0.76,5.38){$c$}
+
+\end{pspicture*}
+
+\end{document}

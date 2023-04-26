@@ -1,0 +1,29 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ngerman]{babel}
+\usepackage{pst-gantt}
+\usepackage{pstricks-add}
+\usepackage{lscape}
+\author{Ahmad Yoosofan}
+\title{test table}
+\begin{document}
+\begin{landscape}
+\begin{PstGanttChart}[yunit=2,xunit=2.5,
+  ChartUnitIntervalName=Quartal,
+  ChartUnitBasicIntervalName=Quartal,
+  %TaskUnitIntervalValue=4,
+  TaskUnitType=Quartal,
+  ChartShowIntervals]{12}{12}
+  \PstGanttTask[TaskInsideLabel={Task1 0/3}]{0}{3}
+  \PstGanttTask[TaskInsideLabel={Task2 3/2}]{3}{2}
+ 
+\PstGanttTask[TaskInsideLabel={\begin{tabular}{@{}l@{}}multiline\\Task\dots\end{tabular}}]{2}{3}
+  \PstGanttTask[TaskInsideLabel={Task11 10/1}]{10}{1}
+  \PstGanttTask[TaskInsideLabel={Task12 10/2}]{10}{2}
+\end{PstGanttChart}
+\end{landscape}
+\end{document}

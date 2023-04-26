@@ -1,0 +1,11 @@
+\documentclass[12pt]{article}
+\usepackage{pst-gantt}
+\begin{document}
+\begin{PstGanttChart}[yunit=2,ChartUnitIntervalName=,
+                ChartUnitBasicIntervalName=second,
+                TaskUnitIntervalValue=10,TaskUnitType=,
+                ChartShowIntervals]{4}{5}
+\PstGanttTask[TaskInsideLabel={P1}]{0}{1} [TaskInsideLabel={P3}]{2}{1}
+\PstGanttTask[TaskInsideLabel={P2}]{0}{1}
+\end{PstGanttChart}	
+\end{document}
