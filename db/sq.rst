@@ -13,7 +13,7 @@
 ----
 
 Database Course
-================
+==================
 Ahmad Yoosofan
 
 SQL
@@ -22,61 +22,27 @@ University of Kashan
 
 ----
 
-DSL (Data Sub Language)
-=======================
-
-What is a DSL?
-
-A DSL is a language or part of a language concerned only with
-
-database query and update and/or database definition.
-
-----
-
-SQL (Structured Query Language)
-===============================
-
-SQL is a NOT a programming language, it's a DSL.
-
-Why?
-
-Because there's no standard way to write a full standalone app using just SQL.
-
-reference: `Bill Karwin <https://stackoverflow.com/a/42518549/20435458/>`_
-
-----
-
-SQL's structure and components
-==============================
-.. image:: img/sql/sql_components_operators_functions_datatypes.jpg
-  :width: 100%
-
-----
-
-SQL Components
-==============
-
-* DDL: Data Definition Language
-* DML: Data Query Language
-* DML: Data Manipluation Language
-* DCL: Data Control Language
-* TCL: Transaction Control Language
-
-----
-
-Create Table
-============
-DDL: create table
------------------
-
+create table
+================
 .. code:: sql
 
   create table s (
-    sn      char(10) primary key,
-    sname   char(30),
-    status  int  default 0,
-    city    char(20)
+     sn      char(10) primary key,
+     sname   char(30),
+     status  int  default 0,
+     city    char(20)
   );
+
+
+DSL(Data Sub Language)
+-------------------------
+SQL (Structured Query Language)
+
+* DDL: Data Definition Language
+* DML: Data Manipluation Language
+* DCL: Data Control Language
+
+DDL: create table
 
 ----
 
@@ -84,12 +50,11 @@ Tools
 ========
 Online
 -----------
-
 #. https://sql.js.org/examples/GUI/
 #. https://sql.js.org/#/
 #. https://www.sqlitetutorial.net/
 #. https://sqliteonline.com/
-#. https://extendsclass.com/sqlite-browser.html
+#. `<https://extendsclass.com/sqlite-browser.html#>`_
 #. https://inloop.github.io/sqlite-viewer/
 #. https://github.com/inloop/sqlite-viewer
 #. https://github.com/sql-js/sql.js
@@ -110,25 +75,25 @@ Install
 .. code:: sql
 
   create table s (
-    sn      char(10) primary key,
-    sname   char(30),
-    status  int  default 0,
-    city    char(20)
+     sn      char(10) primary key,
+     sname   char(30),
+     status  int  default 0,
+     city    char(20)
   );
 
   create table p (
-    pn     char(10) primary key,
-    pname  char(30),
-    color  char(20),
-    weight NUMERIC(9, 2),
-    city   char(20)
+     pn     char(10) primary key,
+     pname  char(30),
+     color  char(20),
+     weight NUMERIC(9, 2),
+     city   char(20)
   );
 
   create table sp (
-    sn    char(10) references s,
-    pn    char(10) references p,
-    qty   int default 0,
-    primary key (sn, pn)
+     sn    char(10) references s,
+     pn    char(10) references p,
+     qty   int default 0,
+     primary key (sn, pn)
   );
 
 ----
@@ -422,10 +387,9 @@ Database Schema
 
 ----
 
-Insert
+insert
 =========
-DML: insert
------------
+DML
 
 .. code:: sql
 
@@ -563,15 +527,15 @@ SP
   :header-rows: 1
   :class: smallerelementwithfullborder
 
-  pname,  weight
-  Nut,    12
-  Bolt,   17
+  pname, weight
+  Nut,  12
+  Bolt, 17
   Screw,  17
   Screw,  14
-  Cam,    12
-  Cog,    19
-  Nut,    
-  Bolt,   
+  Cam,  12
+  Cog,  19
+  Nut,
+  Bolt,
 
 .. :
 
@@ -594,15 +558,15 @@ SP
   :header-rows: 1
   :class: smallerelementwithfullborder
 
-  pname,  weight * 1000
-  Nut,    12000
-  Bolt,   17000
+  pname, weight * 1000
+  Nut,  12000
+  Bolt, 17000
   Screw,  17000
   Screw,  14000
-  Cam,    12000
-  Cog,    19000
-  Nut,    
-  Bolt,   
+  Cam,  12000
+  Cog,  19000
+  Nut,
+  Bolt,
 
 ----
 
@@ -618,15 +582,15 @@ as (rename)
   :header-rows: 1
   :class: smallerelementwithfullborder
 
-  pname,  gweight
-  Nut,    12000
-  Bolt,   17000
+  pname, gweight
+  Nut,  12000
+  Bolt, 17000
   Screw,  17000
   Screw,  14000
-  Cam,    12000
-  Cog,    19000
-  Nut,    
-  Bolt,   
+  Cam,  12000
+  Cog,  19000
+  Nut,
+  Bolt,
 
 ----
 
@@ -687,19 +651,19 @@ as (rename)
   :class: smallerelementwithfullborder substep
 
   pn
-  P1
-  P2
-  P3
-  P4
-  P5
-  P6
-  P1
-  P2
-  P2
-  P2
-  P4
-  P5
-  P2
+  p1
+  p2
+  p3
+  p4
+  p5
+  p6
+  p1
+  p2
+  p2
+  p2
+  p4
+  p5
+  p2
 
 ----
 
@@ -724,10 +688,10 @@ as (rename)
 
     (
       (
-        (
-          p rename pn as ppn
-        )
-        times sp
+         (
+           p rename pn as ppn
+         )
+         times sp
       ) where ppn = pn
     ) {pname}
 
@@ -845,13 +809,13 @@ join
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  sn,  sname,  status,  city
-  s1,  Smith,  20,      London
-  s2,  Jones,  10,      Paris
-  s3,  Blake,  30,      Paris
-  s4,  Clark,  20,      London
-  s5,  Adams,  30,      Athens
-  s6,  Ali,    40,      کاشان
+  sn, sname,  status, city
+  s1, Smith,  20,   London
+  s2, Jones,  10,   Paris
+  s3, Blake,  30,   Paris
+  s4, Clark,  20,   London
+  s5, Adams,  30,   Athens
+  s6, Ali,    40,   کاشان
 
 ----
 
@@ -873,20 +837,20 @@ join
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pn,  pname,  color,  weight,  city,   sn,  qty,  sname,  status,  city
-  P1,  Nut,    Red,    12,      London, s1,  300,  Smith,  20,      London
-  P2,  Bolt,   Green,  17,      Paris,  s1,  200,  Smith,  20,      London
-  P3,  Screw,  Blue,   17,      Oslo,   s1,  400,  Smith,  20,      London
-  P4,  Screw,  Red,    14,      London, s1,  200,  Smith,  20,      London
-  P5,  Cam,    Blue,   12,      Paris,  s1,  100,  Smith,  20,      London
-  P6,  Cog,    Red,    19,      London, s1,  100,  Smith,  20,      London
-  P1,  Nut,    Red,    12,      London, s2,  300,  Jones,  10,      Paris
-  P2,  Bolt,   Green,  17,      Paris,  s2,  400,  Jones,  10,      Paris
-  P2,  Bolt,   Green,  17,      Paris,  s3,  200,  Blake,  30,      Paris
-  P2,  Bolt,   Green,  17,      Paris,  s4,  200,  Clark,  20,      London
-  P4,  Screw,  Red,    14,      London, s4,  300,  Clark,  20,      London
-  P5,  Cam,    Blue,   12,      Paris,  s4,  400,  Clark,  20,      London
-  P2,  Bolt,   Green,  17,      Paris,  s6,  350,  Ali,    40,      کاشان
+  pn, pname,  color,  weight, city, sn, qty,  sname,  status, city
+  p1, Nut,  Red,  12, London, s1, 300,  Smith,  20, London
+  p2, Bolt, Green,  17, Paris,  s1, 200,  Smith,  20, London
+  p3, Screw,  Blue, 17, Oslo, s1, 400,  Smith,  20, London
+  p4, Screw,  Red,  14, London, s1, 200,  Smith,  20, London
+  p5, Cam,  Blue, 12, Paris,  s1, 100,  Smith,  20, London
+  p6, Cog,  Red,  19, London, s1, 100,  Smith,  20, London
+  p1, Nut,  Red,  12, London, s2, 300,  Jones,  10, Paris
+  p2, Bolt, Green,  17, Paris,  s2, 400,  Jones,  10, Paris
+  p2, Bolt, Green,  17, Paris,  s3, 200,  Blake,  30, Paris
+  p2, Bolt, Green,  17, Paris,  s4, 200, Clark, 20, London
+  p4, Screw,  Red,  14, London, s4, 300,  Clark,  20, London
+  p5, Cam,  Blue, 12, Paris,  s4, 400,  Clark,  20, London
+  p2, Bolt, Green,  17, Paris,  s6, 350,  Ali,  40, کاشان
 
 ----
 
@@ -972,12 +936,12 @@ join
   :class: smallerelementwithfullborder substep
 
   pn
-  P1
-  P2
-  P3
-  P4
-  P5
-  P6
+  p1
+  p2
+  p3
+  p4
+  p5
+  p6
 
 ----
 
@@ -1351,14 +1315,14 @@ Use Another name for a Table in Query
   :class: smallerelementwithfullborder substep
 
   pn, pname,  color,  weight, city
-  P1, Nut,  Red,  12, London
-  P2, Bolt, Green,  17, Paris
-  P3, Screw,  Blue, 17, Oslo
-  P4, Screw,  Red,  14, London
-  P5, Cam,  Blue, 12, Paris
-  P6, Cog,  Red,  19, London
-  P7, Nut,  Red,  ,  London
-  P8, Bolt, Green, ,   Paris
+  p1, Nut,  Red,  12, London
+  p2, Bolt, Green,  17, Paris
+  p3, Screw,  Blue, 17, Oslo
+  p4, Screw,  Red,  14, London
+  p5, Cam,  Blue, 12, Paris
+  p6, Cog,  Red,  19, London
+  p7, Nut,  Red,  ,  London
+  p8, Bolt, Green, ,   Paris
 
 ----
 
@@ -1568,9 +1532,9 @@ escape
   :class: smallerelementwithfullborder substep
 
     pname,  weight
-    Bolt,   17
-    Cam,    12
-    Bolt,   
+    Bolt, 17
+    Cam,  12
+    Bolt,
 
 ----
 
@@ -1711,7 +1675,6 @@ Union
 .. container::
 
   .. code:: sql
-    :class: substep
 
       select pname
       from p
@@ -1741,7 +1704,7 @@ Union
       select pname
       from p
       where weight>10
-      ;
+     ;
 
 
 .. container::
@@ -1757,7 +1720,7 @@ Union
     Cog
     Screw
 
-  |
+  .
 
   .. csv-table::
     :header-rows: 1
@@ -2005,17 +1968,17 @@ Except
           :class: smallerelementwithfullborder
 
           pn, sn
-          P1, s3
-          P1, s4
-          P1, s5
-          P1, s6
-          P2, s5
-          P3, s2
-          P3, s3
-          P3, s4
-          P3, s5
-          P3, s6
-          P4, s2
+          p1, s3
+          p1, s4
+          p1, s5
+          p1, s6
+          p2, s5
+          p3, s2
+          p3, s3
+          p3, s4
+          p3, s5
+          p3, s6
+          p4, s2
 
       - ``.``
 
@@ -2024,19 +1987,19 @@ Except
           :class: smallerelementwithfullborder
 
           pn, sn
-          P4, s3
-          P4, s5
-          P4, s6
-          P5, s2
-          P5, s3
-          P5, s5
-          P5, s6
-          P6, s2
-          P6, s3
-          P6, s4
-          P6, s5
-          P6, s6
-          P7, s1
+          p4, s3
+          p4, s5
+          p4, s6
+          p5, s2
+          p5, s3
+          p5, s5
+          p5, s6
+          p6, s2
+          p6, s3
+          p6, s4
+          p6, s5
+          p6, s6
+          p7, s1
 
       - ``.``
 
@@ -2045,17 +2008,17 @@ Except
           :class: smallerelementwithfullborder
 
           pn, sn
-          P7, s2
-          P7, s3
-          P7, s4
-          P7, s5
-          P7, s6
-          P8, s1
-          P8, s2
-          P8, s3
-          P8, s4
-          P8, s5
-          P8, s6
+          p7, s2
+          p7, s3
+          p7, s4
+          p7, s5
+          p7, s6
+          p8, s1
+          p8, s2
+          p8, s3
+          p8, s4
+          p8, s5
+          p8, s6
 
 ----
 
@@ -2325,9 +2288,9 @@ Exists
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pname,  weight
-  Nut,    12
-  Cam,    12
+  pname weight
+  Nut,  12
+  Cam,  12
   Nut,
   Bolt,
 
@@ -2684,10 +2647,10 @@ NULL
     :class: substep
 
     create table s (
-      sn      char(10) primary key,
-      sname   char(30) not null,
-      status  int  default 0,
-      city    char(20)
+     sn      char(10) primary key,
+     sname   char(30) not null,
+     status  int  default 0,
+     city    char(20)
     );
 
 .. ::
@@ -3063,9 +3026,9 @@ Sum
   :class: substep smallerelementwithfullborder
 
   pn, qty,  weight
-  P1, 300,  12
-  P2, 400,  17
-  P2, 200,  17
+  p1, 300,  12
+  p2, 400,  17
+  p2, 200,  17
 
 ----
 
@@ -3089,7 +3052,7 @@ Average
   :class: substep
 
   select avg(qt) as sqt
-  from  sp
+  from   sp
   ;
 
 ----
@@ -3108,7 +3071,7 @@ Average
   where city='Paris'
   ;
 
-.. csv-table::
+..  csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
@@ -3119,7 +3082,7 @@ Average
 
 .. class:: rtl-h1
 
-  میانگین مقدار عرضه‌های (qty) عرضه‌کنندگان شهر پاریس را بیابید
+میانگین مقدار عرضه‌های(qty) عرضه‌کنندگان شهر پاریس را بیابید
 
 .. code:: sql
 
@@ -3469,12 +3432,12 @@ group by
     :class: substep smallerelementwithfullborder
 
     pn,sqt
-    P1,600
-    P2,1350
-    P3,400
-    P4,500
-    P5,500
-    P6,100
+    p1,600
+    p2,1350
+    p3,400
+    p4,500
+    p5,500
+    p6,100
 
 ----
 
@@ -3504,10 +3467,10 @@ group by
   :class: substep smallerelementwithfullborder
 
     pn, sqt
-    P2, 1350
-    P3, 400
-    P4, 500
-    P6, 100
+    p2, 1350
+    p3, 400
+    p4, 500
+    p6, 100
 
 ----
 
@@ -3536,7 +3499,7 @@ group by
   :class: substep smallerelementwithfullborder
 
     pn, sqt
-    P2, 1350
+    p2, 1350
 
 .. :
 
@@ -3579,8 +3542,8 @@ group by
   :class: substep smallerelementwithfullborder
 
   pn, sn, qty
-  P1, s1, 300
-  P1, s2, 300
+  p1, s1, 300
+  p1, s2, 300
 
 
 ..  csv-table::
@@ -3588,11 +3551,11 @@ group by
   :class: substep smallerelementwithfullborder
 
   pn, sn, qty
-  P2, s1, 200
-  P2, s2, 400
-  P2, s3, 200
-  P2, s4, 200
-  P2, s6, 350
+  p2, s1, 200
+  p2, s2, 400
+  p2, s3, 200
+  p2, s4, 200
+  p2, s6, 350
 
 .. container::
 
@@ -3601,7 +3564,7 @@ group by
     :class: substep smallerelementwithfullborder
 
     pn, sn, qty
-    P3, s1, 400
+    p3, s1, 400
 
   .
 
@@ -3610,7 +3573,7 @@ group by
     :class: substep smallerelementwithfullborder
 
     pn, sn, qty
-    P6, s1, 100
+    p6, s1, 100
 
 
 ..  csv-table::
@@ -3618,16 +3581,16 @@ group by
   :class: substep smallerelementwithfullborder
 
   pn, sn, qty
-  P4, s1, 200
-  P4, s4, 300
+  p4, s1, 200
+  p4, s4, 300
 
 ..  csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
   pn, sn, qty
-  P5, s1, 100
-  P5, s4, 400
+  p5, s1, 100
+  p5, s4, 400
 
 ----
 
@@ -4344,9 +4307,9 @@ Scalar value(I)
   :class: substep smallerelementwithfullborder
 
   pn, weight
-  P2, 17
-  P3, 17
-  P6, 19
+  p2, 17
+  p3, 17
+  p6, 19
 
 ----
 
@@ -4373,8 +4336,8 @@ Scalar value(II)
   :class: substep smallerelementwithfullborder
 
   pn, weight
-  P1, 12
-  P5, 12
+  p1, 12
+  p5, 12
 
 
 ----
@@ -4423,12 +4386,12 @@ Scalar value(V)
   :class: substep smallerelementwithfullborder
 
   pn, sqty
-  P1, 600
-  P2, 1350
-  P3, 400
-  P4, 500
-  P5, 500
-  P6, 100
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
 
 
 ----
@@ -4454,14 +4417,14 @@ Scalar value(V)
   :class: substep smallerelementwithfullborder
 
   pn, sqty
-  P1, 600
-  P2, 1350
-  P3, 400
-  P4, 500
-  P5, 500
-  P6, 100
-  P7, NULL
-  P8, NULL
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+  p7,
+  p8,
 
 ----
 
@@ -4475,14 +4438,13 @@ Scalar value(V)
     :class: substep
 
     select pn,
-      (select sum(status)
+       (select sum(status)
         from s
         where s.city = p.city
-      ) as sum_status,
-      city
+       ) as sum_status,
+       city
     from p
     order by weight desc
-    ;
 
 
 .. csv-table::
@@ -4491,14 +4453,14 @@ Scalar value(V)
 
 
     pn, sum_status, city
-    P6, 40,         London
-    P2, 40,         Paris
-    P3, NULL,       Oslo
-    P4, 40,         London
-    P1, 40,         London
-    P5, 40,         Paris
-    P7, 40,         London
-    P8, 40,         Paris
+    p6, 40,   London
+    p2, 40,   Paris
+    p3,   ,   Oslo
+    p4, 40,   London
+    p1, 40,   London
+    p5, 40,   Paris
+    p7, 40,   London
+    p8, 40,   Paris
 
 ----
 
@@ -4516,17 +4478,9 @@ Scalar value(V)
     from p natural join sp
     group by pn; -- wrong
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder
 
-    pn, sqty
-    P1, 600
-    P2, 1000
-    P3, 400
-    P4, 500
-    P5, 500
-    P6, 100
+.. image:: img/left_outer_join1_wrong_inner_join.png
+    :class: substep
 
 .. code:: sql
     :class: substep
@@ -4538,19 +4492,9 @@ Scalar value(V)
       ) as sqty
     from p;
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder
+.. image:: img/left_outer_join1_using_scalar.png
+    :class: substep
 
-    pn, sqty
-    P1, 600
-    P2, 1000
-    P3, 400
-    P4, 500
-    P5, 500
-    P6, 100
-    P7, NULL
-    P8, NULL
 
 ----
 
@@ -4579,14 +4523,14 @@ Left Outer Join(I)
   :class: substep smallerelementwithfullborder
 
   pn, sqty
-  P1, 600
-  P2, 1350
-  P3, 400
-  P4, 500
-  P5, 500
-  P6, 100
-  P7, NULL
-  P8, NULL
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+  p7,
+  p8,
 
 ----
 
@@ -4721,23 +4665,23 @@ Full Outer Join(II)
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  scity,  pcity
+  scity   pcity
   London, London
   London, London
   London, London
   London, London
-  Paris, Paris
-  Paris, Paris
-  Paris, Paris
-  Paris, Paris
-  Paris, Paris
-  Paris, Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
+  Paris ,  Paris
   London, London
   London, London
   London, London
   London, London
-  Athens, NULL
-  کاشان , NULL
+  Athens,
+  کاشان ,
 
 ----
 
@@ -4782,7 +4726,7 @@ Scalar value(III)
   :class: substep smallerelementwithfullborder
 
   pn, weight
-  P8, NULL
+  p7,
 
 .. code:: sql
   :class: substep
@@ -4800,7 +4744,7 @@ Scalar value(III)
   :class: substep smallerelementwithfullborder
 
   pn, weight
-  P1, 12
+  p1, 12
 
 
 ----
@@ -4828,7 +4772,7 @@ Scalar value(IV)
   :class: smallerelementwithfullborder
 
   pn, weight
-  P1, 12
+  p1, 12
 
 .. code:: sql
   :class: substep
@@ -4850,8 +4794,8 @@ Scalar value(IV)
   :class: substep smallerelementwithfullborder
 
   pn, weight
-  P1, 12
-  P5, 12
+  p1, 12
+  p5, 12
 
 ----
 
@@ -5335,10 +5279,10 @@ Check
   );
 
   create table sp (
-    sn    char(10) references s on update cascade on delete cascade,
-    pn    char(10) references p on update cascade on delete cascade,
-    qty   int default 1 check(qty > 0),
-    primary key (sn, pn)
+     sn    char(10) references s on update cascade on delete cascade,
+     pn    char(10) references p on update cascade on delete cascade,
+     qty   int default 1 check(qty > 0),
+     primary key (sn, pn)
   );
 
 ----
@@ -5761,7 +5705,7 @@ order by
 
 ..  csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder, substep
+  :class: smallerelementwithfullborder
 
   sname,  status
   Jones, 10
@@ -5787,18 +5731,8 @@ order by ..... desc
   order by status desc
   ;
 
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder, substep
-
-  sname,  status
-  Ali,    40
-  Blake,  30
-  Adams,  30
-  Smith,  20
-  Clark,  20
-  Jones,  10
+.. image:: img/order_by_desc.png
+    :class: substep
 
 ----
 
@@ -5826,8 +5760,6 @@ order by ..... desc
 
 ----
 
-.. class:: rtl-h1
-
 شمارهٔ عرضه‌کنندگانی را بیابید که جمع وزن قطعه‌هایی که عرضه می‌کنند بیشتر از ۱۱ هزار باشد
 
 .. code:: sql
@@ -5842,9 +5774,9 @@ order by ..... desc
     select sn
     from s
     where 11000 < ( select sum(weight * qty)
-                  from p natural join spj
-                  where spj.sn = s.sn
-                );
+                 from p natural join spj
+                 where spj.sn = s.sn
+               );
 
 
 .. ::
@@ -5856,26 +5788,24 @@ order by ..... desc
 
   .. code:: sql
 
-    select  trackid,
-            name,
-            albumid
+    select trackid,
+           name,
+           albumid
     from tracks
     where albumid = (
-        select albumid
-        from albums
-        where title = 'Let There Be Rock'
+       select albumid
+       from albums
+       where title = 'Let There Be Rock'
     );
 
       alter table p drop factory_name;
 
 -----
 
-.. class:: rtl-h1
-
 شماره و نام عرضه کنندگان را بیابید. اگر وضعیت عرضه‌کننده بزرگتر از ۲۰ بود کنار مشخصات عرضه کننده کلمه ۱ و در غیر این صورت کلمهٔ ۲ بگذارید.
 
-* ۱. "big"
-* ۲. "small"
+*  ۱ "big"
+* ۲ "small"
 
 .. code:: sql
 
@@ -5914,22 +5844,22 @@ order by ..... desc
 .. code:: sql
 
   select pn,
-    (select sum(status)
+     (select sum(status)
       from s
       where s.city=p.city
-    ),
-    city
+     ),
+     city
   from p
   order by weight desc
 
 .. code:: sql
 
     select pn,
-      (select sum(status)
+       (select sum(status)
         from s
         where s.city=p.city
-      ) as sum_status,
-      city
+       ) as sum_status,
+       city
     from p
     order by weight desc
     ;
@@ -5977,8 +5907,8 @@ order by ..... desc
     from   s
     where exists
          ( select * from s as T
-            where T.city=s.city and T.status>1000
-          )
+           where T.city=s.city and T.status>1000
+         )
 
 
 ..  code:: sql
@@ -6001,8 +5931,8 @@ order by ..... desc
     from   s
     where not exists
          ( select * from s as T
-            where T.city=s.city and T.status<1000
-          )
+           where T.city=s.city and T.status<1000
+         )
 
 
 .. code:: sql
@@ -6079,24 +6009,24 @@ lateral
 
 
     with psk as (select city, weight, pn, sn from p natural join s),
-      jsk as (select city, sn, jn, status from s NATURAL join j)
-      select * from psk
-      where weight < (select avg(weight) from p)
+       jsk as (select city, sn, jn, status from s NATURAL join j)
+       select * from psk
+       where weight < (select avg(weight) from p)
     ;
 
     -- a = b * c 8 (k-5)
     -- h = a * (h - 7)
 
     with psk as (select city, weight, pn, sn from p natural join s)
-      select * from psk
-      where weight < (select avg(weight) from p)
+       select * from psk
+       where weight < (select avg(weight) from p)
     ;
 
     with psk as (select city, weight, pn, sn from p natural join s),
-      jsk as (select city, sn, jn, status from s NATURAL join j)
-      select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn from psk, jsk
-      where weight < (select avg(weight) from p) and
-        jsk.city = psk.city
+       jsk as (select city, sn, jn, status from s NATURAL join j)
+       select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn from psk, jsk
+       where weight < (select avg(weight) from p) and
+          jsk.city = psk.city
     ;
 
 ----
@@ -6107,7 +6037,7 @@ lateral
     select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn
     from (select city, weight, pn, sn from p natural join s) as psk,
           (select city, sn, jn, status from s NATURAL join j) as jsk
-          where weight < (select avg(weight) from psk) and
+       where weight < (select avg(weight) from psk) and
           jsk.city = psk.city
     ;
 
@@ -6482,7 +6412,7 @@ View
   );
 
 .. image:: img/create_view_postgresql.png
-  :width: 800px
+  :width: 740px
 
 ----
 
@@ -6490,6 +6420,8 @@ View
 
   ALTER VIEW kashan_p RENAME TO kashan_parts;
   DROP VIEW [ IF EXISTS ] kashan_parts;
+
+
 
 ----
 
@@ -6581,7 +6513,6 @@ Problems
    *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است.
    *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است. زوج‌های تکراری در این راه حل نباید وجود داشته باشد. دقت کنید که دو زوج (الف ، ب) و (ب ، الف) متفاوت هستند.
 
-----
 
 .. contents::  فهرست
 
