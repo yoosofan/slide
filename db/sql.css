@@ -67,20 +67,6 @@ div#order-by-asc-id > pre:nth-of-type(1){ grid-area: code1;}
 div#order-by-asc-id > pre:nth-of-type(2){ grid-area: code2;}
 div#order-by-asc-id > img:nth-of-type(1){ grid-area: out1; justify-self: start;}
 
-div#in-some-error-field-query-id{
-  display: grid;
-  grid-template-areas:
-    'h1 h1'
-    'code1 code3'
-    'code2 code4'
-    ;
-}
-div#in-some-error-field-query-id > p.rtl-h2:nth-of-type(1){ grid-area: h1;}
-div#in-some-error-field-query-id > pre:nth-of-type(1){ grid-area: code1;}
-div#in-some-error-field-query-id > pre:nth-of-type(2){ grid-area: code2;}
-div#in-some-error-field-query-id > pre:nth-of-type(3){ grid-area: code3;}
-div#in-some-error-field-query-id > pre:nth-of-type(4){ grid-area: code4;}
-
 div#scalar-value-1-id{
   display: grid;
   grid-template-areas:

@@ -60,7 +60,6 @@ ComplexCls(II)
     :start-line: 29
     :end-line: 67
 
-
 ----
 
 :class: t2c
@@ -80,7 +79,6 @@ ComplexCls(III)
     :class: ltr
     :start-line: 29
     :end-line: 67
-
 
 ----
 
@@ -479,6 +477,27 @@ MyArray /  =
     :end-line: 57
 
 .. include:: src/op/1260.cpp
+    :code: cpp
+    :number-lines: 57
+    :class: ltr
+    :start-line: 57
+    :end-line: 89
+
+
+-----
+
+:class: t2c
+
+MyArray /  = 
+==================================================
+.. include:: src/op/1270.cpp
+    :code: cpp
+    :number-lines: 30
+    :class: ltr
+    :start-line: 30
+    :end-line: 57
+
+.. include:: src/op/1270.cpp
     :code: cpp
     :number-lines: 57
     :class: ltr

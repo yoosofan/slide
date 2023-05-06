@@ -144,16 +144,24 @@ First-Come, First-Served (FCFS)
 
 ----
 
-.. csv-table:: cpu
+:class: t2c
+
+.. csv-table::
   :class: yoo-gantt-chart-set-width-based-on-data
 
   :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
   0, , 2, , 3, , 5, , 6 
 
-.. csv-table:: cpu
+.. csv-table::
   :class: yoo-gantt-chart-set-width-based-on-data
 
   |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
+  0, , 2, , 3, , 5, , 6 
+
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data44
+
+  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
   0, , 2, , 3, , 5, , 6 
 
 ----
@@ -334,7 +342,7 @@ SJF/SPN
 
     .. class:: substep
 
-    *Average Waiting Time*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 1.5`
+    *Average Waiting Time*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
 
 .. class:: substep
 
@@ -383,9 +391,11 @@ Shortest Remaining Time(SRT), preemptive SJF
 
     .. class:: substep
 
-        *Average Waiting Time 1*: :math:`\frac{0 + (4-0) + (10-3) + (11-4)}{4} = \frac{17}{4} = 3\frac{1}{4} = 3.25`
+        *Average Waiting Time 1*: :math:`\frac{0 + (4-0) + (10-1) + (11-2)}{4} = \frac{22}{4} = 5\frac{2}{4} = 5.5`
 
         *Rearange*
+
+
 
     .. class:: withborder substep
 
@@ -394,16 +404,20 @@ Shortest Remaining Time(SRT), preemptive SJF
     * 
     * :math:`P_2`
     * 
+    * :math:`P_0`
+    * 
     * :math:`P_3`
     * 
     * :math:`P_1`
     * 
 
-    .. class:: yoo-x-numbers
+    .. class:: substep yoo-x-numbers
 
     * 0
     * 
-    * 4
+    * 1
+    * 
+    * 2 
     * 
     * 5
     * 
@@ -413,15 +427,115 @@ Shortest Remaining Time(SRT), preemptive SJF
 
     .. class:: substep
 
-    *Average Waiting Time 2*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 1.5`
+    *Average Waiting Time 2*: :math:`\frac{(0+(2-0)) + (8-0) + (1-1) + (5-2)}{4} = \frac{13}{4} = 3\frac{1}{4} = 3.25`
 
 
 .. class:: substep
 
-* *Average Waiting Time* 1: 3.25
-* *Average Waiting Time* 2: 1.5
+* *Average Waiting Time* 1: 5.5
+* *Average Waiting Time* 2: 3.25
 * 1: FCFS
 * 2: Shortest Job First(SJF) or Shortest Process Next(SPN)
+
+----
+
+Estimating Service Time(I)
+=============================
+.. class:: substep
+ 
+* .. math:: 
+    :class: ltr
+
+      \tau_n =  \frac{t_0 + t_1 + t_2 + ... + t_{n - 1}}{n}
+
+* .. math:: 
+    :class: ltr
+
+     n * \tau_n = t_0 + t_1 + t_2 + ... + t_{n - 1}
+
+* .. math::
+    :class: ltr 
+    
+      \tau_{n+1} = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} + t_n}{n+1}
+
+* .. math::
+    :class: ltr 
+    
+      = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} }{n+1} + \frac{t_n}{n+1}
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} = \frac{n * \tau_n}{n + 1} + \frac{t_n}{n+1}
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+
+----
+
+Estimating Service Time(II)
+=============================
+.. class:: substep
+ 
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} = \frac{n + 1 - 1}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} =  ( \frac{n + 1}{n + 1} - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} =  ( 1 - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
+
+* .. math::
+    :class: ltr 
+    
+    \alpha = \frac{1}{n+1}
+
+    \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
+
+----
+
+Estimating Service Time(III)
+=============================
+.. class:: substep
+ 
+* .. math::
+    :class: ltr 
+    
+    \alpha = \frac{1}{n+1}\ , \  \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
+
+* .. math::
+    :class: ltr 
+    
+    t_n = actual\ length\ of\ n^{th}\ service\ time
+
+* .. math::
+    :class: ltr 
+    
+    \tau_{n+1} = predicted\ value\ for\ the\ next\ service\ time
+ 
+* .. math::
+    :class: ltr 
+    
+    0 ≼ \alpha ≼ 1 \ , \ \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
+
+* .. math::
+    :class: ltr 
+   
+    \alpha → 0 
 
 ----
 

@@ -5287,11 +5287,68 @@ Check
 
 ----
 
-:class: t2c
+Foreign Key Error
+====================
+.. code:: sql
+
+  create table "Department"(
+    "DN" integer default 0 primary key,
+    "DeptName" varchar(30) default '',
+    "MgrSSN" varchar(20) REFERENCES "Employee"("SSN")
+  );
+  create table "Employee"(
+    "SSN" varchar(20) primary key,
+    "name" varchar(40) not null,
+    "salary" numeric(15,2) default 0,
+    "Dn" integer default 0 REFERENCES "Department"("DN")
+  );
+
+  insert into "Department"("DN", "DeptName", "MgrSSN")
+      values(1, 'computer', '');
+  insert into "Department"("DN", "DeptName", "MgrSSN")
+      values(2, 'Chemistry', '');
+
+
+.. code:: sh
+
+  -- SQLite
+  Result: FOREIGN KEY constraint failed
+  At line 14:
+  insert into "Department"("DN", "DeptName", "MgrSSN")
+      values(1, 'computer', '');
+
+----
+
+Foreign Key Error(PostgreSQL)
+==================================
+.. code:: sql
+
+  create table "Department"(
+    "DN" integer default 0 primary key,
+    "DeptName" varchar(30) default '',
+    "MgrSSN" varchar(20) REFERENCES "Employee"("SSN")
+  );
+
+.. code:: sh
+
+  ERROR:  relation "Employee" does not exist
 
 .. code:: sql
 
-  create database company;
+  create table "Employee"(
+    "SSN" varchar(20) primary key,
+    "name" varchar(40) not null,
+    "salary" numeric(15,2) default 0,
+    "Dn" integer default 0 REFERENCES "Department"("DN")
+  );
+
+.. code:: sh
+
+  ERROR:  relation "Department" does not exist
+
+----
+
+.. code:: sql
 
   create table "Department"(
     "DN" integer default 0 primary key,
@@ -5306,7 +5363,6 @@ Check
     "Dn" integer default 0
   );
 
-
 .. code:: sql
 
   insert into "Department"("DN", "DeptName", "MgrSSN")
@@ -5319,6 +5375,10 @@ Check
 
   insert into "Employee"("SSN", "name", "salary", "Dn")
     values('e10', 'ali', 1200, 2);
+
+----
+
+.. code:: sql
 
   update "Department" set "MgrSSN"='e2' where "DN"=1;
   update "Department" set "MgrSSN"='e10' where "DN"=2;
@@ -5343,6 +5403,8 @@ Check
 
 ----
 
+SQLite is incomplete
+=======================
 .. code:: sql
 
   create table tte1(
@@ -5357,13 +5419,67 @@ Check
   insert into tte1(myid, salary, name1, dept2, fee)
     values(31, 1200, 'هوشنگ', 1, 200);
 
-  -- ~ insert into tte1(myid, salary, name1, dept2, fee)
-    -- ~ values(33, 1200, 'حامد', 1, 1190);
-  -- ~ ERROR:  new row for relation "tte1" violates check constraint "tte1_check"
-  -- ~ DETAIL:  Failing row contains (33, 1200.00, حامد, 1, 1190.00).
+.. code:: sh
+
+  Result: FOREIGN KEY constraint failed
+  At line 10:
+  insert into tte1(myid, salary, name1, dept2, fee)
+      values(31, 1200, 'هوشنگ', 1, 200);
+
+
+----
+
+Same Sample in PostgreSQL
+===========================
+.. code:: sql
+
+  create table tte1(
+    myid integer default 0 primary key,
+    salary numeric(14,2) check(salary >= 100),
+    name1 varchar(20) not null,
+    dept2 integer references "Department"("DN"),
+    fee   numeric(14, 2) default 10, --check(salary - fee > 80)
+    check(salary - fee > 80)
+  );
+
+  insert into tte1(myid, salary, name1, dept2, fee)
+    values(31, 1200, 'هوشنگ', 1, 200);
+
+.. code:: sh
+
+  INSERT 0 1
+
+----
+
+.. code:: sql
+
+  create table "Department"(
+    "DN" integer default 0 primary key,
+    "DeptName" varchar(30) default '',
+    "MgrSSN" varchar(20)
+  );
+
+  create table "Employee"(
+    "SSN" varchar(20) primary key,
+    "name" varchar(40) not null,
+    "salary" numeric(15,2) default 0,
+    "Dn" integer default 0
+  );
+
+.. code:: sql
+
+  insert into "Department"("DN", "DeptName", "MgrSSN")
+    values(1, 'computer', '');
+  insert into "Department"("DN", "DeptName", "MgrSSN")
+    values(2, 'Chemistry', '32');
 
   alter table "Department" add constraint "departmentManager" foreign key("MgrSSN")
-    references "Employee"("SSN") on update cascade on delete cascade;
+    references "Employee"("SSN") on update cascade on delete no action;
+
+.. code:: sh
+
+  ERROR:  insert or update on table "Department" violates foreign key constraint "departmentManager"
+  DETAIL:  Key (MgrSSN)=(32) is not present in table "Employee".
 
 ----
 
@@ -5392,7 +5508,7 @@ All
       select *
       from p
       where city = 'Paris' and
-        p.weight <= T.weight
+        p.weight >= T.weight
   );
 
 .. code:: sql
@@ -5443,9 +5559,11 @@ All
 
 ----
 
+:class: t2c
+
 IN
 ===
-.. class:: substep rtl-h2
+.. class:: substep rtl-h1
 
 نام قطعاتی را بیابید که عرضه‌کننده‌ای همشهری آن قطعه‌ها باشد
 
@@ -5479,7 +5597,6 @@ IN
 ----
 
 :class: t2c
-
 
 .. class:: rtl-h1
 
@@ -5548,11 +5665,13 @@ IN
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
 نام قطعاتی را بیابید که هیچ عرضه کنندهٔ همشهری‌شان هیچ قطعه‌ای را عرضه نکرده باشد.
 
-.. class:: rtl-h2 substep
+.. class:: rtl-h1 substep
 
 نام قطعاتی را بیابید که عرضه کننده‌ای در شهرشان نباشد که قطعه‌ای عرضه کرده باشد.
 
@@ -5571,7 +5690,6 @@ IN
 
 کوشش کنید با exists این پرس‌وجو را حل کنید.
 
-
 .. code:: sql
   :class: substep
 
@@ -5584,11 +5702,55 @@ IN
     )
   ;
 
+
 ----
 
-.. class:: rtl-h2
+:class: t2c
 
-نام قطعاتی را بیابید که وزن آنها از قطعه‌ای در شهر کاشان بزرگ‌تر باشد.
+.. class:: rtl-h1
+
+نام قطعاتی را بیابید که هیچ عرضه کنندهٔ همشهری‌شان هیچ قطعه‌ای را عرضه نکرده باشد.
+
+
+.. code:: sql
+  :class: substep
+
+  select pname  from p
+  where city not in (
+      select city
+      from s
+      where sn not in
+      (select sn from sp)
+    );
+
+.. code:: sql
+  :class: substep
+
+  select pname from p
+  where city in (
+      select city
+      from s
+      where sn not in
+      (select sn from sp)
+    );
+
+.. code:: sql
+  :class: substep
+
+  select pname from p
+  where city not in (
+      select city from s
+      where sn in
+      (select sn from sp)
+    );
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  نام قطعاتی را بیابید که وزن آنها از قطعه‌ای در شهر کاشان بزرگ‌تر باشد.
 
 .. code:: sql
   :class: substep
@@ -5601,10 +5763,6 @@ IN
       where city = 'Kashan'
     )
   ;
-
-.. class:: substep rtl-h2
-
-کوشش کنید با exists این پرس‌وجو را حل کنید.
 
 
 .. code:: sql
@@ -5622,9 +5780,9 @@ IN
 
 ----
 
-:id: in-some-error-field-query-id
+:class: t2c
 
-.. class:: rtl-h2
+.. class:: rtl-h1
 
 شمارهٔ قطعاتی را بیابید که در شهر آنها عرضه کننده‌ای با وضعیت بزرگ‌تر از ۶ وجود داشته باشد.
 
@@ -5992,54 +6150,69 @@ https://stackoverflow.com/a/10984951
 
 ----
 
+
 lateral
 =============
 .. code:: sql
 
-    select *
-    from P, LATERAL (select sn from s where s.city = p.city) as t;
+    select pn, sn, p.city, t.city
+    from p, LATERAL (select sn, s.city from s where s.city = p.city) as t;
 
+.. code:: sql
+
+    select pn, sn, p.city, t.city -- Error
+    from p, (select sn, s.city from s where s.city = p.city) as t;
+
+
+.. code:: sh
+
+    Error invalid reference to FROM-clause entry for table "p"
+    LINE 2: ... from p, (select sn, s.city from s where s.city = p.city) as...
+                                                                 ^
+    HINT: There is an entry for table "p", but it cannot be referenced
+    from this part of the query.
+
+.. code:: sql
+
+    select pn, sn, p.city, s.city
+    from p, s
+    where s.city = p.city;
+
+.. code:: sql
+
+    select pn, sn, p.city, s.city
+    from p natural join s;
 
 ----
 
 .. code:: sql
 
-    with psk as (select city from p natural join s)
-    sp-# select * from psk;
+  with psk as (select city from p natural join s)
+    select * from psk;
 
+  with psk as (select city, weight, pn, sn from p natural join s)
+    select * from psk
+    where weight < (select avg(weight) from p)
+  ;
 
-    with psk as (select city, weight, pn, sn from p natural join s),
-       jsk as (select city, sn, jn, status from s NATURAL join j)
-       select * from psk
-       where weight < (select avg(weight) from p)
-    ;
-
-    -- a = b * c 8 (k-5)
-    -- h = a * (h - 7)
-
-    with psk as (select city, weight, pn, sn from p natural join s)
-       select * from psk
-       where weight < (select avg(weight) from p)
-    ;
-
-    with psk as (select city, weight, pn, sn from p natural join s),
-       jsk as (select city, sn, jn, status from s NATURAL join j)
-       select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn from psk, jsk
-       where weight < (select avg(weight) from p) and
-          jsk.city = psk.city
-    ;
+  with psk as (select city, weight, pn, sn from p natural join s)
+    , jsk as (select city, sn, jn, status from s NATURAL join j)
+    select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn from psk, jsk
+    where weight < (select avg(weight) from p) and
+      jsk.city = psk.city
+  ;
 
 ----
 
 .. code:: sql
 
-    -- Error
-    select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn
-    from (select city, weight, pn, sn from p natural join s) as psk,
-          (select city, sn, jn, status from s NATURAL join j) as jsk
-       where weight < (select avg(weight) from psk) and
-          jsk.city = psk.city
-    ;
+  -- Error
+  select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn
+  from (select city, weight, pn, sn from p natural join s) as psk
+    , (select city, sn, jn, status from s NATURAL join j) as jsk
+  where weight < (select avg(weight) from psk) and
+    jsk.city = psk.city
+  ;
 
 ----
 
@@ -6421,7 +6594,32 @@ View
   ALTER VIEW kashan_p RENAME TO kashan_parts;
   DROP VIEW [ IF EXISTS ] kashan_parts;
 
+.. code:: sql
+  
+  drop view if exists m2;
+  drop view if exists m1;
+  
+  create view m1 as
+    select sn, city
+    from s
+    where status > 8 
+    ;
+    
+  create view m2 as
+    select sn, pn
+    from m1 natural join p
+    ;
 
+----
+
+view
+=======
+* select is fine
+* insert, update, delete is problematic
+* unless it depends only on one table almost
+
+
+#. Speed of execution
 
 ----
 
@@ -6436,6 +6634,8 @@ MATERIALIZED VIEW
       AS query
       [ WITH [ NO ] DATA ]
 
+
+----
 
 .. code:: sql
 
@@ -6461,7 +6661,6 @@ MATERIALIZED VIEW
       OWNER TO new_owner
       SET TABLESPACE new_tablespace
 
-
 ----
 
 .. code:: sql
@@ -6476,7 +6675,7 @@ MATERIALIZED VIEW
 .. code:: sql
 
   REFRESH MATERIALIZED VIEW name
-      [ WITH [ NO ] DATA ]
+    [ WITH [ NO ] DATA ]
 
   REFRESH MATERIALIZED VIEW order_summary;
 

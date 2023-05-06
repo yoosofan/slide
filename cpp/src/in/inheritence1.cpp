@@ -3,7 +3,7 @@ using namespace std;
 class Shape{
   string name = "shape";//char name[100]; '\0' رشته
   string color = "white";//strcpy, strcmp; char*color; str1=str2
-public:
+ public:
   int Area(void){return 0;}
   Shape() = default;
   friend ostream& operator <<(ostream& o1, const Shape& s1){
@@ -13,7 +13,7 @@ public:
 };
 class Square: public Shape{
   int d = 1;
-public:
+ public:
   int Area(void){return d*d;}
   Square(int d){this->d=d;}
   Square() = default;
@@ -28,5 +28,4 @@ int main(){
   Square sq(3);
   cout<< sq.Area() << endl;
   cout << sq << endl;
-  return 0;
 }

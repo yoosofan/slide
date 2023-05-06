@@ -11,7 +11,8 @@ public:
     cout << "in Shape" << endl;
     return 0;
   }
-  void show(void){cout<<"show in shape"<<endl;}
+  void show(void)
+  {cout<<"show in shape"<<endl;}
 };
 class Square: protected Shape{
   int d;

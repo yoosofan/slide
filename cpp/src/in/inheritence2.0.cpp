@@ -4,12 +4,14 @@ class Shape{
   string name = "shape";
   string color = "white";
 public:
+  Shape(string na, string co){name=na; color = co;}
   int Area(void){return 0;}
-  shape() = default;
+  Shape() = default;
   friend ostream& operator <<(ostream& o1, const Shape& s1){
     o1 << "name: " << s1.name << "\tcolor: " << s1.color;
     return o1;
   }
+  string getColor(void){return color;}
 };
 class Square: public Shape{
   int d = 1;
@@ -31,5 +33,5 @@ int main(){
   cout << ps->Area() << endl;
   ps = &sq;
   cout << ps->Area() <<endl;
-  return 0;
+  cout << ps->getColor() <<endl;
 }

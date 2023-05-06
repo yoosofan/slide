@@ -211,7 +211,6 @@ IDE
 
 ----
 
-
 Standard Library
 =====================
 * https://en.wikipedia.org/wiki/C_standard_library
@@ -292,7 +291,6 @@ struct cpp
     :class: ltr
     :start-line: 0
     :end-line: 28
-
 
 ----
 

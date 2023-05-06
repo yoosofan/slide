@@ -15,7 +15,8 @@ public:
   int Area(void){return d*d;}
   Square(int d=1){this->d=d;}
 };
-void f1(shape a){cout << a.Area() << endl;}
+void f1(shape a)
+{cout << a.Area() << endl;}
 int main(){
   Shape s;
   f1(s);

@@ -1,6 +1,9 @@
 #include<iostream>
 using namespace std;
-class A{};
+class A{
+  public: 
+  void say(void){cout << "A" << endl;}
+};
 class Shape: public A{
   string name = "shape";
   string color = "shape";
@@ -24,16 +27,10 @@ public:
   }
 };
 int main(){
-  Shape s;
-  cout << s.Area() << endl;
-  Square sq(3);
-  cout << sq.Area() << endl;
-  Shape* ps = &s;
-  cout << ps->Area() << endl;
-  ps = &sq;
-  cout << ps->Area() << endl;
-  A* pa;
-  pa = &sq;
+  Shape s; cout << s.Area() << endl;
+  Square sq(3); cout << sq.Area() << endl;
+  Shape* ps = &s; cout << ps->Area() << endl;
+  ps = &sq; cout << ps->Area() << endl;
+  A* pa; pa = &sq; pa -> say();
   // cout << pa -> Area() << endl; // Error
-  return 0;
 }
