@@ -555,7 +555,6 @@ Share code
 
 Mutual Exclusion Violation
 ================================
-
 .. class:: substep
 
 Share code
@@ -644,7 +643,6 @@ Trace Second Try
 #. :math:`P_0` 7
 #. :math:`P_1` 3
 #. :math:`P_1` 5
-#. *Mutual Exclusion Violation*
 
 .. class:: substep trace-code
 
@@ -821,6 +819,7 @@ need CS
 #. :math:`P_j` 2
 #. :math:`P_i` 3
 #. :math:`P_j` 3
+#. ∞
 
 ----
 
@@ -880,7 +879,7 @@ Software Soloution 2 processes
 
   // CS
 
-  need[j] = false ;
+  need[i] = false ;
 
 ----
 

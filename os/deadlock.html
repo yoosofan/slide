@@ -8,10 +8,16 @@
 <meta name="copyright"
 content="Copyright &#169; 2020 University of Kashan (Ahmad Yoosofan)" />
 <meta name="author" content="Ahmad Yoosofan" />
-<link rel="stylesheet" type="text/css" media="screen, projection, print" href="../../tools/Slidy2/styles/slidy.css" />
-<script src="../../tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript"></script>
-<link href="../../tools/yoosofan_slides.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" media="screen, projection, print" 
+  href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" /> 
+<!-- <link rel="stylesheet" type="text/css" media="screen, projection, print" href="../tools/Slidy2/styles/slidy.css" /> -->
+<script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js" 
+  charset="utf-8" type="text/javascript"></script> 
+<!--  <script src="../tools/Slidy2/scripts/slidy.js" charset="utf-8" type="text/javascript"></script> -->
+<link href="../tools/yoosofan_slides4slidy2.css" rel="stylesheet" type="text/css" />
 <link href="deadlock.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 <meta name="font-size-adjustment" content="-1" />
 <!-- <meta name="duration" content="5" /> -->
 </head>
@@ -1212,11 +1218,13 @@ resource type R<sub>j</sub>.</li>
 <ol class="incremental">
  <li>Initialize Work = Available.<br /> 
   <pre>
+    <code class="language-cpp">
      for i in range(0, n): 
        if Allocation[i] <> 0: 
          Finish[i] = false. 
        else: 
          Finish[i] = true.
+    </code>
   </pre>
  </li>
  <li> Find an index i such that<br />
@@ -1713,4 +1721,5 @@ state is restored
     </li>
   </ol>
 </div>
+<script>hljs.highlightAll();</script>
 </body> </html>

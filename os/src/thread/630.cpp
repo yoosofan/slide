@@ -11,5 +11,4 @@ int main(){
   thread t(f);
   cout << "In main" << endl;
   cout << "second in main" << endl;
-  return 0;
 }

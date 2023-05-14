@@ -13,5 +13,4 @@ int main(){
   cout << "In main" << endl;
   cout << "second in main" << endl;
   t.join();
-  return 0;
 }

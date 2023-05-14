@@ -1,6 +1,6 @@
 import threading
 def f1(j):
-  for i in range(5):
+  for i in range(500):
     print(j,"__",i,"__This is a test")
 
 if __name__ == "__main__":
@@ -10,7 +10,7 @@ if __name__ == "__main__":
   th1.start()
   #for i in range(10):  print('LLLLL__',i)
   th1.join()
-  for i in range(10):
+  for i in range(400):
     print("iii__",i)
   th2.start()
   th2.join()
