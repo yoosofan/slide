@@ -43,8 +43,7 @@ const complexCls& a,
 template<typename T> int search(
     T* a, T v, int n){
   for(int i=0; i < n; i++)
-    if(a[i] == v)
-      return i;
+    if(a[i] == v) return i;
   return -1;
 }
 int main(){

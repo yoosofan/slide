@@ -16,10 +16,8 @@ class complexCls{
   }
 template<typename Type> class array{
   static const int MAX = 200;
-  Type a[MAX];  int n;
+  Type a[MAX];  int n = 0;
 public:
-  array(int n = 20){this->n=n;}
-  ~array(){n=0;}
   void input(void){
     cout<<"Enter n: "; cin>>n;
     for(int i=0;i<n;i++){

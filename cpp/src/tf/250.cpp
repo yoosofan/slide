@@ -11,9 +11,8 @@ void sort(T a[],int n){
   for(i=0;i<n;i++)
     for(j=i+1;j<n;j++)
       if(a[i]>a[j]){
-         temp=a[i];
-         a[i]=a[j];
-         a[j]=temp;
+        swap(a[i], a[j]);
+        /* swap<T>(a[i], a[j]); temp=a[i]; a[i]=a[j]; a[j]=temp; */
        }
 }
 int main(){
@@ -25,8 +24,7 @@ int main(){
   cout<<"i= "<<i<<"\tj= "<<j<<endl;
   mySwap<int>(i,j);
   cout<<"i= "<<i<<"\tj= "<<j<<endl;
-  sort<double>(ae,6);
+  sort(ae,6);
   for(i=0;i<6;i++) cout<<ae[i]<<'\t';
   cout<<endl;
-  return 0;
 }

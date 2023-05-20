@@ -8,5 +8,4 @@ int main(){
   std::string s1="ali",s2="reza";
   swap2<std::string>(s1,s2);
   std::cout<<"s1:"<<s1<<"\ts2:"<<s2<<std::endl;
-  return 0;
 }

@@ -4,16 +4,16 @@ using namespace std;
 class complexCls{
   double re, im;
  public:
-  complexCls(double a=0, double b=0)
-  {re = a; im = b;}
+  complexCls(double a = 0, double b = 0){
+    re = a;
+    im = b;
+  }
 };
 template<typename Type> class array{
   static const int MAX = 200;
   Type a[MAX];  
-  int n;
+  int n = 0;
 public:
-  array(int n=20){this->n = n;}
-  ~array(){n = 0;}
   void input(void){
     cout<<"Enter n: ";
     cin >> n;

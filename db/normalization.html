@@ -24,6 +24,14 @@ cite {direction: ltr; unicode-bidi: embed;font-size: 0.7em  }
 /* Allow manual direction override by class directive and roles */
 .rtl { direction: rtl; }
 .ltr { direction: ltr; }
+.center {
+  margin: auto;
+  width: 50%;
+  /*border: 3px solid green;*/
+  padding: 10px;
+  text-align: center;
+}
+
 
 </style>
 <style type="text/css">
@@ -1347,6 +1355,30 @@ span.boxed, span.framebox {
 <td>مکانیک</td>
 <td>عباسیان</td>
 </tr>
+<tr><td>342</td>
+<td>کامپیوتر</td>
+<td>یوسفان</td>
+</tr>
+<tr><td>123</td>
+<td>هنر</td>
+<td>عرب بیگی</td>
+</tr>
+<tr><td>243</td>
+<td>مکانیک</td>
+<td>عباسیان</td>
+</tr>
+<tr><td>243</td>
+<td>کامپیوتر</td>
+<td>یوسفان</td>
+</tr>
+<tr><td>342</td>
+<td>هنر</td>
+<td>عرب بیگی</td>
+</tr>
+<tr><td>123</td>
+<td>مکانیک</td>
+<td>عباسیان</td>
+</tr>
 </tbody>
 </table>
 <p>یک مشکل مهم این جدول این است که در آن وابستگی مهم میان استاد راهنما و رشته نشان داده نشده است. روشن است که ساختار جدول‌ها بهتر است به گونه‌ای باشد که تا جایی که بشود بتواند شرایط واقعی را نشان دهد و وابستگی تابعی را نشان دهد.</p>
@@ -1366,11 +1398,29 @@ span.boxed, span.framebox {
 <tr><td>123</td>
 <td>یوسفان</td>
 </tr>
+<tr><td>123</td>
+<td>عرب بیگی</td>
+</tr>
+<tr><td>123</td>
+<td>عباسیان</td>
+</tr>
 <tr><td>243</td>
 <td>عرب بیگی</td>
 </tr>
+<tr><td>243</td>
+<td>یوسفان</td>
+</tr>
+<tr><td>243</td>
+<td>یوسفان</td>
+</tr>
 <tr><td>342</td>
 <td>عباسیان</td>
+</tr>
+<tr><td>342</td>
+<td>یوسفان</td>
+</tr>
+<tr><td>342</td>
+<td>عرب بیگی</td>
 </tr>
 </tbody>
 </table>
@@ -1406,9 +1456,8 @@ span.boxed, span.framebox {
 <h1>6&nbsp;&nbsp;&nbsp;نرمال سطح چهارم</h1>
 <table border="1" class="ltr docutils">
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr><td><div class="first last"><table border="1px" dir="ltr" style="margin: 2px; padding:2px;">
@@ -1484,7 +1533,6 @@ span.boxed, span.framebox {
     </tbody>
 </table>
 </div></td>
-<td>.</td>
 <td><table border="1" class="first last docutils">
 <colgroup>
 <col width="33%" />
@@ -1547,15 +1595,15 @@ span.boxed, span.framebox {
 <hr class="docutils" />
 <div class="section" id="multivalued-dependency">
 <h2>6.1&nbsp;&nbsp;&nbsp;multivalued dependency</h2>
-<p class="ltr">SSN →→ Book | Sport</p>
+<p>وابستگی چند مقداری</p>
+<p class="ltr center">SSN →→ Book | Sport</p>
 <!-- :
 
 database course fourth normal form multivalued -->
 <table border="1" class="ltr docutils">
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col width="50%" />
+<col width="50%" />
 </colgroup>
 <tbody valign="top">
 <tr><td><table border="1" class="first last docutils">
@@ -1614,7 +1662,7 @@ database course fourth normal form multivalued -->
 </tbody>
 </table>
 </td>
-<td><table border="1" class="first last docutils">
+<td><table border="1" class="first docutils">
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -1639,8 +1687,7 @@ database course fourth normal form multivalued -->
 </tr>
 </tbody>
 </table>
-</td>
-<td><table border="1" class="first last docutils">
+<table border="1" class="last docutils">
 <colgroup>
 <col width="50%" />
 <col width="50%" />
@@ -2242,7 +2289,7 @@ database course fourth normal form multivalued -->
 </tr>
 </tbody>
 </table>
-<p>حفظ وابستگی‌ها و کنار هم گذاشتن ویژگی‌هایی که به هم وابسته هستند.</p>
+<p>حفظ وابستگی‌ها و کنار هم گذاشتن ویژگی‌هایی که به هم وابسته هستند، اهمیت بالایی دارد.</p>
 <span class="target" id="book"><span id="sport"></span><span id="ssn"></span></span><!-- comments:
 
  rst2html normalization.rst normalization.html - -stylesheet=farsi.css,html4css1.css

@@ -39,5 +39,4 @@ int main(){
   string s1 = "ali", s2 = "reza";
   mySwap<string>(s1, s2);
   cout << "s1:" << s1 << "\ts2:" << s2 << endl;
-  return 0;
 }

@@ -28,13 +28,6 @@ template<typename T> class ArrayCls{
     for(int i=0; i<size; i++)     
       data[i]=a.data[i];
   }
-  ArrayCls(ArrayCls&& a){
-    data = a.data;
-    size = a.size;
-    a.data = nullptr;
-    a.size = 0;
-    cout<<"move constructor "<<endl;
-  }
   ArrayCls operator+(ArrayCls& a){
     if(size != a.size) 
       throw myException();
@@ -59,15 +52,6 @@ template<typename T> class ArrayCls{
     cout<<"regular assignment "<<endl;
     return *this;
   }
-  ArrayCls operator=(ArrayCls&& a){
-    delete[] data;
-    size = a.size;
-    data = a.data;
-    a.data = nullptr; 
-    a.size = 0;
-    cout<<"move assignment "<<endl;
-    return *this;
-  } 
   T & operator[](int index){
     if(index>=size || index < 0) throw myException();//"Index is out of range");
     return data[index];
@@ -151,28 +135,18 @@ int main(){
   for(int k=0;k<5;k++)cout<<t1[k]<<endl;
   complexCls t3[]={21,22,23,24,25,26} , t4[]= {1,2}, t5[]={3,4} ;
   ArrayCls<complexCls> a(t1,6), b(t2,6) , c(t3,6), d(t4,2), e(t5,2), f, g;
-  try{
-    f = a + b - c ;
-    f = a + b  ;
-    f = a + c  ;
-    f=a;
-    cout<<"after first assignment"<<endl;
-    g = e + f;
-    
-    f = a - e;
-    f = b - d;
-  }
-  catch(myException &ex1){ cout<<"exception"<<endl;}
-  catch(...){cout<<"unknown exception"<<endl;}
-  try{
-    a[1] = 12 ;
-    cout << a[1]<<endl;
-    a[2] = 8;
-    cout << a[0]<<endl;
-  }
-  catch(myException & ex1){cout<<"exception"<<endl;}
-  catch(...){cout<<"unknown exception"<<endl;}
+  f = a + b - c ;
+  f = a + b  ;
+  f = a + c  ;
+  f=a;
+  cout<<"after first assignment"<<endl;
+  g = e + f;
+  f = a - e;
+  f = b - d;
+  a[1] = 12 ;
+  cout << a[1]<<endl;
+  a[2] = 8;
+  cout << a[0]<<endl;
   ArrayCls<double> y=f1<double>(5);
   cout<<"after f1"<<endl;
-  return 0;
 }

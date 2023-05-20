@@ -11,7 +11,6 @@ int main(){
   string s2 = "Goodbye";
   swap(s1, s2);
   cout << "s1= " << s1 << "\ts2= " << s2 << endl;
-  return 0;
 }
 void swap(double& a, double& b){
   double temp = a;
