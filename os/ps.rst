@@ -17,6 +17,14 @@ https://yoosofan.github.io
 
 University of Kashan
 
+.. :
+
+  .. raw:: html
+
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+      <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+
 ----
 
 Sharing Resources
@@ -883,8 +891,6 @@ Software Soloution 2 processes
 
 ----
 
-:id: software-cs2processes-python-code-id
-
 Python Code
 ================
 .. include:: src/ps/software_soloution2processes.py
@@ -895,7 +901,7 @@ Python Code
 
 ----
 
-:id: software-cs-n-processes-i-id
+:class: t2c
 
 Software Soloution n processes(I)
 ========================================
@@ -911,18 +917,91 @@ Software Soloution n processes(I)
     // Each process
     number[i] = max(number, n)+1;
     for(j = (i+1) % n; j != i; j = (j+1) % n)
-      while((number[i] > number[j] && number[j] != 0)
+      while(number[i] > number[j] && number[j] != 0)
           ;
-
     /* Critical Section */
-
     number[i] = 0;
 
+.. class:: substep trace-code
+
+#. :math:`P_1` 2: Before assignment
+#. :math:`P_2` 2: Get the same number as P1
+#. :math:`P_2` 3, 4, 5, 6: in critical section
+#. :math:`P_1` 2: assign the number
+#. :math:`P_1` 3: given P2 is the only process
+#. :math:`P_1` 4: Number[1] == number[2] 
+#. :math:`P_1` 5: then break
+#. :math:`P_1` 6: in cs then mutual exclusion violation
+
+
+----
+
+:class: t2c
+
+Software Soloution n processes(II)
+========================================
+.. code:: cpp
+   :number-lines:
+
+    // Share section
+    int number[n] = {0};
+
+.. code:: cpp
+   :number-lines:
+
+    // Each process
+    number[i] = max(number, n)+1;
+    for(j = (i+1) % n; j != i; j = (j+1) % n)
+      while(number[i] >= number[j] && number[j] != 0)
+          ;
+    /* Critical Section */
+    number[i] = 0;
+
+.. class:: substep trace-code
+
+ 
+#. :math:`P_1` 2: Before assignment
+#. :math:`P_2` 2: Get the same number as P1
+#. :math:`P_1` 2: After assignment
+#. :math:`P_1` 3: Only for P2 with the same number
+#. :math:`P_1` 4: number[1] >= number[2] then wait
+#. :math:`P_2` 3: Only for P1 with the same number
+#. :math:`P_2` 4: number[2] >= number[1] then wait
+#. Unlimited wait or *Dead Lock*  ∞
+
+----
+
+:class: t2c
+
+Software Soloution n processes(III)
+========================================
+.. code:: cpp
+   :number-lines:
+
+    // Each process
+    number[i] = max(number, n)+1;
+    for(j = (i+1) % n; j != i; j = (j+1) % n)
+      while(number[i] >= number[j] 
+          && number[j] != 0 && i < j)
+          ;
+    /* Critical Section */
+    number[i] = 0;
+
+.. code:: cpp
+   :number-lines:
+
+    // Share section
+    int number[n]={0};
+
+.. class:: substep trace-code
+ 
+#. Test
+ 
 ----
 
 :id: software-cs-n-processes-ii-id
 
-Software Soloution n processes(II)
+Software Soloution n processes(III)
 ========================================
 .. code:: cpp
    :number-lines:
@@ -944,53 +1023,56 @@ Software Soloution n processes(II)
 
 ----
 
-:id: software-cs-n-processes-ii-trace-id
+:class: t2c
 
-.. code:: cpp
-   :number-lines:
+Software Soloution n processes(III)
+========================================
+.. container::
 
-    // Share section
-    int number[3] = {0};
+  .. code:: cpp
+     :number-lines:
 
-    // P0
-    t=max(number,3);
-    number[0]=t+1;
-    for(j=(0+1)%3;j!=0;j=(j+1)%3){
-      while((number[0]>number[j] && number[j]!=0)||
-            ((number[0]==number[j])&& 0<j))
-          ;
-    /* Critical Section */
-    number[0] = 0;
+      // Share section
+      int number[3] = {0};
 
-    // P1
-    t=max(number,3);
-    number[1]=t+1;
-    for(j=(1+1)%n;j!=1;j=(j+1)%n){
-      while((number[1]>number[j] && number[j]!=0)||
-            ((number[1]==number[j])&& 1<j))
-          ;
-    /* Critical Section */
-    number[1] = 0;
+  .. code:: cpp
+     :number-lines:
 
-    // P2
-    t=max(number,3);
-    number[2]=t+1;
-    for(j=(2+1)%3;j!=2;j=(j+1)%3){
-      while((number[2]>number[j] && number[j]!=0)||
-            ((number[2]==number[j])&& 2<j))
-          ;
-    /* Critical Section */
-    number[2] = 0;
+      // P0
+      t=max(number,3);
+      number[0]=t+1;
+      for(j=(0+1)%3;j!=0;j=(j+1)%3){
+        while((number[0]>number[j] && number[j]!=0)||
+              ((number[0]==number[j])&& 0<j))
+            ;
+      /* Critical Section */
+      number[0] = 0;
+
+  .. code:: cpp
+     :number-lines:
+
+      // P1
+      t=max(number,3);
+      number[1]=t+1;
+      for(j=(1+1)%n;j!=1;j=(j+1)%n){
+        while((number[1]>number[j] && number[j]!=0)||
+              ((number[1]==number[j])&& 1<j))
+            ;
+      /* Critical Section */
+      number[1] = 0;
 
 .. class:: substep trace-code
 
-#. P0-6 (number[0]==0)
-#. P1-16 (number[1]== 1)
-#. P2-24 (number[2]== 2)
-#. P1-19 (number[1] == 0)
-#. P2-26 (number[2] == 2)
-#. P0-8 (number[0] == 1)
-#. P0-10 (number[0] == 1)
+#. P0-2 (number[0]== 0)
+#. P1-2 (number[1]== 0)
+#. P0-3 (number[0]== 1)
+#. P0-4,5(all other number[j]==0)
+#. P0-6,7
+#. P0-8 (critical section)
+#. P1-3 (number[1] == 1)
+#. P1-4, 5 
+#. P1-6 ( i < j  , 1 < 0 ? )
+#. P1-7,8 (in critical section)
 #. **Mutual exclusion violation**
 
 ----
@@ -1340,77 +1422,55 @@ Semaphore(II - no busy waiting)
       public:
       void P(){
         s--;
-        if(s<0){
+        if(s < 0){
           q.add(OS_getMyProcessPID());
           OS_block_me(); 
-          // get cpu from me and do not add me to ready queue
         }
       }
       void V(void){
         s++;
-        if(s<=0){
-          int i=q.del(); // remove and return first element of queue
-          OS_wakeup_process(i); // add process number i (PID==i) to ready queue, so it can be run
+        if(s <= 0){
+          int i=q.del();
+          OS_wakeup_process(i);
         }
       }
       semaphore(int i=1){s=i;}
     };
 
-.. code:: cpp
-  :number-lines:
-
-    // Shared section
-    Semaphore mutex=1;
-
-    // Each process use the following structure for CS
-    void f(void){
-      mutex.P();
-
-      // CS
-
-      mutex.V();
-    }
-
-
 ----
+
+:class: t2c
 
 Sempahoce(III) extra functions
 ================================================
 .. code:: cpp
   :number-lines:
 
-    bool testAndSet(bool &target){
+    bool testAndSet(bool& target){
        bool rv=target;
        target=true;
        return rv;
     }
-    class myIntQueue {
-      private:
-        int bufferOfQueue[MAX_NUMBER_WAIT_PROCESS_FOR_A_SEMAPHORE];
-        int first,last;
+    class myIntQueue{
+        int bufferOfQueue[MAX];
+        int first, last;
       public:
         myIntQueue(){first=last=0;}
         int add(int i){
           bufferOfQueue[last]=i;
-          last=(last+1)%MAX_NUMBER_WAIT_PROCESS_FOR_A_SEMAPHORE ;
+          last=(last+1) % MAX;
           return i;
         }
         int del(void){
-          int i=bufferOfQueue[first];
-          first=(first+1)%MAX_NUMBER_WAIT_PROCESS_FOR_A_SEMAPHORE ;
+          int i = bufferOfQueue[first];
+          first = (first+1) % MAX;
           return i;
         }
     };
-    void OS_wakeup_process(int pid){} // add process number i (PID==i) to ready queue, so it can be run
-    void OS_block_me(void){} // get cpu from me and do not add me to ready queue
+    void OS_wakeup_process(int pid){}
+    void OS_block_me(void){}
     int OS_getMyProcessPID(void){return 1;}
 
-----
-
-:class: t2c
-
-Semaphore(III)
-===================
 .. code:: cpp
   :number-lines:
 
@@ -1439,24 +1499,9 @@ Semaphore(III)
       {s=i;lock=false;}
     };
 
-.. code:: cpp
-  :number-lines:
-
-    // Shared section
-    Semaphore mutex=1;
-
-
-    // Each process use the following structure for CS
-    mutex.P();
-
-    // Critical Section
-
-    mutex.V();
-
-    // Reminder Section
-
-
 ----
+
+:class: t2c
 
 Semaphore(IV) Simple Usage
 =============================
@@ -1469,14 +1514,18 @@ Semaphore(IV) Simple Usage
   // Pi
 
   mutex.P();
+
   //   Critical Section
+
   mutex.V()
+
+  //   Reminder Section
+
 
 .. code:: cpp
   :number-lines:
 
   semaphore sem_printer=1, sem_scanner=1;
-
 
   // Pi
 
@@ -1486,9 +1535,7 @@ Semaphore(IV) Simple Usage
 
   sem_printer.V();
 
-
   ....
-
 
   sem_scanner.P();
 
@@ -1496,6 +1543,52 @@ Semaphore(IV) Simple Usage
 
   sem_sanner.V();
 
+----
+
+:class: t2c
+
+Another Forms of Semaphore
+==============================
+.. code:: cpp
+
+    semaphore mutex = 1;
+    
+    // Each process
+    
+    void f1(void){
+      while(true){
+      
+        P(mutex);
+        
+        // Critical Section
+        
+        V(mutex);
+        
+        // Reminder Section
+        
+      }
+    }
+
+.. code:: cpp
+
+    semaphore mutex = 1;
+    
+    // Each process
+    
+    void f1(void){
+      while(true){
+      
+        wait(mutex);
+        
+        // Critical Section
+        
+        signal(mutex);
+        
+        // Reminder Section
+      
+      }
+    }
+      
 .. :
 
   https://en.cppreference.com/w/cpp/thread/counting_semaphore
@@ -1629,6 +1722,52 @@ Simple Deadlock
 
 ----
 
+:class: t2c
+
+Semaphore in Python
+====================
+.. code:: python
+  :number-lines:
+  
+  // Share part
+  full = Semaphore(0)
+
+  class MyShare:
+    n = 0
+
+.. code:: python
+  :number-lines:
+  
+  def f1(sh1):
+    i = 1
+    while i < 999999:
+      full.acquire() # full.P(); full.wait();
+      
+      sh1.n = i
+      i += 1
+      
+      full.release() # full.V(); full.signal();
+
+.
+
+.. code:: python
+  :number-lines:
+
+  if __name__ == "__main__":        
+    sh1 = MyShare()
+    th1=Thread(target=f1,args=(sh1,))
+    th2=Thread(target=f1,args=(sh1,))
+    th1.start()
+    th2.start()
+    th1.join()
+    th2.join()
+    print("counter ", sh1.n)
+
+
+----
+
+Producer consumer(I)
+=======================
 .. image:: img/ps/bounded-buffer-problem.webp
 
 .. :
@@ -1636,7 +1775,10 @@ Simple Deadlock
   https://www.studytonight.com/operating-system/bounded-buffer
   http://www.tutorialsspace.com/Operating-System/20-Interprocess-Communication-Producer-Consumer-Problem.aspx
 
+----
 
+Producer consumer(II)
+=======================
 .. list-table::
 
   * - .. code:: python
@@ -1661,11 +1803,8 @@ Simple Deadlock
             out = out +1
             consume(x,out)
 
-.. list-table::
-
   * - .. code:: python
-
-        from threading import *
+        :number-lines:
 
         class MyShare:
           counter = 0
@@ -1680,18 +1819,18 @@ Simple Deadlock
           print('consume ',x,i)
 
     - .. code:: python
+        :number-lines:
 
         if __name__ == "__main__":        
-
-          myShare = MyShare()
-          th1 = Thread(target=consumer,args=(myShare,))
-          th2 = Thread(target=producer,args=(myShare,))
+          sh1 = MyShare()
+          th1=Thread(target=consumer,args=(sh1,))
+          th2=Thread(target=producer,args=(sh1,))
           th1.start();
           th2.start();
           th1.join();
           th2.join()
-          for i in range(4):  print(myShare.buf[i])
-          print("counter ",myShare.counter)
+          for i in range(4): print(sh1.buf[i])
+          print("counter ", sh1.counter)
 
 ----
 
@@ -1725,7 +1864,7 @@ Unbounded Buffer
     out = 0
     x=0
     for i in range(5000):
-      full.acquire() # full.P(); full.wait();
+      full.acquire()
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = (out +1) % sh1.n

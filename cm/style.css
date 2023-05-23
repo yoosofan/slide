@@ -108,6 +108,13 @@ div.t2c > h1, div.t2c > .rtl-h1{
   background-color: #E6F4FA;
 }
 
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}
+
 div.yoo-grid-auto-flow-column{
   display: grid;
   gap: 2rem;

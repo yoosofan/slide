@@ -221,16 +221,6 @@ div#software-cs2processes-id > pre:nth-of-type(1){ grid-area: shcode; justify-se
 div#software-cs2processes-id > pre:nth-of-type(2){ grid-area: p0code;}
 div#software-cs2processes-id > pre:nth-of-type(3){ grid-area: p1code;}
 
-div#software-cs2processes-python-code-id {
-  display: grid;
-  grid-template-areas:
-    'h1 '
-    'p0code'
-    ;
-}
-div#software-cs2processes-python-code-id > h1:nth-of-type(1){ grid-area: h1;}
-div#software-cs2processes-python-code-id > pre:nth-of-type(1){ grid-area: p0code; justify-self: center;}
-
 div#software-cs-n-processes-ii-trace-id {
   display: grid;
   grid-template-areas:

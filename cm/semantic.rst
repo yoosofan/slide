@@ -1,12 +1,11 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: slide_style.css semantic.css
+:css: style.css semantic.css
 :substep: true
 :slide-numbers: true
 
 .. role:: raw-html(raw)
    :format: html
-
 
 ----
 
@@ -17,6 +16,12 @@ Ahmad Yoosofan
 Compiler course
 
 University of Kashan
+
+.. raw:: html
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
 
 .. :
 
@@ -41,45 +46,66 @@ University of Kashan
 
 ----
 
-:id: Ea-LR-parse-id
+:class: grid-2col-class
 
 #. E → E + a
 #. E → a
 
-..  csv-table:: 
+..  csv-table::
     :header: ` `, a, `+`, `$`, `E`
     :class: smallerelementwithfullborder
 
     0, s2, , , 1
-    1, , s3, acc, 
-    2, , r2, r2, 
+    1, , s3, acc,
+    2, , r2, r2,
     3, s4, , ,
-    4, , r1, r1, 
+    4, , r1, r1,
 
-..  csv-table:: 
+..  csv-table::
     :header: Stack, Input, Action
     :class: smallerelementwithfullborder yoosofantextalignleft
 
-    :math:`I_0`, 8+9$,
-    :math:`I_0` 8 :math:`I_2`, +9$, r2(E → a)
-    :math:`I_0` E(8) :math:`I_1`, +9$
-    :math:`I_0` E(8) :math:`I_1` + :math:`I_3`, 9$
-    :math:`I_0` E(8) :math:`I_1` + :math:`I_3` 9 :math:`I_4`, $, r1(E→E+a)
-    :math:`I_0` E(17) :math:`I_1`, $
+    :math:`I_0`, a[8]+a[9]$,
+    :math:`I_0` a[8] :math:`I_2`, +a[9]$, r2(E → a)
+    :math:`I_0` E[8] :math:`I_1`, +a[9]$
+    :math:`I_0` E[8] :math:`I_1` + :math:`I_3`, a[9]$
+    :math:`I_0` E[8] :math:`I_1` + :math:`I_3` a[9] :math:`I_4`, $, r1(E→E+a)
+    :math:`I_0` E[17] :math:`I_1`, $
     acc
 
-.. image:: img/semantic/Ea-LR-parse-id.png
+.. raw:: html
+
+    <div id="graph220"></div>
+    <script>
+    d3.select("#graph220").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "a" [ label = "E[17]" ];
+        "b" [ label = "E[8]" ];
+        "d" [ label = "+" ];
+        "c" [ label = "9" ];
+        "e" [ label = "8" ];
+
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
 
 .. :
 
-    :height: 128px
-    :width: 122px
+    https://stackoverflow.com/a/61416465/886607
+    https://stackoverflow.com/a/28863761/886607
 
 ----
 
-:id: Ea-LR-parse-semantic-id
+:class: grid-2col-class
 
-..  csv-table:: 
+..  csv-table::
     :header: ` `, Production, Semantic
     :class: smallerelementwithfullborder yoosofantextalignleft
 
@@ -87,51 +113,192 @@ University of Kashan
     2, "E → E + a", "E.val = :math:`E_1`.val + a"
 
 
-..  csv-table:: 
+..  csv-table::
     :header: ` `, a, `+`, `$`, `E`
     :class: smallerelementwithfullborder
 
     0, s2, , , 1
-    1, , s3, acc, 
-    2, , r2, r2, 
+    1, , s3, acc,
+    2, , r2, r2,
     3, s4, , ,
-    4, , r1, r1, 
+    4, , r1, r1,
 
-..  csv-table:: 
-    :header: Stack, Input, Action
+..  csv-table::
+    :header: n, Stack, Input, Action
     :class: smallerelementwithfullborder yoosofantextalignleft
 
-    :math:`I_0`, 8+9+2$,
-    :math:`I_0` 8 :math:`I_2`, +9+2$, r2(E → a)
-    :math:`I_0` E(8) :math:`I_1`, +9+2$,
-    :math:`I_0` E(8) :math:`I_1` + :math:`I_3`, 9+2$,
-    :math:`I_0` E(8) :math:`I_1` + :math:`I_3` 9 :math:`I_4`, +2$, r1(E→E+a)
-    :math:`I_0` E(17) :math:`I_1` + :math:`I_3`, 2$,
-    :math:`I_0` E(17) :math:`I_1` + :math:`I_3` 2 :math:`I_4`, $, r1(E→E+a)
-    :math:`I_0` E(19) :math:`I_1`, $,
-    acc
+    0, :math:`I_0`, a[8]+a[9]+a[2]$,
+    1, :math:`I_0` a[8] :math:`I_2`, +a[9]+a[2]$, r2(E → a)
+    2, :math:`I_0` E[8] :math:`I_1`, +a[9]+a[2]$,
+    3, :math:`I_0` E[8] :math:`I_1` + :math:`I_3`, a[9]+a[2]$,
+    4, :math:`I_0` E[8] :math:`I_1` + :math:`I_3` a[9] :math:`I_4`, +a[2]$, r1(E→E+a)
+    5, :math:`I_0` E[17] :math:`I_1`, +a[2]$,
+    6, :math:`I_0` E[17] :math:`I_1` + :math:`I_3`, a[2]$,
+    7, :math:`I_0` E[17] :math:`I_1` + :math:`I_3` a[2] :math:`I_4`, $, r1(E→E+a)
+    8, :math:`I_0` E[19] :math:`I_1`, $,
+    9, acc ,
 
-.. image:: img/semantic/Ea-LR-parse-id-semantic.png
-    :width: 340px
-    :height: 341px
+.. raw:: html
 
+    <div id="graph240"></div>
+    <script>
+    d3.select("#graph240").graphviz().renderDot(`
 
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "i" [ label = "E[19]" ];
+        "a" [ label = "E[17]" ];
+        "r" [ label = "+" ];
+        "p" [ label = "a[2]" ];
+        "b" [ label = "E[8]" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a[9]" ];
+        "e" [ label = "a[8]" ];
+
+        i -> a [dir="back"];
+        i -> r [dir="back"];
+        i -> p [dir="back"];
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
 
 ----
 
 Anotated parse tree
 ==========================
-.. image:: img/semantic/anotated_parse_tree.png
-    :align: center
+a[8]+a[9]+a[2]
+
+.. raw:: html
+
+    <div id="graph260"></div>
+    <script>
+    d3.select("#graph260").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "i" [ label = "E.val=19" ];
+        "a" [ label = "E.val=17" ];
+        "r" [ label = "+" ];
+        "p" [ label = "a.val=2" ];
+        "b" [ label = "E.val=8" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a.val=9" ];
+        "e" [ label = "a.val=8" ];
+
+        i -> a [dir="back"];
+        i -> r [dir="back"];
+        i -> p [dir="back"];
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
 
 ----
 
-.. image:: img/semantic/Anotated_parse_tree1.png
-    :align: center
+:class: t2c
+
+Dependency Graph
+=========================
+#. E → T + E
+#. E → T
+#. T → F * T
+#. T → F
+#. F → ( E )
+#. F → a
+
+.. raw:: html
+
+    <div id="graph280"></div>
+    <script>
+    d3.select("#graph280").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "i" [ label = "E.val=19" ];
+        "a" [ label = "E.val=17" ];
+        "r" [ label = "+" ];
+        "p" [ label = "a.val=2" ];
+        "b" [ label = "E.val=8" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a.val=9" ];
+        "e" [ label = "a.val=8" ];
+
+        i -> a [dir="back"];
+        i -> r [dir="back"];
+        i -> p [dir="back"];
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
+
+.. :
+
+  .. image:: img/semantic/Anotated_parse_tree1.png
+      :align: center
 
 ----
 
-:id: ply-calc220-id
+:class: t2c
+
+Syntax-Directed Definition
+=============================
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
+
+    S → E n, print(E.v)
+    E → :math:`E_1+T`, :math:`E.v=E_1.v + T.v`
+    E → T, :math:`E.v=T.v`
+    T → :math:`T_1*F.v`, :math:`T.v=T_1.v * F.v`
+    T → F, :math:`T.v=F.v`
+    F → ( E ), :math:`F.v=E.v`
+    F → a, :math:`F.v=a.lexval`
+
+.. raw:: html
+
+    <div id="graph300"></div>
+    <script>
+    d3.select("#graph300").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "i" [ label = "E.val=19" ];
+        "a" [ label = "E.val=17" ];
+        "r" [ label = "+" ];
+        "p" [ label = "a.val=2" ];
+        "b" [ label = "E.val=8" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a.val=9" ];
+        "e" [ label = "a.val=8" ];
+
+        i -> a [dir="back"];
+        i -> r [dir="back"];
+        i -> p [dir="back"];
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
+
+----
+
+:class: grid-2col-class
 
 .. include:: src/semantic/ply_calc220.py
     :code: python
@@ -147,7 +314,7 @@ Anotated parse tree
 
 ----
 
-:id: ply-calc220-2-id
+:class: grid-2col-class
 
 .. include:: src/semantic/ply_calc220.py
     :code: python
@@ -161,39 +328,92 @@ Anotated parse tree
     :start-line: 38
     :end-line: 58
 
-.. image:: img/semantic/anotated_parse_tree.png
-    :height: 300px
+.. :
+
+  .. image:: img/semantic/anotated_parse_tree.png
+      :height: 300px
 
 
 ----
 
-Syntax-Directed Definition
-=============================
-..  csv-table:: 
+:class: grid-2col-class
+
+.. include:: src/semantic/ply_calc220_code.py
+    :code: python
+    :number-lines:
+    :start-line: 19
+    :end-line: 50
+
+.. include:: src/semantic/ply_calc220_code.py
+    :code: python
+    :number-lines:
+    :start-line: 50
+    :end-line: 80
+
+----
+
+Inherited Attribute
+===========================
+..  csv-table::
     :header: Production, Semantic Rules
     :class: smallerelementwithfullborder yoosofantextalignleft center
+    :align: center
 
-    S → E n, print(E.val)
-    E → E1 + T, E.val = E1.val + T.val
-    E → T, E.val = T.val
-    T → T1 * F, T.val = T1.val * F.val
-    T → F, T.val = F.val
-    F → ( E ), F.val = E.val
-    F → digit, F.val = digit.lexval
+    "D → T L", "L.in = T.type"
+    "T → int", "T.type = integer"
+    "T → real", "T.type = real"
+    "L → L1, id", "L1.in = L.in,   addtype(id.entry,L.in)"
+    "L → id", "addtype(id.entry,L.in)"
+
+* int i
+* int a,b,c
+* real x,y
 
 ----
 
-Dependency Graph
-=========================
+real a, b, c
 
-.. image:: img/semantic/dependency_graph1.png
+.. image:: img/semantic/dependency_graph_for_declaration.png
     :align: center
 
 ----
 
-:id: etf-code-id
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-..  csv-table:: 
+    "L → E \\n", "print(val[top-1])"
+    "E → E1 + T", "val[ntop] = val[top-2] + val[top]"
+    "E → T",
+    "T → T1 * F", "val[ntop] = val[top-2] * val[top]"
+    "T → F",
+    "F → ( E )", "val[ntop] = val[top-1]"
+    "F → digit"
+
+----
+
+..  csv-table::
+    :header: ,Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
+
+    1, "A → B", "print(B.n0),  print(B.n1)"
+    2, "B → 0 B1", "B.n0=B1.n0+1,  B.n1=B1.n1"
+    3, "B → 1 B1", "B.n0=B1.n0,  B.n1=B1.n1+1"
+    4, "B → λ ", "B.n0=0,  B.n1=0"
+
+----
+
+.. image:: img/semantic/constructing_syntax_tree_for_simple.png
+    :align: center
+
+----
+
+.. image:: img/semantic/constructing_syntax_tree_for_simple_syntax_tree.png
+    :align: center
+
+----
+
+..  csv-table::
     :header: Production, Semantic Rules
     :class: smallerelementwithfullborder yoosofantextalignleft
 
@@ -225,91 +445,8 @@ Dependency Graph
 
 ----
 
-:id: ply-calc220-code-id
-
-.. include:: src/semantic/ply_calc220_code.py
-    :code: python
-    :number-lines:
-    :start-line: 19
-    :end-line: 50
-
-.. include:: src/semantic/ply_calc220_code.py
-    :code: python
-    :number-lines:
-    :start-line: 50
-    :end-line: 80
-
-----
-
-
-Inherited Attribute
-===========================
-
-..  csv-table:: 
-    :header: Production, Semantic Rules
-    :class: smallerelementwithfullborder yoosofantextalignleft center
-    :align: center
-
-    "D → T L", "L.in = T.type"
-    "T → int", "T.type = integer"
-    "T → real", "T.type = real"
-    "L → L1, id", "L1.in = L.in,   addtype(id.entry,L.in)"
-    "L → id", "addtype(id.entry,L.in)"
-
-* int i
-* int a,b,c
-* real x,y
-
-----
-
-Dependency Graph for declaration
-=====================================
-real a, b, c
-
-.. image:: img/semantic/dependency_graph_for_declaration.png
-    :align: center
-
-----
-
-..  csv-table:: 
-    :header: Production, Semantic Rules
-    :class: smallerelementwithfullborder yoosofantextalignleft center
-
-    "L → E \\n", "print(val[top-1])"
-    "E → E1 + T", "val[ntop] = val[top-2] + val[top]"
-    "E → T",
-    "T → T1 * F", "val[ntop] = val[top-2] * val[top]"
-    "T → F",
-    "F → ( E )", "val[ntop] = val[top-1]"
-    "F → digit"
-
-----
-
-
-..  csv-table:: 
-    :header: ,Production, Semantic Rules
-    :class: smallerelementwithfullborder yoosofantextalignleft center
-
-    1, "A → B", "print(B.n0),  print(B.n1)"
-    2, "B → 0 B1", "B.n0=B1.n0+1,  B.n1=B1.n1"
-    3, "B → 1 B1", "B.n0=B1.n0,  B.n1=B1.n1+1"
-    4, "B → λ	", "B.n0=0,  B.n1=0"
-
-----
-
-.. image:: img/semantic/constructing_syntax_tree_for_simple.png
-    :align: center
-
-----
-
-.. image:: img/semantic/constructing_syntax_tree_for_simple_syntax_tree.png
-    :align: center
-
-----
-
 Translation Scheme
 =========================
-
 * E → T R
 * R → + T { print(“+”) } R1
 * R → λ
@@ -317,11 +454,11 @@ Translation Scheme
 
 a+b+c
 
-E → T R → id(a){print(id.name)} R → R → + T  {print("+")} R1 → T  {print("+")} R1 
+E → T R → id(a){print(id.name)} R → R → + T  {print("+")} R1 → T  {print("+")} R1
 
 id(b){print(id.name)} {print("+")} R1 → {print("+")} R1 → R1 → + T {print("+")} R1
 
-→ T {print("+")} R1 → id(c){print(id.name)} {print("+")} R1 → {print("+")} R1 
+→ T {print("+")} R1 → id(c){print(id.name)} {print("+")} R1 → {print("+")} R1
 
 → R1 → λ
 
@@ -332,17 +469,17 @@ a b + c +
 
 .. :
 
-  ..  csv-table:: 
+  ..  csv-table::
       :header: ,Production, Semantic Rules
       :class: smallerelementwithfullborder yoosofantextalignleft center
 
       1, "T → F T ' ", "T '.inh = F.val ,  T.val = T '.syn"
       2, "T ' → * F :math:`T '_1` ", ":math:`T '_1`.inh = T '.inh * F.val,  T '.syn = :math:`T '_1`.syn"
       3, "T ' → λ", "T '.syn = T '.inh"
-      4, "F → id	", "F.val = id.name"
+      4, "F → id  ", "F.val = id.name"
 
     5 * 7 * 2
-    
+
 .. image:: img/semantic/sdd_top_down_expression.png
     :align: center
 
@@ -370,7 +507,6 @@ a b + c +
 
 Specification
 ======================
-
 .. class:: substep
 
   * attributes
@@ -382,7 +518,7 @@ Specification
   * may perform some other activities
   * in fact, they may perform almost any activities.
   * An attribute may hold almost any thing.
-  * a string, a number, a memory location, a complex record. 
+  * a string, a number, a memory location, a complex record.
   * inherited attribute
   * synthesized attribute
 
@@ -399,7 +535,7 @@ S-Attributed Definitions
 
 circular dependency
 ==============================
-..  csv-table:: 
+..  csv-table::
     :header: Production, Semantic Rules
     :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -418,7 +554,7 @@ Each attribute must be either
 
     1. Synthesized, or
     2. Inherited, but for every rule like :math:`A → X_1X_2 ... X_n` which contains an inherited attribute :math:`X_i.a`, the rule may use only:
-        
+
         * Inherited attributes associated with the head A.
         * attributes associated with the occurrences of symbols :math:`X_1, X_2 , . . . , X_{i-1}` is located to the left of :math:`X_i`.
 
@@ -428,7 +564,7 @@ Examples
 
 .. class:: substep
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production, Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -440,7 +576,7 @@ Examples
 
     .
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production, Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -456,7 +592,7 @@ Not L-Attributed
 
 .. class:: substep
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production, Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -464,7 +600,7 @@ Not L-Attributed
 
     .
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production, Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -479,7 +615,7 @@ Translation Scheme vs SDD
 
     SDD
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production, Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -491,7 +627,7 @@ Translation Scheme vs SDD
 
     Translation Scheme
 
-    ..  csv-table:: 
+    ..  csv-table::
         :header: Production and Semantic Rules
         :class: smallerelementwithfullborder yoosofantextalignleft center
 
@@ -500,7 +636,7 @@ Translation Scheme vs SDD
         R → λ {R.val = R.inh}
         F → ( E ) {F.val = E.val}
         F → digit {F.val = digit.lexval}
-    
+
 ----
 
 SDD for typesetting boxes
@@ -512,6 +648,31 @@ SDD for typesetting boxes
 
 End
 ===========
+
+.. raw:: html
+
+    <div id="graph88220"></div>
+    <script>
+    d3.select("#graph88220").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "a" [ label = "E.val = 9" ];
+        "b" [ label = "E.val = 5" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a.val = 4" ];
+        "e" [ label = "a.val = 5" ];
+
+        a -> { c d b } [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
+
+.. :
+
+    https://stackoverflow.com/a/29008563/886607
 
 ----
 
