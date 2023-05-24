@@ -336,22 +336,6 @@ Syntax-Directed Definition
 
 ----
 
-:class: grid-2col-class
-
-.. include:: src/semantic/ply_calc220_code.py
-    :code: python
-    :number-lines:
-    :start-line: 19
-    :end-line: 50
-
-.. include:: src/semantic/ply_calc220_code.py
-    :code: python
-    :number-lines:
-    :start-line: 50
-    :end-line: 80
-
-----
-
 Inherited Attribute
 ===========================
 ..  csv-table::
@@ -442,6 +426,22 @@ real a, b, c
 .. :
 
   ←
+
+----
+
+:class: grid-2col-class
+
+.. include:: src/semantic/ply_calc220_code.py
+    :code: python
+    :number-lines:
+    :start-line: 19
+    :end-line: 50
+
+.. include:: src/semantic/ply_calc220_code.py
+    :code: python
+    :number-lines:
+    :start-line: 50
+    :end-line: 80
 
 ----
 

@@ -1077,8 +1077,6 @@ Software Soloution n processes(III)
 
 ----
 
-:id: software-cs-n-processes-id
-
 Software Soloution n processes(III)
 ==========================================
 .. code:: cpp
@@ -1088,6 +1086,7 @@ Software Soloution n processes(III)
     bool choose[n]= {false};
 
 .. code:: cpp
+   :number-lines:
 
     choose[i]=true;
     number[i]=max(number,n)+1;
@@ -1102,8 +1101,6 @@ Software Soloution n processes(III)
     number[i] = 0;
 
 ----
-
-:id: hardware-cs-i-id
 
 Hardware Soloution(I)
 ==========================================
@@ -1123,6 +1120,11 @@ Hardware Soloution(I)
 
     // Share section
     bool lock=false;
+
+.. code:: cpp
+  :class: substep
+  :number-lines:
+
 
     // Each process
     while(testAndSet(lock))
@@ -1373,6 +1375,8 @@ Requirements for Solution
 
 ----
 
+:class: t2c
+
 Semaphore(I)
 ================
 .. code:: cpp
@@ -1394,23 +1398,33 @@ Semaphore(I)
       }
     }
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+.. container::
 
-    // Shared section
-    Semaphore mutex=1;
+  .. code:: cpp
+    :number-lines:
+    :class: substep
 
-    // Each process use the following structure for CS
-    void f(void){
-      mutex.P();
+      // Shared section
+      Semaphore mutex=1;
 
-      // CS
+  .. code:: cpp
+    :number-lines:
+    :class: substep
 
-      mutex.V();
-    }
+
+      // Each process use the following structure for CS
+      void f(void){
+        do{
+          mutex.P();
+            // CS
+          mutex.V();
+            // RS
+        }while(true);
+      }
 
 ----
+
+:class: t2c
 
 Semaphore(II - no busy waiting)
 ====================================
@@ -1423,19 +1437,42 @@ Semaphore(II - no busy waiting)
       void P(){
         s--;
         if(s < 0){
-          q.add(OS_getMyProcessPID());
-          OS_block_me(); 
+          q.add(getMyProcessPID());
+          blockMe(); 
         }
       }
       void V(void){
         s++;
         if(s <= 0){
-          int i=q.del();
-          OS_wakeup_process(i);
+          int i = q.del();
+          wakeupProcess(i);
         }
       }
       semaphore(int i=1){s=i;}
     };
+
+.. container::
+
+  .. code:: cpp
+    :number-lines:
+    :class: substep
+
+      // Shared section
+      Semaphore mutex=1;
+
+  .. code:: cpp
+    :number-lines:
+    :class: substep
+
+
+      void f(void){
+        do{
+          mutex.P();
+            // CS
+          mutex.V();
+            // RS
+        }while(true);
+      }
 
 ----
 
@@ -1446,30 +1483,28 @@ Sempahoce(III) extra functions
 .. code:: cpp
   :number-lines:
 
-    bool testAndSet(bool& target){
-       bool rv=target;
-       target=true;
-       return rv;
-    }
+    bool testAndSet(bool& target)
+    {bool rv=target;target=true;return rv;}
     class myIntQueue{
-        int bufferOfQueue[MAX];
-        int first, last;
+      static const int MAX = 1000;
+      int bufferOfQueue[MAX];
+      int first, last;
       public:
-        myIntQueue(){first=last=0;}
-        int add(int i){
-          bufferOfQueue[last]=i;
-          last=(last+1) % MAX;
-          return i;
-        }
-        int del(void){
-          int i = bufferOfQueue[first];
-          first = (first+1) % MAX;
-          return i;
-        }
+      myIntQueue(){first=last=0;}
+      int add(int i){
+        bufferOfQueue[last]=i;
+        last=(last+1) % MAX;
+        return i;
+      }
+      int del(void){
+        int i = bufferOfQueue[first];
+        first = (first+1) % MAX;
+        return i;
+      }
     };
-    void OS_wakeup_process(int pid){}
-    void OS_block_me(void){}
-    int OS_getMyProcessPID(void){return 1;}
+    void wakeupProcess(int pid){}
+    void blockMe(void){}
+    int getMyProcessPID(void);
 
 .. code:: cpp
   :number-lines:
@@ -1482,21 +1517,21 @@ Sempahoce(III) extra functions
       void P(){
         while(testAndSet(lock)) ;
         s--;
-        if(s<0){
-          q.add(OS_getMyProcessPID());
-          lock=false;
-          OS_block_me();
-        }else lock=false;
+        if(s < 0){
+          q.add(getMyProcessPID());
+          lock = false;
+          blockMe();
+        }else lock = false;
       }
       void V(void){
         while(testAndSet(lock)) ;
         s++;
-        if(s<=0)
-          OS_wakeup_process(q.del());
-        lock=false;
+        if(s <= 0)
+          wakeupProcess(q.del());
+        lock = false;
       }
       semaphore(int i)
-      {s=i;lock=false;}
+      {s = i;lock = false;}
     };
 
 ----
@@ -1588,7 +1623,14 @@ Another Forms of Semaphore
       
       }
     }
-      
+
+----
+
+Other Types of Semaphore
+============================
+#. Binary Semaphore
+#. Weak Semaphore
+
 .. :
 
   https://en.cppreference.com/w/cpp/thread/counting_semaphore
@@ -1675,7 +1717,6 @@ Another Forms of Semaphore
     g++ -std=c++20 -O2 -Wall -pedantic -pthread main.cpp && ./a.out
 
   https://coliru.stacked-crooked.com/
-
 
 ----
 
