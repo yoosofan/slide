@@ -645,7 +645,7 @@ Trace Second Try
 
 #. :math:`P_0` 1
 #. :math:`P_0` 3
-#. :math:`P_0` 5 
+#. :math:`P_0` 5
 #. :math:`P_1` 1
 #. :math:`P_1` 1
 #. :math:`P_0` 7
@@ -929,7 +929,7 @@ Software Soloution n processes(I)
 #. :math:`P_2` 3, 4, 5, 6: in critical section
 #. :math:`P_1` 2: assign the number
 #. :math:`P_1` 3: given P2 is the only process
-#. :math:`P_1` 4: Number[1] == number[2] 
+#. :math:`P_1` 4: Number[1] == number[2]
 #. :math:`P_1` 5: then break
 #. :math:`P_1` 6: in cs then mutual exclusion violation
 
@@ -959,7 +959,7 @@ Software Soloution n processes(II)
 
 .. class:: substep trace-code
 
- 
+
 #. :math:`P_1` 2: Before assignment
 #. :math:`P_2` 2: Get the same number as P1
 #. :math:`P_1` 2: After assignment
@@ -981,7 +981,7 @@ Software Soloution n processes(III)
     // Each process
     number[i] = max(number, n)+1;
     for(j = (i+1) % n; j != i; j = (j+1) % n)
-      while(number[i] >= number[j] 
+      while(number[i] >= number[j]
           && number[j] != 0 && i < j)
           ;
     /* Critical Section */
@@ -994,9 +994,9 @@ Software Soloution n processes(III)
     int number[n]={0};
 
 .. class:: substep trace-code
- 
+
 #. Test
- 
+
 ----
 
 :id: software-cs-n-processes-ii-id
@@ -1070,7 +1070,7 @@ Software Soloution n processes(III)
 #. P0-6,7
 #. P0-8 (critical section)
 #. P1-3 (number[1] == 1)
-#. P1-4, 5 
+#. P1-4, 5
 #. P1-6 ( i < j  , 1 < 0 ? )
 #. P1-7,8 (in critical section)
 #. **Mutual exclusion violation**
@@ -1438,7 +1438,7 @@ Semaphore(II - no busy waiting)
         s--;
         if(s < 0){
           q.add(getMyProcessPID());
-          blockMe(); 
+          blockMe();
         }
       }
       void V(void){
@@ -1510,8 +1510,8 @@ Sempahoce(III) extra functions
   :number-lines:
 
     class semaphore{
-      int s; 
-      myIntQueue q; 
+      int s;
+      myIntQueue q;
       bool lock;
       public:
       void P(void){
@@ -1605,18 +1605,18 @@ Another Forms of Semaphore
     :number-lines:
 
     // Each process
-    
+
     void f1(void){
       while(true){
-      
+
         P(mutex);
-        
+
         // Critical Section
-        
+
         V(mutex);
-        
+
         // Reminder Section
-        
+
       }
     }
 
@@ -1626,23 +1626,23 @@ Another Forms of Semaphore
     :number-lines:
 
       semaphore mutex = 1;
- 
+
   .. code:: cpp
      :number-lines:
-    
+
       // Each process
-      
+
       void f1(void){
         while(true){
-        
+
           wait(mutex);
-          
+
           // Critical Section
-          
+
           signal(mutex);
-          
+
           // Reminder Section
-        
+
         }
       }
 
@@ -1792,7 +1792,7 @@ Semaphore in Python
 ====================
 .. code:: python
   :number-lines:
-  
+
   // Share part
   full = Semaphore(0)
 
@@ -1801,15 +1801,15 @@ Semaphore in Python
 
 .. code:: python
   :number-lines:
-  
+
   def f1(sh1):
     i = 1
     while i < 999999:
       full.acquire() # full.P(); full.wait();
-      
+
       sh1.n = i
       i += 1
-      
+
       full.release() # full.V(); full.signal();
 
 .
@@ -1817,7 +1817,7 @@ Semaphore in Python
 .. code:: python
   :number-lines:
 
-  if __name__ == "__main__":        
+  if __name__ == "__main__":
     sh1 = MyShare()
     th1=Thread(target=f1,args=(sh1,))
     th2=Thread(target=f1,args=(sh1,))
@@ -1885,7 +1885,7 @@ Producer consumer(II)
     - .. code:: python
         :number-lines:
 
-        if __name__ == "__main__":        
+        if __name__ == "__main__":
           sh1 = MyShare()
           th1=Thread(target=consumer,args=(sh1,))
           th2=Thread(target=producer,args=(sh1,))
@@ -1904,14 +1904,14 @@ Unbounded Buffer(Wrong Answer)
 =================================
 .. code:: python
   :number-lines:
-  
+
   mutex = Semaphore(1)
 
 .
 
 .. code:: python
   :number-lines:
-  
+
   def producer(sh1):
     x = -1
     in1 = 0
@@ -1944,14 +1944,14 @@ Unbounded Buffer
 ==================
 .. code:: python
   :number-lines:
-  
+
   full = Semaphore(0)
 
 .
 
 .. code:: python
   :number-lines:
-  
+
   def producer(sh1):
     x = -1
     in1 = 0
@@ -1982,14 +1982,14 @@ Buffer(I)
 ==================
 .. code:: python
   :number-lines:
-  
+
   full = Semaphore(0)
 
 .
 
 .. code:: python
   :number-lines:
-  
+
   def producer(sh1):
     x = -1
     in1 = 0
@@ -2020,12 +2020,19 @@ Bounded Buffer(II)
 ==================
 .. code:: python
   :number-lines:
-  
+
+  class MyShare:
+    counter = 0
+    n = 100000
+    buf = [-1] * n
+
+.. code:: python
+  :number-lines:
+
+
   full = Semaphore(0)
 
-  empty= Semaphore(10)
-
-.
+  empty= Semaphore(MyShare.n)
 
 .. code:: python
   :number-lines:
@@ -2035,10 +2042,10 @@ Bounded Buffer(II)
     in1 = 0
     for i in range(5000):
       x = produce(x, in1)
-      empty.acquire() # empty.P();  empty.wait()
+      empty.acquire() # empty.P()
       sh1.buf[in1] = x
       in1 = (in1 + 1) % sh1.n
-      full.release(); # empty.V();  empty.signal()
+      full.release(); # empty.V()
 
 .. code:: python
   :number-lines:
@@ -2047,11 +2054,58 @@ Bounded Buffer(II)
     out = 0
     x=0
     for i in range(5000):
-      full.acquire() # full.P(); full.wait();
+      full.acquire() # full.P()
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = (out +1) % sh1.n
-      empty.release() # empty.V(); empty.signal();
+      empty.release() # empty.V()
+      consume(x,out)
+
+----
+
+:class: t2c
+
+Bounded Buffer(Any kind of Queue)
+==================================
+.. code:: python
+  :number-lines:
+
+  Q = Any kind of complex Queue
+  // with append and delete
+
+  full = Semaphore(0)
+
+  empty= Semaphore(10)
+
+  mutex = Semaphore(1)
+
+.
+
+.. code:: python
+  :number-lines:
+
+  def producer(sh1):
+    x = -1
+    for i in range(5000):
+      x = produce(x, in1)
+      empty.acquire() # empty.P()
+      mutex.acquire()
+      Q.append(x)
+      mutex.release()
+      in1 = (in1 + 1) % sh1.n
+      full.release(); # empty.V()
+
+.. code:: python
+  :number-lines:
+
+  def consumer(sh1):
+    x=0
+    for i in range(5000):
+      full.acquire() # full.P()
+      mutex.acquire()
+      x = Q.delete()
+      mutex.release()
+      empty.release() # empty.V()
       consume(x,out)
 
 ----
@@ -2076,6 +2130,54 @@ Producer consumer full
 
 :class: t2c
 
+Bounded Buffer(Percent Empty )
+======================================
+.. code:: python
+  :number-lines:
+
+  class MyShare:
+    counter = 0
+    n = 100000
+    buf = [-1] * n
+
+.. code:: python
+  :number-lines:
+
+  full = Semaphore(0)
+
+  empty= Semaphore(MyShare.n % 90)
+
+.. code:: python
+  :number-lines:
+
+  def producer(sh1):
+    x = -1
+    in1 = 0
+    for i in range(5000):
+      x = produce(x, in1)
+      empty.acquire() # empty.P()
+      sh1.buf[in1] = x
+      in1 = (in1 + 1) % sh1.n
+      full.release(); # empty.V()
+
+.. code:: python
+  :number-lines:
+
+  def consumer(sh1):
+    out = 0
+    x=0
+    for i in range(5000):
+      full.acquire() # full.P()
+      x = sh1.buf[out];
+      sh1.buf[out] = -1
+      out = (out +1) % sh1.n
+      empty.release() # empty.V()
+      consume(x,out)
+
+----
+
+:class: t2c
+
 Readers and Writers(I)
 ========================
 .. code:: cpp
@@ -2083,10 +2185,10 @@ Readers and Writers(I)
   :class: substep
 
   SharedObjectType sh1 = InitalValue;
-  
+
   void write(SharedObjectType a1)
   {sh1 = a1;}
-  
+
   SharedObjectType read(void)
   {return sh1;}
 
@@ -2098,7 +2200,8 @@ Readers and Writers(I)
 
   void writer(void){
     do{
-      write();
+      x = ProduceOrWhatever()
+      write(x);
       RemainingWork();
     }while(1);
   }
@@ -2109,7 +2212,8 @@ Readers and Writers(I)
 
   void reader(void){
     do{
-      read();
+      x = read()
+      consumeOrWhatever(x)
       RemainingWork();
     }while(1);
   }
@@ -2134,8 +2238,9 @@ Readers and Writers(II)
 
   void writer(void){
     do{
+      x = ProduceOrWhatever()
       wx.P();
-      write();
+      write(x);
       wx.V();
       RemainingWork();
     }while(1);
@@ -2148,8 +2253,9 @@ Readers and Writers(II)
   void reader(void){
     do{
       wx.P();
-      read();
+      x = read()
       wx.V();
+      consumeOrWhatever(x)
       RemainingWork();
     }while(1);
   }
@@ -2189,14 +2295,58 @@ Readers and Writers(III)
   void reader(void){
     do{
       if(read_count == 0)
-          wx.P();
+        wx.P();
       read_count ++;
       read();
       read_count --;
-      if( read_count == 0)
+      if(read_count == 0)
           wx.V();
       RemainingWork();
     }while(1);
+  }
+
+
+----
+
+:class: t2c
+
+Readers and Writers(IV)
+=========================
+.. container::
+
+  .. code:: cpp
+    :number-lines:
+    :class: substep
+
+    semaphore wrt = 1, mutex = 1;
+    int readCount = 0;
+
+  .. code:: cpp
+    :number-lines:
+    :class: substep
+
+    void writer(void){
+       wrt.P();
+       // writting perform in  share_variable;
+       wrt.V();
+    }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void readers(void){
+     mutex.P();
+     readCount++;
+     if(readCount==1)
+        wrt.P();
+     mutex.V();
+     // reading performed
+     mutex.P();
+     readCount--;
+     if(readCount==0)
+        wrt.V();
+     mutex.V();
   }
 
 ----
@@ -2230,16 +2380,168 @@ Dininig Philosophers(II)
       Rest();
     }
   }
-  
+
 .. code:: cpp
   :number-lines:
   :class: substep
 
   int main(){
-    cobegin{ 
+    cobegin{
       philosopher(0); philosopher(1);
-      philosopher(2); philosopher(3); 
+      philosopher(2); philosopher(3);
       philosopher(4);
+    }
+  }
+
+----
+
+Dininig Philosophers(III)
+==========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  // Shared Eating
+
+  void think(void){cout <<"Eating"<<endl;}
+  void eat(void){cout<<"thinking"<<endl;}
+  semaphore forks[5]={1,1,1,1,1};
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    while (1){
+      think();
+      forks[i].P();
+      forks[(i+1)%5].P();
+      eat();
+      forks[(i+1)%5].V();
+      forks[i].V();
+    }
+  }
+
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+
+  int main(){
+    cobegin{ philosopher(0);
+      philosopher(1); philosopher(2);
+      philosopher(3); philosopher(4);
+    }
+  }
+
+
+----
+
+Dininig Philosophers(IV)
+==========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  enum {thinking , hungry , eating }
+    state[5];
+
+  semaphore self[5]{0,0,0,0,0};
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void pickup(int i){
+    state[i] = hungry;
+    if(state[(i-1)%5] == eating ||
+        state[(i+1)%5 == eating)
+      self[i].P()
+    state[i] = eating;
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void putdown(int i){
+    if(state[(i-1)%5] == hungry &&
+        state[(i-2)%5 != eating )
+      self[(i-1)%5].V();
+    if(state[(i+1)%5] == hungry &&
+        state[(i+2)%5 != eating )
+      self[(i+1)%5].V();
+    state[i]=thinking;
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    do{
+      //thinking
+      pickup(i);
+      // eating
+      putdown(i);
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    for(int i=0; i<5; i++)
+      state[i]= thinking;
+    cobegin{ philosopher(0);
+      philosopher(1);philosopher(2);
+      philosopher(3);philosopher(4);
+    }
+  }
+
+
+----
+
+Dininig Philosophers(VI)
+==========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  // Shared Eating
+
+  void think(void){cout <<"Eating"<<endl;}
+  void eat(void){cout<<"thinking"<<endl;}
+  semaphore forks[5]={1,1,1,1,1};
+  semaphore numberOfPh = 4;
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    while (1){
+      think();
+      numberOfPh.P();
+      forks[i].P();
+      forks[(i+1)%5].P();
+      eat();
+      forks[(i+1)%5].V();
+      forks[i].V();
+      numberOfPh.V();
+    }
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    cobegin{ philosopher(0);
+      philosopher(1); philosopher(2);
+      philosopher(3); philosopher(4);
     }
   }
 
@@ -2247,6 +2549,8 @@ Dininig Philosophers(II)
 
 Monitor
 ==========
+
+----
 
 END
 =======
