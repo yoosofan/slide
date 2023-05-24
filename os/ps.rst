@@ -1502,8 +1502,8 @@ Sempahoce(III) extra functions
         return i;
       }
     };
-    void wakeupProcess(int pid){}
-    void blockMe(void){}
+    void wakeupProcess(int pid);
+    void blockMe(void);
     int getMyProcessPID(void);
 
 .. code:: cpp
@@ -1514,7 +1514,7 @@ Sempahoce(III) extra functions
       myIntQueue q; 
       bool lock;
       public:
-      void P(){
+      void P(void){
         while(testAndSet(lock)) ;
         s--;
         if(s < 0){
@@ -1540,43 +1540,53 @@ Sempahoce(III) extra functions
 
 Semaphore(IV) Simple Usage
 =============================
-.. code:: cpp
-  :number-lines:
+.. container::
 
-  // shared section
-  semaphore mutex=1;
+  .. code:: cpp
+    :number-lines:
 
-  // Pi
+    // shared section
+    semaphore mutex=1;
 
-  mutex.P();
+  .. code:: cpp
+    :number-lines:
 
-  //   Critical Section
+    // Pi
 
-  mutex.V()
+    mutex.P();
 
-  //   Reminder Section
+    //   Critical Section
+
+    mutex.V()
+
+    //   Reminder Section
 
 
-.. code:: cpp
-  :number-lines:
+.. container::
 
-  semaphore sem_printer=1, sem_scanner=1;
+  .. code:: cpp
+    :number-lines:
 
-  // Pi
+    semaphore sem_printer=1, sem_scanner=1;
 
-  sem_printer.P();
+  .. code:: cpp
+    :number-lines:
 
-  // work with printer
+    // Pi
 
-  sem_printer.V();
+    sem_printer.P();
 
-  ....
+    // work with printer
 
-  sem_scanner.P();
+    sem_printer.V();
 
-  // Work with scanner
+    ....
 
-  sem_sanner.V();
+    sem_scanner.P();
+
+    // Work with scanner
+
+    sem_sanner.V();
 
 ----
 
@@ -1584,10 +1594,16 @@ Semaphore(IV) Simple Usage
 
 Another Forms of Semaphore
 ==============================
-.. code:: cpp
+.. container::
+
+  .. code:: cpp
+    :number-lines:
 
     semaphore mutex = 1;
-    
+
+  .. code:: cpp
+    :number-lines:
+
     // Each process
     
     void f1(void){
@@ -1604,25 +1620,31 @@ Another Forms of Semaphore
       }
     }
 
-.. code:: cpp
+.. container::
 
-    semaphore mutex = 1;
+  .. code:: cpp
+    :number-lines:
+
+      semaphore mutex = 1;
+ 
+  .. code:: cpp
+     :number-lines:
     
-    // Each process
-    
-    void f1(void){
-      while(true){
+      // Each process
       
-        wait(mutex);
+      void f1(void){
+        while(true){
         
-        // Critical Section
+          wait(mutex);
+          
+          // Critical Section
+          
+          signal(mutex);
+          
+          // Reminder Section
         
-        signal(mutex);
-        
-        // Reminder Section
-      
+        }
       }
-    }
 
 ----
 
@@ -1630,6 +1652,7 @@ Other Types of Semaphore
 ============================
 #. Binary Semaphore
 #. Weak Semaphore
+#. Priority Semaphore
 
 .. :
 
@@ -1849,7 +1872,7 @@ Producer consumer(II)
 
         class MyShare:
           counter = 0
-          n = 10
+          n = 100000
           buf = [-1] * n
 
         def produce(x, i):
@@ -1877,6 +1900,46 @@ Producer consumer(II)
 
 :class: t2c
 
+Unbounded Buffer(Wrong Answer)
+=================================
+.. code:: python
+  :number-lines:
+  
+  mutex = Semaphore(1)
+
+.
+
+.. code:: python
+  :number-lines:
+  
+  def producer(sh1):
+    x = -1
+    in1 = 0
+    for i in range(5000):
+      mutex.acquire()
+      x = produce(x, in1)
+      sh1.buf[in1] = x
+      in1 = in1 + 1
+      mutex.release() # empty.V()
+
+.. code:: python
+  :number-lines:
+
+  def consumer(sh1):
+    out = 0
+    x=0
+    for i in range(5000):
+      mutex.acquire()
+      x = sh1.buf[out];
+      sh1.buf[out] = -1
+      out = out + 1
+      consume(x,out)
+      mutex.release()
+
+----
+
+:class: t2c
+
 Unbounded Buffer
 ==================
 .. code:: python
@@ -1895,8 +1958,8 @@ Unbounded Buffer
     for i in range(5000):
       x = produce(x, in1)
       sh1.buf[in1] = x
-      in1 = (in1 + 1) % sh1.n
-      full.release(); # empty.V();  empty.signal()
+      in1 = in1 + 1
+      full.release(); # full.V()
 
 .. code:: python
   :number-lines:
@@ -1905,7 +1968,45 @@ Unbounded Buffer
     out = 0
     x=0
     for i in range(5000):
-      full.acquire()
+      full.acquire() # full.P()
+      x = sh1.buf[out];
+      sh1.buf[out] = -1
+      out = out +1
+      consume(x,out)
+
+----
+
+:class: t2c
+
+Buffer(I)
+==================
+.. code:: python
+  :number-lines:
+  
+  full = Semaphore(0)
+
+.
+
+.. code:: python
+  :number-lines:
+  
+  def producer(sh1):
+    x = -1
+    in1 = 0
+    for i in range(5000):
+      x = produce(x, in1)
+      sh1.buf[in1] = x
+      in1 = (in1 + 1) % sh1.n
+      full.release(); # full.V()
+
+.. code:: python
+  :number-lines:
+
+  def consumer(sh1):
+    out = 0
+    x=0
+    for i in range(5000):
+      full.acquire() # full.V()
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = (out +1) % sh1.n
@@ -1915,7 +2016,7 @@ Unbounded Buffer
 
 :class: t2c
 
-Bounded Buffer
+Bounded Buffer(II)
 ==================
 .. code:: python
   :number-lines:
@@ -1973,9 +2074,179 @@ Producer consumer full
 
 ----
 
+:class: t2c
+
+Readers and Writers(I)
+========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  SharedObjectType sh1 = InitalValue;
+  
+  void write(SharedObjectType a1)
+  {sh1 = a1;}
+  
+  SharedObjectType read(void)
+  {return sh1;}
+
+.
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void writer(void){
+    do{
+      write();
+      RemainingWork();
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void reader(void){
+    do{
+      read();
+      RemainingWork();
+    }while(1);
+  }
+
+----
+
+:class: t2c
+
+Readers and Writers(II)
+========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  semaphore wx = 1;
+
+.
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void writer(void){
+    do{
+      wx.P();
+      write();
+      wx.V();
+      RemainingWork();
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void reader(void){
+    do{
+      wx.P();
+      read();
+      wx.V();
+      RemainingWork();
+    }while(1);
+  }
+
+----
+
+:class: t2c
+
+Readers and Writers(III)
+=========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  semaphore wx = 1;
+  int read_count = 0;
+
+.
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void writer(void){
+    do{
+      wx.P();
+      write();
+      wx.V();
+      RemainingWork();
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void reader(void){
+    do{
+      if(read_count == 0)
+          wx.P();
+      read_count ++;
+      read();
+      read_count --;
+      if( read_count == 0)
+          wx.V();
+      RemainingWork();
+    }while(1);
+  }
+
+----
+
+Dininig Philosophers(I)
+==========================
 .. image:: img/ps/An_illustration_of_the_dining_philosophers_problem_small_wikipedia.png
 
 ----
+
+Dininig Philosophers(II)
+==========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  //
+  // Shared Eating Objects
+  // Forks
+  // Food (Spagetti)
+  //
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    while (1){
+      think();
+      eat();
+      Rest();
+    }
+  }
+  
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    cobegin{ 
+      philosopher(0); philosopher(1);
+      philosopher(2); philosopher(3); 
+      philosopher(4);
+    }
+  }
+
+----
+
+Monitor
+==========
 
 END
 =======
@@ -2035,6 +2306,7 @@ END
       t1.join();
       t2.join();
     }
+
   C#
   ================
   https://developpaper.com/concurrent-programming-in-net-core/

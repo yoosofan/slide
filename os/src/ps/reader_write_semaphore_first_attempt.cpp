@@ -14,7 +14,7 @@ void writer(void){
     wx.P();
     write();
     wx.V();
-    ReminingWork();
+    RemainingWork();
   }while(1);
 }
 
@@ -23,7 +23,7 @@ void reader(void){
     wx.P();
     read();
     wx.V();
-    ReminingWork();
+    RemainingWork();
   }while(1);
 }
 
