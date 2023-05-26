@@ -1656,6 +1656,9 @@ Other Types of Semaphore
 
 .. :
 
+  https://ebrary.net/51306/computer_science/burst_fifo_mode_semaphores
+  https://cwiki.apache.org/confluence/display/NUTTX/Signaling+Semaphores+and+Priority+Inheritance
+
   https://en.cppreference.com/w/cpp/thread/counting_semaphore
 
   std::counting_semaphore, std::binary_semaphore
@@ -2357,6 +2360,8 @@ Dininig Philosophers(I)
 
 ----
 
+:class: t2c
+
 Dininig Philosophers(II)
 ==========================
 .. code:: cpp
@@ -2394,6 +2399,8 @@ Dininig Philosophers(II)
   }
 
 ----
+
+:class: t2c
 
 Dininig Philosophers(III)
 ==========================
@@ -2437,6 +2444,8 @@ Dininig Philosophers(III)
 
 
 ----
+
+:class: t2c
 
 Dininig Philosophers(IV)
 ==========================
@@ -2503,6 +2512,8 @@ Dininig Philosophers(IV)
 
 
 ----
+
+:class: t2c
 
 Dininig Philosophers(VI)
 ==========================
