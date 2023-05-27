@@ -9,8 +9,8 @@ class myException {
   string what(void){return message;}*/
 };
 template<typename T> class ArrayCls{
-  T* data;
-  int size;
+  T* data = nullptr;
+  int size = 0;
  public:
   ArrayCls() = default;
   ArrayCls(T* a, int sz){
@@ -123,7 +123,7 @@ ostream& operator<<(ostream &o,complexCls a){
   o<<"("<<a.r<<","<<a.i<<")";
   return o;
 }
-template<class T> ArrayCls<T> f1(int n){
+template<typename T> ArrayCls<T> f1(int n){
   ArrayCls<T> a(n);
   cout<<"in f1 "<<endl;
   return a;

@@ -209,7 +209,7 @@ DELETE
 
 :class: t2c
 
-A program
+A program(I)
 ============
 .. include:: src/python-sqlite/sp420_add.py
     :code: python
@@ -218,6 +218,12 @@ A program
     :start-line: 1
     :end-line: 26
 
+----
+
+:class: t2c
+
+A program(II)
+==============
 .. include:: src/python-sqlite/sp420_add.py
     :code: python
     :number-lines: 26

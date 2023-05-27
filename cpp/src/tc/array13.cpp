@@ -27,7 +27,10 @@ template<typename T> class Node{
 template<typename Type=string, 
   typename Index=int, int N=20> 
 class array{
-  Type *a;  int n, count; Index *ind;
+  Type* a = nullptr;  
+  int n = N, 
+  count = 0; 
+  Index *ind = nullptr;
 public:
   array(){
     this->n=N;
@@ -44,11 +47,11 @@ public:
     for(int i=0;i<count;i++)
       a[i]=m1.a[i] , ind[i]=m1.ind[i];
   }
-  array(array&& m1){
+  /*array(array&& m1){
     n=m1.n; a=m1.a; ind=m1.ind; 
     count=m1.count; m1.n=0;
     m1.a=nullptr;m1.ind=nullptr;
-  }
+  }*/
   Type& operator[](const Index& index){
     int i;
     for(i=0; i<count;i++)
@@ -56,14 +59,14 @@ public:
     if(i<n){ind[count]=index; return a[count++];}
     throw 1;
   }
-  template<class T,class I,int K>
-  friend ostream&operator<<(ostream&o1,array<T,I,K>);
   array operator=(const array&m1){
     n=m1.n;a=new Type[n]; ind=new Index[n]; count=m1.count;
     for(int i=0;i<count;i++)
       a[i]=m1.a[i] , ind[i]=m1.ind[i];
     return *this;
   }
+  template<class T,class I,int K>
+  friend ostream&operator<<(ostream&o1,array<T,I,K>);
 };
 template<class T,class I,int K>
 ostream&operator<<(ostream&o1,const array<T,I,K>m1){
@@ -71,12 +74,16 @@ ostream&operator<<(ostream&o1,const array<T,I,K>m1){
   for(int i=0;i<m1.count;i++)
     o1<<'['<<m1.ind[i]<<"]="<<m1.a[i]<<endl;
   return o1;
-} void f1(void){throw "dghdd";} 
-int main(){array<int,Node<int> >m1;
+} 
+
+void f1(void){throw "dghdd";} 
+int main(){
+  array<int, Node<int> >m1;
   int aa=12; Node<int> n1(&aa);
   m1[n1]=44;
   cout<<m1[n1]<<endl;
-  aa=4;m1[Node<int>(&aa)]=4;
+  aa=4;
+  m1[Node<int>(&aa)]=4;
   cout<<m1[Node<int>(new int(4))]<<endl;
   try{
     array<int,string,3> cm1; array<string,complexCls> am1;

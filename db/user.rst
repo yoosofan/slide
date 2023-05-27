@@ -371,8 +371,8 @@ Restore
 --------------
 .. code:: sh
 
-  psql dbname < backup.tar
-  psql pc < backup.tar
+  psql dbname < backup.sql
+  psql pc < backup.sql
 
 
 ----
@@ -452,6 +452,7 @@ Transaction(III)
   UPDATE accounts
      SET balance = balance + 1000
   WHERE account_no = 200;
+
   INSERT INTO account_changes(change_no, account_no,flag,amount,changed_at)
   VALUES(10, 100,'-',1000,datetime('now'));
    

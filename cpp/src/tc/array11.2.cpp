@@ -71,14 +71,25 @@ template<typename Type> class array{
       o1<<m1.a[i]<<endl;
     return o1;
   }
+  friend istream& operator>>(
+      istream&o1, array<Type>& m1){
+    cout << "Enter number of Elements: ";
+    o1 >> m1.n;
+    for(int i=0; i < m1.n; i++){
+      cout << "Enter a[" << i << "]: ";
+      o1 >> m1.a[i];
+    }
+    return o1;
+  }
 };
 int main(){
   array<int> m1, m2, m3; 
   array<double> dm; 
-  array<char> cm;  cout<<m1;
+  array<char> cm;
+  cin >> m1;
   m3=m2=m1;   cout<<m1;  //array<int> m4(m1);  array<int>m5=m1;
   m1=m2+m3; cout<<m1;
   m1=m1+m3; cout<<m1;
   m1=m1-m2; cout<<m1;
-  m1 +=m2;   /*cout<<m1;*/
+  m1 +=m2;   cout<<m1;
 }

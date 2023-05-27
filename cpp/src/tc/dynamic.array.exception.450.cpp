@@ -2,11 +2,15 @@
 #include <cstdlib>
 #include<cmath>
 #include<fstream>
-using namespace std;class myException {string message; public:
+using namespace std;
+
+class myException {
+  string message; 
+ public:
   myException(string msg){message = msg;}
   string what(void){return message;}
 };
-template <class T> class ArrayCls{
+template <typename T> class ArrayCls{
   T *data;
   int size;
  public:
