@@ -1217,23 +1217,18 @@ resource type R<sub>j</sub>.</li>
 <div class="slide"><br /><h1>Deadlock </h1><br /><br />
 <ol class="incremental">
  <li>Initialize Work = Available.<br /> 
-  <pre>
-    <code class="language-cpp">
+  <pre><code class="language-cpp">
      for i in range(0, n): 
-       if Allocation[i] <> 0: 
-         Finish[i] = false. 
-       else: 
-         Finish[i] = true.
-    </code>
-  </pre>
+       if Allocation[i] <> 0:  Finish[i] = false. 
+       else: Finish[i] = true.
+    </code></pre>
  </li>
- <li> Find an index i such that<br />
-        a. Finish[i] == false <br />
-        b. Request[i] ≤ Work <br />
+ <li> Find an index i such that: 
+        (a) Finish[i] == false 
+        (b) Request[i] ≤ Work <br />
        If no such i exists, go to step 4.
   </li>
-  <li>Work += Allocation[i]<br />
-      Finish[i] = true <br />
+  <li>Work += Allocation[i]  and Finish[i] = true <br />
       Go to step 2.
   <li>If Finish[i] == false for some i, 0 ≤ i &lt; n, then the system is in a deadlock
  </li>
@@ -1270,34 +1265,34 @@ resource type R<sub>j</sub>.</li>
 
 <!--src/deadlock/deadlock_detection_algorithm.py-->
 <div class="slide"><h1>Deadlock detection (Python code) </h1>
-<pre>
-N = 100 # number of Processes
-M = 200 # number of Resources
-Available = [0] * M # array(M)
-Allocation = [[0] * M] * N # array(N,M)
-Request = [[0] * M] * N # array(N,M)
-################################################
-finish  = [False] * N #array(N)
-work = Available.copy()
-flag = True
-for i in range(0, N):
-  if all(k == 0 for k in Allocation[i]):
-    finish[i] = True
-################################################
-while flag == True:
-  flag = False
-  for i in range(0, N):
-    if finish[i] == False and all(k<=m for k, m in zip(Request[i], work)):
-      finish[i] = True
-      work = [x+y for x, y in zip(work, Allocation[i])]
-      flag = True
-################################################
-deadlocked = [i for i in range(0, N) if finish[i] == False]
-if len(deadlocked) !=0:
-  print("The system is deadlocked")
-else:
-  print("The system is not deadlocked")
-</pre>
+<pre>     <code class="language-cpp">
+    N = 100 # number of Processes
+    M = 200 # number of Resources
+    Available = [0] * M # array(M)
+    Allocation = [[0] * M] * N # array(N,M)
+    Request = [[0] * M] * N # array(N,M)
+    ################################################
+    finish  = [False] * N #array(N)
+    work = Available.copy()
+    flag = True
+    for i in range(0, N):
+      if all(k == 0 for k in Allocation[i]):
+        finish[i] = True
+    ################################################
+    while flag == True:
+      flag = False
+      for i in range(0, N):
+        if finish[i] == False and all(k<=m for k, m in zip(Request[i], work)):
+          finish[i] = True
+          work = [x+y for x, y in zip(work, Allocation[i])]
+          flag = True
+    ################################################
+    deadlocked = [i for i in range(0, N) if finish[i] == False]
+    if len(deadlocked) !=0:
+      print("The system is deadlocked")
+    else:
+      print("The system is not deadlocked")
+</code></pre>
 </div>
 
 <div class="slide"><br /><h1>Recovery from Deadlock</h1><br />
@@ -1329,6 +1324,23 @@ else:
     </li></ol>
   </li>
 </ol>
+</div>
+
+<div class="slide">
+<h1>Other Considerations about Dead Lock Detection</h1>
+<ul class="incremental">
+  <li> When do we run Deadlock Detection Algorithm?</li>
+  <li>Types of Schedular:
+    <ol class="incremental">
+      <li> Long term Schedular</li>
+      <li> Mid term Schedular</li>
+      <li> Short term Schedular (CPU Schedular)</li>
+    </ol>
+  </li>
+  <li>This Algorithm is Time Consuming</li>
+  <li> All well-known Operating Systems does not use it</li>
+  <li>Deadlock Ignorance</li>
+</ul>
 </div>
 
 <div class="slide"><h1>Deadlock Avoidance(Banker's Algorithm) 1</h1>
