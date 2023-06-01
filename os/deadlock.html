@@ -38,7 +38,7 @@ content="Copyright &#169; 2020 University of Kashan (Ahmad Yoosofan)" />
   </h1></p><br />
   <p><h2>Deadlock</h2></p><br /><br /><br />
   <p><a href="http://yoosofan.github.io/">Ahmad Yoosofan</a></p>
-  <p> Spring 2022 </p>
+  <p> Spring 2023 </p>
   <p>University of Kashan </p>
   <p><a href="yoosofan@mail.com">yoosofan@mail.com</a></p>
 </div>
@@ -1512,7 +1512,7 @@ resource type R<sub>j</sub>.</li>
 <div class="slide"><br /><h1>Safety Algorithm</h1><br /><br />
   <ol class ="incremental">
     <li>Variables
-    <ul>
+    <ol>
       <li>
         int work[m] = Avaiable
       </li>
@@ -1522,14 +1522,14 @@ resource type R<sub>j</sub>.</li>
       <li>
         int Need[n][m] = MAX - Allocation
       </li>
-    </ul>
+    </ol>
   </li>
   <li>
     while exists i such that ( (Finish[i] == false) and  ( Need[i] &le; Work) )
-    <ul>
+    <ol>
       <li>Work = Work + Allocation[i] </li>
       <li>Finish[i] = true </li>
-    </ul>
+    </ol>
   <li>
     If Finish[i] ==true for all i, then the system is in a safe state.
   </li>
@@ -1558,14 +1558,11 @@ process P; by modifying the state as follows:
   </ul>
  </li>
   <li>
-If the resulting resource-allocation state is safe, the transaction is com-
-pleted, and process P; is allocated its resources. However, if the new state
-is unsafe, then P; must wait for Request;, and the old resource-allocation
-state is restored
-
+If the resulting resource-allocation state is safe, the transaction is completed, 
+and process P; is allocated its resources. However, if the new state
+is unsafe, then P; must wait for Request;, and the old resource-allocation state is restored
   </li>
   </ol>
-
 </div>
 
 <div class="slide">
