@@ -1,5 +1,0 @@
-Enter your choice.              Enter 0 for end
-Enter a>0: Enter a>0: **
-**
-Enter your choice.              Enter 0 for end
-Enter a>0: 
