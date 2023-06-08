@@ -2,16 +2,10 @@
 #include<iostream>
 #include<fstream>
 #include<cmath>
-//using namespace std;
-//struct point{int x,y;};
-///////
-//struct point{double x,y;};
-template<typename T>
-struct point{T x,y;};
-
+template<typename T> struct point{T x,y;};
 namespace K1{
-struct student{ char name[20]; char stdno[20];};
-double pow(double x, double y){return x+y;}
+  struct student{ char name[20]; char stdno[20];};
+  double pow(double x, double y){return std::pow(x,y);}
 };
 namespace A1{
 struct student{ char*name; char* stdno; double avg;};
@@ -50,8 +44,4 @@ int main(){
   f1.write((char*)&x,sizeof(x));
   f1.close();
   std::cout<<myClass::count<<std::endl;
-  return 0;
-}/*
-big indian
-little indian
-*/
+}

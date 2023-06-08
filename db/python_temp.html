@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
+<title>python_temp.rst</title>
+<style type="text/css">
+
+@media print{
+hr {page-break-after: always;}
+}
+</style>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<div class="section" id="database-application-python">
+<h1>Database - Application - python</h1>
+<p>Ahmad Yoosofan</p>
+<p>University of Kashan</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="simple-application-i">
+<h1>Simple Application(I)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from &quot;s&quot;;'</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">r1</span><span class="punctuation">)</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln"> 9 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<!-- :
+
+:start-line: 3
+:end-line: 18 -->
+</div>
+<hr class="docutils" />
+<div class="section" id="cursor-i">
+<h1>Cursor(I)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c1</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c2</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln"> 7 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c2</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span>
+<span class="ln"> 9 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'S'</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">11 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">12 </span>
+<span class="ln">13 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'P'</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r2</span><span class="punctuation">:</span>
+<span class="ln">15 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">16 </span>
+<span class="ln">17 </span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">18 </span><span class="name">c2</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">19 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<!-- :
+
+:start-line: 3
+:end-line: 18 -->
+</div>
+<hr class="docutils" />
+<div class="section" id="cursor-ii">
+<h1>Cursor(II)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span>
+<span class="ln"> 5 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln"> 6 </span>
+<span class="ln"> 7 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'S'</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln"> 9 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">10 </span>
+<span class="ln">11 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">12 </span>
+<span class="ln">13 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'P'</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r2</span><span class="punctuation">:</span>
+<span class="ln">15 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">16 </span>
+<span class="ln">17 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">18 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<!-- :
+
+:start-line: 3
+:end-line: 18 -->
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cursor-iii">
+<h1>Cursor(III)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln"> 6 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'r1: '</span><span class="punctuation">,</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">r1</span><span class="punctuation">))</span>
+<span class="ln"> 7 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'r2:'</span><span class="punctuation">,</span>  <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">r2</span><span class="punctuation">))</span>
+<span class="ln"> 8 </span><span class="name">r1</span> <span class="operator">=</span> <span class="punctuation">(</span> <span class="punctuation">(</span><span class="literal string single">'p4'</span><span class="punctuation">,</span> <span class="literal string single">'cog'</span><span class="punctuation">,</span> <span class="literal string single">'green'</span><span class="punctuation">,</span> <span class="literal number integer">13</span><span class="punctuation">),</span>
+<span class="ln"> 9 </span>        <span class="punctuation">(</span><span class="literal string single">'p8'</span><span class="punctuation">,</span> <span class="literal string single">'bolt'</span><span class="punctuation">,</span> <span class="literal string single">'red'</span><span class="punctuation">,</span> <span class="literal number integer">32</span><span class="punctuation">)</span>
+<span class="ln">10 </span>     <span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">r2</span> <span class="operator">=</span> <span class="punctuation">(</span> <span class="punctuation">(</span><span class="literal string single">'p15'</span><span class="punctuation">,</span> <span class="literal string single">'screw'</span><span class="punctuation">,</span> <span class="literal string single">'blue'</span><span class="punctuation">,</span> <span class="literal number integer">76</span><span class="punctuation">),</span>
+<span class="ln">12 </span>       <span class="punctuation">(</span> <span class="literal string single">'p45'</span><span class="punctuation">,</span> <span class="literal string single">'Nut'</span><span class="punctuation">,</span> <span class="literal string single">'Red'</span><span class="punctuation">,</span> <span class="literal number integer">27</span><span class="punctuation">)</span>
+<span class="ln">13 </span>     <span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'r1: '</span><span class="punctuation">,</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">r1</span><span class="punctuation">))</span>
+<span class="ln">15 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'r2:'</span><span class="punctuation">,</span>  <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">r2</span><span class="punctuation">))</span>
+<span class="ln">16 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'S'</span><span class="punctuation">)</span>
+<span class="ln">17 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln">18 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">19 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">20 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">21 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'P'</span><span class="punctuation">)</span>
+<span class="ln">22 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r2</span><span class="punctuation">:</span>
+<span class="ln">23 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">24 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">25 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<pre class="code console literal-block">
+<span class="ln"> 1 </span><span class="generic output">python3 sp260.py
+</span><span class="ln"> 2 </span><span class="generic output">
+</span><span class="ln"> 3 </span><span class="generic output">r1:  &lt;class 'sqlite3.Cursor'&gt;
+</span><span class="ln"> 4 </span><span class="generic output">r2: &lt;class 'sqlite3.Cursor'&gt;
+</span><span class="ln"> 5 </span><span class="generic output">r1:  &lt;class 'tuple'&gt;
+</span><span class="ln"> 6 </span><span class="generic output">r2: &lt;class 'tuple'&gt;
+</span><span class="ln"> 7 </span><span class="generic output">S
+</span><span class="ln"> 8 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P1', 'Nut', 'Red', 12, 'London')</span>
+<span class="ln"> 9 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P2', 'Bolt', 'Green', 17, 'Paris')</span>
+<span class="ln">10 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P3', 'Screw', 'Blue', 17, 'Oslo')</span>
+<span class="ln">11 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P4', 'Screw', 'Red', 14, 'London')</span>
+<span class="ln">12 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P5', 'Cam', 'Blue', 12, 'Paris')</span>
+<span class="ln">13 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P6', 'Cog', 'Red', 19, 'London')</span>
+<span class="ln">14 </span><span class="generic output">P</span>
+</pre>
+<!-- :
+
+:start-line: 3
+:end-line: 18 -->
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traverse-fields">
+<h1>Traverse Fields</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c1</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c2</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln"> 7 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c2</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span>
+<span class="ln"> 9 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'S'</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">11 </span>  <span class="keyword">for</span> <span class="name">k1</span> <span class="operator word">in</span> <span class="name">m1</span><span class="punctuation">:</span>
+<span class="ln">12 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">k1</span><span class="punctuation">,</span> <span class="name">end</span><span class="operator">=</span><span class="literal string double">&quot; ;  &quot;</span><span class="punctuation">)</span>
+<span class="ln">13 </span>  <span class="name builtin">print</span><span class="punctuation">();</span>
+<span class="ln">14 </span>
+<span class="ln">15 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'P'</span><span class="punctuation">)</span>
+<span class="ln">16 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r2</span><span class="punctuation">:</span>
+<span class="ln">17 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">18 </span>
+<span class="ln">19 </span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">c2</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">21 </span>
+<span class="ln">22 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<pre class="code console literal-block">
+<span class="ln"> 1 </span><span class="generic output">python3 sp280.py
+</span><span class="ln"> 2 </span><span class="generic output">
+</span><span class="ln"> 3 </span><span class="generic output">S
+</span><span class="ln"> 4 </span><span class="generic output">S1 ;  Smith ;  20 ;  London ;
+</span><span class="ln"> 5 </span><span class="generic output">S2 ;  Jones ;  10 ;  Paris ;
+</span><span class="ln"> 6 </span><span class="generic output">S3 ;  Blake ;  30 ;  Paris ;
+</span><span class="ln"> 7 </span><span class="generic output">S4 ;  Clark ;  20 ;  London ;
+</span><span class="ln"> 8 </span><span class="generic output">S5 ;  Adams ;  30 ;  Athens ;
+</span><span class="ln"> 9 </span><span class="generic output">S6 ;  Ali ;  40 ;  کاشان ;
+</span><span class="ln">10 </span><span class="generic output">P
+</span><span class="ln">11 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P1', 'Nut', 'Red', 12, 'London')</span>
+<span class="ln">12 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P2', 'Bolt', 'Green', 17, 'Paris')</span>
+<span class="ln">13 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P3', 'Screw', 'Blue', 17, 'Oslo')</span>
+<span class="ln">14 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P4', 'Screw', 'Red', 14, 'London')</span>
+<span class="ln">15 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P5', 'Cam', 'Blue', 12, 'Paris')</span>
+<span class="ln">16 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P6', 'Cog', 'Red', 19, 'London')</span>
+<span class="ln">17 </span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fetch">
+<h1>Fetch</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c1</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c2</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from s;'</span><span class="punctuation">)</span>
+<span class="ln"> 7 </span><span class="name">r2</span> <span class="operator">=</span> <span class="name">c2</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span>
+<span class="ln"> 9 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'S'</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">11 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">12 </span>
+<span class="ln">13 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'P'</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c2</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span>
+<span class="ln">15 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c2</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span>
+<span class="ln">16 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">r2</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span>
+<span class="ln">17 </span>
+<span class="ln">18 </span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">19 </span><span class="name">c2</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<pre class="code console literal-block">
+<span class="ln"> 1 </span><span class="generic output">python3 sp280.py
+</span><span class="ln"> 2 </span><span class="generic output">
+</span><span class="ln"> 3 </span><span class="generic output">S
+</span><span class="ln"> 4 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S1', 'Smith', 20, 'London')</span>
+<span class="ln"> 5 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S2', 'Jones', 10, 'Paris')</span>
+<span class="ln"> 6 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S3', 'Blake', 30, 'Paris')</span>
+<span class="ln"> 7 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S4', 'Clark', 20, 'London')</span>
+<span class="ln"> 8 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S5', 'Adams', 30, 'Athens')</span>
+<span class="ln"> 9 </span><span class="generic output"></span><span class="generic prompt virtualenv">('S6', 'Ali', 40, 'کاشان')</span>
+<span class="ln">10 </span><span class="generic output">P
+</span><span class="ln">11 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P1', 'Nut', 'Red', 12, 'London')</span>
+<span class="ln">12 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P2', 'Bolt', 'Green', 17, 'Paris')</span>
+<span class="ln">13 </span><span class="generic output"></span><span class="generic prompt virtualenv">('P3', 'Screw', 'Blue', 17, 'Oslo')</span>
+<span class="ln">14 </span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="manipulate-tables-i">
+<h1>Manipulate Tables(I)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln"> 5 </span><span class="literal string single">  insert into p(pn, pname, color, weight, city)
+</span><span class="ln"> 6 </span><span class="literal string single">  values('p19','Nut'  ,'Red'  ,12.0,'London')
+</span><span class="ln"> 7 </span><span class="literal string single">  ;
+</span><span class="ln"> 8 </span><span class="literal string single"> '''</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">11 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">12 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'before commit'</span><span class="punctuation">)</span>
+<span class="ln">13 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">14 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'after commit'</span><span class="punctuation">)</span>
+<span class="ln">15 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">16 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">17 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">18 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">19 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="manipulate-tables-ii">
+<h1>Manipulate Tables(II)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c1</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c2</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln"> 6 </span><span class="literal string single">  insert into p(pn, pname, color, weight, city)
+</span><span class="ln"> 7 </span><span class="literal string single">  values('p20','Nut'  ,'Red'  ,12.0,'London')
+</span><span class="ln"> 8 </span><span class="literal string single">  ;
+</span><span class="ln"> 9 </span><span class="literal string single"> '''</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c2</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">12 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">13 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'before commit'</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">15 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'after commit'</span><span class="punctuation">)</span>
+<span class="ln">16 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c2</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">17 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">18 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">19 </span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">c2</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">21 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="two-connection">
+<h1>Two Connection</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">conn1</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">c1</span> <span class="operator">=</span> <span class="name">conn1</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 6 </span><span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln"> 7 </span><span class="literal string single">  insert into p(pn, pname, color, weight, city)
+</span><span class="ln"> 8 </span><span class="literal string single">  values('p22','Nut'  ,'Red'  ,12.0,'London')
+</span><span class="ln"> 9 </span><span class="literal string single">  ;
+</span><span class="ln">10 </span><span class="literal string single"> '''</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">12 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">13 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'before commit'</span><span class="punctuation">)</span>
+<span class="ln">15 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">16 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'after commit'</span><span class="punctuation">)</span>
+<span class="ln">17 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln">18 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln">19 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln">20 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">21 </span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">22 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<!-- :
+
+:start-line: 3
+:end-line: 18 -->
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="delete">
+<h1>DELETE</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">sqlite3</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''delete from p where pn='p19';'''</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln"> 6 </span><span class="name">r1</span> <span class="operator">=</span> <span class="name">c1</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'select * from p;'</span><span class="punctuation">)</span>
+<span class="ln"> 7 </span><span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">r1</span><span class="punctuation">:</span>
+<span class="ln"> 8 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">10 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="a-program-i">
+<h1>A program(I)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword">def</span> <span class="name function">createTable</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">):</span>
+<span class="ln"> 2 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln"> 3 </span><span class="literal string single">    CREATE TABLE IF NOT EXISTS stocks (
+</span><span class="ln"> 4 </span><span class="literal string single">    date1 char(10),
+</span><span class="ln"> 5 </span><span class="literal string single">    trans char(15),
+</span><span class="ln"> 6 </span><span class="literal string single">    symbol char(10),
+</span><span class="ln"> 7 </span><span class="literal string single">    qty numeric(8,2),
+</span><span class="ln"> 8 </span><span class="literal string single">    price numeric(8,2),
+</span><span class="ln"> 9 </span><span class="literal string single">    primary key(date1)
+</span><span class="ln">10 </span><span class="literal string single">  );
+</span><span class="ln">11 </span><span class="literal string single">  '''</span><span class="punctuation">)</span>
+<span class="ln">12 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln">13 </span><span class="literal string single">    INSERT INTO stocks VALUES (
+</span><span class="ln">14 </span><span class="literal string single">      '2006-01-05'
+</span><span class="ln">15 </span><span class="literal string single">      ,'BUY', 'RHAT', 100, 35.14
+</span><span class="ln">16 </span><span class="literal string single">    );
+</span><span class="ln">17 </span><span class="literal string single">  '''</span><span class="punctuation">)</span>
+<span class="ln">18 </span>
+<span class="ln">19 </span><span class="keyword">def</span> <span class="name function">test2</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">):</span>
+<span class="ln">20 </span>  <span class="name">t</span> <span class="operator">=</span> <span class="punctuation">(</span><span class="literal string single">'RAT'</span><span class="punctuation">,)</span>
+<span class="ln">21 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln">22 </span><span class="literal string single">    SELECT *
+</span><span class="ln">23 </span><span class="literal string single">    FROM stocks
+</span><span class="ln">24 </span><span class="literal string single">    WHERE symbol=?
+</span><span class="ln">25 </span><span class="literal string single">  '''</span><span class="punctuation">,</span> <span class="name">t</span><span class="punctuation">)</span>
+</pre>
+<hr class="docutils" />
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">class:</th><td class="field-body">t2c</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="a-program-ii">
+<h1>A program(II)</h1>
+<pre class="code python ltr literal-block">
+<span class="ln">26 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span>
+<span class="ln">27 </span>  <span class="name">purchases</span> <span class="operator">=</span> <span class="punctuation">[</span>
+<span class="ln">28 </span>    <span class="punctuation">(</span><span class="literal string single">'2006-03-28'</span><span class="punctuation">,</span> <span class="literal string single">'BUY'</span><span class="punctuation">,</span> <span class="literal string single">'IBM'</span><span class="punctuation">,</span> <span class="literal number integer">1000</span><span class="punctuation">,</span> <span class="literal number float">45.00</span><span class="punctuation">),</span>
+<span class="ln">29 </span>    <span class="punctuation">(</span><span class="literal string single">'2006-04-05'</span><span class="punctuation">,</span> <span class="literal string single">'BUY'</span><span class="punctuation">,</span> <span class="literal string single">'MSFT'</span><span class="punctuation">,</span> <span class="literal number integer">1000</span><span class="punctuation">,</span> <span class="literal number float">72.00</span><span class="punctuation">),</span>
+<span class="ln">30 </span>    <span class="punctuation">(</span><span class="literal string single">'2006-04-06'</span><span class="punctuation">,</span> <span class="literal string single">'SELL'</span><span class="punctuation">,</span> <span class="literal string single">'IBM'</span><span class="punctuation">,</span> <span class="literal number integer">500</span><span class="punctuation">,</span> <span class="literal number float">53.00</span><span class="punctuation">),</span>
+<span class="ln">31 </span>  <span class="punctuation">]</span>
+<span class="ln">32 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">executemany</span><span class="punctuation">(</span><span class="literal string single">'INSERT INTO stocks VALUES (?,?,?,?,?)'</span><span class="punctuation">,</span> <span class="name">purchases</span><span class="punctuation">)</span>
+<span class="ln">33 </span><span class="keyword">def</span> <span class="name function">testDelete</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">):</span>
+<span class="ln">34 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;DELETE FROM stocks WHERE symbol='IBM';&quot;</span><span class="punctuation">)</span>
+<span class="ln">35 </span>  <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from stocks&quot;</span><span class="punctuation">);</span>
+<span class="ln">36 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;آخرین خروچی‌های&quot;</span><span class="punctuation">);</span>
+<span class="ln">37 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span>
+<span class="ln">38 </span>
+<span class="ln">39 </span><span class="keyword">def</span> <span class="name function">testFor</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">):</span>
+<span class="ln">40 </span>  <span class="keyword">for</span> <span class="name">row</span> <span class="operator word">in</span> <span class="name">c</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'SELECT * FROM stocks ORDER BY price'</span><span class="punctuation">):</span>
+<span class="ln">41 </span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">row</span><span class="punctuation">)</span>
+<span class="ln">42 </span>
+<span class="ln">43 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'example.db'</span><span class="punctuation">)</span>
+<span class="ln">44 </span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln">45 </span><span class="comment single">#createTable(c)</span>
+<span class="ln">46 </span><span class="comment single">#test2(c)</span>
+<span class="ln">47 </span><span class="name">testDelete</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">)</span>
+<span class="ln">48 </span><span class="comment single">#testFor(c)</span>
+<span class="ln">49 </span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">();</span> <span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span> <span class="comment single">#os.system('rm example.db')</span>
+</pre>
+<!-- :
+
+:start-line:
+:end-line: 18 -->
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>        <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span> <span class="name">host</span> <span class="operator">=</span> <span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln"> 9 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>         <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span> <span class="name">host</span> <span class="operator">=</span> <span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">'[ '</span><span class="punctuation">,</span> <span class="name">end</span> <span class="operator">=</span> <span class="literal string single">''</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span>  <span class="keyword">for</span> <span class="name">m1</span> <span class="operator word">in</span> <span class="name">a</span><span class="punctuation">:</span>
+<span class="ln"> 9 </span>    <span class="keyword">if</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span> <span class="operator word">is</span> <span class="name builtin">str</span><span class="punctuation">:</span>
+<span class="ln">10 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="operator">.</span><span class="name">strip</span><span class="punctuation">(),</span> <span class="name">end</span><span class="operator">=</span><span class="literal string single">', '</span><span class="punctuation">)</span>
+<span class="ln">11 </span>    <span class="keyword">else</span><span class="punctuation">:</span>
+<span class="ln">12 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">,</span> <span class="name">end</span><span class="operator">=</span><span class="literal string single">', '</span><span class="punctuation">)</span>
+<span class="ln">13 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">']'</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">15 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>         <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="comment single">#cur.execute(&quot;select * from a1;&quot;);</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;create table a1(
+</span><span class="ln"> 7 </span><span class="literal string double">                    mn int primary key,
+</span><span class="ln"> 8 </span><span class="literal string double">                    st char(20)
+</span><span class="ln"> 9 </span><span class="literal string double">                );
+</span><span class="ln">10 </span><span class="literal string double">            &quot;&quot;&quot;</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">12 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">13 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>         <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="comment single">#cur.execute(&quot;select * from a1;&quot;);</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;CREATE TABLE IF NOT EXISTS &quot;a1&quot;(
+</span><span class="ln"> 7 </span><span class="literal string double">                    &quot;mn&quot; INTEGER PRIMARY KEY,
+</span><span class="ln"> 8 </span><span class="literal string double">                    &quot;st&quot; VARCHAR(20)
+</span><span class="ln"> 9 </span><span class="literal string double">                );
+</span><span class="ln">10 </span><span class="literal string double">            &quot;&quot;&quot;</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">12 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">13 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>         <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;ALTER TABLE &quot;a1&quot; ADD &quot;status&quot; INTEGER;&quot;&quot;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 7 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;SELECT * FROM &quot;a1&quot;;&quot;&quot;&quot;</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln"> 9 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>        <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;1234&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 7 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 8 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">10 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>          <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;SELECT * FROM &quot;s&quot;;&quot;&quot;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln"> 9 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">10 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">11 </span>
+<span class="ln">12 </span><span class="comment single"># psql --username=postgres --dbname=sp  --host=127.0.0.1  --password</span>
+<span class="ln">13 </span><span class="comment single"># INSERT INTO &quot;p&quot;(&quot;pn&quot;, &quot;pname&quot;, &quot;color&quot;, &quot;weight&quot;, &quot;city&quot;) VALUES('p7','Bolt', 'Green', 12.1, 'Shiraz');</span>
+<span class="ln">14 </span>
+<span class="ln">15 </span><span class="comment single"># with psk as (select city from p natural join s)</span>
+<span class="ln">16 </span><span class="comment single"># select * from psk;</span>
+<span class="ln">17 </span><span class="comment single"># CREATE OR REPLACE VIEW &quot;psk&quot; (&quot;city&quot;) AS SELECT DISTINCT &quot;p&quot;.&quot;city&quot; FROM &quot;s&quot; JOIN &quot;p&quot; ON &quot;s&quot;.&quot;city&quot; = &quot;p&quot;.&quot;city&quot; ;</span>
+<span class="ln">18 </span><span class="literal string doc">&quot;&quot;&quot;
+</span><span class="ln">19 </span><span class="literal string doc">CREATE OR REPLACE VIEW &quot;psk&quot; (&quot;city&quot;) AS
+</span><span class="ln">20 </span><span class="literal string doc">    SELECT DISTINCT &quot;p&quot;.&quot;city&quot;
+</span><span class="ln">21 </span><span class="literal string doc">    FROM &quot;s&quot; JOIN &quot;p&quot; ON &quot;s&quot;.&quot;city&quot; = &quot;p&quot;.&quot;city&quot; ;
+</span><span class="ln">22 </span><span class="literal string doc">&quot;&quot;&quot;</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="comment single">#Error</span>
+<span class="ln"> 2 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 3 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 4 </span>          <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 6 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 7 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 8 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 9 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="comment single">#cur.execute(&quot;insert into a1(sno,status) values('s4','alll');&quot;)</span>
+<span class="ln">11 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;INSERT INTO &quot;a1&quot;(&quot;mn&quot;, &quot;st&quot;, &quot;status&quot;) VALUES
+</span><span class="ln">12 </span><span class="literal string double">            (4, 'S4', 15);&quot;&quot;&quot;</span><span class="punctuation">)</span>
+<span class="ln">13 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;UPDATE &quot;a1&quot; SET &quot;status&quot; = 40 WHERE &quot;st&quot;='S4';&quot;&quot;&quot;</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln">15 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">16 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">17 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">18 </span>
+<span class="ln">19 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="comment single">#Error</span>
+<span class="ln"> 2 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 3 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;spd&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 7 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 8 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;update a1 set status=10 where sno='s1';&quot;</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;update a1 set status=20 where sno='s2';&quot;</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">12 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">13 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">15 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="name">mport</span> <span class="name">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>            <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 7 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 8 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name builtin">print</span><span class="punctuation">()</span>
+<span class="ln">10 </span><span class="name">n1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter Status for s1 :  '</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">si</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Enter si : &quot;</span><span class="punctuation">);</span>
+<span class="ln">12 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="name">si</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">13 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;'S12'&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">14 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;S12' or </span><span class="literal string escape">\'</span><span class="literal string double">32</span><span class="literal string escape">\'</span><span class="literal string double">='32&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">15 </span>
+<span class="ln">16 </span><span class="name">update</span> <span class="name">s</span> <span class="name builtin">set</span> <span class="name">status</span><span class="operator">=</span><span class="literal number integer">13</span> <span class="name">where</span> <span class="name">sn</span><span class="operator">=</span><span class="literal string single">'S12'</span> <span class="operator word">or</span> <span class="literal string single">'32'</span><span class="operator">=</span><span class="literal string single">'32'</span><span class="punctuation">;</span>
+<span class="ln">17 </span>
+<span class="ln">18 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;S12'; insert into p(pn, pname, weight, city) values('p31', 'ddd', 43, 'Kashan'); select * from p where pn='p4343&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">19 </span>
+<span class="ln">20 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">stmt</span><span class="punctuation">)</span>
+<span class="ln">21 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">stmt</span><span class="punctuation">)</span>
+<span class="ln">22 </span><span class="comment single">#cur.execute(&quot;update s set status=20 where sn='s3';&quot;)</span>
+<span class="ln">23 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">24 </span><span class="name builtin">print</span><span class="punctuation">();</span>
+<span class="ln">25 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln">26 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">27 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">28 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">29 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;update a1 set status=10 where sno='s1';&quot;</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;update a1 set status=20 where sno='s3';&quot;</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">11 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln">12 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">13 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">14 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">15 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">s1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter a sno: '</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">sname1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter sname '</span><span class="punctuation">)</span>
+<span class="ln"> 6 </span><span class="name">stmt1</span> <span class="operator">=</span><span class="literal string double">&quot;insert into s(sn, sname, status, city) values('&quot;</span><span class="punctuation">;</span>
+<span class="ln"> 7 </span><span class="name">stmt1</span><span class="operator">+=</span><span class="name">s1</span><span class="operator">+</span><span class="literal string double">&quot;','&quot;</span><span class="operator">+</span><span class="name">sname1</span>
+<span class="ln"> 8 </span><span class="name">stmt1</span><span class="operator">+=</span><span class="literal string double">&quot;',30,'Athens');&quot;</span>
+<span class="ln"> 9 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">stmt1</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln">11 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">12 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">13 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">14 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">15 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 3 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 4 </span><span class="name">s1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter a sn: '</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">sname1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter sname '</span><span class="punctuation">)</span>
+<span class="ln"> 6 </span><span class="name">stmt1</span> <span class="operator">=</span><span class="literal string double">&quot;insert into s(sn, sname, status, city) values('&quot;</span><span class="punctuation">;</span>
+<span class="ln"> 7 </span><span class="name">stmt1</span><span class="operator">+=</span><span class="name">s1</span><span class="operator">+</span><span class="literal string double">&quot;','&quot;</span><span class="operator">+</span><span class="name">sname1</span>
+<span class="ln"> 8 </span><span class="name">stmt1</span><span class="operator">+=</span><span class="literal string double">&quot;',30,'Athens');&quot;</span>
+<span class="ln"> 9 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">stmt1</span><span class="punctuation">)</span>
+<span class="ln">10 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln">11 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">12 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">13 </span>  <span class="keyword">for</span> <span class="name">l1</span> <span class="operator word">in</span> <span class="name">a</span><span class="punctuation">:</span>
+<span class="ln">14 </span>    <span class="comment single">#print(l1,type(l1),end=' ');</span>
+<span class="ln">15 </span>    <span class="keyword">if</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span> <span class="operator">!=</span> <span class="name builtin">int</span> <span class="operator word">and</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span><span class="operator">!=</span><span class="name builtin">float</span> <span class="operator word">and</span> <span class="name">l1</span><span class="operator">!=</span><span class="keyword constant">None</span><span class="punctuation">:</span>
+<span class="ln">16 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">,</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">),</span><span class="name">end</span><span class="operator">=</span><span class="literal string single">' '</span><span class="punctuation">);</span>
+<span class="ln">17 </span>  <span class="name builtin">print</span><span class="punctuation">()</span>
+<span class="ln">18 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">19 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="name">mport</span> <span class="name">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>            <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln"> 6 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 7 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 8 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name builtin">print</span><span class="punctuation">()</span>
+<span class="ln">10 </span><span class="name">n1</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string single">'Enter Status for s1 :  '</span><span class="punctuation">)</span>
+<span class="ln">11 </span><span class="name">si</span><span class="operator">=</span><span class="name builtin">input</span><span class="punctuation">(</span><span class="literal string double">&quot;Enter si : &quot;</span><span class="punctuation">);</span>
+<span class="ln">12 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="name">si</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">13 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;'S12'&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">14 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;S12' or </span><span class="literal string escape">\'</span><span class="literal string double">32</span><span class="literal string escape">\'</span><span class="literal string double">='32&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">15 </span>
+<span class="ln">16 </span><span class="name">update</span> <span class="name">s</span> <span class="name builtin">set</span> <span class="name">status</span><span class="operator">=</span><span class="literal number integer">13</span> <span class="name">where</span> <span class="name">sn</span><span class="operator">=</span><span class="literal string single">'S12'</span> <span class="operator word">or</span> <span class="literal string single">'32'</span><span class="operator">=</span><span class="literal string single">'32'</span><span class="punctuation">;</span>
+<span class="ln">17 </span>
+<span class="ln">18 </span><span class="name">stmt</span><span class="operator">=</span><span class="literal string double">&quot;update s set status=&quot;</span><span class="operator">+</span><span class="name builtin">str</span><span class="punctuation">(</span><span class="name">n1</span><span class="punctuation">)</span><span class="operator">+</span><span class="literal string double">&quot; where sn='&quot;</span><span class="operator">+</span><span class="literal string double">&quot;S12'; insert into p(pn, pname, weight, city) values('p31', 'ddd', 43, 'Kashan'); select * from p where pn='p4343&quot;</span><span class="operator">+</span><span class="literal string double">&quot;';&quot;</span>
+<span class="ln">19 </span>
+<span class="ln">20 </span><span class="name builtin">print</span><span class="punctuation">(</span><span class="name">stmt</span><span class="punctuation">)</span>
+<span class="ln">21 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">stmt</span><span class="punctuation">)</span>
+<span class="ln">22 </span><span class="comment single">#cur.execute(&quot;update s set status=20 where sn='s3';&quot;)</span>
+<span class="ln">23 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">24 </span><span class="name builtin">print</span><span class="punctuation">();</span>
+<span class="ln">25 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln">26 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">27 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln">28 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">29 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 3 </span>        <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 4 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 5 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select sn,avg(qty) from sp group by sn;&quot;</span><span class="punctuation">);</span>
+<span class="ln"> 6 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln"> 7 </span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span>
+<span class="ln"> 8 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select sn,qty from sp;&quot;</span><span class="punctuation">)</span>
+<span class="ln"> 9 </span><span class="name builtin">sum</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span>
+<span class="ln">10 </span><span class="name">prev</span><span class="operator">=</span><span class="literal string single">'s00'</span>
+<span class="ln">11 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">12 </span>  <span class="keyword">if</span> <span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">0</span><span class="punctuation">]</span><span class="operator">==</span><span class="name">prev</span><span class="punctuation">:</span>
+<span class="ln">13 </span>    <span class="name builtin">sum</span><span class="operator">+=</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">];</span>
+<span class="ln">14 </span>  <span class="keyword">else</span><span class="punctuation">:</span>
+<span class="ln">15 </span>    <span class="keyword">if</span> <span class="name">prev</span><span class="operator">!=</span><span class="literal string single">'s00'</span><span class="punctuation">:</span>
+<span class="ln">16 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">prev</span><span class="punctuation">,</span> <span class="name builtin">sum</span><span class="punctuation">)</span>
+<span class="ln">17 </span>    <span class="name builtin">sum</span><span class="operator">=</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">]</span>
+<span class="ln">18 </span>    <span class="name">prev</span><span class="operator">=</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">0</span><span class="punctuation">]</span>
+<span class="ln">19 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 2 </span><span class="comment single">#conn = psycopg2.connect(&quot;dbname=spd user=postgres password=12344321 host=localhost&quot;)</span>
+<span class="ln"> 3 </span><span class="comment single">#conn = psycopg2.connect(database=&quot;spd&quot;, user=&quot;postgres&quot;, password=&quot;12344321&quot;,host='localhost')</span>
+<span class="ln"> 4 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 6 </span><span class="comment single">#cur.execute(&quot;SELECT * from s&quot;)</span>
+<span class="ln"> 7 </span><span class="comment single">#print(cur.fetchone())</span>
+<span class="ln"> 8 </span><span class="comment single">#cur.execute(</span>
+<span class="ln"> 9 </span><span class="comment single"># &quot;create view vs2 as select sno,pno,sname from s natural join sp;&quot;);</span>
+<span class="ln">10 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span>
+<span class="ln">11 </span><span class="comment single">#cur.execute(</span>
+<span class="ln">12 </span><span class="comment single"># &quot;select * from vs2&quot;);</span>
+<span class="ln">13 </span><span class="comment single">#print(cur.fetchone());</span>
+<span class="ln">14 </span><span class="comment single">#for a  in cur.fetchall():</span>
+<span class="ln">15 </span><span class="comment single">#  print(a)</span>
+<span class="ln">16 </span><span class="comment single">#cur.execute(</span>
+<span class="ln">17 </span><span class="comment single">#  &quot;insert into s values ('s6','ali',20,null);&quot;)</span>
+<span class="ln">18 </span><span class="comment single">#conn.commit();</span>
+<span class="ln">19 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from s;&quot;</span><span class="punctuation">);</span>
+<span class="ln">20 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">21 </span>  <span class="keyword">for</span> <span class="name">l1</span> <span class="operator word">in</span> <span class="name">a</span><span class="punctuation">:</span>
+<span class="ln">22 </span>    <span class="comment single">#print(l1,type(l1),end=' ');</span>
+<span class="ln">23 </span>    <span class="keyword">if</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span> <span class="operator">!=</span> <span class="name builtin">int</span> <span class="operator word">and</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span><span class="operator">!=</span><span class="name builtin">float</span> <span class="operator word">and</span> <span class="name">l1</span><span class="operator">!=</span><span class="keyword constant">None</span><span class="punctuation">:</span>
+<span class="ln">24 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">,</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">),</span><span class="name">end</span><span class="operator">=</span><span class="literal string single">' '</span><span class="punctuation">);</span>
+<span class="ln">25 </span>  <span class="name builtin">print</span><span class="punctuation">()</span>
+<span class="ln">26 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string single">'''
+</span><span class="ln">27 </span><span class="literal string single">create table if not exists a2 (
+</span><span class="ln">28 </span><span class="literal string single">  sn varchar(10),
+</span><span class="ln">29 </span><span class="literal string single">  sname varchar(25),
+</span><span class="ln">30 </span><span class="literal string single">  primary key(sn)
+</span><span class="ln">31 </span><span class="literal string single">);
+</span><span class="ln">32 </span><span class="literal string single">'''</span><span class="punctuation">)</span>
+<span class="ln">33 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">34 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span>
+<span class="ln">35 </span> <span class="literal string double">&quot;insert into a2 values('s1','ali');&quot;</span><span class="punctuation">)</span>
+<span class="ln">36 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">37 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;select * from a1;&quot;</span><span class="punctuation">);</span>
+<span class="ln">38 </span><span class="keyword">for</span> <span class="name">a</span> <span class="operator word">in</span> <span class="name">cur</span><span class="operator">.</span><span class="name">fetchall</span><span class="punctuation">():</span>
+<span class="ln">39 </span>  <span class="keyword">for</span> <span class="name">l1</span> <span class="operator word">in</span> <span class="name">a</span><span class="punctuation">:</span>
+<span class="ln">40 </span>    <span class="comment single">#print(l1,type(l1),end=' ');</span>
+<span class="ln">41 </span>    <span class="keyword">if</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span> <span class="operator">!=</span> <span class="name builtin">int</span> <span class="operator word">and</span> <span class="name builtin">type</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">)</span><span class="operator">!=</span><span class="name builtin">float</span> <span class="operator word">and</span> <span class="name">l1</span><span class="operator">!=</span><span class="keyword constant">None</span><span class="punctuation">:</span>
+<span class="ln">42 </span>      <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">,</span><span class="name builtin">len</span><span class="punctuation">(</span><span class="name">l1</span><span class="punctuation">),</span><span class="name">end</span><span class="operator">=</span><span class="literal string single">' '</span><span class="punctuation">);</span>
+<span class="ln">43 </span>  <span class="name builtin">print</span><span class="punctuation">()</span>
+<span class="ln">44 </span>
+<span class="ln">45 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">46 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+<hr class="docutils" />
+<pre class="code python ltr literal-block">
+<span class="ln"> 1 </span><span class="comment single">#https://www.psycopg.org/docs/usage.html</span>
+<span class="ln"> 2 </span><span class="keyword namespace">import</span> <span class="name namespace">psycopg2</span>
+<span class="ln"> 3 </span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg2</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">database</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span>
+<span class="ln"> 4 </span>        <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12344321&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span>
+<span class="ln"> 5 </span><span class="name">cur</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span>
+<span class="ln"> 6 </span><span class="name">sql</span> <span class="operator">=</span> <span class="literal string double">&quot;&quot;&quot;
+</span><span class="ln"> 7 </span><span class="literal string double">      CREATE TABLE test (
+</span><span class="ln"> 8 </span><span class="literal string double">        id serial PRIMARY KEY,
+</span><span class="ln"> 9 </span><span class="literal string double">        num integer,
+</span><span class="ln">10 </span><span class="literal string double">        data varchar);
+</span><span class="ln">11 </span><span class="literal string double">      &quot;&quot;&quot;</span>
+<span class="ln">12 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">sql</span><span class="punctuation">)</span>
+<span class="ln">13 </span><span class="name">sql</span> <span class="operator">=</span> <span class="literal string double">&quot;INSERT INTO test (num, data) VALUES (</span><span class="literal string interpol">%s</span><span class="literal string double">, </span><span class="literal string interpol">%s</span><span class="literal string double">)&quot;</span>
+<span class="ln">14 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="name">sql</span><span class="punctuation">,</span> <span class="punctuation">(</span><span class="literal number integer">100</span><span class="punctuation">,</span> <span class="literal string double">&quot;abc'def&quot;</span><span class="punctuation">))</span>
+<span class="ln">15 </span>
+<span class="ln">16 </span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;SELECT * FROM test;&quot;</span><span class="punctuation">)</span>
+<span class="ln">17 </span><span class="name">cur</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">()</span>
+<span class="ln">18 </span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span>
+<span class="ln">19 </span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+<span class="ln">20 </span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span>
+</pre>
+</div>
+</div>
+</body>
+</html>

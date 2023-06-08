@@ -16,7 +16,6 @@ int main(){
     }
     f1.close();
   }
-  return 0;
 }
 /* Rererence for more study
  * http://www.cplusplus.com/reference/fstream/fstream/is_open/

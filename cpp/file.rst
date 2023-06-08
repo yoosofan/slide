@@ -135,6 +135,11 @@ Bianry file
 
 ----
 
+* big indian
+* little indian
+
+----
+
 .. include:: src/files/binary/binary3_class.cpp
     :code: cpp
     :number-lines:

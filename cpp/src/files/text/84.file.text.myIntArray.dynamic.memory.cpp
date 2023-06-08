@@ -2,13 +2,13 @@
 #include<fstream>
 using namespace std;
 class myIntArray{ 
-  int* a; 
-  fstream f1;
-  int n;
+  int* a = nullptr; 
+  int n = 0;
+  int max = 0;
   public:
   myIntArray(const char* fileName="input.integers.txt"){
     int i;
-    f1.open(fileName); 
+    fstream f1(fileName);
     if(!f1){
       cout << "file ";
       throw "cannot open file";
@@ -24,6 +24,7 @@ class myIntArray{
         a = b;
       }
     n = i;
+    max = k;
     f1.close();
   }
   ~myIntArray(){delete[] a;}
@@ -53,5 +54,4 @@ int main(){
   m1.sort();
   cout << m1.search(12) << endl;
   m1.print();
-  return 0;
 }
