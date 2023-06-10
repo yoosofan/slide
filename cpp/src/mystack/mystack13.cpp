@@ -39,5 +39,4 @@ int main(){
     f1();
   }catch(int &exc)
   {cout<<"Exception ";errorMessage(exc);}
-  return 0;
 }

@@ -25,7 +25,7 @@ class myArray{ // Error
       a[k] = ma[k];
   }
   myArray(const myArray& b){
-    cout << "copy construcotr" << endl;
+    cout << "copy constructor" << endl;
   }
   ~myArray(){
     cout << "Destructor" << endl;
@@ -43,7 +43,7 @@ int main(){
   myArray p(d);
   // myArray p = d;
 }/*
-copy construcotr
+copy constructor
 Destructor
 Destructor
 */

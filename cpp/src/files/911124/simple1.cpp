@@ -23,5 +23,4 @@ using namespace std;
 int main(){
   myClass c1;c1.init("23","ali","Hamidi");
   c1.print();
-  return 0;
 }

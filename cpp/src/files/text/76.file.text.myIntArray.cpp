@@ -45,5 +45,4 @@ int main(){
   m1.sort();
   cout << m1.search(12) << endl;
   m1.print();
-  return 0;
 }

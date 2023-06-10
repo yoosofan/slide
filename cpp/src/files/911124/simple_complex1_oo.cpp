@@ -30,5 +30,4 @@ int main(){
   f.display();complexCls g;
   g.init(2); g = f.add(x);
   g.display();
-  return 0;
 }

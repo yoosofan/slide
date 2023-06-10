@@ -23,12 +23,13 @@ class doubleArrayCls{
   {copy(a, sz);}
   doubleArrayCls(const doubleArrayCls& a)
   {copy(a.data, a.size);}
+  doubleArrayCls(const int n1){data = new double[size = n1];}
 	~doubleArrayCls()
   {delete[] data;data=nullptr;size=0;}
 	doubleArrayCls operator+(
       doubleArrayCls& a){
 		if(size != a.size)
-      throw myException("Length of two arrays are inequal");
+      throw myException("Length of two arrays are not equal");
 		doubleArrayCls retVal(size);
 		for(int i=0; i < size ; i++)
 			retVal.data[i]=data[i]+a.data[i];
@@ -37,7 +38,7 @@ class doubleArrayCls{
 	doubleArrayCls operator-(
       doubleArrayCls& a){
 		if(size != a.size) 
-      throw myException("Length of two arrays are inequal");
+      throw myException("Length of two arrays are not equal");
 		doubleArrayCls retVal(size);
 		for(int i=0; i < size ; i++)
       retVal.data[i]=data[i]-a.data[i];

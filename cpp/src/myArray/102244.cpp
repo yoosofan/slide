@@ -31,7 +31,7 @@ class myArray{ // 102244.cpp
           << endl;
   }
   myArray(const myArray& b){
-    cout << "copy construcotr" << endl;
+    cout << "copy constructor" << endl;
     n = b.n;
     a = new double[n];
     for(int i = 0; i < n; i++) a[i] = b.a[i];
@@ -53,7 +53,7 @@ void f1(void){
   f2(p);
 }
 void f2(myArray& k){k.print();}/*
-copy construcotr
+copy constructor
 before call f2
  n = 4
 a[0] = 10

@@ -26,7 +26,7 @@ class myArray{ // 102140
       a[k] = ma[k];
   }
   myArray(const myArray& b){
-    cout << "copy construcotr"
+    cout << "copy constructor"
          << endl;
     n = b.n;
     for(int i = 0; i < n; i++)
@@ -51,8 +51,8 @@ void f1(void){
   myArray q=p;
   p.print();
 }/*
-copy construcotr
-copy construcotr
+copy constructor
+copy constructor
  n = 4
 a[0] = 10
 a[1] = 12
