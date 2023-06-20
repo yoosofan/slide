@@ -524,7 +524,11 @@ Software Interrupt
 
 ----
 
-.. image:: img/in/interrupt_chart.jpg
+.. :
+
+  .. image:: img/in/interrupt_chart.jpg
+
+.. image:: img/in/Flowchart_for_interrupt_cycle.png
    :align: center
    :height: 600px
    :width: 700px
