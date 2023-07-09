@@ -356,4 +356,6 @@ A program(II)
 
 ----
 
-rst2html python_temp.rst python_temp.html --stylesheet=python_temp.css,html4css1.css
+.. :
+
+    rst2html python4print.rst python4print.html --stylesheet=python4print.css,html4css1.css

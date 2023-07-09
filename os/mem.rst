@@ -458,7 +458,6 @@ Effective Access Time (EAT)
 .. image:: img/in/process_parts.png
    :align: center
 
-
 ----
 
 .. class:: rtl-h1
@@ -625,7 +624,6 @@ Multi Layer
 DMA
 =====
 .. image:: img/memory/system-configuration-with-dmac.png
-
 
 ----
 
