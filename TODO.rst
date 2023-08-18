@@ -25,3 +25,31 @@ Converting a code to a highlighted one by tools like pygment was not a good choi
 * https://www.eddymens.com/blog/highlightjs-add-line-numbers
 * https://github.com/wcoder/highlightjs-line-numbers.js
 * http://wcoder.github.io/highlightjs-line-numbers.js/
+
+Learn more about Hovercraft and change its code
+-----------------------------------------------
+* https://www.strangegizmo.com/products/restxsl/
+* https://stackoverflow.com/questions/2746692/restructuredtext-tool-support
+* https://docutils.sourceforge.io/docs/user/links.html
+
+
+Other Slide Show
+---------------------
+* https://github.com/adamzap/landslide
+
+* https://github.com/shower/core
+* https://github.com/shower/shwr.me
+
+* https://github.com/gnab/remark
+* https://github.com/gnab/remark/wiki
+* https://github.com/gnab/remark
+* https://remarkjs.com
+
+Tools
+------
+Editors
+^^^^^^^^
+* geany.org
+* https://github.com/retext-project/retext
+* python.net/~gherman/ReSTedit.html
+
