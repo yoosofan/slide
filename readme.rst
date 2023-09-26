@@ -24,6 +24,31 @@ Type the following link
 
 http://127.0.0.1:8000
 
+List of courses and slides
+--------------------------
+.. csv-table::
+    :header-rows: 1
+
+    course name, folder
+    compiler design, cm
+    cpp, Advanced Programming: cpp based
+    Fundamental of database systems concepts, db
+    Operating Systems, os
+    Front-end web development fundations and related topics, web
+
+cm (Compiler)
+^^^^^^^^^^^^^
+.. csv-table::
+    :header-rows: 1
+
+    File Name, Description
+    in.rst, Intorducton of compiler design and its importance
+    la.rst, Lexical Analyser or Scanner
+    lex.rst, LEX or flex: lexical analyser generator tool.
+    sa.rst, Syntax Alanysis
+    rd.rst, recursive descentant syntax analyser or compiler devepment method
+    
+
 Convert to html
 ------------------
 
