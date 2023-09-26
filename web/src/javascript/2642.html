@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<link rel="icon" href="favicon.ico" /></head><body>
+<h1>Heading 1</h1>
+<div>Hello World</div>
+<div><a href="#">link 1</a></div>
+<form action="#" id="form1">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br />
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname" form="form1">
+  <br /><input type="submit" value="Submit">
+</form><script>
+console.log(document.all);
+console.log(document.all[10]);
+document.all[10].textContent = 'Hello';
+console.log(document.forms[0]);
+</script></body></html> 

@@ -1,0 +1,78 @@
+:root { --border: 2px solid #95ABD0; /*#393939;*/}
+
+ol.trace-code {justify-self: start; /*background-color: #BEF648;*/}
+pre.code {justify-self: center;/*overflow: scroll;*/}
+
+div#html-dom-model-image-id{
+  display: grid;
+  grid-template-areas:
+    'htmlstructuresrc domimage'
+    ;
+}
+div#html-dom-model-image-id > img:nth-of-type(1){ grid-area: domimage;  width: 500px; height: auto; }
+div#html-dom-model-image-id > pre:nth-of-type(1){ grid-area: htmlstructuresrc; }
+div#meta-charset-UTF-8-id > pre:nth-of-type(1){ align-self: center;}
+
+div#dir-rtl-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'htmlsourcecode htmloutput'
+    ;
+}
+div#dir-rtl-id > h1:nth-of-type(1){ grid-area: h1;}
+div#dir-rtl-id > pre:nth-of-type(1){ grid-area: htmlsourcecode;}
+div#dir-rtl-id > div.output-of-html{ grid-area: htmloutput; border: var(--border);}
+
+div#dir-ltr-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'htmlsourcecode htmloutput'
+    ;
+}
+div#dir-ltr-id > h1:nth-of-type(1){ grid-area: h1;}
+div#dir-ltr-id > pre:nth-of-type(1){ grid-area: htmlsourcecode;}
+div#dir-ltr-id > div.output-of-html{ grid-area: htmloutput; border: var(--border);}
+
+div#dir-ltr-in-tags-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'htmlsourcecode htmloutput'
+    ;
+}
+div#dir-ltr-in-tags-id > h1:nth-of-type(1){ grid-area: h1;}
+div#dir-ltr-in-tags-id > pre:nth-of-type(1){ grid-area: htmlsourcecode;}
+div#dir-ltr-in-tags-id > div.output-of-html{ grid-area: htmloutput; border: var(--border); justify-content: start; text-align:left; direction:ltr}
+
+.two-column-yoosofan{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+iframe.output-of-html{ 
+  border: 2px blue solid;
+  text-align:left; 
+  direction:ltr;
+  overflow: scroll;
+  margin:0;
+}
+
+.simple-html01-class{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+/*
+  overflow: scroll;
+*/
+}
+
+.simple-html02-class{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: stretch;
+  overflow: scroll;
+}
+  
