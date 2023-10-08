@@ -24,7 +24,6 @@ int main(){
       i++;
     }while(i<n);
   else printf("0<n<50, %d",n);
-  return 0;
 }
 struct date input_date(void){
   struct date d1;

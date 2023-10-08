@@ -184,6 +184,35 @@ Parts, Suppliers and Projects Database
 
 ----
 
+:class: t2c
+
+فروشگاه ۲
+===============================
+..  csv-table::
+  :header: `شماره جنس`_,نام جنس,موجودی
+  :class: smallerelementwithfullborder
+
+  1,شکر,1000
+  2,نمک,1500
+
+
+
+
+..  csv-table::
+  :header: `شماره جنس`_,`شماره فاکتور فروش`_,میزان فروش
+  :class: smallerelementwithfullborder
+
+  1,1,12
+  1,4,14
+  1,5,5
+  2,2,10
+  2,4,20
+  2,5,30
+  2,3,40
+
+
+----
+
 Types
 ===========
 Not exact types
@@ -587,6 +616,21 @@ Projection
 
     (s{city} union p{city}) minus (s{city} intersect p{city});
 
+.. code:: sql
+    :class: substep
+
+    (s{city} minus p{city}) union (p{city} minus s{city});
+
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  CITY
+  Athens
+  Oslo
+
+
 ----
 
 Condition
@@ -595,9 +639,13 @@ Condition
 
   p where city = "Paris";
 
-.. image:: img/relational_model/condition_city.png
-    :align: center
-    :class: substep
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  PN,PNAME,COLOR,WEIGHT,CITY
+  P2,Bolt,Green,17,Paris
+  P5,Cam,Blue,12,Paris
 
 ----
 
@@ -686,7 +734,6 @@ Get part names of P2
   Oslo
   london
 
-
 ----
 
 .. class:: rtl-h1
@@ -731,7 +778,6 @@ Times
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder substep
-
 
     CITY,STATUS
     London,20
@@ -822,14 +868,14 @@ Rename
 .. code::
     :class: substep
 
-    S rename sn as sn1;
+    S rename SN as SN1;
 
 
 .. csv-table::
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
-    sn1,SNAME,STATUS,CITY
+    SN1,SNAME,STATUS,CITY
     S1,Smith,20,London
     S2,Jones,10,Paris
     S3,Blake,30,Paris

@@ -1,6 +1,4 @@
 #include <stdio.h>
-
-
 struct firstStruct{  };
 struct secondStruct{ };
 struct thirdStruct{ };

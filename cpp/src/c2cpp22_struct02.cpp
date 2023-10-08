@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 struct date{ int year, month, day; };
 struct student{
   char name[50]; 
@@ -24,7 +25,6 @@ int main(){
       i++;
     }while(i<n);
   else  { cout << "0<n<50 "; cout << n;}
-  return 0;
 }
 date input_date(void){
   date d1;
