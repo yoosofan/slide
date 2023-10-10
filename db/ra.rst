@@ -991,7 +991,7 @@ Rename
 
 .. class:: rtl-h1
 
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (I)
   
 .. code:: sql
   :class: substep
@@ -1033,6 +1033,15 @@ Rename
   (p{pn, pname} rename pn as ppn)
   ;
 
+----
+
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (II)
+  
 .. code:: sql
   :class: substep
 
@@ -1202,6 +1211,46 @@ Rename
     Athens,Paris
     Athens,Oslo
 
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+    زوج شهرهای عرضه‌کنندگان و شهرهای قطعات غیرهمشهری را بیابید.
+
+.. container::
+
+  .. code:: sql
+      :class: substep
+
+        ( s rename city as scity ){scity}
+        times
+        p{city};
+
+  .. code:: sql
+      :class: substep
+
+        (
+          ( s rename city as scity ){scity}
+          times
+          p{city}
+        ) where scity <> pcity;
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep  smallerelementwithfullborder
+
+    scity,CITY
+    London,Paris
+    London,Oslo
+    Paris,London
+    Paris,Oslo
+    Athens,London
+    Athens,Paris
+    Athens,Oslo
+
 ----
 
 :class: t2c
@@ -1333,8 +1382,12 @@ Rename
 
 :class: t2c
 
-Get supplier names for suppliers that supply part P4
-==============================================================
+.. :
+
+    Get supplier names for suppliers that supply part P4
+    ==============================================================
+
+
 .. class:: rtl-h1
 
   نام عرضه کنندگانی را بیابید که قطعهٔ P4 را عرضه کرده باشد
@@ -1363,11 +1416,14 @@ Get supplier names for suppliers that supply part P4
 
 :class: t2c
 
-Get supplier city for suppliers that supply Red parts(I)
-==========================================================
+.. :
+
+    Get supplier city for suppliers that supply Red parts(I)
+    ==========================================================
+
 .. class:: rtl-h1
 
-  شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند.
+  شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند(I).
 
 .. class:: rtl-h1 substep
 
@@ -1426,7 +1482,7 @@ Get supplier city for suppliers that supply Red parts(I)
 
 .. class:: rtl-h1
 
-شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند.
+شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند(II).
 
 .. code:: sql
   :class: substep
