@@ -1810,6 +1810,12 @@ Join پیوند
 
   p join sp
 
+.. class:: substep
+
+* Join does not have order
+* It will apply equals for each shared attributes
+* It will apply times for two relations without shared attribute
+
 ----
 
 :class: t2c
@@ -1985,10 +1991,18 @@ Join پیوند
 .. code:: sql
     :class: substep
 
-      (
+      (    -- راه حل نادرست
        (s join sp){pn, sname}
        join p
       ) where city = "Paris"
+    ){sname} ;
+
+
+.. code:: sql
+    :class: substep
+
+      (    -- راه حل نادرست
+       (p{city} where city='Paris') join s
     ){sname} ;
 
 ----
@@ -2112,6 +2126,34 @@ Join پیوند
       (
         (s where status > 20) where city = "Paris"
       )
+    ){pname} ;
+
+.. code:: sql
+    :class: substep
+
+    (
+      (
+        ( p where weight > 10 ){pn, pname}
+        join
+        sp
+      )
+      join
+      (
+        (s where status > 20) where city = "Paris"
+      )
+    ){pname} ;
+
+.. code:: sql
+    :class: substep
+
+    (
+      (
+        ( p where weight > 10 ){pn, pname}
+        join
+        sp
+      )
+      join
+      (s where status > 20 and city = "Paris")
     ){pname} ;
 
 .. csv-table::

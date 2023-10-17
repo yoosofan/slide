@@ -21,7 +21,7 @@ struct myArray{
   }
 };
 int myArray::other_static = 20 ;
-// int myArray.other_static = 20 ;
+// int myArray.other_static = 20 ; // Error
 int main(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));

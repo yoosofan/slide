@@ -1640,17 +1640,36 @@ table
 
 ----
 
+progress
+========
+
 .. code:: html
 
   <progress value="33" max="100"></progress>
 
+.. raw:: html
+
+    <div>
+      <progress value="33" max="100"></progress> 
+    </div>
+
+
 ----
 
+Embed
+======
 
 .. code:: html
 
   <embed type="video/quicktime" src="movie.mov"
-  width="640" height="480">
+  width="640" height="480" />
+ 
+.. raw:: html
+
+  <div>
+    <embed type="video/quicktime" src="movie.mov"
+    width="640" height="480" />
+  </div>
 
 ----
 
@@ -1671,28 +1690,29 @@ table
 
 .. code:: html
 
-  <video controls poster="/images/sample.gif">
-     <source src="sample.mp4" type="video/mp4">
-     <source src="sample.ogv" type="video/ogv">
+  <video controls poster="/images/sample.gif" >
+     <source src="sample.mp4" type="video/mp4" />
+     <source src="sample.ogv" type="video/ogv" />
      <track kind="captions"
-       src="sampleCaptions.vtt" srclang="en">
+       src="sampleCaptions.vtt" srclang="en" />
      <track kind="descriptions"
-       src="sampleDescriptions.vtt" srclang="en">
+       src="sampleDescriptions.vtt" srclang="en" />
      <track kind="chapters"
-       src="sampleChapters.vtt" srclang="en">
+       src="sampleChapters.vtt" srclang="en" />
      <track kind="subtitles"
-       src="sampleSubtitles_de.vtt" srclang="de">
+       src="sampleSubtitles_de.vtt" srclang="de" />
      <track kind="subtitles"
-       src="sampleSubtitles_en.vtt" srclang="en">
+       src="sampleSubtitles_en.vtt" srclang="en" />
      <track kind="subtitles"
-       src="sampleSubtitles_ja.vtt" srclang="ja">
+       src="sampleSubtitles_ja.vtt" srclang="ja" />
      <track kind="subtitles"
-       src="sampleSubtitles_oz.vtt" srclang="oz">
+       src="sampleSubtitles_oz.vtt" srclang="oz" />
      <track kind="metadata" src="keyStageɨ.vtt"
-       srclang="en" label="Key Stage 1">
+       srclang="en" label="Key Stage 1" />
      <track kind="metadata" src="keyStageɩ.vtt"
-       srclang="en" label="Key Stage 2">
-     <track kind="metadata" src="keyStageɪ.vtt"  srclang="en" label="Key Stage 3">
+       srclang="en" label="Key Stage 2" />
+     <track kind="metadata" src="keyStageɪ.vtt"  
+       srclang="en" label="Key Stage 3" />
   </video>
 
 

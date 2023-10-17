@@ -492,7 +492,7 @@ Keywords in Symbol Table
 
 ----
 
-.. include:: src/la//scanner1.cpp
+.. include:: src/la/scanner1.cpp
   :code: cpp
   :number-lines:
   :start-line: 5
@@ -500,7 +500,7 @@ Keywords in Symbol Table
 
 ----
 
-.. include:: src/la//scanner1.cpp
+.. include:: src/la/scanner1.cpp
   :code: cpp
   :number-lines:
   :start-line: 31
@@ -508,15 +508,18 @@ Keywords in Symbol Table
 
 ----
 
+:class: t2c
+
+Memory Allocation
+===================
+
 .. csv-table::
   :class: smallerelementwithfullborder
 
   " i "," f "," w "," h "," i "
   " l "," e "," i "," n "," t "
   " a "," c "," o "," u "," n "
-  " t ","\0 "
-
---
+  " t ","\\0 "
 
 .. csv-table::
   :header-rows: 1
@@ -571,10 +574,10 @@ Regular Expression
   #. a{3,}  : Match 3 or more
   #. [^abc] : Any character except a, b or c
   #. [^\\n] : . ,  scanf("[^\\n]", st);
-  #. [a^c] : on of: a ^ b
+  #. [a^c] : one of: a ^ c
   #. a/b `:` a when followed by b
   #. (abc)/(xyz) : abcsldsxyzss , abcsldsxzss ×
-  #. (https?|ftp)://([^/\\r\\n]+)(/[^\\r\\n]*)?
+  #. (https?|ftp):/(/[^/\\r\\n]+)+/?
       https://yoosofan.github.io/course/
 
 ----
