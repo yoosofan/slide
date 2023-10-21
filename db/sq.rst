@@ -1980,7 +1980,7 @@ Except
           p3, s6
           p4, s2
 
-      - ``.``
+      - |nbsp| |nbsp| |nbsp|
 
       - .. csv-table::
           :header-rows: 1
@@ -2001,7 +2001,7 @@ Except
           p6, s6
           p7, s1
 
-      - ``.``
+      - |nbsp| |nbsp| |nbsp|
 
       - .. csv-table::
           :header-rows: 1
@@ -2077,7 +2077,7 @@ Except
         Cog,  Ali
         Cog,  Blake
 
-    - ``.``
+    - |nbsp| |nbsp| |nbsp| 
 
     - .. csv-table::
         :header-rows: 1
@@ -6746,3 +6746,7 @@ sql speed up select * instead of fields
 * sql between like
 * https://lornajane.net/posts/2011/inner-vs-outer-joins-on-a-many-to-many-relationship
 * https://www.w3schools.com/sql/default.asp
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+

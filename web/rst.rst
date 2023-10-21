@@ -1160,6 +1160,17 @@ Math(I)
 
     n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k
 
+.. code:: rst
+
+    .. math::
+
+        n_{\mathrm{offset}} = \int_{k=0}^{N-1} s_k n_k
+
+.. math::
+
+    n_{\mathrm{offset}} = \intw_{k=0}^{N-1} s_k n_k
+
+
 ----
 
 :class: t2c

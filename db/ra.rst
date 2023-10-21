@@ -2288,7 +2288,7 @@ University Database
 * teaches(ID_, course_id_, sec_id_, semester_, year_)
 * takes(ID_, course_id_, sec_id_, semester_, year_, grade)
 * advisor(s_ID_, i_ID)
-* time_slot(time_slot_id_, day_, start_hr_, start_min_, end_hr, end_min)
+* time_slot(time_slot_id_, day_, start_time_, end_time)
 * prereq(course_id_, prereq_id_)
 
 ----
@@ -2956,8 +2956,7 @@ END
 .. _i_ID:
 .. _time_slot_id:
 .. _day:
-.. _start_hr:
-.. _start_min:
+.. _start_time:
 .. _prereq_id:
 
 
