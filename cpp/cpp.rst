@@ -1,4 +1,5 @@
 :data-transition-duration: 1000
+:data-width: 800
 :skip-help: true
 :css: ./style.css ./cpp.css
 :substep: true
