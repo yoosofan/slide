@@ -486,7 +486,6 @@ Parse for + * ( ) no priority
   #. 9 * ((4 + 5) * 3)
   #. 9 * ((4 + 5) + 3)
   #. (9 + (4 + 5)) * 3
-  #. 9 + 4 + 5 * 3 == 54
   
   .. class:: substep
 
@@ -526,6 +525,16 @@ Parse for + * ( ) no priority
       12 -- 13 [label="S"];
       13 -- END [label=")"];
     }
+
+.. :
+
+  
+  #. 9 + 4 + 5 * 3 == 54
+
+  #. E → E + T | E * T | T
+  #. T → (E) | a
+
+  E --> E + T | E - T | E * T | T
 
 ----
 

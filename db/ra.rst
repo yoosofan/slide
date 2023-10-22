@@ -2486,6 +2486,16 @@ Calculation on tuples instead of relations
 
   * sx.city where exists spx(spx.sn = sx.sn and spx.pn = 'p2')
 
+  * اشکال
+
+  * sx.city where exists spx (
+      spx.sn = sx.sn
+    ) and exists px (px.pn = 'P2')
+
+  * sx.city where exists spx (
+      spx.sn = sx.sn
+    ) and exists spy (spy.pn = 'P2')
+
 ----
 
 .. class:: rtl-h1
@@ -2529,15 +2539,18 @@ Calculation on tuples instead of relations
     #. sx.sname where exists spx(sx.sn=spx.sn and exists px(px.pn=spx.pn and px.color = 'red’))
 
 
+#. sx.sname where exists px(px.color = 'red’  and exists spx(px.pn=spx.pn and sx.sn=spx.sn))
+
+
 .. class:: rtl substep
 
   پاسخ نادرست
 
 .. class:: substep
 
-  #. sx.sname where exists spx(sx.sn=spx.sn) and exists px(px.pn=spx.pn and px.color = 'red’)
-  #. sx.sname where exists spx(sx.sn=spx.sn) and exists px(exists spx(px.pn=spx.pn and px.color = 'red’))
-  #. sx.sname where exists spx(sx.sn=spx.sn and px.pn=spx.pn and px.color = 'red’)
+  1. sx.sname where exists spx(sx.sn=spx.sn) and exists px(px.pn=spx.pn and px.color = 'red’)
+  2. sx.sname where exists spx(sx.sn=spx.sn) and exists px(exists spx(px.pn=spx.pn and px.color = 'red’))
+  3. sx.sname where exists spx(sx.sn=spx.sn and px.pn=spx.pn and px.color = 'red’)
 
 ----
 
@@ -2607,6 +2620,23 @@ Calculation on tuples instead of relations
 
   {sx.sn, sy.sn as sn2} where sx.city = sy.city and
    sx.sn < sy.sn and exists spx(sx.sn = spx.sn or sy.sn = spx.sn)
+
+هر دو عرضه کرده باشند (راه حل اشتباه)
+
+.. code:: sql
+  :class: substep
+
+  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
+   sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
+
+
+.. code:: sql
+  :class: substep
+
+  -- راه حل درست
+  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
+   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) and
+   exists spy(sy.sn = spy.sn))
 
 ----
 
