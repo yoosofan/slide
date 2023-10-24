@@ -10,7 +10,8 @@ class GlobalVariables:
   fullDirectoryName: str =''
   directoryName: str = 'temporary03454-images9877/'
   counter: int = 1
-  mathjaxFileName: Path = Path('/home/ahmad/research/more_yoosofan/other/current_events/course/tools/mathjax/tex-mml-chtml.js')
+  mathjaxFileName: Path = Path(__file__).parent.resolve() / 'tools' / 'tex-mml-chtml.js'
+  print(mathjaxFileName)
 
 def align(argument):
   """Conversion function for the "align" option."""
@@ -75,11 +76,11 @@ def checkArgvAndSetVariables(argvs: List[str]) -> List[str]:
 
   # ~ cmd =  GlobalVariables.fullDirectoryName.joinpath('tex-mml-chtml.js')
   cmd =  '-j' + str(GlobalVariables.mathjaxFileName)
-  cmd =  '-j./' + GlobalVariables.directoryName + str(GlobalVariables.mathjaxFileName.name)
+  # cmd =  '-j./' + GlobalVariables.directoryName + str(GlobalVariables.mathjaxFileName.name)
   # ~ cmd =  '-j./' + str(GlobalVariables.mathjaxFileName.name)
   # ~ cmd =  '-jtemporary-images/tex-mml-chtml.js'
   # ~ cmd =  ' --js temporary-images/tex-mml-chtml.js'
-  cmd = ['--skip-help', str(argvs[1])]
+  cmd = [cmd, '--skip-help', str(argvs[1])]
   
   return cmd
   
@@ -88,7 +89,8 @@ def createAndCopyDirectoriesAndFiles():
   dd = GlobalVariables.fullDirectoryName.joinpath(GlobalVariables.mathjaxFileName.name)
   shutil.copy(GlobalVariables.mathjaxFileName, dd)
   dd = GlobalVariables.fullDirectoryName.joinpath('output')
-  shutil.copytree(GlobalVariables.mathjaxFileName.parent.joinpath('output'), dd)
+  #print(dd)
+  #shutil.copytree(GlobalVariables.mathjaxFileName.parent.joinpath('output'), dd)
   
 if __name__ == "__main__":
   cmd = checkArgvAndSetVariables(sys.argv)

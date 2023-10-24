@@ -1397,12 +1397,12 @@ A → A α | β
 
 .. table::
 
-    +-----------------------------------------------------------------------+------------------------------------------------------------------------------+
-    | .. image:: img/recursive.descendant.method/with_left_recursion.png    |  .. image:: img/recursive.descendant.method/without_left_recursion.png       |
-    |    :align: center                                                     |     :align: center                                                           |
-    |    :class: substep                                                    |     :class: substep                                                          |
-    |    :height: 350px                                                     |     :height: 350px                                                           |
-    +-----------------------------------------------------------------------+------------------------------------------------------------------------------+
+    +-------------------------------------------+-----------------------------------------------+
+    | .. image:: img/rd/with_left_recursion.png |  .. image:: img/rd/without_left_recursion.png |
+    |    :align: center                         |     :align: center                            |
+    |    :class: substep                        |     :class: substep                           |
+    |    :height: 350px                         |     :height: 350px                            |
+    +-------------------------------------------+-----------------------------------------------+
 
 .. class:: substep
 
