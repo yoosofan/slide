@@ -1,7 +1,7 @@
 :data-transition-duration: 1000
-:data-width: 800
-:skip-help: true
+:data-width: 1024
 :css: ./style.css ./cpp.css
+:skip-help: true
 :substep: true
 :slide-numbers: true
 :skip-help: true
