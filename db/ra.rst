@@ -2486,6 +2486,16 @@ Calculation on tuples instead of relations
 
   * sx.city where exists spx(spx.sn = sx.sn and spx.pn = 'p2')
 
+  * اشکال
+
+  * sx.city where exists spx (
+      spx.sn = sx.sn
+    ) and exists px (px.pn = 'P2')
+
+  * sx.city where exists spx (
+      spx.sn = sx.sn
+    ) and exists spy (spy.pn = 'P2')
+
 ----
 
 .. class:: rtl-h1
@@ -2529,15 +2539,18 @@ Calculation on tuples instead of relations
     #. sx.sname where exists spx(sx.sn=spx.sn and exists px(px.pn=spx.pn and px.color = 'red’))
 
 
+#. sx.sname where exists px(px.color = 'red’  and exists spx(px.pn=spx.pn and sx.sn=spx.sn))
+
+
 .. class:: rtl substep
 
   پاسخ نادرست
 
 .. class:: substep
 
-  #. sx.sname where exists spx(sx.sn=spx.sn) and exists px(px.pn=spx.pn and px.color = 'red’)
-  #. sx.sname where exists spx(sx.sn=spx.sn) and exists px(exists spx(px.pn=spx.pn and px.color = 'red’))
-  #. sx.sname where exists spx(sx.sn=spx.sn and px.pn=spx.pn and px.color = 'red’)
+  1. sx.sname where exists spx(sx.sn=spx.sn) and exists px(px.pn=spx.pn and px.color = 'red’)
+  2. sx.sname where exists spx(sx.sn=spx.sn) and exists px(exists spx(px.pn=spx.pn and px.color = 'red’))
+  3. sx.sname where exists spx(sx.sn=spx.sn and px.pn=spx.pn and px.color = 'red’)
 
 ----
 
@@ -2602,11 +2615,37 @@ Calculation on tuples instead of relations
   sn,sn2
   s1,s2
 
+----
+
+
+:class: t2c
+
+.. class:: rtl-h1
+
+    زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و دست کم یکی از آن دو عرضه کننده، قطعه یا قطعه‌هایی عرضه کرده باشند.
+
 .. code:: sql
   :class: substep
 
   {sx.sn, sy.sn as sn2} where sx.city = sy.city and
    sx.sn < sy.sn and exists spx(sx.sn = spx.sn or sy.sn = spx.sn)
+
+هر دو عرضه کرده باشند (راه حل اشتباه)
+
+.. code:: sql
+  :class: substep
+
+  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
+   sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
+
+
+.. code:: sql
+  :class: substep
+
+  -- راه حل درست
+  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
+   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) and
+   exists spy(sy.sn = spy.sn))
 
 ----
 
@@ -2614,7 +2653,7 @@ Calculation on tuples instead of relations
 
 .. class:: rtl-h1
 
-    نام عرضه‌کنندگانی را بیابید که همهٔ قطعه‌ها را عرضه کرده باشند.
+    نام عرضه‌کنندگانی را بیابید که همهٔ قطعه‌ها را عرضه کرده باشند(I).
 
 .. code:: sql
   :class: substep
@@ -2641,6 +2680,15 @@ Calculation on tuples instead of relations
   sx.sname where forall px(
     px.pn=spx.pn
   )  sx.sn=spx.sn
+
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+    نام عرضه‌کنندگانی را بیابید که همهٔ قطعه‌ها را عرضه کرده باشند(II).
 
 .. code:: sql
   :class: substep
@@ -2739,27 +2787,91 @@ Calculation on tuples instead of relations
 
     نام قطعاتی را بیابید که همهٔ عرضه‌کنندگانی که قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند.
 
-.. class:: substep
+.. code:: sql
+    :class: substep
 
-    #. px.pname where not exists spx( spx.pn = 'p3' and not exists spy( spy.sn = spx.sn and spy.pn = px.pn) )
-    #. px.pname where forall spx( spx.pn <> 'p3' or exists spy( spy.sn = spx.sn and spy.pn = px.pn) )
-
-.. class:: rtl substep
-
-    #. نام قطعاتی که برای‌شان وجود نداشته باشد عرضه‌ای که آن عرضه برای قطعهٔ p3 باشد و وجود نداشته باشد عرضهٔ دیگری از همان عرضه کننده که قطعهٔ آن همین قطعهٔ مورد نظر ما نباشد.
+     px.pname where not exists spx( 
+       spx.pn = 'p3' and not exists spy( 
+         spy.sn = spx.sn and spy.pn = px.pn
+       ) 
+    )
     
+    px.pname where forall spx( 
+      spx.pn <> 'p3' or exists spy( 
+        spy.sn = spx.sn and spy.pn = px.pn
+      ) 
+    )
+
 .. class:: rtl-h2 substep
 
-    پاسخ‌های نادرست
+    نام قطعاتی که برای‌شان وجود نداشته باشد عرضه‌ای که آن عرضه برای قطعهٔ p3 باشد و وجود نداشته باشد عرضهٔ دیگری از همان عرضه کننده که قطعهٔ آن همین قطعهٔ مورد نظر ما نباشد.
 
-.. class:: substep
+----
 
-    #. px.pname where exists spx(spx.pn = 'p3' and exists spy(spy.pn = px.pn and spy.sn = spx.sn))
-    #. px.pname where forall spx( spx.pn='p3' and forall Spy(Spy.sn=Spx.sn and Spy.pn/='p3' and exists Px(px.pn=Spy.pn))
-    #. px.pname where exists spx( Spx.pn='p3' and exists spy(spy.sn=Spx.sn and Spy.pn<>'p3' and exists px(px.pn=spy.pn))
-    #. px.pname where forall spx( spx.pn = 'p3’ or exists spy( spy.sn = spx.sn and spy.pn = px.pn) )
-    #. px.pname where forall spx( spx.pn = 'p3’ and exists spy( spy.pn = spx.pn and spy.pn = px.pn) )
-    #. px.pname where forall spx( spx.pn = 'p3’ or exists spy( spy.pn = spx.pn and spy.sn = spx.sn) )
+
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که همهٔ عرضه‌کنندگانی که قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(I)
+
+.. code:: sql
+
+    px.pname where exists spx(
+      spx.pn = 'p3' and exists spy(
+        spy.pn = px.pn and spy.sn = spx.sn
+      )
+    )
+
+.. code:: sql
+    
+    px.pname where forall spx( 
+      spx.pn='p3' and forall Spy(
+        Spy.sn=Spx.sn and Spy.pn <> 'p3' and exists Px(
+          px.pn=Spy.pn
+        )
+      )
+    )
+
+.. code:: sql
+    
+    px.pname where exists spx( 
+      Spx.pn='p3' and exists spy(
+        spy.sn=Spx.sn and Spy.pn<>'p3' and exists px(
+          px.pn=spy.pn)
+      )
+    )
+    
+
+----
+
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که همهٔ عرضه‌کنندگانی که قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(II)
+
+.. code:: sql
+
+    px.pname where forall spx( 
+      spx.pn = 'p3’ or exists spy( 
+        spy.sn = spx.sn and spy.pn = px.pn
+       ) 
+    )
+
+.. code:: sql
+
+    px.pname where forall spx( 
+      spx.pn = 'p3' and exists spy( 
+        spy.pn = spx.pn and spy.pn = px.pn
+      ) 
+    )
+
+.. code:: sql
+    
+    px.pname where forall spx( 
+      spx.pn = 'p3' or exists spy( 
+        spy.pn = spx.pn and spy.sn = spx.sn
+      ) 
+    )
 
 ----
 
@@ -2772,58 +2884,145 @@ Calculation on tuples instead of relations
 
     نام قطعاتی را بیابید که در همهٔ پروژه‌ها به کار گرفته شده باشند.
 
-.. class:: rtl substep
+.. class:: rtl-h1 substep
 
-   #. نام قطعاتی را بیابید که برای همهٔ پروژه‌ها عرضه‌ای از آن قطعه وجود داشته باشد.
-   #. نام قطعاتی را بیابید که پروژه‌ای وجود نداشته باشد که عرضه‌ای از آن قطعه برای آن پروژه وجود نداشته باشد.
+    نام قطعاتی را بیابید که برای همهٔ پروژه‌ها عرضه‌ای از آن قطعه وجود داشته باشد.
+  
+    نام قطعاتی را بیابید که پروژه‌ای وجود نداشته باشد که عرضه‌ای از آن قطعه برای آن پروژه وجود نداشته باشد.
 
-.. class:: substep
+.. code:: sql
+    :class: substep
 
-    #. px.pname where forall jx(exists spjx(spjx.jn = jx.jn and px.pn = spjx.pn) )
-    #. px.pname where not exists jx( not exitst spjx(spjx.jn = jx.jn and px.pn = spjx.pn) )
+    px.pname where forall jx(
+      exists spjx(
+        spjx.jn = jx.jn and px.pn = spjx.pn
+      ) 
+    )
 
-.. class:: rtl substep
+.. code:: sql
+    :class: substep
 
-    پاسخ‌های نادرست
-
-.. class:: substep
-
-    #. px.pname where forall spjx(spjx.pn = px.pn)
-    #. px.pname where forall SPJx(exists (SPJx.pn=px.pn and px.pn=SPJx.pn))
-    #. px.pname where not exist spjx(spjx.pn=px.pn and not exist spjy(spjy.pn=spjx.pn and spjy.pn=px.pn))
-    #. px.pname where forall px(exists spj(spj.pn = px.pn)
+    px.pname where not exists jx( 
+      not exitst spjx(
+        spjx.jn = jx.jn and px.pn = spjx.pn
+      ) 
+    )
 
 ----
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که در همهٔ پروژه‌ها به کار گرفته شده باشند. پاسخ‌های نادرست
+
+.. code:: sql
+    :class: substep
+
+    px.pname where forall spjx(spjx.pn = px.pn)
+
+.. code:: sql
+    :class: substep
+    
+    px.pname where forall SPJx(
+      exists (
+        SPJx.pn=px.pn and px.pn=SPJx.pn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+    
+    px.pname where not exist spjx(
+      spjx.pn=px.pn and not exist spjy(
+        spjy.pn=spjx.pn and spjy.pn=px.pn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+    
+    px.pname where forall px(
+      exists spj(spj.pn = px.pn)
+    )
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.
+
+
+.. class:: h2
 
 * book( bn_ , title, category, fpd, author )
 * member( mn_ , name , category, bn)
 * borrow( bn_ , mn_ , nd , rdt, ret)
 
+.. class:: rtl substep
+
+      پاسخ‌های نادرست
+
+.. code:: sql
+    :class: substep
+
+    bookx.author where forall bookx(
+      exists borrowx(bookx.bn = borrowx.bn)
+    )
+    
+
+.. code:: sql
+    :class: substep
+    
+    bookx.author where not exist memberx(
+      memberx.bn=bookx.bn and 
+      not exist borrowx(
+        borrowx.bn=memberx.bn and 
+        borrowx.bn=bookx.bn 
+      )
+    )
+
+
+----
+
+:class: t2c
+
 .. class:: rtl-h1
 
     نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.
-    
-    
+
+
 .. class:: rtl substep
 
-    پاسخ‌های نادرست
+      پاسخ‌های نادرست
 
-.. class:: substep
+.. code:: sql
+    :class: substep
 
-    #. bookx.author where forall bookx(exists borrowx(bookx.bn = borrowx.bn))
-    #. bookx.author where not exist memberx(memberx.bn=bookx.bn and not exist borrowx(borrowx.bn=memberx.bn and borrowx.bn=bookx.bn ))
-    #. bookx.author where forall booky(bookx.author=booky.author and exist borrowx(borrowx.bn=bookx.bn))
+    bookx.author where forall booky(
+      bookx.author=booky.author and 
+      exist borrowx(borrowx.bn=bookx.bn)
+    )
 
 .. class:: rtl substep
 
     پاسخ‌های درست
 
+.. code:: sql
+    :class: substep
 
-.. class:: substep
-
-    #. bookx.author where not exists booky(booky.author = bookx.author and not exists borrowx(borrowx.bn = booky.bn) )
-    #. bookx.author where forall booky(bookx.author <> booky.author or exist borrowx(borrowx.bn=bookx.bn))
-
+    bookx.author where not exists booky(
+      booky.author = bookx.author and 
+      not exists borrowx(borrowx.bn = booky.bn) 
+    )
+    
+.. code:: sql
+    :class: substep
+    
+    bookx.author where forall booky(
+      bookx.author <> booky.author or 
+      exist borrowx(borrowx.bn=bookx.bn)
+    )
 
 ----
 

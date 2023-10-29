@@ -486,7 +486,6 @@ Parse for + * ( ) no priority
   #. 9 * ((4 + 5) * 3)
   #. 9 * ((4 + 5) + 3)
   #. (9 + (4 + 5)) * 3
-  #. 9 + 4 + 5 * 3 == 54
   
   .. class:: substep
 
@@ -526,6 +525,16 @@ Parse for + * ( ) no priority
       12 -- 13 [label="S"];
       13 -- END [label=")"];
     }
+
+.. :
+
+  
+  #. 9 + 4 + 5 * 3 == 54
+
+  #. E → E + T | E * T | T
+  #. T → (E) | a
+
+  E --> E + T | E - T | E * T | T
 
 ----
 
@@ -1388,12 +1397,12 @@ A → A α | β
 
 .. table::
 
-    +-----------------------------------------------------------------------+------------------------------------------------------------------------------+
-    | .. image:: img/recursive.descendant.method/with_left_recursion.png    |  .. image:: img/recursive.descendant.method/without_left_recursion.png       |
-    |    :align: center                                                     |     :align: center                                                           |
-    |    :class: substep                                                    |     :class: substep                                                          |
-    |    :height: 350px                                                     |     :height: 350px                                                           |
-    +-----------------------------------------------------------------------+------------------------------------------------------------------------------+
+    +-------------------------------------------+-----------------------------------------------+
+    | .. image:: img/rd/with_left_recursion.png |  .. image:: img/rd/without_left_recursion.png |
+    |    :align: center                         |     :align: center                            |
+    |    :class: substep                        |     :class: substep                           |
+    |    :height: 350px                         |     :height: 350px                            |
+    +-------------------------------------------+-----------------------------------------------+
 
 .. class:: substep
 

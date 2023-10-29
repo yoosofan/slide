@@ -8,8 +8,8 @@ def S(lex1):
       print(lex1.s[lex1.begin:])
   else: print('Syntax Error at', lex1.s[lex1.begin:])
 def E(lex1):
-  print('E: ', lex1.s[lex1.begin:]) 
   while True:
+    print('E: ', lex1.s[lex1.begin:]) 
     if T(lex1) == False: return False
     if lex1.ct.type not in ['+', '-']: 
       break
@@ -17,8 +17,8 @@ def E(lex1):
     lex1.getToken()
   return True
 def T(lex1):
-  print('T: ', lex1.s[lex1.begin:])
   while True:
+    print('T: ', lex1.s[lex1.begin:])
     if F(lex1) == False: return False
     if lex1.ct.type not in ['*', '/']: 
       break
@@ -42,8 +42,16 @@ def run(s):
   lex1 = lexical_number_plus_mul_par.lexical(s);
   S(lex1)
 if __name__ == "__main__":
+  while True:
+    print("Enter an expression like 12.1  + (35.45 * 2)")
+    s = input("> ")
+    if s.strip() == '':
+      break
+    run(s)
+'''    
   if len(sys.argv) < 2:
     print("python3 a.py '12.1  + (35.45 * 2)'")
     raise SystemExit(f"Usage: {sys.argv[0]} input expression")
   s = ''.join(sys.argv[1:])
   run(s)
+'''
