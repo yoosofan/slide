@@ -1242,7 +1242,6 @@ Diagrams of the Second Calculator
 
       <div id="yoograph450" class="substep"></div><script>
       d3.select("#yoograph450").graphviz().renderDot(`digraph {
-      digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="3"]
         node [shape=circle]
@@ -1921,7 +1920,7 @@ Parser Code for Last Calculator
 :class: t2c
 
 Parser Tree
-====================================================
+===========
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_parser_tree.py
   :code: python
   :number-lines: 9
@@ -1958,46 +1957,48 @@ Parser Tree
 
     <div id="yoograph790" class="substep"></div><script>
     d3.select("#yoograph790").graphviz().renderDot(`digraph {
-      Start [label="E[1+4*(3-1)]"]
-      A12 [label="E[1]"]
-      A54 [label="T[1]"]
-      A56 [label="F[1]"]
-      Aplus1 [label = "+"]
-      A35r [label="T[4*(3-1)]"]
-      A3545 [label="T[4]"]
-      A35452 [label="F[4]"]
-      Aplus2 [label="*"]
-      A2 [label="F[(3-1)]"]
-      A23 [label="("]
-      A24 [label="E[3-1]"]
-      A25 [label=")"]
-      A1  [label="E[3]"]
-      A13 [label="-"]
-      A16 [label="T[1]"]
-      A04 [label="T[3]"]
-      A07 [label="F[1]"]
-      A08 [label="F[3]"]
-      Start -> A12
-      Start -> Aplus1
-      Start -> A35r
-      A35r  -> A3545
-      A3545 -> A35452
-      A35r  -> Aplus2
-      A35r  -> A2
-      A2    -> A23
-      A2    -> A24
-      A2    -> A25
-      A24   -> A1
-      A24   -> A13
-      A24   -> A16
-      A1    -> A04
-      A16   -> A07
-      A04   -> A08
-      A12   -> A54
-      A54   -> A56
+        Start [label="E[1+4*(3-1)]"]
+        A12 [label="E[1]"]
+        A54 [label="T[1]"]
+        A56 [label="F[1]"]
+        Aplus1 [label="+"]
+        A35r [label="T[4*(3-1)]"]
+        A3545 [label="T[4]"]
+        A35452 [label="F[4]"]
+        Aplus2 [label="*"]
+        A2 [label="F[(3-1)]"]
+        A23 [label="("]
+        A24 [label="E[3-1]"]
+        A25 [label=")"]
+        A1  [label="E[3]"]
+        A13 [label="-"]
+        A16 [label="T[1]"]
+        A04 [label="T[3]"]
+        A07 [label="F[1]"]
+        A08 [label="F[3]"]
+        Start -> A12
+        Start -> Aplus1
+        Start -> A35r
+        A35r  -> A3545
+        A3545 -> A35452
+        A35r -> Aplus2
+        A35r -> A2
+        A2  -> A23
+        A2  -> A24
+        A2  -> A25
+        A24 -> A1
+        A24 -> A13
+        A24 -> A16
+        A1  -> A04
+        A16 -> A07
+        A04 -> A08
+        A12 -> A54
+        A54 -> A56
     }`); </script>
 
-1. E → E + T | E - T | T  ,  2.  T → T * F | T / F | F , 3. F → (E) | a
+.. :
+
+    1. E → E + T | E - T | T  ,  2.  T → T * F | T / F | F , 3. F → (E) | a
 
 ----
 
