@@ -982,6 +982,34 @@ Use LL Table for Parsing
 
 ----
 
+:class: t2c
+
+#. S → i(e) S
+#. S → i(e) S e S
+#. S → o
+
+.. container::
+    :class: substep
+
+    Left 
+    
+    #. S → i(e) S A
+    #. A → e S
+    #. A → λ
+    #. S → o
+
+.. class:: substep
+
+* first(S)  = {i, o}
+* first(A)  = {e, λ}
+* follow(S) = {$, e}
+* follow(A) = {$, e}
+
+
+
+
+----
+
 End
 
 .. comments:
