@@ -19,7 +19,6 @@ struct myArray{ // 100620
 void f1(void);
 int main(){
   f1();
-  return 0;
 }
 void f1(void){
   double x[]{10, 12, 34, 54};

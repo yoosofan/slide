@@ -4,7 +4,7 @@ struct myArray{ //100630
   static const int MAX = 100;
   double a[MAX];
   int n;
-  myArray(const double *ma = nullptr, int k = 0){
+  myArray(const double* ma = nullptr, int k = 0){
     if( k > MAX ) 
       k = MAX ;
     for(n = k--; k >= 0; k--)
@@ -17,10 +17,7 @@ struct myArray{ //100630
   }
 };
 void f1(void);
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}
 void f1(void){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));

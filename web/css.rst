@@ -502,6 +502,7 @@ Selector(IV): Selecting multiple element
         }
 * If any selector is invalid the whole rule will be ignored
     .. code:: css
+        :number-lines:
 
         h2{
           color:red;
@@ -512,6 +513,7 @@ Selector(IV): Selecting multiple element
           background-color:blue;
         }
     .. code:: css
+        :number-lines:
 
         h2, h3{
           color:red,
@@ -653,16 +655,11 @@ General sibling combinator
 .. code:: css
   :class: substep
   :number-lines:
-
-  main h1 ~ p {
-    background-color: lightgrey;
-  }
-  main p {
-    padding-left: 24px;
-  }
-  main h1 + p {
-    padding-left: 4px;
-  }
+  
+  main {background-color: green;}
+  main p {padding-left: 24px; background-color:red;}
+  main h1 ~ p {background-color: blue;}
+  main h1 + p {padding-left: 4px; background-color:pink;}
 
 .. raw:: html
 

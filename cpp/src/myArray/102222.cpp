@@ -4,7 +4,8 @@ class myArray{  // 102222.cpp
   double *a = nullptr;
   int n = 0;
   public:
-  myArray(const double *ma = nullptr, int n = 0){
+  myArray(const double *ma = nullptr,
+       int n = 0){
     if(n == 0 || ma == nullptr){
       n = 0;
       a = nullptr;
@@ -23,7 +24,7 @@ class myArray{  // 102222.cpp
   }
   double get(const int index = 0 ){
     if(index < n) return a[index];
-    cout << "Error: get myArray element"
+    cout<<"Error: get myArray element"
       << endl;
     return 0;
   }
@@ -31,24 +32,22 @@ class myArray{  // 102222.cpp
            const double value){
     if( index < n ) a[index] = value;
     else
-      cout << "Error set myArray element"
+      cout<<"Error set myArray element"
           << endl;
   }
   myArray(const myArray& b){
     cout << "copy constructor" << endl;
     n = b.n;
     a = new double[n];
-    for(int i = 0; i < n; i++) a[i] = b.a[i];
+    for(int i = 0; i < n; i++)
+      a[i] = b.a[i];
   }
 };
 int main(){
   double x[100000]={10,12,34,54};
   myArray d(x,sizeof(x)/sizeof(double));
   myArray g,h;
-  return 0;
-}
-/*
+}/*
 in destructor
 in destructor
-in destructor
-*/
+in destructor */

@@ -1026,7 +1026,7 @@ Use Another name for a Table in Query
 .. code:: sql
   :class: substep
 
-  select *
+  select t.name
   from t, t as M
   where t.a < M.a;
 
@@ -1034,8 +1034,8 @@ Use Another name for a Table in Query
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  a,  name, a,  name
-  1,  a,  2,  b
+  name
+  a
 
 .. code:: sql
   :class: substep
@@ -1353,13 +1353,13 @@ Use Another name for a Table in Query
 
 .. class:: rtl-h1
 
-    نام قطعاتی را بیابید که نام شهر آنها چهارحرفی باشد  با S آغاز شده باشد
+    نام قطعاتی را بیابید که نام شهر آنها پنج حرفی باشد  با S آغاز شده باشد
 
 .. code:: sql
 
   select pname
   from p
-  where city like 'S___'
+  where city like 'S____'
   ;
 
 ..  csv-table::
@@ -1394,7 +1394,7 @@ Use Another name for a Table in Query
 
 .. class:: rtl-h1
 
-  نام قطعاتی را بیابید که دست کم سه‌حرفی باشند و با رشتهٔ زیر آغاز شده باشند
+  نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ زیر آغاز شده باشند
 
 `bn_`
 

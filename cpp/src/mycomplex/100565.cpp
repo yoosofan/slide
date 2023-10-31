@@ -1,15 +1,16 @@
 #include <iostream>
 using namespace std;
-class myComplex{ double re, img; public: //100565
-  myComplex(const double a = 0, const double b = 0)
-  {re = a; img = b;}
+class myComplex{ double re, img; public:
+  myComplex(const double a = 0, 
+    const double b = 0)
+  {re = a; img = b;}  //100565
   myComplex(const myComplex& a){
     re = a.re; img = a.img;
     cout << "Copy Constructor" << endl;
   }
-  ~myComplex(){cout << "Destructor" << endl;}
+  ~myComplex(){cout<<"Destructor"<<endl;}
   void print(void) const
-  {cout << '(' << re << ", " << img << ')' << endl;}
+  {cout<<'(' << re<<", "<<img<<')'<< ndl;}
   myComplex add(const myComplex a){
     myComplex r = a;
     r.re  += re;
@@ -30,7 +31,8 @@ class myComplex{ double re, img; public: //100565
   }
 };
 void myFunction(void){
-  myComplex a(2, 3), b=4, c; 
+  myComplex a(2, 3),
+     b=4, c; 
   c = a.add(b);  
   c.print();
   c = a.sub(b); 
@@ -38,8 +40,7 @@ void myFunction(void){
   c = a.mul(b); 
   c.print();
 }
-int main(){myFunction();return 0;}/*
-./a.out
+int main(){myFunction();}/*
 Copy Constructor
 Copy Constructor
 Destructor
@@ -55,5 +56,4 @@ Destructor
 (8, 12)
 Destructor
 Destructor
-Destructor
-*/
+Destructor   */

@@ -13,10 +13,12 @@
     :js-body: assets/d3.v5.min.js
     :js-body: assets/index.min.js
     :js-body: assets/d3-graphviz.js
-    :js-body: assets/yoojs.js
 
+.. :
 
     :js: ./temporary03454-images9877/tex-mml-chtml.js
+
+    :js-body: assets/yoojs.js
 
 ----
 
@@ -34,9 +36,9 @@ https://yoosofan.github.io/course/compiler.html
 
 .. raw:: html
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
-    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js" charset="utf-8"></script>
 
 .. :
 
@@ -68,14 +70,14 @@ Grammar
     <div id="yoograph4" class="substep"></div>
     <script>
     d3.select("#yoograph4").graphviz().renderDot(`
-      digraph g {
-        rankdir = "LR";
-        node     [shape=circle];
-        END      [shape=doublecircle, label="3"];
-        0 -> END [label="a"];
-        0 -> 1   [label="a"];
-        1 -> 2   [label="+"];
-        2 -> END [label="E"];
+      digraph {
+        rankdir = "LR"
+        node     [shape=circle]
+        END      [shape=doublecircle, label="3"]
+        0 -> END [label="a"]
+        0 -> 1   [label="a"]
+        1 -> 2   [label="+"]
+        2 -> END [label="E"]
       }
     `);
     </script>
@@ -83,11 +85,9 @@ Grammar
 
 .. class:: substep
 
-  Which edge must we choose from node 0?
-
-  Node 1
-
-  Node 3
+  * Which edge must we choose from node 0?
+  * Node 1
+  * Node 3
 
 .. :
 
@@ -107,15 +107,15 @@ Left Factoring
     <div id="yoograph5" class="substep"></div>
     <script>
     d3.select("#yoograph5").graphviz().renderDot(`
-      digraph g {
-        rankdir = "LR";
-        node     [shape=circle];
-        END      [shape=doublecircle, label="3"];
-        0 -> END [label="a"];
-        0 -> 1   [label="a"];
-        1 -> 2   [label="+"];
-        2 -> END [label="E"];
-     }
+      digraph {
+        rankdir = "LR"
+        node     [shape=circle]
+        END      [shape=doublecircle, label="3"]
+        0 -> END [label="a"]
+        0 -> 1   [label="a"]
+        1 -> 2   [label="+"]
+        2 -> END [label="E"]
+      }
     `);
     </script>
 
@@ -130,13 +130,13 @@ Left Factoring
     <div id="yoograph10" class="substep"></div>
     <script>
     d3.select("#yoograph10").graphviz().renderDot(`
-      digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          E [shape=plaintext];
-          0 -> 1 [label="a"];
-          1 -> END [label="B"];
+      digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          E [shape=plaintext]
+          0 -> 1 [label="a"]
+          1 -> END [label="B"]
       }
     `);
     </script>
@@ -146,17 +146,18 @@ Left Factoring
     <div id="yoograph20" class="substep"></div>
     <script>
     d3.select("#yoograph20").graphviz().renderDot(`
-      digraph g {
-        rankdir = "LR";
-        node [shape=circle];
-        END [shape=doublecircle, label="2"];
-        B [shape=plaintext];
-        0 -> 1 [label="+"];
-        1 -> END [label="E"];
-        0 -> END [label="λ"];
+      digraph {
+        rankdir = "LR"
+        node [shape=circle]
+        END [shape=doublecircle, label="2"]
+        B [shape=plaintext]
+        0 -> 1 [label="+"]
+        1 -> END [label="E"]
+        0 -> END [label="λ"]
       }
     `);
     </script>
+
 
 ----
 
@@ -170,15 +171,15 @@ Parser Code for Add
 
   .. raw:: html
 
-      <div id="yoograph40" class="substep"></div>
+      <div id="yoograph40"></div>
       <script>
       d3.select("#yoograph40").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1 [label="a"];
-          1 -> END [label="B"];
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1 [label="a"]
+          1 -> END [label="B"]
         }
       `);
       </script>
@@ -190,14 +191,14 @@ Parser Code for Add
       <div id="yoograph60"></div>
       <script>
       d3.select("#yoograph60").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1 [label="+"];
-          1 -> END [label="E"];
-          0 -> END [label="λ"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1 [label="+"]
+          1 -> END [label="E"]
+          0 -> END [label="λ"]
+        }
       `);
       </script>
 
@@ -264,21 +265,21 @@ Parse Tree
       <div id="yoograph70" class="substep"></div>
       <script>
       d3.select("#yoograph70").graphviz().renderDot(`
-        digraph g {
-          Start [label="12.1+35.45+2"];
-          A12 [label="12.1"];
-          Aplus1 [label = "+"];
-          A35r [label="35.45+2"];
-          A3545 [label="35.45"];
-          Aplus2 [label="+"];
-          A2 [label="2"];
+        digraph {
+          Start [label="12.1+35.45+2"]
+          A12 [label="12.1"]
+          Aplus1 [label = "+"]
+          A35r [label="35.45+2"]
+          A3545 [label="35.45"]
+          Aplus2 [label="+"]
+          A2 [label="2"]
 
-          Start -> A12;
-          Start -> Aplus1;
-          Start -> A35r;
-          A35r  -> A3545;
-          A35r  -> Aplus2;
-          A35r  -> A2;
+          Start -> A12
+          Start -> Aplus1
+          Start -> A35r
+          A35r  -> A3545
+          A35r  -> Aplus2
+          A35r  -> A2
        }
       `);
       </script>
@@ -350,17 +351,15 @@ Simplify Diagram
       <div id="yoograph80" class="substep"></div>
       <script>
       d3.select("#yoograph80").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1 [label="a"];
-          1 -> END [label="B"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1 [label="a"]
+          1 -> END [label="B"]
+        }
       `);
       </script>
-
 
   B
 
@@ -369,18 +368,16 @@ Simplify Diagram
       <div id="yoograph90" class="substep"></div>
       <script>
       d3.select("#yoograph90").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1 [label="+"];
-          1 -> END [label="E"];
-          0 -> END [label="λ"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1 [label="+"]
+          1 -> END [label="E"]
+          0 -> END [label="λ"]
+        }
       `);
       </script>
-
 
 .. container:: substep
 
@@ -391,15 +388,15 @@ Simplify Diagram
       <div id="yoograph110" class="substep"></div>
       <script>
       d3.select("#yoograph110").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="3"];
-          0 -> 1     [label="a"];
-          1 -> 2     [label="+"];
-          1 -> END   [label="λ"];
-          2 -> END   [label="E"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="3"]
+          0 -> 1     [label="a"]
+          1 -> 2     [label="+"]
+          1 -> END   [label="λ"]
+          2 -> END   [label="E"]
+        }
       `);
       </script>
 
@@ -408,18 +405,17 @@ Simplify Diagram
       <div id="yoograph120" class="substep"></div>
       <script>
       d3.select("#yoograph120").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="3"];
-          0 -> 1     [label="a"];
-          1 -> 2     [label="+"];
-          1 -> END   [label="λ"];
-          2 -> 0     [label="λ"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="3"]
+          0 -> 1     [label="a"]
+          1 -> 2     [label="+"]
+          1 -> END   [label="λ"]
+          2 -> 0     [label="λ"]
+        }
       `);
       </script>
-
 
 .. class:: substep
 
@@ -430,14 +426,14 @@ Simplify Diagram
     <div id="yoograph130" class="substep"></div>
     <script>
     d3.select("#yoograph130").graphviz().renderDot(`
-      digraph g {
-        rankdir = "LR";
-        node [shape=circle];
-        END [shape=doublecircle, label="2"];
-        0 -> 1     [label="a"];
-        1 -> 0     [label="+"];
-        1 -> END   [label="λ"];
-     }
+      digraph {
+        rankdir = "LR"
+        node [shape=circle]
+        END [shape=doublecircle, label="2"]
+        0 -> 1     [label="a"]
+        1 -> 0     [label="+"]
+        1 -> END   [label="λ"]
+      }
     `);
     </script>
 
@@ -453,18 +449,17 @@ Parser Code for add Nonrecursive
 
   .. raw:: html
 
-      <div id="yoograph140" class="substep"></div>
+      <div id="yoograph140"></div>
       <script>
       d3.select("#yoograph140").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1     [label="a"];
-          1 -> 0     [label="+"];
-          1 -> END   [label="λ"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1     [label="a"]
+          1 -> 0     [label="+"]
+          1 -> END   [label="λ"]
+        }
       `);
       </script>
 
@@ -510,14 +505,14 @@ Calculator Code for add Nonrecursive
       <div id="yoograph150" class="substep"></div>
       <script>
       d3.select("#yoograph150").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="2"];
-          0 -> 1     [label="a"];
-          1 -> 0     [label="+"];
-          1 -> END   [label="λ"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="2"]
+          0 -> 1     [label="a"]
+          1 -> 0     [label="+"]
+          1 -> END   [label="λ"]
+        }
       `);
       </script>
 
@@ -598,17 +593,17 @@ Parse for + * ( ) no priority
       <div id="yoograph162" class="substep"></div>
       <script>
       d3.select("#yoograph162").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="7"];
-          0 -> END [label="A"];
-          0 -> 2 [label="A"];
-          0 -> 3 [label="A"];
-          2 -> 4 [label="+"];
-          4 -> END [label="A"];
-          3 -> 6 [label="*"];
-          6 -> END [label="A"];
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="7"]
+          0 -> END [label="A"]
+          0 -> 2 [label="A"]
+          0 -> 3 [label="A"]
+          2 -> 4 [label="+"]
+          4 -> END [label="A"]
+          3 -> 6 [label="*"]
+          6 -> END [label="A"]
         }
       `);
       </script>
@@ -618,21 +613,19 @@ Parse for + * ( ) no priority
       <div id="yoograph170" class="substep"></div>
       <script>
       d3.select("#yoograph170").graphviz().renderDot(`
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="14"];
-          10 -> END [label="a"];
-          10 -> 12 [label="("];
-          12 -> 13 [label="S"];
-          13 -> END [label=")"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="14"]
+          10 -> END [label="a"]
+          10 -> 12 [label="("]
+          12 -> 13 [label="S"]
+          13 -> END [label=")"]
+        }
       `);
       </script>
 
-
 .. :
-
 
   #. 9 + 4 + 5 * 3 == 54
 
@@ -670,17 +663,15 @@ Left Factoring
       <div id="yoograph180" class="substep"></div>
       <script>
       d3.select("#yoograph180").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-            0 -> 1 [label="A"];
-            1 -> END [label="B"];
-       }
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0 -> 1 [label="A"]
+          1 -> END [label="B"]
+        }
       `);
       </script>
-
 
   * B
 
@@ -689,18 +680,16 @@ Left Factoring
       <div id="yoograph190" class="substep"></div>
       <script>
       d3.select("#yoograph190").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="17"];
-          15 -> 16 [label="+|*"];
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="17"]
+          15 -> 16 [label="+|*"]
           16 -> END [label="A"]
-          15 -> END [label="λ"];
-       }
+          15 -> END [label="λ"]
+        }
       `);
       </script>
-
 
 .. container:: substep
 
@@ -711,19 +700,17 @@ Left Factoring
       <div id="yoograph200" class="substep"></div>
       <script>
       d3.select("#yoograph200").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="14"];
-          10 -> END [label="a"];
-          10 -> 12 [label="("];
-          12 -> 13 [label="S"];
-          13 -> END [label=")"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="14"]
+          10 -> END [label="a"]
+          10 -> 12 [label="("]
+          12 -> 13 [label="S"]
+          13 -> END [label=")"]
+        }
       `);
       </script>
-
 
 ----
 
@@ -740,14 +727,13 @@ Simplify Diagram
       <div id="yoograph210" class="substep"></div>
       <script>
       d3.select("#yoograph210").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-            0 -> 1 [label="A"];
-            1 -> END [label="B"];
-       }
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0 -> 1 [label="A"]
+          1 -> END [label="B"]
+        }
       `);
       </script>
 
@@ -759,18 +745,16 @@ Simplify Diagram
       <div id="yoograph220" class="substep"></div>
       <script>
       d3.select("#yoograph220").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="17"];
-          15 -> 16 [label="+|*"];
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="17"]
+          15 -> 16 [label="+|*"]
           16 -> END [label="A"]
-          15 -> END [label="λ"];
-       }
+          15 -> END [label="λ"]
+        }
       `);
       </script>
-
 
   * A
 
@@ -779,19 +763,17 @@ Simplify Diagram
       <div id="yoograph230" class="substep"></div>
       <script>
       d3.select("#yoograph230").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="14"];
-          10 -> END [label="a"];
-          10 -> 12 [label="("];
-          12 -> 13 [label="S"];
-          13 -> END [label=")"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="14"]
+          10 -> END [label="a"]
+          10 -> 12 [label="("]
+          12 -> 13 [label="S"]
+          13 -> END [label=")"]
+        }
       `);
       </script>
-
 
 .. container:: substep
 
@@ -802,18 +784,16 @@ Simplify Diagram
       <div id="yoograph240" class="substep"></div>
       <script>
       d3.select("#yoograph240").graphviz().renderDot(`
-
-        digraph g {
-          END [shape=doublecircle, label="17"];
-          node [shape=circle];
-          0  -> 1 [label="A"];
-          1  -> 16 [label="+|*"];
+        digraph {
+          END [shape=doublecircle, label="17"]
+          node [shape=circle]
+          0  -> 1 [label="A"]
+          1  -> 16 [label="+|*"]
           1  -> END [label="λ"]
-          16 -> END [label="A"];
-       }
+          16 -> END [label="A"]
+        }
       `);
       </script>
-
 
 ----
 
@@ -830,37 +810,33 @@ Remove Some Recursion
       <div id="yoograph250" class="substep"></div>
       <script>
       d3.select("#yoograph250").graphviz().renderDot(`
-
-        digraph g {
+        digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="17"];
-          node [shape=circle];
-          0  -> 1 [label="A"];
-          1  -> 16 [label="+|*"];
+          END [shape=doublecircle, label="17"]
+          node [shape=circle]
+          0  -> 1 [label="A"]
+          1  -> 16 [label="+|*"]
           1  -> END [label="λ"]
-          16 -> END [label="A"];
-       }
+          16 -> END [label="A"]
+        }
       `);
       </script>
-
 
 .. raw:: html
 
     <div id="yoograph260" class="substep"></div>
     <script>
     d3.select("#yoograph260").graphviz().renderDot(`
-
-      digraph g {
+      digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="17"];
-        node [shape=circle];
-        0  -> 1 [label="A"];
-        1  -> 0 [label="+|*"];
+        END [shape=doublecircle, label="17"]
+        node [shape=circle]
+        0  -> 1 [label="A"]
+        1  -> 0 [label="+|*"]
         1  -> END [label="λ"]
-     }
+      }
     `);
     </script>
-
 
 .. container:: substep
 
@@ -871,16 +847,15 @@ Remove Some Recursion
       <div id="yoograph270" class="substep"></div>
       <script>
       d3.select("#yoograph270").graphviz().renderDot(`
-
-        digraph g {
-          rankdir = "LR";
-          node [shape=circle];
-          END [shape=doublecircle, label="14"];
-          10 -> END [label="i"];
-          10 -> 12 [label="("];
-          12 -> 13 [label="S"];
-          13 -> END [label="}"];
-       }
+        digraph {
+          rankdir = "LR"
+          node [shape=circle]
+          END [shape=doublecircle, label="14"]
+          10 -> END [label="i"]
+          10 -> 12 [label="("]
+          12 -> 13 [label="S"]
+          13 -> END [label="}"]
+        }
       `);
       </script>
 
@@ -898,12 +873,12 @@ Parser Code
    .. raw:: html
 
       <div id="yoograph280" class="substep"></div><script>
-      d3.select("#yoograph280").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph280").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="17"];
-        node [shape=circle];
-        0  -> 1 [label="A"];
-        1  -> 0 [label="+|*"];
+        END [shape=doublecircle, label="17"]
+        node [shape=circle]
+        0  -> 1 [label="A"]
+        1  -> 0 [label="+|*"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -912,14 +887,14 @@ Parser Code
   .. raw:: html
 
       <div id="yoograph290" class="substep"></div><script>
-      d3.select("#yoograph290").graphviz().renderDot(`digraph g {
-        rankdir = "LR";
-        node [shape=circle];
-        END [shape=doublecircle, label="14"];
-        10 -> END [label="a"];
-        10 -> 12 [label="("];
-        12 -> 13 [label="S"];
-        13 -> END [label="}"];
+      d3.select("#yoograph290").graphviz().renderDot(`digraph {
+        rankdir = "LR"
+        node [shape=circle]
+        END [shape=doublecircle, label="14"]
+        10 -> END [label="a"]
+        10 -> 12 [label="("]
+        12 -> 13 [label="S"]
+        13 -> END [label="}"]
       } `); </script>
 
 
@@ -1017,12 +992,12 @@ State Diagram(II)
   .. raw:: html
 
       <div id="yoograph300" class="substep"></div><script>
-      d3.select("#yoograph300").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph300").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> END [label="L"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> END [label="L"]
       }`); </script>
 
 .. container:: substep
@@ -1032,12 +1007,12 @@ State Diagram(II)
   .. raw:: html
 
       <div id="yoograph310" class="substep"></div><script>
-      d3.select("#yoograph310").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph310").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="+"];
-      1  -> END [label="E"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="+"]
+      1  -> END [label="E"]
       0  -> END [label="λ"]
       }`); </script>
 
@@ -1048,12 +1023,12 @@ State Diagram(II)
   .. raw:: html
 
       <div id="yoograph320" class="substep"></div><script>
-      d3.select("#yoograph320").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph320").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> END [label="M"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> END [label="M"]
       }`); </script>
 
 .. container:: substep
@@ -1063,13 +1038,13 @@ State Diagram(II)
   .. raw:: html
 
       <div id="yoograph330" class="substep"></div><script>
-      d3.select("#yoograph330").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph330").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="*"];
-        1  -> END [label="T"];
-        1  -> 2 [label="M"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="*"]
+        1  -> END [label="T"]
+        1  -> 2 [label="M"]
         0  -> END [label="λ"]
       }`); </script>
 
@@ -1080,12 +1055,12 @@ State Diagram(II)
   .. raw:: html
 
       <div id="yoograph340" class="substep"></div><script>
-      d3.select("#yoograph340").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph340").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="("];
-        1  -> 2 [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="("]
+        1  -> 2 [label="E"]
         2  -> END [label=")"]
         0  -> END [label="a"]
       }`); </script>
@@ -1109,12 +1084,12 @@ Simplify Diagram(II) - Combine E, L
   .. raw:: html
 
       <div id="yoograph350" class="substep"></div><script>
-      d3.select("#yoograph350").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph350").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> END [label="L"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> END [label="L"]
       }`); </script>
 
 
@@ -1126,26 +1101,26 @@ Simplify Diagram(II) - Combine E, L
   .. raw:: html
 
       <div id="yoograph360" class="substep"></div><script>
-      d3.select("#yoograph360").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph360").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="+"];
-        1  -> 2 [label="E"];
-        2  -> END [label="L"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="+"]
+        1  -> 2 [label="E"]
+        2  -> END [label="L"]
         0  -> END [label="λ"]
       }`); </script>
 
   .. raw:: html
 
       <div id="yoograph370" class="substep"></div><script>
-      d3.select("#yoograph370").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph370").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> 2 [label="+"];
-        2  -> END [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> 2 [label="+"]
+        2  -> END [label="E"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1153,25 +1128,25 @@ Simplify Diagram(II) - Combine E, L
 .. raw:: html
 
     <div id="yoograph380" class="substep"></div><script>
-    d3.select("#yoograph380").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph380").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> 2 [label="+"];
-      2  -> 0 [label="λ"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="T"]
+      1  -> 2 [label="+"]
+      2  -> 0 [label="λ"]
       1  -> END [label="λ"]
     }`); </script>
 
 .. raw:: html
 
     <div id="yoograph390" class="substep"></div><script>
-    d3.select("#yoograph390").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph390").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> 0 [label="+"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="T"]
+      1  -> 0 [label="+"]
       1  -> END [label="λ"]
     }`); </script>
 
@@ -1188,12 +1163,12 @@ Simplify Diagram(III) - Combine T, M
   .. raw:: html
 
       <div id="yoograph400" class="substep"></div><script>
-      d3.select("#yoograph400").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph400").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> END [label="M"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> END [label="M"]
       }`); </script>
 
 
@@ -1204,13 +1179,13 @@ Simplify Diagram(III) - Combine T, M
   .. raw:: html
 
       <div id="yoograph410" class="substep"></div><script>
-      d3.select("#yoograph410").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph410").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="*"];
-        1  -> 2 [label="T"];
-        2  -> END [label="M"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="*"]
+        1  -> 2 [label="T"]
+        2  -> END [label="M"]
         0  -> END [label="λ"]
       }`); </script>
 
@@ -1218,38 +1193,38 @@ Simplify Diagram(III) - Combine T, M
 .. raw:: html
 
     <div id="yoograph420" class="substep"></div><script>
-    d3.select("#yoograph420").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph420").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> 2 [label="*"];
-      2  -> END [label="T"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="F"]
+      1  -> 2 [label="*"]
+      2  -> END [label="T"]
       1  -> END [label="λ"]
     }`); </script>
 
 .. raw:: html
 
     <div id="yoograph430" class="substep"></div><script>
-    d3.select("#yoograph430").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph430").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> 2 [label="*"];
-      2  -> 0 [label="λ"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="F"]
+      1  -> 2 [label="*"]
+      2  -> 0 [label="λ"]
       1  -> END [label="λ"]
     }`); </script>
 
 .. raw:: html
 
     <div id="yoograph440" class="substep"></div><script>
-    d3.select("#yoograph440").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph440").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> 0 [label="*"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="F"]
+      1  -> 0 [label="*"]
       1  -> END [label="λ"]
     }`); </script>
 
@@ -1266,13 +1241,13 @@ Diagrams of the Second Calculator
   .. raw:: html
 
       <div id="yoograph450" class="substep"></div><script>
-      d3.select("#yoograph450").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph450").graphviz().renderDot(`digraph {
       digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> 0 [label="+"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> 0 [label="+"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1281,12 +1256,12 @@ Diagrams of the Second Calculator
   .. raw:: html
 
       <div id="yoograph460" class="substep"></div><script>
-      d3.select("#yoograph460").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph460").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> 0 [label="*"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> 0 [label="*"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1296,12 +1271,12 @@ Diagrams of the Second Calculator
   .. raw:: html
 
       <div id="yoograph470" class="substep"></div><script>
-      d3.select("#yoograph470").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph470").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="("];
-        1  -> 2 [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="("]
+        1  -> 2 [label="E"]
         2  -> END [label=")"]
         0  -> END [label="a"]
       }`); </script>
@@ -1315,12 +1290,12 @@ Diagrams of the Second Calculator
   .. raw:: html
 
       <div id="yoograph480" class="substep"></div><script>
-      d3.select("#yoograph480").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph480").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="2"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> 0 [label="+|*"];
+        END [shape=doublecircle, label="2"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> 0 [label="+|*"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1346,12 +1321,12 @@ State Diagram
   .. raw:: html
 
       <div id="yoograph490" class="substep"></div><script>
-      d3.select("#yoograph490").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph490").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> 2 [label="+"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> 2 [label="+"]
         2  -> END [label="E"]
         0  -> END [label="T"]
       }`); </script>
@@ -1363,12 +1338,12 @@ State Diagram
   .. raw:: html
 
       <div id="yoograph500" class="substep"></div><script>
-      d3.select("#yoograph500").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph500").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> 2 [label="*"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> 2 [label="*"]
         2  -> END [label="T"]
         0  -> END [label="F"]
       }`); </script>
@@ -1381,12 +1356,12 @@ State Diagram
   .. raw:: html
 
       <div id="yoograph510" class="substep"></div><script>
-      d3.select("#yoograph510").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph510").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="("];
-        1  -> 2 [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="("]
+        1  -> 2 [label="E"]
         2  -> END [label=")"]
         0  -> END [label="a"]
       }`); </script>
@@ -1400,12 +1375,12 @@ Simplify Diagram(IV) - Fewer steps
 .. raw:: html
 
     <div id="yoograph520" class="substep"></div><script>
-    d3.select("#yoograph520").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph520").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> 2 [label="+"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="T"]
+      1  -> 2 [label="+"]
       2  -> END [label="E"]
       0  -> END [label="T"]
     }`); </script>
@@ -1414,12 +1389,12 @@ Simplify Diagram(IV) - Fewer steps
 .. raw:: html
 
     <div id="yoograph530" class="substep"></div><script>
-    d3.select("#yoograph530").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph530").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> 0 [label="+"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="T"]
+      1  -> 0 [label="+"]
       1  -> END [label="λ"]
     }`); </script>
 
@@ -1427,13 +1402,13 @@ Simplify Diagram(IV) - Fewer steps
 .. raw:: html
 
     <div id="yoograph540" class="substep"></div><script>
-    d3.select("#yoograph540").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph540").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      0  -> END [label="F"];
-      1  -> 2 [label="*"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="F"]
+      0  -> END [label="F"]
+      1  -> 2 [label="*"]
       2  -> END [label="E"]
     }`); </script>
 
@@ -1441,12 +1416,12 @@ Simplify Diagram(IV) - Fewer steps
 .. raw:: html
 
     <div id="yoograph550" class="substep"></div><script>
-    d3.select("#yoograph550").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph550").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> 0 [label="*"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="F"]
+      1  -> 0 [label="*"]
       1  -> END [label="λ"]
     }`); </script>
 
@@ -1454,12 +1429,12 @@ Simplify Diagram(IV) - Fewer steps
 .. raw:: html
 
     <div id="yoograph560" class="substep"></div><script>
-    d3.select("#yoograph560").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph560").graphviz().renderDot(`digraph {
       rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="("];
-      1  -> 2 [label="E"];
+      END [shape=doublecircle, label="3"]
+      node [shape=circle]
+      0  -> 1 [label="("]
+      1  -> 2 [label="E"]
       2  -> END [label=")"]
       0  -> END [label="a"]
     }`); </script>
@@ -1477,12 +1452,12 @@ Parser Code for Add and Multiply
    .. raw:: html
 
       <div id="yoograph570" class="substep"></div><script>
-      d3.select("#yoograph570").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph570").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> 0 [label="+"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> 0 [label="+"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1491,12 +1466,12 @@ Parser Code for Add and Multiply
   .. raw:: html
 
       <div id="yoograph580" class="substep"></div><script>
-      d3.select("#yoograph580").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph580").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> 0 [label="*"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> 0 [label="*"]
         1  -> END [label="λ"]
       }`); </script>
 
@@ -1507,12 +1482,12 @@ Parser Code for Add and Multiply
   .. raw:: html
 
       <div id="yoograph590" class="substep"></div><script>
-      d3.select("#yoograph590").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph590").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="("];
-        1  -> 2 [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="("]
+        1  -> 2 [label="E"]
         2  -> END [label=")"]
         0  -> END [label="a"]
       }`); </script>
@@ -1665,12 +1640,12 @@ Calculator Grammar
         <script>
         d3.select("#yoograph610").graphviz().renderDot(`
 
-          digraph g {
+          digraph {
             rankdir = "LR"
-            END [shape=doublecircle, label="2"];
-            node [shape=circle];
-            0  -> 1 [label="T"];
-            1  -> END [label="E'"];
+            END [shape=doublecircle, label="2"]
+            node [shape=circle]
+            0  -> 1 [label="T"]
+            1  -> END [label="E'"]
          }
         `);
         </script>
@@ -1679,50 +1654,50 @@ Calculator Grammar
     .. raw:: html
 
         <div id="yoograph620" class="substep"></div><script>
-        d3.select("#yoograph620").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph620").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="+|-"];
-          1  -> 2 [label="T"];
-          2  -> END [label="E'"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="+|-"]
+          1  -> 2 [label="T"]
+          2  -> END [label="E'"]
           0  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph630" class="substep"></div><script>
-        d3.select("#yoograph630").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph630").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="F"];
-          1  -> END [label="T'"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="F"]
+          1  -> END [label="T'"]
         }`); </script>
 
 
     .. raw:: html
 
         <div id="yoograph640" class="substep"></div><script>
-        d3.select("#yoograph640").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph640").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="*|/"];
-          1  -> 2 [label="F"];
-          2  -> END [label="T'"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="*|/"]
+          1  -> 2 [label="F"]
+          2  -> END [label="T'"]
           0  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph650" class="substep"></div><script>
-        d3.select("#yoograph650").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph650").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="("];
-          1  -> 2 [label="E"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="("]
+          1  -> 2 [label="E"]
           2  -> END [label=")"]
           0  -> END [label="a"]
         }`); </script>
@@ -1740,12 +1715,12 @@ Simplify Diagram(V) - Combine E and E'
     .. raw:: html
 
         <div id="yoograph660" class="substep"></div><script>
-        d3.select("#yoograph660").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph660").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="T"];
-          1  -> END [label="E'"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="T"]
+          1  -> END [label="E'"]
         }`); </script>
 
     E'
@@ -1753,13 +1728,13 @@ Simplify Diagram(V) - Combine E and E'
     .. raw:: html
 
         <div id="yoograph670" class="substep"></div><script>
-        d3.select("#yoograph670").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph670").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="+|-"];
-          1  -> 2 [label="T"];
-          2  -> END [label="E'"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="+|-"]
+          1  -> 2 [label="T"]
+          2  -> END [label="E'"]
           0  -> END [label="λ"]
         }`); </script>
 
@@ -1771,38 +1746,38 @@ Simplify Diagram(V) - Combine E and E'
     .. raw:: html
 
         <div id="yoograph680" class="substep"></div><script>
-        d3.select("#yoograph680").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph680").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="+|-"];
-          1  -> 0 [label="T"];
-          0  -> END [label="λ"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="+|-"]
+          1  -> 0 [label="T"]
+          0  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph690" class="substep"></div><script>
-        d3.select("#yoograph690").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph690").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="T"];
-          1  -> 2 [label="+|-"];
-          2  -> 1 [label="T"];
-          1  -> END [label="λ"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="T"]
+          1  -> 2 [label="+|-"]
+          2  -> 1 [label="T"]
+          1  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph700" class="substep"></div><script>
-        d3.select("#yoograph700").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph700").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="T"];
-          1  -> 0 [label="+|-"];
-          1  -> END [label="λ"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="T"]
+          1  -> 0 [label="+|-"]
+          1  -> END [label="λ"]
         }`); </script>
 
 
@@ -1819,12 +1794,12 @@ Simplify Diagram(VI) - Combining T and T'
     .. raw:: html
 
         <div id="yoograph710" class="substep"></div><script>
-        d3.select("#yoograph710").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph710").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="F"];
-          1  -> END [label="T'"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="F"]
+          1  -> END [label="T'"]
         }`); </script>
 
     T'
@@ -1832,13 +1807,13 @@ Simplify Diagram(VI) - Combining T and T'
     .. raw:: html
 
         <div id="yoograph720" class="substep"></div><script>
-        d3.select("#yoograph720").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph720").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="*|/"];
-          1  -> 2 [label="F"];
-          2  -> END [label="T'"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="*|/"]
+          1  -> 2 [label="F"]
+          2  -> END [label="T'"]
           0  -> END [label="λ"]
         }`); </script>
 
@@ -1849,38 +1824,38 @@ Simplify Diagram(VI) - Combining T and T'
     .. raw:: html
 
         <div id="yoograph730" class="substep"></div><script>
-        d3.select("#yoograph730").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph730").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="2"];
-        node [shape=circle];
-        0  -> 1 [label="*|/"];
-        1  -> 0 [label="F"];
-        0  -> END [label="λ"];
+        END [shape=doublecircle, label="2"]
+        node [shape=circle]
+        0  -> 1 [label="*|/"]
+        1  -> 0 [label="F"]
+        0  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph740" class="substep"></div><script>
-        d3.select("#yoograph740").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph740").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="3"];
-          node [shape=circle];
-          0  -> 1 [label="F"];
-          1  -> 2 [label="*|/"];
-          2  -> 1 [label="F"];
-          1  -> END [label="λ"];
+          END [shape=doublecircle, label="3"]
+          node [shape=circle]
+          0  -> 1 [label="F"]
+          1  -> 2 [label="*|/"]
+          2  -> 1 [label="F"]
+          1  -> END [label="λ"]
         }`); </script>
 
     .. raw:: html
 
         <div id="yoograph750" class="substep"></div><script>
-        d3.select("#yoograph750").graphviz().renderDot(`digraph g {
+        d3.select("#yoograph750").graphviz().renderDot(`digraph {
           rankdir = "LR"
-          END [shape=doublecircle, label="2"];
-          node [shape=circle];
-          0  -> 1 [label="F"];
-          1  -> 0 [label="*|/"];
-          1  -> END [label="λ"];
+          END [shape=doublecircle, label="2"]
+          node [shape=circle]
+          0  -> 1 [label="F"]
+          1  -> 0 [label="*|/"]
+          1  -> END [label="λ"]
         }`); </script>
 
 ----
@@ -1896,13 +1871,13 @@ Parser Code for Last Calculator
   .. raw:: html
 
       <div id="yoograph760" class="substep"></div><script>
-      d3.select("#yoograph760").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph760").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="2"];
-        node [shape=circle];
-        0  -> 1 [label="T"];
-        1  -> 0 [label="+|-"];
-        1  -> END [label="λ"];
+        END [shape=doublecircle, label="2"]
+        node [shape=circle]
+        0  -> 1 [label="T"]
+        1  -> 0 [label="+|-"]
+        1  -> END [label="λ"]
       }`); </script>
 
   T
@@ -1910,13 +1885,13 @@ Parser Code for Last Calculator
   .. raw:: html
 
       <div id="yoograph770" class="substep"></div><script>
-      d3.select("#yoograph770").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph770").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="2"];
-        node [shape=circle];
-        0  -> 1 [label="F"];
-        1  -> 0 [label="*|/"];
-        1  -> END [label="λ"];
+        END [shape=doublecircle, label="2"]
+        node [shape=circle]
+        0  -> 1 [label="F"]
+        1  -> 0 [label="*|/"]
+        1  -> END [label="λ"]
       }`); </script>
 
   F
@@ -1924,12 +1899,12 @@ Parser Code for Last Calculator
   .. raw:: html
 
       <div id="yoograph780" class="substep"></div><script>
-      d3.select("#yoograph780").graphviz().renderDot(`digraph g {
+      d3.select("#yoograph780").graphviz().renderDot(`digraph {
         rankdir = "LR"
-        END [shape=doublecircle, label="3"];
-        node [shape=circle];
-        0  -> 1 [label="("];
-        1  -> 2 [label="E"];
+        END [shape=doublecircle, label="3"]
+        node [shape=circle]
+        0  -> 1 [label="("]
+        1  -> 2 [label="E"]
         2  -> END [label=")"]
         0  -> END [label="a"]
       }`); </script>
@@ -1982,7 +1957,7 @@ Parser Tree
 .. raw:: html
 
     <div id="yoograph790" class="substep"></div><script>
-    d3.select("#yoograph790").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph790").graphviz().renderDot(`digraph {
       Start [label="E[1+4*(3-1)]"]
       A12 [label="E[1]"]
       A54 [label="T[1]"]
@@ -2031,7 +2006,7 @@ Parser Tree
 .. raw:: html
 
     <div id="yoograph800" class="substep"></div><script>
-    d3.select("#yoograph800").graphviz().renderDot(`digraph g {
+    d3.select("#yoograph800").graphviz().renderDot(`digraph {
       Start [label="E[1+4*(3-1)]"]
       A54 [label="T[1]"]
       A56 [label="F[1]"]

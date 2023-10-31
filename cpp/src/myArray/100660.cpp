@@ -14,7 +14,7 @@ struct myArray{ // 100660
     if( index < n ) a[index] = value;
     cout << "Error accessing myArray " << endl;
   }
-  myArray(const double *ma = nullptr, int k = 0){
+  myArray(const double* ma = nullptr, int k = 0){
     if( k > MAX ) 
       k = MAX ;
     for(n = k--; k >= 0; k--)

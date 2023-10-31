@@ -9,7 +9,6 @@ int main(){
   cout << "f2(" << k << "): ";
   n = f2(k-2);
   cout << "n: " << n << endl;
-  return 0;
 }
 int f2(int n, int z){
   cout << "n: "<< n << "\t z: " << z << endl;

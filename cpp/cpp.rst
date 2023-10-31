@@ -1765,13 +1765,13 @@ Destructor(II)
   :code: cpp
   :number-lines:
   :start-line: 2
-  :end-line: 28
+  :end-line: 31
 
 .. include:: src/myArray/102140.cpp
   :code: cpp
   :number-lines:
-  :start-line: 28
-  :end-line: 58
+  :start-line: 31
+  :end-line: 60
 
 ----
 
@@ -1824,31 +1824,34 @@ Destructor(V)
   :code: cpp
   :number-lines:
   :start-line: 2
-  :end-line: 31
+  :end-line: 28
 
 .. include:: src/myArray/102222.cpp
   :code: cpp
   :number-lines:
-  :start-line: 31
+  :start-line: 28
   :end-line: 64
 
 ----
 
 :class: t2c
 
-Destructor(VI)
-===========================
-.. include:: src/myArray/102234.cpp
-  :code: cpp
-  :number-lines:
-  :start-line: 2
-  :end-line: 33
+.. :
+
+    Destructor(VI)
+    ===========================
 
 .. include:: src/myArray/102234.cpp
   :code: cpp
   :number-lines:
-  :start-line: 33
-  :end-line: 69
+  :start-line: 2
+  :end-line: 34
+
+.. include:: src/myArray/102234.cpp
+  :code: cpp
+  :number-lines:
+  :start-line: 34
+  :end-line: 72
 
 ----
 
@@ -1911,20 +1914,23 @@ Implicit Conversion (double to complexCls)
 
 :class: t2c
 
-ComplexCls(XIII) - const
-=========================
-.. include:: src/mycomplex/100565.cpp
-    :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 2
-    :end-line: 30
+.. :
+
+    ComplexCls(XIII) - const
+    =========================
 
 .. include:: src/mycomplex/100565.cpp
     :code: cpp
     :number-lines:
     :class: ltr
-    :start-line: 30
+    :start-line: 2
+    :end-line: 31
+
+.. include:: src/mycomplex/100565.cpp
+    :code: cpp
+    :number-lines:
+    :class: ltr
+    :start-line: 31
     :end-line: 62
 
 ----

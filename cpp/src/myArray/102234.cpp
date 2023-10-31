@@ -1,24 +1,25 @@
 #include <iostream>
 using namespace std;
-class myArray{  // 102234.cpp
-  double *a = nullptr;  int n = 0;   public:
-  myArray(const double *ma = nullptr, int n = 0){
+class myArray{ int n = 0;//102234.cpp
+  double *a = nullptr;  public:
+  myArray(const double *ma = nullptr,
+      int n = 0){
     if(n == 0 || ma == nullptr)
     {n = 0; a = nullptr;}
     else{
       a = new double[this->n = n];
-      for(int i=0; i<n; i++)   a[i] = ma[i];
+      for(int i=0; i<n; i++)   
+        a[i] = ma[i];
     }
   }
   ~myArray(){
-    delete[] a;
-    a = nullptr;
+    delete[] a;  a = nullptr;
     n = 0;
     cout << "in destructor" << endl;
   }
   double get(const int index = 0 ){
     if(index < n) return a[index];
-    cout << "Error: get myArray element"
+    cout<<"Error: get myArray element"
       << endl;
     return 0;
   }
@@ -26,14 +27,15 @@ class myArray{  // 102234.cpp
            const double value){
     if( index < n ) a[index] = value;
     else
-      cout << "Error set myArray element"
+      cout<<"Error set myArray element"
           << endl;
   }
   myArray(const myArray& b){
     cout << "copy constructor" << endl;
     n = b.n;
     a = new double[n];
-    for(int i = 0; i < n; i++) a[i] = b.a[i];
+    for(int i = 0; i < n; i++) 
+      a[i] = b.a[i];
   }
   void print(void){
     cout << " n = " << n << endl;

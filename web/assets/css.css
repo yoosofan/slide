@@ -198,17 +198,17 @@ div#selector-vi-combinator-ii main h1 + p{
   padding-left: 4px;
 }
 div#selector-vii-combinator-iii main{
-  text-align: left;
+  text-align: left; background-color: green;
   align-self: start;
 }
 div#selector-vi-combinator-iii main p{
-  padding-left: 24px;
-}
-div#selector-vii-combinator-iii main h1 + p{
-  padding-left: 4px;
+  padding-left: 24px; background-color:red;
 }
 div#selector-vii-combinator-iii main h1 ~ p{
-  background-color: lightgrey;
+  background-color: blue;
+}
+div#selector-vii-combinator-iii main h1 + p{
+  padding-left: 4px; background-color: pink;
 }
 div#selector-attribute-iii-id ul#sample-view a{
     color: blue;

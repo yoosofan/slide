@@ -21,10 +21,7 @@ struct myArray{ // 100640
   }
 };
 void f1(void);
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}
 void f1(void){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));

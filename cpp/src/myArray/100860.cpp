@@ -14,7 +14,6 @@ int main(){
     cout << "const char*" << endl; ///
   else
     cout << "other" << endl;
-  return 0;
 }
 void print(double *pa){
   for(auto i = 0; i < 5; i++)
@@ -26,7 +25,6 @@ void f1(void){
   for(auto i = 0; i < 5 ; i++)
     px[i] = i+1;
   print(px);
-}/*
-PKc
+}/*PKc
 const char*
 */

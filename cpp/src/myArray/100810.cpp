@@ -9,7 +9,6 @@ int main(){ // 100810
   f2(pa);
   pa = f3();
   f4(pa);
-  return 0;
 }
 double* f1(void){
   double* px = nullptr;

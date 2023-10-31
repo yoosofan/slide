@@ -677,9 +677,9 @@ Paging
 .. class:: substep
 
   #. Number of bits of Addrress  related to Maximum supported memory by this computer(cpu and motherboard)
-  #. Number of bits of Addrress  =  log2(Maximum supported memory
+  #. Number of bits of Addrress  =  log2(Maximum supported memory)
   #. If max supported memory = 32 words then number of bits needed for addrress ?
-  #. 32 = 2 ^ 5
+  #. 32 = 2 ^ 5, :math:`n = log_2(m)` , m is number of bytes or words
   #. 5 = log2(32)
   #. if p = 2, d = 3 then the size of each frame or page is ?
   #. 2 ^ 3 = 8
@@ -743,7 +743,7 @@ Consider a computer with maximum 16 words
     :header-rows: 1
     :class: smallerelementwithfullborder
 
-    "01 ","01 ","01 ","01 "
+    "00 ","01 ","10 ","11 "
     0,1,2,3
 
   .
@@ -752,7 +752,7 @@ Consider a computer with maximum 16 words
     :header-rows: 1
     :class: smallerelementwithfullborder
 
-    "01 ","01 ","01 ","01 "
+    "00 ","01 ","10 ","11 "
     4,5,6,7
 
   .
@@ -761,7 +761,7 @@ Consider a computer with maximum 16 words
     :header-rows: 1
     :class: smallerelementwithfullborder
 
-    "01 ","01 ","01 ","01 "
+    "00 ","01 ","10 ","11 "
     8,9,10,11
 
   .
@@ -770,7 +770,7 @@ Consider a computer with maximum 16 words
     :header-rows: 1
     :class: smallerelementwithfullborder
 
-    "01 ","01 ","01 ","01 "
+    "00 ","01 ","10 ","11 "
     12,13,14,15
 
 ----

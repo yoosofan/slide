@@ -2,21 +2,17 @@
 using namespace std;
 class myArray{ // 102140
   static const int MAX = 100;
-  double a[MAX];
-  int n;
-  public:
+  double a[MAX]; int n;  public:
   double get(const int index = 0 ){
     if(index < n) return a[index];
     cout << "Error in myArray"
-         << endl;
-    return 0;
+         << endl; return 0;
   }
   void set(const int index,
            const double value){
     if( index < n ) a[index] = value;
-    else
-      cout << "Error accessing myArray"
-           << endl;
+    else cout<<"Error accessing myArray"
+       << endl;
   }
   myArray(const double* ma=nullptr,
           int k = 0){
@@ -32,9 +28,8 @@ class myArray{ // 102140
     for(int i = 0; i < n; i++)
       a[i] = b.a[i];
   }
-  ~myArray(){
-    cout << "Destructor" << endl;
-  }
+  ~myArray()
+  {cout << "Destructor" << endl;}
   void print(void){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
