@@ -3936,7 +3936,7 @@ group by
 
 .. class:: .rtl-h1
 
-نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
+نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(I).
 
 .. container::
 
@@ -3945,7 +3945,7 @@ group by
     :number-lines:
 
     select p.city -- wrong answer
-    from p join spj using(pn)
+    from p join sp using(pn)
       join s using(sn)
     where s.status > 10
     group by p.city
@@ -3980,9 +3980,56 @@ group by
       where status > 10 and
         s.sn = sp.sn
     )
-  group p.city
+  group by p.city
   having sum(qty) > 20 and
     count(pn) > 2
+  ;
+
+
+----
+
+:class: t2c
+
+.. class:: .rtl-h1
+
+نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(II).
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from p join sp using(pn)
+  where exists(
+      select *
+      from s
+      where status > 10 and
+        s.sn = sp.sn
+    )
+  group by p.city
+  having sum(qty) > 20 and
+    count(distinct pn) > 2
+  ;
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from p join sp using(pn)
+  where exists(
+      select *
+      from s
+      where status > 10 and
+        s.sn = sp.sn
+    ) and exists(
+      select *
+      from p as p2
+      where p.city = p2.city and
+        p.pn <> p2.city
+    )
+  group by p.city
+  having sum(qty) > 20
   ;
 
 .. :
@@ -4566,6 +4613,32 @@ Left Outer Join(II)
         where sp.pn = p.pn
       ) as sqty
     from p;
+
+
+----
+
+:class: t2c
+
+.. class:: .rtl-h1
+
+نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(III).
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from p left outer join sp using(pn)
+  where exists(
+      select *
+      from s
+      where status > 10 and
+        s.sn = sp.sn
+    )
+  group by p.city
+  having sum(qty) > 20 and
+    count(distinct pn) > 2
+  ;
 
 ----
 
