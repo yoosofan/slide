@@ -2206,6 +2206,8 @@ ComplexCls(XIX)
     :start-line: 0
     :end-line: 30
 
+----
+
 .. include:: src/mycomplex/00_one_file/complexCls08.cpp
     :code: cpp
     :number-lines:
@@ -2225,6 +2227,8 @@ ComplexCls(XX)
     :class: ltr
     :start-line: 2
     :end-line: 38
+
+----
 
 .. include:: src/mycomplex/00_one_file/complexCls10.cpp
     :code: cpp
@@ -2285,6 +2289,8 @@ ComplexCls(XXIII)
     :class: ltr
     :start-line: 2
     :end-line: 35
+
+----
 
 .. include:: src/mycomplex/00_one_file/complexCls1202.cpp
     :code: cpp
