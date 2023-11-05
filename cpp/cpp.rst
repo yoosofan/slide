@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :data-width: 1024
-:css: ./style.css ./cpp.css
+:css: ./style.css ../css/cpp.css
 :skip-help: true
 :substep: true
 :slide-numbers: true
@@ -2997,7 +2997,7 @@ Four Pillars of OOP
 * Polymorphism
 * Inheritence
 
-.. image:: img/oop_4_pillars.png
+.. image:: ../img/oop_4_pillars.png
    :align: center
 
 .. :
