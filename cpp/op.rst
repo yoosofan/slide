@@ -90,14 +90,14 @@ ComplexCls(IV) / Operator +
     :code: cpp
     :number-lines:
     :class: ltr
-    :start-line: 0
+    :start-line: 3
     :end-line: 29
 
 .. container::
 
   .. include:: src/op/1026.cpp
       :code: cpp
-      :number-lines: 29
+      :number-lines: 27
       :class: ltr
       :start-line: 29
       :end-line: 67
@@ -120,12 +120,12 @@ ComplexCls(V) / Operator +
     :code: cpp
     :number-lines:
     :class: ltr
-    :start-line: 0
+    :start-line: 3 
     :end-line: 22
 
 .. include:: src/op/1036.cpp
     :code: cpp
-    :number-lines:
+    :number-lines: 20
     :class: ltr
     :start-line: 22
     :end-line: 67
@@ -229,7 +229,7 @@ ComplexCls(VIII) / Operator + - * =
 
 .. include:: src/op/1076.cpp
     :code: cpp
-    :number-lines: 32
+    :number-lines: 26
     :class: ltr
     :start-line: 28
     :end-line: 67
@@ -239,28 +239,34 @@ ComplexCls(VIII) / Operator + - * =
 
 :class: t2c
 
-ComplexCls(VIII) / Operator + - * = []
-==================================================
+.. :
+
+    ComplexCls(VIII) / Operator + - * = []
+    ==================================================
+
 .. include:: src/op/1086.cpp
     :code: cpp
     :number-lines: 4
     :class: ltr
     :start-line: 3
-    :end-line: 30
+    :end-line: 32
 
 .. include:: src/op/1086.cpp
     :code: cpp
     :number-lines: 30
     :class: ltr
-    :start-line: 30
+    :start-line: 33
     :end-line: 67
 
 -----
 
 :class: t2c
 
-ComplexCls(VIII) / Operator + - * = []
-==================================================
+.. :
+
+    ComplexCls(VIII) / Operator + - * = []
+    ==================================================
+
 .. include:: src/op/1088.cpp
     :code: cpp
     :number-lines: 4
@@ -275,13 +281,15 @@ ComplexCls(VIII) / Operator + - * = []
     :start-line: 29
     :end-line: 67
 
-
 -----
 
 :class: t2c
 
-ComplexCls(VIII) / Operator + - * =
-==================================================
+.. :
+
+    ComplexCls(VIII) / Operator + - * =
+    ==================================================
+
 .. include:: src/op/1090.cpp
     :code: cpp
     :number-lines: 4
@@ -300,8 +308,11 @@ ComplexCls(VIII) / Operator + - * =
 
 :class: t2c
 
-ComplexCls(IX) / friend 
-==================================================
+.. :
+
+    ComplexCls(IX) / friend 
+    ==================================================
+
 .. include:: src/op/1091.cpp
     :code: cpp
     :number-lines: 4
@@ -321,8 +332,11 @@ ComplexCls(IX) / friend
 
 :class: t2c
 
-ComplexCls(X) / Operator ==  != !
-==================================================
+.. :
+
+    ComplexCls(X) / Operator ==  != !
+    ==================================================
+
 .. include:: src/op/1100.cpp
     :code: cpp
     :number-lines: 4
@@ -332,7 +346,7 @@ ComplexCls(X) / Operator ==  != !
 
 .. include:: src/op/1100.cpp
     :code: cpp
-    :number-lines: 37
+    :number-lines: 35
     :class: ltr
     :start-line: 37
     :end-line: 78

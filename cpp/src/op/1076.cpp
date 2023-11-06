@@ -12,7 +12,8 @@ class complexCls{
   {return sqrt(r * r + i * i);}
   void input(void){
     cout << "Enter real:"; cin >> r;
-    cout << "Enter imaginary:"; cin >> i;
+    cout << "Enter imaginary:"; 
+    cin >> i;
   }
   complexCls operator+(const complexCls& b){
     complexCls c;
@@ -32,7 +33,8 @@ class complexCls{
     c.i = r * b.i + i * b.r;
     return c;
   }
-  complexCls operator=(const complexCls& b){
+  complexCls operator=(
+      const complexCls& b){
     r = b.r;
     i = b.i;
     return *this;

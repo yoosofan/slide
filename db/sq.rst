@@ -4397,6 +4397,18 @@ Scalar value(II)
   p1, 12
   p5, 12
 
+.. code:: sql
+  :class: substep
+
+  select pn, weight
+  from p
+  where weight = (
+      select weight
+      from p
+      order by weight asc
+      limit 1
+  );
+
 
 ----
 
@@ -4494,6 +4506,7 @@ Scalar value(V)
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     select pn,
        (select sum(status)
@@ -4531,6 +4544,7 @@ Scalar value(V)
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     select pn, sum(qty) as sqty
     from p natural join sp
@@ -4606,6 +4620,7 @@ Left Outer Join(II)
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     select pn, (
         select sum(qty)

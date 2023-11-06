@@ -14,22 +14,22 @@ class complexCls{
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
   }
-  friend complexCls operator+(const complexCls& a,
-      const complexCls& b){
+  friend complexCls operator+(
+      const complexCls& a,const complexCls& b){
     complexCls c;
     c.r = a.r + b.r;
     c.i = a.i + b.i;
     return c;
   }
-  friend complexCls operator-(const complexCls& a,
-      const complexCls& b){
+  friend complexCls operator-(
+      const complexCls& a,const complexCls& b){
     complexCls c;
     c.r = a.r - b.r;
     c.i = a.i - b.i;
     return c;
   }
-  friend complexCls operator*(const complexCls& a,
-      const complexCls& b){
+  friend complexCls operator*(
+      const complexCls& a,const complexCls& b){
     complexCls c;
     c.r = a.r * b.r - a.i * b.i;
     c.i = a.r * b.i + a.i * b.r;
@@ -42,7 +42,9 @@ class complexCls{
   }
   double& operator[](int index){
     if(index < 0 || index > 1){
-      cout << "index is out of range" << index << endl;
+      cout << 
+        "index is out of range"
+        << index << endl;
       return r;
     }
     if(index) return i;

@@ -20,9 +20,11 @@ class complexCls{
     c.i = this->i + b.i;
     return c;
   }
-  friend complexCls add(complexCls& a, complexCls& b);
+  friend complexCls add(complexCls& a, 
+      complexCls& b);
 };
-complexCls add(complexCls& a, complexCls& b){
+complexCls add(complexCls& a,
+    complexCls& b){
   complexCls c = a;
   c.r += b.r;
   c.i += b.i;
@@ -36,7 +38,4 @@ void f1(void){
   c=add(a,b);
   c.Show();
 }
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}

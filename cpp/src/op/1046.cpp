@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r,i; // Error
  public:
   complexCls(int m = 0, int n = 0)
@@ -12,7 +12,8 @@ class complexCls{
   {return sqrt(r * r + i * i);}
   void input(void){
     cout << "Enter real:"; cin >> r;
-    cout << "Enter imaginary:"; cin >> i;
+    cout << "Enter imaginary:";
+    cin >> i;
   }
   complexCls operator+(complexCls& b){
     complexCls c;
@@ -20,7 +21,7 @@ class complexCls{
     c.i = this->i + b.i;
     return c;
   }
-  friend complexCls add(complexCls& a, 
+  friend complexCls add(complexCls& a,
     complexCls& b){
     complexCls c = a;
     c.r += b.r;
@@ -35,7 +36,4 @@ void f1(void){
   c = add(a,b);
   c.Show();
 }
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}

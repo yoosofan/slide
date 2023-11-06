@@ -32,14 +32,17 @@ class complexCls{
     c.i = r * b.i + i * b.r;
     return c;
   }
-  complexCls operator=(const complexCls& b){
+  complexCls operator=(
+      const complexCls& b){
     r = b.r;
     i = b.i;
     return *this;
   }
   double& operator[](int index){
     if(index < 0 || index > 1){
-      cout << "index is out of range" << index << endl;
+      cout <<
+        "index is out of range"
+        << index << endl;
       return r;
     }
     if(index) return i;

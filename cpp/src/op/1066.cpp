@@ -26,7 +26,8 @@ class complexCls{
     c.i = this->i - b.i;
     return c;
   }
-  complexCls operator*(const complexCls& b){
+  complexCls operator*(
+      const complexCls& b){
     complexCls c;
     c.r = r * b.r - i * b.i;
     c.i = r * b.i + i * b.r;
@@ -34,7 +35,8 @@ class complexCls{
   }
 };
 void f1(void){
-  complexCls a(2, 3), b(2, 1), c(a);
+  complexCls a(2, 3),
+    b(2, 1), c(a);
   c = a + 2;  c.Show();
   c = a - 2;  c.Show();
 }
