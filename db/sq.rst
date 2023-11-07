@@ -5182,17 +5182,57 @@ Condition on delete
 
 :class: t2c
 
-with
-=====
+with(I)
+=======
+.. code:: sql
+
+  select pn, pname
+  from p, (
+      select avg(weight) as averagev
+      from p
+    ) as temp
+  where p.weight > temp.averagev
+  ;
+
+.. code:: sql
+
+  select pn, pname
+  from p
+  where p.weight > (
+      select avg(weight)
+      from p
+    )
+  ;
+
 .. code:: sql
 
   with temp (averagev) as(
-    select avg(wight)
+    select avg(weight)
     from p
   )
   select pn, pname
-  from p
+  from p, temp
   where p.weight > averagev
+  ;
+
+----
+
+:class: t2c
+
+with(II)
+=========
+.. code:: sql
+
+  select pn
+  from (
+      select avg(weight) as averagev
+      from p
+    ) as temp1, (
+      select pn, sum(qty) as total
+      from sp
+      group by pn
+    ) as temp2
+  where temp2.total > temp1.averagev
   ;
 
 .. code:: sql
@@ -5211,6 +5251,13 @@ with
   where temp2.total > temp1.averagev
   ;
 
+----
+
+
+:class: t2c
+
+with(II)
+========
 .. code:: sql
 
   with dept _total (dept_name, value) as(
