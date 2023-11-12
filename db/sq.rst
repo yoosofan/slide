@@ -5253,7 +5253,6 @@ with(II)
 
 ----
 
-
 :class: t2c
 
 with(II)
@@ -5389,6 +5388,92 @@ Three-valued logic
 
 ----
 
+.. code:: sql
+    :number-lines:
+    
+    select *
+    from List_of_tables
+    where (conditions) is unknown;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select *
+    from List_of_tables
+    where (conditions) is not unknown;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select *
+    from List_of_tables
+    where not ( (conditions) is not unknown);
+   
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select *
+    from List_of_tables
+    where ( (conditions) is not unknown) is not unknown;
+
+.. class:: substep
+
+    Always True
+
+----
+
+"is not unknown" , "is unknown"
+=================================
+.. class:: substep
+
+#. Always True or False
+#. It cannot be "unknown"
+#. The meaning of "null" and "unknown" is different
+#. The usages of "null" and "unknown" is different
+
+
+----
+
+The final result of an uknown condition is False
+================================================
+.. class:: substep rtl-h1
+
+    نام قطعاتی را بیابید که وزن بیشتر از ۱۷ دارند.
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select pname
+    from p
+    where weight > 17;
+
+
+----
+
+Only Conditions with Known Values
+=================================
+Pr : is a large combinations of conditions
+------------------------------------------
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    ((pr) is not unknown) and pr ;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select *
+    from List_of_tables
+    where (conditions) is not unknown;
+
+----
+ 
 Check
 =======
 .. code:: sql
@@ -5629,11 +5714,20 @@ Same Sample in PostgreSQL
 
 ----
 
-vacuum
-===========
-* vacuum
-* vacuum full
-* vacuum
+no action, restrict, set null, set default or cascade
+=====================================================================
+.. class:: substep
+
+#. **no action**: Configuring "no action" means just that: when a parent key is modified or deleted from the database, no special action is taken.
+#. **restrict**: The "restrict" action means that the application is prohibited from deleting (for on delete restrict) or modifying (for on update restrict) a parent key when there exists one or more child keys mapped to it. The difference between the effect of a restrict action and normal foreign key constraint enforcement is that the restrict action processing happens as soon as the field is updated - not at the end of the current statement as it would with an immediate constraint, or at the end of the current transaction as it would with a deferred constraint. Even if the foreign key constraint it is attached to is deferred, configuring a restrict action causes SQLite to return an error immediately if a parent key with dependent child keys is deleted or modified.
+#. **set null**: If the configured action is "set null", then when a parent key is deleted (for on delete set null) or modified (for on update set null), the child key columns of all rows in the child table that mapped to the parent key are set to contain SQL null values.
+#. **set default**: The "set default" actions are similar to "set null", except that each of the child key columns is set to contain the columns default value instead of null. Refer to the create table documentation for details on how default values are assigned to table columns.
+#. **cascade**: A "cascade" action propagates the delete or update operation on the parent key to each dependent child key. For an "on delete cascade" action, this means that each row in the child table that was associated with the deleted parent row is also deleted. For an "on update cascade" action, it means that the values stored in each dependent child key are modified to match the new parent key values.
+
+.. :
+
+  https://sqlite.org/foreignkeys.html
+  https://www.sqlitetutorial.net/sqlite-foreign-key/
 
 ----
 
@@ -5673,7 +5767,9 @@ All
 
 :class: t2c
 
-.. class:: rtl-h1
+Some
+====
+.. class:: rtl-h1 substep
 
   نام قطعاتی را بیابید که وزن آن قطعه‌ها از دست کم وزن یک قطعه درون شهر پاریس بیشتر باشد
 
@@ -6106,12 +6202,14 @@ order by ..... desc
 
 -----
 
-شماره و نام عرضه کنندگان را بیابید. اگر وضعیت عرضه‌کننده بزرگتر از ۲۰ بود کنار مشخصات عرضه کننده کلمه ۱ و در غیر این صورت کلمهٔ ۲ بگذارید.
+:class: t2c
 
-*  ۱ "big"
-* ۲ "small"
+.. class:: rtl-h1
+
+    شماره و نام عرضه کنندگان را بیابید. اگر وضعیت عرضه‌کننده بزرگتر از ۲۰ بود کنار مشخصات عرضه کننده کلمهٔ big و در غیر این صورت کلمهٔ small بگذارید.
 
 .. code:: sql
+    :class: substep
 
     select sn, sname, case
         when status > 20 then 'big'
@@ -6585,21 +6683,6 @@ SQLite uses the following terminology
 
 ----
 
-no action, restrict, set null, set default or cascade
-=====================================================================
-* no action: Configuring "no action" means just that: when a parent key is modified or deleted from the database, no special action is taken.
-* restrict: The "restrict" action means that the application is prohibited from deleting (for on delete restrict) or modifying (for on update restrict) a parent key when there exists one or more child keys mapped to it. The difference between the effect of a restrict action and normal foreign key constraint enforcement is that the restrict action processing happens as soon as the field is updated - not at the end of the current statement as it would with an immediate constraint, or at the end of the current transaction as it would with a deferred constraint. Even if the foreign key constraint it is attached to is deferred, configuring a restrict action causes SQLite to return an error immediately if a parent key with dependent child keys is deleted or modified.
-* set null: If the configured action is "set null", then when a parent key is deleted (for on delete set null) or modified (for on update set null), the child key columns of all rows in the child table that mapped to the parent key are set to contain SQL null values.
-* set default: The "set default" actions are similar to "set null", except that each of the child key columns is set to contain the columns default value instead of null. Refer to the create table documentation for details on how default values are assigned to table columns.
-* cascade: A "cascade" action propagates the delete or update operation on the parent key to each dependent child key. For an "on delete cascade" action, this means that each row in the child table that was associated with the deleted parent row is also deleted. For an "on update cascade" action, it means that the values stored in each dependent child key are modified to match the new parent key values.
-
-.. :
-
-  https://sqlite.org/foreignkeys.html
-  https://www.sqlitetutorial.net/sqlite-foreign-key/
-
-----
-
 Alter table Foreign key
 ================================
 MySQL / SQL Server / Oracle / MS Access
@@ -6692,8 +6775,14 @@ Constraint(II): Unique
 
 ----
 
+Vacuum
+===========
+vacuum;
+--------
+vacuum full
+-----------
 SQLite vacuum
-==================
+-------------
 .. code:: sql
 
     vacuum;
