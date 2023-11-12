@@ -44,6 +44,4 @@ int main(){
 	cout<<d[1]<<endl;
 	d[3]=4;
 	cout<<d[3]<<endl;
-	
-	return 0;
 }

@@ -2475,6 +2475,27 @@ ComplexCls(XXX)
 
 :class: t2c
 
+ComplexCls and copy constructor
+===============================
+.. include:: src/mycomplex/00_one_file/complexCls18_10.cpp
+    :code: cpp
+    :number-lines:
+    :class: ltr
+    :start-line: 2
+    :end-line: 30
+
+.. include:: src/mycomplex/00_one_file/complexCls18_10.cpp
+    :code: cpp
+    :number-lines:
+    :class: ltr
+    :start-line: 30
+    :end-line: 60
+
+
+----
+
+:class: t2c
+
 ComplexCls(XXXI)
 ===========================
 .. include:: src/mycomplex/00_one_file/complexCls19.cpp

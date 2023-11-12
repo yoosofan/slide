@@ -61,7 +61,7 @@ class complexCls{
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
   //c = 2 + a;  c.Show();
-  c = a - 2;  c.Show();
+  c = a = a + b + 2;  c.Show();
   if(a == b ) cout << "a == b" << endl;
   else cout << "a != b" << endl;
   if(!a) cout << "a is not zero" << endl;

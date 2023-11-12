@@ -8,6 +8,8 @@ class complexCls{
     re = r;
     cout << "constructor:"; print();
   }
+  complexCls(const complexCls& a)
+  {re=a.re;img=a.img;cout<<"cop"<<endl;}
   double getRe(void)
   {return re;}
   double getImg(void)
@@ -36,19 +38,21 @@ void f4(complexCls p1){
   p1.print();
   complexCls p2(3, 4);
   complexCls p3(5, 6);
-  f2(p2);  
+  p3 = f2(p2);  
   p3.print();  
-}/*
+}/* ./a.out
 constructor:(1,2)
+cop
 (1,2)
 constructor:(3,4)
 constructor:(5,6)
+cop
 (3,4)
+cop
 destructor:(16,4)
 destructor:(16,4)
 (16,4)
 destructor:(16,4)
 destructor:(3,4)
 destructor:(1,2)
-destructor:(1,2)
-*/
+destructor:(1,2)  */

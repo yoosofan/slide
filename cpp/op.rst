@@ -103,7 +103,7 @@ ComplexCls(IV) / Operator +
       :end-line: 67
 
   .. code:: console
-  
+
     4+ i 4
     4+ i 4
     4+ i 4
@@ -120,7 +120,7 @@ ComplexCls(V) / Operator +
     :code: cpp
     :number-lines:
     :class: ltr
-    :start-line: 3 
+    :start-line: 3
     :end-line: 22
 
 .. include:: src/op/1036.cpp
@@ -153,7 +153,7 @@ ComplexCls(VI) / Operator + (Error)
       :end-line: 67
 
   .. code:: console
-  
+
     In function ‘void f1()’:
     1046.cpp:33:9: error: no match for ‘operator+’
      (operand types are ‘complexCls’ and ‘int’)
@@ -169,7 +169,7 @@ ComplexCls(VI) / Operator + (Error)
 
 :class: t2c
 
-ComplexCls(VII) / Operator + 
+ComplexCls(VII) / Operator +
 =========================================
 .. include:: src/op/1056.cpp
     :code: cpp
@@ -189,11 +189,11 @@ ComplexCls(VII) / Operator +
 
   .. code:: console
 
-    g++ src/op/1056.cpp 
+    g++ src/op/1056.cpp
     slide$ ./a.out
     4+ i 3
     4+ i 4
- 
+
 -----
 
 :class: t2c
@@ -233,7 +233,6 @@ ComplexCls(VIII) / Operator + - * =
     :class: ltr
     :start-line: 28
     :end-line: 67
-
 
 -----
 
@@ -308,9 +307,29 @@ ComplexCls(VIII) / Operator + - * =
 
 :class: t2c
 
+c = complexCls(2) + a 
+=====================
+.. include:: src/op/1095.cpp
+    :code: cpp
+    :number-lines: 4
+    :class: ltr
+    :start-line: 3
+    :end-line: 26
+
+.. include:: src/op/1095.cpp
+    :code: cpp
+    :number-lines: 29 
+    :class: ltr
+    :start-line: 26
+    :end-line: 5 65
+
+-----
+
+:class: t2c
+
 .. :
 
-    ComplexCls(IX) / friend 
+    ComplexCls(IX) / friend
     ==================================================
 
 .. include:: src/op/1091.cpp
@@ -326,7 +345,6 @@ ComplexCls(VIII) / Operator + - * =
     :class: ltr
     :start-line: 34
     :end-line: 67
-
 
 -----
 
@@ -418,7 +436,7 @@ ComplexCls(VIII) /  ( )
 
 :class: t2c
 
-ComplexCls(VIII) /  
+ComplexCls(VIII) /
 ==================================================
 .. include:: src/op/1150.cpp
     :code: cpp
@@ -440,21 +458,20 @@ ComplexCls(VIII) /
 :class: t2c
 
 MyArray /  =
-==================================================
+====================
 .. include:: src/op/1240.cpp
     :code: cpp
-    :number-lines: 30
+    :number-lines: 0
     :class: ltr
-    :start-line: 30
-    :end-line: 57
+    :start-line: 0
+    :end-line: 25
 
 .. include:: src/op/1240.cpp
     :code: cpp
-    :number-lines: 57
+    :number-lines: 25
     :class: ltr
-    :start-line: 57
+    :start-line: 25
     :end-line: 89
-
 
 -----
 
@@ -464,16 +481,16 @@ MyArray /  = Error
 ==================================================
 .. include:: src/op/1250.cpp
     :code: cpp
-    :number-lines: 30
+    :number-lines: 0
     :class: ltr
-    :start-line: 30
-    :end-line: 57
+    :start-line: 0
+    :end-line: 25
 
 .. include:: src/op/1250.cpp
     :code: cpp
-    :number-lines: 57
+    :number-lines: 25
     :class: ltr
-    :start-line: 57
+    :start-line: 25
     :end-line: 89
 
 
@@ -481,7 +498,7 @@ MyArray /  = Error
 
 :class: t2c
 
-MyArray /  = 
+MyArray /  =
 ==================================================
 .. include:: src/op/1260.cpp
     :code: cpp
@@ -502,7 +519,7 @@ MyArray /  =
 
 :class: t2c
 
-MyArray /  = 
+MyArray /  =
 ==================================================
 .. include:: src/op/1270.cpp
     :code: cpp
