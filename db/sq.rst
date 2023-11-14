@@ -6268,33 +6268,165 @@ order by ..... desc
 
 ----
 
+:class: t2c
+
+Unique(I)
+==========
 .. code:: sql
 
-    unique
+    CREATE TABLE Persons (
+        ID int NOT NULL UNIQUE,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Age int
+    );
 
-    not unique
+.. code:: sql
+    :class: substep
 
-    delete from p where weight < (select avg(weight) from p);
+    CREATE TABLE Persons (
+        ID int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Age int,
+        UNIQUE (ID)
+    ); 
 
-    select distinct city
-    from   s
-    where exists(
-      select * from s as T
-      where T.city=s.city and T.status>1000
+.. code:: sql
+    :class: substep
+
+    CREATE TABLE Persons (
+        ID int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255),
+        Age int,
+        CONSTRAINT UC_Person UNIQUE (ID,LastName)
+    ); 
+
+.. code:: sql
+    :class: substep
+
+    create table "student"(
+      "SSN" varchar(20) unique not null,
+      "name" varchar(40) not null,
+      "student_number" bigint Primary key
+      );
+
+    insert into 
+      "student"("SSN", "name", "student_number") 
+    values
+    ("38947389", "کامران خداپرستی", 973433),
+    ("38472389", "کوروش پارسایی", 9632847),
+    ("38947389", ")احمد یوسفان", 93802932);
+
+
+----
+
+:class: t2c
+
+Unique(II)
+===========
+.. code:: sql
+
+    create table contacts(
+        contact_id integer primary key,
+        first_name text,
+        last_name text,
+        email text not null UNIQUE
+    );
+
+.. code:: sql
+
+    create table shapes(
+      shape_id integer primary key,
+      background_color text,
+      foreground_color text,
+      UNIQUE(background_color,foreground_color)
+    );
+
+.. :
+
+  https://www.sqlitetutorial.net/sqlite-unique-constraint/
+
+.. code:: sql
+
+    ALTER TABLE Persons
+    ADD UNIQUE (ID); 
+
+.. code:: sql
+
+    ALTER TABLE Persons
+    ADD CONSTRAINT UC_Person 
+      UNIQUE (ID,LastName); 
+
+.. code:: sql
+
+    ALTER TABLE Persons
+    DROP CONSTRAINT UC_Person;
+
+----
+
+Unique(III)
+=======================
+.. code:: sql
+
+    create table contacts (
+      contact_id integer primary key,
+      first_name text    not null,
+      last_name  text    not null,
+      email      text,
+      phone      text    not null
+        check (length(phone) >= 10)
+    );
+
+.. code:: sql
+    :class: substep
+
+    create table products (
+      product_id   integer         primary key,
+      product_name text            not null,
+      list_price   DECIMAL (10, 2) not null,
+      discount     DECIMAL (10, 2) not null
+                                  default 0,
+      check (list_price >= discount and
+          discount >= 0 and
+          list_price >= 0)
+    );
+
+
+.. :
+
+  https://www.sqlitetutorial.net/sqlite-unique-constraint/
+  https://www.w3schools.com/sql/sql_check.asp
+
+
+----
+
+Unique condition
+=================
+.. code:: sql
+
+    select pn
+    from p
+    where unique(
+      select *
+      from sp
+      where sp.pn = p.pn
     )
+    ;
+    -- not implemented in PostgreSQL
 
-    select distinct city
-    from   s
-    where s.status>1000
+.. code:: sql
 
-    select city    from   s
-    except
-    select city    from   s
-    where s.status<=1000
-
-
-
-    delete from p where city="kashan"
+    select pn
+    from p
+    where not unique(
+      select *
+      from sp
+      where sp.pn = p.pn
+    )
+    ;
+    -- not implemented in PostgreSQL
 
 ----
 
@@ -6467,187 +6599,193 @@ Constraint(I)
 * foreign keys
 * unique
 
+
+.. :
+
+    ----
+
+    .. code:: sql
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+        delete from "P" where "pn" = 'P6';
+        Help: foreign key constraint failed
+
+        update "SPJ"
+        set "jn" = 'J8'
+        where "pn" = 'P6';
+        Help: foreign key constraint failed
+
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade,
+          foreign key("pn") references "P"("pn") On delete cascade,
+          foreign key("jn") references "J"("jn") on Delete cascade
+        );
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
+          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
+          foreign key("jn") references "J"("jn") on delete cascade on update cascade,
+        );
+
+
+        delete from "P" where "pn" = 'P6';
+
+        drop table spj;
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
+          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
+          foreign key("jn") references "J"("jn") on Delete cascade on update cascade
+        );
+
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        update P
+        set "pn" = 'P8'
+        where "pn" = 'P6';
+
+        select distinct pn from p;
+
+        select distinct pn from p;
+
+        select distinct pn from spj;
+
+    ----
+
+    .. code:: sql
+
+        update table P
+        set "pn" = 'P6'
+        where "pn" = 'P8';
+
+        drop table if exists spj;
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete set null on update cascade,
+          foreign key("pn") references "P"("pn") On delete set null on update cascade,
+          foreign key("jn") references "J"("jn") on Delete set null on update cascade
+        );
+
+    ----
+
+    .. code:: sql
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10) references S,
+          pn    char(10) references P,
+          jn    char(10) references J,
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+        );
+
+        drop table spj;
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn"),
+          foreign key("pn") references "P"("pn"),
+          foreign key("jn") references "J"("jn")
+        );
+
+----
+
 pragma foreign_keys
--------------------------
-.. code:: sql
-
-    create table SPJ (
-      sn    char(10) references S,
-      pn    char(10) references P,
-      jn    char(10) references J,
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-    );
-
-    drop table spj;
-
-    create table SPJ (
-      sn    char(10),
-      pn    char(10),
-      jn    char(10),
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-      foreign key("sn") references "S"("sn"),
-      foreign key("pn") references "P"("pn"),
-      foreign key("jn") references "J"("jn")
-    );
-
-----
-
-.. code:: sql
-
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-    delete from "P" where "pn" = 'P6';
-    Help: foreign key constraint failed
-
-    update "SPJ"
-    set "jn" = 'J8'
-    where "pn" = 'P6';
-    Help: foreign key constraint failed
-
-----
-
-.. code:: sql
-
-    create table SPJ (
-      sn    char(10),
-      pn    char(10),
-      jn    char(10),
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-      foreign key("sn") references "S"("sn") on delete cascade,
-      foreign key("pn") references "P"("pn") On delete cascade,
-      foreign key("jn") references "J"("jn") on Delete cascade
-    );
-
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-----
-
-.. code:: sql
-
-    create table SPJ (
-      sn    char(10),
-      pn    char(10),
-      jn    char(10),
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-      foreign key("sn") references "S"("sn") on delete cascade on update cascade,
-      foreign key("pn") references "P"("pn") On delete cascade on update cascade,
-      foreign key("jn") references "J"("jn") on delete cascade on update cascade,
-    );
-
-
-    delete from "P" where "pn" = 'P6';
-
-    drop table spj;
-
-----
-
-.. code:: sql
-
-    create table SPJ (
-      sn    char(10),
-      pn    char(10),
-      jn    char(10),
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-      foreign key("sn") references "S"("sn") on delete cascade on update cascade,
-      foreign key("pn") references "P"("pn") On delete cascade on update cascade,
-      foreign key("jn") references "J"("jn") on Delete cascade on update cascade
-    );
-
-
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
----
-
-.. code:: sql
-
-    update P
-    set "pn" = 'P8'
-    where "pn" = 'P6';
-
-    select distinct pn from p;
-
-    select distinct pn from p;
-
-    select distinct pn from spj;
-
----
-
-.. code:: sql
-
-    update table P
-    set "pn" = 'P6'
-    where "pn" = 'P8';
-
-    drop table if exists spj;
-
-    create table SPJ (
-      sn    char(10),
-      pn    char(10),
-      jn    char(10),
-      qty   int default 0,
-      primary key (sn, pn ,jn)
-      foreign key("sn") references "S"("sn") on delete set null on update cascade,
-      foreign key("pn") references "P"("pn") On delete set null on update cascade,
-      foreign key("jn") references "J"("jn") on Delete set null on update cascade
-    );
-
-----
-
-.. code:: sql
-
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-    insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-    insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-----
-
+====================
 .. code:: sql
 
     pragma foreign_keys=off;
@@ -6664,9 +6802,9 @@ pragma foreign_keys
 
 .. :
 
-  https://www.sqlitetutorial.net/sqlite-primary-key/
-  https://www.sqlbook.com/sql/drop-table-if-exists/
-  https://www.tutorialspoint.com/sql/sql-foreign-key.htm
+    https://www.sqlitetutorial.net/sqlite-primary-key/
+    https://www.sqlbook.com/sql/drop-table-if-exists/
+    https://www.tutorialspoint.com/sql/sql-foreign-key.htm
 
 ----
 
@@ -6693,85 +6831,6 @@ MySQL / SQL Server / Oracle / MS Access
     add constraint FK_PersonOrder
     foreign key (PersonID) references Persons(PersonID);
 
-----
-
-Constraint(II): Unique
-=======================
-.. code:: sql
-
-    create table "student"(
-      "SSN" varchar(20) unique not null,
-      "name" varchar(40) not null,
-      "student_number" bigint Primary key
-      );
-
-    insert into "student"("SSN", "name", "student_number") values("38947389", "کامران خداپرستی", 973433),
-                                                                 ("38472389", "کوروش پارسایی", 9632847),
-                                                                 ("38947389", ")احمد یوسفان", 93802932
-      );
-
-    create table contacts(
-        contact_id integer primary key,
-        first_name text,
-        last_name text,
-        email text not null UNIQUE
-    );
-
-----
-
-.. code:: sql
-
-    create table shapes(
-        shape_id integer primary key,
-        background_color text,
-        foreground_color text,
-        UNIQUE(background_color,foreground_color)
-    );
-
-.. :
-
-  https://www.sqlitetutorial.net/sqlite-unique-constraint/
-
-----
-
-Constraint(III): Unique
-=======================
-.. code:: sql
-
-    create table contacts (
-        contact_id integer primary key,
-        first_name text    not null,
-        last_name  text    not null,
-        email      text,
-        phone      text    not null
-                        check (length(phone) >= 10)
-    );
-
-.. code:: sql
-    :class: substep
-
-    create table products (
-        product_id   integer         primary key,
-        product_name text            not null,
-        list_price   DECIMAL (10, 2) not null,
-        discount     DECIMAL (10, 2) not null
-                                    default 0,
-        check (list_price >= discount and
-            discount >= 0 and
-            list_price >= 0)
-    );
-
-
-.. :
-
-  https://www.sqlitetutorial.net/sqlite-unique-constraint/
-  https://www.w3schools.com/sql/sql_check.asp
-
-
-----
-
-Constraint(II): Unique
-=======================
 
 ----
 
@@ -6933,54 +6992,56 @@ Recursive query
       select ∗
       from rec_prereq;
 
-----
+.. :
 
-Problems
-======================================================
-..  class:: rtl
+    ----
 
-   *  نام عرضه کنندگانی را به دست آورید که همه‌ی قطعه‌های همشهری خود را عرضه می‌کنند.
-   *  نام عرضه کنندگانی را به دست آورید که فقط قطعه‌های همشهری خود را عرضه می‌کنند.
-   *  نام عرضه کنندگانی را به دست آورید که فقط قطعه‌های با وزن کمتر از ۱۰۰ زا عرضه می‌کنند.
-   *  مجموع وزن قطعه‌هایی را به دست آورید که عرضه شده‌اند.
-   *  نام شهرها و مجموع وزن قطعه‌های آن شهرهایی را به دست آورید که همه‌ی عرضه کنندگان درون آن شهرها آن قطعه‌ها را عرضه کرده باشند.
-   *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است.
-   *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است. زوج‌های تکراری در این راه حل نباید وجود داشته باشد. دقت کنید که دو زوج (الف ، ب) و (ب ، الف) متفاوت هستند.
+    Problems
+    ======================================================
+    ..  class:: rtl
+
+       *  نام عرضه کنندگانی را به دست آورید که همه‌ی قطعه‌های همشهری خود را عرضه می‌کنند.
+       *  نام عرضه کنندگانی را به دست آورید که فقط قطعه‌های همشهری خود را عرضه می‌کنند.
+       *  نام عرضه کنندگانی را به دست آورید که فقط قطعه‌های با وزن کمتر از ۱۰۰ زا عرضه می‌کنند.
+       *  مجموع وزن قطعه‌هایی را به دست آورید که عرضه شده‌اند.
+       *  نام شهرها و مجموع وزن قطعه‌های آن شهرهایی را به دست آورید که همه‌ی عرضه کنندگان درون آن شهرها آن قطعه‌ها را عرضه کرده باشند.
+       *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است.
+       *  نام زوج شهرهای عرضه کنندگان و قطعه‌هایی را به دست آورید که آن عرضه کننده آن قطعه را عرضه کرده است. زوج‌های تکراری در این راه حل نباید وجود داشته باشد. دقت کنید که دو زوج (الف ، ب) و (ب ، الف) متفاوت هستند.
 
 
-.. contents::  فهرست
+    .. contents::  فهرست
 
-.. comment:
+    .. comment:
 
-  rst2s5.py rsts5.txt rsts5.html -d -t --section-numbering --stylesheet=farsi.css,html4css1.css
-  rst2html  sql.samples.sql   sql.samples.html --stylesheet=myfarsi.css,html4css1.css
+      rst2s5.py rsts5.txt rsts5.html -d -t --section-numbering --stylesheet=farsi.css,html4css1.css
+      rst2html  sql.samples.sql   sql.samples.html --stylesheet=myfarsi.css,html4css1.css
 
-  https://intellipaat.com/blog/tutorial/sql-tutorial/like-and-between-operators-in-sql/#_sql_like
-  https://beginner-sql-tutorial.com/sql-like-in-operators.htm
-  sql between like
-  https://lornajane.net/posts/2011/inner-vs-outer-joins-on-a-many-to-many-relationship
-  https://www.w3schools.com/sql/default.asp
+      https://intellipaat.com/blog/tutorial/sql-tutorial/like-and-between-operators-in-sql/#_sql_like
+      https://beginner-sql-tutorial.com/sql-like-in-operators.htm
+      sql between like
+      https://lornajane.net/posts/2011/inner-vs-outer-joins-on-a-many-to-many-relationship
+      https://www.w3schools.com/sql/default.asp
 
-  insert into S(sn,sname,status,city) values('S1','Smith',20,'London');
-  insert into S(sn,sname,status,city) values('S2','Jones',10,'Paris' );
-  insert into S(sn,sname,status,city) values('S3','Blake',30,'Paris' )
+      insert into S(sn,sname,status,city) values('S1','Smith',20,'London');
+      insert into S(sn,sname,status,city) values('S2','Jones',10,'Paris' );
+      insert into S(sn,sname,status,city) values('S3','Blake',30,'Paris' )
 
-----
+    ----
 
-speed up
-===============
-sql speed up select * instead of fields
+    speed up
+    ===============
+    sql speed up select * instead of fields
 
-* https://www.freelancer.com/articles/web-development/how-to-make-your-sql-queries-faster
-* https://stackoverflow.com/questions/17354219/how-to-speed-up-sql-queries-indexes/17354616
-* https://www.infoworld.com/article/3209665/sql-unleashed-17-ways-to-speed-your-sql-queries.html
-* https://stackoverflow.com/questions/65512/which-is-faster-best-select-or-select-column1-colum2-column3-etc
-* https://www.jdoodle.com/execute-sql-online/
-* https://intellipaat.com/blog/tutorial/sql-tutorial/like-and-between-operators-in-sql/#_sql_like
-* https://beginner-sql-tutorial.com/sql-like-in-operators.htm
-* sql between like
-* https://lornajane.net/posts/2011/inner-vs-outer-joins-on-a-many-to-many-relationship
-* https://www.w3schools.com/sql/default.asp
+    * https://www.freelancer.com/articles/web-development/how-to-make-your-sql-queries-faster
+    * https://stackoverflow.com/questions/17354219/how-to-speed-up-sql-queries-indexes/17354616
+    * https://www.infoworld.com/article/3209665/sql-unleashed-17-ways-to-speed-your-sql-queries.html
+    * https://stackoverflow.com/questions/65512/which-is-faster-best-select-or-select-column1-colum2-column3-etc
+    * https://www.jdoodle.com/execute-sql-online/
+    * https://intellipaat.com/blog/tutorial/sql-tutorial/like-and-between-operators-in-sql/#_sql_like
+    * https://beginner-sql-tutorial.com/sql-like-in-operators.htm
+    * sql between like
+    * https://lornajane.net/posts/2011/inner-vs-outer-joins-on-a-many-to-many-relationship
+    * https://www.w3schools.com/sql/default.asp
 
 .. |nbsp| unicode:: 0xA0
    :trim:

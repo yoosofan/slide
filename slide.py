@@ -44,6 +44,7 @@ class GraphVizCls(Directive):
     reference = directives.uri(GlobalVariables.directoryName+name1)
     GlobalVariables.counter += 1
     self.options['uri'] = reference
+    print(self.options.get('height', []))
     image_node = nodes.image(
       rawsource=self.block_text,
       classes=self.options.get('class', []),
@@ -62,8 +63,8 @@ def checkArgvAndSetVariables(argvs: List[str]) -> List[str]:
   if len(argvs) < 2:
     print(f"Arguments count: {len(argvs)}")
     print('Enter name of slide')
-    print('python3 run_slides.py compiler/slide/rd.rst')
-    print('./run_slides.py compiler/slide/rd.rst')
+    print('python3 run_slides.py cm/rd.rst')
+    print('./run_slides.py cm/rd.rst')
     raise SystemExit(f"Usage: {argvs[0]} <rst slide path>")
     for i, arg in enumerate(argvs):
       print(f"Argument {i:>6}: {arg}")  
