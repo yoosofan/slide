@@ -24,7 +24,14 @@ class complexCls{
   friend complexCls operator+(double x,
       const complexCls& b){
     complexCls c = b;
-    c.i += x;
+    c.r += x;
+    cout << "in double+"<< endl;
+    return c;
+  }
+  complexCls operator+(double x){
+    complexCls c = *this;
+    c.r += x;
+    cout << "in +double"<< endl;
     return c;
   }
   friend complexCls operator-(const complexCls& a,
@@ -82,7 +89,7 @@ class complexCls{
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
-  c = 2 + a;  c.Show();
+  c = 2 + a; c = a + 2; c.Show();
   c = a++; // a.operator++(11);
   c.Show(); c = ++a;// a.operator++(); 
   c.Show();

@@ -321,7 +321,7 @@ c = complexCls(2) + a
     :number-lines: 29 
     :class: ltr
     :start-line: 26
-    :end-line: 5 65
+    :end-line: 65
 
 -----
 
@@ -504,14 +504,14 @@ MyArray /  =
     :code: cpp
     :number-lines: 30
     :class: ltr
-    :start-line: 30
-    :end-line: 57
+    :start-line: 3  
+    :end-line: 30
 
 .. include:: src/op/1260.cpp
     :code: cpp
-    :number-lines: 57
+    :number-lines: 32
     :class: ltr
-    :start-line: 57
+    :start-line: 30
     :end-line: 89
 
 
@@ -523,16 +523,16 @@ MyArray /  =
 ==================================================
 .. include:: src/op/1270.cpp
     :code: cpp
-    :number-lines: 30
+    :number-lines: 3
     :class: ltr
-    :start-line: 30
-    :end-line: 57
+    :start-line: 3
+    :end-line: 30
 
 .. include:: src/op/1270.cpp
     :code: cpp
-    :number-lines: 57
+    :number-lines: 33
     :class: ltr
-    :start-line: 57
+    :start-line: 30
     :end-line: 89
 
 

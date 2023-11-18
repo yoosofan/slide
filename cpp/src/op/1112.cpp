@@ -24,7 +24,8 @@ class complexCls{
   friend complexCls operator+(double x,
       const complexCls& b){
     complexCls c = b;
-    c.i += x;
+    c.r += x;
+    cout << "in double+"<< endl;
     return c;
   }
   friend complexCls operator-(const complexCls& a,

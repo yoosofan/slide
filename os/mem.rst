@@ -1414,7 +1414,7 @@ By the usage of
 * modify bit or
 * dirty bit
 
-(modify bit, use bit)
+("modify bit", "use bit" or "access bit")
 
 .. class:: substep
 
