@@ -87,3 +87,9 @@ Reaseons to learn web design basics
 #. سرعت توسعه بیشتر اولیه
 #. بسته به نوع ابزار تعداد زیاد قالب‌های آماده
 
+Some of Yoosofan Old Websites
+-----------------------------
+https://www.youtube.com/live/d9yRtCmelZQ?si=kqWRdQxCVZkg5IQS
+
+
+دقیقه 55 از ویدئوی بالا دربردارنده شکل‌های دو صفحه قدیمی‌ام در دانشگاه است
