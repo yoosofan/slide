@@ -6883,6 +6883,63 @@ View
 
 ----
 
+:class: t2c
+
+Sample View
+============
+.. code:: sql
+
+  create table student
+    (ID     varchar(5),
+     name     varchar(20) not null,
+     dept_name    varchar(20),
+     tot_cred   numeric(3,0) check (tot_cred >= 0),
+     primary key (ID),
+     foreign key (dept_name) 
+      references department (dept_name)
+      on delete set null
+    );
+
+.. code:: sql
+
+  update student S
+  set tot_cred = (
+    select sum(credits)
+    from takes, course
+    where takes.course_id = course.course_id
+      and S.ID= takes.ID and
+      takes.grade <> 'F' and
+      takes.grade is not null
+  );
+
+.. code:: sql
+
+  create table student
+    (ID     varchar(5),
+     name     varchar(20) not null,
+     dept_name    varchar(20),
+     primary key (ID),
+     foreign key (dept_name) 
+      references department (dept_name)
+      on delete set null
+    );
+
+.. code:: sql
+
+  create view student_total as (
+    select ID, name, dept_name, (
+        select sum(credits)
+        from takes, course
+        where takes.course_id = course.course_id
+          and student.ID= takes.ID and
+          takes.grade <> 'F' and
+          takes.grade is not null
+    ) as total_cred
+    from student
+  );
+
+----
+
 .. code:: sql
 
   ALTER VIEW kashan_p RENAME TO kashan_parts;
@@ -6974,6 +7031,24 @@ MATERIALIZED VIEW
   REFRESH MATERIALIZED VIEW order_summary;
 
   REFRESH MATERIALIZED VIEW annual_statistics_basis WITH NO DATA;
+
+.. code:: sql
+
+  create materialized view student_total as (
+    select ID, name, dept_name, (
+        select sum(credits)
+        from takes, course
+        where takes.course_id = course.course_id
+          and student.ID= takes.ID and
+          takes.grade <> 'F' and
+          takes.grade is not null
+    ) as total_cred
+    from student
+  );
+
+.. code:: sql
+
+  REFRESH MATERIALIZED VIEW student_total;
 
 ----
 
