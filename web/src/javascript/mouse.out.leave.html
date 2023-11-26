@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html><!-- https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event -->
+<head><!-- https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_event_mouseleave_mouseout-->
+<style>
+.mouse-out {
+  background-color:lightgray;
+  padding:20px;
+  width:250px;
+  float:left;
+}
+.mouse-out > h3 {background-color:white;}
+
+.mouse-leave {
+  background-color:lightgray;
+  padding:20px;
+  width:250px;
+  float:right;
+}
+.mouse-leave > h3 {background-color:white;}
+</style>
+<script>
+function onLoad(){
+  var x = 0, y = 0;
+  document.querySelector("div.mouse-out").
+    addEventListener('mouseout', function(e){
+      document.querySelector(".mouse-out span").textContent = (x += 1).toString();
+      //alert(e.toString());
+      console.dir(e);
+    });
+  
+  document.querySelector("div.mouse-leave").
+    addEventListener('mouseleave' , function(e){
+      document.querySelector(".mouse-leave span").textContent = (y += 1).toString();
+      // alert(e.toString());
+      console.dir(e);
+    });
+}
+</script>
+</head>
+<body onload="onLoad();">
+
+<p>The mouseout event triggers when the mouse pointer leaves any child elements as well the selected element.</p>
+<p>The mouseleave event is only triggered when the mouse pointer leaves the selected element. </p>
+
+<div class="mouse-out">
+  <h3>Mouseout event triggered: <span>0</span></h3>
+  <h4>Second Child </h4>
+</div>
+
+<div class="mouse-leave">
+  <h3>Mouseleave event triggered: <span>0</span></h3>
+  <h4>Second Child</h4>
+</div>
+
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+x = 0;
+y = 0;
+$(document).ready(function(){
+  $("div.over").mouseout(function(){
+    $(".over span").text(x += 1);
+  });
+  $("div.enter").mouseleave(function(){
+    $(".enter span").text(y += 1);
+  });
+});
+</script>
+</head>
+<body>
+
+<p>The mouseout event triggers when the mouse pointer leaves any child elements as well the selected element.</p>
+<p>The mouseleave event is only triggered when the mouse pointer leaves the selected element. </p>
+
+<div class="over" style="background-color:lightgray;padding:20px;width:250px;float:left">
+  <h3 style="background-color:white;">Mouseout event triggered: <span></span></h3>
+  <h4>sfjlsdfd </h4>
+</div>
+
+<div class="enter" style="background-color:lightgray;padding:20px;width:250px;float:right">
+  <h3 style="background-color:white;">Mouseleave event triggered: <span></span></h3>
+  <h4>rrrrr</h4>
+</div>
+
+</body>
+</html>
+-->

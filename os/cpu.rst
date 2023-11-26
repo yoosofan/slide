@@ -260,7 +260,7 @@ FCFS - Convoy effect
 
     .. class:: substep
 
-        *Average Waiting Time 1*: :math:`\frac{0 + (4-0) + (10-3) + (11-4)}{4} = \frac{17}{4} = 3\frac{1}{4} = 3.25`
+        *Average Waiting Time 1*: :math:`\frac{0 + (4-0) + (10-3) + (11-4)}{4} = \frac{18}{4} = 4\frac{2}{4} = 4.5`
 
         *Rearange*
 
@@ -290,12 +290,12 @@ FCFS - Convoy effect
 
     .. class:: substep
 
-    *Average Waiting Time 2*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 1.5`
+    *Average Waiting Time 2*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
 
 .. class:: substep
 
-* *Average Waiting Time* 1: 3.25
-* *Average Waiting Time* 2: 1.5
+* *Average Waiting Time* 1: 4.5
+* *Average Waiting Time* 2: 2.5
 * 1: FCFS
 * 2: Shortest Job First(SJF) or Shortest Process Next(SPN)
 
@@ -427,13 +427,13 @@ Shortest Remaining Time(SRT), preemptive SJF
 
     .. class:: substep
 
-    *Average Waiting Time 2*: :math:`\frac{(0+(2-0)) + (8-0) + (1-1) + (5-2)}{4} = \frac{13}{4} = 3\frac{1}{4} = 3.25`
+    *Average Waiting Time 2*: :math:`\frac{(0+(2-1)) + (8-0) + (1-1) + (5-2)}{4} = \frac{12}{4} = 3`
 
 
 .. class:: substep
 
 * *Average Waiting Time* 1: 5.5
-* *Average Waiting Time* 2: 3.25
+* *Average Waiting Time* 2: 3
 * 1: FCFS
 * 2: Shortest Job First(SJF) or Shortest Process Next(SPN)
 
