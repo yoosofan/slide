@@ -5,7 +5,9 @@ class Shape{
   string name;
   string color;
 public:
-  Shape(string name="shape", string color="white"):name(name),color(color){}
+  Shape(string name="shape", 
+      string color="white"):
+        name(name),color(color){}
   virtual int Area(void) = 0;
   // virtual static void f(void){cout<<"Shape virtual static f"<<endl;}
 };
@@ -29,5 +31,4 @@ int main(){
   Shape* ps = &sq;
   cout << ps -> Area() << endl;
   sq.printAll();
-  return 0;
 }

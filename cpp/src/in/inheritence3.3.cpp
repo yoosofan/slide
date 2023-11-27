@@ -29,5 +29,4 @@ int main(){
   ps = &sq;
   cout << ps -> Area() << endl;
   sq.printAll();
-  return 0;
 }

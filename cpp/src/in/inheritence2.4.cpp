@@ -4,13 +4,13 @@ using namespace std;
 class A{};
 class Shape: public A{
 protected:
-  string name;
-  string color;
+  string name = "shape";
+  string color= "blue";
 public:
   int Area(void){return 0;}
 };
 class Square: public Shape{
-  int d;
+  int d = 1;
 public:
   int Area(void){return d*d;}
   Square(int d=1){this->d=d;}

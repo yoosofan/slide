@@ -17,12 +17,15 @@ class Shape: public A{
 class Square: public Shape{
   int d = 1;
  public:
-  int Area(void){test = 2; Shape::Area(); return d*d;}
+  int Area(void)
+  {test = 2; Shape::Area(); return d*d;}
   Square(int d){this->d=d;}
   int testValue(void){return test;}
   Square() = default;
-  friend ostream& operator <<(ostream& o1, const Square& s1){
-    o1 << Shape(s1) << "\tside: " << s1.d;
+  friend ostream& operator <<(
+      ostream& o1, const Square& s1){
+    o1 << Shape(s1) << "\tside: " 
+       << s1.d;
     return o1;
   }
 };
@@ -32,5 +35,5 @@ int main(){
   Shape* ps = &s; cout << ps->Area() << endl;
   ps = &sq; cout << ps->Area() << endl;
   cout << sq.testValue() << endl;
-  // cout << sq.test << endl;
+  // cout << sq.test << endl;//Error
 }
