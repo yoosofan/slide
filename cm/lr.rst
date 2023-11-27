@@ -10,6 +10,8 @@ LR
 =====
 Syntax Analysis(LR)
 -----------------------
+Bottom-Up Parsing
+
 Ahmad Yoosofan
 
 Compiler course
@@ -17,6 +19,323 @@ Compiler course
 University of Kashan
 
 https://yoosofan.github.io/course/compiler.html
+
+
+----
+
+:class: t2c
+
+Simple Add(I)
+======================
+.. class:: substep
+
+#. E → E + a
+#. E → a
+
+.. yographviz::
+  :class: substep
+
+  digraph {
+    graph [splines=true  rankdir = "LR"];
+    ratio = auto;
+
+    "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td align="left" port="r0">E → .E + a</td></tr>
+      <tr><td align="left" port="r1">E → .a </td></tr>
+    </table>>];
+  }
+
+.. :
+
+----
+
+:class: t2c
+
+Simple Add(II)
+======================
+#. E → E + a
+#. E → a
+
+.. yographviz::
+  :class: substep
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      state0 -> state2 [ label = "a" ];
+    }
+
+
+----
+
+:class: t2c
+
+Simple Add(III)
+======================
+#. E → E + a
+#. E → a
+
+.. yographviz::
+  :class: substep
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E. + a </td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+    }
+
+
+----
+
+:class: t2c
+
+Simple Add(IV)
+======================
+#. E → E + a
+#. E → a
+
+.. yographviz::
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E. + a </td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E +. a </td></tr>
+        </table>>];
+
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+      state1 -> state3 [ label = "+" ];
+    }
+
+
+----
+
+:class: t2c
+
+Simple Add(V)
+======================
+#. E → E + a
+#. E → a
+
+.. yographviz::
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E. + a </td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E +. a </td></tr>
+        </table>>];
+
+      "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E + a. </td></tr>
+        </table>>];
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+      state1 -> state3 [ label = "+" ];
+      state3 -> state4 [ label = "a" ];
+    }
+
+
+----
+
+:class: t2c
+
+Simple Add(VI)
+======================
+#. E → E + a
+#. E → a
+
+.. yographviz::
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E. + a </td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E +. a </td></tr>
+        </table>>];
+
+      "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E + a. </td></tr>
+        </table>>];
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+      state1 -> state3 [ label = "+" ];
+      state3 -> state4 [ label = "a" ];
+    }
+
+.. class:: substep
+
+* input: 3+5+1
+* a(3)+a(5)+a(1)
+* a+a+a
+
+
+----
+
+:class: t2c
+
+Simple Add(VII)
+======================
+#. S → E 
+#. E → E + a
+#. E → a
+
+.. yographviz::
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">S → .E </td></tr>
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r0">S → E. </td></tr>
+        <tr><td align="left" port="r0">E → E. + a</td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E +. a </td></tr>
+        </table>>];
+
+      "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td align="left" port="r1">E → E + a. </td></tr>
+        </table>>];
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+      state1 -> state3 [ label = "+" ];
+      state3 -> state4 [ label = "a" ];
+    }
+
+
+----
+
+:class: t2c
+
+Simple Add(VII)
+======================
+#. S → E 
+#. E → E + a
+#. E → a
+
+.. yographviz::
+
+    digraph {
+      graph [splines=true  rankdir = "LR"];
+      ratio = auto;
+
+      "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td>(I<sub>0</sub>)</td></tr>
+        <tr><td align="left" port="r0">S → .E </td></tr>
+        <tr><td align="left" port="r0">E → .E + a</td></tr>
+        <tr><td align="left" port="r1">E → .a </td></tr>
+        </table>>];
+
+      "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td>(I<sub>1</sub>)</td></tr>
+        <tr><td align="left" port="r0">S → E. </td></tr>
+        <tr><td align="left" port="r0">E → E. + a</td></tr>
+        </table>>];
+
+      "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td>(I<sub>2</sub>)</td></tr>
+        <tr><td align="left" port="r1">E → a. </td></tr>
+        </table>>];
+
+      "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td>(I<sub>3</sub>)</td></tr>
+        <tr><td align="left" port="r1">E → E +. a </td></tr>
+        </table>>];
+
+      "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+        <tr><td>(I<sub>4</sub>)</td></tr>
+        <tr><td align="left" port="r1">E → E + a. </td></tr>
+        </table>>];
+
+      state0 -> state1 [ label = "E" ];
+      state0 -> state2 [ label = "a" ];
+      state1 -> state3 [ label = "+" ];
+      state3 -> state4 [ label = "a" ];
+    }
 
 
 ----
@@ -52,8 +371,13 @@ Simple Calculator(I)
       <tr><td align="left" port="r5">F → .a </td></tr>
       <tr><td align="left" port="r5">F → .(E) </td></tr>
     </table>>];
-  }
+    "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>1</sub>)</td></tr>
+      <tr><td align="left" port="r3">E → a. </td></tr>
+    </table>> ];
 
+    state0 -> state1 [ label = "a" ];
+  }
 
 ----
 
@@ -242,31 +566,61 @@ Simple Calculator(II)
 
 ----
 
+.. image:: img/lr/slr_etf.png
+
+----
+
+Ambiguous Grammar
+==================
+.. code:: fortran
+
+    if x = 2 then
+        x = 3
+    else
+        x = 4
+
+.. class:: substep
+
+#. S → i S
+#. S → i S e S
+#. S → o
+
+----
+
+
+#. S → i S M
+#. M → e S
+#. M → λ
+#. S → o
+
+----
+
+
+:class: t2c
+
+An Especial Grammar
+======================
+#. S → L = R
+#. S → R
+#. L → * R
+#. L → a
+#. R → L
+
+.. container:: substep
+
+  Augmented Grammer
+
+  * S' → S
+
+  #. S → L = R
+  #. S → R
+  #. L → * R
+  #. L → a
+  #. R → L
+
+----
+
 .. :
-
-    :class: t2c
-
-    An Especial Grammar
-    ======================
-    #. S → L = R
-    #. S → R
-    #. L → * R
-    #. L → a
-    #. R → L
-
-    .. container:: substep
-
-      Augmented Grammer
-
-      * S' → S
-
-      #. S → L = R
-      #. S → R
-      #. L → * R
-      #. L → a
-      #. R → L
-
-    ----
 
     Testing Css flexbox
 
