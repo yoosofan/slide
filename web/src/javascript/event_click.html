@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><script>
+function onLoad(){
+  document.querySelector("form").
+    addEventListener('submit',
+      (e) => {
+        e.preventDefault();
+        document.
+        getElementById('output').
+        innerHTML = '<h3>'+
+        e.target[1].value+'</h3>';
+  });
+  document.querySelector("body").
+    addEventListener('mousemove',
+      (e) => {
+        document.
+          querySelector('#output').
+          innerHTML='<h3>MouseX: '+
+          e.clientX+'</h3><h3>MouseY:'+
+          e.clientY+'</h3>';
+        document.body.style.
+          backgroundColor = 
+          "rgb("+e.clientX+","+
+          e.clientY+", 40)";
+  });
+}
+</script></head>
+<body onload="onLoad();"><form>
+<label for="firstname">
+First name:</label>
+<input type="text"
+name="firstname" /><br />
+<label for="lastname">
+Last name:</label>
+<input type="text" name="lastname"
+value="yoosofan" /><br />
+<textarea name="comment" rows="5"
+cols="20" maxlenght="98">
+comments</textarea>
+<input type="submit"
+value="submit2" /></form>
+<div id="output">Test</div>
+</body></html>

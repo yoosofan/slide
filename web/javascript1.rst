@@ -439,6 +439,73 @@ EVENTS
       "rgb("+e.offsetX+","+e.offsetY+", 40)";
   }
 
+----
+
+:class: t2c
+
+.. include:: src/javascript/event_click.html
+    :code: html
+    :number-lines:
+    :class: ltr
+    :start-line: 0
+    :end-line: 21
+  
+.. include:: src/javascript/event_click.html
+    :code: html
+    :number-lines: 22
+    :class: ltr
+    :start-line: 22
+    :end-line: 45
+
+----
+
+:class: t2c
+
+.. include:: src/javascript/event_click.html
+    :code: html
+    :number-lines: 2
+    :class: ltr
+    :start-line: 1
+    :end-line: 25
+
+.. raw:: html
+
+   <iframe src="http://127.0.0.1:8002/src/javascript/event_click.html" title="description" class="output-of-html">
+   </iframe>
+
+----
+
+:class: t2c
+
+.. include:: src/javascript/event_onsubmit.html
+    :code: html
+    :number-lines:
+    :class: ltr
+    :start-line: 0
+    :end-line: 22
+  
+.. include:: src/javascript/event_onsubmit.html
+    :code: html
+    :number-lines: 23
+    :class: ltr
+    :start-line: 22
+    :end-line: 45
+
+----
+
+:class: t2c
+
+.. include:: src/javascript/event_onsubmit.html
+    :code: html
+    :number-lines: 2
+    :class: ltr
+    :start-line: 1
+    :end-line: 25
+
+.. raw:: html
+
+   <iframe src="http://127.0.0.1:8002/src/javascript/event_onsubmit.html" title="description" class="output-of-html">
+   </iframe>
 
 ----
 
@@ -451,8 +518,9 @@ Jalali Date
 LibreJS
 ===========
 https://www.gnu.org/software/librejs/
+
 GNU LibreJS aims to address the JavaScript problem described in Richard Stallman's article The JavaScript Trap. LibreJS is a free add-on for GNU IceCat and other Mozilla-based browsers. It blocks nonfree nontrivial JavaScript while allowing JavaScript that is free and/or trivial.
 
 ----
 
-Next
+END
