@@ -388,6 +388,31 @@ EVENTS
 
 ----
 
+
+.. include:: src/javascript/jquery.mouse.out.leave.html
+    :code: html
+    :number-lines:
+    :class: ltr
+ 
+----
+
+:class: t2c
+
+.. include:: src/javascript/jquery.mouse.out.leave.html
+    :code: html
+    :number-lines: 7
+    :class: ltr
+    :start-line: 6
+    :end-line: 31
+
+.. raw:: html
+
+   <iframe src="http://127.0.0.1:8002/src/javascript/jquery.mouse.out.leave.html" title="description" class="output-of-html">
+   </iframe>
+
+
+----
+
 .. code:: javascript
 
   var button = document.getElementById('button');

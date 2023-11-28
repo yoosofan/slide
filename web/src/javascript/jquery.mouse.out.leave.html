@@ -1,34 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
+<!-- https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+.over{background-color:lightgray;padding:20px;width:250px;margin:5px;}
+.enter{background-color:lightgray;padding:20px;width:250px;margin-top:25px;}
+</style>
 <script>
 x = 0;
 y = 0;
 $(document).ready(function(){
-  $("div.over").mouseout(function(){
-    $(".over span").text(x += 1);
+  $("div.over").mouseout(
+    function(){
+      $(".over span").
+        text(x += 1);
   });
-  $("div.enter").mouseleave(function(){
-    $(".enter span").text(y += 1);
-  });
+  $("div.enter").mouseleave(
+    function(){
+      $(".enter span").
+      text(y += 1);});
 });
-</script>
-</head>
-<body>
-
-<p>The mouseout event triggers when the mouse pointer leaves any child elements as well the selected element.</p>
-<p>The mouseleave event is only triggered when the mouse pointer leaves the selected element. </p>
-
-<div class="over" style="background-color:lightgray;padding:20px;width:250px;float:left">
-  <h3 style="background-color:white;">Mouseout event triggered: <span></span></h3>
-  <h4>sfjlsdfd </h4>
-</div>
-
-<div class="enter" style="background-color:lightgray;padding:20px;width:250px;float:right">
-  <h3 style="background-color:white;">Mouseleave event triggered: <span></span></h3>
-  <h4>rrrrr</h4>
-</div>
-
-</body>
-</html>
+</script></head><body><p>
+<div class="over">
+<h3 style="background-color:white;">
+Mouseout event triggered:<span></span>
+</h3><h4>sfjlsdfd </h4></div>
+<div class="enter">
+<h3 style="background-color:white;">
+Mouseleave event triggered:<span>
+</span></h3><h4>rrrrr</h4></div>
+</body></html>
