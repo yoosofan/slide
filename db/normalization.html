@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="Docutils 0.16: http://docutils.sourceforge.net/" />
-<title>هنجارسازی (نرمال سازی) Normalization</title>
+<meta name="generator" content="Docutils 0.20.1: https://docutils.sourceforge.io/" />
 <meta content="fa" http-equiv="Content-Language" />
+<title>هنجارسازی (نرمال سازی) Normalization</title>
 <style type="text/css">
 
 /* Use these two if the main document direction is RTL */
@@ -27,7 +27,6 @@ cite {direction: ltr; unicode-bidi: embed;font-size: 0.7em  }
 .center {
   margin: auto;
   width: 50%;
-  /*border: 3px solid green;*/
   padding: 10px;
   text-align: center;
 }
@@ -37,362 +36,10 @@ cite {direction: ltr; unicode-bidi: embed;font-size: 0.7em  }
 <style type="text/css">
 
 /*
-:Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 7952 2016-07-26 18:15:59Z milde $
-:Copyright: This stylesheet has been placed in the public domain.
-
-Default cascading style sheet for the HTML output of Docutils.
-
-See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
-customize this style sheet.
-*/
-
-/* used to remove borders from tables and images */
-.borderless, table.borderless td, table.borderless th {
-  border: 0 }
-
-table.borderless td, table.borderless th {
-  /* Override padding for "table.docutils td" with "! important".
-     The right padding separates the table cells. */
-  padding: 0 0.5em 0 0 ! important }
-
-.first {
-  /* Override more specific margin styles with "! important". */
-  margin-top: 0 ! important }
-
-.last, .with-subtitle {
-  margin-bottom: 0 ! important }
-
-.hidden {
-  display: none }
-
-.subscript {
-  vertical-align: sub;
-  font-size: smaller }
-
-.superscript {
-  vertical-align: super;
-  font-size: smaller }
-
-a.toc-backref {
-  text-decoration: none ;
-  color: black }
-
-blockquote.epigraph {
-  margin: 2em 5em ; }
-
-dl.docutils dd {
-  margin-bottom: 0.5em }
-
-object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
-  overflow: hidden;
-}
-
-/* Uncomment (and remove this text!) to get bold-faced definition list terms
-dl.docutils dt {
-  font-weight: bold }
-*/
-
-div.abstract {
-  margin: 2em 5em }
-
-div.abstract p.topic-title {
-  font-weight: bold ;
-  text-align: center }
-
-div.admonition, div.attention, div.caution, div.danger, div.error,
-div.hint, div.important, div.note, div.tip, div.warning {
-  margin: 2em ;
-  border: medium outset ;
-  padding: 1em }
-
-div.admonition p.admonition-title, div.hint p.admonition-title,
-div.important p.admonition-title, div.note p.admonition-title,
-div.tip p.admonition-title {
-  font-weight: bold ;
-  font-family: sans-serif }
-
-div.attention p.admonition-title, div.caution p.admonition-title,
-div.danger p.admonition-title, div.error p.admonition-title,
-div.warning p.admonition-title, .code .error {
-  color: red ;
-  font-weight: bold ;
-  font-family: sans-serif }
-
-/* Uncomment (and remove this text!) to get reduced vertical space in
-   compound paragraphs.
-div.compound .compound-first, div.compound .compound-middle {
-  margin-bottom: 0.5em }
-
-div.compound .compound-last, div.compound .compound-middle {
-  margin-top: 0.5em }
-*/
-
-div.dedication {
-  margin: 2em 5em ;
-  text-align: center ;
-  font-style: italic }
-
-div.dedication p.topic-title {
-  font-weight: bold ;
-  font-style: normal }
-
-div.figure {
-  margin-left: 2em ;
-  margin-right: 2em }
-
-div.footer, div.header {
-  clear: both;
-  font-size: smaller }
-
-div.line-block {
-  display: block ;
-  margin-top: 1em ;
-  margin-bottom: 1em }
-
-div.line-block div.line-block {
-  margin-top: 0 ;
-  margin-bottom: 0 ;
-  margin-left: 1.5em }
-
-div.sidebar {
-  margin: 0 0 0.5em 1em ;
-  border: medium outset ;
-  padding: 1em ;
-  background-color: #ffffee ;
-  width: 40% ;
-  float: right ;
-  clear: right }
-
-div.sidebar p.rubric {
-  font-family: sans-serif ;
-  font-size: medium }
-
-div.system-messages {
-  margin: 5em }
-
-div.system-messages h1 {
-  color: red }
-
-div.system-message {
-  border: medium outset ;
-  padding: 1em }
-
-div.system-message p.system-message-title {
-  color: red ;
-  font-weight: bold }
-
-div.topic {
-  margin: 2em }
-
-h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
-h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
-  margin-top: 0.4em }
-
-h1.title {
-  text-align: center }
-
-h2.subtitle {
-  text-align: center }
-
-hr.docutils {
-  width: 75% }
-
-img.align-left, .figure.align-left, object.align-left, table.align-left {
-  clear: left ;
-  float: left ;
-  margin-right: 1em }
-
-img.align-right, .figure.align-right, object.align-right, table.align-right {
-  clear: right ;
-  float: right ;
-  margin-left: 1em }
-
-img.align-center, .figure.align-center, object.align-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-table.align-center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.align-left {
-  text-align: left }
-
-.align-center {
-  clear: both ;
-  text-align: center }
-
-.align-right {
-  text-align: right }
-
-/* reset inner alignment in figures */
-div.align-right {
-  text-align: inherit }
-
-/* div.align-center * { */
-/*   text-align: left } */
-
-.align-top    {
-  vertical-align: top }
-
-.align-middle {
-  vertical-align: middle }
-
-.align-bottom {
-  vertical-align: bottom }
-
-ol.simple, ul.simple {
-  margin-bottom: 1em }
-
-ol.arabic {
-  list-style: decimal }
-
-ol.loweralpha {
-  list-style: lower-alpha }
-
-ol.upperalpha {
-  list-style: upper-alpha }
-
-ol.lowerroman {
-  list-style: lower-roman }
-
-ol.upperroman {
-  list-style: upper-roman }
-
-p.attribution {
-  text-align: right ;
-  margin-left: 50% }
-
-p.caption {
-  font-style: italic }
-
-p.credits {
-  font-style: italic ;
-  font-size: smaller }
-
-p.label {
-  white-space: nowrap }
-
-p.rubric {
-  font-weight: bold ;
-  font-size: larger ;
-  color: maroon ;
-  text-align: center }
-
-p.sidebar-title {
-  font-family: sans-serif ;
-  font-weight: bold ;
-  font-size: larger }
-
-p.sidebar-subtitle {
-  font-family: sans-serif ;
-  font-weight: bold }
-
-p.topic-title {
-  font-weight: bold }
-
-pre.address {
-  margin-bottom: 0 ;
-  margin-top: 0 ;
-  font: inherit }
-
-pre.literal-block, pre.doctest-block, pre.math, pre.code {
-  margin-left: 2em ;
-  margin-right: 2em }
-
-pre.code .ln { color: grey; } /* line numbers */
-pre.code, code { background-color: #eeeeee }
-pre.code .comment, code .comment { color: #5C6576 }
-pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
-pre.code .literal.string, code .literal.string { color: #0C5404 }
-pre.code .name.builtin, code .name.builtin { color: #352B84 }
-pre.code .deleted, code .deleted { background-color: #DEB0A1}
-pre.code .inserted, code .inserted { background-color: #A3D289}
-
-span.classifier {
-  font-family: sans-serif ;
-  font-style: oblique }
-
-span.classifier-delimiter {
-  font-family: sans-serif ;
-  font-weight: bold }
-
-span.interpreted {
-  font-family: sans-serif }
-
-span.option {
-  white-space: nowrap }
-
-span.pre {
-  white-space: pre }
-
-span.problematic {
-  color: red }
-
-span.section-subtitle {
-  /* font-size relative to parent (h1..h6 element) */
-  font-size: 80% }
-
-table.citation {
-  border-left: solid 1px gray;
-  margin-left: 1px }
-
-table.docinfo {
-  margin: 2em 4em }
-
-table.docutils {
-  margin-top: 0.5em ;
-  margin-bottom: 0.5em }
-
-table.footnote {
-  border-left: solid 1px black;
-  margin-left: 1px }
-
-table.docutils td, table.docutils th,
-table.docinfo td, table.docinfo th {
-  padding-left: 0.5em ;
-  padding-right: 0.5em ;
-  vertical-align: top }
-
-table.docutils th.field-name, table.docinfo th.docinfo-name {
-  font-weight: bold ;
-  text-align: left ;
-  white-space: nowrap ;
-  padding-left: 0 }
-
-/* "booktabs" style (no vertical lines) */
-table.docutils.booktabs {
-  border: 0px;
-  border-top: 2px solid;
-  border-bottom: 2px solid;
-  border-collapse: collapse;
-}
-table.docutils.booktabs * {
-  border: 0px;
-}
-table.docutils.booktabs th {
-  border-bottom: thin solid;
-  text-align: left;
-}
-
-h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
-h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
-  font-size: 100% }
-
-ul.auto-toc {
-  list-style-type: none }
-
-</style>
-<style type="text/css">
-
-/*
 *   math2html: convert LaTeX equations to HTML output.
 *
 *   Copyright (C) 2009,2010 Alex Fernández
+*                 2021      Günter Milde
 *
 *   Released under the terms of the `2-Clause BSD license'_, in short:
 *   Copying and distribution of this file, with or without modification,
@@ -404,16 +51,19 @@ ul.auto-toc {
 *
 *   Based on eLyXer: convert LyX source files to HTML output.
 *   http://elyxer.nongnu.org/
-*/
-/* --end--
+*
+*
 * CSS file for LaTeX formulas.
+*
+* References: http://www.zipcon.net/~swhite/docs/math/math.html
+*             http://www.cs.tut.fi/~jkorpela/math/
 */
 
 /* Formulas */
 .formula {
 	text-align: center;
-	font-family: "Droid Serif", "DejaVu Serif", "STIX", serif;
 	margin: 1.2em 0;
+	line-height: 1.4;
 }
 span.formula {
 	white-space: nowrap;
@@ -437,6 +87,9 @@ span.unknown {
 span.ignored, span.arraydef {
 	display: none;
 }
+.phantom {
+	visibility: hidden;
+}
 .formula i {
 	letter-spacing: 0.1ex;
 }
@@ -453,33 +106,48 @@ span.ignored, span.arraydef {
 }
 
 /* Structures */
+span.hspace {
+	display: inline-block;
+}
 span.overline, span.bar {
 	text-decoration: overline;
 }
-.fraction, .fullfraction {
+.fraction, .fullfraction, .textfraction {
 	display: inline-block;
 	vertical-align: middle;
 	text-align: center;
 }
-.fraction .fraction {
+span.formula .fraction,
+.textfraction,
+span.smallmatrix {
 	font-size: 80%;
-	line-height: 100%;
+	line-height: 1;
 }
 span.numerator {
 	display: block;
+	line-height: 1;
 }
 span.denominator {
 	display: block;
+	line-height: 1;
 	padding: 0ex;
 	border-top: thin solid;
 }
+.formula sub, .formula sup {
+	font-size: 80%;
+}
 sup.numerator, sup.unit {
-	font-size: 70%;
 	vertical-align: 80%;
 }
 sub.denominator, sub.unit {
-	font-size: 70%;
 	vertical-align: -20%;
+}
+span.smallsymbol {
+	font-size: 75%;
+	line-height: 75%;
+}
+span.boldsymbol {
+	font-weight: bold;
 }
 span.sqrt {
 	display: inline-block;
@@ -487,39 +155,62 @@ span.sqrt {
 	padding: 0.1ex;
 }
 sup.root {
-	font-size: 70%;
 	position: relative;
 	left: 1.4ex;
 }
 span.radical {
 	display: inline-block;
 	padding: 0ex;
-	font-size: 150%;
+	/* font-size: 160%; for DejaVu, not required with STIX */
+	line-height: 100%;
 	vertical-align: top;
+	vertical-align: middle;
 }
+
 span.root {
 	display: inline-block;
 	border-top: thin solid;
 	padding: 0ex;
 	vertical-align: middle;
 }
-span.symbol {
-	line-height: 125%;
-	font-size: 125%;
+div.formula .bigoperator,
+.displaystyle .bigoperator,
+.displaystyle .bigoperator {
+	line-height: 120%;
+	font-size: 140%;
+	padding-right: 0.2ex;
 }
-span.bigsymbol {
-	line-height: 150%;
-	font-size: 150%;
+span.fraction .bigoperator,
+span.scriptstyle .bigoperator {
+	line-height: inherit;
+	font-size: inherit;
+	padding-right: 0;
 }
-span.largesymbol {
-	font-size: 175%;
+span.bigdelimiter {
+	display: inline-block;
 }
-span.hugesymbol {
-	font-size: 200%;
+span.bigdelimiter.size1 {
+	transform: scale(1, 1.2);
+	line-height: 1.2;
 }
+span.bigdelimiter.size2 {
+	transform: scale(1, 1.62);
+	line-height: 1.62%;
+
+}
+span.bigdelimiter.size3 {
+	transform: scale(1, 2.05);
+	line-height: 2.05%;
+}
+span.bigdelimiter.size4 {
+	transform: scale(1, 2.47);
+	line-height: 2.47%;
+}
+/* vertically stacked sub and superscript */
 span.scripts {
 	display: inline-table;
 	vertical-align: middle;
+	padding-right: 0.2ex;
 }
 .script {
 	display: table-row;
@@ -537,51 +228,42 @@ span.limits {
 sup.limit, sub.limit {
 	line-height: 100%;
 }
-span.symbolover {
-	display: inline-block;
-	text-align: center;
-	position: relative;
-	float: right;
-	right: 100%;
-	bottom: 0.5em;
-	width: 0px;
-}
-span.withsymbol {
+span.embellished,
+span.embellished > .base {
 	display: inline-block;
 }
-span.symbolunder {
+span.embellished > sup,
+span.embellished > sub {
 	display: inline-block;
-	text-align: center;
+	font-size: 100%;
 	position: relative;
-	float: right;
-	right: 80%;
-	top: 0.3em;
+	bottom: 0.3em;
 	width: 0px;
+}
+span.embellished > sub {
+	top: 0.4em;
 }
 
 /* Environments */
 span.array, span.bracketcases, span.binomial, span.environment {
 	display: inline-table;
 	text-align: center;
-	border-collapse: collapse;
-	margin: 0em;
 	vertical-align: middle;
 }
 span.arrayrow, span.binomrow {
 	display: table-row;
-	padding: 0ex;
-	border: 0ex;
+	padding: 0;
+	border: 0;
 }
 span.arraycell, span.bracket, span.case, span.binomcell, span.environmentcell {
 	display: table-cell;
 	padding: 0ex 0.2ex;
-	line-height: 99%;
+	line-height: 1; /* 99%; */
 	border: 0ex;
 }
-/*
-* CSS file for LaTeX formulas, extra stuff:
-* binomials, vertical braces, stackrel, fonts and colors.
-*/
+.environment.align > .arrayrow > .arraycell.align-l {
+	padding-right: 2em;
+}
 
 /* Inline binomials */
 span.binom {
@@ -624,19 +306,30 @@ span.downstackrel {
 }
 
 /* Fonts */
+.formula {
+	font-family: STIX, "DejaVu Serif", "DejaVu Math TeX Gyre", serif;
+}
+span.radical,   /* ensure correct size of square-root sign */
+span.integral { /* upright integral signs for better alignment of indices */
+	font-family: "STIXIntegralsUp", STIX;
+	/* font-size: 115%; match apparent size with DejaVu */
+}
+span.bracket {
+  /* some "STIX" and "DejaVu Math TeX Gyre" bracket pieces don't fit */
+	font-family: "DejaVu Serif", serif;
+}
 span.mathsf, span.textsf {
-	font-style: normal;
 	font-family: sans-serif;
 }
 span.mathrm, span.textrm {
-	font-style: normal;
-	font-family: serif;
+	font-family: STIX, "DejaVu Serif", "DejaVu Math TeX Gyre", serif;
 }
-span.text, span.textnormal {
-	font-style: normal;
+span.mathtt, span.texttt {
+	font-family: monospace;
 }
-span.textipa {
-	color: #008080;
+span.text, span.textnormal,
+span.mathsf, span.mathtt, span.mathrm {
+	font-style: normal;
 }
 span.fraktur {
 	font-family: "Lucida Blackletter", eufm10, blackletter;
@@ -647,6 +340,16 @@ span.blackboard {
 span.scriptfont {
 	font-family: "Monotype Corsiva", "Apple Chancery", "URW Chancery L", cursive;
 	font-style: italic;
+}
+span.mathscr {
+  font-family: MathJax_Script, rsfs10,  cursive;
+  font-style: italic;
+}
+span.textsc {
+	font-variant: small-caps;
+}
+span.textsl {
+	font-style: oblique;
 }
 
 /* Colors */
@@ -665,13 +368,12 @@ span.boxed, span.framebox {
 	padding: 5px;
 }
 
-
 </style>
 </head>
 <body>
 <div class="document" id="normalization">
 <h1 class="title">هنجارسازی (نرمال سازی) Normalization</h1>
-<h2 class="subtitle" id="id1">احمد یوسفان ، دانشگاه کاشان</h2>
+<h2 class="subtitle" id="section-1">احمد یوسفان ، دانشگاه کاشان</h2>
 
 <p>نرمال سازی پایگاه داده روندی برای ساماندهی ویژگی‌ها (ستون‌ها) و رابطه‌ها (جدول‌ها) در یک پایگاه داده‌ی رابطه‌ای به منظور کاهش افزونگی داده است.</p>
 <p>هدف از نرمال سازی؟</p>
@@ -738,9 +440,9 @@ span.boxed, span.framebox {
 </tr>
 </tbody>
 </table>
-<div class="section" id="id2">
+<div class="section" id="section-2">
 <h1>1&nbsp;&nbsp;&nbsp;نرمال سطح ۱</h1>
-<div class="section" id="id3">
+<div class="section" id="section-3">
 <h2>1.1&nbsp;&nbsp;&nbsp;تبدیل شده به نرمال ۱</h2>
 <table border="1" class="docutils">
 <caption>جدول فروش یک فروشگاه</caption>
@@ -809,7 +511,7 @@ span.boxed, span.framebox {
 <p>روشن است که این جدول مشکل دارد و روشن این که باید دو جدول باشد ولی چه قانونی این را می‌گوید.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="id4">
+<div class="section" id="section-4">
 <h2>1.2&nbsp;&nbsp;&nbsp;دو جدول پیشنهادی</h2>
 <table border="1" class="docutils">
 <caption>جدول موجودی فروشگاه</caption>
@@ -884,7 +586,7 @@ span.boxed, span.framebox {
 <p>قانون تقسیم چه می‌تواند باشد.</p>
 </div>
 </div>
-<div class="section" id="id5">
+<div class="section" id="section-5">
 <h1>2&nbsp;&nbsp;&nbsp;وابستگی تابعی</h1>
 <p>در جدول موجودی فروشگاه، شماره‌ی جنس تعیین کننده‌ی (determinant) دو ویژگی دیگر یعنی «نام جنس» و «موجودی» است. از طرف دیگر می‌توان گفت نام جنس و موجودی وابسته (dependant) به شماره‌ی جنس هستند.</p>
 <p>به این نوع وابستگی، «وابستگی تابعی»(Functional Deppendancy) یا FD گفته می‌شود. وابستگی تابعی میان ویژگی‌های جدول برخاسته از تعریف و نوع ارتباط آنها با هم دیگر در جدول است و طراح پایگاه داده باید بتواند وابستگی‌های تابعی میان ویژگی‌های درون جدول‌های خود را بیابد.</p>
@@ -955,7 +657,7 @@ span.boxed, span.framebox {
 <li>AC→B</li>
 <li>BC→A</li>
 </ol>
-<div class="section" id="id6">
+<div class="section" id="section-6">
 <h2>2.1&nbsp;&nbsp;&nbsp;ویژگی‌های ریاضی وابستگی تابعی</h2>
 <p>به این ترتیب وابستگی تابعی می‌تواند به صورت یک عمل ریاضی تعریف شود و ویژگی‌های آن از دید ریاضی بر روی رابطه‌ها بررسی گردد.  بنابراین تعدادی اصل و تعدادی ویژگی و قضیه ار روی آن به دست می‌آید که در اینجا به بخشی از آن پرداخته می‌شود.</p>
 <blockquote>
@@ -976,9 +678,9 @@ span.boxed, span.framebox {
 <li>اتحاد کلی  :  اگر X ⭢ Y و Z ⭢ W آن‌گاه X ⋃ (Z - Y) ⭢ YW</li>
 </ul>
 </div>
-<div class="section" id="id7">
+<div class="section" id="section-7">
 <h2>2.2&nbsp;&nbsp;&nbsp;بستار وابستگی تابعی</h2>
-<p>به مجموعه‌ی همه‌ی وابستگی‌های تابعی که می‌تواند از روی چند وابستگی تابعی به دست آید بستار آن وابستگی‌های تابعی گفته می‌شود. اگر F یک مجموعه وابستگی باشد <span class="formula"><sup> + </sup><i>F</i></span> مجموعه‌ی بستار F است.</p>
+<p>به مجموعه‌ی همه‌ی وابستگی‌های تابعی که می‌تواند از روی چند وابستگی تابعی به دست آید بستار آن وابستگی‌های تابعی گفته می‌شود. اگر F یک مجموعه وابستگی باشد <span class="formula"><sup> + </sup><i>F</i></span> مجموعه‌ی بستار F است.</p>
 <p>برای نمونه اگر  در رابطه‌ی R ویژگی‌های A,B,C,D را به همراه قانون‌های وابستگی زیر داشته باشیم</p>
 <ol class="ltr arabic simple">
 <li>A → B</li>
@@ -996,7 +698,7 @@ span.boxed, span.framebox {
 <li>A → D</li>
 </ol>
 </div>
-<div class="section" id="id8">
+<div class="section" id="section-8">
 <h2>2.3&nbsp;&nbsp;&nbsp;مجموعه‌ی کاهش ناپذیر وابستگی‌ها</h2>
 <p>در یک رابطه (جدول) به مجموعه‌ای از وابستگی‌های تابعی گفته می‌شود که کمینه باشد یا به عبارت دیگر هیچ کدام از قانون‌های وابستگی درون این مجموعه نتواند به شکلی از روی دیگر قانون‌ها به دست آید. مجموعه‌ای کاهش ناپذیر از وابستگی‌ها است اگر و فقط اگر سه قانون زیر را داشته باشد.</p>
 <ul class="simple">
@@ -1006,7 +708,7 @@ span.boxed, span.framebox {
 </ul>
 </div>
 </div>
-<div class="section" id="id9">
+<div class="section" id="section-9">
 <h1>3&nbsp;&nbsp;&nbsp;نرمال سطح دوم</h1>
 <p>اگر ویژگی‌هایی به بخشی از کلید اصلی وابسته باشند به آن <em>وابستگی جزئی</em> گفته می‌شود. جدولی در سطح دوم نرمال است که درون آن وابستگی جزئی وجود نداشته باشد. یعنی هیچ قانون وابستگی که سمت چپ آن (تعیین کننده) آن بخشی از کلید باشد در وابستگی‌های آن جدول وجود نداشته باشد. به عبارت دیگر بخشی از کلید در سمت چپ هیچ وابستگی تابعی نباشد.</p>
 <p>اکنون به جدول اولیه‌ی فروش دقت کنید. در این جدول کلید دو ویژگی شماره فاکتور و شماره جنس است در حالی که وابستگی تابعی شماره جنس ⭠ {نام جنس ، موجودی} را داریم که در سمت چپ آن (تعیین کننده آن) فقط بخشی از کلید اصلی است. ویژگی یا ويژگی‌هایی از جدول به بخشی از کلید اصلی وابسته هستند و بنابراین باید جدا شوند.</p>
@@ -1024,7 +726,7 @@ span.boxed, span.framebox {
 </ul>
 <p>بنابراین باید جدول یاد شده را به دو جدول بشکنیم تا وابستگی جزئی درون آن نباشد.</p>
 </div>
-<div class="section" id="id10">
+<div class="section" id="section-10">
 <h1>4&nbsp;&nbsp;&nbsp;نرمال سطح سوم</h1>
 <table border="1" class="docutils">
 <caption>جدول دانشجو</caption>
@@ -1096,7 +798,7 @@ span.boxed, span.framebox {
 <li>ناهنجاری افزودن</li>
 </ul>
 <p>کدپستی دبیرستان  ⭠ {نام دبیرستان، شهر دبیرستان}</p>
-<div class="section" id="id11">
+<div class="section" id="section-11">
 <h2>4.1&nbsp;&nbsp;&nbsp;وابستگی باواسطه</h2>
 <p><a class="reference external" href="#">شمارهٔ دانشجویی</a>, نام, نام خانوادگی, کدپستی دبیرستان</p>
 <p><a class="reference external" href="#">کدپستی دبیرستان</a>, نام دبیرستان, شهر دبیرستان</p>
@@ -1173,7 +875,7 @@ span.boxed, span.framebox {
 </tbody>
 </table>
 </div>
-<div class="section" id="id12">
+<div class="section" id="section-12">
 <h2>4.2&nbsp;&nbsp;&nbsp;استثناها</h2>
 <table border="1" class="docutils">
 <caption>جدول خریدار</caption>
@@ -1283,8 +985,8 @@ span.boxed, span.framebox {
 <td>۳۴</td>
 </tr>
 <tr><td>۹۷۳۸۳۸۷</td>
-<td>علی رضایی</td>
-<td>۲۹۸۷۳۹۲۸۳</td>
+<td>مهدی رضایی</td>
+<td>۲۹۸۷۳۹۲۸۴</td>
 <td>رضا</td>
 <td>اختر صالحی</td>
 <td>۷۶۸۷۹۸۷</td>
@@ -1294,8 +996,8 @@ span.boxed, span.framebox {
 <td>۲۳</td>
 </tr>
 <tr><td>۹۸۲۳۷۴</td>
-<td>علی رضایی</td>
-<td>۲۹۸۷۳۹۲۸۳</td>
+<td>حسین رضایی</td>
+<td>۲۹۸۷۳۹۲۸۵</td>
 <td>رضا</td>
 <td>اختر صالحی</td>
 <td>۷۶۸۷۹۸۷</td>
@@ -1305,8 +1007,8 @@ span.boxed, span.framebox {
 <td>۲۳</td>
 </tr>
 <tr><td>۹۶۰۹۸۳۴</td>
-<td>علی رضایی</td>
-<td>۲۹۸۷۳۹۲۸۳</td>
+<td>زینب رضایی</td>
+<td>۲۹۸۷۳۹۲۸۶</td>
 <td>رضا</td>
 <td>اختر صالحی</td>
 <td>۷۶۸۷۹۸۷</td>
@@ -1448,11 +1150,11 @@ span.boxed, span.framebox {
 </tr>
 </tbody>
 </table>
-<div class="section" id="id13">
+<div class="section" id="section-13">
 <h2>5.1&nbsp;&nbsp;&nbsp;همهٔ وابستگی‌ها در جدول فقط به کلید اصلی باشد.</h2>
 </div>
 </div>
-<div class="section" id="id14">
+<div class="section" id="section-14">
 <h1>6&nbsp;&nbsp;&nbsp;نرمال سطح چهارم</h1>
 <table border="1" class="ltr docutils">
 <colgroup>
@@ -1719,6 +1421,135 @@ database course fourth normal form multivalued -->
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
+<p>جدولی را در نظر بگیرید که شمارهٔ ملی یک نفر را به همراه نام فرزندان و شماره تلفن‌های فرد نگهداری می‌کند. هر فرد می‌تواند چند شمارهٔ تلفن و چند فرزند داشته باشد.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><a class="reference internal" href="#ssn">SSN</a></th>
+<th class="head"><a class="reference internal" href="#child">child</a></th>
+<th class="head"><a class="reference internal" href="#phone">phone</a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>54467</td>
+<td>ali</td>
+<td>90284902</td>
+</tr>
+<tr><td>54467</td>
+<td>ali</td>
+<td>82434893</td>
+</tr>
+<tr><td>54467</td>
+<td>reza</td>
+<td>90284902</td>
+</tr>
+<tr><td>54467</td>
+<td>reza</td>
+<td>82434893</td>
+</tr>
+<tr><td>65231</td>
+<td>hamid</td>
+<td>9284028</td>
+</tr>
+<tr><td>65231</td>
+<td>hamid</td>
+<td>9284026</td>
+</tr>
+<tr><td>65231</td>
+<td>hamed</td>
+<td>9284028</td>
+</tr>
+<tr><td>65231</td>
+<td>hamed</td>
+<td>9284026</td>
+</tr>
+<tr><td>65231</td>
+<td>mahmood</td>
+<td>9284028</td>
+</tr>
+<tr><td>65231</td>
+<td>mahmood</td>
+<td>9284026</td>
+</tr>
+</tbody>
+</table>
+<p>می‌تواند به دو جدول زیر شکسته شود.</p>
+<table border="1" class="ltr docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><table border="1" class="first last docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><a class="reference internal" href="#ssn">SSN</a></th>
+<th class="head"><a class="reference internal" href="#child">child</a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>54467</td>
+<td>ali</td>
+</tr>
+<tr><td>54467</td>
+<td>reza</td>
+</tr>
+<tr><td>65231</td>
+<td>hamid</td>
+</tr>
+<tr><td>65231</td>
+<td>hamed</td>
+</tr>
+<tr><td>65231</td>
+<td>mahmood</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td><table border="1" class="first last docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><a class="reference internal" href="#ssn">SSN</a></th>
+<th class="head"><a class="reference internal" href="#child">child</a></th>
+<th class="head"><a class="reference internal" href="#phone">phone</a></th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>54467</td>
+<td>90284902</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>54467</td>
+<td>82434893</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>65231</td>
+<td>9284028</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>65231</td>
+<td>9284026</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
 <p>فرض کنید در فروشگاهی امکان خرید گروهی نیز باشد یعنی یک گروه از خریداران با نام‌های گوناگون یک خرید را با هم انجام دهند و یک فاکتور برایشان صادر شود. برای نمونه اگر سه نفر از اعضا خانواده با هم برای خرید آمدند نام هر سه نفر در فاکتور خرید آورده شود در حالی که یک فاکتور برای جنس‌های درون آن زده شود. بنابراین قانون زیر نیز افزوده شود:</p>
 <p><em>برای یک فاکتور یک یا چند قلم جنس و یک یا چند خریدار می‌تواند وجود داشته باشد.</em></p>
 <p>با این فرض، جدول زیر برای فروش پیشنهاد شده است.</p>
@@ -2037,7 +1868,7 @@ database course fourth normal form multivalued -->
 <p>مهم‌ترین نکته این است که خریداران گوناگون در یک فاکتور فروش نمی‌توانند جنس‌های گوناگونی داشته باشند و همه‌ی جنس‌هایشان تکراری است.</p>
 </div>
 </div>
-<div class="section" id="id15">
+<div class="section" id="section-15">
 <h1>7&nbsp;&nbsp;&nbsp;نمونه نرمال سازی</h1>
 <p>جدول فروش زیر را در نظر بگیرید:</p>
 <table border="1" class="docutils">
@@ -2290,9 +2121,9 @@ database course fourth normal form multivalued -->
 </tbody>
 </table>
 <p>حفظ وابستگی‌ها و کنار هم گذاشتن ویژگی‌هایی که به هم وابسته هستند، اهمیت بالایی دارد.</p>
-<span class="target" id="book"><span id="sport"></span><span id="ssn"></span></span><!-- comments:
+<span class="target" id="phone"><span id="child"></span><span id="book"></span><span id="sport"></span><span id="ssn"></span></span><!-- comments:
 
- rst2html normalization.rst normalization.html - -stylesheet=farsi.css,html4css1.css
+ rst2html normalization.rst normalization.html - -stylesheet=farsi.css
  rst2html.py normalization.rst normalization.html - -stylesheet=farsi.css,html4css1.css
 
  Database normalization (or normalisation) is the process of organizing the columns (attributes) and tables (relations) of a relational database to minimize data redundancy.
