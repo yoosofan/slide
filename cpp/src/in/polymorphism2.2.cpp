@@ -31,7 +31,8 @@ class Employee: public Person{
 public:
   virtual string getJob(void)
   {return "employee";}
-  Employee(string name1="Ali",int year1=12):Person(name1,year1){}
+  Employee(string name1="Ali",int year1=12):
+    Person(name1,year1){}
 };
 int main(){
   Person p("Reza", 11);

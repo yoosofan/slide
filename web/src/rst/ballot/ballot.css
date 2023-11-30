@@ -1,0 +1,37 @@
+/*
+
+  http://yoosofan.github.io
+  yoosofan@gmx.com
+  yoosofan@myfastmail.com
+  yoosofan@gmail.com
+  2023/05/20 19:41:15
+  Ballot designed for fifth election of syndicate of the faculties of the university of Kashan
+  https://kashanu.ac.ir
+*/
+body { 
+  direction: rtl; 
+  text-align:justify;    
+  font-family:'Nazli', Geneva, sans-serif; 
+  font-size: 1.1em;
+}
+
+.document{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 1rem;
+  justify-items: stretch;
+}
+
+.document > div{
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 15%;
+}
+
+.document > div ol{
+list-style-type: persian;
+}
+
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }

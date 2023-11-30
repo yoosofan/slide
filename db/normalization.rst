@@ -660,11 +660,12 @@ multivalued dependency
 ..  _شمارهٔ دانشجویی: #
 
 .. _کدپستی دبیرستان: #
-.. _SSN:
-.. _Sport:
-.. _Book:
-.. _child:
-.. _phone:
+
+.. _SSN:  #
+.. _Sport: #
+.. _Book: #
+.. _child: #
+.. _phone: #
 
 .. comments:
 
