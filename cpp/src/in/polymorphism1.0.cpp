@@ -24,5 +24,4 @@ int main(){
   Square* pq2=&sq;
   cout<<__LINE__<<": "<<pq2->Area()<<endl;
   //pq2=&s;
-  return 0;
 }

@@ -2,31 +2,29 @@
 using namespace std;
 class A{
   int a1;
-  friend void print(A);  //A(){}
-public:
+  friend void print(A); // A(){}
+public: // A() = delete;
   A(int a):a1(a){}
   virtual void Show(void)
   { cout << a1 << endl; }
 };
-class B{
-  int b1;
+class B{ protected: int b1;
   friend void print(A);
-public:
+public: void f1(void){}
   B(int b){b1=b;}
   virtual void Show(void)
   {cout << b1 << endl;}
 };
 class D: public A, public B{
-  //int d1;    //int b1;
-  int b1;
+  int d1=0, b1=0;
   static int si;
 public:
   static void printHello(void)
   {cout << "Hello world" << si << endl;}
-  D(int a, int b, int d):A(a), B(b){b1 = d;}
+  D(int a,int b,int d):A(a),B(b){b1=d;}
   virtual void Show(void){
       A::Show();
-      B::Show();
+      B::Show(); cout << B::b1 << endl;
       cout << "\tb1:   " << b1 << endl;
   }
 };
@@ -49,13 +47,15 @@ public:
 static int GLOBAL_VARIABLE_I=12;
 int D::si = 7;
 int main(){
-  A a1(2);  myPrint(a1);
+  A a1(2);  myPrint(a1); A* pa1 = &a1;
   B b1(9);  myPrint(b1);
   C c1;     myPrint(b1);
-  D d1(2, 3, 4); d1.Show();
-  a1.Show();     D::printHello();
+  D d1(2, 3, 4); d1.Show(); pa1 = &d1;
+  // D* pd1 = &a1; // pa1 -> f1();
+  pa1->Show();  D::printHello();
   int GLOBAL_VARIABLE_I = 15;
-  cout << "i: " << GLOBAL_VARIABLE_I << endl;
-  cout<<"External i "<<::GLOBAL_VARIABLE_I<<endl;
+  cout<<"i: "<< GLOBAL_VARIABLE_I <<endl;
+  cout<<"External i "
+      << ::GLOBAL_VARIABLE_I << endl;
   print(a1);
 }

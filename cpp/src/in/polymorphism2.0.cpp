@@ -19,5 +19,4 @@ public:
 int main(){
   Person p("Reza", 11, "student");
   p.print();
-  return 0;
 }

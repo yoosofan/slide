@@ -8,7 +8,6 @@ int main(){
   cout << search(ae, 33, 6)  << endl;
   string am[]={"ali", "reza", "kamran", "hamid"};
   cout << search(am,"reza",4) << endl;
-  return 0;
 }
 int search(double* a, double v, int n){
   for(int i = 0; i < n; i++) 

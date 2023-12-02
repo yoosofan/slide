@@ -36,5 +36,4 @@ int main(){
   cout << ps->getJob() << endl;
   ps = &st1;
   cout << ps->getJob() << endl;
-  return 0;
 }

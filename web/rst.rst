@@ -1431,6 +1431,7 @@ Referenes
 * http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html#citations
 * `<http://rest-sphinx-memo.readthedocs.org/en/latest/ReST.html>`_
 * `Markdown and reStructuredText <https://gist.github.com/dupuy/1855764>`_
+* https://spec.commonmark.org/0.30/
 * http://docutils.sourceforge.net/docs/ref/rst/
 * `another useful resource <http://www.math.uiuc.edu/~gfrancis/illimath/windows/aszgard_mini/movpy-2.0.0-py2.4.4/manuals/docutils/ref/rst/directives.html>`_
 * `From Python <https://docs.python.org/devguide/documenting.html>`_

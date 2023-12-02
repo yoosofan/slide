@@ -13,7 +13,8 @@ template<typename T>void mySwap(
   a = b;
   b = t;
 }
-template<typename T> void sort_wrong(T a[],int n){
+template<typename T> void sort_wrong(
+      T a[],int n){
   int i,j; 
   T temp;
   for(i=0;i<n;i++)
@@ -47,5 +48,4 @@ int main(){
   mySwap<int>(i,j);   cout<<"i= "<<i<<"\tj= "<<j<<endl;
   for(i=0;i<5;i++) cout<<ae[i]<<'\t';  cout<<endl;
   sort<double>(ae,5); for(i=0;i<5;i++) cout<<ae[i]<<'\t';  cout<<endl;
-  return 0;
 }
