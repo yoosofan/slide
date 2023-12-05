@@ -4,7 +4,8 @@ template<typename T>int search(T* a, T v, int n){
   for(int i=0; i<n; i++) if(a[i]==v) return i;
   return -1;
 }
-template<typename T> void mySwap(T & a,T & b){T t=a;a=b;b=t;}
+template<typename T> void mySwap(T & a,
+  T & b){T t=a;a=b;b=t;}
 template<typename T>
 void sort(T a[],int n){
   int i,j; T temp;

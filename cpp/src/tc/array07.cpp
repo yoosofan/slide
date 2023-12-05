@@ -51,13 +51,11 @@ template<typename Type> class array{
   }
 };
 int main(){
-  try{
-    array<complexCls> ccm1; 
-    ccm1.input();ccm1.print();
-    complexCls c2(4);
-    if(c2==4) cout<<"equals"<<endl;
-    complexCls c1(4);
-    if(4==c1) cout<<"equals"<<endl;
-    cout<<ccm1.search(c1)<<endl;
-  }catch(const char *st1){cout<<st1<<endl;}
+  array<complexCls> ccm1; 
+  ccm1.input();ccm1.print();
+  complexCls c2(4);
+  if(c2==4) cout<<"equals"<<endl;
+  complexCls c1(4);
+  if(4==c1) cout<<"equals"<<endl;
+  cout<<ccm1.search(c1)<<endl;
 }

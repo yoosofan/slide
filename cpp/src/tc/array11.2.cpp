@@ -3,11 +3,8 @@ using namespace std;
 template<typename Type> class array{
   Type* a;
   int n;
-
   public:
-
   array(int n=20){this->n=n; a=new Type[n];}
-
   ~array(){n=0;delete[] a; a=nullptr;}
 
   Type& operator[](int index){
@@ -25,7 +22,6 @@ template<typename Type> class array{
   }
   array operator+=(const array& m1)
   {*this = *this + m1; return *this;}
-
   array(const array& f){
     n=f.n;
     a = new Type[n]; 
@@ -38,10 +34,8 @@ template<typename Type> class array{
     const array *pmax, *pmin;
     pmax = m1.n > this->n ? &m1 : this; 
     pmin = m1.n <= this->n ? &m1 : this;
-    
     // pmax -> n = 5;
     // pmax = pmin;
-    
     retVal.n = pmax->n; 
     retVal.a = new Type[retVal.n];
     for(i = 0; i < pmin->n; i++) 

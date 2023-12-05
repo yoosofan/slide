@@ -109,8 +109,8 @@ University of Kashan
     :header: ` `, Production, Semantic
     :class: smallerelementwithfullborder yoosofantextalignleft
 
-    1, "E → a", "E.val = a"
-    2, "E → E + a", "E.val = :math:`E_1`.val + a"
+    1, "E → a", "E.val = lexValue(a)"
+    2, "E → E + a", "E.val = :math:`E_1`.val + lexValue(a)"
 
 
 ..  csv-table::
@@ -376,6 +376,8 @@ real a, b, c
 
 ----
 
+:class: t2c
+
 ..  csv-table::
     :header: ,Production, Semantic Rules
     :class: smallerelementwithfullborder yoosofantextalignleft center
@@ -384,6 +386,37 @@ real a, b, c
     2, "B → 0 B1", "B.n0=B1.n0+1,  B.n1=B1.n1"
     3, "B → 1 B1", "B.n0=B1.n0,  B.n1=B1.n1+1"
     4, "B → λ ", "B.n0=0,  B.n1=0"
+
+
+.. raw:: html
+
+    <div id="graph300"></div>
+    <script>
+    d3.select("#graph300").graphviz().renderDot(`
+
+      digraph g {
+        node [ shape = "plaintext" ];
+
+        "A" [ label = "print(B.n0);print(B.n1);" ];
+        "B1" [ label = "E.val=17" ];
+        "r" [ label = "+" ];
+        "p" [ label = "a.val=2" ];
+        "b" [ label = "E.val=8" ];
+        "d" [ label = "+" ];
+        "c" [ label = "a.val=9" ];
+        "e" [ label = "a.val=8" ];
+
+        A -> a [dir="back"];
+        i -> r [dir="back"];
+        i -> p [dir="back"];
+        a -> c [dir="back"];
+        a -> d [dir="back"];
+        a -> b [dir="back"];
+        b -> e [dir="back"];
+      }
+    `);
+    </script>
+
 
 ----
 

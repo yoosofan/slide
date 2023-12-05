@@ -2,7 +2,7 @@
 using namespace std;
 // const int MAX=200;
 // #define MAX 200
-template<class Type> class array{
+template<typename Type> class array{
   static const int MAX = 200;
   Type a[MAX];
   int n = 0;

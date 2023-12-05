@@ -13,6 +13,7 @@ class complexCls{
   friend ostream& operator<<(
       ostream& io1, const complexCls &m1){
     io1 << m1.re << ',' << m1.im << endl;
+    return io1;
   }
 template<typename Type> class array{
   static const int MAX = 200;

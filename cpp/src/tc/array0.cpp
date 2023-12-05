@@ -25,14 +25,14 @@ class complexCls{
     return false;
   }
 };
-template<class T> class Node{ 
+template<typename T> class Node{ 
   T v;
-  Node *next;  
+  Node* next;  
   public:
   Node(T* m1 = 0){
     if(m1)
       v = *m1;
-    next=nullptr;
+    next = nullptr;
   }
   bool operator==(Node m2){
     if(v == m2.v) 

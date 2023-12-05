@@ -15,8 +15,8 @@ template<typename Type> class array{
   int n = 0;
 public:
   void input(void){
-    cout<<"Enter n: ";
-    cin >> n;
+    cout<<"Enter n < " << MAX << " : ";
+    do{cin >> n;} while(n<0 || n>MAX);
     for(auto i = 0; i < n; i++){
       cout << "Enter a[" << i << "]: ";
       cin >> a[i];

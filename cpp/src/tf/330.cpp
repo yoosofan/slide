@@ -56,8 +56,8 @@ int main(){
     {"ali", "reza", "kamran", "hamid"};
   cout << search<string>(am, "reza", 4)
     << endl;
-  complexCls ac[] = {
-    complexCls(1, 2), complexCls(3, 4), complexCls(6,7)
+  complexCls ac[] = {complexCls(1, 2),
+    complexCls(3, 4), complexCls(6,7)
   };
   //int mm=search<complexCls>(ac,complexCls(6,7), sizeof(ac)/sizeof(complexCls));
   int mm = search<complexCls>(
