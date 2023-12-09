@@ -17,8 +17,7 @@ template<typename T> class myArray{
 };
 int main(){
   myArray<double> m1;
-  m1["ali"]=23;
-  m1["reza"]=45;
+  m1["ali"]=14;
+  m1["reza"]=12;
   cout << m1["ali"] << endl;
-  return 0;
 }

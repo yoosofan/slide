@@ -1140,7 +1140,6 @@ Assembly implementation
 ==============================
 .. code:: asm
   :number-lines:
-  :class: substep
 
   enter_region:        ; A "jump to" tag; function entry point.
 
@@ -1175,7 +1174,6 @@ Assembly implementation
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
     // P0
     do{
@@ -1188,7 +1186,6 @@ Assembly implementation
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
     // P1
     do{
@@ -1201,7 +1198,6 @@ Assembly implementation
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
     // P2
     do{
@@ -1478,7 +1474,7 @@ Semaphore(II - no busy waiting)
 
 :class: t2c
 
-Sempahoce(III) extra functions
+Sempahore(III) extra functions
 ================================================
 .. code:: cpp
   :number-lines:

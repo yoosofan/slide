@@ -20,5 +20,4 @@ void tprintf(const char* format, T value, Targs... Fargs){ // recursive variadic
 
 int main(){
   tprintf("% world% %\n", "Hello", '!', 123);    
-  return 0;
-}
+} // new2011.06.Variadic.Templates.cpp

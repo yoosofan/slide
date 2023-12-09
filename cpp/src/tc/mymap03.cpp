@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
-template<typename T=double, typename I=string, int MAX=300>
+template<typename T=double, 
+  typename I=string, int MAX=300>
 class myArray{
   T a[MAX];
   int n;
@@ -23,5 +24,4 @@ int main(){
   m1["ali"]=23;
   m1["reza"]=45;
   cout << m1["ali"] << endl;
-  return 0;
 }

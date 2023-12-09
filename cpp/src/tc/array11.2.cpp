@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
 template<typename Type> class array{
-  Type* a;
-  int n;
+  Type* a = nullptr;
+  int n = 0;
   public:
   array(int n=20){this->n=n; a=new Type[n];}
   ~array(){n=0;delete[] a; a=nullptr;}
