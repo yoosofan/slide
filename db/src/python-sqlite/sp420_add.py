@@ -31,6 +31,7 @@ def test2(c):
     ('2006-04-06', 'SELL', 'IBM', 500, 53.00),
   ]
   c.executemany('INSERT INTO stocks VALUES (?,?,?,?,?)', purchases)
+
 def testDelete(c):
   c.execute("DELETE FROM stocks WHERE symbol='IBM';")
   c.execute("select * from stocks");
@@ -41,10 +42,13 @@ def testFor(c):
   for row in c.execute('SELECT * FROM stocks ORDER BY price'):
     print(row)
 
-conn = sqlite3.connect('example.db')
+path1 = 'example.db' 
+conn = sqlite3.connect(path1)
 c = conn.cursor()
 #createTable(c)
 #test2(c)
 testDelete(c)
 #testFor(c)
 c.close(); conn.commit() #os.system('rm example.db')
+if os.path.exists(path1):
+  os.remove(path1)

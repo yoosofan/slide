@@ -33,6 +33,10 @@ Simple Application(I)
 
 ----
 
+.. :
+
+    https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types
+
 Cursor(I)
 ==============
 .. include:: src/python-sqlite/sp240.py

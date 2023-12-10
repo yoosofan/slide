@@ -1,11 +1,11 @@
-import sqlite3
+import sqlite3, os
 def createTable(c):  
   c.execute('''CREATE TABLE IF NOT EXISTS p (
                   pn char(10), 
                   pname char(15), 
                   city char(10), 
-                  status numeric(8,2), 
-                  primary key(pno)
+                  weight numeric(8,2), 
+                  primary key(pn)
                   );
             ''')
   c.execute('''INSERT INTO p 
@@ -13,7 +13,7 @@ def createTable(c):
                  ('p2','mouse'   ,'Shiraz',200);
             ''')
 def test2(c):
-  t=input("Enter pno: ");
+  t=input("Enter pn: ");
   print(t)	
   c.execute('SELECT * FROM p WHERE pn=? ;', (t,))
   print(c.fetchone())
@@ -29,13 +29,19 @@ def test2(c):
 def testFor(c):
   for row in c.execute('SELECT * FROM p ORDER BY weight'):
     print(row)
+
 def testInputDeleteUser(c):
   t=input("Enter pn: ");
   c.execute('delete from p where pn=?;',(t,));
-conn = sqlite3.connect('newdb.sqlite')
+
+path1 = 'example.db' 
+conn = sqlite3.connect(path1)
 c = conn.cursor()
 createTable(c)
 testFor(c)
-testInputDeleteUser(c)
+#testInputDeleteUser(c)
 testFor(c)
+test2(c)
 conn.commit()
+if os.path.exists(path1):
+  os.remove(path1)
