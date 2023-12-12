@@ -1,13 +1,11 @@
-import psycopg2
-#conn = psycopg2.connect("dbname=spd user=postgres password=12344321 host=localhost")
-#conn = psycopg2.connect(database="spd", user="postgres", password="12344321",host='localhost')
-conn = psycopg2.connect(database="sp", user="postgres", password="12344321",host='127.0.0.1')
+import psycopg
+#conn = psycopg.connect(dbname="sp", user="postgres", password="12",host='localhost')
+conn = psycopg2.connect(dbname="sp", user="postgres", password="12344321",host='127.0.0.1')
 cur = conn.cursor()
 #cur.execute("SELECT * from s")
 #print(cur.fetchone())
 #cur.execute(
 # "create view vs2 as select sno,pno,sname from s natural join sp;");
-conn.commit();
 #cur.execute(
 # "select * from vs2");
 #print(cur.fetchone());
@@ -41,6 +39,5 @@ for a in cur.fetchall():
     if type(l1) != int and type(l1)!=float and l1!=None:
       print(l1,len(l1),end=' ');
   print()
-
 cur.close()
 conn.close()

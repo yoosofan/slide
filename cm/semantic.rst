@@ -353,12 +353,26 @@ Inherited Attribute
 * int a,b,c
 * real x,y
 
+#. D → T {L.in = T.type} L
+#. T → int {T.type = integer}
+#. T → real {T.type = real}
+#. L → {L1.in = L.in} L1, id {addtype(id.entry,L.in)}
+#. L → id {addtype(id.entry,L.in)}
+
 ----
 
 real a, b, c
 
 .. image:: img/semantic/dependency_graph_for_declaration.png
     :align: center
+
+----
+
+#. <src/ply/420.type.py>_
+#. <src/ply/426.type.py>_
+#. <src/ply/430.type.py>_
+#. <src/ply/436.type.literals.py>_
+
 
 ----
 
@@ -481,7 +495,7 @@ real a, b, c
 Translation Scheme
 =========================
 * E → T R
-* R → + T { print(“+”) } R1
+* R → + T { print("+") } R1
 * R → λ
 * T → id { print(id.name) }
 

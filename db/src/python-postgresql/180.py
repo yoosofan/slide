@@ -1,8 +1,8 @@
-import psycopg2
-conn = psycopg2.connect(database="sp", user="postgres", 
-        password="12344321",host='127.0.0.1')
+import psycopg
+conn = psycopg.connect(dbname="sp", user="postgres", 
+        password="12",host='127.0.0.1')
 cur = conn.cursor()
-cur.execute("select sn,avg(qty) from sp group by sn;");
+cur.execute("select sn, avg(qty) from sp group by sn;");
 for a in cur.fetchall():
   print(a)
 cur.execute("select sn,qty from sp;")

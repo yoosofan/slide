@@ -1,16 +1,17 @@
 #https://www.psycopg.org/docs/usage.html
-import psycopg2
-conn = psycopg2.connect(database="sp", user="postgres", 
-        password="12344321",host='127.0.0.1')
+import psycopg
+conn = psycopg.connect(dbname="sp", user="postgres", 
+        password="12",host='127.0.0.1')
 cur = conn.cursor()
 sql = """
-      CREATE TABLE test (
+      CREATE TABLE if not exists test (
         id serial PRIMARY KEY, 
         num integer, 
         data varchar);
       """
 cur.execute(sql)
-sql = "INSERT INTO test (num, data) VALUES (" + s1+ ',' +s2+ ");"
+s1 = 54; s2 = 'eeee'
+sql = "INSERT INTO test (num, data) VALUES (" + str(s1)+ ',' +s2+ ");"
 sql = "INSERT INTO test (num, data) VALUES (%s, %s)"
 cur.execute(sql, (100, "abc'def"))
 

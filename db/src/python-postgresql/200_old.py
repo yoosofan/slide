@@ -1,7 +1,7 @@
 #https://www.psycopg.org/docs/usage.html
-import psycopg2
-conn = psycopg2.connect(database="sp", user="postgres", 
-        password="12344321",host='127.0.0.1')
+import psycopg
+conn = psycopg.connect(dbname="sp", user="postgres", 
+        password="12",host='127.0.0.1')
 cur = conn.cursor()
 cur.execute("CREATE TABLE test (id serial PRIMARY KEY, num integer, data varchar);")
 cur.execute("INSERT INTO test (num, data) VALUES (%s, %s)", (100, "abc'def"))
