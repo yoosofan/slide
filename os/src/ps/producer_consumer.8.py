@@ -1,4 +1,3 @@
-# Python 3   only
 from threading import *; import time;
 N=3;
 class MyShare:counter = 0; z1= [-1]*3;buf = [z1] * N

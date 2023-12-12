@@ -79,7 +79,8 @@ int main(){
   }catch(int nn){
     cout <<"Second catch in main "<<nn << endl;
   }
-  catch(myException &a1){cout<<"My Exception catch "<<a1.what()<<endl;}
+  catch(myException &a1)
+  {cout<<"My Exception catch "<<a1.what()<<endl;}
   catch(exception &a2){  cout << "my second exception "<<a2.what()<<endl;}
   try{
     throw 5;

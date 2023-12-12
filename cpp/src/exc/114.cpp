@@ -43,5 +43,4 @@ int main(){
   if(!f2(13)) 
     cout << "In main" << endl;
   cout<< "End" << endl;
-  return 0;
 }

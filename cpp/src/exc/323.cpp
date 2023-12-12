@@ -55,7 +55,8 @@ class doubleArrayCls{
 		return *this;
 	}
 	double & operator[](int index){
-		if(index>=size || index < 0) throw myException("Index is out of range");
+		if(index>=size || index < 0) 
+      throw myException("Index is out of range");
 		return data[index];
 	}
 };

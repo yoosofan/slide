@@ -5,7 +5,7 @@ void f1(int i){
 	if(i <= 0)   throw 1;
 	else   cout << i <<endl;
 }
-void f2(int mm){
+void f2(int mm){//f4(4);
 	if(mm > 20)  throw 2;
 	else  cout << mm << endl;
 }

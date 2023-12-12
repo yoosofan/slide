@@ -60,9 +60,8 @@ int main(){
 		cout <<"Execution will not reach to this statement"<<endl;
 	}catch(int  ll){ cout <<"Third catch in main "<<endl;}
 	try{
-		int i=0; 
+		int i=0; f1(-1);
 		cout<<2/i<<endl;
 	}catch(...){cout<<"catch"<<endl;}
 	cout<< "End "<<endl;
-	return 0;
 }

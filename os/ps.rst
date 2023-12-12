@@ -1847,39 +1847,18 @@ Producer consumer(II)
   * - .. code:: python
         :number-lines:
 
-        def producer(sh1):
-          x = -1
-          in1 = 0
-          for i in range(5000):
-            x = produce(x, in1)
-            sh1.buf[in1] = x
-            in1 = in1 + 1
-
-    - .. code:: python
-        :number-lines:
-
-        def consumer(sh1):
-          out = 0
-          x=0
-          for i in range(5000):
-            x = sh1.buf[out];
-            out = out +1
-            consume(x,out)
-
-  * - .. code:: python
-        :number-lines:
-
         class MyShare:
           counter = 0
           n = 100000
           buf = [-1] * n
 
-        def produce(x, i):
-          print('produce ', (x+1)%100,i)
+        def produce():
+          x = random()
+          print('produce ', (x+1)%100)
           return (x+1)%100
 
-        def consume(x, i):
-          print('consume ',x,i)
+        def consume(x):
+          print('consume ',x)
 
     - .. code:: python
         :number-lines:
@@ -1894,6 +1873,29 @@ Producer consumer(II)
           th2.join()
           for i in range(4): print(sh1.buf[i])
           print("counter ", sh1.counter)
+
+  * - .. code:: python
+        :number-lines:
+
+        def producer(sh1):
+          x = -1
+          in1 = 0
+          for i in range(5000):
+            x = produce()
+            sh1.buf[in1] = x
+            in1 = in1 + 1
+
+    - .. code:: python
+        :number-lines:
+
+        def consumer(sh1):
+          out = 0
+          x=0
+          for i in range(5000):
+            x = sh1.buf[out];
+            out = out +1
+            consume(x)
+
 
 ----
 
@@ -1916,7 +1918,7 @@ Unbounded Buffer(Wrong Answer)
     in1 = 0
     for i in range(5000):
       mutex.acquire()
-      x = produce(x, in1)
+      x = produce()
       sh1.buf[in1] = x
       in1 = in1 + 1
       mutex.release() # empty.V()
@@ -1932,7 +1934,7 @@ Unbounded Buffer(Wrong Answer)
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = out + 1
-      consume(x,out)
+      consume(x)
       mutex.release()
 
 ----
@@ -1955,7 +1957,7 @@ Unbounded Buffer
     x = -1
     in1 = 0
     for i in range(5000):
-      x = produce(x, in1)
+      x = produce()
       sh1.buf[in1] = x
       in1 = in1 + 1
       full.release(); # full.V()
@@ -1971,7 +1973,7 @@ Unbounded Buffer
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = out +1
-      consume(x,out)
+      consume(x)
 
 ----
 
@@ -1993,7 +1995,7 @@ Buffer(I)
     x = -1
     in1 = 0
     for i in range(5000):
-      x = produce(x, in1)
+      x = produce()
       sh1.buf[in1] = x
       in1 = (in1 + 1) % sh1.n
       full.release(); # full.V()
@@ -2009,7 +2011,7 @@ Buffer(I)
       x = sh1.buf[out];
       sh1.buf[out] = -1
       out = (out +1) % sh1.n
-      consume(x,out)
+      consume(x)
 
 ----
 
@@ -2040,7 +2042,7 @@ Bounded Buffer(II)
     x = -1
     in1 = 0
     for i in range(5000):
-      x = produce(x, in1)
+      x = produce()
       empty.acquire() # empty.P()
       sh1.buf[in1] = x
       in1 = (in1 + 1) % sh1.n
@@ -2055,10 +2057,9 @@ Bounded Buffer(II)
     for i in range(5000):
       full.acquire() # full.P()
       x = sh1.buf[out];
-      sh1.buf[out] = -1
       out = (out +1) % sh1.n
       empty.release() # empty.V()
-      consume(x,out)
+      consume(x)
 
 ----
 
@@ -2086,7 +2087,7 @@ Bounded Buffer(Any kind of Queue)
   def producer(sh1):
     x = -1
     for i in range(5000):
-      x = produce(x, in1)
+      x = produce()
       empty.acquire() # empty.P()
       mutex.acquire()
       Q.append(x)
@@ -2105,7 +2106,7 @@ Bounded Buffer(Any kind of Queue)
       x = Q.delete()
       mutex.release()
       empty.release() # empty.V()
-      consume(x,out)
+      consume(x)
 
 ----
 
@@ -2168,7 +2169,6 @@ Bounded Buffer(Percent Empty )
     for i in range(5000):
       full.acquire() # full.P()
       x = sh1.buf[out];
-      sh1.buf[out] = -1
       out = (out +1) % sh1.n
       empty.release() # empty.V()
       consume(x,out)
