@@ -1,6 +1,6 @@
 #include<fstream>
 #include<iostream>
-#include<iomanip>
+//#include<iomanip>
 using namespace std;
 const int MAX_STR = 200;
 int main(){
@@ -12,6 +12,7 @@ int main(){
     throw "Cannot open file";
   }
   f1.read(st, MAX_STR - 1); // 199 charactes + \0 
+  //cout << f1.read(st, MAX_STR - 1).gcount() << endl; // 199 charactes + \0 
   while(!f1.eof()){
   //~ while(getline(f1, st2)){
     //~ st[9]= 0;

@@ -13,4 +13,6 @@ int main(){
   while(f1.getline(st, MAX_STR - 1).gcount() > 0 )    
     cout << st << endl;
   f1.close();
+  int i; cout << "Enter i: "; 
+  cout << (cin >> i).gcount() << endl;
 }

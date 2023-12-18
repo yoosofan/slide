@@ -18,7 +18,8 @@ int main(){
   f1.write((char*) &(++i), sizeof(int));
   // f1.write((char *) &(i++),sizeof(int));
   // f1.write((char *) &(i+1),sizeof(int));
-  f1.write((char*) &(++i), sizeof(int));
+  i = 0;
   f1.write((char*) &(i += 234234), sizeof(int));
-  f1.close();
+  cout << std::hex << i << endl;
+  f1.close(); // little Endian , Big Endian
 }
