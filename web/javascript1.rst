@@ -549,3 +549,26 @@ GNU LibreJS aims to address the JavaScript problem described in Richard Stallman
 ----
 
 END
+
+.. :
+
+    javascript.info
+
+
+    let animal = {
+      name: "Animal",
+      eat() {
+        alert(`${this.name} eats.`);
+      }
+    };
+
+    let rabbit = {
+      __proto__: animal,
+      name: "Rabbit",
+      eat() {
+        // that's how super.eat() could presumably work
+        this.__proto__.eat.call(this); // (*)
+        // this.__proto__.eat(); // (*)
+      }
+    };// 
+

@@ -172,6 +172,26 @@ File Structure in Unix
 
 ----
 
+RAM in DISK
+===========
+.. image:: img/disk/compuram-ssd-performancetest-en.jpg
+
+.. :
+
+    https://www.compuram.de/blog/en/ram-upgrade-andor-ssd-drive-whats-the-benefit/
+    https://en.wikipedia.org/wiki/Solid-state_drive
+
+----
+
+.. image:: img/disk/0fdaa514-25ae-494d-b4a6-4e1ca52633f1.jpg
+
+.. :
+    
+    internal ssd disk ram hierarchy
+    https://www.utmel.com/blog/categories/memory%20chip/solid-state-drive-ssd-classification-and-architecture
+    https://www.diskmfr.com/know-how-internal-structure-details-of-solid-state-drives/
+
+----
 File Allocation Methods Comparison
 ---------------------------------------
 .. note:

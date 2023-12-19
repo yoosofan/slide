@@ -177,7 +177,8 @@ Function parts
 .. code:: sql
     :number-lines:
 
-    CREATE OR REPLACE FUNCTION somefunc03(nm1 CHAR(10), nm2 CHAR(10), o1 OUT INTEGER)
+    CREATE OR REPLACE FUNCTION somefunc03(nm1 CHAR(10), nm2 CHAR(10),
+       o1 OUT INTEGER)
      AS $$
     DECLARE
       quantity integer := 30;
@@ -401,7 +402,8 @@ Simple Functions 1
 .. code:: sql
     :number-lines:
 
-    CREATE OR REPLACE FUNCTION get_year(INTEGER)
+    CREATE OR REPLACE 
+    FUNCTION get_year(INTEGER)
     RETURNS INTEGER AS $$
     BEGIN
       RETURN ( $1 / 10000);
@@ -412,10 +414,11 @@ Simple Functions 1
 .. code:: sql
     :number-lines:
 
-    CREATE OR REPLACE FUNCTION get_month(INTEGER)
+    CREATE OR REPLACE 
+    FUNCTION get_month(INTEGER)
     RETURNS INTEGER AS $$
     BEGIN
-      RETURN ( $1 / 100 ) % 100 ;
+      RETURN ( $1 / 100 ) % 100;
     END;
     $$ LANGUAGE plpgsql
     RETURNS NULL ON NULL INPUT;
@@ -423,7 +426,8 @@ Simple Functions 1
 .. code:: sql
     :number-lines:
 
-    CREATE OR REPLACE FUNCTION get_day(INTEGER)
+    CREATE OR REPLACE 
+    FUNCTION get_day(INTEGER)
     RETURNS INTEGER AS $$
     BEGIN
       RETURN $1  % 100 ;
@@ -434,7 +438,8 @@ Simple Functions 1
 .. code:: sql
     :number-lines:
 
-    CREATE OR REPLACE FUNCTION get_year_and_month(INTEGER)
+    CREATE OR REPLACE FUNCTION 
+    get_year_and_month(INTEGER)
     RETURNS INTEGER AS $$
     BEGIN
       RETURN ( $1 / 100);
