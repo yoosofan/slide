@@ -181,9 +181,9 @@ RAM in DISK
     https://www.compuram.de/blog/en/ram-upgrade-andor-ssd-drive-whats-the-benefit/
     https://en.wikipedia.org/wiki/Solid-state_drive
 
-----
+.. :
 
-.. image:: img/disk/0fdaa514-25ae-494d-b4a6-4e1ca52633f1.jpg
+  .. image:: img/disk/0fdaa514-25ae-494d-b4a6-4e1ca52633f1.jpg
 
 .. :
     
@@ -192,11 +192,13 @@ RAM in DISK
     https://www.diskmfr.com/know-how-internal-structure-details-of-solid-state-drives/
 
 ----
+
 File Allocation Methods Comparison
 ---------------------------------------
-.. note:
+.. :
 
     .. image:: img/disk/disk_File_Allocation_Methods.png
+
 
 .. class:: smallerelementwithfullborder
 

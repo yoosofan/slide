@@ -19,36 +19,28 @@ template<typename T> class myArray{
       }
     }
   }
-  ~myArray(){
-    f1.close();
-  }
+  ~myArray(){f1.close();}
   T read(const int index){
     T data;
     f1.seekg(index * sizeof(T), ios::beg); 
-    // ios::end   ios::cur
     f1.read((char*) &data, sizeof(T));
     return data;
   }
-  void write(const T& data, const int index){
+  void write(const T&data,const int index){
     f1.seekp(index * sizeof(T), ios::beg);
     f1.write((char*) &data, sizeof(T));
   }
-  T readNext(void){
-    T data;
+  T readNext(void){T data;
     f1.read((char*) &data, sizeof(T));
     return data;
   }
-  void writeNext(T data){
-    f1.write((char*) &data, sizeof(T));
-  }
-  void rewind(void){
-    f1.seekg(0, ios::beg);
-    f1.seekp(0, ios::beg);
-  }
+  void writeNext(T data)
+  {f1.write((char*) &data, sizeof(T));}
+  void rewind(void)
+  {f1.seekg(0, ios::beg);f1.seekp(0, ios::beg);}
 };
 struct student{
-  char name[20];
-  char stdno[14];
+  char name[20]; char stdno[14];
   double avg;
   void print(void){
     cout << "name:" << name << endl << "stdno:" << stdno
@@ -62,11 +54,8 @@ int main(){
   strcpy(st1.name, "Reza");
   strcpy(st1.stdno, "923434");
   st1.avg = 14.2;
-  myi.writeNext(st1);
-  myi.rewind();
+  myi.writeNext(st1); myi.rewind();
   myi.readNext().print();
   myi.readNext().print();
-  myi.read(0).print();
-  myi.read(1).print();
-  return 0;
+  myi.read(0).print();myi.read(1).print();
 }

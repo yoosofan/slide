@@ -11,19 +11,16 @@ int main(){
   const char st2[]{'A', 'B', 'C', '\0'};
   const char st3[]{65, 66, 67, 0};
   const char st4[]{0x41, 0x42, 0x43, 0x0};
-  f1.write((char*) st1, 4 * sizeof(char));
-  f1.write((char*) st2, 4 * sizeof(char));
-  f1.write((char*) st3, 4 * sizeof(char));
-  f1.write((char*) st4, 4 * sizeof(char));
-  f1.write((char*) &(++i), sizeof(int));
-  // f1.write((char *) &(i++),sizeof(int));
-  // f1.write((char *) &(i+1),sizeof(int));
-  f1.write((char*) &(++i), sizeof(int));
-  f1.write((char*) &(i += 234234), sizeof(int));
+  f1.write((char*)st1, 4 * sizeof(char));
+  f1.write((char*)st2, 4 * sizeof(char));
+  f1.write((char*)st3, 4 * sizeof(char));
+  f1.write((char*)st4, 4 * sizeof(char));
+  f1.write((char*)&(++i), sizeof(int));
+  f1.write((char*)&(++i), sizeof(int));
+  f1.write((char*)&(i += 234234), sizeof(int));
   f1.close();
-  fstream f3("a1.txt", ios::in | ios::binary);
-  if(!f3)
-      throw "Cannot Open File";
+  fstream f3("a1.txt",ios::in | ios::binary);
+  if(!f3)  throw "Cannot Open File";
   f3.read((char*) &j, sizeof(int));
   char ast[20];
   f3.read(ast, 4 * sizeof(char));
@@ -37,7 +34,7 @@ int main(){
   cout << ast + 12 << endl;
   cout << "number of read character: "
     << f3.read((char*) &j, sizeof(int)).gcount() << endl;
-  while(f3.read((char*) &j, sizeof(int)))
+  while(f3.read((char*)&j,sizeof(int)))
       cout << j << endl;
   f3.close();
 }

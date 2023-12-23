@@ -57,11 +57,8 @@ struct student{
   }
   char& operator[](int& index);
 };
-int mystrlen(char* s){
-  int i;
-  for(i = 0; s[i]; i++);
-  return i;
-}
+int mystrlen(char* s)
+{int i;for(i = 0; s[i]; i++);return i;}
 char& student::operator[](int& index){
   if(index < mystrlen(stdno))
     return stdno[index];
@@ -84,7 +81,4 @@ int main(){
   cout << myi.readNext() << endl;
   cout << myi.read(0) << endl;
   cout << myi.read(1) << endl;
-  //myi.write(54,10);
-  //cout<<myi.read(25)<<endl<<endl;
-  return 0;
 }
