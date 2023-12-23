@@ -113,5 +113,4 @@ int main(){myFileArray<student> myi("temp6.in");
   cout<<myi[1]<<endl;
   cout<<myi[wt1]<<endl;
   cout<<myi.read(0)<<endl<<endl;
-  return 0;
 }

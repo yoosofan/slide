@@ -4,6 +4,7 @@
 :substep: true
 :slide-numbers: true
 :skip-help: true
+:data-width: 1024
 
 .. title: Operating Systems: Process Synchronization
 

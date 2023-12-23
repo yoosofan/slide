@@ -75,5 +75,4 @@ int main(){
   cout << myi.readNext() << endl;
   cout <<myi.read(0) << endl;
   cout << myi.read(1) << endl;
-  return 0;
 }

@@ -55,5 +55,4 @@ int main() {
     if (istrm >> n >> s)                               // text input
       std::cout << "read back from file: " << d << ' ' << n << ' ' << s << '\n';
   }
-}
-*/
+}*/

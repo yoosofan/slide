@@ -110,5 +110,4 @@ int main(){myFileArray<student> myi("temp6.in");
   myi.write(st1,10);
   myi[10]=st1;
   cout<<myi.read(25)<<endl<<endl;
-  return 0;
 }

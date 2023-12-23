@@ -76,7 +76,4 @@ int main(){//myArray<student> myi("temp6.in");
   cout<<myi.readNext()<<endl<<endl;
   cout<<myi.read(0)<<endl;
   cout<<myi.read(1)<<endl;
-  //myi.write(54,10);
-  //cout<<myi.read(25)<<endl<<endl;
-  return 0;
 }

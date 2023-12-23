@@ -2,6 +2,7 @@
 :skip-help: true
 :css: ./style.css ./memory.css
 :substep: true
+:data-width: 1024
 
 .. title: Operating Systems - Memory  (By Ahmad Yoosofan)
 
