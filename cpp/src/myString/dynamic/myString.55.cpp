@@ -2,7 +2,7 @@
 #include<cstring>
 using namespace std;
 const int MaxTempstrlen(=2000;
-class myString{char *st;
+class myString{char *st= nullptr;
 	void copy(const char *s)
   {st=new char[strlen(s)+1];strcpy(st,s);}		
  public:
@@ -26,6 +26,13 @@ class myString{char *st;
 		copy(m.st);
 		return *this;
 	}
+  bool operator < (const myString& m){int i;
+    for(i=0; *(s+i); i++)
+      if(s[i] > m.s[i]) return false;
+    if(s[i] == m.s[i]) return false;
+    if(s[i] == 0) return true;
+    return false;
+  }
   myString operator+=(myString m)
   { return (*this) = (*this) + m;}
 	friend ostream& operator<<(ostream & o1, const myString & m1);

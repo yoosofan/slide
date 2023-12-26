@@ -5,6 +5,7 @@
 :slide-numbers: true
 :skip-help: true
 :data-width: 1024
+:data-height: 768
 
 .. title: Operating Systems: Process Synchronization
 

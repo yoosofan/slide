@@ -3,6 +3,9 @@
 :css: style.css
 :substep: true
 :slide-numbers: true
+:data-width: 1024
+:data-height: 768
+
 
 ----
 

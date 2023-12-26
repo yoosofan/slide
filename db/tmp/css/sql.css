@@ -1,0 +1,117 @@
+/* 63
+ */
+
+div#aggregation-functions-sum-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1 h1 sp1table'
+    'h2 h2 h2 sp1table'
+    'q1table q1sql q1p sp1table'
+    'q2table q2sql q2p sp1table'
+    'q3table q3sql q3p sp1table'
+    ;
+  gap: 10px;
+}
+div#aggregation-functions-sum-id > h1:nth-of-type(1){ grid-area: h1;}
+div#aggregation-functions-sum-id > h2:nth-of-type(1){ grid-area: h2;}
+div#aggregation-functions-sum-id > p:nth-of-type(1){ grid-area: q1p;}
+div#aggregation-functions-sum-id > pre:nth-of-type(1){ grid-area: q1sql;}
+div#aggregation-functions-sum-id > table:nth-of-type(1){ grid-area: q1table;}
+div#aggregation-functions-sum-id > p:nth-of-type(2){ grid-area: q2p;}
+div#aggregation-functions-sum-id > pre:nth-of-type(2){ grid-area: q2sql;}
+div#aggregation-functions-sum-id > table:nth-of-type(2){ grid-area: q2table;}
+div#aggregation-functions-sum-id > p:nth-of-type(3){ grid-area: q3p;}
+div#aggregation-functions-sum-id > pre:nth-of-type(3){ grid-area: q3sql;}
+div#aggregation-functions-sum-id > table:nth-of-type(3){ grid-area: q3table;}
+div#aggregation-functions-sum-id > table:nth-of-type(4){ grid-area: sp1table;}
+
+
+div#query-inside-from-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'q1sql q1table'
+    'q2sql q2table'
+    'q3sql q3table'
+    'q4sql q4table'
+    'my1link my1link'
+    ;
+  justify-items: start;
+  align-items: center;
+  gap: 1px;
+}
+div#query-inside-from-id >     p:nth-of-type(1){grid-area:h1; justify-self:center;}
+div#query-inside-from-id >   pre:nth-of-type(1){grid-area:q1sql;}
+div#query-inside-from-id > table:nth-of-type(1){grid-area:q1table;}
+div#query-inside-from-id >   pre:nth-of-type(2){grid-area:q2sql;}
+div#query-inside-from-id > table:nth-of-type(2){grid-area:q2table;}
+div#query-inside-from-id >   pre:nth-of-type(3){grid-area:q3sql;}
+div#query-inside-from-id > table:nth-of-type(3){grid-area:q3table;}
+div#query-inside-from-id >   pre:nth-of-type(4){grid-area:q4sql;}
+div#query-inside-from-id > table:nth-of-type(4){grid-area:q4table;}
+div#query-inside-from-id >     p:nth-of-type(2){grid-area:my1link;}
+
+div#order-by-asc-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'h2 h2'
+    'code1 out1'
+    'code2 out1'
+    ;
+}
+
+div#order-by-asc-id > h1:nth-of-type(1){ grid-area: h1;}
+div#order-by-asc-id > p.rtl-h2:nth-of-type(1){ grid-area: h2;}
+div#order-by-asc-id > pre:nth-of-type(1){ grid-area: code1;}
+div#order-by-asc-id > pre:nth-of-type(2){ grid-area: code2;}
+div#order-by-asc-id > img:nth-of-type(1){ grid-area: out1; justify-self: start;}
+
+div#scalar-value-1-id{
+  display: grid;
+  grid-template-areas:
+    'h1 h1'
+    'h2 h2'
+    'code1 out1'
+    'h3 h3'
+    'code2 out2'
+    ;
+}
+div#scalar-value-1-id > h1:nth-of-type(1){ grid-area: h1;}
+div#scalar-value-1-id > p.rtl-h2:nth-of-type(1){ grid-area: h2;}
+div#scalar-value-1-id > pre:nth-of-type(1){ grid-area: code1;}
+div#scalar-value-1-id > img:nth-of-type(1){ grid-area: out1; justify-self: start;}
+div#scalar-value-1-id > p.rtl-h2:nth-of-type(2){ grid-area: h3;}
+div#scalar-value-1-id > pre:nth-of-type(2){ grid-area: code2;}
+div#scalar-value-1-id > img:nth-of-type(2){ grid-area: out2; justify-self: start;}
+
+
+div#scalar-value-2-id{
+  display: grid;
+  grid-template-areas:
+    'h2 h2'
+    'code1 out1'
+    'code2 out2'
+    ;
+}
+div#scalar-value-2-id > p.rtl-h2:nth-of-type(1){ grid-area: h2;}
+div#scalar-value-2-id > pre:nth-of-type(1){ grid-area: code1;}
+div#scalar-value-2-id > img:nth-of-type(1){ grid-area: out1; justify-self: center;}
+div#scalar-value-2-id > pre:nth-of-type(2){ grid-area: code2;}
+div#scalar-value-2-id > img:nth-of-type(2){ grid-area: out2; justify-self: start;}
+
+div#left-outer-join1-id{
+  display: grid;
+  grid-template-areas:
+    'h2 h2'
+    'code1 out1'
+    'code2 out2'
+    'code3 out2'
+    ;
+}
+div#left-outer-join1-id > p.rtl-h2:nth-of-type(1){ grid-area: h2;}
+div#left-outer-join1-id > pre:nth-of-type(1){ grid-area: code1;}
+div#left-outer-join1-id > img:nth-of-type(1){ grid-area: out1; justify-self: center;}
+div#left-outer-join1-id > pre:nth-of-type(2){ grid-area: code2;}
+div#left-outer-join1-id > pre:nth-of-type(3){ grid-area: code3;}
+div#left-outer-join1-id > img:nth-of-type(2){ grid-area: out2; justify-self: start;}
