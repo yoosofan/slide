@@ -4,6 +4,8 @@
 :substep: true
 :slide-numbers: true
 :js: ./temporary03454-images9877/tex-mml-chtml.js
+:data-width: 1024
+
 
 ----
 
