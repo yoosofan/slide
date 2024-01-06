@@ -773,6 +773,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -852,6 +854,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -931,6 +935,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -1010,6 +1016,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -1088,6 +1096,8 @@ Look ahead
       }
  
 ----
+
+:data-transition-duration: 1
 
 .. yographviz::
 
@@ -1168,6 +1178,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -1247,6 +1259,8 @@ Look ahead
  
 ----
 
+:data-transition-duration: 1
+
 .. yographviz::
 
       digraph g {
@@ -1325,6 +1339,8 @@ Look ahead
       }
  
 ----
+
+:data-transition-duration: 1
 
 .. yographviz::
 
@@ -1405,6 +1421,8 @@ Look ahead
 
 ----
 
+:data-transition-duration: 1000
+
 
 LALR
 =======
@@ -1422,3 +1440,7 @@ LALR
   I6,   ,   ,   ,   ,   ,   , 
   I7,   ,   ,   ,   ,   ,   , 
   I8,   ,   ,   ,   ,   ,   , 
+
+----
+
+END
