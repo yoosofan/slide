@@ -2,30 +2,41 @@ Slides of some computer courses
 
 Ahmad Yoosofan
 
-Tools
+Use Bildumilo to view presentations
+===================================
+`Bildumilo <https://github.com/yoosofan/bildumilo>`_
 
-`Hovercraft <https://github.com/regebro/hovercraft>`_
+Installation
+------------
+1. It is better to use virtual environment in python3
 
-.. code:: sh
+    .. code:: sh
 
-  pip3 install hovercraft
+        cd ~/destination/directory/
+        python -m venv myvenv
+        source myvenv/bin/activate
+2. Download `Bildumilo <https://github.com/yoosofan/bildumilo>`_ repository to a directory, like :code:`~/path/bildumilo`
+3. Install by pip
 
+    .. code:: sh
+
+        pip install ~/path/bildumilo/
 
 Run a simple slide
-
+------------------
 .. code:: sh
 
   cd cpp
-  hovercraft cpp.rst
+  bildumilo cpp.rst
 
 Open Browser
-
+^^^^^^^^^^^^
 Type the following link
 
 http://127.0.0.1:8000
 
 List of courses and slides
---------------------------
+==========================
 .. csv-table::
     :header-rows: 1
 
@@ -37,7 +48,7 @@ List of courses and slides
     Front-end web development fundations and related topics, web
 
 cm (Compiler)
-^^^^^^^^^^^^^
+-------------
 .. csv-table::
     :header-rows: 1
 
@@ -50,23 +61,35 @@ cm (Compiler)
     
 
 Convert to html
-------------------
+==================
+Bildumilo creates a directory by the name of slide if it possible. Therefore, it doesn't need to do the follwing steps.
+However, Ii is possible to create a seperate directory.
 
 .. code:: sh
 
   cd os
-  hovercraft cpu.rst cpu/
+  bildumilo cpu.rst cpu_htmls/
 
 Convert to pdf
------------------
-Run hovercraft
-^^^^^^^^^^^^^^^^^^
+=================
+Install google-chrome
+
+.. code:: sh
+
+  bildumilo cpu.rst --pdf cpu.pdf
+
+Old methods for hovercraft
+--------------------------
+Run hovercraft 
+^^^^^^^^^^^^^^^
 .. code:: sh
 
   cd os
-  hovercraft mem.rst
-  Run browser
-  Type 127.0.0.1:8000
+  bildumilo mem.rst
+
+  ###  Run browser
+
+  ### Type 127.0.0.1:8000
 
 Mothods
 ^^^^^^^^
