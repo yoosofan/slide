@@ -56,5 +56,4 @@ void f1(){
 int main(){
   f1();
   cout<<"This will not appear in main"<<endl;
-  return 0;
 }

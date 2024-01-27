@@ -53,3 +53,18 @@ Editors
 * https://github.com/retext-project/retext
 * python.net/~gherman/ReSTedit.html
 
+
+Check these
+-----------
+Creating pdf
+^^^^^^^^^^^^
+* https://copyprogramming.com/howto/python-convert-html-to-pdf
+* https://forum.xojo.com/t/alternative-solutions-for-converting-html-to-pdf/69155/25
+* https://stackoverflow.com/questions/73819036/how-to-convert-html-to-pdf-using-selenium-3-141-59
+* https://pypi.org/project/pdfgen/
+* https://pyppeteer.github.io/pyppeteer/index.html
+* https://dev.to/bschoeneweis/converting-html-to-a-pdf-using-python-aws-lambda-and-wkhtmltopdf-3mdh
+* https://github.com/kumaF/pyhtml2pdf
+* https://www.reddit.com/r/learnpython/comments/15yxc4f/whre_i_can_download_pythonladp_for_windowns/
+* https://www.reddit.com/r/voidlinux/comments/165uz0m/how_can_i_install_fluidsynthdssi/
+* https://stackoverflow.com/questions/46026987/selenium-gives-selenium-common-exceptions-webdriverexception-message-unknown
