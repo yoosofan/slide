@@ -1,4 +1,6 @@
 :data-transition-duration: 1000
+:data-width: 1024
+:data-height: 768
 :skip-help: true
 :css: ./style.css
 :substep: true
@@ -44,21 +46,25 @@ https://yoosofan.github.io/course/compiler.html
 
 Compiler Usage
 =================
-.. class:: rtl substep
+.. class:: rtl
 
 * به عنوان کاربر کامپایلر بهتر است ابزار را بشناسیم. پس بهتر می‌توانیم از آن کمک بگیریم
 * تئوری همراه با عملی نیاز است.
 * یک پروژه متفاوت است
 * نرم‌افزار کامپایلر یکی از مهم‌ترین نرم‌افزارهای کامپیوتر هست و هر نرم‌افزاری به کار می‌برید عملا با کامپایلری تولید  شده است.
 * به کارگیری سخت‌افزارهای جدید توانایی‌های دستورهای جدید پردازنده‌ها کاملا وابسته به کامپایلر است. شرکت سخت‌افزاری کامپایلر
-    * https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.oshpmh
-    * https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top.html
-    * https://developer.amd.com/amd-aocc
-    * https://developer.amd.com/spack/amd-optimized-c-cpp-compiler
-    * https://developer.amd.com/x86-open64-compiler-suite
-    * https://developer.nvidia.com/hpc-compilers
-    * https://developer.nvidia.com/cuda-llvm-compiler
-    * https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html
+
+.. class:: ltr
+
+* `Intel Fortran Compiler <https://www.intel.com/content/www/us/en/developer/tools/oneapi/fortran-compiler.html#gs.oshpmh>`_
+* `Intel C++ Compiler <https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top.html>`_
+* `AMD AOCC <https://developer.amd.com/amd-aocc>`_
+* `AMD OPtimized Compiler <https://developer.amd.com/spack/amd-optimized-c-cpp-compiler>`_
+* `AMD x86 Compiler <https://developer.amd.com/x86-open64-compiler-suite>`_
+* `NVIDIA HPC Compiler <https://developer.nvidia.com/hpc-compilers>`_
+* `NVIDIA Cuda Compiler <https://developer.nvidia.com/cuda-llvm-compiler>`_
+* `NVIDIA Compiler Driver <https://docs.nvidia.com/cuda/cuda-compiler-driver-nvcc/index.html>`_
+
 
 .. :
 
@@ -124,7 +130,7 @@ Compiler History
 
 ----
 
-.. class:: rtl substep
+.. class:: rtl
 
 * خانه سرد است
 * خانه گرم است
@@ -136,9 +142,10 @@ Compiler History
 
 ----
 
+:class: t2c
+
 تحلیل‌گر لغوی
 =======================
-
 .. code:: asm
 
     mov A,B
@@ -152,15 +159,18 @@ Compiler History
     B
     \n
 
+.. container::
 
-* Lexical Analyser
-* Tokenizer (token)
+    * Lexical Analyser
+    * Tokenizer (token)
 
-.. code:: cpp
+    .. code:: cpp
 
-    A = B + 4
+        A = B + 4
 
 ----
+
+:class: t2c
 
 .. code:: cpp
 
@@ -198,6 +208,8 @@ Parser
 
 ----
 
+:class: t2c
+
 Semantic Analysis
 ========================
 تحلیل‌گر معنایی
@@ -230,7 +242,7 @@ Semantic Analysis
 
 کامپایلر
 =========
-.. class:: substep rtl
+.. class:: rtl
 
 * تحلیل‌گر لغوی
 * تحلیل‌گر نحوی
@@ -243,9 +255,11 @@ Semantic Analysis
 
 ----
 
-.. image:: img/sa/frontend_backend15.png
-
 .. image:: img/sa/frontend_backend22.png
+
+----
+
+.. image:: img/sa/frontend_backend15.png
 
 .. :
 

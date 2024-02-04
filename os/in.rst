@@ -1,4 +1,6 @@
 :data-transition-duration: 1000
+:data-width: 1024
+:data-height: 768
 :skip-help: true
 :css: ./style.css
 :substep: true
