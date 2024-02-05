@@ -9,7 +9,9 @@
   margin: 0;
   padding: 0;
 }*/
-
+#impress {
+  transform: scale(1) !important;
+}
 body{
   text-align: center;
   font-size: 100%;
