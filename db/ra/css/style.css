@@ -1,8 +1,12 @@
-@media screen and (min-width:1149px) { #impress { transform: scale(1.5) !important; }}
+/*@media screen and (min-width:1149px) { #impress { transform: scale(1.5) !important; }}
 @media screen and (min-width:1200px) and (max-width:1148px) { #impress { transform: scale(1.5) !important; }}
 @media screen and (min-width:800px) and (max-width:1199px) { #impress { transform: scale(1.25) !important; }}
 @media screen and (min-width:640px) and (max-width:799px) { #impress { transform: scale(0.8) !important;}}
 @media screen and (min-width:500px) and (max-width:639px) { #impress { transform: scale(0.8) !important;  }}
+*/
+#impress {
+  transform: scale(1) !important;
+}
 
 body { text-align: center;
 font-family: Nazli, DejaVu Serif, Liberation Serif,  FreeSerif;

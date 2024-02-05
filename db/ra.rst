@@ -556,19 +556,28 @@ Projection
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
     شهرهایی را بیابید که هم عرضه کننده و هم قطعه در آنها هست.
 
-.. code:: sql
-    :class: substep
+.. container:: substep
 
-    s{city} minus (s{city} minus p{city});
+    .. code:: sql
+        :class: substep
 
-.. code:: sql
-    :class: substep
+        s{city} minus (s{city} minus p{city});
 
-    s{city} intersect p{city};
+    .. code:: sql
+        :class: substep
+
+        p{city} minus (p{city} minus s{city});
+
+    .. code:: sql
+        :class: substep
+
+        s{city} intersect p{city};
 
 .. csv-table::
   :header-rows: 1
@@ -2488,13 +2497,17 @@ Calculation on tuples instead of relations
 
   * اشکال
 
-  * sx.city where exists spx (
-      spx.sn = sx.sn
-    ) and exists px (px.pn = 'P2')
+  * .. code:: sql
+    
+        sx.city where exists spx (
+          spx.sn = sx.sn
+        ) and exists px (px.pn = 'P2')
 
-  * sx.city where exists spx (
-      spx.sn = sx.sn
-    ) and exists spy (spy.pn = 'P2')
+  * .. code::
+
+      sx.city where exists spx (
+        spx.sn = sx.sn
+      )  and exists spy (spy.pn = 'P2')
 
 ----
 
