@@ -119,6 +119,18 @@ Instruction Set(II)
     SKO:    Skip if output flag
     NOP:    No operation
 
+.. code:: asm
+    :class: substep
+    
+    ..........
+    
+    LB1:    out
+            sko
+            bun LB1
+
+     ..........
+    
+
 ----
 
 Instruction Set Bianary(I)
