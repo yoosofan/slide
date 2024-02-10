@@ -57,7 +57,7 @@ Converting C code to C++
     * ctype.h  → cctype
     * https://en.wikipedia.org/wiki/C_standard_library
     * https://en.cppreference.com/w/c/header
-#. Add the line the follwing line after includes
+#. Add the follwing line after includes
     * :code:`using namespace std;`
 #. Compile using C++ compiler like g++
 

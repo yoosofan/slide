@@ -21,7 +21,6 @@ int main(){
     else if(n != 4)
       printf("wrong number\n");
   }while(n != 4);
-  return 0;
 }
 
 void printSquare(void){
