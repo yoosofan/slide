@@ -170,6 +170,7 @@ Compilers
     * windows:
         * https://www.mingw-w64.org/downloads/
         * http://win-builds.org/doku.php
+        * https://www.msys2.org/#installation
 *  `clang <https://clang.llvm.org/>`_
 *  https://visualstudio.microsoft.com/downloads/
 

@@ -12,5 +12,4 @@ int main(){
   int sum = s1 + s2 + s3;
   // initialization
   std::cout << sum;
-  return 0;
 }

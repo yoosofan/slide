@@ -14,5 +14,4 @@ int main(){
   sum = s1 + s2 + s3; 
   // Assignment
   printf("%d\n",sum);
-  return 0;
 }

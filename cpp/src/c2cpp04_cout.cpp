@@ -12,7 +12,5 @@ int main(){
   cin >> s3 ;
   int sum = s1 + s2 + s3;
   // initialization
-
   cout << sum;
-  return 0;
 }
