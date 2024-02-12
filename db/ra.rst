@@ -923,26 +923,31 @@ Rename
           times
           (sp rename pn as sppn)
 
-        ) where pn = sppn
-        ;
+        ) where pn = sppn;
+
+
+    .. code:: sql
+        :class: substep
+
+        (  
+          (
+            p
+            times
+            (sp rename pn as sppn)
+          ) where pn = sppn 
+        ) {pn, pname, weight, color};
 
 .. csv-table::
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
-    PN,PNAME,COLOR,WEIGHT,CITY,SN,sppn,QTY
-    P1,Nut,Red,12,London,S1,P1,300
-    P1,Nut,Red,12,London,S2,P1,300
-    P2,Bolt,Green,17,Paris,S1,P2,200
-    P2,Bolt,Green,17,Paris,S2,P2,400
-    P2,Bolt,Green,17,Paris,S3,P2,200
-    P2,Bolt,Green,17,Paris,S4,P2,200
-    P3,Screw,Blue,17,Oslo,S1,P3,400
-    P4,Screw,Red,14,london,S1,P4,200
-    P4,Screw,Red,14,london,S4,P4,300
-    P5,Cam,Blue,12,Paris,S1,P5,100
-    P5,Cam,Blue,12,Paris,S4,P5,400
-    P6,Cog,Red,19,London,S1,P6,100
+    WEIGHT,PN,PNAME,COLOR
+    12,P1,Nut,Red
+    17,P2,Bolt,Green
+    17,P3,Screw,Blue
+    14,P4,Screw,Red
+    12,P5,Cam,Blue
+    19,P6,Cog,Red
 
 ----
 
