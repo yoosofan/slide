@@ -8,13 +8,11 @@ enum TokenType{
 struct Token{
   TokenType type;
   int n;
-  double r;
 };
 
 void error(const string msg)
 {cout<<msg<<endl; exit(0);}
 
-Token  t;
 char buffer[200];
 int tindex =0;
 
@@ -25,6 +23,7 @@ void read(void){
 }
 
 Token getToken(void){
+  Token  t; t.n = 0;
   static int number_of_call = 0;
   number_of_call ++;
   if(buffer[tindex] == '(')        
@@ -49,8 +48,7 @@ Token getToken(void){
     tindex --;
   }else if(buffer[tindex] == '\0')  
     t.type = EOF_INPUT;
-  else    
-    error("unknown character");
+  else  error("unknown character");
   tindex++; 
   return t;
 }
@@ -67,5 +65,4 @@ int main(){
     t=getToken();
     printToken(t);
   }while(t.type != EOF_INPUT);
-  return 0;
 }

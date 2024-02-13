@@ -3,7 +3,7 @@
 
 @media screen and (min-width:1599px) { #impress { transform: scale(1.6) !important; }}
 @media screen and (min-width:1200px) and (max-width:1599px) { #impress { transform: scale(1.4) !important; }}
-
+*/
 @media screen and (min-width:800px) and (max-width:1199px) { #impress { transform: scale(1.05) !important; }}
 #impress{
   margin: 0;

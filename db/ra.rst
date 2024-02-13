@@ -1049,7 +1049,6 @@ Rename
 
 ----
 
-
 :class: t2c
 
 .. class:: rtl-h1
@@ -1091,8 +1090,8 @@ Rename
 
 .. class:: rtl-h1
 
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد
-  
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد(III)
+
 .. code:: sql
   :number-lines:
    
@@ -1116,6 +1115,15 @@ Rename
   B := (sp{sn, pn} times (s{sn, sname} rename sn as ssn1) where sn = ssn1;
   C := (B times (p{pn, pname} rename pn as pn1) where pn = pn1;
   A minus (C{sn, sname, pn, pname})
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (IV)
+  
 
 .. code:: sql
   :number-lines:
