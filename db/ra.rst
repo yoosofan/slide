@@ -1258,13 +1258,13 @@ Rename
           ( s rename city as scity ){scity}
           times
           p{city}
-        ) where scity <> pcity;
+        ) where scity <> city;
 
 .. csv-table::
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
-    scity,CITY
+    scity, city
     London,Paris
     London,Oslo
     Paris,London
@@ -1307,7 +1307,6 @@ Rename
       :class: substep
 
       (((s rename sn as sn1) times sp) where sn1=sn){sname};
-
 
 .. csv-table::
   :header-rows: 1
@@ -1508,6 +1507,7 @@ Rename
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   (
     (
@@ -1526,7 +1526,8 @@ Rename
 
 .. code:: sql
   :class: substep
-
+  :number-lines:
+  
   (
     (
       (
@@ -1547,6 +1548,11 @@ Rename
   ){city}
   ;
 
+
+.. :
+
+  ( ( s rename sn as sn1) rename city as city1)
+
 ----
 
 :class: t2c
@@ -1558,7 +1564,7 @@ Rename
 
 .. class:: rtl-h1
 
-  شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند.
+    شهر عرضه کنندگانی را بیابید که قطعهٔ قرمزی را عرضه کرده باشند(III).
 
 .. code:: sql
     :class: substep
@@ -1580,8 +1586,8 @@ Rename
             (
               (p where color = "Red")
             ){pn}
-          ) rename pn as pn1
         )
+          ) rename pn as pn1
       ) where pn1=pn
     ){city};
 
@@ -1604,6 +1610,7 @@ Rename
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   (
     (
@@ -1630,6 +1637,7 @@ Rename
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   (
     (
@@ -1692,6 +1700,7 @@ Rename
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   (
    (
@@ -1719,6 +1728,7 @@ Rename
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     ( 
       ( 
@@ -1750,6 +1760,7 @@ Rename
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     (
       (

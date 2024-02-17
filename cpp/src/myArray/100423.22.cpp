@@ -4,7 +4,7 @@ struct myArray{
   double a[100];
   int n = 0;
   void set(double ma[], int k){
-    if(k >= 0 && k < 100){
+    if(k >= 0 && k <= 100){
       n = k;
       for(int i = 0; i < n; i++)
         a[i] = ma[i];
