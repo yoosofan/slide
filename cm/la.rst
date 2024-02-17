@@ -1,5 +1,7 @@
 :data-transition-duration: 1000
 :skip-help: true
+:data-width: 1024
+:data-height: 768
 :css: ./style.css
 :substep: true
 :slide-numbers: true
@@ -298,10 +300,11 @@ Some Issues
 
 ----
 
-.. include:: src/la//template.in.template.cpp
+.. include:: src/la/template.in.template.cpp
   :code: cpp
   :number-lines:
   :class: ltr
+  :start-line: 47
 
 ----
 
@@ -311,7 +314,7 @@ Applications of Lexical Analyzer
 --------------------------------
 * Editors
     * `zed.dev <https://zed.dev/>`_ , `github <https://github.com/zed-industries/zed>`_
-    * `Atom <https://atom-editor.cc/>`_ `github <https://github.com/atom/atom>`_ 
+    * `Atom <https://atom-editor.cc/>`_ `github <https://github.com/atom/atom>`_
     * `LPG2 <https://github.com/A-LPG/LPG2>`_
         * `Eclipse IDE <https://github.com/impulse-org>`_
 
@@ -330,6 +333,60 @@ ID
 
 ----
 
+.. yographviz::
+
+    digraph {
+      rankdir = "LR";
+      node     [shape=circle];  0 7;
+
+      node     [shape=doublecircle];  1 2 3 4 5 6;
+
+      node     [shape=doublecircle, xlabel="✷", tooltip="integer number"]; 8;
+
+      0 -> 1   [label="("];
+      0 -> 2   [label=")"];
+      0 -> 3   [label="+"];
+      0 -> 4   [label="-"];
+      0 -> 5   [label="*"];
+      0 -> 6   [label="/"];
+      0 -> 7   [label="[0-9]"];
+      7 -> 7   [label="[0-9]"];
+      7 -> 8   [label="other"];
+    }
+
+.. :
+
+
+    digraph G {
+      edge [arrowhead=none];
+      nodesep = 1;
+      ranksep=0.05;
+      splines = ortho;
+      rankdir = LR;
+
+      node [ shape="box", width = 2, height = 1, fixedsize=true];
+      A1;
+      B4 B5 B6 B3 B2 B1;
+
+      node [ shape="point", width = 0, height = 0 ];
+      { rank = same; W4 W5 W6 W0 W3 W2 W1 }
+
+      A1 -> W0;
+      W4 -> W5 -> W6 -> W0 -> W3 -> W2 -> W1;        /* critical! */
+      W1 -> B1;
+      W2 -> B2;
+      W3 -> B3;
+      W4 -> B4;
+      W5 -> B5;
+      W6 -> B6;
+    }
+
+.. :
+
+        8 -> SY  [arrowhead=none, penwidth=0, len=0];
+
+----
+
 :class: t2c
 
 .. include:: src/la/lexical440.cpp
@@ -342,6 +399,24 @@ ID
 .. include:: src/la/lexical440.cpp
   :code: cpp
   :number-lines:
+  :class: ltr
+  :start-line: 35
+  :end-line: 74
+
+----
+
+:class: t2c
+
+.. include:: src/la/lexical455.cpp
+  :code: cpp
+  :number-lines: 3
+  :class: ltr
+  :start-line: 2
+  :end-line: 35
+
+.. include:: src/la/lexical455.cpp
+  :code: cpp
+  :number-lines: 36
   :class: ltr
   :start-line: 35
   :end-line: 74
@@ -371,24 +446,6 @@ Number
 
 .. image:: img/number.png
   :width: 740px
-
-----
-
-:class: t2c
-
-.. include:: src/la/lexical455.cpp
-  :code: cpp
-  :number-lines:
-  :class: ltr
-  :start-line: 0
-  :end-line: 36
-
-.. include:: src/la/lexical455.cpp
-  :code: cpp
-  :number-lines:
-  :class: ltr
-  :start-line: 36
-  :end-line: 74
 
 ----
 
@@ -467,7 +524,7 @@ Keywords in Symbol Table
 
   .. csv-table::
     :header-rows: 1
-    :class: substep  smallerelementwithfullborder
+    :class: smallerelementwithfullborder
 
     Name, Type, Value
     if, IF,
@@ -479,16 +536,26 @@ Keywords in Symbol Table
 
   .. code:: cpp
 
+    a = 2
+    count = count + a
+
+  .. code:: cpp
+
     a = 2\ncount = count + a\0
 
-  .. csv-table::
-    :class: substep  smallerelementwithfullborder
+  .. code:: cpp
 
-      ` a `,`   `,` = `,`   `,` 2 `,` \\n`,` c `,` o `,` u `, ` n `,` t `, `   `,` = `,` c `, ` o `, ` u `,` n `,` t `,`  `,` + `,` a `,` \\0`
+    |a| |=| |2|\n|c|o|u|n|t| |=| |c|o|u|n|t| |+| |a|\0|
+
+  .. :
+
+      .. csv-table::
+        :class: substep  smallerelementwithfullborder
+
+          ` a `,`   `,` = `,`   `,` 2 `,` \\n`,` c `,` o `,` u `, ` n `,` t `, `   `,` = `,` c `, ` o `, ` u `,` n `,` t `,`  `,` + `,` a `,` \\0`
 
 .. include:: src/la//symbol_table34.cpp
   :code: cpp
-  :class: substep
   :number-lines:
 
 
@@ -501,15 +568,14 @@ Keywords in Symbol Table
 .. include:: src/la/scanner1.cpp
   :code: cpp
   :number-lines:
-  :start-line: 5
-  :end-line: 31
+  :end-line: 34
 
 ----
 
 .. include:: src/la/scanner1.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 31
+  :number-lines: 35
+  :start-line: 34
   :end-line: 90
 
 ----
@@ -544,7 +610,7 @@ Memory Allocation
 
 Regular Expression
 =======================
-.. container:: 
+.. container::
 
   #. 0|1|2|3 : 0 or 1 or 2 or 3
   #. [0123] : 0 or 1 or 2 or 3
@@ -629,7 +695,7 @@ Regular Expression in Programming(re/regex)
     * https://www.programiz.com/python-programming/regex
     * https://realpython.com/regex-python/
     * https://www.geeksforgeeks.org/regular-expression-python-examples-set-1/
-    
+
 * Javascript
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
     * https://www.w3schools.com/js/js_regexp.asp

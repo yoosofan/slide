@@ -1,5 +1,4 @@
 #include<iostream>
-#include<cstdlib>
 using namespace std;
 enum TokenType{
   NUMBER, PLUS, MINUS, MUL,
@@ -7,17 +6,16 @@ enum TokenType{
 };
 struct Token{
   TokenType type;
-  int n;
-  double r;
+  int n = 0;
 };
 
 void error(const string msg)
-{cout<<msg<<endl; exit(0);}
+{cout<<msg<<endl; throw 0;}
 
 class lexical{
   Token  t;
   char buffer[200];
-  int tindex =0;
+  int tindex = 0;
   public:
   void read(void){
     cout << "Enter expression"
@@ -68,5 +66,4 @@ int main(){
     t=lex1.getToken();
     lex1.printToken(t);
   }while(t.type != EOF_INPUT);
-  return 0;
 }

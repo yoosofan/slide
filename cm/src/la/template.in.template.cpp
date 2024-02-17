@@ -62,5 +62,4 @@ int main(){
     cout<<am1[complexCls(3,4)]<<endl;
     cout<<cm1;  cout<<am1;
   }catch(...){cout<<"Error "<<endl;}
-  return 0;
 }
