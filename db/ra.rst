@@ -2093,31 +2093,25 @@ Join پیوند
   :class: substep
 
   --      نادرست۴
-  (s join sp join p{city}){sname} ;
-
-.. code:: sql
-  :class: substep
-
-  --      نادرست۵
 
   ((s join sp{sn})join p){sname};
 
 .. code:: sql
   :class: substep
 
-  --      نادرست۶
+  --      نادرست۵
   ((sp join s){sn, sname} join p){sname};
 
 .. code:: sql
   :class: substep
 
-  --      نادرست۷
+  --      نادرست۶
   ((sp join s){sn, sname, city) join p){sname};
 
 .. code:: sql
   :class: substep
 
-  --      نادرست۸
+  --      نادرست۷
   (((s join sp ){city}) join p){sname};
 
 ----
@@ -2161,33 +2155,6 @@ Join پیوند
       )
     ){pname} ;
 
-.. code:: sql
-    :class: substep
-
-    (
-      (
-        ( p where weight > 10 ){pn, pname}
-        join
-        sp
-      )
-      join
-      (
-        (s where status > 20) where city = "Paris"
-      )
-    ){pname} ;
-
-.. code:: sql
-    :class: substep
-
-    (
-      (
-        ( p where weight > 10 ){pn, pname}
-        join
-        sp
-      )
-      join
-      (s where status > 20 and city = "Paris")
-    ){pname} ;
 
 .. csv-table::
   :header-rows: 1

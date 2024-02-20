@@ -4,7 +4,7 @@
 #include <cstring>
 #include <cctype>
 using namespace std;
-enum Type {ID,INT,DOUBLE,LT,LE,WHILE,IF, RETURN, ASG, END_INPUT};
+enum Type {IF,WHILE, INT,DOUBLE,RETURN, ID, LT,LE,ASG, END_INPUT};
 struct Token{Type t;  char *str=nullptr;  int  i=0; int line,pos;
     void print(void){cout << t << ":\t" << str << ":\t" << i << endl;}  
 };

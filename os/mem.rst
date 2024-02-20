@@ -288,31 +288,6 @@ overlay
 
 ----
 
-BIOS
-==========
-.. image:: img/in/Award_BIOS_setup_utility.png
-   :align: center
-
-----
-
-.. image:: img/in/bios.gif
-   :align: center
-
-----
-
-Boot sequence
-==================
-.. image:: img/in/boot_sequence.png
-   :align: center
-   :height: 450px
-
-----
-
-.. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
-   :align: center
-
-----
-
 .. class:: rtl-h1
 
     سلسله مراتب حافظه
