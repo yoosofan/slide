@@ -313,8 +313,8 @@ Writing Code
 Applications of Lexical Analyzer
 --------------------------------
 * Editors
-    * `zed.dev <https://zed.dev/>`_ , `github <https://github.com/zed-industries/zed>`_
-    * `Atom <https://atom-editor.cc/>`_ `github <https://github.com/atom/atom>`_
+    * `zed.dev <https://zed.dev/>`_ , `zed github <https://github.com/zed-industries/zed>`_
+    * `Atom <https://atom-editor.cc/>`_ `Atom github <https://github.com/atom/atom>`_
     * `LPG2 <https://github.com/A-LPG/LPG2>`_
         * `Eclipse IDE <https://github.com/impulse-org>`_
 
