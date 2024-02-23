@@ -554,7 +554,7 @@ Keywords in Symbol Table
 
           ` a `,`   `,` = `,`   `,` 2 `,` \\n`,` c `,` o `,` u `, ` n `,` t `, `   `,` = `,` c `, ` o `, ` u `,` n `,` t `,`  `,` + `,` a `,` \\0`
 
-.. include:: src/la//symbol_table34.cpp
+.. include:: src/la/symbol_table34.cpp
   :code: cpp
   :number-lines:
 
