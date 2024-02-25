@@ -24,4 +24,3 @@ int main(){
 }
 // 20 20 10 20
 // https://www.geeksforgeeks.org/
-// https://www.geeksforgeeks.org/reference-to-a-pointer-in-c-with-examples-and-applications/

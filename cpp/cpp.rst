@@ -11,6 +11,8 @@
 .. role:: raw-html(raw)
    :format: html
 
+.. |nbsp| unicode:: 0xA0 
+
 Advanced Programming (C++)
 ==============================
 Ahmad Yoosofan
@@ -544,6 +546,8 @@ Encapsulation(I)
         :class: ltr
         :start-line: 2
         :end-line: 28
+
+    - |nbsp| 
 
     - .. include:: src/student/student124.cpp
         :code: cpp
