@@ -1,3 +1,4 @@
+# 128.pluse.mul.py
 tokens = ('NUMBER','PLUS', 'MUL')
 t_PLUS    = r'\+'
 t_MUL    = r'\*'
@@ -17,10 +18,12 @@ def t_error(t):
 import ply.lex as lex
 lex.lex()
 lex.input("*445+23*34+123")
+
 while True:
   tok = lex.token()
   if not tok:  break
   print(tok)
+
 """
 lex$ python3 128.plus.mul.py 
 LexToken(MUL,'*',1,0)

@@ -26,6 +26,7 @@ lex.input("""wwe2 = 4+23 *34 +123
 count+34+435
 x=y
 """)
+
 while True:
   tok = lex.token()
   if not tok:  break
@@ -52,7 +53,4 @@ LexToken(ID,'x',3,34)
 LexToken(ASG,'=',3,35)
 LexToken(ID,'y',3,36)
 new line
-lex$ 
-
 """
-

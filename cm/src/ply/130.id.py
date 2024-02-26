@@ -17,6 +17,7 @@ def t_error(t):
 import ply.lex as lex
 lex.lex()
 lex.input("wwe2+4+23*34+123")
+
 while True:
   tok = lex.token()
   if not tok:  break
@@ -34,4 +35,3 @@ LexToken(PLUS,'+',1,12)
 LexToken(NUMBER,123,1,13)
 lex$ 
 """
-

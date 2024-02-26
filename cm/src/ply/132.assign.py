@@ -20,8 +20,9 @@ while True:
   tok = lex.token()
   if not tok:  break
   print(tok)
+
 """
-lex$ python3 132.assign.py 
+lex$ python3 132.assign.py
 LexToken(ID,'wwe2',1,0)
 LexToken(ASG,'=',1,5)
 LexToken(NUMBER,4,1,7)
@@ -39,6 +40,6 @@ LexToken(NUMBER,435,1,30)
 LexToken(ID,'x',1,34)
 LexToken(ASG,'=',1,35)
 LexToken(ID,'y',1,36)
-lex$ 
+lex$
 """
 

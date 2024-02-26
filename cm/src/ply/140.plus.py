@@ -15,6 +15,12 @@ def t_error(t):
 import ply.lex as lex
 lex.lex()
 
+"""
+S → E
+E → E + T
+E → a
+"""
+
 def p_s(p):
   'S : E' 
   print('S → E ', p[1])
@@ -41,8 +47,3 @@ while True:
   s = input('calc > ')
   if s.strip()=='':break
   yacc.parse(s)
-"""
-S → E
-E → E + T
-E → a
-"""

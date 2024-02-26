@@ -37,7 +37,7 @@ https://web.cs.hacettepe.edu.tr/~bbm301/lectures/lecture3_lex.pdf
   https://www.opensourceforu.com/2017/04/lex-waving-the-magic-wand-of-regular-expressions/
   http://www.cs.columbia.edu/~aho/cs4115/Lectures/15-02-02.html
   compiler lex regular expression examples
-  
+
 ----
 
 :class: t2c
@@ -52,7 +52,7 @@ Install and Compile Lex File
   :number-lines:
 
   # Install flex in Ubuntu
-  
+
   sudo apt install g++
 
   sudo apt install flex
@@ -88,7 +88,7 @@ Count words(I)
   .. include:: src/lex/count_words_input_1.txt
     :code: text
     :number-lines:
-  
+
 .. code:: console
   :number-lines:
   :class: substep
@@ -133,7 +133,7 @@ Count words(II)
 .. code:: console
   :number-lines:
   :class: substep
-  
+
   lex$ ./a.out < count_words_input_1.txt
 
   ID :aDDDaaHHbm412abAmns12bm2
@@ -175,7 +175,7 @@ Count words(III)-input(I)
 .. code:: console
   :number-lines:
   :class: substep
-  
+
   lex$ flex 04.count_words.l
   lex$ gcc lex.yy.c -lfl
   lex$ ./a.out < count_words_input_1.txt
@@ -215,7 +215,7 @@ Count words(III)-input(II)
 .. code:: console
   :number-lines:
   :class: substep
-  
+
   lex$ flex 04.count_words.l
   lex$ gcc lex.yy.c -lfl
   lex$ ./a.out < count_words_input_2.txt
@@ -255,7 +255,7 @@ Simple Number
 .. code:: console
   :number-lines:
   :class: substep
-  
+
   lex$ flex 05.simpleNumber.l
   lex$ gcc lex.yy.c -lfl
   lex$ ./a.out < 05.simpleNumber_input.txt
@@ -289,7 +289,7 @@ Number of Characters
   .. code:: console
     :number-lines:
     :class: substep
-    
+
     lex$ flex 08.numberOfCharacters.l
     lex$ gcc lex.yy.c -lfl
     lex$ ./a.out < 08.numberOfCharacters_input.txt
@@ -300,7 +300,7 @@ Number of Characters
     Line::6
     Dot::0
     Other::0
-  
+
 ----
 
 :class: t2c
@@ -320,7 +320,7 @@ Parts of Speech(I)
   .. code:: console
     :number-lines:
     :class: substep
-   
+
     aaa :::: mytest
     bbb: don't recognize, a noun
     is: is a verb
@@ -336,7 +336,7 @@ Parts of Speech(I)
   flex 12.wordsInEnglish1.l
   gcc lex.yy.c -lfl
   ./a.out < 12.wordsInEnglish1.input.txt
-  
+
 ----
 
 :class: t2c
@@ -350,7 +350,7 @@ Parts of Speech(II)
 .. code:: console
   :number-lines:
   :class: substep
- 
+
   I:don't recognize
   am:verb
   an:don't recognize
@@ -449,5 +449,121 @@ Some References
 
 ----
 
-Next PLY
-===========
+PLY / lex part
+==============
+* https://github.com/dabeaz/ply/
+* www.dabeaz.com/ply/
+* https://github.com/dabeaz/ply/tree/master/src/ply
+
+.. image:: img/ply.github.png
+
+----
+
+.. include:: src/ply/115.id.plus.py
+  :code: python
+  :number-lines:
+
+----
+
+.. include:: src/ply/124.plus.py
+  :code: python
+  :number-lines:
+
+----
+
+.. include:: src/ply/126.error.plus.py
+  :code: python
+  :number-lines:
+
+----
+
+:class: t2c
+
+.. include:: src/ply/128.plus.mul.py
+  :code: python
+  :number-lines:
+  :end-line: 21
+
+.. include:: src/ply/128.plus.mul.py
+  :code: python
+  :number-lines: 22
+  :start-line: 21
+
+----
+
+:class: t2c
+
+.. include:: src/ply/130.id.py
+  :code: python
+  :number-lines:
+  :end-line: 20
+
+.. include:: src/ply/130.id.py
+  :code: python
+  :number-lines: 21
+  :start-line: 20
+
+
+----
+
+:class: t2c
+
+.. include:: src/ply/132.assign.py
+  :code: python
+  :number-lines:
+  :end-line: 23
+
+.. include:: src/ply/132.assign.py
+  :code: python
+  :number-lines: 24
+  :start-line: 23
+
+----
+
+:class: t2c
+
+.. include:: src/ply/133.comp.py
+  :code: python
+  :number-lines:
+  :end-line: 21
+
+.. include:: src/ply/133.comp.py
+  :code: python
+  :number-lines: 22
+  :start-line: 21
+
+
+----
+
+:class: t2c
+
+.. include:: src/ply/134.newline.py
+  :code: python
+  :number-lines:
+  :end-line: 29
+
+.. include:: src/ply/134.newline.py
+  :code: python
+  :number-lines: 29
+  :start-line: 28
+
+
+----
+
+:class: t2c
+
+A calculator
+============
+.. include:: src/ply/140.plus.py
+  :code: python
+  :number-lines:
+  :end-line: 23
+
+.. include:: src/ply/140.plus.py
+  :code: python
+  :number-lines: 23
+  :start-line: 22
+
+----
+
+END
