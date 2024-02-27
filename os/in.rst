@@ -26,12 +26,29 @@ Introduction
 
 -----
 
-.. image::  img/in/seperate_code_data.png
+Making an imaginary computer step by step
+=========================================
+Finding more about how hardware and software works
+-------------------------------------------------
+#. It needs to go back to principles
+#. It provides clear path for what we already have
+#. Understanding that why computers works this way nowadays
 
+-----
+
+Imaginary Computer (YIC-220)
+=============================
+Different memory for code and data
+----------------------------------
+.. image::  img/in/seperate_code_data.png
 
 ----
 
 .. image::  img/in/hex_keyboard.png
+
+----
+
+.. image::  img/in/Keypad-with-ATmega32.jpg
 
 ----
 
@@ -43,11 +60,19 @@ Introduction
 
 ----
 
-.. image::  img/in/simple_execution_cycle.png
+The Second Imaginary Computer
+=============================
+Uniform memory (John von Neumann)
+----------------------------------
+.. list-table::
 
-----
+    * - .. image::  img/in/simple_execution_cycle.png
 
-.. image::  img/in/seperate_code_data.png
+      - .. image:: img/in/John_von_Neumann.jpg
+
+.. :
+
+        https://commons.wikimedia.org/wiki/File:John_von_Neumann.jpg
 
 ----
 
@@ -75,10 +100,6 @@ Introduction
 
 
     010101001000100100011
-
-----
-
-.. image::  img/in/Keypad-with-ATmega32.jpg
 
 ----
 
@@ -152,7 +173,7 @@ Instruction Set Bianary(I)
 
 ----
 
-Instruction Set Binry(II)
+Instruction Set Binary(II)
 ===========================
 .. code:: asm
 
@@ -178,6 +199,8 @@ https://circuitdigest.com/microcontroller-projects/keypad-interfacing-with-avr-a
 
 Example
 ============
+* https://github.com/yoosofan/mano-computer-simulator-js
+* https://yoosofan.github.io/mano-computer-simulator-js/
 * https://github.com/Naheel-Azawy/Simple-Computer-Simulator/blob/master/test/test-symbolic
 * https://github.com/Naheel-Azawy/Simple-Computer-Simulator/blob/master/test/test
 * https://github.com/Naheel-Azawy/Simple-Computer-Simulator/tree/master/test
