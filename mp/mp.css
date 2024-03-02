@@ -1,0 +1,14 @@
+h1, h2, h3, rtl-h1, rtl-h2, rtl-h3{color: #261B5F;}
+ul>li::marker{content: "► ";}/*https://css-tricks.com/finally-it-will-be-easy-to-change-the-color-of-list-bullets/ */
+li::marker{color: #7D0E7B;}/*https://stackoverflow.com/a/65727521/886607*/
+/*
+var section = document.getElementById("TheContent");
+var list = section.getElementsByTagName("li");
+var cnt = 0;
+for (var i=0;i<list.length;i++){
+  if (list[i].parentElement.parentElement.nodeName!="LI") {
+    cnt += 1;
+    list[i].setAttribute("value",cnt);
+  }
+}
+*/

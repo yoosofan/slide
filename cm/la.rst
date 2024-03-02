@@ -678,6 +678,7 @@ Online Regular Expression Tools
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
 * https://appdevtools.com/regular-expression-tester
 * https://www.regular-expressions.info/javascriptexample.html
+* https://ihateregex.io/
 
 ----
 

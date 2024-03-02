@@ -255,7 +255,7 @@ General Solutions
 :id: simplyfing-race-conditions-id
 
 Simplifying
-=====================================
+=============
 .. list-table::
 
   * - .. code:: cpp
