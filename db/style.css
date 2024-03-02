@@ -4,11 +4,11 @@
 @media screen and (min-width:640px) and (max-width:799px) { #impress { transform: scale(0.8) !important;}}
 @media screen and (min-width:500px) and (max-width:639px) { #impress { transform: scale(0.8) !important;  }}
 */
-#impress {
+/*#impress {
   transform: scale(1) !important;
 }
-
-body { text-align: center;
+*/
+body { text-align: center; font-weight:normal; font-size:x-large;
 font-family: Nazli, DejaVu Serif, Liberation Serif,  FreeSerif;
 /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
 }

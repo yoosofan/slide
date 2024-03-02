@@ -2327,9 +2327,11 @@ Calculation on tuples instead of relations
 
 ----
 
-  * { ∃ px ∈ P | px.city = 'kashan'}
-  * { ∃ sx ∈ S | sx.city = 'kashan'}
-  * { ∀ sx ∈ S | sx.status > 1}
+  { ∃ px ∈ P | px.city = 'kashan'}
+  
+  { ∃ sx ∈ S | sx.city = 'kashan'}
+  
+  { ∀ sx ∈ S | sx.status > 1}
 
 .. class:: substep
   
