@@ -2472,6 +2472,17 @@ Calculation on tuples instead of relations
   #. px.pname where exists spx
   #. px.pname where exists spx (spx.pn = px.pn)
 
+.. class:: substep
+
+  #. px.pname where spx.pn = px.pn
+  
+  #.  Error
+
+  #. px.pname where forall spx (spx.pn = px.pn)
+  #. نام همهٔ قطعاتی را بیابید که همهٔ عرضه کنندگان آنها را عرضه کرده باشند
+  #. نام همهٔ قطعاتی که عرضه شده‌انده
+  
+
 ----
 
 .. class:: rtl-h1

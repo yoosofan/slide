@@ -1,8 +1,9 @@
 tokens = ('NUMBER','PLUS', 'MUL', 'ID', 'ASG',
-  'COMP')
+  'COMP', 'ID2')
 t_PLUS    = r'\+'
 t_MUL    = r'\*'
-t_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
+t_ID = r'[a-zA-Z_]+'
+t_ID2 = r'[a-zA-Z_][a-zA-Z_0-9]*'
 t_ASG = '='
 t_COMP = '=='
 t_NUMBER = r'[0-9]+'
@@ -14,7 +15,7 @@ def t_error(t):
 
 import ply.lex as lex
 lex.lex()
-lex.input("""wwe2 ==  4+23 = *34 +123
+lex.input("""wwe2 == 4+23 = *34 +123
 count+34+435
 x=y
 """)

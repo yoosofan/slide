@@ -1,12 +1,20 @@
 tokens = ('NUMBER','PLUS', 'MUL', 'ID', 'ASG',
-  'COMP')
+  'COMP', )
 t_PLUS    = r'\+'
 t_MUL    = r'\*'
-t_ID = r'[a-zA-Z_][a-zA-Z_0-9]*'
 t_ASG = '='
 t_COMP = '=='
 t_NUMBER = r'[0-9]+'
 t_ignore = " \t\n"
+
+def t_ID(t):
+  r'[a-zA-Z_][a-zA-Z_0-9]*'
+  l1 = ['0','1','2','3','4','5','6','7','8','9']
+  for m1 in l1:
+    if m1 in t.value:
+      t.type= 'ID2'
+      return t
+  return t
 
 def t_error(t):
     print("Illegal rrr '%s'" % t.value[0])
@@ -14,7 +22,7 @@ def t_error(t):
 
 import ply.lex as lex
 lex.lex()
-lex.input("""wwe2 ==  4+23 = *34 +123
+lex.input("""wwe2 == 4+23 = *34 +123
 count+34+435
 x=y
 """)

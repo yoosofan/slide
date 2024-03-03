@@ -459,18 +459,24 @@ PLY / lex part
 
 ----
 
+Sample I
+=========
 .. include:: src/ply/115.id.plus.py
   :code: python
   :number-lines:
 
 ----
 
+Sample II
+=========
 .. include:: src/ply/124.plus.py
   :code: python
   :number-lines:
 
 ----
 
+Sample III
+==========
 .. include:: src/ply/126.error.plus.py
   :code: python
   :number-lines:
@@ -479,6 +485,8 @@ PLY / lex part
 
 :class: t2c
 
+Sample IV
+=========
 .. include:: src/ply/128.plus.mul.py
   :code: python
   :number-lines:
@@ -493,6 +501,8 @@ PLY / lex part
 
 :class: t2c
 
+Sample V
+========
 .. include:: src/ply/130.id.py
   :code: python
   :number-lines:
@@ -508,6 +518,8 @@ PLY / lex part
 
 :class: t2c
 
+Sample VI
+=========
 .. include:: src/ply/132.assign.py
   :code: python
   :number-lines:
@@ -522,6 +534,8 @@ PLY / lex part
 
 :class: t2c
 
+Sample VII
+==========
 .. include:: src/ply/133.comp.py
   :code: python
   :number-lines:
@@ -537,6 +551,8 @@ PLY / lex part
 
 :class: t2c
 
+Sample VIII
+===========
 .. include:: src/ply/134.newline.py
   :code: python
   :number-lines:
