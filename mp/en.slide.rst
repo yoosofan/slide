@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :data-width: 1024
-:data-hieght: 768
+:data-height: 768
 :skip-help: true
 :css: ./style.css ./mp.css
 :substep: true
@@ -235,6 +235,19 @@ Search Engines and Meta Search Engines
   https://trends.google.com/trends/?geo=IR
   https://dmoz-odp.org/
   https://en.wikipedia.org/wiki/List_of_web_directories
+
+----
+
+
+* filetype: pdf
+* copyright:
+* "Strict phrase"
+* `-` does not occure
+* regular expression
+* ( ) + or and 
+* refine results based on date and other options
+* site: yoosofan.github.io
+* 
 
 ----
 
