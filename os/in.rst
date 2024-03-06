@@ -29,7 +29,7 @@ Introduction
 Making an imaginary computer step by step
 =========================================
 Finding more about how hardware and software works
--------------------------------------------------
+---------------------------------------------------
 #. It needs to go back to principles
 #. It provides clear path for what we already have
 #. Understanding that why computers works this way nowadays

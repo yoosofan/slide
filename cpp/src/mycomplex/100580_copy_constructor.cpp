@@ -42,7 +42,7 @@ void myFunction(void){
   c = a.mul(b);// c = a * b
   c.print();
 }
-int main(){myFunction();return 0;}/*
+int main(){myFunction();}/*
 copy constructor
 copy constructor
 copy constructor
