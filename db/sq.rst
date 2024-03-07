@@ -79,7 +79,7 @@ Install
   create table s (
      sn      char(10) primary key,
      sname   char(30),
-     status  int  default 0,
+     status  int  default(0),
      city    char(20)
   );
 
@@ -94,7 +94,7 @@ Install
   create table sp (
      sn    char(10) references s,
      pn    char(10) references p,
-     qty   int default 0,
+     qty   int default(0),
      primary key (sn, pn)
   );
 
