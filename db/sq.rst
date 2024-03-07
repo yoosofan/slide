@@ -48,29 +48,40 @@ DDL: create table
 
 ----
 
-Tools
-========
-Online
------------
-#. https://sql.js.org/examples/GUI/
-#. https://sql.js.org/#/
-#. https://www.sqlitetutorial.net/
-#. https://sqliteonline.com/
-#. `<https://extendsclass.com/sqlite-browser.html#>`_
-#. https://inloop.github.io/sqlite-viewer/
-#. https://github.com/inloop/sqlite-viewer
-#. https://github.com/sql-js/sql.js
-#. https://sql.js.org/#/
-#. http://sqlfiddle.com/
-#. https://github.com/coleifer/sqlite-web
-#. https://sqlitestudio.pl/
-#. https://www.onworks.net/programs/sqlite-online?amp=0
-#. https://www.heidisql.com/#featurelist
-#. https://sqlzoo.net/
+:class: t2c
 
-Install
---------
-* https://sqlitebrowser.org/
+SQLite
+======
+.. container::
+
+    *Terminal and GUI*
+
+    #. https://www.sqlite.org/download.html
+    #. https://sqlite.org/src/timeline
+    #. https://github.com/sqlite/sqlite
+    #. https://www.sqlite.org/cli.html
+    #. https://sqlitebrowser.org/
+    #. https://github.com/sqlitebrowser/sqlitebrowser
+
+.. container::
+
+    *Online*
+
+    #. https://sql.js.org/examples/GUI/
+    #. https://sql.js.org/#/
+    #. https://www.sqlitetutorial.net/
+    #. https://sqliteonline.com/
+    #. `<https://extendsclass.com/sqlite-browser.html#>`_
+    #. https://inloop.github.io/sqlite-viewer/
+    #. https://github.com/inloop/sqlite-viewer
+    #. https://github.com/sql-js/sql.js
+    #. https://sql.js.org/#/
+    #. http://sqlfiddle.com/
+    #. https://github.com/coleifer/sqlite-web
+    #. https://sqlitestudio.pl/
+    #. https://www.onworks.net/programs/sqlite-online?amp=0
+    #. https://www.heidisql.com/#featurelist
+    #. https://sqlzoo.net/
 
 ----
 

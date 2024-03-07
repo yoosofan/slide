@@ -449,6 +449,15 @@ Some References
 
 ----
 
+Similar Lexer and Parser
+========================
+#. PLY
+#. `Lemon for SQLite <https://www.sqlite.org/lemon.html>`_
+    #. https://www.sqlite.org/lang.html
+    #. https://www.sqlite.org/pragma.html
+
+----
+
 PLY / lex part
 ==============
 * https://github.com/dabeaz/ply/

@@ -83,6 +83,15 @@ https://cloudogu.com/images/blog/2013/04/CentralizedVCS.png
 
 ----
 
+Other Decenteralised SCM
+=========================
+#. bazaar
+#. Mercurial
+#. `fossil <https://fossil-scm.org/home/doc/trunk/www/index.wiki>`_
+
+
+----
+
 Graph of Changes
 =================
 .. image:: img/git.graph.of.changes.png
