@@ -972,6 +972,13 @@ Boot sequence
 
 ----
 
+* `IEEE Std 1275 1994 Standard for boot initialization <https://archive.org/details/ieee_std_1275_1994_standard_for_boot_initialization_configur/page/n7/mode/2up>`_
+* https://openfirmware.info/Welcome_to_OpenBIOS
+* https://github.com/openbios
+* https://github.com/openbios/openbios
+
+
+
 Context Switch
 =================
 
