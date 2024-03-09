@@ -111,19 +111,30 @@ SQLite
 
 ----
 
+:class: t2c
+
 Database
 ===========
-SP database includes the following
+.. container::
 
-* s
-* p
-* sp
+    SP database includes the following
 
-Database Schema
------------------
-.. code:: sql
+    * s, p, sp
 
-  create database sp;
+    **Database Schema**
+    
+    .. code:: sql
+
+      create database sp;
+
+.. container::
+
+    **DBMS(Database Management System)**
+    
+    * An application
+    * RDBMS
+    * DB2, Oracle, PostgreSQL, MySQL, SqlServer, MariaDB
+    * SQLite (Lack of DCL commands, each db on a file)
 
 
 .. :
@@ -1268,29 +1279,30 @@ Use Another name for a Table in Query
   Screw
   Cam
 
-.. container::
+.. :
 
   .. class:: rtl-h3 substep
 
       راه حل نادرست
 
-  .. code:: sql
-      :class: substep
+.. code:: sql
+  :class: substep
 
-      select distinct p.pname
-      from p as p1 join p on
-        p1.weight > p.weight and
-        p1.color = 'Red'
-      ;
+  select distinct p.pname
+  from p as p1 join p on
+    p1.weight > p.weight and
+    p1.color = 'Red'
+  ;
 
+.. :
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+    ..  csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder substep
 
-  pname
-  Cog
-  Screw
+      pname
+      Cog
+      Screw
 
 ----
 
@@ -1348,7 +1360,7 @@ Use Another name for a Table in Query
 .. code:: sql
   :class: substep
 
-  select pname, city
+  select city
   from p
   where city like 'P%'
   ;
@@ -1384,6 +1396,8 @@ Use Another name for a Table in Query
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
     نام شهر قطعاتی را بیابید که درون نام شهر آنها رشتهٔ is وجود داشته باشد
@@ -1407,7 +1421,7 @@ Use Another name for a Table in Query
 
 .. class:: rtl-h1
 
-  نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ زیر آغاز شده باشند
+  نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ زیر آغاز شود.
 
 `bn_`
 
@@ -1598,7 +1612,7 @@ escape
 
       select pname, weight
       from p
-      where not (weight>=12 and weight<=14)
+      where not (weight >= 12 and weight <= 14)
       ;
 
     .. code:: sql
@@ -1607,6 +1621,14 @@ escape
       select pname, weight
       from p
       where weight not between 12 and 14
+      ;
+
+    .. code:: sql
+      :class: substep
+
+      select pname, weight
+      from p
+      where weight < 12 or weight > 14
       ;
 
 .. csv-table::
