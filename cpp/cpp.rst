@@ -221,7 +221,7 @@ git
 
     cd slide
     git pull origin main
-
+    
 ----
 
 IDE
@@ -1058,6 +1058,22 @@ Static Function in struct(I)
   MAX: 100
   other_static: 94
   slide$
+
+----
+
+:class: t2c
+
+this
+====
+.. include:: src/myArray/100488.01.this.cpp
+  :code: cpp
+  :number-lines:
+  :class: ltr
+
+.. include:: src/myArray/100488.02.this.cpp
+  :code: cpp
+  :number-lines:
+  :class: ltr
 
 ----
 
