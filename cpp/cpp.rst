@@ -192,12 +192,35 @@ Compile and run
 
 ----
 
+
 Editors
 ============
 *  geany: http://www.geany.org
 *  notepad++ http://www.notepad-plus-plus.org
 *  kate http://kate-editor.org
 *  https://code.visualstudio.com/download
+
+----
+
+git
+====
+* https://git-scm.com/
+* https://github.com/yoosofan/slide
+* https://gitlab.com/yoosofan_course/Farsi_gitlab_guide
+
+.. code:: sh
+
+    git config --global user.name "نام و نام خانوادگی شما"
+    git config --global user.email "رایانامه‌ی شما"
+
+.. code:: sh
+
+    git clone https://github.com/yoosofan/slide.git
+    
+.. code:: sh
+
+    cd slide
+    git pull origin main
 
 ----
 
