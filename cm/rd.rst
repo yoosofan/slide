@@ -711,10 +711,10 @@ Remove Some Recursion
       rankdir = "LR";
       node [shape=circle];
       END [shape=doublecircle, label="14"];
-      10 -> END [label="i"];
+      10 -> END [label="a"];
       10 -> 12 [label="("];
       12 -> 13 [label="S"];
-      13 -> END [label="}"];
+      13 -> END [label=")"];
     }
 
 ----
@@ -750,7 +750,7 @@ Parser Code
       10 -> END [label="a"];
       10 -> 12 [label="("];
       12 -> 13 [label="S"];
-      13 -> END [label="}"];
+      13 -> END [label=")"];
     }
 
 .. include:: src/rd/A_S_plus_mul_pranathesis.py
