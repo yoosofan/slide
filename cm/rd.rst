@@ -536,6 +536,16 @@ Parse for + * ( ) no priority
   #. T → (E) | a
 
   E --> E + T | E - T | E * T | T
+  
+  Add another grammer that does not produce (a)
+
+  #. S → A
+  #. S → B
+  #. B → A + A
+  #. B → A * A
+  #. A → (B)
+  #. A → a
+
 
 ----
 
@@ -764,6 +774,21 @@ Parser Code
 
 :class: t2c
 
+.. include:: src/rd/A_S_plus_mul_pranathesis.py
+  :code: python
+  :number-lines:
+  :end-line: 22
+
+.. include:: src/rd/A_S_plus_mul_pranathesis.py
+  :code: python
+  :number-lines: 21
+  :class: substep
+  :start-line: 22
+
+----
+
+:class: t2c
+
 Lexical
 ===========
 .. include:: src/rd/lexical_number_plus_mul_par.py
@@ -780,6 +805,42 @@ Lexical
   :start-line: 33
   :end-line: 65
 
+
+----
+
+:class: t2c
+
+Error Recovery (panic mode)
+===========================
+.. include:: src/rd/A_S_plus_mul_pranathesis_panic_recover.py
+  :code: python
+  :number-lines: 1
+  :start-line: 1
+  :end-line: 25
+
+.. include:: src/rd/A_S_plus_mul_pranathesis_panic_recovery.py
+  :code: python
+  :number-lines: 24
+  :start-line: 25
+  :end-line: 50
+
+----
+
+:class: t2c
+
+Error Recovery (panic mode)
+===========================
+.. include:: src/rd/lexical_number_plus_mul_par_panic.py
+  :code: python
+  :number-lines: 1
+  :start-line: 1
+  :end-line: 25
+
+.. include:: src/rd/lexical_number_plus_mul_par_panic.py
+  :code: python
+  :number-lines: 24
+  :start-line: 25
+  :end-line: 50
 
 ----
 
