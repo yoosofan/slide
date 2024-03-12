@@ -812,35 +812,38 @@ Lexical
 
 Error Recovery (panic mode)
 ===========================
-.. include:: src/rd/A_S_plus_mul_pranathesis_panic_recover.py
-  :code: python
-  :number-lines: 1
-  :start-line: 1
-  :end-line: 25
 
-.. include:: src/rd/A_S_plus_mul_pranathesis_panic_recovery.py
-  :code: python
-  :number-lines: 24
-  :start-line: 25
-  :end-line: 50
+.. :
 
-----
+    .. include:: src/rd/A_S_plus_mul_pranathesis_panic_recover.py
+      :code: python
+      :number-lines: 1
+      :start-line: 1
+      :end-line: 25
 
-:class: t2c
+    .. include:: src/rd/A_S_plus_mul_pranathesis_panic_recovery.py
+      :code: python
+      :number-lines: 24
+      :start-line: 25
+      :end-line: 50
 
-Error Recovery (panic mode)
-===========================
-.. include:: src/rd/lexical_number_plus_mul_par_panic.py
-  :code: python
-  :number-lines: 1
-  :start-line: 1
-  :end-line: 25
+    ----
 
-.. include:: src/rd/lexical_number_plus_mul_par_panic.py
-  :code: python
-  :number-lines: 24
-  :start-line: 25
-  :end-line: 50
+    :class: t2c
+
+    Error Recovery (panic mode)
+    ===========================
+    .. include:: src/rd/lexical_number_plus_mul_par_panic.py
+      :code: python
+      :number-lines: 1
+      :start-line: 1
+      :end-line: 25
+
+    .. include:: src/rd/lexical_number_plus_mul_par_panic.py
+      :code: python
+      :number-lines: 24
+      :start-line: 25
+      :end-line: 50
 
 ----
 
@@ -852,13 +855,13 @@ A Simple Calculator (, ), ``+``, ``*``
 
   #. 34
   #. 34 + 2
-  #. 34 + 45+98
+  #. 34 + 45 + 98
   #. 34 + 45+98 * 4 * 554
   #. (34 * 2) + 3
   #. 43 * (54+3)
   #. 2 + (34)
   #. (34+3) * 2
-  #. (34+3) * 2
+  #. 34+3 * 2 * ((4))
 
   .. class:: substep
 
@@ -890,9 +893,9 @@ A Simple Calculator (, ), ``+``, ``*``
     **Left Recursion**
 
     #. E -> T L
-    #. L -> + E | λ
+    #. L -> + T L | λ
     #. T -> F M
-    #. M -> * T | λ
+    #. M -> * F M | λ
     #. F -> (E) | a
 
 ----
@@ -918,7 +921,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  L -> + E | λ
+  L -> + T L | λ
 
   .. yographviz::
     :class: substep
@@ -928,7 +931,8 @@ State Diagram(II)
       END [shape=doublecircle, label="3"];
       node [shape=circle];
       0  -> 1 [label="+"];
-      1  -> END [label="E"];
+      1  -> 2 [label="T"];
+      2  -> END [label="L"];
       0  -> END [label="λ"]
     }
 
@@ -949,7 +953,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  M -> * T | λ
+  M -> * F M | λ
 
   .. yographviz::
     :class: substep
@@ -959,7 +963,8 @@ State Diagram(II)
       END [shape=doublecircle, label="3"];
       node [shape=circle];
       0  -> 1 [label="*"];
-      1  -> END [label="T"];
+      1  -> 2 [label="F"];
+      2  -> END [label="M"];
       0  -> END [label="λ"]
     }
 
@@ -1733,7 +1738,7 @@ Simplify Diagram(VI) - Combining T and T'
 :class: t2c
 
 Parser Code for Last Calculator
-====================================================
+=================================
 .. container::
 
   E
