@@ -17,4 +17,4 @@ void f1(void){
   cout << c1.getRe() << endl;
   cout << c2.getRe() << endl;
 }
-int main(){f1();return 0;}
+int main(){f1();}

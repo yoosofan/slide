@@ -2202,17 +2202,26 @@ Exists
 
   نام عرضه‌کنندگانی را بیابید که قطعه‌ای در شهر آنها باشد
 
-.. code:: sql
-  :class: substep
+.. container::
 
-  select sname
-  from s
-  where exists (
-      select *
-      from p
-      where p.city = s.city
-    )
-  ;
+    .. code:: sql
+      :class: substep
+
+      select sname
+      from s
+      where exists (
+          select *
+          from p
+          where p.city = s.city
+        )
+      ;
+
+    .. code:: sql
+      :class: substep
+
+      select distinct sname 
+      from s natural join p
+      ; --  may have different result
 
 .. csv-table::
   :header-rows: 1
@@ -2232,16 +2241,34 @@ Exists
 
   نام قطعاتی را بیابید که وزن آنها از دست کم یک قطعهٔ دیگر بیشتر باشد
 
-.. code:: sql
+.. container::
 
-  select pname
-  from p as T
-  where exists (
-      select *
-      from p
-      where T.weight > p.weight
-    )
-  ;
+    .. code:: sql
+
+      select pname
+      from p as T
+      where exists (
+          select *
+          from p
+          where T.weight > p.weight
+        )
+      ;
+
+    .. code:: sql
+
+      select distinct T.pname
+      from p as T join p on
+        T.pn < p.pn and
+        T.weight > p.weight
+        ; -- wrong
+
+    .. code:: sql
+
+      select distinct T.pname
+      from p as T join p on
+        T.pn <> p.pn and
+        T.weight > p.weight
+        ; -- May have different result
 
 .. csv-table::
   :header-rows: 1

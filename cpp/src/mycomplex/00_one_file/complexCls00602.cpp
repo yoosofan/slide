@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 class complexCls{
-  double re,img;
+  double re=0,img=0;
  public:
   complexCls(double r=0,double i=0):re(r), img(i){}
   double getRe(void){return re;}
