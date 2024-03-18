@@ -1,9 +1,7 @@
 #include <iostream>// istream
 #include <cmath>
 using namespace std;
-class complexCls{//1140
-  double r, i;
- public:
+class complexCls{ double r, i;  public: //1150
   complexCls(double m = 0, double n = 0):r(m), i(n){}
   friend ostream& operator<<(ostream& o1, 
       const complexCls& a){

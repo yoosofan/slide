@@ -2350,7 +2350,7 @@ Exists
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pname weight
+  pname, weight
   Nut,  12
   Cam,  12
   Nut,
@@ -2456,6 +2456,7 @@ Exists
 
     نام قطعه‌های عرضه شده‌ای را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند.
 
+
 .. code:: sql
   :class: substep
 
@@ -2466,9 +2467,20 @@ Exists
       from s natural join sp
       where sp.pn = p.pn and
         p.city <> s.city
-    )
-  ;
-  -- or
+    );
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+    pname
+    Screw
+    Cog
+    Screw
+
+.. code:: sql
+  :class: substep
+
   select pname
   from   p natural join sp
   where not exists(
@@ -2481,18 +2493,9 @@ Exists
           where  sp.pn = p.pn and
             sp.sn = s.sn
         )
-    )
-  ;
+    );
 
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-    pname
-    Screw
-    Cog
-    Screw
 
 ----
 
@@ -2542,6 +2545,20 @@ Exists
     Screw
     Cog
 
+.. :
+
+
+    select pname -- ریحانه زمانیان
+    from p natural join sp
+    except all
+    select pname
+    from p
+    where exist(
+    select *
+    from s natural join sp
+    where sp.pn=p.pn and
+    p.city<> s.city
+    ) ;
 
 ----
 
@@ -2583,6 +2600,20 @@ Exists
     pname
     " "
 
+.. :
+
+    select pname
+    from p 
+    where not exists(
+       select pn
+       from s, sp
+       where sp.sn=s.sn and
+                  p.pn=sp.pn
+    );
+
+    -- شمارهٔ قطعاتی را می‌دهد که آن قطعه‌ها عرضه شده باشند
+    --  نام قطعاتی را می‌دهد که برای آن قطعات عرضه‌ای وجود ندارد
+
 
 ----
 
@@ -2621,6 +2652,64 @@ Exists
     Cam
     Cog
 
+.. :
+
+    select distinct pname
+    from p
+    where not exists(
+      select pn
+      from sp, s
+      where sp.sn = s.sn and 
+          sp.pn = p.pn and
+          status > 100
+    );
+    -- نام قطعاتی را بیابید که عرضه‌ای از آن قطعات باشد که عرضهٔ کنندهٔ آن عرضه وضعیت بیشتر از ۱۰۰ داشته باشد.
+    
+
+
+    select distinct pname
+    from p
+    where not exists(
+      select *
+      from sp, s
+      where s.sn=sp.sn and p.pn = sp.pn and exists(
+          select *
+          from s
+          where status > 100
+       )
+    );
+
+    select distinct pname
+    from p
+    where not exists(
+      select *
+      from sp, s
+      where s.sn=sp.sn and p.pn = sp.pn and exists(
+          select *
+          from s as T
+          where T.sn = sp.sn and status > 100
+       )
+    );
+
+.. :
+
+
+      select distinct pname -- ریحانه زمانیان
+      from p  -- پاسخ نزدیک به پاسخ اصلی
+    except all
+      select distinct pname
+      from p
+      where exists(
+        select *
+        from s
+        where status > 100 and not exists(
+          select *
+          from sp
+          where s.sn=sp.sn and
+          p.pn=sp.pn
+        )
+      )
+    ;
 
 ----
 

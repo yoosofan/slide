@@ -6,9 +6,9 @@ class complexCls{
  public:
   complexCls(int m = 0, int n = 0)
   {r = m; i = n;}
-  void Show(void)
+  void Show(void) const
   {cout << r << "+ i " << i << endl;}
-  double Magnitude(void)
+  double Magnitude(void) const
   {return sqrt(r * r + i * i);}
   void input(void){
     cout << "Enter real:"; cin >> r;
@@ -55,11 +55,8 @@ void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  c.Show();
   // c.operator=(operator+(2, a));
+  // operator+(complexCls(2), a);
   c = a - 2;  c.Show();
-  c[0] = 56;
-  c.Show();
+  c[0] = 56; c.Show();
 }
-int main(){f1();}/*
-4+ i 3
-0+ i 3
-56+ i 3   */
+int main(){f1();}

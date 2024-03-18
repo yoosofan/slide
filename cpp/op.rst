@@ -398,17 +398,17 @@ ComplexCls(VIII) / << >>
 ==================================================
 .. include:: src/op/1130.cpp
     :code: cpp
-    :number-lines: 30
+    :number-lines: 4
     :class: ltr
-    :start-line: 30
-    :end-line: 57
+    :start-line: 4 
+    :end-line: 18
 
 .. include:: src/op/1130.cpp
     :code: cpp
     :number-lines: 57
     :class: ltr
     :start-line: 57
-    :end-line: 89
+    :end-line: 74
 
 
 -----

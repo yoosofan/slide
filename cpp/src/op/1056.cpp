@@ -6,9 +6,9 @@ class complexCls{
  public:
   complexCls(int m = 0, int n = 0)
   {r = m; i = n;}
-  void Show(void)
+  void Show(void) const
   {cout << r << "+ i " << i << endl;}
-  double Magnitude(void)
+  double Magnitude(void) const
   {return sqrt(r * r + i * i);}
   void input(void){
     cout << "Enter real:"; cin >> r;
@@ -21,7 +21,7 @@ class complexCls{
     return c;
   }
   friend complexCls add(const complexCls& a, 
-    const complexCls& b){
+      const complexCls& b){
     complexCls c = a;
     c.r += b.r;
     c.i += b.i;
@@ -35,7 +35,4 @@ void f1(void){
   c = add(a,b);
   c.Show();
 }
-int main(){
-  f1();
-  return 0;
-}
+int main(){f1();}

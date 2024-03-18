@@ -6,9 +6,9 @@ class complexCls{
  public:
   complexCls(int m = 0, int n = 0)
   {r = m; i = n;}
-  void Show(void)
+  void Show(void) const
   {cout << r << "+ i " << i << endl;}
-  double Magnitude(void)
+  double Magnitude(void) const
   {return sqrt(r * r + i * i);}
   void input(void){
     cout << "Enter real:"; cin >> r;

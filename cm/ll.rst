@@ -988,8 +988,7 @@ Use LL Table for Parsing
 #. S → i(e) S e S
 #. S → o
 
-.. container::
-    :class: substep
+.. container::substep
 
     Left 
     
