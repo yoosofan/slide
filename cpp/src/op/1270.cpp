@@ -1,13 +1,13 @@
 #include <iostream>
 using namespace std;
 class myArray{ 
-  double *a = nullptr; 
+  double* a = nullptr; 
   int n = 0; 
  public:
 	myArray(const double *ma = nullptr,
       int n=0){
 		if(! (n==0 || ma==nullptr)){
-			a=new double[this->n=n];
+			a = new double[this->n = n];
 			for(int i=0;i<n;i++) a[i]=ma[i];
 		}
 	}
