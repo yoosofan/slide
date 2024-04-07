@@ -1,7 +1,7 @@
 :data-transition-duration: 1000
 :data-max-scale: 5
-:data-width: 1590
-:data-height: 890
+:data-width: 1024 
+:data-height: 768
 :skip-help: true
 :css: ./style.css
 :substep: true
@@ -225,6 +225,41 @@ Parsing(II)
 #. .$ [ $ ]
 #. accept
 
+.. :
+
+  A →  a B
+  B →  b A
+  B →  a
+  B →  b
+  
+  
+  
+  Left factoring
+  A →  a B
+  B →  a
+
+  B →  b A
+  B →  b
+
+  Left factoring
+  A →  a B
+  B →  a
+
+  B →  b L
+  L →  A
+  L →  λ 
+
+  Left factoring
+  A →  a B
+  B →  a
+  B →  b L
+  L →  A
+  L →  λ 
+
+  first(A) = {a}
+  first(B) = {a, b}
+  first(L) = {a, λ}
+
 ----
 
 :class: t2c
@@ -250,7 +285,6 @@ Parsing(III)
 
 #. A $
 #. ⇒ a B $
-#. ⇒ a B $
 #. ⇒ a b A $
 #. ⇒ a b a B $
 #. ⇒ a b a a $
@@ -259,16 +293,16 @@ Parsing(III)
   :header-rows: 1
   :class: smallerelementwithfullborder equal-col
 
-  Stack ,  input        , action
-   A  $ ,   a b a a $   , A → a B
-   a B $ ,   a b a a $   , Remove a
-   B  $ ,   b a a $     , B → b A
-   b A $ ,   b a a $     , Remove b
-   A  $ ,     a a $     , A → a B
-   a B $ ,     a a $     , Remove a
-   B  $ ,     a $       , B → a
-   a  $ ,     a $       , Remove a
-      $ ,       $       , accept
+  Stack  ,  input        , action
+   $ A   ,   a b a a $   , A → a B
+   $ B a ,   a b a a $   , Remove a
+   $ B   ,   b a a $     , B → b A
+   $ A b ,   b a a $     , Remove b
+   $ A   ,     a a $     , A → a B
+   $ B a ,     a a $     , Remove a
+   $ B   ,     a $       , B → a
+   $ a   ,     a $       , Remove a
+   $     ,       $       , accept
 
 ----
 
@@ -426,6 +460,41 @@ Parsing(VI)
 
 :class: t2c
 
+Parsing(VII)
+==========================================
+.. container::
+
+  #. A → a B
+  #. B → b A
+  #. B →  λ
+
+  * first( A ) = {a}
+  * first( B ) = {b , λ}
+
+  #. follow( A ) = {$}
+  #. follow( B ) = {$}
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder equal-col
+
+  "  ",   a  , b     , $
+  A   ,  a B ,       ,
+  B   ,      ,  b A  , λ
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder equal-col
+
+  Stack , input   , action
+  A   $ , a a $ , A → a B
+  a B $ , a a $ , Remove a
+  B   $ , a   $ , Reject
+
+----
+
+:class: t2c
+
 Wrong Calculator Grammar(I)
 ==========================================
 .. container::
@@ -513,28 +582,33 @@ Wrong Calculator Grammar(II)
 ==========================================
 .. container::
 
-  .. csv-table::
-    :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+  #. E  → T E'
+  #. E' → + E 
+  #. E' → λ
+  #. T  → F T'
+  #. T' → * T
+  #. T' → λ
+  #. F  → ( E )
+  #. F  →  a
 
-    " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
-    E  , T E' ,          ,         , T E'   ,        ,
-    E' ,  λ   ,  `+` E   ,    λ    ,    λ   ,   λ    ,  λ
-    T  , F T' ,          ,         , F T'   ,        ,
-    T' ,  λ   ,   λ      , `*` T   ,     λ  ,  λ     , λ
-    F  ,   a  ,          ,         , ( E )  ,        ,
+  * first(E) = first(T) = first(F) = { a, ( }
+  * first(E')  = { + ,  λ }
+  * first(T')  = { * ,  λ }
+  * follow(E)  = { $ , ) }
+  * follow(E') = { $ , ) }
+  * follow(T)  = { + , $ , ) }
+  * follow(T') = { + , $ , ) }
+  * follow(F)  = { * , + , $ , ) }
 
-  .
-  
   .. csv-table::
     :header-rows: 1
     :class: substep smallerelementwithfullborder equal-col
 
     " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    , $
     E  , T E' ,          ,         ,  T E'  ,        ,
-    E' ,      ,  `+` E   ,         ,        ,        , λ
+    E' ,      ,  `+` E   ,         ,        ,    λ   , λ
     T  , F T' ,          ,         ,  F T'  ,        ,
-    T' ,      ,    λ     , `*` T   ,        ,        , λ
+    T' ,      ,    λ     , `*` T   ,        ,    λ   , λ
     F  ,   a  ,          ,         , ( E )  ,        ,
 
 .. csv-table::
@@ -741,11 +815,10 @@ Simple Calculator(I)
   :header-rows: 1
   :class: substep smallerelementwithfullborder equal-col
 
-  "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
-  E   , E + T | E - T | T   ,           ,        ,        ,         ,   E + T | E - T | T  ,        ,
-  T   , T * F | T / F | F  ,           ,        ,        ,         , T * F | T / F | F   ,        ,
-  F   , a     ,           ,        ,        ,         , ( E )  ,        ,
-
+  "  ", a                  , `+` , `-` , `*` , `/` ,      (              , ) , $
+  E   , E + T | E - T | T  ,     ,     ,     ,     ,   E + T | E - T | T ,   ,
+  T   , T * F | T / F | F  ,     ,     ,     ,     , T * F | T / F | F   ,   ,
+  F   , a                  ,     ,     ,     ,     , ( E )               ,   ,
 
 ----
 

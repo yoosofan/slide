@@ -8,13 +8,14 @@
  * in modern browsers and inspired by the idea behind prezi.com.
  *
  *
- * Copyright 2011-2012 Bartek Szopka (@bartaz), 2016-2020 Henrik Ingo (@henrikingo)
+ * Copyright 2011-2012 Bartek Szopka (@bartaz), 2016-2023 Henrik Ingo (@henrikingo) 
+ * and 70+ other contributors
  *
  * Released under the MIT License.
  *
  * ------------------------------------------------
  *  author:  Bartek Szopka, Henrik Ingo
- *  version: 1.1.0
+ *  version: 2.0.0
  *  url:     http://impress.js.org
  *  source:  http://github.com/impress/impress.js/
  */
@@ -2023,48 +2024,95 @@
  * Copyright 2016 Henrik Ingo (@henrikingo)
  * Released under the MIT license.
  */
-/* global markdown, hljs, mermaid, impress, document, window */
+/* global markdown, marked, hljs, mermaid, impress */
 
 ( function( document, window ) {
     "use strict";
 
-    var preInit = function() {
-        if ( window.markdown ) {
+    const SLIDE_SEPARATOR = /^-----$/m;
 
-            // Unlike the other extras, Markdown.js doesn't by default do anything in
-            // particular. We do it ourselves here.
-            // In addition, we use "-----" as a delimiter for new slide.
+    const getMarkdownParser = function( ) {
+        if ( window.hasOwnProperty( "marked" ) ) {
 
-            // Query all .markdown elements and translate to HTML
-            var markdownDivs = document.querySelectorAll( ".markdown" );
-            for ( var idx = 0; idx < markdownDivs.length; idx++ ) {
-              var element = markdownDivs[ idx ];
-              var dialect = element.dataset.markdownDialect;
+            // Using marked
+            return function( elem, src ) {
+                return marked.parse( src );
+            };
+        } else if ( window.hasOwnProperty( "markdown" ) ) {
 
-              var slides = element.textContent.split( /^-----$/m );
-              var i = slides.length - 1;
-              element.innerHTML = markdown.toHTML( slides[ i ], dialect );
+            // Using builtin markdown engine
+            return function( elem, src ) {
+                var dialect = elem.dataset.markdownDialect;
+                return markdown.toHTML( src, dialect );
+            };
+        }
 
-              // If there's an id, unset it for last, and all other, elements,
-              // and then set it for the first.
-              var id = null;
-              if ( element.id ) {
-                id = element.id;
-                element.id = "";
-              }
-              i--;
-              while ( i >= 0 ) {
-                var newElement = element.cloneNode( false );
-                newElement.innerHTML = markdown.toHTML( slides[ i ], dialect );
-                element.parentNode.insertBefore( newElement, element );
-                element = newElement;
-                i--;
-              }
-              if ( id !== null ) {
-                element.id = id;
-              }
+        return null;
+    };
+
+    const getMarkdownSlides = function( elem ) {
+        var text = elem.textContent;
+
+        // Using first not blank line to detect leading whitespaces.
+        // can't properly handle the mixing of space and tabs
+        var m = text.match( /^([ \t]*)\S/m );
+        if ( m !== null ) {
+            text = text.replace( new RegExp( "^" + m[ 1 ], "mg" ), "" );
+        }
+
+        return text.split( SLIDE_SEPARATOR );
+    };
+
+    const convertMarkdowns = function( selector ) {
+
+        // Detect markdown engine
+        var parseMarkdown = getMarkdownParser();
+        if ( !parseMarkdown ) {
+            return;
+        }
+
+        for ( var elem of document.querySelectorAll( selector ) ) {
+            var id = null;
+            if ( elem.id ) {
+                id = elem.id;
+                elem.id = "";
             }
-        } // Markdown
+
+            var origTitle = null;
+            if ( elem.title ) {
+                origTitle = elem.title;
+                elem.title = "";
+            }
+
+            var slides = getMarkdownSlides( elem );
+            var slideElems = [ elem ];
+
+            for ( var j = 1; j < slides.length; ++j ) {
+                var newElem = elem.cloneNode( false );
+                newElem.id = "";
+                elem.parentNode.insertBefore( newElem, slideElems[ 0 ] );
+                slideElems.splice( 0, 0, newElem );
+            }
+
+            if ( id ) {
+                slideElems[ 0 ].id = id;
+            }
+
+            for ( var i = 0; i < slides.length; ++i ) {
+                slideElems[ i ].innerHTML =
+                    parseMarkdown( slideElems[ i ], slides[ i ] );
+
+                if ( origTitle && ( i === 0 ) ) {
+                    slideElems[ i ].title = origTitle;
+                }
+            }
+        }
+    };
+
+    var preInit = function() {
+
+        // Query all .markdown elements and translate to HTML
+        convertMarkdowns( ".markdown" );
 
         if ( window.hljs ) {
             hljs.initHighlightingOnLoad();
@@ -2844,8 +2892,8 @@
                 var preView = consoleWindow.document.getElementById( 'preView' );
 
                 // Firefox:
-                slideView.contentDocument.body.classList.add( 'impress-console' );
-                preView.contentDocument.body.classList.add( 'impress-console' );
+                slideView.contentDocument.body.classList.add( 'impress-console', 'slideView' );
+                preView.contentDocument.body.classList.add( 'impress-console', 'preView' );
                 if ( cssFileIframe !== undefined ) {
                     slideView.contentDocument.head.insertAdjacentHTML(
                         'beforeend',
@@ -2859,7 +2907,8 @@
 
                 // Chrome:
                 slideView.addEventListener( 'load', function() {
-                        slideView.contentDocument.body.classList.add( 'impress-console' );
+                        slideView.contentDocument.body.classList.add( 'impress-console',
+                            'slideView' );
                         if ( cssFileIframe !== undefined ) {
                             slideView.contentDocument.head.insertAdjacentHTML(
                                 'beforeend',
@@ -2869,7 +2918,7 @@
                         }
                 } );
                 preView.addEventListener( 'load', function() {
-                        preView.contentDocument.body.classList.add( 'impress-console' );
+                        preView.contentDocument.body.classList.add( 'impress-console', 'preView' );
                         if ( cssFileIframe !== undefined ) {
                             preView.contentDocument.head.insertAdjacentHTML(
                                 'beforeend',
@@ -3905,6 +3954,33 @@
         return tempDiv.firstChild;
     };
 
+    var getStepTitle = function( step ) {
+
+        // Max length for title.
+        // Line longer than this will be cutted.
+        const MAX_TITLE_LEN = 40;
+
+        if ( step.title ) {
+            return step.title;
+        }
+
+        // Neither title nor id is defined
+        if ( step.id.startsWith( 'step-' ) ) {
+            for ( var line of step.innerText.split( '\n' ) ) {
+                line = line.trim( );
+                if ( line.length > 0 ) {
+                    if ( line.length <= MAX_TITLE_LEN ) {
+                        return line;
+                    } else {
+                        return line.slice( 0, MAX_TITLE_LEN - 3 ) + '...';
+                    }
+                }
+            }
+        }
+
+        return step.id;
+    };
+
     var selectOptionsHtml = function() {
         var options = '';
         for ( var i = 0; i < steps.length; i++ ) {
@@ -3913,7 +3989,7 @@
             if ( hideSteps.indexOf( steps[ i ] ) < 0 ) {
                 options = options + '<option value="' + steps[ i ].id + '">' + // jshint ignore:line
 							(
-								steps[ i ].title ? steps[ i ].title : steps[ i ].id
+								getStepTitle( steps[ i ] )
 							) + '</option>' + '\n';
             }
         }
@@ -4617,9 +4693,24 @@
             for ( var i = 0; i < substeps.length; i++ ) {
                 substeps[ i ].classList.remove( "substep-active" );
             }
-            var el = substeps[ visible.length ];
-            el.classList.add( "substep-visible" );
-            el.classList.add( "substep-active" );
+
+            // Loop over all substeps that are not yet visible and set
+            //   those of currentSubstepOrder to visible and active
+            var el;
+            var currentSubstepOrder;
+            for ( var j = visible.length; j < substeps.length; j++ ) {
+                if ( currentSubstepOrder &&
+                    currentSubstepOrder !== substeps[ j ].dataset.substepOrder ) {
+
+                    // Stop if the substepOrder is greater
+                    break;
+                }
+                el = substeps[ j ];
+                currentSubstepOrder = el.dataset.substepOrder;
+                el.classList.add( "substep-visible" );
+                el.classList.add( "substep-active" );
+            }
+
             return el;
         }
     };
@@ -4647,6 +4738,14 @@
             }
             var el = visible[ visible.length - 1 ];
             el.classList.remove( "substep-visible" );
+
+            // Continue if there is another substep with the same substepOrder
+            if ( current > 0 &&
+                visible[ current - 1 ].dataset.substepOrder ===
+                visible[ current ].dataset.substepOrder ) {
+                visible.pop();
+                return hideSubstep( visible );
+            }
             return el;
         }
     };
