@@ -915,7 +915,6 @@ Parsing(I)
     T'  ,       ,         ,      , `*` F T' ,  `/` F T' ,        ,       ,
     F   , a     ,           ,        ,        ,         , ( E )  ,        ,
 
-.. class:: substep
 
 #. a $ { 435.43 }
 #. .a $ [ T E' ]
@@ -1024,61 +1023,152 @@ Use LL Table for Parsing
 #. .a + a * a $ [ F T' E' ]
 #. .a + a * a $ [ a T' E' ]
 #. .+ a * a $   [ T' E' ]
-#. .+ a
-
-----
-
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
-
-  "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
-  E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
-  E'  ,       ,  `+` T E'   , `-` T E' ,        ,         ,        ,   λ    ,  λ
-  T   ,  F T' ,           ,        ,        ,         , F T'   ,        ,
-  T'  ,       ,  λ        ,  λ     , `*` F T' ,  `/` F T' ,        ,   λ    ,  λ
-  F   , a     ,           ,        ,        ,         , ( E )  ,        ,
-
-----
-
-.. class:: substep
-
-#. Follow(E)  = {) , $ }
-#. Follow(E') = Follow(E) = {) , $}
-#. Follow(T) = {First(E')-{λ}} ∪ Follow(E)
-   ∪ follow(E') = {`+`, `-`, ), $}
-#. Follow(T') = Follow(T) =
-   { `*`, `/`, `+`, `-`, $}
-#. Follow(F) = {First(T')-{λ}} ∪ Follow(T')
-   = {`*`, `/`} ∪ { `*`, `/`, `+`, `-`, $}
-   = { `*`, `/`, `+`, `-`, $}
+#. .+ a * a $   [ T' E' ]
 
 ----
 
 :class: t2c
 
-#. S → i(e) S
-#. S → i(e) S e S
-#. S → o
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
 
-.. container::substep
+  "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
+  E   ,  T E' ,           ,          ,          ,           ,  T E'  ,     ,
+  E'  ,       ,  `+` T E' , `-` T E' ,          ,           ,        ,   λ ,  λ
+  T   ,  F T' ,           ,          ,          ,           , F T'   ,     ,
+  T'  ,       ,     λ     ,    λ     , `*` F T' ,  `/` F T' ,        ,   λ ,  λ
+  F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
 
-    Left 
-    
-    #. S → i(e) S A
-    #. A → e S
-    #. A → λ
-    #. S → o
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
 
-.. class:: substep
+  Stack         ,  input       , action
+  E           $ , .a - a / a $ , E → T E'
+  T E'        $ , .a - a / a $ , T → F T'
+  F T' E'     $ , .a - a / a $ , F → a
+  a T' E'     $ , .a - a / a $ , Remove a
+  T' E'       $ , . -  a / a $ , T' → λ
+  E'          $ , . -  a / a $ , E' → - T E'
+  `-` T E'    $ , . -  a / a $ , Remove -
+  T E'        $ , . a / a    $ , T → F T'
+  F T' E'     $ , . a / a    $ , F → a
+  a T' E'     $ , . a / a    $ , Remove a
+  T' E'       $ , . / a      $ , T' → / F T'
+  / F T' E'   $ , . / a      $ , Remove / 
+  F T' E'     $ , . a        $ ,  F → a
+  a T' E'     $ , . a        $ ,  Remove a
+  T' E'       $ , .          $ ,  T' → λ
+  E'          $ , .          $ ,  E' → λ
+              $ , .          $ ,  accept
 
-* first(S)  = {i, o}
-* first(A)  = {e, λ}
-* follow(S) = {$, e}
-* follow(A) = {$, e}
+
+----
+
+:class: t2c
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
+
+  "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
+  E   ,  T E' ,           ,          ,          ,           ,  T E'  ,     ,
+  E'  ,       ,  `+` T E' , `-` T E' ,          ,           ,        ,   λ ,  λ
+  T   ,  F T' ,           ,          ,          ,           , F T'   ,     ,
+  T'  ,       ,     λ     ,    λ     , `*` F T' ,  `/` F T' ,        ,   λ ,  λ
+  F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
+
+  Stack             ,  input       , action
+  E               $ , .( a + a ) a   $ , E → T E'
+  T E'            $ , .( a + a ) a   $ , T → F T'
+  F T' E'         $ , .( a + a ) a   $ , F → ( E )
+  ( E ) T' E'     $ , .( a + a ) a   $ , Remove (
+  E ) T' E'       $ , .  a + a ) a   $ , E → T E' 
+  T E' ) T' E'    $ , .  a + a ) a   $ , T → F T' 
+  F T' E' ) T' E' $ , .  a + a ) a   $ , F → a 
+  a T' E' ) T' E' $ , .  a + a ) a   $ , Remove a
+  T' E' ) T' E'   $ , .  + a ) a     $ , T' → λ
+  E' ) T' E'      $ , .  + a ) a     $ , E' → + T E' 
+  + T E' ) T' E'  $ , .  + a ) a     $ , Remove + 
+  T E' ) T' E'    $ , .  a ) a       $ , T → F T' 
+  F T' E' ) T' E' $ , .  a ) a       $ , F → a 
+  a T' E' ) T' E' $ , .  a ) a       $ , Remove a
+  T' E' ) T' E'   $ , .  ) a         $ , T' → λ
+  E' ) T' E'      $ , .  ) a         $ , E' → λ
+  ) T' E'         $ , .  ) a         $ , Remove )
 
 
 
+  T' E'           $ , .  a           $ , T' → λ
+   E'             $ , .  a           $ , E' → λ
+                  $ , .  a           $ , Reject
+
+----
+
+:class: t2c
+
+#. E  → T E'
+#. E' → + T E'
+#. E' → - T E' 
+#. E' →  λ
+#. T  → F T'
+#. T' → * F T' 
+#. T' → / F T' 
+#. T' →  λ
+#. F  → a
+#. F  → ( E )
+
+* First(E) = First(T) = First(F) = {a, ( }
+* First(E') = {`+`, `-`, λ}
+* First(T') = {`*`, `/`, λ}
+
+* Follow(E)  = {) , $ }
+* Follow(E') = Follow(E) = {) , $}
+* Follow(T) = {First(E')-{λ}} ∪ Follow(E)
+   ∪ follow(E') = {`+`, `-`, ), $}
+* Follow(T') = Follow(T) =
+   { `*`, `/`, `+`, `-`, $}
+* Follow(F) = {First(T')-{λ}} ∪ Follow(T')
+   = {`*`, `/`} ∪ { `*`, `/`, `+`, `-`, $}
+   = { `*`, `/`, `+`, `-`, $}
+
+`.`
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
+
+  "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
+  E   ,  T E' ,           ,          ,          ,           ,  T E'  ,     ,
+  E'  ,       ,  `+` T E' , `-` T E' ,          ,           ,        ,   λ ,  λ
+  T   ,  F T' ,           ,          ,          ,           , F T'   ,     ,
+  T'  ,       ,     λ     ,    λ     , `*` F T' ,  `/` F T' ,        ,   λ ,  λ
+  F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
+
+----
+
+#. S → i(r) S  | i(r) S e S | o
+
+* Eliminate Left Factor
+
+#. S → i(r) S A | o
+#. A → e S | λ
+
+* first(S)  = {i, o} , first(A)  = {e, λ}
+* follow(S) = {$, e} , follow(A) = {$, e}
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder equal-col
+
+  "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
+  S   ,  i ( r ) S A ,   ,           ,  o   ,       ,     ,
+  A   ,              ,   , e S / λ   ,      ,       ,     ,  λ  
 
 ----
 
