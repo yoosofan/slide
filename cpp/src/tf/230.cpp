@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 template<typename T>int search(
-    T* a, T v, int n){
+    T *a, T v, int n){
   for(int i = 0; i < n; i++) 
     if(a[i] == v) 
       return i;

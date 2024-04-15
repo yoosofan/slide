@@ -4,7 +4,7 @@ def f1():
     print(i,"__111")
 
 def f2():
-  for i in range(5000):
+  for i in range(10000):
     print(i,"__222")
 
 if __name__ == "__main__":

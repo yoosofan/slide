@@ -27,9 +27,9 @@ class complexCls{
 };
 template<typename T> class Node{ 
   T v;
-  Node* next;  
+  Node *next;  
   public:
-  Node(T* m1 = 0){
+  Node(T *m1 = nullptr){
     if(m1)
       v = *m1;
     next = nullptr;
@@ -55,11 +55,9 @@ template<typename Type> class array{
     a=nullptr;
   }
   Type& operator[](int index){
-    int i;
-    for(i=0; i < count; i++)    
-      if(i==index) 
-        return a[i];
-    if(i<n){return a[count++];}
+    if(index < count)    
+      return a[index];
+    if(index<n){return a[count++];}
     return a[0];
   }
 }; int main(){
@@ -76,5 +74,4 @@ template<typename Type> class array{
   array<complexCls> am1;  
   am1[0]=complexCls(3,4);  
   cout<<am1[0]<<endl;
-  return 0;
 }

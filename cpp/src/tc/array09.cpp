@@ -13,7 +13,7 @@ class complexCls{
   friend bool operator==(const complexCls &m1,const complexCls&m2)
   {if(m1.re==m2.re && m1.im==m2.im) return true; return false;}
 };
-template<class Type> class array{Type a[MAX];  int n;
+template<typename Type> class array{Type a[MAX];  int n;
 public:
   void input(void){cout<<"Enter n: ";cin>>n;
     if(n<0 || n>MAX) throw "n is greater than 200";

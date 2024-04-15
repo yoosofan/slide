@@ -12,7 +12,7 @@ class myArray{ // 100740
   }
   void set(const int index, const double value){
     if( index < n ) a[index] = value;
-    cout << "Error accessing myArray " << endl;
+    else cout << "Error accessing myArray " << endl;
   }
   myArray(const double *ma = nullptr, int k = 0){
     if( k > MAX ) 

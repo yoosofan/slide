@@ -40,7 +40,7 @@ int main(){
   cout << p.nameLen() << endl;
   Student st1;
   cout << st1.getJob() << endl;
-  Person* ps = &p;
+  Person *ps = &p;
   cout << ps->getJob() << endl;
   ps = &st1;
   cout << ps->getJob() << endl;

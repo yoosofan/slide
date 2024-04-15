@@ -18,11 +18,16 @@ class complexCls{
   }
   friend bool operator==(
       const complexCls &m1,
-      const complexCls&m2){
+      const complexCls &m2){
     if(m1.re == m2.re && m1.im == m2.im) 
       return true; 
     return false;
-  }
+  }/*
+  bool operator==(const complexCls&m2){
+    if(re == m2.re && this->im == m2.im) 
+      return true; 
+    return false;
+  }*/
 };
 template<typename Type> class array{
   static const int MAX = 200;
@@ -32,7 +37,7 @@ template<typename Type> class array{
     cout<<"Enter n: ";
     cin>>n;
     if(n < 0 || n > MAX) 
-      throw "n is greater than 200";
+      throw "n is greater than 200";//exit(0);
     for(int i=0; i < n; i++){
       cout << "Enter a[" << i << "]: ";
       cin >> a[i];

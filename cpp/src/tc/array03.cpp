@@ -19,5 +19,5 @@ int main(){
   array<char> cm;
   array<complexCls> ccm1;
   m1.input();
-  m1.print(); //  ccm1.input(); ccm1.print();
+  m1.print(); // ccm1.input(); ccm1.print();
 }

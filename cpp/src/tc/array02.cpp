@@ -23,6 +23,6 @@ int main(){
   array<int> m1,m2,m3; 
   array<double> dm;   
   array<char> cm;
-  m1.input();
+  m1.input(); // m2.input();
   m1.print();
 }

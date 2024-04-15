@@ -4,7 +4,7 @@ template<typename Type> class array{
   Type *a = nullptr;
   int n = 0;
   public:
-  array(int n=20){this->n=n; a=new Type[n];}
+  explicit array(int n=20){this->n=n; a=new Type[n];}
   ~array(){n=0;delete[] a; a=nullptr;}
 
   Type& operator[](int index){
@@ -42,6 +42,25 @@ template<typename Type> class array{
       retVal.a[i] = pmin->a[i] + pmax->a[i];
     for(; i < pmax->n;i++)    
       retVal.a[i]=pmax->a[i];
+    return retVal;
+  }
+  array operator+(const int m1){
+    array retVal(*this);
+    if(this->n <= 0){
+      retVal.a = new Type[retVal.n=1];
+      retVal.a[0] = 0;
+    }
+    retVal.a[0] += m1;
+    return retVal;
+  }
+  friend array<Type> operator+(
+      int m1, const array<Type>& m2){
+    array<Type> retVal(m2);
+    if(retVal.n <= 0){
+      retVal.a = new Type[retVal.n=1];
+      retVal.a[0] = 0;
+    }
+    retVal.a[0] += m1;
     return retVal;
   }
 
@@ -85,6 +104,9 @@ int main(){
   m1=m2+m3; cout<<m1;
   m1=m1+m3; cout<<m1;
   m1=m1-m2; cout<<m1;
-  m1 +=m2;   cout<<m1;
-  m1 = m2 + 45; cout << m1;// ???
+  m1 +=m2;   cout<<m1<<endl;
+  m1 = m2 + 45;cout <<"m2::"<<endl<<m2<<endl; 
+  cout << m1 << endl; 
+  m1 = 45 + m2;
+  cout << m1 << endl; 
 }

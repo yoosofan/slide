@@ -15,7 +15,7 @@ int search(double* a, double v, int n){
       return i;
   return -1;
 }
-int search(string* a, string v, int n){
+int search(string *a, string v, int n){
   for(int i = 0; i < n; i++) 
     if(a[i] == v) 
       return i;
