@@ -4028,6 +4028,25 @@ group by
   having(sum(weight*qty)>100)
   ;
 
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select jname
+  from j natural join (
+    select jn
+    from spj join j using(jn)
+      join p using(pn)
+    where exists (
+        select *
+        from s
+        where s.sn = spj.sn and
+          s.status > 20
+      )
+    group by jn
+    having(sum(weight*qty)>100)
+  )
+  ;
 
 ----
 
@@ -4653,21 +4672,38 @@ Scalar value(V)
 
 .. class:: rtl-h1
 
-شمارهٔ قطعات را همراه با جمع وضعیت عرضه‌کنندگان درون شهر آن قطعات به همراه شهر قطعه بیابید که به ترتیب نزولی وزن قطعه نشان داده شده باشند.
+شمارهٔ همهٔ قطعات را همراه با جمع وضعیت عرضه‌کنندگان درون شهر آن قطعات به همراه شهر قطعه بیابید که به ترتیب نزولی وزن قطعه نشان داده شده باشند.
 
-.. code:: sql
-    :class: substep
-    :number-lines:
+.. container::
 
-    select pn,
-       (select sum(status)
-        from s
-        where s.city = p.city
-       ) as sum_status,
-       city
-    from p
-    order by weight desc
+    .. code:: sql
+        :class: substep
+        :number-lines:
 
+        select pn,
+           (select sum(status)
+            from s
+            where s.city = p.city
+           ) as sum_status,
+           city
+        from p
+        order by weight desc
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pn, sum(status) , p.city
+        from p natural join sp natural join s
+        order by weight desc -- wrong
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pn, sum(status) , p.city
+        from p join s using(city)
+        order by weight desc -- wrong
 
 .. csv-table::
   :header-rows: 1
@@ -4787,7 +4823,7 @@ Left Outer Join(II)
 
 .. class:: .rtl-h1
 
-نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(III).
+نام شهرهای همهٔ قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(III).
 
 .. code:: sql
   :class: substep
@@ -4847,10 +4883,14 @@ Full Outer Join(I)
 Full Outer Join(II)
 ====================
 .. code:: sql
-    :class: substep
 
     select distinct p.city, s.city
     from p natural full outer join s;
+
+.. code:: sql
+
+    select distinct p.city, s.city
+    from p, s; -- very different result
 
 ----
 
@@ -4904,18 +4944,26 @@ Full Outer Join(II)
 
   نام همهٔ شهرهای عرضه کنندگان را در کنار نام شهر قطعاتی که همشهری آنها هستند بنویسید و اگر قطعه‌ای همشهری آن عرضه کننده نبود نام شهر عرضه کننده همراه با null بیاید
 
-.. code:: sql
-  :class: substep
+.. container::
 
-  select s.city as scity, p.city as pcity
-  from s left outer join p using(city);
+    .. code:: sql
+      :class: substep
+
+      select s.city as scity, p.city as pcity
+      from s left outer join p using(city);
+
+    .. code:: sql
+      :class: substep
+
+      select s.city as scity, p.city as pcity
+      from s, p --  wrong
 
 
 .. csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
 
-  scity   pcity
+  scity ,  pcity
   London, London
   London, London
   London, London
