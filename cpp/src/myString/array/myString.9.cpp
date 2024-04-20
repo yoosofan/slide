@@ -34,5 +34,4 @@ void myStringCopy(myString & dst, const char *src){
 int main(){
     const char *st="salam"; cout<<myStringLength(st)<<endl;
     myString s("Ali");
-    return 0;
 }

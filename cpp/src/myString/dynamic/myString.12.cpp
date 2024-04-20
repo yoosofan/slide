@@ -38,7 +38,6 @@ int main(){
 	myString s("Ali"),s2="Reza";
 	f1(s);
 	s2=s;
-	return 0;
 }
 void mystrcpy((char *dst, const char *src){
 	*dst=*src;

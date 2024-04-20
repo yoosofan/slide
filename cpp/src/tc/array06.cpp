@@ -15,6 +15,7 @@ class complexCls{
     io1 << m1.re << ',' << m1.im << endl;
     return io1;
   }
+};
 template<typename Type> class array{
   static const int MAX = 200;
   Type a[MAX];  int n = 0;

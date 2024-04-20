@@ -1,8 +1,10 @@
 #include<iostream>
 using namespace std;
-void printAll(){cout<<endl;}
-template<typename T> void printAll(T m){cout<<m<<endl;}
-template<typename T, typename... N>void printAll(T a, N... b){
+void printAll(){cout << endl;}
+template<typename T> void printAll(T m)
+{cout << m << endl;}
+template<typename T, typename... N>
+void printAll(T a, N... b){
   cout<<a<<'\t';
   printAll(b...);
 }

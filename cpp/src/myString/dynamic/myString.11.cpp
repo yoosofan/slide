@@ -20,7 +20,7 @@ class myString{
 	//void set(char c, int index);
 	//myString substr(int start,int end)
 	~myString(){cout<<"Destructor is called "<<endl;}
-	friend void mystrcpy((myString & dst, const char *src);
+	friend void mystrcpy((myString &dst, const char *src);
 };
 myString f1(myString m1){
 	m1.print();
@@ -30,7 +30,6 @@ int main(){
 	const char *st="salam"; cout<<myStringLength(st)<<endl;
 	myString s("Ali"),s2="Reza";
 	//f1(s);
-	return 0;
 }
 void mystrcpy((char *dst, const char *src){
 	*dst=*src;

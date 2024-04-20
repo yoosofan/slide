@@ -1,5 +1,6 @@
 //Error
 #include<iostream>
+#include<cmath>
 using namespace std;
 struct complexCls{
   double r,i;
@@ -49,5 +50,4 @@ int main(){
   m1["hamid"] = complexCls(5,7);
   cout << m1["ali"] << endl;
   cout << m1["reza"] << endl;
-  return 0;
 }

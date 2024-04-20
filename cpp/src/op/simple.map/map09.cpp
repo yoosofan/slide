@@ -1,6 +1,5 @@
 #include<iostream>
 using namespace std;
-
 class complexCls{
   double r = 0 ,i = 0;
 public:
@@ -13,24 +12,20 @@ public:
     result.i = a.i + b.i;
     return result;
   }
-
   friend complexCls operator -(const complexCls& a,const complexCls& b){
     complexCls result;
     result.r = a.r - b.r;
     result.i = a.i - b.i;
     return result;
   }
-
   friend complexCls operator *(const complexCls& a,const complexCls& b){
     complexCls result;
     result.r = a.r * b.r;
     result.i = a.i * b.i;
     return result;
   }
-
   friend bool operator==(const complexCls& a,const complexCls& b)
   {return a.r==b.r && a.i==b.i;}
-
   friend ostream& operator<<(ostream& o1, complexCls& a)
   {o1<<'('<<a.r<<" , "<< a.i << ')' ; return o1;}
 };
@@ -51,7 +46,6 @@ public:
     return a[n++];
   }
 };
-
 int main(){
   myArray m1;
   complexCls b1=3;
@@ -61,5 +55,4 @@ int main(){
   m1[complexCls(5, 7)] = "kamran";
   cout << m1[b1] << endl;
   cout << m1[complexCls(5, 7)] << endl;
-  return 0;
 }

@@ -26,5 +26,4 @@ int main(){
   m1["hamid"]="12.rrr5";
   cout<<m1["ali"]<<endl;
   cout<<m1["reza"]<<endl;
-  return 0;
 }

@@ -33,5 +33,4 @@ int main(){
   myString s("Ali");
   //s.st[2]='c';
   myStringCopy(s.st, "Kamran");
-  return 0;
 }

@@ -36,7 +36,6 @@ int main(){
 	s2=s;
 	s2.set('A',2);
 	s.print();
-	return 0;
 }
 void mystrcpy((char *dst, const char *src){
 	*dst=*src;

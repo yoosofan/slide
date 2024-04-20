@@ -1,7 +1,8 @@
 #include<iostream>
 using namespace std;
 class complexCls{ double re,im;
- public:complexCls(double a=0,double b=0){re=a;im=b;}
+ public:complexCls(double a=0,double b=0)
+ {re=a;im=b;}
 };
 template<typename Type> class array{
   static const int MAX = 200;

@@ -29,9 +29,9 @@ complexCls operator *(const complexCls& a,const complexCls& b){
 bool operator==(const complexCls& a,const complexCls& b){
   return a.r==b.r && a.i==b.i;
 }
-
-ostream& operator<<(ostream&o1, complexCls&a)
-{o1<<'('<<a.r<<" , "<< a.i << ')' ; return o1;}
+ostream& operator<<(ostream&o1, 
+    complexCls&a)
+{o1<<'('<<a.r<<" , "<< a.i << ')'; return o1;}
 
 class myArray{
   complexCls a[300];
@@ -39,9 +39,7 @@ class myArray{
   string s[300];
 public:
   myArray() = default;
-
-  complexCls& operator[](string m1){
-    int i;
+  complexCls& operator[](string m1){int i;
     for(i=0; i<n; i++)
       if(s[i] == m1 )        return a[i];
     s[n]=m1;
@@ -57,5 +55,4 @@ int main(){
   m1["hamid"] = complexCls(5,7);
   cout << m1["ali"] << endl;
   cout << m1["reza"] << endl;
-  return 0;
 }

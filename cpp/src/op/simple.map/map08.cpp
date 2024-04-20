@@ -5,31 +5,26 @@ struct complexCls{
   complexCls(double m=0 , double n=0)
   {r = m; i = n;}
 };
-
 complexCls operator +(const complexCls& a,const complexCls& b){
   complexCls result;
   result.r = a.r + b.r;
   result.i = a.i + b.i;
   return result;
 }
-
 complexCls operator -(const complexCls& a,const complexCls& b){
   complexCls result;
   result.r = a.r - b.r;
   result.i = a.i - b.i;
   return result;
 }
-
 complexCls operator *(const complexCls& a,const complexCls& b){
   complexCls result;
   result.r = a.r * b.r;
   result.i = a.i * b.i;
   return result;
 }
-
 bool operator==(const complexCls& a,const complexCls& b)
 {return a.r==b.r && a.i==b.i;}
-
 ostream& operator<<(ostream& o1, complexCls& a)
 {o1<<'('<<a.r<<" , "<< a.i << ')' ; return o1;}
 
@@ -39,7 +34,6 @@ class myArray{
   complexCls s[300];
 public:
   myArray() = default;
-
   string& operator[](const complexCls& m1){
     int i;
     for(i=0; i<n; i++)
@@ -49,7 +43,6 @@ public:
     return a[n++];
   }
 };
-
 int main(){
   myArray m1;
   complexCls b1=3;
@@ -59,5 +52,4 @@ int main(){
   m1[complexCls(5, 7)] = "kamran";
   cout << m1[b1] << endl;
   cout << m1[complexCls(5, 7)] << endl;
-  return 0;
 }

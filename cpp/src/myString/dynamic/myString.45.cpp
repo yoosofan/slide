@@ -52,5 +52,4 @@ int main(){myString s1("Ali"),s2="Reza",s3;
   cout<<s3<<endl;
   s2+=s1;
   cout<<s2<<endl;
-	return 0;
 }
