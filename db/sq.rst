@@ -5007,7 +5007,7 @@ Scalar value(III)
 ======================
 .. class:: rtl-h1
 
-شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند(I).
 
 .. code:: sql
   :class: substep
@@ -5053,7 +5053,7 @@ Scalar value(IV)
 ====================
 .. class:: rtl-h1
 
-شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند(II).
 
 .. code:: sql
   :number-lines:
@@ -5090,6 +5090,58 @@ Scalar value(IV)
 .. csv-table::
   :header-rows: 1
   :class: substep smallerelementwithfullborder
+
+  pn, weight
+  p1, 12
+  p5, 12
+
+
+----
+
+:class: t2c
+
+Scalar value(IV)
+====================
+.. class:: rtl-h1
+
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند(III).
+
+.. code:: sql
+  :number-lines:
+
+  select pn, weight
+  from p
+  where weight = (
+      select weight
+      from p
+      where weight is not null
+      order by weight asc
+      limit 1
+    )
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  pn, weight
+  p1, 12
+  p5, 12
+
+.. code:: sql
+  :number-lines:
+
+  select pn, weight
+  from p
+  where weight = (
+      select min(weight)
+      from p
+    )
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
 
   pn, weight
   p1, 12
@@ -5148,35 +5200,27 @@ Scalar value(IV)
 .. code:: sql
   :class: substep
 
-  select jname
+  select jname -- نادرست
   from spj join j using(jn) join s
     using(sn) join p using(pn)
   where s.status > 20
   group by jn
   having(sum(weight * qty) > 100)
 
-.. class:: rtl substep
-
-    پاسخ نادرست
-
 .. code:: sql
   :class: substep
 
-  select jname
+  select jname  -- نادرست
   from j join spj using(jn) join s
     using(sn) join P using(pn)
   where status > 20
   group by pn
   having sum(qty * weight) > 100;
 
-.. class:: rtl substep
-
-    پاسخ نادرست
-
 .. code:: sql
   :class: substep
 
-  select jname
+  select jname -- درست
   from p join spj using(pn) join
     j using(jn)
   where exits(
@@ -5184,12 +5228,24 @@ Scalar value(IV)
     from s natural join (spj as T)
     where T.jn=j.jn and status > 20
   )
-  group by qty
+  group by jn
   having (weight*qty)>100
 
-.. class:: rtl substep
+.. code:: sql
+  :class: substep
 
-    پاسخ درست
+  select jname -- درست
+  from j natural join (
+    select jn 
+    from p join spj using(pn) join
+      j using(jn)
+    where exits(
+      select *
+      from s natural join (spj as T)
+      where T.jn=j.jn and status > 20
+    )
+    group by jn
+    having (weight*qty)>100
 
 ----
 

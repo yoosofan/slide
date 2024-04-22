@@ -893,6 +893,17 @@ Software Soloution 2 processes
 
 ----
 
+
+* https://en.wikipedia.org/wiki/Mutual_exclusion
+* https://en.wikipedia.org/wiki/Dekker%27s_algorithm
+* https://en.wikipedia.org/wiki/Peterson%27s_algorithm
+* https://en.wikipedia.org/wiki/Lamport%27s_bakery_algorithm
+
+* operating system process synchronization history dekker peterson
+
+----
+
+
 Python Code
 ================
 .. include:: src/ps/software_soloution2processes.py
@@ -934,7 +945,6 @@ Software Soloution n processes(I)
 #. :math:`P_1` 4: Number[1] == number[2]
 #. :math:`P_1` 5: then break
 #. :math:`P_1` 6: in cs then mutual exclusion violation
-
 
 ----
 
@@ -1100,7 +1110,10 @@ Software Soloution n processes(III)
             ((number[i] == number[j]) && i < j  ) )
           ;
     /* Critical Section */
+
     number[i] = 0;
+
+* https://en.wikipedia.org/wiki/Lamport%27s_bakery_algorithm
 
 ----
 
