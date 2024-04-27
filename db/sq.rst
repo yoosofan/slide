@@ -5514,7 +5514,7 @@ with(II)
 ========
 .. code:: sql
 
-  with dept _total (dept_name, value) as(
+  with dept_total (dept_name, value) as(
       select dept_name, sum(salary)
       from instructor
       group by dept_name

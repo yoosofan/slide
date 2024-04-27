@@ -1,3 +1,4 @@
+// Error
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -36,7 +37,7 @@ int main(){
 	try{f1(1); f2(12); f3();}
   catch(int m){
 		cout <<"catch expception "<<m<<endl;
-	}catch (const char *sm){
+	}catch (const char const *sm){
 		cout<<"catch f4 error in main "<< sm<<endl;
 	}
 	try{ f2(13);

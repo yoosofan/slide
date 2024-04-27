@@ -7,7 +7,7 @@ void f1(int i){
 }
 void f2(int mm){//f4(4);
 	if(mm > 20)  throw 2;
-	else  cout << mm << endl;
+	cout << mm << endl;
 }
 void f4(int mm){
 	char s1[20]="ldkjfld";
@@ -15,12 +15,8 @@ void f4(int mm){
 	cout << "In f4 mm " << mm << endl;
 }
 void f3(void){
-	try{
-		f1(3);
-		f4(2);
-	}catch(int mm){
-		cout <<"In f3 "<<mm<<endl;
-	}
+	try{ f1(3); f4(2);}catch(int mm)
+  {cout <<"In f3 "<<mm<<endl;}
 }
 struct RootCls{double root1 , root2;};
 RootCls solve(double a, double b, double c){
@@ -39,18 +35,13 @@ RootCls solve(double a, double b, double c){
 	return retVal;
 }
 int main(){
-	try{
-		f1(1);
-		f2(12);
-		f3();
-	}catch(int m){
+	try{ f1(1); f2(12);f3();}catch(int m){
 		cout <<"catch expception "<<m<<endl;
 	}catch (char const* sm){
 		cout << "catch f4 error in main "
       << sm << endl;
 	}
-	try{
-		f2(13);
+	try{ f2(13);
 		RootCls rc1 = solve(4 , 55, 2);
 		cout << rc1.root1 << " root2  "
       << rc1.root2 << endl;
@@ -58,11 +49,9 @@ int main(){
 		cout << "Second catch in main " << nn 
       << endl;
 	}
-	try{
-		throw 5;
+	try{ throw 5;
 		cout << "Execution will not reach to this statement" << endl;
-	}catch(int  ll){
-		cout <<"Third catch in main "<<endl;
-	}
+	}catch(int  ll)
+  {cout <<"Third catch in main "<<endl;}
 	cout<< "End "<<endl;
 }

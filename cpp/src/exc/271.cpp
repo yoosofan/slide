@@ -33,10 +33,10 @@ RootCls solve(double a, double b, double c){
 }
 
 int main(){
-	try{f1(1); f2(12); f3();}
+	try{f1(1); f2(12); f4(5); f3();}
   catch(int m){
 		cout <<"catch expception "<<m<<endl;
-	}catch (const char *sm){
+	}catch (char *sm){
 		cout<<"catch f4 error in main "<< sm<<endl;
 	}
 	try{ f2(13);

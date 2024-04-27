@@ -35,12 +35,12 @@ bool f3(void){
 }
 int main(){
   if(!f1(1)) 
-    cout << "In main"<< endl;
+  {cout << "In main"<< endl;return 1;}
   if(!f2(12)) 
-    cout << "In main" << endl;
+  {cout << "In main" << endl;return 1;}
   if(!f3()) 
-    cout << "In main" << endl;
+  {cout << "In main" << endl;return 1;}
   if(!f2(13)) 
-    cout << "In main" << endl;
+  {cout << "In main" << endl;return 1;}
   cout<< "End" << endl;
 }

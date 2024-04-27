@@ -3,20 +3,19 @@
 #include <string>
 #include <cstring>
 #include <exception>
-class myException {
-	public:
+using namespace std;
+struct myException {
 	int errorNumber;
 	char nameError[50];
-	public:
-	myException(int errn=0 , const char *errc="Unknown error "){
+	myException(int errn=0 ,
+      const char *errc="Unknown error "){
 		errorNumber = errn;
 		strcpy(nameError , errc);
 	}
 };
-using namespace std;
 void f1(int i){
 	if( i <= 0)   throw 1;
-	else    cout << i<<endl;
+	cout << i<<endl;
 }
 void f2(int mm){
 	if (mm > 20)  throw 2;
@@ -27,12 +26,8 @@ void f4(int mm){
 	cout << "In f4 mm "<< mm<<endl;
 }
 void f3(void){
-	try {
-		f1(-3);
-		f4(2);
-	}catch(int mm){
-		cout <<"In f3 "<<mm<<endl;
-	}
+	try {f1(-3); f4(2);}catch(int mm)
+  {cout <<"In f3 "<<mm<<endl;}
 }
 struct RootCls{ double root1 , root2;};
 RootCls solve(double a, double b, double c){
@@ -56,8 +51,7 @@ int main(){
 	}catch (char * sm){
 		cout<<"catch f4 error in main "<< sm<<endl;
 	}
-	try{
-		f2(13);
+	try{ f2(13);
 		RootCls rc1 =solve(4 , 5, 2);
 		cout<< rc1.root1<<" root2  "<<rc1.root2<< endl;
 	}catch(int nn){

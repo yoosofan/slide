@@ -6,13 +6,11 @@ void f1(int i){
   cout << "f1: " << i << endl;
 }
 void f2(int mm){
-  if(mm > 20)
-    throw 3;
+  if(mm > 20) throw 3;
   cout << "f2: " << mm << endl;
 }
 void f4(int mm){
-  if(mm < 10) 
-    throw 5;
+  if(mm < 10)  throw 5;
   cout << "In f4 mm " << mm << endl;
 }
 int f3(int x = 34){
@@ -30,9 +28,8 @@ void f8(void){
     cout << f3() << endl;
     f5();
     f2(13);
-  }catch(const int& m1){
-    cout << "In main " << m1 << endl;
-  }
+  }catch(const int& m1)
+  {cout << "In main " << m1 << endl;}
   cout<< "End" << endl;
 }
 int main(){f8();}

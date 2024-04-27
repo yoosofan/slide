@@ -63,5 +63,4 @@ int main(){
 		cout <<"Execution will not reach to this statement"<<endl;
 	}catch(int  ll){ cout <<"Third catch in main "<<endl;}
 	cout<< "End "<<endl;
-	return 0;
 }
