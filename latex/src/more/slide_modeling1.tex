@@ -1,0 +1,620 @@
+\documentclass[svgnames]{beamer}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{enumerate}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{backgroud}
+%\usepackage[top=15mm, bottom=20mm, left=10mm, right=10mm]{geometry}
+%\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{fontenc}
+%\usepackage{arabtex}
+%\usepackage[farsi,arabic]{babel}
+%\usepackage[utf8]
+\usepackage{tikz}
+\usetikzlibrary{calc,shapes.multipart,chains,arrows}
+%\usepackage{xepersian}
+\usepackage{array}
+%\settextfont[Scale=1.2]{Nazli}
+%\settextfont[Scale=1.1]{Times New Roman}
+%\defpersianfont\nastaliq{IranNastaliq}
+%\setlatintextfont[Scale=1.1]{Times New Roman}
+%\setlatintextfont[Scale=1.1]{Libertine}
+%\setlatintextfont{Times}
+\author{Ahmad Yoosofan}
+%\SepMark{-}
+\date{\today}
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
+\begin{document}
+\begin{frame}[c]{ }
+\centering
+
+\\[38pt]
+\textcolor{blue}{Ahmad Yoosofan} \\
+\textcolor{blue}{Winter 1391} \\
+\textcolor{blue}{University of Kashan, Iran} \\
+\end{frame}
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+System Life Cycle\\
+\newpage
+
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\[20pt]
+- inputs, outputs, and interaction by users.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\[20pt]
+- inputs, outputs, and interaction by users.\\
+- ie, search in a library based on ISBN, title, and authors.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\[20pt]
+- inputs, outputs, and interaction by users.\\
+- ie, search in a library based on ISBN, title, and authors.\\
+- How the results of a search are displayed. \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\[20pt]
+- inputs, outputs, and interaction by users.\\
+- ie, search in a library based on ISBN, title, and authors.\\
+- How the results of a search are displayed. \\
+- Information about the physical environment and technology\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional \\[20pt]
+- inputs, outputs, and interaction by users.\\
+- ie, search in a library based on ISBN, title, and authors.\\
+- How the results of a search are displayed. \\
+- Information about the physical environment and technology\\
+- Another functional requirement of this applicatin is specification of its platform. web-based, linux-based and so on.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS :
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+- Specific workload types and levels \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+- Specific workload types and levels \\
+- ie: At peak periods \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+- Specific workload types and levels \\
+- ie: At peak periods \\
+ ... The library is expected to receive 50 search requests/sec\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+- Specific workload types and levels \\
+- ie: At peak periods \\
+ ... The library is expected to receive 50 search requests/sec\\
+ ... Respond within 2 seconds \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\quad 1.1. Functional\\
+\quad 1.2. Non-functional\\[20pt]
+- QoS : performance, availability, reliability, and security\\
+- Qualitative and quantitative characterization of the workload \\
+- Specific workload types and levels \\
+- ie: At peak periods \\
+ ... The library is expected to receive 50 search requests/sec\\
+ ... Respond within 2 seconds \\
+ ... To 95\% of the requests.
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design 
+\\[20pt]
+- How will the requirements be met?\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design 
+\\[20pt]
+- How will the requirements be met?\\
+- Reusing proven software solutions \\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design 
+\\[20pt]
+- How will the requirements be met?\\
+- Reusing proven software solutions \\
+- Risk in terms of performance !!
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design 
+\\[20pt]
+- How will the requirements be met?\\
+- Reusing proven software solutions \\
+- Risk in terms of performance !!\\
+- Evaluation of the performance of the third-party solutions\\
+ ... on overall system performance\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\[18pt]
+- May use other system implementations in this application.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\[18pt]
+- May use other system implementations in this application.\\
+- Choosing the best suitable underlying proven applications
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\[18pt]
+- May use other system implementations in this application.\\
+- Choosing the best suitable underlying proven applications\\
+ .... such as DataBase Management System (DBMS)\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\[18pt]
+- May use other system implementations in this application.\\
+- Choosing the best suitable underlying proven applications\\
+ .... such as DataBase Management System (DBMS)\\
+ .... based on performance needs versus price\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\[16pt]
+ - It is usually done concurrently with system development.
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\[16pt]
+ - It is usually done concurrently with system development.\\
+ - Load testing 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\[16pt]
+ - It is usually done concurrently with system development.\\
+ - Load testing \\
+ - Full testing is too time consuming 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\[16pt]
+ - It is usually done concurrently with system development.\\
+ - Load testing \\
+ - Full testing is too time consuming  \\
+ - and always there is budget constraints\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\[16pt]
+ - It is usually done concurrently with system development.\\
+ - Load testing \\
+ - Full testing is too time consuming  \\
+ - and always there is budget constraints\\
+ - Understanding the performance implications\\ 
+ .... and consequences of design and implementation
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+ - Configuration parameters must be set for optimal performance.\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+ - Configuration parameters must be set for optimal performance.\\
+ - Maximum number of TCP connections
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+ - Configuration parameters must be set for optimal performance.\\
+ - Maximum number of TCP connections\\
+ - Maximum number of threads
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+ - Configuration parameters must be set for optimal performance.\\
+ - Maximum number of TCP connections\\
+ - Maximum number of threads\\ 
+ - Timeout periods 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\[14pt]
+ - The system was usually tested in a controlled environment.\\
+ - Configuration parameters must be set for optimal performance.\\
+ - Maximum number of TCP connections\\
+ - Maximum number of threads\\  
+ - Timeout periods \\
+ - Database connection pool size\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+(a) Workload
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+ (a) Workload\\
+\quad - - \quad Peak periods
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+(a) Workload\\
+\quad - - \quad Peak periods \\
+\quad - - \quad Characteristics of the arrival process of requests 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+(a) Workload\\
+\quad - - \quad Peak periods \\
+\quad - - \quad Characteristics of the arrival process of requests\\
+\quad - - \quad Unusual patterns 
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+(a) Workload\\
+\quad - - \quad Peak periods \\
+\quad - - \quad Characteristics of the arrival process of requests\\
+\quad - - \quad Unusual patterns \\
+\quad - - \quad The performance of the system depends on\\
+\quad . \quad .... the types of requests it receives.
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+(a) Workload\\
+(b) External Performance Metrics\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time\\
+\quad - - measurement of statistics\\
+\quad . \quad .... mean, standard deviation , ...\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time\\
+\quad - - measurement of statistics\\
+\quad . \quad .... mean, standard deviation , ...\\
+\; (b) Internal Performance Metrics\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time\\
+\quad - - measurement of statistics\\
+\quad . \quad .... mean, standard deviation , ...\\
+\; (b) Internal Performance Metrics\\
+\quad - -  internal factors\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time\\
+\quad - - measurement of statistics\\
+\quad . \quad .... mean, standard deviation , ...\\
+\; (b) Internal Performance Metrics\\
+\quad - -  internal factors\\
+\quad . \quad ....   utilization of processors, storage devices, and networks\\
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! 6. System Operation\\[8pt] 
+\; (a) Workload\\
+\; (b) External Performance Metrics\\
+\quad - - measurement of user-perceived satisfaction\\
+\quad . \quad ....  response time\\
+\quad - - measurement of statistics\\
+\quad . \quad .... mean, standard deviation , ...\\
+\; (b) Internal Performance Metrics\\
+\quad - -  internal factors\\
+\quad . \quad ....   utilization of processors, storage devices, and networks\\
+\quad . \quad ....   the number of requests waiting in the various software and hardware queues.\\
+
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\[8pt] 
+
+\newpage
+\textcolor{blue}{Modeling and Perfomance Evaluation of Computer Systems} \\[38pt]
+\raggedright
+\! System Life Cycle\\
+\; 1. Requirements Analysis and Specification\\
+\; 2. System Design\\
+\; 3. System Development\\
+\; 4. System Testing\\
+\; 5. System Deployment\\
+\; 6. System Operation\\
+\; 7. System Evolution\\
+\end{document}

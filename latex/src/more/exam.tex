@@ -1,0 +1,137 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{amsmath}
+%\usepackage[usenames,dvipsnames]{xcolor}
+%\usepackage{backgroud}
+\usepackage{geometry}
+\geometry{top=15mm, bottom=20mm, left=10mm, right=10mm}
+%\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{fontenc}
+%\usepackage{arabtex}
+%\usepackage[farsi,arabic]{babel}
+%\usepackage[utf8]
+\usepackage{array}
+\usepackage{xepersian}
+\settextfont[Scale=1.2]{Nazli}
+%\settextfont[Scale=1.1]{Times New Roman}
+\defpersianfont\nastaliq{IranNastaliq}
+\setlatintextfont[Scale=1.1]{Times New Roman}
+%\setlatintextfont[Scale=1.1]{Libertine}
+%\setlatintextfont{Times}
+\author{Ahmad Yoosofan}
+\SepMark{-}
+\date{\today}
+\begin{document}
+\pagestyle{empty}  % suppress page number
+\lstset{% general command to set parameter(s)
+basicstyle=\small, % print whole listing small
+keywordstyle=\bfseries, % underlined bold black keywords
+commentstyle=\fcolorbox{blue},
+identifierstyle=, % nothing happens
+language=C,
+stringstyle=\ttfamily, % typewriter type for strings
+showstringspaces=false,
+numbers=left, numberstyle=\small, stepnumber=1, 
+numbersep=5pt,
+numberblanklines=true, %|false
+%backgroundcolor=\color{yellow},
+showstringspaces=false
+} % no special string spaces
+\centering{
+\begin{nastaliq} به نام خدا \end{nastaliq}
+\\
+آزمون مبانی برنامه نویسی ، زمان 150 دقیقه
+}
+\\ \raggedleft
+لطفا روی برگه‌ی آزمون، پاسخنامه و دیگر برگه‌ها نام خود را بنویسید.
+ لطفا همه‌ی برگه‌های خود را پس از آزمون تحویل دهید. پاسخ‌گویی به پرسش‌ها در ۲۰ دقیقه‌ی نخست آزمون و سپس پس از هر نیم ساعت به مدت ۱۰ دقیقه خواهد بود ۴۵ دقیقه آخر آزمون به پرسشی پاسخ داده نمی‌شود.
+ در حل مسأله‌های آزمون هیچ تابع ریاضی یا رشته‌ای آماده‌ای را به کار نبرید و تابع‌هایی را که نیاز دارید خودتان بنویسید
+\begin{enumerate}
+\item
+خروجی برنامه زیر را بنویسید.(۱)
+
+\begin{latin}
+\lstinputlisting[multicols=3]{test1.c}
+\end{latin}
+
+\item
+تابع مقایسه‌ی دو رشته را به صورت زیر بنویسید که دو رشته را دریافت کند و اگر یکمی
+\lr{(str1)}
+  کوچکتر از دومی
+\lr{(str2)} 
+بود مقدار منفی یک را برگرداند و اگر یکمی بزرگ‌تر از دومی بود مثبت یک را برگرداند و اگر دو رشته طول مساوی و نویسه‌های (کاراکترهای)
+یکسان داشتند آن‌گاه صفر را برگرداند.(۱/۲۵)
+\\
+\begin{latin}
+"Ab" <"Abc" = "Abc" < "abc" < "bac" = "bac" <"bacd" < "da" ="da"  \\
+\begin{lstlisting}[numbers=none] 
+int str_cmp(const char *str1 , const char *str2);
+\end{lstlisting}
+\end{latin}
+
+\item
+محاسبه ترکیب m و n را به صورت بازگشتی می‌توان به صورت
+زیر
+تعریف کرد. تابعی به صورت بازگشتی بنویسید که دو عدد صحیح m و n را بگیرد و بر پایه‌ی فرمول داده شده ترکیب m و n را حساب کند. فرض کنید همواره  
+\lr{0 $\leq$ m  $\leq$ n} 
+است.(۱/۲۵)
+\\
+
+\begin{latin}
+\begin{math}
+\binom{n}{m} = \binom{n-1}{m} + \binom{n-1}{m-1} \quad  ,  \quad  \binom{n}{0} =  1  \quad  ,  \quad  \binom{n}{n} =  1 
+\end{math}
+\end{latin}
+
+\begin{latin}
+\begin{lstlisting}[numbers=none] 
+int cmb(int m, int n);
+\end{lstlisting}
+\end{latin}
+
+\item
+تابع جستجوی دودویی را بنویسید که یک آرایه‌ی مرتب شده و غیر تکراری(a) را به همراه تعداد عنصرهای آن(n) و عددی که باید
+ جستجو شود(v) را می‌گیرد و مکان v را در آرایه برمی‌گرداند و اگر نیافت منفی یک را برمی‌گرداند.(۱)
+\\
+\begin{latin}
+\begin{lstlisting}[numbers=none] 
+int bin_search(int a[], int n, int v);
+\end{lstlisting}
+\end{latin}
+
+\item
+تابع
+\lr{exp(x)}
+را به کمک بسط سری 
+\lr{\begin{math} \exp(x) = 1 + \frac{x}{1!} + \frac{x^2}{2!}+\frac{x^3}{3!}+ ... + \frac{x^n}{n!} \end{math} }
+بنویسید. این تابع یک عدد اعشاری x را می‌گیرد و یک عدد اعشاری برمی‌گرداند که برابر
+\lr{ \begin{math} e^x \end{math} }
+است.
+ محاسبه سری را تا جایی ادامه دهید که آخرین جمله آن
+\lr{ \begin{math} \frac{x^n}{n!}\end{math} }
+کوچکتر از 0/001 شود.(۱/۷۵)
+\begin{latin}
+\begin{lstlisting}[numbers=none] 
+double exp(double x);
+\end{lstlisting}
+\end{latin}
+
+\item
+تابعی بنویسید که اشاره‌گرهایی به دو عدد بزرگ را دریافت کند و سپس این دو عدد بزرگ را با هم جمع کند و نتیجه را برگرداند. ساختار عدد صحیح بزرگ در زیر نوشته شده است.
+این عددها بدون علامت هستند و همواره مثبت هستند. اگر به شکل دیگری نیز می‌توانید  تابع جمع دو عدد صحیح بزرگ را بنویسید.(۱/۷۵)
+
+\begin{latin}
+\begin{lstlisting}[numbers=none] 
+typedef struct {int a[1000];int n;}hn; hn add(hn*a1, hn*a2);
+\end{lstlisting}
+\end{latin}
+\end{enumerate}
+تندرست باشید، احمد یوسفان
+\end{document}

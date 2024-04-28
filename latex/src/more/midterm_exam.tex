@@ -1,0 +1,135 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{color}
+%~ %\usepackage[usenames,dvipsnames]{xcolor}
+%~ %\usepackage{backgroud}
+\usepackage[top=15mm, bottom=20mm, left=10mm, right=10mm]{geometry}
+%~ %\usepackage[utf8]{inputenc}
+%~ %\usepackage[utf8]{fontenc}
+%~ %\usepackage{arabtex}
+%~ %\usepackage[farsi,arabic]{babel}
+%~ %\usepackage[utf8]
+\usepackage{xepersian}
+\usepackage{array}
+\settextfont[Scale=1.2]{Nazli}
+%~ %\settextfont[Scale=1.1]{Times New Roman}
+\defpersianfont\nastaliq{IranNastaliq}
+%~ \setlatintextfont[Scale=1.1]{Times New Roman}
+%~ %\setlatintextfont[Scale=1.1]{Libertine}
+%~ %\setlatintextfont{Times}
+\author{Ahmad Yoosofan}
+\SepMark{-}
+\date{\today}
+\begin{document}
+\pagestyle{empty}  %~ suppress page number
+\centering{\begin{nastaliq} به نام خدا \end{nastaliq}}
+\\
+\centering{
+آزمون مبانی برنامه نویسی ، زمان ۱۱۰ دقیقه
+}
+\begin{enumerate}
+\item
+اشکال‌های برنامه‌ی زیر را بیابید(۲). 
+%~ %\setlatinmonofont[Scale=1]{Courier}  
+\\
+%~ %\setlatintextfont{courier}
+\begin{latin}
+\lstset{%~ general command to set parameter(s)
+basicstyle=\small, %~ print whole listing small
+keywordstyle=\bfseries, %~ underlined bold black keywords
+commentstyle=\fcolorbox{blue},
+identifierstyle=, %~ nothing happens
+language=C,
+stringstyle=\ttfamily, %~ typewriter type for strings
+showstringspaces=false,
+numbers=left, numberstyle=\small, stepnumber=1, 
+numbersep=5pt,
+numberblanklines=true, %~ |false
+%~ %backgroundcolor=\color{yellow},
+showstringspaces=false
+} %~ no special string spaces
+
+%~ \begin{lstlisting}[frame=single,multicols=2]
+
+%~ \begin{lstlisting}[][multicols=2]
+\begin{lstlisting}  
+#include<stdio.h>
+int main(){
+  int i,n,a[100];
+  i=0;
+  printf("Enter  0 < n < 100 : ");
+  scanf("%d",& n);
+  if(n>0){
+    if(i<n){
+      while(i<n){
+        printf("Enter a[%d] : ", i);
+        scanf("%d",& a[i]);
+        i = i + 1;
+      }
+      sum = 0;
+      while(i<n){
+        sum = sum+a[i];
+        i = i + 1 ;
+      }
+      printf("The output is: %d", sum);
+    }
+    else{
+      printf("Wrong input! n>=100 \n");
+    }
+  }
+  else{
+    printf("Wrong input. n <=0 \n");
+  }
+  return 0;
+}
+\end{lstlisting}
+\end{latin}
+\item
+برنامه‌ای بنویسید که یک عدد بزرگ‌تر از ۲ از کاربر بگیرد و یک مربع به اندازه‌ی آن به کمک * بکشد. در نوشتن برنامه‌ی این مسأله و مسأله‌های پس از این نیازی نیست که مانند برنامه‌ی بالا درست بودن ورودی کاربر  بررسی شود(۵). 
+\begin{center} 
+\begin{tabular}{| c   | c | c  | c | c| c |} \hline
+   عدد  & 
+شکل  & 
+عدد    & 
+شکل  & 
+عدد      & 
+شکل 
+   \\ %~ \tabularnewline 
+\hline
+  &     &   &****  &   & ***** \\
+  & *** &   &****  &   & ***** \\
+3 & *** & 4 &****  & 5 & ***** \\
+  & *** &   &****  &   & ***** \\
+  &     &   &      &   & ***** \\
+\hline \end{tabular} \end{center} 
+\item
+برنامه‌ای بنویسید که ۵ عدد نخست Emirp را نمایش دهد.
+عددهای Emirp عددهایی هستند که اگر رقم‌های آنها را معکوس کنیم باز عدد اولی به دست می‌آید. برای نمونه ۱۳
+یکی از این عددها است که معکوس رقم‌های آن یعنی ۳۱ نیز اول است(۹).
+
+\item
+برنامه‌ای بنویسید که یک عدد از کاربر بگیرد و  رقم‌های آن را از کوچک به بزرگ مرتب کند و عدد به دست آمده را نمایش دهد(۹).
+\\
+\begin{center} 
+\begin{tabular}{| c   | c | c  | c | c| c |}
+\hline
+   عدد1  & 
+خروجی1  & 
+عدد۲    & 
+خروجی۲  & 
+عدد۳     & 
+خروجی۳ 
+    \tabularnewline 
+\hline
+ 491 &  149   &  318 & 138  &  729  & 279 \\
+\hline \end{tabular} \end{center}
+\\ %~ [8mm]
+تندرست باشید،‌احمد یوسفان
+\end{enumerate}
+\end{document}

@@ -1,0 +1,243 @@
+:root {
+ --yoo-gantt-chart-width: 450px;
+}
+ol.trace-code {justify-self: start; /*background-color: #BEF648;*/}
+pre.code { justify-self: center;}
+tr, td, th{border: 1px solid;}
+
+.yoo-gantt-chart > ul.withborder > li:nth-of-type(odd){
+  background-color: black;
+}
+.yoo-gantt-chart li{
+  list-style-type: none;
+  text-align: center;
+}
+
+/*
+ * cpu-burst-io-id
+*/
+
+div#cpu-burst-io-id {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+div#cpu-test2-id {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  'h1 h1'
+  'table1 yooganttchart'
+  'code1 code1'
+  ;
+}
+div#cpu-test2-id table{grid-area:table1;}
+div#cpu-test2-id > ul:nth-of-type(1){grid-area:code1;}
+div#cpu-test2-id h1{grid-area: h1;}
+div#cpu-test2-id .yoo-gantt-chart > ul{
+  display: grid;
+  width: var(--yoo-gantt-chart-width);
+  margin: 0;
+  padding: 0;
+}
+div#cpu-test2-id .yoo-gantt-chart > ul.withborder{
+  grid-template-columns: 0.2rem 2fr 0.2rem 1fr 0.2rem 2fr 0.2rem 1fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+/*
+div#cpu-test2-id .yoo-gantt-chart > ul.yoo-x-axis{
+  grid-template-columns: 
+    0.05rem 1fr 0.05rem 1fr 0.05rem 1fr 0.05rem 1fr 0.05rem
+    1fr 0.05rem 1fr 0.05rem 1fr 0.05rem 1fr 0.05rem;
+  grid-area: ulyooxaxis;
+}
+div#cpu-test2-id .yoo-gantt-chart > ul.yoo-x-axis > li:nth-of-type(odd){
+  background-color: black;
+}
+*/
+table.yoo-gantt-chart-set-width-based-on-data tr:nth-of-type(1) td:last-of-type{
+  border: 0;
+}
+table.yoo-gantt-chart-set-width-based-on-data tr:nth-of-type(2) td{
+  border: 0;
+  text-align: left;
+}
+div#cpu-test2-id .yoo-gantt-chart > ul.yoo-x-numbers{
+ grid-template-columns: 0.2rem 2fr 0.2rem 1fr 0.2rem 2fr 0.2rem 1fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+
+/*
+ * processes-table-id
+*/
+
+div#processes-table-id{
+  display: grid;
+  grid-template-areas: 
+  'h1 h1 '
+  'table1 table2 ';
+  grid-gap: 10px;
+}
+div#processes-table-id h1:nth-of-type(1){grid-area:h1;}
+div#processes-table-id table:nth-of-type(1){grid-area:table1;margin:10px;}
+div#processes-table-id table:nth-of-type(2){grid-area:table2;margin:10px;}
+
+/*
+ * cpu-average-waiting-id
+*/
+
+div#cpu-average-waiting-id{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  'h1 h1'
+  'table1 yooganttchart'
+  'code1 code1'
+  ;
+}
+div#cpu-average-waiting-id table{grid-area:table1;}
+div#cpu-average-waiting-id > ul:nth-of-type(1){grid-area:code1;}
+div#cpu-average-waiting-id h1{grid-area: h1;}
+div#cpu-average-waiting-id .yoo-gantt-chart > ul{
+  display: grid;
+  width: var(--yoo-gantt-chart-width);
+  margin: 0;
+  padding: 0;
+}
+div#cpu-average-waiting-id .yoo-gantt-chart > ul.withborder{
+  grid-template-columns: 0.2rem 2fr 0.2rem 1fr 0.2rem 2fr 0.2rem 1fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#cpu-average-waiting-id .yoo-gantt-chart > ul.yoo-x-numbers{
+ grid-template-columns: 0.2rem 2fr 0.2rem 1fr 0.2rem 2fr 0.2rem 1fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+
+/*
+ * FCFS-Convoy-effect-id
+*/
+
+div#FCFS-Convoy-effect-id{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  'h1 h1'
+  'table1 yooganttchart'
+  'code1 code1'
+  ;
+}
+div#FCFS-Convoy-effect-id table{grid-area:table1;}
+div#FCFS-Convoy-effect-id > ul:nth-of-type(1){grid-area:code1;}
+div#FCFS-Convoy-effect-id h1{grid-area: h1;}
+div#FCFS-Convoy-effect-id .yoo-gantt-chart > ul{
+  display: grid;
+  width: var(--yoo-gantt-chart-width);
+  margin: 0;
+  padding: 0;
+}
+div#FCFS-Convoy-effect-id .yoo-gantt-chart > ul.withborder{
+  grid-template-columns: 0.2rem 4fr 0.2rem 6fr 0.2rem 1fr 0.2rem 3fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#FCFS-Convoy-effect-id .yoo-gantt-chart > ul.yoo-x-numbers{
+ grid-template-columns: 0.2rem 4fr 0.2rem 6fr 0.2rem 1fr 0.2rem 3fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+div#FCFS-Convoy-effect-id .yoo-gantt-chart > ul.withborder:nth-of-type(3){
+  grid-template-columns: 0.2rem 4fr 0.2rem 1fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#FCFS-Convoy-effect-id .yoo-gantt-chart > ul.yoo-x-numbers:nth-of-type(4){
+ grid-template-columns: 0.2rem 4fr 0.2rem 1fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+
+/*
+ * sjf-spn-id
+*/
+
+div#sjf-spn-id{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  'h1 h1'
+  'table1 yooganttchart'
+  'code1 code1'
+  ;
+}
+div#sjf-spn-id table{grid-area:table1;}
+div#sjf-spn-id > ul:nth-of-type(1){grid-area:code1;}
+div#sjf-spn-id h1{grid-area: h1;}
+div#sjf-spn-id .yoo-gantt-chart > ul{
+  display: grid;
+  width: var(--yoo-gantt-chart-width);
+  margin: 0;
+  padding: 0;
+}
+div#sjf-spn-id .yoo-gantt-chart > ul.withborder{
+  grid-template-columns: 0.2rem 4fr 0.2rem 1fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#sjf-spn-id .yoo-gantt-chart > ul.yoo-x-numbers{
+  grid-template-columns: 0.2rem 4fr 0.2rem 1fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+
+/*
+ * srt-id
+*/
+
+div#srt-id{
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-areas:
+  'h1 h1'
+  'table1 yooganttchart'
+  'code1 code1'
+  ;
+}
+div#srt-id table{grid-area:table1;}
+div#srt-id > ul:nth-of-type(1){grid-area:code1;}
+div#srt-id h1{grid-area: h1;}
+div#srt-id .yoo-gantt-chart > ul{
+  display: grid;
+  width: var(--yoo-gantt-chart-width);
+  margin: 0;
+  padding: 0;
+}
+div#srt-id .yoo-gantt-chart > ul.withborder:nth-of-type(1){
+  grid-template-columns: 0.2rem 4fr 0.2rem 6fr 0.2rem 1fr 0.2rem 3fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#srt-id .yoo-gantt-chart > ul.yoo-x-numbers:nth-of-type(2){
+ grid-template-columns: 0.2rem 4fr 0.2rem 6fr 0.2rem 1fr 0.2rem 3fr 0.2rem;
+ grid-area: ulyooxnumbers;
+}
+div#srt-id .yoo-gantt-chart > ul.withborder:nth-of-type(3){
+  grid-template-columns: 0.2rem 1fr 0.2rem 1fr 0.2rem 3fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  grid-area: ulwithborder
+}
+div#srt-id .yoo-gantt-chart > ul.yoo-x-numbers:nth-of-type(4){
+  grid-template-columns: 0.2rem 1fr 0.2rem 1fr 0.2rem 3fr 0.2rem 3fr 0.2rem 6fr 0.2rem;
+  grid-area: ulyooxnumbers;
+}
