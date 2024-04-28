@@ -335,28 +335,34 @@
 </span><span class="ln">4 </span><span class="w">
 </span><span class="ln">5 </span><span class="w">  </span><span class="c1">//    CRITICAL SECTION
 </span><span class="ln">6 </span><span class="c1"></span><span class="w">
-</span><span class="ln">7 </span><span class="w">  </span><span class="n">lock</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span></pre></div><div class="step step-level-1" step="26" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="41600" data-y="0" data-z="0"><h1 id="assembly-implementation">Assembly implementation</h1><pre class="highlight code asm"><span class="ln"> 1 </span><span class="nl">enter_region:</span><span class="w">        </span><span class="c1">; A "jump to" tag; function entry point.
-</span><span class="ln"> 2 </span><span class="c1"></span><span class="w">
-</span><span class="ln"> 3 </span><span class="w">  </span><span class="nf">tsl</span><span class="w"> </span><span class="no">reg</span><span class="p">,</span><span class="w"> </span><span class="no">flag</span><span class="w">      </span><span class="c1">; Test and Set Lock; flag is the
-</span><span class="ln"> 4 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; shared variable; it is copied
-</span><span class="ln"> 5 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; into the register reg and flag
-</span><span class="ln"> 6 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; then atomically set to 1.
-</span><span class="ln"> 7 </span><span class="c1"></span><span class="w">
-</span><span class="ln"> 8 </span><span class="w">  </span><span class="nf">cmp</span><span class="w"> </span><span class="no">reg</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">        </span><span class="c1">; Was flag zero on entry_region?
-</span><span class="ln"> 9 </span><span class="c1"></span><span class="w">
-</span><span class="ln">10 </span><span class="w">  </span><span class="nf">jnz</span><span class="w"> </span><span class="no">enter_region</span><span class="w">   </span><span class="c1">; Jump to enter_region if
-</span><span class="ln">11 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; reg is non-zero; i.e.,
-</span><span class="ln">12 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; flag was non-zero on entry.
-</span><span class="ln">13 </span><span class="c1"></span><span class="w">
-</span><span class="ln">14 </span><span class="w">  </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; Exit; i.e., flag was zero on
-</span><span class="ln">15 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; entry. If we get here, tsl
-</span><span class="ln">16 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; will have set it non-zero; thus,
-</span><span class="ln">17 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; we have claimed the resource
-</span><span class="ln">18 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; associated with flag.
-</span><span class="ln">19 </span><span class="c1"></span><span class="w">
-</span><span class="ln">20 </span><span class="w"></span><span class="nl">leave_region:</span><span class="w">
-</span><span class="ln">21 </span><span class="w">  </span><span class="nf">move</span><span class="w"> </span><span class="no">flag</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">      </span><span class="c1">; store 0 in flag
-</span><span class="ln">22 </span><span class="c1"></span><span class="w">  </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; return to caller</span></pre></div><div class="step step-level-1" step="27" id="hardware-cs-i-trace-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="43200" data-y="0" data-z="0"><pre class="highlight code cpp"><span class="ln">1 </span><span class="w">  </span><span class="c1">// P0
+</span><span class="ln">7 </span><span class="w">  </span><span class="n">lock</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span></pre></div><div class="step step-level-1" step="26" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="41600" data-y="0" data-z="0"><h1 id="assembly-implementation">Assembly implementation</h1><pre class="highlight code asm"><span class="ln"> 1 </span><span class="nl">Start_Share_region:</span><span class="w">
+</span><span class="ln"> 2 </span><span class="w">  </span><span class="nf">move</span><span class="w"> </span><span class="no">flag</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">      </span><span class="c1">; store 0 in flag
+</span><span class="ln"> 3 </span><span class="c1"></span><span class="w">  </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; return to caller
+</span><span class="ln"> 4 </span><span class="c1"></span><span class="w">
+</span><span class="ln"> 5 </span><span class="w">
+</span><span class="ln"> 6 </span><span class="w">
+</span><span class="ln"> 7 </span><span class="w"></span><span class="nl">enter_region:</span><span class="w">        </span><span class="c1">; entry point.
+</span><span class="ln"> 8 </span><span class="c1"></span><span class="w">
+</span><span class="ln"> 9 </span><span class="w">  </span><span class="nf">move</span><span class="w"> </span><span class="no">reg</span><span class="p">,</span><span class="w"> </span><span class="mi">#1</span><span class="w">       </span><span class="c1">; Was flag zero on entry_region?
+</span><span class="ln">10 </span><span class="c1"></span><span class="w">
+</span><span class="ln">11 </span><span class="w"></span><span class="nl">loop:</span><span class="w">                </span><span class="c1">; A "jump to" tag
+</span><span class="ln">12 </span><span class="c1"></span><span class="w">
+</span><span class="ln">13 </span><span class="w">  </span><span class="nf">tsl</span><span class="w"> </span><span class="no">reg</span><span class="p">,</span><span class="w"> </span><span class="no">flag</span><span class="w">      </span><span class="c1">; Test and Set Lock; flag is the shared variable; it is copied
+</span><span class="ln">14 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; into the register reg and flag then atomically set to 1.
+</span><span class="ln">15 </span><span class="c1"></span><span class="w">
+</span><span class="ln">16 </span><span class="w">  </span><span class="nf">cmp</span><span class="w"> </span><span class="no">reg</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">        </span><span class="c1">; Was flag zero on entry_region?
+</span><span class="ln">17 </span><span class="c1"></span><span class="w">
+</span><span class="ln">18 </span><span class="w">  </span><span class="nf">jnz</span><span class="w"> </span><span class="no">loop</span><span class="w">           </span><span class="c1">; Jump to enter_region if reg is non-zero; i.e.,
+</span><span class="ln">19 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; flag was non-zero on entry.
+</span><span class="ln">20 </span><span class="c1"></span><span class="w">
+</span><span class="ln">21 </span><span class="w">  </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; Exit; i.e., flag was zero on entry. If we get here, tsl
+</span><span class="ln">22 </span><span class="c1"></span><span class="w">                     </span><span class="c1">; will have set it non-zero; thus, we have claimed the resource associated with flag.
+</span><span class="ln">23 </span><span class="c1"></span><span class="w">
+</span><span class="ln">24 </span><span class="w">
+</span><span class="ln">25 </span><span class="w">
+</span><span class="ln">26 </span><span class="w"></span><span class="nl">exit_region:</span><span class="w">
+</span><span class="ln">27 </span><span class="w">  </span><span class="nf">move</span><span class="w"> </span><span class="no">flag</span><span class="p">,</span><span class="w"> </span><span class="mi">#0</span><span class="w">      </span><span class="c1">; store 0 in flag
+</span><span class="ln">28 </span><span class="c1"></span><span class="w">  </span><span class="nf">ret</span><span class="w">                </span><span class="c1">; return to caller</span></pre></div><div class="step step-level-1" step="27" id="hardware-cs-i-trace-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="43200" data-y="0" data-z="0"><pre class="highlight code cpp"><span class="ln">1 </span><span class="w">  </span><span class="c1">// P0
 </span><span class="ln">2 </span><span class="c1"></span><span class="w">  </span><span class="k">do</span><span class="p">{</span><span class="w">
 </span><span class="ln">3 </span><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">TS</span><span class="p">(</span><span class="n">lock</span><span class="p">))</span><span class="w">
 </span><span class="ln">4 </span><span class="w">      </span><span class="p">;</span><span class="w">
@@ -370,25 +376,25 @@
 </span><span class="ln">5 </span><span class="w">    </span><span class="c1">// CS
 </span><span class="ln">6 </span><span class="c1"></span><span class="w">    </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
 </span><span class="ln">7 </span><span class="w">    </span><span class="c1">// RS
-</span><span class="ln">8 </span><span class="c1"></span><span class="w">  </span><span class="p">}</span></pre><pre class="highlight code cpp"><span class="ln">1 </span><span class="w">  </span><span class="c1">// P2
+</span><span class="ln">8 </span><span class="c1"></span><span class="w">  </span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></pre><pre class="highlight code cpp"><span class="ln">1 </span><span class="w">  </span><span class="c1">// P2
 </span><span class="ln">2 </span><span class="c1"></span><span class="w">  </span><span class="k">do</span><span class="p">{</span><span class="w">
 </span><span class="ln">3 </span><span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="n">TS</span><span class="p">(</span><span class="n">lock</span><span class="p">))</span><span class="w">
 </span><span class="ln">4 </span><span class="w">      </span><span class="p">;</span><span class="w">
 </span><span class="ln">5 </span><span class="w">    </span><span class="c1">// CS
 </span><span class="ln">6 </span><span class="c1"></span><span class="w">    </span><span class="n">lock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
 </span><span class="ln">7 </span><span class="w">    </span><span class="c1">// RS
-</span><span class="ln">8 </span><span class="c1"></span><span class="w">  </span><span class="p">}</span></pre><ol class="trace-code"><li class="substep">P0-3 , P1-3 , P2-3</li><li class="substep">P0-3 , P1-5 , P2-3</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">P0-3 , P1-7 , P2-5</li><li class="substep">P0-3 , P1-3 , P2-6</li><li class="substep">P0-3 , P1-5 , P2-7</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">P0-3 , P1-7 , P2-5</li><li class="substep">P0-3 , P1-3 , P2-6</li><li class="substep">P0-3 , P1-5 , P2-7</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">.... , ....  , ....</li><li class="substep"><strong>P0 : starve</strong></li></ol></div><div class="step step-level-1" step="28" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="44800" data-y="0" data-z="0"><h1 id="hardware-soloution-ii">Hardware Soloution(II)</h1><pre class="highlight code cpp substep"><span class="ln"> 1 </span><span class="c1">// Share section
+</span><span class="ln">8 </span><span class="c1"></span><span class="w">  </span><span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></pre><ol class="trace-code"><li class="substep">P0-3 , P1-3 , P2-3</li><li class="substep">P0-3 , P1-5 , P2-3</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">P0-3 , P1-7 , P2-5</li><li class="substep">P0-3 , P1-3 , P2-6</li><li class="substep">P0-3 , P1-5 , P2-7</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">P0-3 , P1-7 , P2-5</li><li class="substep">P0-3 , P1-3 , P2-6</li><li class="substep">P0-3 , P1-5 , P2-7</li><li class="substep">P0-3 , P1-6 , P2-3</li><li class="substep">.... , ....  , ....</li><li class="substep"><strong>P0 : starve</strong></li></ol></div><div class="step step-level-1" step="28" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="44800" data-y="0" data-z="0"><h1 id="hardware-soloution-ii">Hardware Soloution(II)</h1><pre class="highlight code cpp"><span class="ln"> 1 </span><span class="c1">// Share section
 </span><span class="ln"> 2 </span><span class="c1"></span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span><span class="w">
 </span><span class="ln"> 3 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="n">waiting</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">};</span><span class="w">
 </span><span class="ln"> 4 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="n">lock</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 5 </span><span class="w"></span><span class="c1">// Each Process
-</span><span class="ln"> 6 </span><span class="c1"></span><span class="k">do</span><span class="p">{</span><span class="w">
-</span><span class="ln"> 7 </span><span class="w">  </span><span class="n">waiting</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 8 </span><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span><span class="w">
-</span><span class="ln"> 9 </span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">waiting</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">){</span><span class="w">
-</span><span class="ln">10 </span><span class="w">    </span><span class="n">testAndSet</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span><span class="w">
-</span><span class="ln">11 </span><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lock</span><span class="p">;</span><span class="w">
-</span><span class="ln">12 </span><span class="w">  </span><span class="p">}</span><span class="w">
+</span><span class="ln"> 5 </span><span class="w">
+</span><span class="ln"> 6 </span><span class="w"></span><span class="c1">// Each Process
+</span><span class="ln"> 7 </span><span class="c1"></span><span class="k">do</span><span class="p">{</span><span class="w">
+</span><span class="ln"> 8 </span><span class="w">  </span><span class="n">waiting</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln"> 9 </span><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">key</span><span class="o">=</span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">10 </span><span class="w">  </span><span class="k">while</span><span class="p">(</span><span class="n">waiting</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w">
+</span><span class="ln">11 </span><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">testAndSet</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span><span class="w">
+</span><span class="ln">12 </span><span class="w">
 </span><span class="ln">13 </span><span class="w">  </span><span class="n">waiting</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">false</span><span class="p">;</span><span class="w">
 </span><span class="ln">14 </span><span class="w">
 </span><span class="ln">15 </span><span class="w">  </span><span class="c1">// CRITICAL SECTION

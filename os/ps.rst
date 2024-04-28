@@ -19,14 +19,6 @@ https://yoosofan.github.io
 
 University of Kashan
 
-.. :
-
-  .. raw:: html
-
-      <script src="https://d3js.org/d3.v5.min.js"></script>
-      <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
-      <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
-
 ----
 
 Sharing Resources
@@ -1156,26 +1148,32 @@ Assembly implementation
 .. code:: asm
   :number-lines:
 
-  enter_region:        ; A "jump to" tag; function entry point.
+  Start_Share_region:
+    move flag, #0      ; store 0 in flag
+    ret                ; return to caller
 
-    tsl reg, flag      ; Test and Set Lock; flag is the
-                       ; shared variable; it is copied
-                       ; into the register reg and flag
-                       ; then atomically set to 1.
+
+
+  enter_region:        ; entry point.
+
+    move reg, #1       ; Was flag zero on entry_region?
+
+  loop:                ; A "jump to" tag
+
+    tsl reg, flag      ; Test and Set Lock; flag is the shared variable; it is copied
+                       ; into the register reg and flag then atomically set to 1.
 
     cmp reg, #0        ; Was flag zero on entry_region?
 
-    jnz enter_region   ; Jump to enter_region if
-                       ; reg is non-zero; i.e.,
+    jnz loop           ; Jump to enter_region if reg is non-zero; i.e.,
                        ; flag was non-zero on entry.
 
-    ret                ; Exit; i.e., flag was zero on
-                       ; entry. If we get here, tsl
-                       ; will have set it non-zero; thus,
-                       ; we have claimed the resource
-                       ; associated with flag.
+    ret                ; Exit; i.e., flag was zero on entry. If we get here, tsl
+                       ; will have set it non-zero; thus, we have claimed the resource associated with flag.
 
-  leave_region:
+
+
+  exit_region:
     move flag, #0      ; store 0 in flag
     ret                ; return to caller
 
@@ -1209,7 +1207,7 @@ Assembly implementation
       // CS
       lock = false;
       // RS
-    }
+    }while(1);
 
 .. code:: cpp
   :number-lines:
@@ -1221,7 +1219,7 @@ Assembly implementation
       // CS
       lock = false;
       // RS
-    }
+    }while(1);
 
 .. class:: substep trace-code
 
@@ -1245,20 +1243,19 @@ Hardware Soloution(II)
 ========================================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Share section
   const int n=20;
   bool waiting[n]={false, ... , false};
   bool lock=false;
+  
   // Each Process
   do{
     waiting[i] = true;
     bool key=true;
-    while(waiting[i] && key){
-      testAndSet(lock);
-      key = lock;
-    }
+    while(waiting[i] && key)
+      key = testAndSet(lock);
+
     waiting[i]=false;
 
     // CRITICAL SECTION
