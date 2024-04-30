@@ -33,6 +33,7 @@ def p_t_mul_a(p):
   print('T → T * a :', 'T: ',p[0], ' \t T1: ', p[1], '\t a: ', p[3])
 def p_t_div_a(p):
   'T : T DIV NUMBER' # T → T / a 
+  if p[3] == 0: print('tt');quit()
   p[0] = p[1] / p[3]
   print('T → T / a :', 'T: ',p[0], ' \t T1: ', p[1], '\t a: ', p[3])
 def p_t_a(p):
