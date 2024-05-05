@@ -1248,7 +1248,7 @@ Hardware Soloution(II)
   const int n=20;
   bool waiting[n]={false, ... , false};
   bool lock=false;
-  
+
   // Each Process
   do{
     waiting[i] = true;
@@ -1662,16 +1662,19 @@ Other Types of Semaphore
 #. Weak Semaphore
 #. Priority Semaphore
 
+C++ Semaphore
+-------------
+* https://en.cppreference.com/w/cpp/thread/counting_semaphore
+
+#. std::counting_semaphore
+#. std::binary_semaphore
+
+POSIX
+------
+* https://ebrary.net/51306/computer_science/burst_fifo_mode_semaphores
+* https://cwiki.apache.org/confluence/display/NUTTX/Signaling+Semaphores+and+Priority+Inheritance
+
 .. :
-
-  https://ebrary.net/51306/computer_science/burst_fifo_mode_semaphores
-  https://cwiki.apache.org/confluence/display/NUTTX/Signaling+Semaphores+and+Priority+Inheritance
-
-  https://en.cppreference.com/w/cpp/thread/counting_semaphore
-
-  std::counting_semaphore, std::binary_semaphore
-  https://en.cppreference.com/w/cpp/thread/counting_semaphore
-
 
   (constructor)     constructs a counting_semaphore  (public member function)
   (destructor)    destructs the counting_semaphore  (public member function)
@@ -1799,8 +1802,8 @@ Simple Deadlock
 
 :class: t2c
 
-Semaphore in Python
-====================
+Python Semaphore
+=================
 .. code:: python
   :number-lines:
 
@@ -1953,8 +1956,8 @@ Unbounded Buffer(Wrong Answer)
 
 :class: t2c
 
-Unbounded Buffer
-==================
+Unbounded Buffer(II)
+=====================
 .. code:: python
   :number-lines:
 
@@ -1991,7 +1994,45 @@ Unbounded Buffer
 
 :class: t2c
 
-Buffer(I)
+Unbounded Buffer(III - better)
+==============================
+.. code:: python
+  :number-lines:
+
+  full = Semaphore(0)
+
+.
+
+.. code:: python
+  :number-lines:
+
+  def producer(sh1):
+    x = -1
+    in1 = 0
+    for i in range(5000):
+      x = produce()
+      sh1.buf[in1] = x
+      full.release(); ### full.V()
+      in1 = in1 + 1
+
+.. code:: python
+  :number-lines:
+
+  def consumer(sh1):
+    out = 0
+    x=0
+    for i in range(5000):
+      full.acquire() # full.P()
+      x = sh1.buf[out];
+      sh1.buf[out] = -1
+      out = out +1
+      consume(x)
+
+----
+
+:class: t2c
+
+Bounded Buffer(I)
 ==================
 .. code:: python
   :number-lines:
@@ -2009,8 +2050,8 @@ Buffer(I)
     for i in range(5000):
       x = produce()
       sh1.buf[in1] = x
-      in1 = (in1 + 1) % sh1.n
       full.release(); # full.V()
+      in1 = (in1 + 1) % sh1.n
 
 .. code:: python
   :number-lines:
@@ -2057,8 +2098,9 @@ Bounded Buffer(II)
       x = produce()
       empty.acquire() # empty.P()
       sh1.buf[in1] = x
-      in1 = (in1 + 1) % sh1.n
       full.release(); # empty.V()
+      in1 = (in1 + 1) % sh1.n
+
 
 .. code:: python
   :number-lines:
@@ -2069,8 +2111,8 @@ Bounded Buffer(II)
     for i in range(5000):
       full.acquire() # full.P()
       x = sh1.buf[out];
-      out = (out +1) % sh1.n
       empty.release() # empty.V()
+      out = (out +1) % sh1.n
       consume(x)
 
 ----
@@ -2127,13 +2169,13 @@ Bounded Buffer(Any kind of Queue)
 Producer consumer full
 ==========================
 .. include:: src/ps/producer_consumer.8.py
-  :code: cpp
+  :code: python
   :number-lines:
   :start-line: 0
   :end-line: 33
 
 .. include:: src/ps/producer_consumer.8.py
-  :code: cpp
+  :code: python
   :number-lines: 33
   :start-line: 33
   :end-line: 70
@@ -2142,7 +2184,7 @@ Producer consumer full
 
 :class: t2c
 
-Bounded Buffer(Percent Empty )
+Bounded Buffer(Percent Empty)
 ======================================
 .. code:: python
   :number-lines:
@@ -2169,8 +2211,9 @@ Bounded Buffer(Percent Empty )
       x = produce(x, in1)
       empty.acquire() # empty.P()
       sh1.buf[in1] = x
-      in1 = (in1 + 1) % sh1.n
       full.release(); # empty.V()
+      in1 = (in1 + 1) % sh1.n
+
 
 .. code:: python
   :number-lines:
@@ -2181,8 +2224,8 @@ Bounded Buffer(Percent Empty )
     for i in range(5000):
       full.acquire() # full.P()
       x = sh1.buf[out];
-      out = (out +1) % sh1.n
       empty.release() # empty.V()
+      out = (out +1) % sh1.n
       consume(x,out)
 
 ----
@@ -2191,6 +2234,9 @@ Bounded Buffer(Percent Empty )
 
 Readers and Writers(I)
 ========================
+.. image:: img/ps/readers.writers.png
+   :width: 70%
+
 .. code:: cpp
   :number-lines:
   :class: substep
@@ -2202,8 +2248,6 @@ Readers and Writers(I)
 
   SharedObjectType read(void)
   {return sh1;}
-
-.
 
 .. code:: cpp
   :number-lines:
@@ -2228,6 +2272,11 @@ Readers and Writers(I)
       RemainingWork();
     }while(1);
   }
+
+.. :
+
+    image
+    https://www.prepbytes.com/blog/operating-system/reader-writer-problem-in-os/
 
 ----
 
@@ -2442,7 +2491,6 @@ Dininig Philosophers(III)
   :number-lines:
   :class: substep
 
-
   int main(){
     cobegin{ philosopher(0);
       philosopher(1); philosopher(2);
@@ -2518,7 +2566,6 @@ Dininig Philosophers(IV)
     }
   }
 
-
 ----
 
 :class: t2c
@@ -2566,13 +2613,287 @@ Dininig Philosophers(VI)
 
 ----
 
-Monitor
+:class: t2c
+
+Monitor(I)
 ==========
+.. image:: img/ps/simple.monitor.jpg
+
+.. code:: cpp
+
+  monitor mp{
+    // Shared data
+    static const int n = 200;
+    int buffer[n];
+    int count;
+
+    // Operations
+    void f1(void){/* .... */ }
+    void f2(void){/* .... */ }
+    void f3(void){/* .... */ }
+
+    // Initialization code
+    // Constructor
+    count = 0;
+    for(int &m1:buffer)
+      m1 = -1;
+  };
 
 ----
 
+:class: t2c
+
+Monitor(II)
+===========
+.. include:: src/ps/simple.monitor.cpp
+  :code: python
+  :number-lines:
+  :start-line: 0
+  :end-line: 19
+
+.. include:: src/ps/simple.monitor.cpp
+  :code: python
+  :number-lines: 18
+  :start-line: 19
+  :end-line: 50
+
+----
+
+:class: t2c
+
+Monitor(III)
+============
+.. image:: img/ps/monitor.png
+   :width: 70%
+
+.. code:: cpp
+
+  monitor mp{
+    // Shared data
+    static const int n = 200;
+    int buffer[n];
+    int count;
+
+    // Condition properties
+    condition x,y;
+
+    // Operations
+    void f1(void){/* .... */ }
+    void f2(void){/* .... */ }
+    void f3(void){/* .... */ }
+
+    // Initialization code
+    // Constructor
+    count = 0;
+    for(int &m1:buffer)
+      m1 = -1;
+  };
+
+----
+
+:class: t2c
+
+Monitor(IV) Dininig Philosophers
+=================================
+.. include:: src/ps/dining_philosopher_monitor_7.cpp
+    :code: cpp
+    :number-lines:
+
+.. include:: src/ps/dining_philosopher_monitor_10.cpp
+    :code: cpp
+    :number-lines:
+    :class: substep
+
+
+----
+
+:class: t2c
+
+Monitor(V) Dininig Philosophers
+=================================
+.. include:: src/ps/dining_philosopher_monitor_13.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 22
+
+.. include:: src/ps/dining_philosopher_monitor_13.cpp
+    :code: cpp
+    :number-lines: 23
+    :start-line: 22
+
+
+----
+
+:class: t2c
+
+Monitor(VI) Dininig Philosophers
+=================================
+.. include:: src/ps/dining_philosopher_monitor_20.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 19
+
+.. include:: src/ps/dining_philosopher_monitor_20.cpp
+    :code: cpp
+    :number-lines: 20
+    :start-line: 19
+
+----
+
+:class: t2c
+
+Monitor(VII) Other Form
+=================================
+.. include:: src/ps/dining_philosopher_monitor_original.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 20
+
+.. include:: src/ps/dining_philosopher_monitor_original.cpp
+    :code: cpp
+    :number-lines: 21
+    :start-line: 20
+
+
+----
+
+:class: t2c
+
+Monitor(VIII) Bounded Buffer
+=================================
+.. include:: src/ps/bounded_buffer_monitor.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 19
+
+.. include:: src/ps/bounded_buffer_monitor.cpp
+    :code: cpp
+    :number-lines: 20
+    :start-line: 19
+
+----
+
+:class: t2c
+
+Monitor(IX) better Bounded Buffer
+=================================
+.. include:: src/ps/bounded_buffer_monitor_better.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 12
+
+.. include:: src/ps/bounded_buffer_monitor_better.cpp
+    :code: cpp
+    :number-lines: 13
+    :start-line: 12
+
+----
+
+:class: t2c
+
+Monitor(XII) Priority
+=================================
+.. include:: src/ps/dining_philosopher_monitor_20_priority.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 19
+
+.. include:: src/ps/dining_philosopher_monitor_20_priority.cpp
+    :code: cpp
+    :number-lines: 20
+    :start-line: 19
+
+----
+
+:class: t2c
+
+Monitor(XIII) notify
+=================================
+.. include:: src/ps/bounded_buffer_by_notify_monitor.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 19
+
+.. include:: src/ps/bounded_buffer_by_notify_monitor.cpp
+    :code: cpp
+    :number-lines: 20
+    :start-line: 19
+
+----
+
+:class: t2c
+
+Monitor(XIII) notify
+=================================
+.. include:: src/ps/bounded_buffer_by_notify_monitor.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 19
+
+.. include:: src/ps/bounded_buffer_by_notify_monitor.cpp
+    :code: cpp
+    :number-lines: 20
+    :start-line: 19
+
+----
+
+:class: t2c
+
+Monitor implementation by Semaphore
+=========================================
+.. include:: src/ps/monitor_implementation_by_semaphore.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 18
+
+.. include:: src/ps/monitor_implementation_by_semaphore.cpp
+    :code: cpp
+    :number-lines: 18
+    :start-line: 18
+
+----
+
+:class: t2c
+
+Send and Receive(I)
+====================
+.. include:: src/ps/mutual_exclusion_by_message.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 14
+
+.. include:: src/ps/mutual_exclusion_by_message.cpp
+    :code: cpp
+    :number-lines: 15
+    :start-line: 14
+
+----
+
+:class: t2c
+
+Send and Receive(II)
+====================
+.. include:: src/ps/mutual_exclusion_by_message2.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 14
+
+.. include:: src/ps/mutual_exclusion_by_message2.cpp
+    :code: cpp
+    :number-lines: 15
+    :start-line: 14
+
+.. :
+
+    pcbmessage.cpp
+    pcbmessage_limited_message.cpp
+
+----
+
+
 END
 =======
+
 .. :
 
   Other links

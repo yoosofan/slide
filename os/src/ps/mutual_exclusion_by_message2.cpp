@@ -1,5 +1,6 @@
-/* program mutualexclusion */
-/* const int n = number of process */
+/* const int n =
+  number of process 
+*/
 
 mailbox box;
 

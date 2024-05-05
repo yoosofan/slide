@@ -1,19 +1,18 @@
-/* program mutualexclusion */
-/* const int n = number of process */
+/* const int n = 
+   number of process */
 mailbox box;
 
 void P(int i){
   message msg;
   while (true) {
     receive(box, msg);
-      /* Critical Section */;
+    /*Critical Section*/
     send(box, msg);
-      /* Remainder Section */;
+    /*Remainder Section*/
   }
 }
 
-void main()
-{
+void main(){
   send(box, null);
   cobegin{
     P(1);

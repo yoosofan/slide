@@ -1,20 +1,31 @@
 monitor mp{
-  condition notfull, notempty;  int count = 0, nextin = 0, nextout = 0;
-  void append (char x){
-    while (count == N) notfull.wait(); /* buffer is full; avoid overflow */
+  condition notfull, notempty;  
+  int count=0, nextin=0, nextout=0;
+  void append(char x){
+    while(count==N) notfull.wait();
     buffer[nextin] = x;
-    nextin = (nextin + 1) % N;
-    count++; /* one more item in buffer */
-    notempty.notify(); /* notify any waiting consumer */
+    nextin=(nextin+1)%N;
+    count++;
+    notempty.notify();
   }
   char take (void){
-    while (count == 0) notempty.wait(); /* buffer is empty; avoid underflow */
+    while(count==0) notempty.wait();
     char x = buffer[nextout];
     nextout = (nextout + 1) % N);
-    count--; /* one fewer item in buffer */
-    notfull.notify(); /* notify any waiting producer */
+    count--;
+    notfull.notify();
     return x
   }
 };
-void producer(void){char x;do{ x = produce();  mp.append(x);}while(1);}
-void consume(void){char x;do{ x = mp.take();  consume(x); } while(1);}
+void producer(void){char x;
+  do{ 
+    x = produce();  
+    mp.append(x);
+  }while(1);
+}
+void consume(void){char x;
+  do{ 
+    x = mp.take();  
+    consume(x); 
+  }while(1);
+}

@@ -47,16 +47,16 @@ def consume(x,i):
     time.sleep(random.random());
 def producer(sh1):
   in1 = 0
-  for i in range(100):
+  for i in range(9999999999999999):
     x=produce(i);
-    empty.acquire();     sh1.buf[in1] = x;     full.release();
+    empty.acquire();  sh1.buf[in1] = x;  full.release();
     in1 = (in1 + 1)% N; lg.producer2(i)
 def consumer(sh1):
   out =0
-  for i in range(100):
+  for i in range(999999999999999):
     lg.consumer1(i);
-    full.acquire();    x = sh1.buf[out] ;   empty.release();
-    out = (out +1) % N ;    consume(x,i);
+    full.acquire(); x = sh1.buf[out] ; empty.release();
+    out = (out +1) % N ;  consume(x,i);
 myShare = MyShare()
 th1 = Thread(target=consumer,args=(myShare,))
 th2 = Thread(target=producer,args=(myShare,))

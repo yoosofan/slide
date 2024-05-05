@@ -13,5 +13,5 @@ int main(){
     philosopher(2);
     philosopher(3);
     philosopher(4);
-  }  return 0;
+  }
 } 
