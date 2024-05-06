@@ -12,6 +12,72 @@ Short Term todo
 
 * Adding descriptions for each folders
 
+Add to the style.css
+^^^^^^^^^^^^^^^^^^^^
+* https://docs.yugabyte.com 
+* https://github.com/yugabyte/yugabyte-db
+* https://docs.yugabyte.com/preview/api/ysql/the-sql-language/with-clause/with-clause-syntax-semantics/#common-table-expression
+
+Sample
+``````
+* db/sq.rst (With Diagram)
+* db/style.css
+
+
+.. code:: css
+
+    svg.rrdiagram{max-width:100%}
+    svg.rrdiagram .connector{fill:none;stroke:#222}
+    svg.rrdiagram .text{fill:#000;font-family:Verdana,sans-serif;font-size:12px}
+    svg.rrdiagram .literal{fill:#90d9ff;stroke:#222}
+    svg.rrdiagram .rule{fill:#d3f0ff;stroke:#222}
+
+Related tools
+``````````````
+* Generate railroad diagrams from code or BNF
+
+* http://tabatkins.github.io/railroad-diagrams/README-py.html
+* https://github.com/tabatkins/railroad-diagrams
+* https://tabatkins.github.io/railroad-diagrams/generator.html#Diagram(%0A%20%20Optional('%2B'%2C%20'skip')%2C%0A%20%20Choice(0%2C%0A%20%20%20%20NonTerminal('name-start%20char')%2C%0A%20%20%20%20NonTerminal('escape'))%2C%0A%20%20ZeroOrMore(%0A%20%20%20%20Choice(0%2C%0A%20%20%20%20%20%20NonTerminal('name%20char')%2C%0A%20%20%20%20%20%20NonTerminal('escape'))))
+* https://pypi.org/project/railroad-diagrams/
+
+* https://www.xanthir.com/etc/railroad-diagrams/example.html
+* https://www.xanthir.com/etc/railroad-diagrams/generator.html
+
+* https://github.com/Chrriis/RRDiagram
+* https://github.com/Chrriis/rrdiagram-js
+
+* https://github.com/GuntherRademacher/rr
+* https://www.bottlecaps.de/rr/ui
+* https://discuss.python.org/t/railroad-diagrams-for-python-grammar/1017
+
+* https://stackoverflow.com/questions/796824/tool-for-generating-railroad-diagram-used-on-json-org
+* https://news.ycombinator.com/item?id=38877399
+
+* https://pikchr.org/home/doc/trunk/doc/download.md 
+
+* https://www.hwaci.com/sw/index.html
+
+* https://wiki.documentfoundation.org/Documentation/SyntaxDiagrams
+* https://en.wikipedia.org/wiki/Syntax_diagram
+* https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
+
+* https://github.com/prantlf/railroad-diagrams 
+* https://www.npmjs.com/package/@prantlf/railroad-diagrams
+
+* https://www.w3.org/TR/2010/REC-xquery-20101214/#EBNFNotation
+
+* https://karmin.ch/ebnf/index#download_and_install
+* https://www.dokuwiki.org/plugin:ebnf
+* https://github.com/tscherter/dokuwiki-plugin-ebnf/
+
+* https://blog.mbless.de/railroad-diagrams
+
+* https://katef.github.io/kgt/
+* https://github.com/katef/kgt
+* https://katef.github.io/kgt/doc/gallery/c89-ebnf.html
+
+
 Test the follwoing changes
 ------------------------------
 Using PrismJS instead of HighlightJS
@@ -68,3 +134,20 @@ Creating pdf
 * https://www.reddit.com/r/learnpython/comments/15yxc4f/whre_i_can_download_pythonladp_for_windowns/
 * https://www.reddit.com/r/voidlinux/comments/165uz0m/how_can_i_install_fluidsynthdssi/
 * https://stackoverflow.com/questions/46026987/selenium-gives-selenium-common-exceptions-webdriverexception-message-unknown
+
+More Graphic library
+---------------------
+PyCairo
+^^^^^^^
+* https://www.cairographics.org/pycairo/
+* https://github.com/pygobject/pycairo
+* https://pycairo.readthedocs.io/en/latest/
+* https://pycairo.readthedocs.io/en/latest/tutorial/index.html
+
+MathPlotLib
+^^^^^^^^^^^
+* https://matplotlib.org/
+* https://matplotlib.org/stable/gallery/index
+
+
+

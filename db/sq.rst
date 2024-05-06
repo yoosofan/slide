@@ -5510,8 +5510,8 @@ with(II)
 
 :class: t2c
 
-with(II)
-========
+with(III)
+=========
 .. code:: sql
 
   with dept_total (dept_name, value) as(
@@ -5526,6 +5526,22 @@ with(II)
   select dept_name
   from dept_total, dept_total_avg
   where dept_total.value > dept_total_avg.value
+
+----
+
+With Diagram
+============
+.. raw:: html
+
+    <svg class="rrdiagram" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="453" height="78" viewBox="0 0 453 78"><path class="connector" d="M0 50h15m50 0h30m88 0h20m-123 0q5 0 5 5v8q0 5 5 5h98q5 0 5-5v-8q0-5 5-5m5 0h30m-5 0q-5 0-5-5v-19q0-5 5-5h85m24 0h86q5 0 5 5v19q0 5-5 5m-5 0h35"></path><polygon points="0,57 5,50 0,43" ></polygon><rect class="literal" x="15" y="34" width="50" height="24" rx="7"></rect><text class="text" x="25" y="50">WITH</text><rect class="literal" x="95" y="34" width="88" height="24" rx="7"></rect><text class="text" x="105" y="50">RECURSIVE</text><rect class="literal" x="313" y="5" width="24" height="24" rx="7"></rect><text class="text" x="323" y="21">,</text><a xlink:href="#common-table-expression"><rect class="rule" x="233" y="34" width="185" height="24"></rect><text class="text" x="243" y="50">common_table_expression</text></a><polygon points="449,57 453,57 453,43 449,43" ></polygon></svg>
+
+.. raw:: html
+
+    <svg class="rrdiagram" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="608" height="179" viewBox="0 0 608 179"><path class="connector" d="M0 50h15m81 0h30m25 0h30m-5 0q-5 0-5-5v-19q0-5 5-5h46m24 0h46q5 0 5 5v19q0 5-5 5m-5 0h30m25 0h20m-251 0q5 0 5 5v8q0 5 5 5h226q5 0 5-5v-8q0-5 5-5m5 0h10m36 0h10m25 0h30m58 0h27m-95 24q0 5 5 5h5m60 0h10q5 0 5-5m-85 29q0 5 5 5h5m56 0h14q5 0 5-5m-85 29q0 5 5 5h5m65 0h5q5 0 5-5m-90-82q5 0 5 5v106q0 5 5 5h5m60 0h10q5 0 5-5v-106q0-5 5-5m5 0h10m25 0h15"></path><polygon points="0,57 5,50 0,43" style="fill:black;stroke-width:0"></polygon><a xlink:href="../../../syntax_resources/grammar_diagrams#cte-name"><rect class="rule" x="15" y="34" width="81" height="24"></rect><text class="text" x="25" y="50">cte_name</text></a><rect class="literal" x="126" y="34" width="25" height="24" rx="7"></rect><text class="text" x="136" y="50">(</text><rect class="literal" x="222" y="5" width="24" height="24" rx="7"></rect><text class="text" x="232" y="21">,</text><a xlink:href="../../../syntax_resources/grammar_diagrams#column-name"><rect class="rule" x="181" y="34" width="106" height="24"></rect><text class="text" x="191" y="50">column_name</text></a><rect class="literal" x="317" y="34" width="25" height="24" rx="7"></rect><text class="text" x="327" y="50">)</text><rect class="literal" x="372" y="34" width="36" height="24" rx="7"></rect><text class="text" x="382" y="50">AS</text><rect class="literal" x="418" y="34" width="25" height="24" rx="7"></rect><text class="text" x="428" y="50">(</text><a xlink:href="../../../syntax_resources/grammar_diagrams#select"><rect class="rule" x="473" y="34" width="58" height="24"></rect><text class="text" x="483" y="50">select</text></a><a xlink:href="../../../syntax_resources/grammar_diagrams#values"><rect class="rule" x="473" y="63" width="60" height="24"></rect><text class="text" x="483" y="79">values</text></a><a xlink:href="../../../syntax_resources/grammar_diagrams#insert"><rect class="rule" x="473" y="92" width="56" height="24"></rect><text class="text" x="483" y="108">insert</text></a><a xlink:href="../../../syntax_resources/grammar_diagrams#update"><rect class="rule" x="473" y="121" width="65" height="24"></rect><text class="text" x="483" y="137">update</text></a><a xlink:href="../../../syntax_resources/grammar_diagrams#delete"><rect class="rule" x="473" y="150" width="60" height="24"></rect><text class="text" x="483" y="166">delete</text></a><rect class="literal" x="568" y="34" width="25" height="24" rx="7"></rect><text class="text" x="578" y="50">)</text><polygon points="604,57 608,57 608,43 604,43" style="fill:black;stroke-width:0"></polygon></svg>
+
+.. :
+
+    https://docs.yugabyte.com/preview/api/ysql/the-sql-language/with-clause/with-clause-syntax-semantics/
 
 ----
 
@@ -7354,6 +7370,110 @@ Recursive query
 
 ----
 
+:class: t2c
+
+General Recursive Form
+=======================
+.. code:: sql
+
+    with recursive r(c1, c2, ...) as (
+        -- Non-recursive term.
+        (
+          select ...
+        )
+
+        union [all]
+
+        -- Recursive term. Notice the 
+        -- so-called recursive 
+        -- self-reference to r.
+        (
+          select ... from r ...
+        )
+      )
+    select ... from r ...;
+
+.. code:: sql
+
+    with recursive r(n) as (
+    -- Non-recursive term.
+        (
+          values(1)
+        )
+        union all
+        -- Recursive term.
+        (
+          select n + 1
+          from r
+          where n < 5
+        )
+      )
+    select n from r order by n;
+
+    -- n 1 2 3 4 5
+
+.. :
+
+  https://docs.yugabyte.com/preview/api/ysql/the-sql-language/with-clause/recursive-cte/
+
+  It shows that you can use the RECURSIVE keyword only immediately after the keyword WITH and that, therefore only the first CTE in a WITH clause can be a recursive CTE. These restrictions are illustrated in the immediately following sections Maximum one recursive CTE and The recursive CTE must be first in the clause.
+  Maximum one recursive CTE
+
+  The attempt to define more than one recursive CTE within a particular WITH clause causes a generic 42601 syntax error. You can work around this restriction by pushing it down by one level of nesting, thus:
+
+
+
+
+  CTE  (common table expression)
+  The recursive CTE
+
+  https://docs.yugabyte.com/preview/api/ysql/the-sql-language/
+
+  The WITH clause
+
+  The WITH clause (sometimes known as the common table expression) can be used as part of a SELECT statement, an INSERT statement, an UPDATE statement, or a DELETE statement. For this reason, the functionality is described in a dedicated section
+  
+----
+
+Maximum one recursive CTE (Common Table Expression)
+===================================================
+.. code:: sql
+
+    with a1(n) as (select 42),
+      a2(n) as (
+        with recursive r(n) as (
+            values(1)
+            union all
+            select n + 1
+            from r
+            where n < 5
+        )
+        select n from r
+      ), a3(n) as (select 99)(
+        select n from a1
+        union all
+        select n from a2
+        union all
+        select n from a3
+      )
+      order by n desc;
+
+    --- n,  99  42  5  4  3  2  1
+
+.. :
+
+  https://docs.yugabyte.com/preview/api/ysql/the-sql-language/with-clause/recursive-cte/
+  https://docs.yugabyte.com/preview/api/ysql/the-sql-language/with-clause/
+  https://docs.yugabyte.com/preview/api/ysql/the-sql-language/
+  https://www.mssqltips.com/sqlservertip/1520/recursive-queries-using-common-table-expressions-cte-in-sql-server/
+  https://www.kodyaz.com/t-sql/sql-server-recursive-query-with-recursive-cte.aspx
+  https://www.dwhpro.com/teradata-recursive-queries/  
+
+  sql "with recursive" query s p sp
+  
+----
+
+  
 END
 
 .. :
