@@ -1506,7 +1506,7 @@ Calculator Grammar
 
   .. math::
 
-    A → A α_1 | A α_2 | \dots | A α_m | β_1 |  β_2 | \dots |  β_n
+      A → A α_1 | A α_2 | \dots | A α_m | β_1 |  β_2 | \dots |  β_n
 
   Convert to
 

@@ -7307,8 +7307,38 @@ MATERIALIZED VIEW
 
 ----
 
+:class: t2c
+
 Recursive query
 =====================
+.. code:: sql
+
+  create table course
+    (course_id    varchar(8),
+     title      varchar(50),
+     dept_name    varchar(20),
+     credits    numeric(2,0) 
+       check (credits > 0),
+     primary key (course_id),
+     foreign key (dept_name) 
+       references department
+       (dept_name)
+       on delete set null
+    );
+
+.. code:: sql
+
+  create table prereq
+    (course_id    varchar(8),
+     prereq_id    varchar(8),
+     primary key (course_id, prereq_id),
+     foreign key (course_id) references course (course_id)
+      on delete cascade,
+     foreign key (prereq_id) references course (course_id)
+    );
+
+.
+
 .. code:: sql
 
     with recursive rec_prereq(course_id, prereq_id) as (
@@ -7321,6 +7351,10 @@ Recursive query
         )
       select ∗
       from rec_prereq;
+
+----
+
+END
 
 .. :
 
