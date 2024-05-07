@@ -3,6 +3,7 @@
 :css: style.css semantic.css
 :substep: true
 :slide-numbers: true
+:data-width: 1024
 
 .. role:: raw-html(raw)
    :format: html
@@ -17,11 +18,13 @@ Compiler course
 
 University of Kashan
 
-.. raw:: html
+.. :
 
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
-    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    .. raw:: html
+
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+        <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
 
 .. :
 
@@ -138,11 +141,7 @@ University of Kashan
     8, :math:`I_0` E[19] :math:`I_1`, $,
     9, acc ,
 
-.. raw:: html
-
-    <div id="graph240"></div>
-    <script>
-    d3.select("#graph240").graphviz().renderDot(`
+.. yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];
@@ -164,8 +163,6 @@ University of Kashan
         a -> b [dir="back"];
         b -> e [dir="back"];
       }
-    `);
-    </script>
 
 ----
 
@@ -173,11 +170,7 @@ Anotated parse tree
 ==========================
 a[8]+a[9]+a[2]
 
-.. raw:: html
-
-    <div id="graph260"></div>
-    <script>
-    d3.select("#graph260").graphviz().renderDot(`
+.., yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];
@@ -199,8 +192,6 @@ a[8]+a[9]+a[2]
         a -> b [dir="back"];
         b -> e [dir="back"];
       }
-    `);
-    </script>
 
 ----
 
@@ -215,11 +206,7 @@ Dependency Graph
 #. F → ( E )
 #. F → a
 
-.. raw:: html
-
-    <div id="graph280"></div>
-    <script>
-    d3.select("#graph280").graphviz().renderDot(`
+.. yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];
@@ -241,8 +228,6 @@ Dependency Graph
         a -> b [dir="back"];
         b -> e [dir="back"];
       }
-    `);
-    </script>
 
 .. :
 
@@ -267,17 +252,13 @@ Syntax-Directed Definition
     F → ( E ), :math:`F.v=E.v`
     F → a, :math:`F.v=a.lexval`
 
-.. raw:: html
-
-    <div id="graph300"></div>
-    <script>
-    d3.select("#graph300").graphviz().renderDot(`
+.. yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];
 
-        "i" [ label = "E.val=19" ];
-        "a" [ label = "E.val=17" ];
+        "i" [ label = "F.val=19" ];
+        "a" [ label = "F.val=17" ];
         "r" [ label = "+" ];
         "p" [ label = "a.val=2" ];
         "b" [ label = "E.val=8" ];
@@ -293,8 +274,6 @@ Syntax-Directed Definition
         a -> b [dir="back"];
         b -> e [dir="back"];
       }
-    `);
-    </script>
 
 ----
 
@@ -402,11 +381,7 @@ real a, b, c
     4, "B → λ ", "B.n0=0,  B.n1=0"
 
 
-.. raw:: html
-
-    <div id="graph300"></div>
-    <script>
-    d3.select("#graph300").graphviz().renderDot(`
+.. yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];
@@ -428,9 +403,6 @@ real a, b, c
         a -> b [dir="back"];
         b -> e [dir="back"];
       }
-    `);
-    </script>
-
 
 ----
 
@@ -609,80 +581,72 @@ Each attribute must be either
 
 Examples
 
-.. class:: substep
 
-    ..  csv-table::
-        :header: Production, Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-        "D → T L", "L.in = T.type"
-        "T → int", "T.type = integer"
-        "T → real", "T.type = real"
-        "L → :math:`L_1`, id", ":math:`L_1`.in = L.in,   addtype(id.entry,L.in)"
-        "L → id", "addtype(id.entry,L.in)"
+    "D → T L", "L.in = T.type"
+    "T → int", "T.type = integer"
+    "T → real", "T.type = real"
+    "L → :math:`L_1`, id", ":math:`L_1`.in = L.in,   addtype(id.entry,L.in)"
+    "L → id", "addtype(id.entry,L.in)"
 
-    .
 
-    ..  csv-table::
-        :header: Production, Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-        E → F R, "R.inh = F.val , E.val = R.val"
-        R → + F :math:`R_1`, ":math:`R_1`.inh = R.inh + F.val , R.val = :math:`R_1`.val"
-        R → λ, R.val = R.inh
-        F → ( E ), F.val = E.val
-        F → digit, F.val = digit.lexval
+    E → F R, "R.inh = F.val , E.val = R.val"
+    R → + F :math:`R_1`, ":math:`R_1`.inh = R.inh + F.val , R.val = :math:`R_1`.val"
+    R → λ, R.val = R.inh
+    F → ( E ), F.val = E.val
+    F → digit, F.val = digit.lexval
 
 ----
 
 Not L-Attributed
 
-.. class:: substep
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-    ..  csv-table::
-        :header: Production, Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
+    "A → B D", "A.s = B.b , B.i = f(D.d, A.s)"
 
-        "A → B D", "A.s = B.b , B.i = f(D.d, A.s)"
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-    .
-
-    ..  csv-table::
-        :header: Production, Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
-
-        "A → L M", "L.in = f1(A.i), M.in = f2(L.s), A.s = f3(M.s)"
-        A → Q R, "R.in = f4(A.in), Q.in = f5(R.s), A.s = f3(Q.s)"
+    "A → L M", "L.in = f1(A.i), M.in = f2(L.s), A.s = f3(M.s)"
+    A → Q R, "R.in = f4(A.in), Q.in = f5(R.s), A.s = f3(Q.s)"
 
 ----
 
 Translation Scheme vs SDD
+=========================
+SDD
 
-.. class:: substep
+..  csv-table::
+    :header: Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-    SDD
+    E → F R, "R.inh = F.val , E.val = R.val"
+    R → + F :math:`R_1`, ":math:`R_1`.inh = R.inh + F.val , R.val = :math:`R_1`.val"
+    R → λ, R.val = R.inh
+    F → ( E ), F.val = E.val
+    F → digit, F.val = digit.lexval
 
-    ..  csv-table::
-        :header: Production, Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
+Translation Scheme
 
-        E → F R, "R.inh = F.val , E.val = R.val"
-        R → + F :math:`R_1`, ":math:`R_1`.inh = R.inh + F.val , R.val = :math:`R_1`.val"
-        R → λ, R.val = R.inh
-        F → ( E ), F.val = E.val
-        F → digit, F.val = digit.lexval
+..  csv-table::
+    :header: Production and Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
 
-    Translation Scheme
-
-    ..  csv-table::
-        :header: Production and Semantic Rules
-        :class: smallerelementwithfullborder yoosofantextalignleft center
-
-        E → F {R.inh = F.val} R {E.val = R.val}
-        R → + F {:math:`R_1`.inh = R.inh + F.val} :math:`R_1` {R.val = :math:`R_1`.val}
-        R → λ {R.val = R.inh}
-        F → ( E ) {F.val = E.val}
-        F → digit {F.val = digit.lexval}
+    E → F {R.inh = F.val} R {E.val = R.val}
+    R → + F {:math:`R_1`.inh = R.inh + F.val} :math:`R_1` {R.val = :math:`R_1`.val}
+    R → λ {R.val = R.inh}
+    F → ( E ) {F.val = E.val}
+    F → digit {F.val = digit.lexval}
 
 ----
 
@@ -696,26 +660,20 @@ SDD for typesetting boxes
 End
 ===========
 
-.. raw:: html
+.. yographviz::
 
-    <div id="graph88220"></div>
-    <script>
-    d3.select("#graph88220").graphviz().renderDot(`
+    digraph g {
+      node [ shape = "plaintext" ];
 
-      digraph g {
-        node [ shape = "plaintext" ];
+      "a" [ label = "E.val = 9" ];
+      "b" [ label = "E.val = 5" ];
+      "d" [ label = "+" ];
+      "c" [ label = "a.val = 4" ];
+      "e" [ label = "a.val = 5" ];
 
-        "a" [ label = "E.val = 9" ];
-        "b" [ label = "E.val = 5" ];
-        "d" [ label = "+" ];
-        "c" [ label = "a.val = 4" ];
-        "e" [ label = "a.val = 5" ];
-
-        a -> { c d b } [dir="back"];
-        b -> e [dir="back"];
-      }
-    `);
-    </script>
+      a -> { c d b } [dir="back"];
+      b -> e [dir="back"];
+    }
 
 .. :
 

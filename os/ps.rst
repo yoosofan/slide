@@ -2509,6 +2509,110 @@ Dininig Philosophers(IV)
   :number-lines:
   :class: substep
 
+  // Shared Eating
+
+  void think(void){cout <<"Eating"<<endl;}
+  void eat(void){cout<<"thinking"<<endl;}
+  semaphore forks[5]={1,1,1,1,1};
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    while (1){
+      think();
+      forks[i].P();
+      forks[(i+1)%5].P();
+      eat();
+      forks[(i+1)%5].V();
+      forks[i].V();
+    }
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher0(int i=0){
+    while (1){
+      think();
+      forks[(i+1)%5].P();
+      forks[i].P();
+      eat();
+      forks[(i+1)%5].V();
+      forks[i].V();
+    }
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    cobegin{ philosopher0(0);
+      philosopher(1); philosopher(2);
+      philosopher(3); philosopher(4);
+    }
+  }
+
+----
+
+:class: t2c
+
+Dininig Philosophers(IV - method 2)
+===================================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  // Shared Eating
+
+  void think(void){cout <<"Eating"<<endl;}
+  void eat(void){cout<<"thinking"<<endl;}
+  semaphore forks[5]={1,1,1,1,1};
+
+  void philosopher(int);
+
+  int main(){
+    cobegin{ philosopher(0);
+      philosopher(1); philosopher(2);
+      philosopher(3); philosopher(4);
+    }
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    while (1){
+      think();
+      if(i == 0){
+        forks[(i+1)%5].P();
+        forks[i].P();
+      }
+      else{
+        forks[i].P();
+        forks[(i+1)%5].P();
+      }
+      eat();
+      forks[(i+1)%5].V();
+      forks[i].V();
+    }
+  }
+
+
+----
+
+:class: t2c
+
+Dininig Philosophers(V - Error 1)
+=================================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
   enum {thinking , hungry , eating }
     state[5];
 
@@ -2538,6 +2642,146 @@ Dininig Philosophers(IV)
         state[(i+2)%5 != eating )
       self[(i+1)%5].V();
     state[i]=thinking;
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    do{
+      //thinking
+      pickup(i);
+      // eating
+      putdown(i);
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    for(int i=0; i<5; i++)
+      state[i]= thinking;
+    cobegin{ philosopher(0);
+      philosopher(1);philosopher(2);
+      philosopher(3);philosopher(4);
+    }
+  }
+
+----
+
+:class: t2c
+
+Dininig Philosophers(Error 2)
+=============================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  enum {thinking , hungry , eating }
+    state[5];
+
+  semaphore self[5]{0,0,0,0,0};
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void pickup(int i){
+    state[i] = hungry;
+    if(state[(i-1)%5] == eating ||
+        state[(i+1)%5 == eating)
+      self[i].P()
+    state[i] = eating;
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void putdown(int i){
+    state[i]=thinking;
+
+    if(state[(i-1)%5] == hungry &&
+        state[(i-2)%5 != eating )
+      self[(i-1)%5].V();
+    if(state[(i+1)%5] == hungry &&
+        state[(i+2)%5 != eating )
+      self[(i+1)%5].V();
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void philosopher(int i){
+    do{
+      //thinking
+      pickup(i);
+      // eating
+      putdown(i);
+    }while(1);
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  int main(){
+    for(int i=0; i<5; i++)
+      state[i]= thinking;
+    cobegin{ philosopher(0);
+      philosopher(1);philosopher(2);
+      philosopher(3);philosopher(4);
+    }
+  }
+
+----
+
+:class: t2c
+
+Dininig Philosophers(V)
+==========================
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  enum {thinking , hungry , eating }
+    state[5];
+
+  semaphore self[5]{0,0,0,0,0};
+  semaphore mutex=1;
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void pickup(int i){
+    mutex.P();
+    state[i] = hungry;
+    if(state[(i-1)%5] == eating ||
+        state[(i+1)%5 == eating)
+      self[i].P()
+    state[i] = eating;
+    mutex.V();
+  }
+
+.. code:: cpp
+  :number-lines:
+  :class: substep
+
+  void putdown(int i){
+    mutex.P();
+    if(state[(i-1)%5] == hungry &&
+        state[(i-2)%5 != eating )
+      self[(i-1)%5].V();
+    if(state[(i+1)%5] == hungry &&
+        state[(i+2)%5 != eating )
+      self[(i+1)%5].V();
+    state[i]=thinking;
+    mutex.V();
   }
 
 .. code:: cpp
