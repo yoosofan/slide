@@ -18,7 +18,6 @@ Compiler course
 
 University of Kashan
 
-
 ----
 
 :class: grid-2col-class
@@ -313,11 +312,78 @@ real a, b, c
 
 ----
 
-#. <src/ply/420.type.py>_
-#. <src/ply/426.type.py>_
-#. <src/ply/430.type.py>_
-#. <src/ply/436.type.literals.py>_
+:class: t2c
 
+.. include:: src/rd/aB.plus.E.recursive.parser.py
+  :code: python
+  :number-lines:
+  :class: substep
+  :start-line: 2
+  :end-line: 24
+
+.. include:: src/rd/aB.plus.E.recursive.parser.py
+  :code: python
+  :number-lines:
+  :class: substep
+  :start-line: 2
+  :end-line: 24
+
+----
+
+:class: t2c
+
+.. include:: src/ply/420.type.py
+  :code: python
+  :number-lines:
+  :end-line: 24
+
+.. include:: src/ply/420.type.py
+  :code: python
+  :number-lines: 24
+  :start-line: 23
+
+----
+
+:class: t2c
+
+.. include:: src/ply/426.type.py
+  :code: python
+  :number-lines:
+  :end-line: 24
+
+.. include:: src/ply/426.type.py
+  :code: python
+  :number-lines: 24
+  :start-line: 23
+
+
+----
+
+:class: t2c
+
+.. include:: src/ply/430.type.py
+  :code: python
+  :number-lines:
+  :end-line: 24
+
+.. include:: src/ply/430.type.py
+  :code: python
+  :number-lines: 24
+  :start-line: 23
+
+----
+
+:class: t2c
+
+.. include:: src/ply/436.type.literals.py
+  :code: python
+  :number-lines:
+  :end-line: 24
+
+.. include:: src/ply/436.type.literals.py
+  :code: python
+  :number-lines: 24
+  :start-line: 23
 
 ----
 
@@ -342,8 +408,8 @@ real a, b, c
     :class: smallerelementwithfullborder yoosofantextalignleft center
 
     1, "A → B", "print(B.n0),  print(B.n1)"
-    2, "B → 0 B1", "B.n0=B1.n0+1,  B.n1=B1.n1"
-    3, "B → 1 B1", "B.n0=B1.n0,  B.n1=B1.n1+1"
+    2, "B → 0 :math:`B_1`", "B.n0=B1.n0+1,  B.n1=B1.n1"
+    3, "B → 1 :math:`B_1`", "B.n0=B1.n0,  B.n1=B1.n1+1"
     4, "B → λ ", "B.n0=0,  B.n1=0"
 
 
@@ -382,6 +448,8 @@ real a, b, c
 
 ----
 
+:class: t2c
+
 ..  csv-table::
     :header: Production, Semantic Rules
     :class: smallerelementwithfullborder yoosofantextalignleft
@@ -416,13 +484,13 @@ real a, b, c
 
 :class: grid-2col-class
 
-.. include:: src/semantic/ply_calc220_code.py
+.. include:: src/ply/ply_calc220_code.py
     :code: python
     :number-lines:
     :start-line: 19
     :end-line: 50
 
-.. include:: src/semantic/ply_calc220_code.py
+.. include:: src/ply/ply_calc220_code.py
     :code: python
     :number-lines:
     :start-line: 50
