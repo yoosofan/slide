@@ -24,6 +24,7 @@ int main(){
   cout << st << endl;
   f1.close();
   cout << std::hex << int('9') << endl;
+  // sscanf
   //~ cout << std::hex << int('7') << endl;
   //~ cout << std::hex << int('4') << endl;
   //~ cout << std::hex << int('3') << endl;

@@ -14,7 +14,7 @@ class myIntArray{
       cout << "file ";
       throw "cannot open file"; // throw
     }
-    for(i = 0 ; f1 >> a[i] && i < N; i++) 
+    for(i=0; f1 >> a[i] && i < N; i++) 
       ; 
     n = i;
     f1.close();
@@ -39,10 +39,14 @@ class myIntArray{
     for(auto i = 0; i < n; i++) 
       cout << a[i] << endl;
     }
+  bool operator!(){return n>0 ? false: true;}
 };
 int main(){
   myIntArray m1("input.integers.txt");
   m1.sort();
   cout << m1.search(12) << endl;
   m1.print();
+  if(!m1) cout << "empty" << endl;
+  else cout << "have element" << endl;
+
 }

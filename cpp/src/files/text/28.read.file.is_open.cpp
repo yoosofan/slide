@@ -14,6 +14,11 @@ int main(){
       cout << st << endl;
       f1.getline(st, MAX_STR - 1);
     }
+    /*{
+    while(!f1.eof()){
+      f1.getline(st, MAX_STR - 1);
+      cout << st << endl;
+    }*/    
     f1.close();
   }
 }

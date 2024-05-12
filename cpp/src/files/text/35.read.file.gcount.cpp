@@ -14,5 +14,7 @@ int main(){
     cout << st << endl;
   f1.close();
   int i; cout << "Enter i: "; 
-  cout << (cin >> i).gcount() << endl;
+  // cout << (cin >> i).gcount() << endl;
+  cout << cin.getline(st, MAX_STR - 1).gcount() << endl;
+  cout << st << endl;
 }

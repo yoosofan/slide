@@ -28,7 +28,7 @@ int main(){
   f3.close();
   ifstream f4("3.out.txt");
   char cst[50];
-  f4.getline(cst,50);
+  f4.getline(cst, 50);
   cout << cst << endl;
-  f4.close();
+  f4.close();  //
 }

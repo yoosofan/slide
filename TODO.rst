@@ -2,14 +2,6 @@ Short Term todo
 -----------------
 * Adding docs for each folder
 * Making a html foldes contain the html coverted form hovercraft files
-* Repalcing offline tools like slide.py for converting dot graphviz to image by an online one like d3-graphviz javascript library. Bad internet connection in my classes and in Iran in general and blocking many websites forced me to use more offline approaches which is time consuming.
-
-    .. code:: html
-    
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
-        <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
-
 * Adding descriptions for each folders
 
 Add to the style.css
@@ -98,7 +90,6 @@ Learn more about Hovercraft and change its code
 * https://stackoverflow.com/questions/2746692/restructuredtext-tool-support
 * https://docutils.sourceforge.io/docs/user/links.html
 
-
 Other Slide Show
 ---------------------
 * https://github.com/adamzap/landslide
@@ -118,7 +109,6 @@ Editors
 * geany.org
 * https://github.com/retext-project/retext
 * python.net/~gherman/ReSTedit.html
-
 
 Check these
 -----------
@@ -148,6 +138,3 @@ MathPlotLib
 ^^^^^^^^^^^
 * https://matplotlib.org/
 * https://matplotlib.org/stable/gallery/index
-
-
-
