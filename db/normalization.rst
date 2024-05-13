@@ -334,7 +334,6 @@
     123, عباسیان    
     243, عرب بیگی
     243, یوسفان
-    243, یوسفان
     342,عباسیان
     342, یوسفان
     342, عرب بیگی
@@ -669,8 +668,10 @@ multivalued dependency
 
 .. comments:
 
+   rst2html4.py normalization.rst normalization.html --stylesheet=farsi.css,html4css1.css
+   rst2html5 normalization.rst normalization.html --stylesheet=farsi.css
    rst2html normalization.rst normalization.html --stylesheet=farsi.css
-   rst2html.py normalization.rst normalization.html --stylesheet=farsi.css,html4css1.css
+   
 
    Database normalization (or normalisation) is the process of organizing the columns (attributes) and tables (relations) of a relational database to minimize data redundancy.
    https://en.wikipedia.org/wiki/Database_normalization
