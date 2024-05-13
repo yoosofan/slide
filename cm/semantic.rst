@@ -498,48 +498,55 @@ real a, b, c
 
 ----
 
+:class: t2c
+
 Translation Scheme
 =========================
-* E → T R
-* R → + T { print("+") } R1
-* R → λ
-* T → id { print(id.name) }
+.. container::
 
-a+b+c
+  * E → T R
+  * R → + T { print("+") } R1
+  * R → λ
+  * T → id { print(id.name) }
 
-E → T R → id(a){print(id.name)} R → R → + T  {print("+")} R1 → T  {print("+")} R1
+  #. a+b+c
+  #. a b + c +
 
-id(b){print(id.name)} {print("+")} R1 → {print("+")} R1 → R1 → + T {print("+")} R1
-
-→ T {print("+")} R1 → id(c){print(id.name)} {print("+")} R1 → {print("+")} R1
-
-→ R1 → λ
-
-
-a b + c +
+* E → T R → id(a){print(id.name)} R
+* → R → + T {print("+")} R1 
+* → T  {print("+")} R1 → 
+* id(b){print(id.name)}{print("+")} R1
+* → {print("+")} R1
+* → R1 → + T {print("+")} R1
+* → T {print("+")} R1
+* → id(c){print(id.name)}{print("+")} R1
+* → {print("+")} R1 → R1 → λ
 
 ----
 
+:class: t2c
+
+..  csv-table::
+    :header: ,Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
+
+    1, "T → F T ' ", "T '.inh = F.val ,  T.val = T '.syn"
+    2, "T ' → * F :math:`T '_1` ", ":math:`T '_1`.inh = T '.inh * F.val,  T '.syn = :math:`T '_1`.syn"
+    3, "T ' → λ", "T '.syn = T '.inh"
+    4, "F → id  ", "F.val = id.name"
+
 .. :
-
-  ..  csv-table::
-      :header: ,Production, Semantic Rules
-      :class: smallerelementwithfullborder yoosofantextalignleft center
-
-      1, "T → F T ' ", "T '.inh = F.val ,  T.val = T '.syn"
-      2, "T ' → * F :math:`T '_1` ", ":math:`T '_1`.inh = T '.inh * F.val,  T '.syn = :math:`T '_1`.syn"
-      3, "T ' → λ", "T '.syn = T '.inh"
-      4, "F → id  ", "F.val = id.name"
 
     5 * 7 * 2
 
-.. image:: img/semantic/sdd_top_down_expression.png
-    :align: center
+.. :
 
-
+    .. image:: img/semantic/sdd_top_down_expression.png
+        :align: center
 
 .. image:: img/semantic/sdd_top_down_expression_dependency_graph.png
     :align: center
+    :width: 400px
 
 ----
 
@@ -694,28 +701,23 @@ SDD for typesetting boxes
 End
 ===========
 
-.. yographviz::
+.. :
 
-    digraph g {
-      node [ shape = "plaintext" ];
+    .. yographviz::
 
-      "a" [ label = "E.val = 9" ];
-      "b" [ label = "E.val = 5" ];
-      "d" [ label = "+" ];
-      "c" [ label = "a.val = 4" ];
-      "e" [ label = "a.val = 5" ];
+        digraph g {
+          node [ shape = "plaintext" ];
 
-      a -> { c d b } [dir="back"];
-      b -> e [dir="back"];
-    }
+          "a" [ label = "E.val = 9" ];
+          "b" [ label = "E.val = 5" ];
+          "d" [ label = "+" ];
+          "c" [ label = "a.val = 4" ];
+          "e" [ label = "a.val = 5" ];
+
+          a -> { c d b } [dir="back"];
+          b -> e [dir="back"];
+        }
 
 .. :
 
     https://stackoverflow.com/a/29008563/886607
-
-----
-
-.. comments:
-
-    rst2html syn.rst syn.html --stylesheet=farsi.css,html4css1.css
-

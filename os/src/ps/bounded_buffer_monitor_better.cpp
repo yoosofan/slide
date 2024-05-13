@@ -16,8 +16,8 @@ void producer(void){
     x = produce();  
     mp.beforeAppend();
     buffer[nextin] = x;
-    nextin=(nextin+1)%N;
     afterAppend()
+    nextin=(nextin+1)%N;
   }while(1);
 }
 void consume(void){
@@ -25,8 +25,8 @@ void consume(void){
   do{ 
     mp.beforeTake();  
     x=buffer[nextout];
-    nextout=(nextout+1)%N;
     mp.afterTake();  
+    nextout=(nextout+1)%N;
     consume(x); 
   }while(1);
 }
