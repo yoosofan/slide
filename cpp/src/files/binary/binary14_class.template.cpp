@@ -3,10 +3,6 @@
 #include <cstdlib>
 #include<cstring>
 using namespace std;
-//void *
-//char *
-//int ff3(void * hh);
-//int ff4(char * hh);
 template<typename T>
 class myArray{
    fstream f1;

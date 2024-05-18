@@ -32,11 +32,11 @@ class myArray{
   void write(int data, int index){
     f1.seekp(index * sizeof(int), 
         ios::beg);
-    f1.write((char*) &data,sizeof(int));
+    f1.write((char*)&data,sizeof(int));
   }
   int readNext(void){
     int j;
-    f1.read((char*) &j, sizeof(int));
+    f1.read((char*)&j, sizeof(int));
     return j;
   }
   void writeNext(int j)

@@ -462,7 +462,7 @@ multivalued dependency
         65231, mahmood
 
     - .. csv-table::
-        :header: SSN_, child_, phone_
+        :header: SSN_, phone_
 
         54467,  90284902
         54467, 82434893
@@ -588,6 +588,11 @@ multivalued dependency
     2,4,20,Kamran,street2,other
     2,5,30,Hamid,street3,other
     2,3,40,Reza,street2,other
+
+.. :
+
+    زمان خرید، شمارهٔ فروشنده
+
 
 باز هم این جدول دلچسب نیست و مشکل دارد. اولین مشکل این است که نرمال دوم نیست زیرا نام خریدار فقط به شماره فاکتور وابسته است بنابراین دو جدول زیر به دست می‌آید.
 

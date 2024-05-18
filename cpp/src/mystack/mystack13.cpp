@@ -1,24 +1,56 @@
 #include<iostream>
 using namespace std;
-struct student{string name, stdNumber;double average;};
-template<class T> class myStack{T *a; int top,n;
- public: myStack(){top=-1;a=new T[n=100];}
-  void push(T b){if(this->isFull()) throw  1; a[++top]=b;}
-  T pop(void){if(isEmpty()) throw 2; return a[top--];}
-  bool isFull(void){return top==n-1;}
-  bool isEmpty(void){return top==-1;}
-  T Top(void){if(isEmpty()) throw 2; return a[top];}
-  ~myStack(){delete[] a;a=0;n=0;}
-  void printAll(void)
-  {cout<<"print all"<<endl;for(int i=0;i<=top;i++)cout<<a[i]<<endl;}
+struct student{
+  string name, stdNumber;
+  double average;
 };
-void f1(void){myStack<int> st1;myStack<double> st2;
-  st1.push(2);st1.push(3); st1.push(4);st1.printAll();
-  cout<<st1.pop()<<endl;  cout<<st1.pop()<<endl;
-  cout<<st1.Top()<<endl;  cout<<st1.Top()<<endl;
+template<typename T> class myStack{
+  T *a = nullptr; 
+  int top=-1, n=0;
+ public: 
+  myStack()
+  {top=-1;a=new T[n=100];}
+  void push(T b){
+    if(this->isFull()) 
+      throw  1; 
+    a[++top]=b;
+  }
+  T pop(){
+    if(isEmpty()) 
+      throw 2; 
+    return a[top--];
+  }
+  bool isFull()
+  {return top==n-1;}
+  bool isEmpty()
+  {return top==-1;}
+  T Top(){
+    if(isEmpty()) 
+      throw 2; 
+    return a[top];
+  }
+  ~myStack()
+  {delete[] a;a=nullptr;n=0;}
+  void printAll(){
+    cout<<"print all"<<endl;
+    for(int i=0;i<=top;i++)
+      cout<<a[i]<<endl;
+  }
+};
+void f1(){
+  myStack<int> st1;
+  myStack<double> st2;
+  st1.push(2);st1.push(3); 
+  st1.push(4);st1.printAll();
+  cout<<st1.pop()<<endl;  
+  cout<<st1.pop()<<endl;
+  cout<<st1.Top()<<endl;  
+  cout<<st1.Top()<<endl;
   st1.printAll();
-  st2.push(2.1);st2.push(3.1);st2.push(4.5);  st2.printAll();
-  myStack<student> st3;student ms1{"Kamran","23234",15.3};
+  st2.push(2.1);st2.push(3.1);
+  st2.push(4.5);st2.printAll();
+  myStack<student> st3;
+  student ms1{"Kamran","23234",15.3};
   st3.push(ms1);
 }
 void errorMessage(int errorNumber){
@@ -37,6 +69,8 @@ void errorMessage(int errorNumber){
 int main(){
   try{
     f1();
-  }catch(int &exc)
-  {cout<<"Exception ";errorMessage(exc);}
+  }catch(int &exc){
+    cout<<"Exception ";
+    errorMessage(exc);
+  }
 }

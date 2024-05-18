@@ -32,7 +32,7 @@ class complexCls{//1140
     return c;
   }
   complexCls operator++(void)   // ++a
-  { i++; r++; return *this;  }
+  { i++; r++; return *this;}
   complexCls operator++(int dummy) // a++
   {complexCls result=*this; r++; i++; return result;}
   complexCls operator--(void)   // --a

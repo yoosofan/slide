@@ -19,37 +19,24 @@ template<typename T> class myArray{
         f1.open(fname, ios::in | ios::out | ios::binary);
       }
     }
-  }
-  ~myArray(){
-    f1.close();
-  }
-  T read(int index){
-    T data;
+  } ~myArray(){f1.close();}
+  T read(int index){ T data;
     f1.seekg(index * sizeof(T), ios::beg); // ios::end   ios::cur
     f1.read((char*) &data, sizeof(T));
     return data;
-  }
-  void write(const T data, int index){
+  } void write(const T data, int index){
     f1.seekp(index * sizeof(T), ios::beg);
     f1.write((char*) &data, sizeof(T));
-  }
-  T readNext(void){
-    T data;
+  } T readNext(void){ T data;
     f1.read((char*) &data , sizeof(T));
     return data;
-  }
-  void writeNext(T data){
-    f1.write((char*) &data, sizeof(T));
-  }
-  void rewind(void){
-    f1.seekg(0, ios::beg);
-    f1.seekp(0, ios::beg);
-  }
+  } void writeNext(T data)
+  {f1.write((char*) &data, sizeof(T));}
+  void rewind(void)
+  {f1.seekg(0, ios::beg);f1.seekp(0, ios::beg);}
  };
 struct student{
-  char name[20];
-  char stdno[14];
-  double avg;
+  char name[20]; char stdno[14]; double avg
   friend ostream & operator<<(ostream & o1, student m1){
     o1 << "( " << m1.name << " , " << m1.stdno
       << " , " << m1.avg << " ) ";

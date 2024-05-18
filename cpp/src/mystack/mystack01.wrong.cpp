@@ -7,13 +7,13 @@ class myStack{
   void push(int b){
     a[top++]=b;
   }
-  int pop(void){
+  int pop(){
     return a[top--];
   }
 };
 int main(){
   myStack st1;
   st1.push(2);
-  cout<<st1.pop()<<endl;
-  return 0;
+  cout << st1.pop() 
+    << endl;
 }
