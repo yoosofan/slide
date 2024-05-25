@@ -35,9 +35,9 @@ class listCls{
   }
   bool remove(int index = 0){
     nodeCls* p = &head; 
-    bool retVal = false;
-    for(int i = 0; i < index && p -> next; i++)
-      p = p -> next;
+    bool retVal = false; auto i = 0;
+    for(; i<index && p->next; i++)
+      p = p->next;
     if(p -> next){
       nodeCls* t1 = p -> next;
       p -> next = p -> next -> next;

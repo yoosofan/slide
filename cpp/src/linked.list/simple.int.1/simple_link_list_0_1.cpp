@@ -12,5 +12,4 @@ int main(){
   head.next = new Node();
   head.next->next = nullptr;
   head.next->data = 15;
-  return 0;
 }

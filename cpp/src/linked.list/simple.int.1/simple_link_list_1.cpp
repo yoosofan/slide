@@ -15,5 +15,4 @@ class list{
 int main(){
   list l1;
   l1.displayAll();
-  return 0;
 }
