@@ -459,7 +459,7 @@ real a, b, c
     "T → T1 * F", "T.loc=newtemp() , :raw-html:`<br />` T.code = T1.code || F.code  || 'mult T.loc, T1.loc, F.loc'"
     "T → F", "T.loc = F.loc, T.code=F.code "
     "F → ( E )", "F.loc = E.loc,  F.code=E.code"
-    "F → id", "F.loc = id.name,  F.code= “” "
+    "F → id", "F.loc = id.name,  F.code= '' "
 
 
 * 3 * 4 + 5
