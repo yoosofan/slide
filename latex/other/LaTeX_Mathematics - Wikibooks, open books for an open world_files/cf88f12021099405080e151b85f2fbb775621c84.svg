@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.721ex" height="1.343ex" style="vertical-align: -0.171ex;" viewBox="0 -504.3 1171.7 578.1" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="10" id="E1-MJMAIN-2322" d="M55 141Q55 149 72 174T125 234T209 303T329 360T478 388H526Q649 383 765 319Q814 291 858 250T923 179T944 141Q944 133 938 128T924 122Q914 124 912 125T902 139Q766 328 500 328Q415 328 342 308T225 258T150 199T102 148T84 124Q81 122 75 122Q55 127 55 141Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJMAIN-2322" x="0" y="0"></use>
+</g>
+</svg>

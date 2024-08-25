@@ -1,0 +1,53 @@
+body{
+  margin:1em;
+  padding:1em;
+}
+h1{
+  text-align:center;
+  color: black;
+  vertical-align:middle;margin:0 auto;
+  /*font-size:80%;*/
+}
+h2{
+  text-align:center;
+  color: black;
+  vertical-align:middle;margin:0 auto;
+  /*font-size:80%;*/
+}
+/*div.slide{ background-color: #728ec2;}*/
+div.slide{
+ background-color: #D1D8E4; /*#728ec2;*/
+/* background-color:#2020A3;#728ec2;*/
+ /*color:yellow;*/
+}
+li.li_2{
+  font-size:0.8em;
+  /*text-indent:2em;*/
+  margin-left:2em;
+}
+li.li_3{
+  font-size:0.7em;
+  margin-left:3em;
+  /*text-indent:3em*/
+}
+li.current		{color:red;}
+li.passed		{color:#544B8A;}
+table.withBorder, table.withBorder tr, table.withBorder th, table.withBorder td
+ {
+ border: 1px solid black;
+ }
+/*
+math{
+  background-color: white;
+}
+*/
+/*
+ * http://www.paulund.co.uk/link-indenting-with-css3-animation
+ .indenting_links li a:hover {
+	padding-left:20px;
+  	-webkit-transition: padding-left 500ms ease-out;
+    -moz-transition: padding-left 500ms ease-out;
+    -o-transition: padding-left 500ms ease-out;
+    transition: padding-left 500ms ease-out;
+}
+*/

@@ -1,0 +1,478 @@
+<!--?xml version="1.0"?-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head>
+<title>3136CIT PLI: Lecture 4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="3136CIT%20PLI%20Lecture%204_files/pli.css">
+</head>
+
+<body class="body">
+<h2>PLI Lecture 4: Bottom-up parsing</h2>
+
+<hr>
+
+<pre>1. INTRODUCTION
+
+References: Louden, Sections 5.1 to 5.3; Appel, 3.3 &amp; 3.4;
+Topor &amp; Sondergaard.
+
+Summary: An introduction to bottom-up, specifically SLR(1), parsing.
+
+More specifically:
+* How to use shift-reduce parsing tables to parse a given 
+  input string.
+* How to construct SLR(1) parsing tables.
+* How to distinguish LR(0), SLR(1) and non-SLR(1)
+  grammars.
+* How to use yacc/bison.
+
+Example 1: Grammar L for lists of a's and b's:
+
+(1) list -&gt; list , elt
+(2) list -&gt; elt
+(3) elt  -&gt; a
+(4) elt  -&gt; b
+
+Construction of a sequence of partial parse trees,
+stored on a stack, for input "a,b" from this grammar:
+
+                                                         list
+                                                         / | \
+              list    list    list       list         list |  \
+  (3)     (2)  |       |       |    (4)   |       (1)  |   |   |
+  --&gt; elt --&gt; elt --&gt; elt --&gt; elt   --&gt;  elt  elt --&gt; elt  |  elt
+       |       |       |       |          |    |       |   |   |
+a      a       a       a ,     a , b      a ,  b       a   ,   b
+
+Notes:
+* This construction uses the actions shift, reduce(A-&gt;X1...Xn),
+  accept, and error.
+* The (reversed) sequence of reductions (1, 4, 2, 3) forms 
+  a rightmost derivation of the input:
+    list -&gt; list , elt =&gt; list , b =&gt; elt , b =&gt; a , b
+  Hence the name LR parsing (Left-to-right generating Rightmost
+  derivation).
+
+2. USE OF PARSING TABLES
+
+More formally, we can attach a state to the root of each
+tree stored on the stack.  The state of the rightmost tree
+is the current state.  Which action to take depends on
+the current state and the next k input symbols (normally, k=1).
+
+Parsing action table for grammar L:
+
+State | a       b       ,           $ (eoi)
+------+--------------------------------------
+  0   | shift   shift
+  1   |                 shift       accept
+  2   |                 reduce(2)   reduce(2)
+  3   |                 reduce(3)   reduce(3)
+  4   |                 reduce(4)   reduce(4)
+  5   | shift   shift   
+  6   |                 reduce(1)   reduce(1)
+
+($ is the end of input symbol.)
+(Blank entries correspond to error actions.)
+
+Goto table for L:
+
+State | list    elt     a       b       ,
+------+-----------------------------------
+  0   | 1       2       3       4
+  1   |                                 5
+  2   | 
+  3   | 
+  4   | 
+  5   |         6       3       4
+  6   | 
+
+(Blank entries are never accessed.)
+
+Note that these two tables would be presented as a single table
+by Louden:
+
+State |           Input       |    Goto
+---------------------------------------------------
+      | a   b   ,       $     | list    elt
+      |--------------------------------------------
+  0   | s3  s4                | 1       2
+  1   |         s5      accept|
+  2   |         r(2)    r(2)  |
+  3   |         r(3)    r(3)  |
+  4   |         r(4)    r(4)  |
+  5   | s3  s4                |         6
+  6   |         r(1)    r(1)  |
+
+Effect of shift and reduce actions:
+
+Shift: If t is the current input symbol, and s is the current
+    state, push the new state goto[s,t] onto the stack, and
+    read the next input symbol.
+
+Reduce (m): If rule (m) is A -&gt; X1...Xn, pop the top n states
+    from the stack, let s be the state on top of the resulting
+    stack, and push the new state goto[s,A] onto the stack.
+
+Behaviour of the parsing algorithm on input "a,b$":
+
+Input       Stack    Action
+---------------------------------------
+a,b$      0          shift;     goto 3
+ ,b$      0 3        reduce(3); goto 2
+ ,b$      0 2        reduce(2); goto 1
+ ,b$      0 1        shift;     goto 5
+  b$      0 1 5      shift;     goto 4
+   $      0 1 5 4    reduce(4); goto 6
+   $      0 1 5 6    reduce(1); goto 1
+   $      0 1        accept
+
+3. CONSTRUCTION OF PARSING TABLES
+
+Each state corresponds to a nonempty set of items of the form
+    X -&gt; u . v
+where u, v, w, etc., are sequences of terminal and nonterminal
+symbols.  The presence of such an item in the current state
+indicates that the parser has just recognised the sequence u
+and that if it next recognises the sequence v it may be able
+to reduce uv to X.
+
+Each state is constructed from a kernel (an initial set of
+items) by forming its closure.  The closure C of a set B
+of items is constructed as follows:
+
+1. Let C = B.
+2. Select an item X -&gt; u . Y v in C.  For each rule Y -&gt; w, 
+   add the item Y -&gt; . w to C if it is not already present.
+3. Repeat step (2) until all items in C have been selected.
+
+For example, in an expression grammar, if B is the kernel 
+(item set)
+   exp -&gt; . term
+   exp -&gt; . exp addop term
+then its closure C is the state (item set)
+   exp -&gt; . term
+   term -&gt; . factor
+   term -&gt; . term mulop factor
+   factor -&gt; . number
+   factor -&gt; . ( exp )
+
+The set Q of states and the goto table is constructed as 
+follows:
+
+1. Let q0 be the closure of {S' -&gt; . S} (S' is a new symbol,
+   S is the start symbol, follow(S') = {$}, and {S' -&gt; . S}
+   is the kernel of q0.  Let Q = {q0}.
+
+2. Let q in Q be any state that has not yet been examined.
+   For each (terminal or nonterminal) symbol W occurring 
+   to the right of "." in an item of q:
+       Let B = { X -&gt; u W . v | X -&gt; u . W v in q } be the
+       kernel of a possible new state.
+       If B is not empty:
+           Let C be the closure of B, let goto[q,W] = C,
+           and add C to Q if it is not already present.
+
+3. Repeat step (2) until all states have been examined.
+
+For example, if q is the state (item set)
+   exp -&gt; . term
+   exp -&gt; . exp + term
+   exp -&gt; . exp - term
+   term -&gt; . factor
+   ...
+then, for the symbol W = exp, B is the kernel (item set)
+   exp -&gt; exp . + term
+   exp -&gt; exp . - term
+and the closure C of B is itself, so the goto table contains
+the entry
+   goto[q,exp] = C.
+
+Finally, the parsing action table entries for each 
+state q in Q are constructed as follows:
+
+1. For each item A -&gt; u . t v in q, where t is a terminal 
+   symbol, the parsing action is t -&gt; shift.
+2. For each item A -&gt; u . in q, the parsing action is 
+   t -&gt; reduce(A -&gt; u) for each t in follow(A).
+3. If item S' -&gt; u . in q, the parsing action is $ -&gt; accept.
+4. For every other terminal symbol, the parsing action is 
+   error.
+
+If we apply this table construction algorithm to grammar L,
+the resulting table (with states shown) is as follows:
+
+State   Set of items            Goto            Action
+-----------------------------------------------------------------
+  0     S' -&gt; . list            list -&gt; 1
+        list -&gt; . list , elt
+        list -&gt; . elt           elt -&gt; 2
+        elt -&gt; . a              a -&gt; 3          a -&gt; shift
+        elt -&gt; . b              b -&gt; 4          b -&gt; shift
+-----------------------------------------------------------------
+  1     S' -&gt; list .                            $ -&gt; accept
+        list -&gt; list . , elt    , -&gt; 5          , -&gt; shift
+-----------------------------------------------------------------
+  2     list -&gt; elt .                           ,$ -&gt; reduce(2)
+-----------------------------------------------------------------
+  3     elt -&gt; a .                              ,$ -&gt; reduce(3)
+-----------------------------------------------------------------
+  4     elt -&gt; b .                              ,$ -&gt; reduce(4)
+-----------------------------------------------------------------
+  5     list -&gt; list , . elt    elt -&gt; 6
+        elt -&gt; . a              a -&gt; 3          a -&gt; shift
+        elt -&gt; . b              b -&gt; 4          b -&gt; shift
+-----------------------------------------------------------------
+  6     list -&gt; list , elt .                    ,$ -&gt; reduce(1)
+-----------------------------------------------------------------
+
+(Note that this is equivalent to the parsing action and goto
+tables shown above.)
+
+4. SLR(1) GRAMMARS
+
+If each (completed) item A -&gt; u (where A is not S') is the 
+_only_ item in its state, the grammar is called LR(0).  In 
+this case, no lookahead is ever required to decide whether  
+to shift or reduce.
+
+Two types of conflicts are possible:
+
+1. Shift/reduce conflicts occur when a state contains items
+       A -&gt; u . t b, and
+       B -&gt; u .
+   This occurs for example with the items:
+       S -&gt; if ( E ) S . else S
+       S -&gt; if ( E ) S .
+    (Yacc always resolves such conflicts in favour of shift.)
+
+2. Reduce/reduce conflicts occur when a state contains items
+       A -&gt; u .
+       B -&gt; v .
+   This occurs for example with the items:
+       factor -&gt; id .
+       factor -&gt; id . args
+       args -&gt; .
+       args -&gt; . ( exprs )
+
+(Shift/shift conflicts are not possible.  Why?)
+
+If no such conflicts occur, the grammar is called SLR(1)
+(Simple LR with 1 symbol lookahead), and the parser is called
+an SLR(1) parser.
+
+If a conflict does occur when follow(A) is used as above,
+the grammar is not SLR(1).  However, if no conflicts occur
+when the _exact right context_ for each item is used, the
+grammar is LALR(1).  
+
+(The construction of LALR(1) parsing tables is not required
+for this course.)
+
+Every SLR(1) grammar is also an LALR(1) grammar,
+LALR(1) parsers have relatively few states. Most practical
+programming language grammars are LALR(1).  Most practical
+parser generator tools (e.g., Yacc/Bison) construct LALR(1)
+parsers.
+
+There exist grammars that are LL(1) but not LALR(1) (and hence
+not SLR(1)).  Conversely, there exist grammars that are SLR(1)
+(and hence LALR(1)) but not LL(1).
+
+The tutorial exercises will explore the differences between
+these classes of grammars through concrete examples.
+
+5. EXAMPLES
+
+Example 2: Grammar for balanced parenthesis strings
+(Louden, Example 5.3):
+
+(1) S' -&gt; S
+(2) S  -&gt; ( S ) S
+(3) S  -&gt; 
+
+State   Set of items        Goto            Action
+------------------------------------------------------------
+  0     S' -&gt; . S           S -&gt; 1
+        S  -&gt; . ( S )       ( -&gt; 2          ( -&gt; shift
+        S  -&gt; .                             )$ -&gt; reduce(3)
+ ------------------------------------------------------------
+  1     S' -&gt; S .                           $ -&gt; accept
+-------------------------------------------------------------
+  2     S -&gt; ( . S ) S      S -&gt; 3        
+        S -&gt; . ( S ) S      ( -&gt; 2          ( -&gt; shift
+        S -&gt; .                              )$ -&gt; reduce(3)
+-------------------------------------------------------------
+  3     S -&gt; ( S . ) S      ) -&gt; 4          ) -&gt; shift
+-------------------------------------------------------------
+  4     S -&gt; ( S ) . S      S -&gt; 5                   
+        S -&gt; . ( S ) S      ( -&gt; 2          ( -&gt; shift
+        S -&gt; .                              )$ -&gt; reduce(3)
+-------------------------------------------------------------
+  5     S -&gt; ( S ) S .                      )$ -&gt; reduce(2)
+-------------------------------------------------------------
+
+See Figure 5.3 for the state and goto entries and Table 5.7
+for the action entries.  This is an SLR(1) grammar.
+
+Exercise: Use this table to parse the input "(())()".
+
+Example 3: Grammar for expressions
+
+(1) S' -&gt; exp
+(2) exp -&gt; exp addop term
+(3) exp -&gt; term
+(4) term -&gt; term mulop factor
+(5) term -&gt; factor
+(6) factor -&gt; ( exp )
+(7) factor -&gt; number
+(8) addop -&gt; +
+(9) addop -&gt; -
+(10) mulop -&gt; *
+(11) mulop -&gt; /
+
+This grammar is SLR(1) (but not LL(1)).
+
+Example 4: Grammar for statements
+(Cf. Louden, Example 5.13)
+
+(1) stmt -&gt; id := exp
+(2) stmt -&gt; id ( exp-list )
+(3) exp -&gt; 0
+(4) exp -&gt; 1
+(5) exp-list -&gt; exp-list , exp
+(6) exp-list -&gt; exp
+
+This grammar is not SLR(1) (or LL(1)), but it is LALR(1).
+
+Examples 3 and 4 require grammar transformations (which may
+distort their semantics) to make them LL(1).
+
+6. PARSER GENERATORS
+
+References: Louden, Section 5.5
+
+Tools exist for both top-down and bottom-up parser generation, 
+but bottom-up generators are much more widely used.
+
+Yacc (yet another compiler compiler) was written
+by Steven Johnson at Bell Laboratories in 1975.
+
+Bison (available from http://www.gnu.org/software/bison/)
+is a GNU extension of Yacc written by Robert Corbett
+and Richard Stallman ca. 1985.
+
+Both of these tools generate parsers in C and require 
+lexical and semantic components to be written in C.  They
+come by default with most Unix and GNU/Linux installations.
+
+JavaCC (Java compiler compiler, started at Sun, now
+available from https://javacc.dev.java.net/) is the most 
+mature and widely used compiler compiler for Java programmers.
+
+CUP (Construction of useful parsers) is an alternative
+Java tool written at Princeton University and now maintained
+at TU Munich (http://www2.cs.tum.edu/projects/cup/).
+
+Lalr-scm is an efficient and portable LALR(1) parser 
+generator for Scheme (based loosely on yacc but without
+lex).
+
+Eli (available from http://eli-project.sourceforge.net/)  
+is a very comprehensive set of tools for compiler 
+construction, based on C, that includes two bottom-up
+parser generators.
+
+We focus on Yacc/Bison.
+
+The format of a Yacc input file, e.g., grammar.y, is 
+as follows:
+
+    (C and Yacc) definitions
+    %%
+    Grammar rules (and semantic actions)
+    %%
+    Auxiliary C function definitions, e.g. for lexical analysis
+
+To generate a parser from a Yacc input file, grammar.y,
+use one of the following commands:
+
+    yacc [options] grammar.y
+    bison [options] grammar.y
+
+Yacc (resp., bison) generates a C file y.tab.c (resp., 
+grammar.tab.c) (the "tab" is for parsing table), which can 
+be compiled by a C compiler.
+
+Study the file <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/parens.y">parens.y</a> as a very simple example of a yacc 
+specification for recognising balanced parenthesis strings.
+
+Study the file <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/calc.y">calc.y</a> as an example of a simple arithmetic 
+expression calculator.  (File <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/calc.data">calc.data</a> contains some sample 
+data.)
+
+Notes: 
+0.  %{ ... %} code is included in the generated C file.
+1.  %token declares a list of tokens.
+2.  Semantic actions (C code) may follow each RHS.
+3.  In semantic actions, $$ refers to the computed value,
+    $1 refers to the value of the first RHS symbol, $2 to 
+    the value of the second $RHS symbol, etc.  (These
+    are the values stored on the stack parallel to the
+    state stack.)
+4.  Yacc generates a parsing function called yyparse().
+5.  This parser calls a lexical analysis function called
+    yylex(), which returns its value in the variable yylval.
+6.  Parsing errors are reported by the function yyerror().
+7.  By default, the LHS symbol of the first grammar rule
+    is the start symbol of the grammar. but we can use:
+        %start <symbol>
+    to override this default.
+8.  yacc -d creates a (useful) y.tab.h file, which can be
+    in other files of a compiler.
+9.  yacc -v (resp., bison -v) creates a y.output (resp., 
+    grammar.output) file containing a human readable form 
+    of the parsing table.  This table should to be studied 
+    when parsing conflicts occur.
+10. Operator associativity and relative precedence can 
+    be easily specified, e.g.:
+        %left '+' '-'
+        %left '*' '/'
+    specifies that the four operators are left associative
+    and that '*' and '/' have higher precedence than '+'
+    and '-'.  This is useful in simpler rules such as
+        exp : exp '+' exp | exp '-' exp | ... | NUMBER ;
+11. We may specify non-integer value types as follows:
+        #define YYSTYPE double
+12. If different symbols have different value types, we
+    need to use a C union, e.g.,
+        %union { double val; char op; }
+    and specify which grammar symbols have which value 
+    types, e.g.,
+        %type <val> exp term factor NUMBER
+        %type <op> addop mulop
+13. In real parsers, which construct parse trees, the value
+    types are pointers to tree nodes.
+
+Study the files <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/calc2.l">calc2.l</a>, <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/calc2.y">calc2.y</a> and <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/Makefile">Makefile</a> to see
+how flex and bison are used together.
+
+Files <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/cppcalc/calc3.l">calc3.l</a>, <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/cppcalc/calc3.y">calc3.y</a> and <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/exx/cppcalc/Makefile3">Makefile3</a> are a C++ solution 
+to the same problem.
+
+Now study the files <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/TinyCompiler/globals.h">globals.h</a> and <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/TinyCompiler/yacc/tiny.y">tiny.y</a> from the TINY
+compiler as a more realistic example.
+
+Compare this parser specification with the recursive
+descent implementation <a href="https://www.ict.griffith.edu.au/teaching/3516ICT/Resources/TinyCompiler/parse.c">parse.c</a> of the same language.
+</op></val></symbol></pre>
+
+<hr>
+
+<address>
+Last updated: $Date: 2007/03/21 04:53:41 $, by Rodney Topor
+</address>
+
+
+
+</body></html>

@@ -4237,6 +4237,45 @@ You can free memory and still use it. This results in very difficult to find err
 
 Just in general: You have to be more careful, when programming C++ than Java, Of course, you should also be careful in Java. But you can get away with much more carelessness. C++ is unforgiving.
 
+Git
+====
+.. code:: sh
+
+  git config --global user.name "نام و نام خانوادگی شما"
+  git config --global user.email "رایانامه‌ی شما"
+
+  git config --global user.name "Ahmad Yoosofan"
+  git config --global user.email "yoosofan@gmx.com"
+
+  git clone https://github.com/yoosofan/cpp991.git
+
+.. code:: sh
+
+  cpp991$ g++ myArray.cpp 
+  cpp991$ ./a.out > output.txt
+  2
+  4
+  5
+  cpp991$ 
+
+
+.. include:: output.txt
+  :code: sh
+
+.. code:: sh
+
+  ./a.out > output.txt
+  ./a.out > output.txt  < input.txt
+  cpp991$ ./a.out < input.txt > output.txt
+
+
+
+
+
+2020/11/23 10:17:55
+
+https://en.cppreference.com/w/cpp/language/operator_precedence
+
 Why c++
 *************
 Rust vs C++

@@ -1,0 +1,442 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Compilers Lecture #7</title>
+    <!-- The following is std, but needs access to cs.nyu.edu -->
+    <link rel="stylesheet" type="text/css" href="http://cs.nyu.edu/~gottlieb/css/courses.css">
+    <!-- Firefox treats the next as relative; I use it when off the net -->
+    <link rel="stylesheet" type="text/css" href="http:/~gottlieb/css/courses.css">
+</head>
+
+<body>
+
+<h1>Compilers</h1>
+
+<p class="startLecture">Start Lecture #7</p> <!-- MARKER -->
+
+<p><strong>Remark</strong>: Lab 3 assigned.
+  Part 1 (no programming) due in one week; the remainder due a week
+  later.
+
+</p><h4>Use of the LR(0) Automaton</h4>
+<p>A state of the automaton is an item set as described previously.
+  The transition function is GOTO.
+  If during a parse we are up to item set I<sub>j</sub> (often called
+  state s<sub>j</sub> or simply state j) and the next input symbol is
+  b (it of course must be a terminal), then the parser shifts in b if
+  the state j has an outgoing transition labeled b.
+  If there is no such transition, then the parser performs a
+  reduction; choosing which reduction to use is determined by the
+  items in I<sub>j</sub> and the FOLLOW sets.
+  (It is also possible that the parser will now accept the input
+  string or announce that the input string is not in the language).</p>
+
+<h3>4.6.3: The LR-Parsing Algorithm</h3>
+<p>The LR-parsing algorithm must decide when to shift and when to
+  reduce (and in the latter case, by which production).
+  It does this by consulting two tables, ACTION and GOTO.
+  The basic algorithm is the same for all LR parsers, what changes are
+  the tables ACTION and GOTO.</p>
+
+<h4>The LR Parsing Tables</h4>
+<p>We have already seen GOTO (for SLR).
+  </p><blockquote class="optional">
+    Technical point that may, and probably should, be ignored: our GOTO
+    was defined on pairs [item-set,grammar-symbol].
+    The new GOTO is defined on pairs [state,nonterminal].
+    A state is simply an item set (so nothing is new here).
+    We will not use the new GOTO on terminals so we just define it on
+    nonterminals.
+  </blockquote>
+<p>Given a state i and a terminal a (or the endmarker), ACTION[i,a]
+  can be
+  </p><ol>
+    <li>Shift j.
+      The terminal a is shifted on to the stack and the parser enters
+      state j.
+    </li><li>Reduce A → α.
+      The parser reduces α on the TOS to A.
+    </li><li>Accept.
+    </li><li>Error
+  </li></ol>
+<p>So ACTION is the key to deciding shift vs. reduce.
+  We will soon see how this table is computed for SLR.
+</p><p>Since ACTION is defined on [state,terminal] pairs and GOTO is
+  defined on [state,nonterminal] pairs, we can combine these tables
+  into one defined on [state,grammar-symbol] pairs.</p>
+
+<h4>LR-Parser Configurations (formalism)</h4>
+<p>This formalism is useful for stating the actions of the parser
+  precisely, but I believe the parser can be explained without this
+  formalism.
+  The essential idea of the formalism is that the entire state of the
+  parser can be represented by the vector of states on the stack
+  and input symbols not yet processed.</p>
+<div class="optional">
+  <p>As mentioned above the Symbols column is redundant so a
+    configuration of the parser consists of the current stack and the
+    remainder of the input.
+    Formally it is
+    </p><div align="center">
+      (s<sub>0</sub>,s<sub>1</sub>...s<sub>m</sub>,a<sub>i</sub>a<sub>i+1</sub>...a<sub>n</sub>$)
+    </div>
+    where the s's are states and the a's input symbols.
+    This configuration could also be represented by the
+    right-sentential form
+    <div align="center">
+      X<sub>1</sub>...X<sub>m</sub>,a<sub>i</sub>...a<sub>n</sub>
+    </div>
+    where the X is the symbol associated with the state.
+    X is either the terminal just shifted in or the LHS of the
+    reduction just performed.
+</div>
+
+<h4>Behavior of the LR Parser</h4>
+<p>The parser consults the combined ACTION-GOTO table for its current
+  state (TOS) and next input symbol, formally this is
+  ACTION[s<sub>m</sub>,a<sub>i</sub>], and proceeds based on the value
+  in the table.
+  If the action is a shift, the next state is clear from the DFA
+  We have done this informally just above; here we use the formal
+  treatment).
+  </p><ol>
+    <li>Shift s.
+      The input symbol a is pushed and s becomes the new state.
+      The new configuration is
+      <div>
+	(s<sub>0</sub>...s<sub>m</sub>s,a<sub>i+1</sub>...a<sub>n</sub>)
+      </div>
+    </li><li>Reduce A → α.
+      Let r be the number of symbols in the RHS of the production.
+      The parser pops r items off the stack (backing up r states) and
+      enters the state GOTO(s<sub>m-r</sub>,A).
+      That is after backing up it goes where A says to go.
+      A real parser would now probably do something, e.g., build a
+      tree node or perform a semantic action.
+      Although we know about this from the chapter 2 overview, we
+      don't officially know about it here.
+      So for now think of it simply printing the production the parser
+      reduced by.
+    </li><li>Accept.
+    </li><li>Error.
+  </li></ol>
+<p></p>
+
+<h3>4.6.4 Constructing SLR-Parsing Tables</h3>
+<p>The missing piece of the puzzle is finally revealed.</p>
+
+<h4>A Simple (but fake) Example</h4>
+
+<img src="Compilers%20Lecture%20%237_files/lr0-simple.png" alt="lr0-simple" class="right">
+  <table class="left" frame="box" rules="all">
+    <tbody><tr><th>State</th><th>a</th><th>b</th><th>+</th><th>$</th><th>A</th><th>B</th><th>C</th></tr>
+    <tr><td>7</td><td></td><td></td><td></td><td>acc</td><td></td><td></td><td></td></tr>
+    <tr><td>8</td><td>s11</td><td>s10</td><td></td><td></td><td>9</td><td>7</td><td></td></tr>
+    <tr><td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>11</td><td></td><td></td><td>s12</td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>12</td><td></td><td>s13</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>13</td><td></td><td>r2</td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody></table>
+
+<p>Before defining the ACTION and GOTO tables precisely, I want to do
+  it informally via the simple example on the right.
+  This is a <strong>FAKE</strong> example, the B'→B· item
+  would be in I<sub>0</sub> and would have only B→·a+b
+  with it.
+</p><p><strong>IMPORTANT</strong>: To construct the table, you do need
+  something not in the diagram, namely the FOLLOW sets from top-down
+  parsing.
+</p><p>For convenience number the productions of the grammar to make them
+  easy to reference and assume that the production B → a+b is
+  numbered 2.
+  Also assume FOLLOW(B)={b} and all other follow sets are empty.
+  Again, I am not claiming that there is a grammar with this diagram
+  and these FOLLOW sets.
+</p><p>Show how to calculate every entry in the table using the diagram
+  and the FOLLOW sets.
+  Then consider input <q>a+b</q> and 
+</p><p>The action table is defined with states (item sets) as rows and
+  <strong>terminals</strong> and the $ endmarker as columns.
+  GOTO has the same rows, but has <strong>nonterminals</strong> as
+  columns.
+  So we construct a combined ACTION-GOTO table, with states as rows
+  and grammar symbols (terminals + nonterminals) plus $ as columns.
+  </p><ol>
+    <li>Each arc in the diagram labeled with a terminal indicates a
+      shift.
+      In the entry with row the state at the tail of the arc and
+      column the labeling terminal place sn, where n is the state at
+      the head of the arc.
+      This indicates that if we are in the given state and the input
+      is the given terminal, we shift to new state n.
+    </li><li>Each arc in the diagram labeled with a nonterminal informs us
+      what state to enter if we reduce.
+      In the entry with row the state at the tail of the arc and
+      column the labeling nonterminal place n, where n is the state
+      at the head of the arc.
+    </li><li>Each completed item (dot at the extreme right) indicates
+      a <strong>possible</strong> reduction.
+      In each entry with row the state containing the completed
+      item and column a terminal in the FOLLOW set of the LHS of
+      the production corresponding to this item, place rn, where n is
+      the number of the production.
+      (In particular, at entry [13,b] place an r2.).
+    </li><li>In the entry with row (i.e., state) containing S'→S and
+      column $, place <q>accept</q>.
+    </li><li>If any entry is labelled twice (i.e., a conflict) the grammar
+      is not SLR(1).
+    </li><li>Any unlabeled entry corresponds to an input error.
+      If the parser accesses this entry, the input sentence is not in
+      the language generated by the grammar.
+  </li></ol>
+<p></p>
+
+<div class="optional">
+  <h4>A Terminology Point</h4>
+  <p>The book (both editions) and the rest of the world seem to use GOTO
+    for both the function defined on item sets and the derived function
+    on states.
+    As a result we will be defining GOTO in terms of GOTO.
+    Item sets are denoted by I or I<sub>j</sub>, etc.
+    States are denoted by s or s<sub>i</sub> or i.
+    Indeed both books use i in this section.
+    The advantage is that on the stack we placed integers (i.e., i's) so
+    this is consistent.
+    The disadvantage is that we are defining GOTO(i,A) in terms of
+    GOTO(I<sub>i</sub>,A), which looks confusing.
+    Actually, we view the old GOTO as a function and the new one as an
+    array (mathematically, they are the same) so we actually write
+    GOTO(i,A) and GOTO[I<sub>i</sub>,A].
+</p></div>
+
+<h4>The Table Construction Algorithm</h4>
+<p>The diagrams above are constructed for our use; they are not used in
+  constructing a bottom-up parser.
+  Here is the real algorithm, which uses just the augmented grammar
+  (i.e., after adding S' → S) and the FOLLOW sets.
+  </p><ol>
+    <li>Construct {I<sub>0</sub>,...,I<sub>n</sub>} the LR(0) items.
+    </li><li>The parsing actions for state i.
+      <ol type="a">
+	<li>If A→α·bβ is in I<sub>i</sub> for
+	  b a terminal, then ACTION[i,b]=<q>shift&nbsp;j</q>, where
+	  GOTO(I<sub>i</sub>,b)=I<sub>j</sub>.
+	</li><li>If A→α· is in I<sub>i</sub>, for
+	  A≠S', then, for all b in FOLLOW(A),
+	  ACTION[i,b]=<q>reduce&nbsp;A→α</q>.
+	</li><li>If S'→S· is in I<sub>i</sub>, then
+	  ACTION[I,$]=<q>accept</q>.
+	</li><li>If any conflicts occurred, the grammar is not SLR(1).
+      </li></ol>
+    </li><li>If GOTO(I<sub>i</sub>,A)=I<sub>j</sub>, for a nonterminal A,
+      then GOTO[i,A]=j.
+    </li><li>All entries not yet defined are <q>error</q>.
+    </li><li>The initial state is the one containing S'→·S.
+  </li></ol>
+
+<img src="Compilers%20Lecture%20%237_files/lr0-4-31.png" alt="lr0 4.31" class="right">
+<h4>The Main Example</h4>
+<table rules="all" frame="box">
+  <caption align="bottom">Action-GOTO Table</caption>
+  <tbody><tr><th rowspan="2">State</th><th colspan="6">ACTION</th><th colspan="3">GOTO</th></tr>
+  <tr><th>id</th><th>+</th><th>*</th><th>(</th><th>)</th><th>$</th><th>E</th><th>T</th><th>F</th></tr>
+  <tr><td>0</td><td>s5</td><td></td><td></td><td>s4</td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+  <tr><td>1</td><td></td><td>s6</td><td></td><td></td><td></td><td>acc</td><td></td><td></td><td></td></tr>
+  <tr><td>2</td><td></td><td>r2</td><td>s7</td><td></td><td>r2</td><td>r2</td><td></td><td></td><td></td></tr>
+  <tr><td>3</td><td></td><td>r4</td><td>r4</td><td></td><td>r4</td><td>r4</td><td></td><td></td><td></td></tr>
+  <tr><td>4</td><td>s5</td><td></td><td></td><td>s4</td><td></td><td></td><td>8</td><td>2</td><td>3</td></tr>
+  <tr><td>5</td><td></td><td>r6</td><td>r6</td><td></td><td>r6</td><td>r6</td><td></td><td></td><td></td></tr>
+  <tr><td>6</td><td>s5</td><td></td><td></td><td>s4</td><td></td><td></td><td></td><td>9</td><td>3</td></tr>
+  <tr><td>7</td><td>s5</td><td></td><td></td><td>s4</td><td></td><td></td><td></td><td></td><td>10</td></tr>
+  <tr><td>8</td><td></td><td>s6</td><td></td><td></td><td>s11</td><td></td><td></td><td></td><td></td></tr>
+  <tr><td>9</td><td></td><td>r1</td><td>s7</td><td></td><td>r1</td><td>r1</td><td></td><td></td><td></td></tr>
+  <tr><td>10</td><td></td><td>r3</td><td>r3</td><td></td><td>r3</td><td>r3</td><td></td><td></td><td></td></tr>
+  <tr><td>11</td><td></td><td>r5</td><td>r5</td><td></td><td>r5</td><td>r5</td><td></td><td></td><td></td></tr>
+</tbody></table><br><br>
+<div class="left">
+  <ol class="compact" start="0">
+    <li>E' → E
+    </li><li>E &nbsp;→ E + T
+    </li><li>E &nbsp;→ T
+    </li><li>T &nbsp;→ T * F
+    </li><li>T &nbsp;→ F
+    </li><li>F &nbsp;→ ( E )
+    </li><li>F &nbsp;→ id
+  </li></ol>
+  Productions
+</div>
+<table rules="cols" frame="box" style="margin-left:3em">
+  <caption align="bottom">FIRST / FOLLOW</caption>
+  <tbody><tr><th></th><th>FIRST</th><th>FOLLOW</th></tr>
+  <tr><td><hr></td><td><hr></td><td><hr></td></tr>
+  <tr><td>E'</td><td>( id</td><td>$</td></tr>
+  <tr><td>E</td><td>( id</td><td>+ ) $</td></tr>
+  <tr><td>T</td><td>( id</td><td>* + ) $</td></tr>
+  <tr><td>F</td><td>( id</td><td>* + ) $</td></tr>
+</tbody></table>
+<br clear="right">
+<p>Our main example, pictured on the right, gives the table shown on
+  the left.
+  The productions and FOLLOW sets are shown as well (the FIRST sets
+  are not used directly, but are needed to calculate FOLLOW).
+  The table entry s5 abbreviates <q>shift and go to state 5</q>.
+  The table entry r2 abbreviates <q>reduce by production number 2</q>,
+  where we have numbered the productions as follows.
+</p><p>The shift actions can be read directly off the DFA.
+  For example I1 with a + goes to I6, I6 with an id goes to I5, and I9
+  with a * goes to I7.
+</p><p>The reduce actions require FOLLOW, which for this simple grammar is
+  fairly easy to calculate.
+  </p><p>Consider I<sub>5</sub>={F→id·}.
+  Since the dot is at the end, we are ready to reduce, but we must
+  check if the next symbol can follow the F we are reducing to.
+  Since FOLLOW(F)={+,*,),$}, in row 5 (for I5) we put
+  r6 (for <q>reduce by production 6</q>) in the columns for
+  +, *, ), and $.
+</p><p>The GOTO columns can also be read directly off the DFA.
+  Since there is an E-transition (arc labeled E) from I<sub>0</sub>
+  to I<sub>1</sub>, the column labeled E in row 0 contains a 1.
+</p><p>Since the column labeled + is blank for row 7, we see that it would
+  be an error if we arrived in state 7 when the next input character
+  is +.
+</p><p>Finally, if we are in state 1 when the input is exhausted ($ is the
+  next input character), then we have a successfully parsed the
+  input.
+</p><p><table frame="box" rules="all" class="right">
+    <tbody><tr><th>Stack</th><th>Symbols</th><th>Input</th><th>Action</th></tr>
+    <tr><td>0</td><td></td><td>id*id+id$</td><td>shift</td></tr>
+    <tr><td>05</td><td>id</td><td>*id+id$</td><td>reduce by F→id</td></tr>
+    <tr><td>03</td><td>F</td><td>*id+id$</td><td>reduct by T→id</td></tr>
+    <tr><td>02</td><td>T</td><td>*id+id$</td><td>shift</td></tr>
+    <tr><td>027</td><td>T*</td><td>id+id$</td><td>shift</td></tr>
+    <tr><td>0275</td><td>T*id</td><td>+id$</td><td>reduce by F→id</td></tr>
+    <tr><td>027 10</td><td>T*F</td><td>+id$</td><td>reduce by T→T*F</td></tr>
+    <tr><td>02</td><td>T</td><td>+id$</td><td>reduce by E→T</td></tr>
+    <tr><td>01</td><td>E</td><td>+id$</td><td>shift</td></tr>
+    <tr><td>016</td><td>E+</td><td>id$</td><td>shift</td></tr>
+    <tr><td>0165</td><td>E+id</td><td>$</td><td>reduce by F→id</td></tr>
+    <tr><td>0163</td><td>E+F</td><td>$</td><td>reduce by T→F</td></tr>
+    <tr><td>0169</td><td>E+T</td><td>$</td><td>reduce by E→E+T</td></tr>
+    <tr><td>01</td><td>E</td><td>$</td><td>accept</td></tr>
+  </tbody></table>
+  <strong>Example</strong>:
+  The diagram on the right shows the actions when SLR is parsing
+  id*id+id.
+  On the blackboard let's do id+id*id and see how the precedence is
+  handled.
+</p><p><strong>Homework</strong>: 2 (you already constructed the LR(0)
+  automaton for this example in the previous homework), 3,
+  4 (this problem refers to 4.2.2(a-g); only use 4.2.2(a-c).
+</p><p><strong>Example</strong>:
+  What about ε-productions?
+  Let's do
+  </p><pre>    A → B D
+    B → b B | ε
+    D → d
+  </pre>
+<p>Reducing by the ε-production actually adds a state to the
+  stack (it pops ZERO states since there are zero symbols on RHS and
+  pushes one).
+</p><p><strong>Homework</strong>: Do the following extension
+  </p><pre>    A → B D
+    B → b B | ε
+    D → d D | ε
+  </pre>
+<p></p>
+
+<h3>4.6.5: Viable Prefixes</h3>
+
+<h2>4.7: More Powerful LR Parsers</h2>
+<p>We consider <b>very</b> briefly two alternatives to SLR,
+  canonical-LR or LR, and lookahead-LR or LALR.</p>
+
+<h3>4.7.1: Canonical LR(1) Items</h3>
+<p>SLR used the LR(0) items, that is the items used were productions
+  with an embedded dot, but contained no other (lookahead)
+  information.
+  The LR(1) items contain the same productions with embedded dots, but
+  add a second component, which is a terminal (or $).
+  This second component becomes important only when the dot is at the
+  extreme right (indicating that a reduction can be made if the input
+  symbol is in the appropriate FOLLOW set).
+  For LR(1) we do that reduction only if the input symbol is exactly
+  the second component of the item.
+  This finer control of when to perform reductions, enables the
+  parsing of a larger class of languages.</p>
+
+<div class="optional">
+  <h3>4.7.2: Constructing LR(1) Sets of Items</h3>
+
+  <h3>4.7.3: Canonical LR(1) Parsing Tables</h3>
+</div>
+
+<h3>4.7.4: Constructing LALR Parsing Tables</h3>
+<p>For LALR we merge various LR(1) item sets together, obtaining nearly
+  the LR(0) item sets we used in SLR.
+  LR(1) items have two components, the first, called the core, is a
+  production with a dot; the second a terminal.
+  For LALR we merge all the item sets that have the same cores by
+  combining the 2nd components (thus permitting reductions when any of
+  these terminals is the next input symbol).
+  Thus we obtain the same number of states (item sets) as in SLR since
+  only the cores distinguish item sets.
+</p><p>Unlike SLR, we limit reductions to occurring only for certain
+  specified input symbols.
+  LR(1) gives finer control; it is possible for the LALR merger to
+  have reduce-reduce conflicts when the LR(1) items on which it is
+  based is conflict free.
+</p><p>Although these conflicts are possible, they are rare and the size
+  reduction from LR(1) to LALR is quite large.
+  LALR is the current method of choice for bottom-up, shift-reduce
+  parsing.</p>
+
+<div class="optional">
+  <h3>4.7.5: Efficient Construction of LALR Parsing Tables</h3>
+
+  <h3>4.7.6: Compaction of LR Parsing Tables</h3>
+
+  <h2>4.8: Using Ambiguous Grammars</h2>
+
+  <h3>4.8.1: Precedence and Associativity to Resolve Conflicts</h3>
+
+  <h3>4.8.2: The <q>Dangling-Else</q> Ambiguity</h3>
+
+  <h3>4.8.3: Error Recovery in LR Parsing</h3>
+</div>
+
+<h2>4.9: Parser Generators</h2>
+
+<h3>4.9.1: The Parser Generator Yacc</h3>
+<p>The tool corresponding to Lex for parsing is yacc, which (at least
+  originally) stood for yet another compiler compiler.
+  This name is cute but somewhat misleading since yacc (like the
+  previous compiler compilers) does not produce a compiler, just a
+  parser.
+</p><p>The structure of the yacc user input is similar to that for lex,
+  but instead of regular definitions, one includes productions with
+  semantic actions.
+</p><p>There are ways to specify associativity and precedence of
+  operators.
+  It is not done with multiple grammar symbols as in a pure parser,
+  but more like declarations.
+</p><p>Use of Yacc requires a serious session with its manual.</p>
+
+<div class="optional">
+  <h3>4.9.2: Using Yacc with Ambiguous Grammars</h3>
+
+  <h3>Creating Yacc Lexical Analyzers with Lex</h3>
+
+  <h4>4.9.4: Error Recovery in Yacc</h4>
+</div>
+
+
+
+
+
+</body></html>
+<!--
+Local Variables:
+mode: auto-fill
+mode: flyspell
+End:
+-->

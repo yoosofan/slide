@@ -1,0 +1,635 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Introduction to Shift-Reduce Parsing</title>
+</head>
+<body vlink="#55188a" text="#000000" link="#0000ef" bgcolor="#BFBFBF" alink="#FF0000"> 
+<h1>Introduction to Shift-Reduce Parsing</h1>
+<p> <font size="-2" color="#008080">
+Last Update Time-stamp: "97/06/30 13:50:16 umrigar"
+</font>
+
+</p><p> This is a brief intuitive introduction to shift-reduce bottom-up
+parsing.  Any compiler text should provide more details.  A elementary
+introduction to <a href="http://www.cs.binghamton.edu/~zdu/parsdemo/gramintro.html">grammars and language analysis</a>
+is also available.
+
+</p><p> A shift-reduce parser uses a <a name="parse-stack"><em>parse stack</em>
+which (conceptually) contains grammar symbols.  During the operation of the
+parser, symbols from the input are <em>shifted</em> onto the stack.  If a
+prefix of the symbols on top of the stack matches the RHS of a grammar rule
+<strong>which is the correct rule to use within the current
+context</strong>, then the parser <em>reduces</em> the RHS of the rule to
+its LHS, replacing the RHS symbols on top of the stack with the nonterminal
+occurring on the LHS of the rule.  This shift-reduce process continues until
+the parser terminates, reporting either success or failure.  It terminates
+with success when the input is legal and is <em>accepted</em> by the parser.
+It terminates with failure if an error is detected in the input.
+
+</a></p><p><a name="parse-stack"> The parser is nothing but a stack automaton which may be in one of
+several discrete <em>states</em>.  A state is usually represented simply as
+an integer.  In reality, the parse stack contains states, rather than
+grammar symbols.  However, since each state corresponds to a unique grammar
+symbol, the state stack can be mapped onto the grammar symbol stack
+mentioned earlier.
+
+</a></p><p><a name="parse-stack"> The operation of the parser is controlled by a couple of tables:
+
+</a></p><dl><a name="parse-stack">
+
+</a><dt><a name="parse-stack"></a><a name="action"><b>Action Table</b></a></dt><dd>
+
+The <em>action table</em> is a table with rows indexed by states and columns
+indexed by terminal symbols.  When the parser is in some state <var>s</var>
+and the current lookahead terminal is <var>t</var>, the action taken by the
+parser depends on the contents of
+<var>action</var><code>[</code><var>s</var><code>][</code><var>t</var><code>]</code>,
+which can contain four different kinds of entries:
+
+<dl>
+
+<dt><b>Shift <var>s'</var></b></dt><dd>
+
+Shift state <var>s'</var> onto the parse stack.
+
+</dd><dt><b>Reduce <var>r</var></b></dt><dd>
+
+Reduce by rule <var>r</var>.  This is explained in more detail below.
+
+</dd><dt><b>Accept</b></dt><dd>
+
+Terminate the parse with success, accepting the input.
+
+</dd><dt><b>Error</b></dt><dd>
+
+Signal a parse error.
+
+</dd></dl>
+
+</dd><dt><a name="goto"><b>Goto Table</b></a></dt><dd>
+
+The <em>goto table</em> is a table with rows indexed by states and columns
+indexed by nonterminal symbols.  When the parser is in state <var>s</var>
+immediately <strong>after</strong> reducing by rule <var>N</var>, then the
+next state to enter is given by
+<var>goto</var><code>[</code><var>s</var><code>][</code><var>N</var><code>]</code>.
+
+</dd></dl>
+
+The current state of a shift-reduce parser is the state on top of the state
+stack.  The detailed operation of such a parser is as follows:
+
+<ol>
+
+<li> Initialize the parse stack to contain a single state
+<var>s<sub>0</sub></var>, where <var>s<sub>0</sub></var> is the
+distinguished <em>initial state</em> of the parser.
+
+</li><li> Use the state <var>s</var> on top of the parse stack and the current
+lookahead <var>t</var> to consult the action table entry
+<var>action</var><code>[</code><var>s</var><code>][</code><var>t</var><code>]</code>:
+
+<ul type="disc">
+
+<li> If the action table entry is <em>shift</em> <var>s'</var> then push state
+<var>s'</var> onto the stack and advance the input so that the lookahead is
+set to the next token.
+
+</li><li> If the action table entry is <em>reduce</em> <var>r</var> and rule
+<var>r</var> has <var>m</var> symbols in its RHS, then pop <var>m</var>
+symbols off the parse stack.  Let <var>s'</var> be the state now revealed on
+top of the parse stack and <var>N</var> be the LHS nonterminal for rule
+<var>r</var>.  Then consult the goto table and push the state given by
+<var>goto</var><code>[</code><var>s'</var><code>][</code><var>N</var><code>]</code>
+onto the stack.  The lookahead token is not changed by this step.
+ 
+
+</li><li> If the action table entry is <em>accept</em>, then terminate the 
+parse with success.
+
+</li><li> If the action table entry is <em>error</em>, then signal an error.
+
+</li></ul>
+
+</li><li> Repeat step (2) until the parser terminates.
+
+</li></ol>
+
+<p> For example, consider the following simple grammar
+
+</p><pre>0)	$S:	stmt &lt;EOF&gt; 
+1)	stmt:	ID ':=' expr 
+2)	expr:	expr '+' ID 
+3)	expr:	expr '-' ID 
+4)	expr:	ID 
+</pre>
+which describes assignment statements like <code>a:= b + c - d</code>.  (Rule
+0 is a special augmenting production added to the grammar).
+
+
+<p> One possible set of shift-reduce parsing tables is shown below
+(<code>s</code><var>n</var> denotes <em>shift</em> <var>n</var>,
+<code>r</code><var>n</var> denotes <em>reduce</em> <var>n</var>,
+<em>acc</em> denotes <em>accept</em> and blank entries denote error
+entries):
+
+</p><center>
+<table border="" align="CENTER">
+<caption>
+
+Parser Tables
+</caption>
+
+<tbody><tr align="CENTER">
+<td>&nbsp;</td>
+<th colspan="5" align="CENTER">Action Table</th>
+<th colspan="2" align="CENTER">Goto Table</th>
+</tr>
+
+<tr align="CENTER">
+<td>&nbsp;</td>
+<th><code>ID</code></th>
+<th><code>':='</code></th>
+<th><code>'+'</code></th>
+<th><code>'-'</code></th>
+<th><code>&lt;EOF&gt;</code></th>
+<th><code>stmt</code></th>
+<th><code>expr</code></th>
+</tr>
+
+<tr align="CENTER">
+<th>0</th>
+<td><code>s1</code></td>	<!-- ID -->
+<td>&nbsp;</td>			<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td>&nbsp;</td>			<!-- EOF -->
+<td><code>g2</code></td>	<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>1</th>
+<td>&nbsp;</td>			<!-- ID -->
+<td><code>s3</code></td>	<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td>&nbsp;</td>			<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>2</th>
+<td>&nbsp;</td>			<!-- ID -->
+<td>&nbsp;</td>			<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td><code>s4</code></td>	<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>3</th>
+<td><code>s5</code></td>	<!-- ID -->
+<td>&nbsp;</td>			<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td>&nbsp;</td>			<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td><code>g6</code></td>	<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>4</th>
+<td><em>acc</em></td>		<!-- ID -->
+<td><em>acc</em></td>		<!-- ':=' -->
+<td><em>acc</em></td>		<!-- '+' -->
+<td><em>acc</em></td>		<!-- '-' -->
+<td><em>acc</em></td>		<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>5</th>
+<td><code>r4</code></td>	<!-- ID -->
+<td><code>r4</code></td>	<!-- ':=' -->
+<td><code>r4</code></td>	<!-- '+' -->
+<td><code>r4</code></td>	<!-- '-' -->
+<td><code>r4</code></td>	<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>6</th>
+<td><code>r1</code></td>	<!-- ID -->
+<td><code>r1</code></td>	<!-- ':=' -->
+<td><code>s7</code></td>	<!-- '+' -->
+<td><code>s8</code></td>	<!-- '-' -->
+<td><code>r1</code></td>	<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>7</th>
+<td><code>s9</code></td>	<!-- ID -->
+<td>&nbsp;</td>			<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td>&nbsp;</td>			<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>8</th>
+<td><code>s10</code></td>	<!-- ID -->
+<td>&nbsp;</td>			<!-- ':=' -->
+<td>&nbsp;</td>			<!-- '+' -->
+<td>&nbsp;</td>			<!-- '-' -->
+<td>&nbsp;</td>			<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+<tr align="CENTER">
+<th>9</th>
+<td><code>r2</code></td>	<!-- ID -->
+<td><code>r2</code></td>	<!-- ':=' -->
+<td><code>r2</code></td>	<!-- '+' -->
+<td><code>r2</code></td>	<!-- '-' -->
+<td><code>r2</code></td>	<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>	
+
+<tr align="CENTER">
+<th>10</th>
+<td><code>r3</code></td>	<!-- ID -->
+<td><code>r3</code></td>	<!-- ':=' -->
+<td><code>r3</code></td>	<!-- '+' -->
+<td><code>r3</code></td>	<!-- '-' -->
+<td><code>r3</code></td>	<!-- EOF -->
+<td>&nbsp;</td>			<!-- stmt -->
+<td>&nbsp;</td>			<!-- expr -->
+</tr>
+
+
+</tbody></table>
+
+<p> A trace of the parser on the input <code>a:= b + c - d</code> is shown
+below:
+
+<table>
+
+<tbody><tr>
+<th align="RIGHT">Stack</th>
+<th bgcolor="#B0B0B0" align="LEFT">Remaining Input</th>
+<th align="LEFT">Action</th>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>a:= b + c - d</code></td>
+<td align="LEFT"><code>s1</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>:= b + c - d</code></td>
+<td align="LEFT"><code>s3</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:=</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>b + c - d</code></td>
+<td align="LEFT"><code>s5</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 5/b</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>+ c - d</code></td>
+<td align="LEFT"><code>r4</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:=</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>+ c - d</code></td>
+<td align="LEFT"><code>g6</code> on <code>expr</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>+ c - d</code></td>
+<td align="LEFT"><code>s7</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr 7/+</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>c - d</code></td>
+<td align="LEFT"><code>s9</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr 7/+ 9/c</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>- d</code></td>
+<td align="LEFT"><code>r2</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:=</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>- d</code></td>
+<td align="LEFT"><code>g6</code> on <code>expr</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>- d</code></td>
+<td align="LEFT"><code>s8</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr 8/-</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>d</code></td>
+<td align="LEFT"><code>s10</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr 8/- 10/d</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&lt;EOF&gt;</code></td>
+<td align="LEFT"><code>r3</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= </code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&lt;EOF&gt;</code></td>
+<td align="LEFT"><code>g6</code> on <code>expr</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 1/a 3/:= 6/expr</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&lt;EOF&gt;</code></td>
+<td align="LEFT"><code>r1</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S </code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&lt;EOF&gt;</code></td>
+<td align="LEFT"><code>g2</code> on <code>stmt</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 2/stmt</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&lt;EOF&gt;</code></td>
+<td align="LEFT"><code>s4</code></td>
+</tr>
+
+<tr>
+<td align="RIGHT"><code>0/$S 2/stmt 4/&lt;EOF&gt;</code></td>
+<td bgcolor="#B0B0B0" align="LEFT"><code>&nbsp;</code></td>
+<td align="LEFT"><em>accept</em></td>
+</tr>
+
+</tbody></table>
+
+</p></center>
+
+Each stack entry is shown as a state number followed by the symbol which
+caused the transition to that state.
+
+<h3>Construction of Shift-Reduce Parsing Tables</h3>
+
+<p> The general idea of bottom-up parsing is to repeatedly match the RHS of
+some rule and reduce it to the rule's LHS.  To identify the matching RHS's,
+the parser needs to keep track of all possible rules which may match.  This
+is done by means of the parser <em>state</em>, where each state keeps track
+of the set of rules the parser may currently be in, and how far along the
+parser may be within each rule.  This idea of states will become clearer if
+we attempt to build the tables for a small example.
+
+</p><p> Consider the grammar used in the previous section, repeated below for
+convenience: 
+
+</p><pre>0)	$S:	stmt &lt;EOF&gt; 
+1)	stmt:	ID ':=' expr 
+2)	expr:	expr '+' ID 
+3)	expr:	expr '-' ID 
+4)	expr:	ID 
+</pre>
+
+The input must be ultimately reducible to the augmenting nonterminal
+<code>$S</code>.  Hence the parser should initially be in rule 0; more
+specifically, it should be expecting the <code>stmt</code> in rule 0.  To
+show precisely which symbol is expected in a rule RHS, we define an
+<em>item</em> to be a rule, along with a <em>position</em> on the RHS
+specifying the next symbol to be expected in that RHS.  We denote an item as
+a rule with a dot <code>.</code> just before the next expected symbol.
+Hence, returning to our example, the parser is initially expecting the item
+
+<pre>0)	$S:	. stmt &lt;EOF&gt; 
+</pre>
+
+However, if the parser is expecting to see a <code>stmt</code>, it could
+be at the beginning of any of the rules for <code>stmt</code>.  Hence the
+initial state should include the <em>initial item</em> for
+<code>stmt</code>.  (The process of including these additional induced items
+is referred to as forming the <em>closure of the state</em>).
+
+
+<pre>State 0
+0)	$S:	. stmt &lt;EOF&gt; 
+1)	stmt:	. ID ':=' expr 
+</pre>
+
+Now if the parser sees an <code>ID</code> in state 0, then it can move the
+dot past any <code>ID</code> symbols in state 0.  We get a new state; let's
+call it State 1:
+
+<pre>State 1
+1)	stmt:	ID . ':=' expr 
+</pre>
+
+If the parser has seen a <code>stmt</code> in state 0, then it can move
+the dot past any <code>stmt</code> symbols in state 0. We get a new state;
+let's call it State 2:
+
+<pre>State 2
+0)	$S:	stmt . &lt;EOF&gt; 
+</pre>
+
+If the parser sees a <code>':='</code> in state 1, we get a new state; let's
+call it State 3:
+
+<pre>State 3
+1)	stmt:	ID ':=' . expr 
+</pre>
+
+However since the dot is before the nonterminal <code>expr</code>, the
+parser could be in any of the rules for <code>expr</code>.  Hence we need to
+include the rules for <code>expr</code> in a new state 3:
+
+<pre>State 3
+1)	stmt:	ID ':=' . expr 
+2)	expr:	. expr '+' ID 
+3)	expr:	. expr '-' ID 
+4)	expr:   . ID 
+</pre>
+
+We continue this process of following all possible transitions out of states
+until we cannot construct any new states.  Completing this construction
+results in an automaton called a <em>LR(0) machine</em>.  The transitions on
+terminal symbols correspond to <em>shift</em> actions in the parser; the
+transitions on nonterminal symbols correspond to <em>goto</em> actions in
+the parser.
+
+<p> Note that the construction guarantees that each state is entered by a
+unique grammar symbol; that is why we can map a state stack into a symbol
+stack as mentioned earlier.
+
+
+</p><p> For our example grammar, we get the following LR(0) machine:
+
+</p><pre>State 0   	
+0)	$S: . stmt <eof> 
+1)	stmt: . ID ':=' expr 
+	GOTO   2 on stmt
+	SHIFT 1 on ID
+
+State 1   	
+1)	stmt: ID . ':=' expr 
+	SHIFT 3 on ':='
+
+State 2   	
+0)	$S: stmt . <eof> 
+	SHIFT 4 on <eof>
+
+State 3   	
+1)	stmt: ID ':=' . expr 
+2)	expr: . expr '+' ID 
+3)	expr: . expr '-' ID 
+4)	expr: . ID 
+	GOTO   6 on expr
+        SHIFT 5 on ID
+
+State 4   	
+0)	$S: stmt <eof> . 
+
+State 5   	
+4)	expr: ID . 
+
+State 6   	
+1)	stmt: ID ':=' expr . 
+2)	expr: expr . '+' ID 
+3)	expr: expr . '-' ID 
+        SHIFT 7 on '+'
+        SHIFT 8 on '-'
+
+State 7   	
+2)	expr: expr '+' . ID 
+        SHIFT 9 on ID
+
+State 8   	
+3)	expr: expr '-' . ID 
+        SHIFT 10 on ID
+
+State 9   	
+2)	expr: expr '+' ID . 
+
+State 10  
+3)	expr: expr '-' ID . 
+
+</eof></eof></eof></eof></pre>
+
+The LR(0) machine defines the <em>shift</em> and <em>goto</em> actions in
+our parse tables.  But what corresponds to the <em>reduce</em> actions in
+the action table?  
+
+<p> We should reduce by a rule when that rule has been completely
+recognized; i.e., when the state contains a <em>reducing item</em> with the
+dot at the extreme right.  However, if a state has reducing items, under
+what conditions should the corresponding reductions be applied? 
+
+</p><ul type="disc">
+
+<li> If there are no other shift or reducing items in the state, then
+whenever that state is entered, it is correct to always apply the reduction
+corresponding to the single reducing item.  Such a state is referred to as
+an LR(0) state.
+
+</li><li> If there are other shift or reducing items in the state, then the
+current lookahead token should be used to make the decision.  The exact way
+this decision is made depends on the precise flavor of shift-reduce parser
+being constructed:
+
+
+<dl>
+
+<dt><b>SLR(1) Parser</b>
+
+Such a parser will reduce by the rule corresponding to a reducing item in a
+state, whenever the current lookahead is among the symbols which may
+<em>follow</em> the rule's LHS nonterminal <strong>anywhere</strong> in the
+grammar.
+
+</dt><dt><b>LALR(1) Parser</b>
+
+Such a parser will reduce by the rule corresponding to a reducing item
+in a state, whenever the current lookahead is among the symbols which may
+<em>follow</em> the rule's LHS nonterminal <strong>only in the context
+of that state </strong>.  These kinds of LALR(1) parsers are usually
+generated by popular parser generators like yacc, <a href="http://www.slac.stanford.edu/comp/unix/gnu-info/bison_1.html">bison</a>
+and <a href="http://opal.cs.binghamton.edu/~zdu/zyacc">zyacc</a>.
+
+
+</dt><dt><b>LR(1) Parser</b>
+
+Instead of constructing a LR(0) machine, a LR(1) machine is
+constructed, where lookahead information forms part of each item.  In this
+case a reducing item triggers a reduction by the corresponding rule
+only when the current lookahead is in the lookahead set computed for that
+item.  Such a parser is referred to as an <em>LR(1)</em> parser.
+
+</dt></dl>
+
+</li></ul>
+
+<p> It is worth emphasizing that the only essential difference between
+SLR(1), LALR(1) and LR(1) parsers is how the decision is made as to when a
+reduction should be applied.  If multiple actions are possible for a
+particular state and lookahead, then that state has <em>conflicts</em>.  The
+parsers are listed above in order of increasing precision of the
+information used for the reduce decision; hence it is possible that a SLR(1)
+parser has conflicts when a LALR(1) parser has none, and a LALR(1) parser
+has conflicts when a LR(1) parser has none.
+
+</p><p> Parse tables can often be represented more compactly by designating a
+particular reduction to be the <em>default reduction</em> for a state.  This
+means that if no other action is possible in a state, the default reduction
+for that state is applied.  This explains why in the example, many rows of
+the table have reduce entries in almost all their columns.  
+
+</p><p> Default reductions do not affect the correctness of the parse.  Their
+only effect is on error detection: an error may not be detected until after
+several (useless) reductions have been applied.  However, the error is still
+detected before any additional symbols are shifted onto the parse stack.
+
+</p><p> <font color="#00FF00">Copyright (C) 1997 Zerksis D. Umrigar</font>
+
+</p><hr>
+
+<p><b>Feedback</b>: Please email any feedback to <a href="mailto:zdu@acm.org">zdu@acm.org</a>.
+
+</p><p><a target="_parent" href="http://www.cs.binghamton.edu/~zdu/parsdemo/index.html">Up to Parsing Demos Main Page</a>
+
+<noframes>
+<!-- this noframes tag doesn't work as expected in Netscape 3.0 -->
+<A TARGET="_parent" HREF="srframe.html">Shift Reduce Parsing Page</A>
+</noframes>
+
+
+
+
+</p></body></html>

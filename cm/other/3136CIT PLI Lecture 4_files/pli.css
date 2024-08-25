@@ -1,0 +1,29 @@
+.alert {
+    color: red;
+}
+.header {
+    position: static;
+}
+.header h2 { color: teal }
+.menu {
+    position: relative;
+    left: 0; right: auto;
+    width: 100%;
+    background-color: silver;
+    border: 2px solid gray;
+    font-weight: bold;
+}
+.menu a {
+    padding-left: 1em;
+}
+.body {
+    position: relative;
+    left: 0; right: auto;
+    width: 100%;
+}
+.body h2 {
+    color: green; 
+}
+.footer {
+    position: relative;
+}

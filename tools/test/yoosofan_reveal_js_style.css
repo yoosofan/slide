@@ -1,0 +1,7 @@
+body section {
+    font-family: Nazli, Libre Baskerville;
+    text-align: justify;
+}
+section.center_elements{
+  text-align: center;
+}

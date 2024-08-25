@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.034ex" height="2.343ex" style="vertical-align: -0.338ex; margin-left: -0.039ex;" viewBox="-17 -863.1 875.7 1008.6" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path stroke-width="10" id="E1-MJAMS-2136" d="M56 706V726Q56 763 76 763Q83 763 87 759T98 741Q108 726 116 721L127 717L340 715Q547 712 564 709Q575 705 587 692Q599 680 605 663L609 650V137H676Q687 124 687 115Q687 110 678 100T622 43L558 -21H-9Q-22 -6 -22 -1T-13 14T42 72L107 137H569V339Q569 541 567 546Q558 555 554 557L545 563H329Q118 566 101 569Q90 573 78 586Q54 610 54 661Q54 670 56 706Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)">
+ <use xlink:href="#E1-MJAMS-2136" x="0" y="0"></use>
+</g>
+</svg>

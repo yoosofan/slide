@@ -1,0 +1,2399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="A brief tutorial on grammars and LALR(1) parsing" />
+		<title>LALR(1) Parsing</title>
+
+		<style type="text/css">
+			pre {
+				margin-left: 2.5em;
+				font-size: x-large;
+			}
+			table, td, th {
+				border: 1px solid black;
+				border-collapse: collapse;
+				padding: .5em;
+			}
+			div.oddpoint, div.evenpoint, div.warningpoint {
+				margin-left: 5em;
+				margin-bottom: 1em;
+				padding: .75em;
+				width: 525px;
+				border: 3px solid black;
+			}
+			div.evenpoint { background-color: Lavender; }
+			div.warningpoint { background-color: Cornsilk; margin-left: 7em; }
+
+			span.num { font-size: x-small; }
+			span.sym { font-size: x-large; }
+		</style>
+
+	</head>
+
+	<body>
+
+		<h1>A Tutorial Explaining LALR(1) Parsing</h1>
+
+		<p>
+			Take two of a half-serious rant taken too far, by
+			<a href="http://www.sjackson.ca">Stephen Jackson</a>.
+		</p>
+
+		<h2>Introduction</h2>
+
+		<h3>Background</h3>
+
+		<p>
+			I've read several resources on syntax analysis.  They left me with the
+			impression that the topic was complex, and meant for minds greater than
+			mine.  But that didn't seem right.  Learning how to use regular
+			expressions to parse text is simple, and Context-Free Grammars in 
+			general aren't that much more complicated.
+		</p>
+
+		<p>
+			I believe that there is an easier way of explaining LALR(1) syntax
+			analysis.  This guide is my attempt to prove it.
+		</p>
+
+		<p>
+			I've decided that a "flashcard" method of explanation is for the best.
+			Each "card" demonstrates a point or two, in a method that visually
+			indicates all the text you should have to read to understand the point.
+			If you get to the end of a card and you don't understand the point,
+			just re-read the current card.  Don't move on until you understand
+			each card!
+		</p>
+
+		<p>Enough background, let's get down to business.</p>
+
+		<hr />
+
+		<h2>Input</h2>
+
+		<p>
+			For starters, you need to turn a string/file into a series of tokens
+			during a phase referred to as "Lexical Analysis" which is outside the
+			scope of this tutorial.  The typical method of tokenizing is with
+			regular expressions.  A quick example of this would be the number
+			<em>25</em> which would match the regular expression <em>[0-9]+</em>.
+			We could then state that if input matches that expression, it should be
+			classified as a <strong>num</strong> token.
+		</p>
+
+		<p>
+			Once we have a collection of tokens, we match them against a "grammar."
+			Grammars are simple languages that are used to bootstrap more complex
+			languages.  They consist of simple mapping rules that indicate what
+			rule to evaluate next (including self-references).
+		</p>
+
+		<div class="oddpoint">
+
+			<p>
+				For example, rule <strong>binop</strong> could indicate a binary
+				operation between two <strong>num</strong>s, such as
+				+,-,*,/, etc.  The notation commonly used for this is:
+			</p>
+
+<pre>
+binop &rarr; num + num
+      | num - num
+      | num * num
+      | num / num
+</pre>
+
+			<p>
+				From our earlier example, <em>25+25</em> would match the first rule
+				of <strong>binop</strong>.
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				Any programmer worth their salt is probably annoyed with the
+				repetition in the previous example.  So let's create another mapping
+				rule, <strong>operation</strong> to shorten the example:
+			</p>
+
+<pre>
+binop &rarr; num operation num
+
+operation &rarr; + | - | * | /
+</pre>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				We now have a simple grammar to express a binary operation between
+				two numbers.  But why limit ourselves to only two numbers?  In math,
+				it is common to have many operators and numbers.  In the
+				meta-language of grammars, we add this quality with recursive rules:
+			</p>
+
+<pre>
+binop &rarr; recbin operation num
+
+recbin &rarr; recbin operation num
+       | num
+
+operation &rarr; + | - | * | /
+</pre>
+
+			<p>
+				Now we can express more complex equations such as
+				<em>4/2-1*3+5</em>.
+			</p>
+
+		</div>
+
+		<div class="warningpoint">
+
+			<h2>A side note about problematic grammars:</h2>
+
+			<h3>Problem 1:</h3>
+
+			<p>
+				We have to be careful defining recursive rules.  To demonstrate this
+				we'll make a temporary grammar that only maps a single
+				<strong>num</strong>:
+			</p>
+
+<pre>
+recdemo &rarr; num
+</pre>
+
+			<p>
+				But the grammar becomes invalid if we create a pointless, but
+				logically resolvable rule:
+			</p>
+
+<pre>
+recdemo &rarr; num
+        | recdemo
+</pre>
+
+			<p>
+				Logically, the grammar's acceptable language is still
+				{<strong>num</strong>}.  We know that if you keep choosing
+				<strong>recdemo</strong> you will just spin in an infinite loop
+				until you choose <strong>num</strong>.  Unfortunately, as logical as
+				our computer is, it is incapable of resolving these two "equal"
+				choices.
+			</p>
+
+			<h3>Problem 2:</h3>
+
+			<p>
+				Another problem is when the correct path is not clear.  The classic
+				example of this is called the "Dangling Else" problem.  Suppose we
+				have two types of if statements.  If statements, and if/else
+				statements (like C).
+			</p>
+
+<pre>
+code &rarr; if boolean code
+     | if boolean code else code
+     | arbitrarycode
+
+boolean &rarr; true | false
+</pre>
+
+			<p>
+				Notice what happens when we follow an <strong>if</strong>'s
+				<strong>code</strong>, then find another <strong>if</strong>
+				followed by an <strong>else</strong>?  Which <strong>if</strong>
+				does the <strong>else</strong> match?
+			</p>
+
+			<p>
+				The two possible matches are:<br />
+				<code>
+					<strong>if true</strong> if false arbitrarycode
+					<strong>else arbitrarycode</strong>
+				</code><br />
+				<code>
+					if true <strong>if false arbitrarycode else arbitrarycode</strong>
+				</code>
+			</p>
+
+			<p>
+				We don't know which one is correct because the grammar is ambiguous.
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				Up until now, we've been implicitly treating <strong>binop</strong>
+				as the starting state.  But in a real grammar, we will need to
+				explicitly declare a rule as the starting state.  There is an
+				additional requirement that a starting state must only have one
+				token. To solve this, we'll make a <strong>start</strong> rule:
+			</p>
+
+<pre>
+start &rarr; binop
+
+binop &rarr; recbin operation num
+
+recbin &rarr; recbin operation num
+       | num
+
+operation &rarr; + | - | * | /
+</pre>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				A feature that won't be used in this tutorial is that a rule can
+				have an empty option represented by the character "&#949;".  Let's
+				change the above example to accept a null string as input.
+			</p>
+
+<pre>
+start &rarr; binop
+
+binop &rarr; recbin operation num
+      | &#949;
+
+recbin &rarr; recbin operation num
+       | num
+
+operation &rarr; + | - | * | /
+</pre>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>There is an alternative method to represent the above grammar:</p>
+
+<pre>
+start &rarr; binop
+
+binop &rarr; recbin operation num
+binop &rarr; &#949;
+
+recbin &rarr; recbin operation num
+recbin &rarr; num
+
+operation &rarr; +
+operation &rarr; -
+operation &rarr; *
+operation &rarr; /
+</pre>
+
+			<p>
+				While it is more verbose, it allows us to number each rule.
+				We'll be using numbering to refer to specific rules (rather than
+				constantly re-writing them).
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<h3>Final Notes on Grammars</h3>
+
+			<p>
+				Now that you are familiar with the concepts, there are some terms
+				that you should know:
+			</p>
+
+			<dl>
+				<dt>Production</dt>
+				<dd>I used the word "rule" instead of "production."</dd>
+
+				<dt>Non-Terminal</dt>
+				<dd>
+					The name of a production, examples: <strong>start</strong>,
+					<strong>binop</strong>, <strong>recbin</strong> and
+					<strong>operation</strong>.
+				</dd>
+
+				<dt>Terminal</dt>
+				<dd>
+					Tokens, such as <strong>digit</strong>, <strong>+</strong>,
+					<strong>-</strong>, <strong>*</strong> and <strong>/</strong>.
+				</dd>
+
+			</dl>
+
+			<p>
+				If you want to check your grammar there is a
+				<a href="http://smlweb.cpsc.ucalgary.ca/start.html">grammar checking
+				tool</a> online.
+			</p>
+
+		</div>
+
+		<hr />
+
+		<h2>Syntax Analysis</h2>
+
+		<p>
+			Now that you (hopefully) understand grammars, we can move onto
+			processing them.  The output of this phase (a parser) is a state
+			machine to be used with source code.
+		</p>
+
+		<p>
+			The example grammar is simple, and a little redundant.
+			Mainly for the sake of demonstration.  The grammar is:
+		</p>
+
+		<!-- Starting the augmented rule at 0 is worth more than valid XHTML -->
+		<ol start="0" style="margin-left: 5em; font-size: x-large;">
+			<li>S &rarr; N</li>
+			<li>N &rarr; V = E</li>
+			<li>N &rarr; E</li>
+			<li>E &rarr; V</li>
+			<li>V &rarr; x</li>
+			<li>V &rarr; * E</li>
+		</ol>
+
+		<p>
+			You may want to copy this grammar down (with the proper numbers) for
+			later reference.
+		</p>
+
+		<h3>Syntax Analysis Goal: Item Sets</h3>
+
+		<div class="oddpoint">
+
+			<p>
+				Item sets are collections of rules that have pointers to the current
+				position of the rule.  These pointers are usually denoted with a
+				bullet (&bull;).  For example:
+			</p>
+
+<pre>
+S &rarr; &bull; N
+S &rarr; N &bull;
+</pre>
+
+			<p>
+				These cases indicate that <strong>N</strong> is about to be
+				encountered, and that <strong>N</strong> has just been encountered,
+				respectively.
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				The first item set, I<sub>0</sub> begins with the starting rule,
+				<code>S &rarr; &bull; N</code><br />
+				This means that we expect an <strong>N</strong> next.  As a result,
+				we add all rules that map <strong>N</strong>, and because
+				<strong>N</strong> is next, we place the pointer at the start of the
+				<strong>N</strong>-rules.
+
+			</p>
+
+<pre>
+S &rarr; &bull; N
+ + N &rarr; &bull; V = E
+ + N &rarr; &bull; E
+</pre>
+
+			<p>
+
+				Both of the newly added items point to an unadded rule at their
+				start, so we'll need to add the corresponding rules
+				(<strong>V</strong> and <strong>E</strong>).  Giving us
+				<strong>I<sub>0</sub></strong>:
+
+			</p>
+
+<pre>
+S &rarr; &bull; N
+ + N &rarr; &bull; V = E
+ + N &rarr; &bull; E
+ + E &rarr; &bull; V
+ + V &rarr; &bull; x
+ + V &rarr; &bull; * E
+</pre>
+
+			<p>
+				And because the pointers are only before terminals and non-terminals
+				that we have already added, we have completed our first set.
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				To make the rest of the item sets, all we have to do is take the
+				current item sets (only I<sub>0</sub> at the moment) and then
+				increment the pointer by giving it a specific input.
+			</p>
+
+			<p>
+				For example, what items in I<sub>0</sub> expect an "x" next?  Only
+				one, "<code>V &rarr; &bull; x</code>".  Thus, if we give
+				I<sub>0</sub> an input of token "x" we will form a new item set
+				(I<sub>1</sub>) with only one item in it, the pointer will be
+				incremented past the given token.
+			</p>
+
+			<p><strong>I<sub>1</sub></strong>:</p>
+
+<pre>
+V &rarr; x &bull;
+</pre>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				There is another rule in I<sub>0</sub> that expects a terminal next
+				<code>V &rarr; &bull; * E</code>.  If we give I<sub>0</sub> an input
+				of "*" we will begin a new set, I<sub>2</sub>:
+			</p>
+
+<pre>
+V &rarr; * &bull; E
+</pre>
+
+			<p>
+				Notice that the pointer is before the non-terminal
+				<strong>E</strong>.  Thus we need to add all
+				<strong>E</strong>-rules.
+			</p>
+
+<pre>
+V &rarr; * &bull; E
+ + E &rarr; &bull; V
+</pre>
+
+			<p>
+				Again, there is a pointer before the non-terminal
+				<strong>V</strong>.  Like <strong>E</strong> earlier, we need to add
+				all <strong>V</strong>-rules.  This gives us the final item set.
+			</p>
+
+			<p><strong>I<sub>2</sub></strong>:</p>
+
+<pre>
+V &rarr; * &bull; E
+ + E &rarr; &bull; V
+ + V &rarr; &bull; x
+ + V &rarr; &bull; * E
+</pre>
+
+			<p>
+				There are two things to notice about this set.  The first is that if
+				we give this set an input of "x" we return to I<sub>1</sub> (Sets
+				are not duplicated).
+			</p>
+
+			<p>
+				The second thing to notice is that because of the last rule, if you
+				give this set an input of "*" we return to this set.
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				The next step is giving I<sub>0</sub> an input of
+				<strong>V</strong>.  It forms an item set with multiple rules.
+			</p>
+
+			<p><strong>I<sub>3</sub></strong>:</p>
+
+<pre>
+N &rarr; V &bull; = E
+E &rarr; V &bull;
+</pre>
+
+		</div>
+
+		 <div class="evenpoint">
+
+			<p>
+				Try doing the next few sets on your own.  If you get stuck, the
+				answers will be given on this card.  Remember that once you finish
+				giving input to the current item set (I<sub>0</sub>) you need to
+				move onto the next item set that requires input (I<sub>2</sub>),
+				and so on until you have created a set dealing with every possible
+				input.
+			</p>
+
+			<h3>Remaining Sets:</h3>
+
+			<p><strong>I<sub>4</sub></strong>:</p>
+
+<pre>
+S &rarr; N &bull;
+</pre>
+
+			<hr />
+			<p><strong>I<sub>5</sub></strong>:</p>
+
+<pre>
+N &rarr; E &bull;
+</pre>
+
+			<hr />
+			<p><strong>I<sub>6</sub></strong>:</p>
+
+<pre>
+V &rarr; * E &bull;
+</pre>
+
+			<hr />
+			<p><strong>I<sub>7</sub></strong>:</p>
+
+<pre>
+E &rarr; V &bull;
+</pre>
+
+			<hr />
+			<p><strong>I<sub>8</sub></strong>:</p>
+
+<pre>
+N &rarr; V = &bull; E
+ + E &rarr; &bull; V
+ + V &rarr; &bull; x
+ + V &rarr; &bull; * E
+</pre>
+
+			<hr />
+			<p><strong>I<sub>9</sub></strong>:</p>
+
+<pre>
+N &rarr; V = E &bull;
+</pre>
+
+		</div>
+
+		<p style="margin-left: 5em">
+			<a href="img/lr0.png" style="border: none">
+				<img src="http://www.sjackson.ca/img/lr0.png" alt="LR(0) Item Sets" style="border: none" />
+			</a><br />
+			<span style="font-size: small">
+				A pictoral representation of the Item Sets.<br />
+				You may want to print this for quick reference.
+			</span>
+		</p>
+
+
+		<h3>Syntax Analysis Goal: Translation Table</h3>
+
+		<div class="oddpoint">
+
+			<p>
+				To construct the Translation Table all we need to do is determine
+				what item set to go to next based on a given input.
+			</p>
+
+			<p>For example, I<sub>0</sub>:</p>
+
+<pre>
+S &rarr; &bull; N
+ + N &rarr; &bull; V = E
+ + N &rarr; &bull; E
+ + E &rarr; &bull; V
+ + V &rarr; &bull; x
+ + V &rarr; &bull; * E
+</pre>
+
+			<p>
+				As stated before, if we give I<sub>0</sub> an input of x we end up
+				in item set 1 (I<sub>1</sub>).  Thus, we have our first piece of the
+				transition table:
+			</p>
+
+			<table>
+
+				<tr>
+					<th>Item Set</th>
+					<th>x</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>1</td>
+				</tr>
+
+			</table>
+
+			<p>
+				If we give I<sub>0</sub> a '=' then nothing occurs.  But a '*' leads
+				to I<sub>2</sub>.  Which gives us a larger piece of the transition
+				table:
+			</p>
+
+			<table>
+
+				<tr>
+					<th>Item Set</th>
+					<th>x</th>
+					<th>=</th>
+					<th>*</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>1</td>
+					<td>&nbsp;</td>
+					<td>2</td>
+				</tr>
+
+			</table>
+
+			<p>
+				We just need to repeat this process over all item sets and inputs.
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>Here is the resulting transition table for our grammar:</p>
+
+			<table>
+
+				<tr>
+					<th>Item Set</th>
+					<th>x</th>
+					<th>=</th>
+					<th>*</th>
+					<th>S</th>
+					<th>N</th>
+					<th>E</th>
+					<th>V</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>1</td>
+					<td>&nbsp;</td>
+					<td>2</td>
+					<td>&nbsp;</td>
+					<td>4</td>
+					<td>5</td>
+					<td>3</td>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>2</th>
+					<td>1</td>
+					<td>&nbsp;</td>
+					<td>2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>6</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td>&nbsp;</td>
+					<td>8</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>8</th>
+					<td>1</td>
+					<td>&nbsp;</td>
+					<td>2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>9</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+		<h3>Syntax Analysis Goal: Extended Grammars</h3>
+
+		<div class="oddpoint">
+
+			<p>
+				For the next phase we are going to have to traverse the item sets
+				previously created.  To explain this quickly we'll have to
+				introduce a shorthand notation.
+			</p>
+
+			<p>
+				For example, if we wanted to start in I<sub>0</sub> and follow the
+				rule <code>V &rarr; * E</code>.
+			</p>
+
+			<p>
+				We would start by giving I<sub>0</sub> a <strong>*</strong>.
+				According to the picture above, this would lead to I<sub>2</sub>.
+				We express this as
+				<span class="num">0<span class="sym">*</span>2</span>
+			</p>
+
+			<p>
+				The next step, I<sub>2</sub> to I<sub>6</sub> due to
+				<strong>E</strong>.  Where the shorthand form is
+				<span class="num">2<span class="sym">E</span>6</span>
+			</p>
+
+			<p>
+				To get the last component of the rule we need to determine the
+				left-hand side.  The non-terminal is <strong>V</strong> and if we
+				give I<sub>0</sub> an input of <strong>V</strong> we go to
+				I<sub>3</sub>.  Denoted as
+				<span class="num">0<span class="sym">V</span>3</span>
+			</p>
+
+			<p>
+				Putting them altogether gives us a "new" rule:
+				<span class="num">0<span class="sym">V</span>3</span> &rarr;
+				<span class="num">0<span class="sym">*</span>2</span>
+				<span class="num">2<span class="sym">E</span>6</span>
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				Fortunately, we only need to do this with rules that start with a
+				pointer.  Giving us our <strong>extended grammar</strong>:
+			</p>
+
+			<ol start="0" style="margin-left: 5em; font-size: x-large;">
+				<li>
+					<span class="num">0</span>S<span class="num">$</span> &rarr;
+					<span class="num">0</span>N<span class="num">4</span>
+				</li>
+				<li>
+					<span class="num">0</span>V<span class="num">3</span> &rarr;
+					<span class="num">0</span>x<span class="num">1</span>
+				</li>
+				<li>
+					<span class="num">0</span>V<span class="num">3</span> &rarr;
+					<span class="num">0</span>*<span class="num">2</span>
+					<span class="num">2</span>E<span class="num">6</span>
+				</li>
+				<li>
+					<span class="num">0</span>N<span class="num">4</span> &rarr;
+					<span class="num">0</span>E<span class="num">5</span>
+				</li>
+				<li>
+					<span class="num">0</span>N<span class="num">4</span> &rarr;
+					<span class="num">0</span>V<span class="num">3</span>
+					<span class="num">3</span>=<span class="num">8</span>
+					<span class="num">8</span>E<span class="num">9</span>
+				</li>
+				<li>
+					<span class="num">0</span>E<span class="num">5</span> &rarr;
+					<span class="num">0</span>V<span class="num">3</span>
+				</li>
+				<li>
+					<span class="num">2</span>E<span class="num">6</span> &rarr;
+					<span class="num">2</span>V<span class="num">7</span>
+				</li>
+				<li>
+					<span class="num">2</span>V<span class="num">7</span> &rarr;
+					<span class="num">2</span>x<span class="num">1</span>
+				</li>
+				<li>
+					<span class="num">2</span>V<span class="num">7</span> &rarr;
+					<span class="num">2</span>*<span class="num">2</span>
+					<span class="num">2</span>E<span class="num">6</span>
+				</li>
+				<li>
+					<span class="num">8</span>V<span class="num">7</span> &rarr;
+					<span class="num">8</span>x<span class="num">1</span>
+				</li>
+				<li>
+					<span class="num">8</span>V<span class="num">7</span> &rarr;
+					<span class="num">8</span>*<span class="num">2</span>
+					<span class="num">2</span>E<span class="num">6</span>
+				</li>
+				<li>
+					<span class="num">8</span>E<span class="num">9</span> &rarr;
+					<span class="num">8</span>V<span class="num">7</span>
+				</li>
+			</ol>
+
+		</div>
+
+		<h3>Syntax Analysis Goal: FIRST Sets</h3>
+
+		<div class="oddpoint">
+
+			<p><strong>Steps to Make the First Set</strong></p>
+
+			<ol>
+				<li>Since x is a terminal, First(x) = { x }.</li>
+				<li>
+					In the case of <code>V &rarr; x</code> where the first symbol is
+					a terminal, First(V) contains x.  In a similar case,
+					<code>V &rarr; &#949;</code>, First(V) would contain &#949;.
+				</li>
+				<li>
+					If there was a rule with multiple non-terminals
+					(<code>R &rarr; A B C</code>), then we would start by adding
+					First(A) (minus &#949;) to First(R).  If First(A) contained
+					&#949; we would add First(B) to First(R), and so on.<br />
+					In the case that First(A), First(B) and First(C) contain &#949;,
+					then First(R) would contain &#949; as well.
+				</li>
+			</ol>
+
+			<p>
+				Step 1 isn't really used (I only explained it to avoid an ambiguity
+				within step 3).  All we have to do is apply step 2 to all rules,
+				then step 3.
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>Let's make the First Set for our grammars.</p>
+
+			<p>
+				Starting with step 2, it only applies to rules 4 and 5 of our
+				original grammar, and therefore only impacts rules 1, 2, 7, 8, 9,
+				and 10 in the extended grammar.
+			</p>
+
+			<p>Original Grammar: <code>First(V) = { x, * }</code></p>
+
+			<p>
+				Extended Grammar:<br />
+				<code>
+					First(<span class="num">0<span class="sym">V</span>3</span>) =
+					{ x, * }<br />
+					First(<span class="num">2<span class="sym">V</span>7</span>) =
+					{ x, * }<br />
+					First(<span class="num">8<span class="sym">V</span>7</span>) =
+					{ x, * }
+				</code>
+			</p>
+
+			<p>
+				Because the first symbol of V is always a terminal, we have finished
+				determining all the variations of First(V).
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				Step 3 will be the one to determine the remainder of the sets.
+				Since we have First(V) of our original grammar and by step 3 we know
+				that First(E) is going to be the same as First(V).
+			</p>
+
+			<code>First(E) = First(V) = { x, * }</code>
+
+			<p>
+				In our extended grammar, the same principle is used, but over more
+				rules.
+			</p>
+
+			<p>
+				<code>
+					First(<span class="num">0<span class="sym">E</span>5</span>) =
+					First(<span class="num">0<span class="sym">V</span>3</span>) =
+					{ x, * }
+					<br />
+					First(<span class="num">2<span class="sym">E</span>6</span>) =
+					First(<span class="num">2<span class="sym">V</span>7</span>) =
+					{ x, * }
+					<br />
+					First(<span class="num">8<span class="sym">E</span>9</span>) =
+					First(<span class="num">8<span class="sym">V</span>7</span>) =
+					{ x, * }
+				</code>
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				From the "general rule" (our original grammar) we have First(E) and
+				First(V) we can determine First(N).
+			</p>
+
+			<p>
+				<code>First(N) = First(E) <em>union</em> First(V) = { x, * }</code>
+				<br />our earlier mappings show it is the same as:<br />
+				<code>First(N) = First(E) = First(V) = { x, * }</code>
+			</p>
+
+			<p>
+				Finally, we can compute First(S):<br />
+				<code>First(S) = First(N) = { x, * }</code>
+			</p>
+
+			<p>
+				Likewise, the extended grammar only has one <strong>S</strong> and
+				<strong>N</strong> rule:<br />
+				<code>
+					First(<span class="num">0<span class="sym">S</span>$</span>) =
+					First(<span class="num">0<span class="sym">N</span>4</span>) =
+					First(<span class="num">0<span class="sym">E</span>5</span>) =
+					First(<span class="num">0<span class="sym">V</span>3</span>) =
+					{ x, * }
+				</code>
+			</p>
+
+			<p>
+				<strong>
+					The first set of every non-terminal in both grammars is:
+					<code>{ x, * }</code>
+				</strong>
+			</p>
+
+		</div>
+
+		<h3>Syntax Analysis Goal: FOLLOW Sets</h3>
+
+		<div class="oddpoint">
+
+			<p><strong>Steps to Make the Follow Set</strong></p>
+
+			<p>
+				Conventions: <em>a</em>, <em>b</em>, and <em>c</em> represent a
+				terminal or non-terminal.  <em>a*</em> represents zero or more
+				terminals or non-terminals (possibly both).  <em>a+</em> represents
+				one or more... D is a non-terminal.
+			</p>
+
+			<ol>
+				<li>
+					Place an End of Input token ($) into the starting rule's follow
+					set.
+				</li>
+				<li>
+					Suppose we have a rule
+					<code>R &rarr; <em>a*</em>D<em>b</em></code>.  Everything in
+					First(b) (except for &#949;) is added to Follow(D).  If First(b)
+					contains &#949; then everything in Follow(R) is put in Follow(D).
+				</li>
+				<li>
+					Finally, if we have a rule <code>R &rarr; <em>a*</em>D</code>,
+					then everything in Follow(R) is placed in Follow(D).
+				</li>
+				<li>The Follow set of a terminal is an empty set.</li>
+			</ol>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				Let's apply the steps, starting with 1, putting $ in
+				<strong>S</strong>'s follow set.
+			</p>
+
+			<code>Follow(S) = { $ }</code>
+
+			<p>
+				Step 2 on rule 1 (<code>N &rarr; V = E</code>) indicates that
+				first(=) is in Follow(V).
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>Because of step 3 on rule 5 (<code>V &rarr; * E</code>):</p>
+			<code>Follow(E) = Follow(V)</code>
+
+			<p>
+				Interestingly enough, step 3 on rule 4 (<code>E &rarr; V</code>)
+				creates a symmetrical relationship:
+			</p>
+			<code>Follow(V) = Follow(E)</code>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				And step 3 on rules 0 and 2 (<code>S &rarr; N</code> and
+				<code>N &rarr; E</code>) spread Follow(S) to the follow sets of the
+				other non-terminals.  Giving us a final result:
+			</p>
+
+			<p>
+				<code>
+					Follow(S) = { $ }<br />
+					Follow(N) = { $ }<br />
+					Follow(E) = { $, = }<br />
+					Follow(V) = { $, = }
+				</code>
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				Now that you know how to do it on the original grammar, try it on
+				the extended grammar.  Here are the results:
+			</p>
+
+			<p>
+				<code>
+					Follow(<span class="num">0<span class="sym">S</span>$</span>) =
+					{ $ }<br />
+					Follow(<span class="num">0<span class="sym">N</span>4</span>) =
+					{ $ }<br />
+					Follow(<span class="num">0<span class="sym">E</span>5</span>) =
+					{ $ }<br />
+					Follow(<span class="num">8<span class="sym">E</span>9</span>) =
+					{ $ }<br />
+					Follow(<span class="num">2<span class="sym">E</span>6</span>) =
+					{ $, = }
+					<br />
+					Follow(<span class="num">0<span class="sym">V</span>3</span>) =
+					{ $, = }
+					<br />
+					Follow(<span class="num">8<span class="sym">V</span>7</span>) =
+					{ $ }<br />
+					Follow(<span class="num">2<span class="sym">V</span>7</span>) =
+					{ $, = }
+				</code>
+			</p>
+
+		</div>
+
+		<h3>Syntax Analysis Goal: Action and Goto Table</h3>
+
+		<div class="oddpoint">
+
+			<p>
+				We create the action/goto table by using the output of previous
+				goals.  There are only four steps for this goal:
+			</p>
+
+			<p><strong>Step 1 - Initialize</strong></p>
+
+			<p>
+				Add a column for the end of input, labelled $.
+				Place an "accept" in the $ column whenever the item set contains an
+				item where the pointer is at the end of the starting rule (in
+				our example "<code>S &rarr; N &bull;</code>").
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p><strong>Step 2 - Gotos</strong></p>
+
+			<p>
+				Directly copy the Translation Table's nonterminal columns as GOTOs.
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p><strong>Step 3 - Shifts</strong></p>
+
+			<p>
+				Copy the terminal columns as shift actions to the number determined
+				from the Translation Table.  (Basically we just copy the transition
+				table, but we put an "s" in front of each number, see below.)
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p><strong>Step 4 - Reductions, Sub-Step 1</strong></p>
+
+			<p>
+				Earlier on we determined the Follow Sets of the extended grammar.
+				Now we need to combine the two.  We start this process by matching
+				the follow sets to an extended rule's left-hand side.
+			</p>
+
+			<table>
+
+				<tr><th>Number</th><th>Rule</th><th>Follow Set</th></tr>
+
+				<tr>
+					<th>0</th>
+					<td>
+						<span class="num">0</span>S<span class="num">$</span> &rarr;
+						<span class="num">0</span>N<span class="num">4</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td>
+						<span class="num">0</span>V<span class="num">3</span> &rarr;
+						<span class="num">0</span>x<span class="num">1</span>
+					</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>2</th>
+					<td>
+						<span class="num">0</span>V<span class="num">3</span> &rarr;
+						<span class="num">0</span>*<span class="num">2</span>
+						<span class="num">2</span>E<span class="num">6</span>
+					</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td>
+						<span class="num">0</span>N<span class="num">4</span> &rarr;
+						<span class="num">0</span>E<span class="num">5</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>
+						<span class="num">0</span>N<span class="num">4</span> &rarr;
+						<span class="num">0</span>V<span class="num">3</span>
+						<span class="num">3</span>=<span class="num">8</span>
+						<span class="num">8</span>E<span class="num">9</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td>
+						<span class="num">0</span>E<span class="num">5</span> &rarr;
+						<span class="num">0</span>V<span class="num">3</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td>
+						<span class="num">2</span>E<span class="num">6</span> &rarr;
+						<span class="num">2</span>V<span class="num">7</span>
+					</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td>
+						<span class="num">2</span>V<span class="num">7</span> &rarr;
+						<span class="num">2</span>x<span class="num">1</span>
+					</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>8</th>
+					<td>
+						<span class="num">2</span>V<span class="num">7</span> &rarr;
+						<span class="num">2</span>*<span class="num">2</span>
+						<span class="num">2</span>E<span class="num">6</span>
+					</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td>
+						<span class="num">8</span>V<span class="num">7</span> &rarr;
+						<span class="num">8</span>x<span class="num">1</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>10</th>
+					<td>
+						<span class="num">8</span>V<span class="num">7</span> &rarr;
+						<span class="num">8</span>*<span class="num">2</span>
+						<span class="num">2</span>E<span class="num">6</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>11</th>
+					<td>
+						<span class="num">8</span>E<span class="num">9</span> &rarr;
+						<span class="num">8</span>V<span class="num">7</span>
+					</td>
+					<td>{ $ }</td>
+				</tr>
+
+			</table>
+
+			<p>
+				We can merge rules that decend from the same original rule, and have
+				the same end point (the very last transition number).  From the
+				above grammar, we can merge rules 6 and 11 into a common rule (we
+				no longer need to keep all the transition numbers, just the final
+				number, which is <em>7</em> due to
+				...<span class="sym">V</span><span class="num">7</span> in this
+				case).<br />
+				They will have the union of the follow sets.
+			</p>
+
+			<p>Leading to the row:</p>
+
+			<table>
+
+				<tr>
+					<th>Final Set</th>
+					<th>Pre-Merge<br />Rules</th>
+					<th>Rule</th>
+					<th>Follow Set</th>
+				</tr>
+
+				<tr>
+					<td>7</td>
+					<td>6, 11</td>
+					<td>E &rarr; V</td>
+					<td>{ $, = }</td>
+				</tr>
+
+			</table>
+
+			<p>
+				Notice that number 5,
+				<span class="num">0<span class="sym">E</span>5</span> &rarr;
+				<span class="num">0<span class="sym">V</span>3</span>,
+				is left out even though it decends from the same rule as 6 and 11?
+				That is because they have a different endpoint (final set).
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p><strong>Step 4 - Reductions, Sub-Step 2</strong></p>
+
+			<p>
+				Here are tuples consisting of the merged rules, their origin,
+				follow sets, and final set:
+			</p>
+
+			<table>
+
+				<tr>
+					<th>Final Set</th>
+					<th>Pre-Merge<br />Rules</th>
+					<th>Rule</th>
+					<th>Follow Set</th>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td>1, 7, 9</td>
+					<td>V &rarr; x</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td>5</td>
+					<td>E &rarr; V</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>0</td>
+					<td>S &rarr; N</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td>3</td>
+					<td>N &rarr; E</td>
+					<td>{ $ }</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td>2, 8, 10</td>
+					<td>V &rarr; * E</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td>6, 11</td>
+					<td>E &rarr; V</td>
+					<td>{ $, = }</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td>4</td>
+					<td>N &rarr; V = E</td>
+					<td>{ $ }</td>
+				</tr>
+
+			</table>
+
+			<p>
+				Final Set 4, <code>S &rarr; N</code> is a special case where the
+				reduction leaves us with nothing, and is thus considered accepting.
+				Since this case is handled in step 1, we ignore this rule during the
+				reduction phase.
+			</p>
+
+			<p>
+				We can then rearrange the remaining tuples to form a reduction
+				table.  The columns are the contents of the used follow sets
+				{ $, = } and the final set numbers.
+			</p>
+
+			<table>
+
+				<tr>
+					<th>Final Set</th>
+					<th>$</th>
+					<th>=</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td><code>V &rarr; X</code></td>
+					<td><code>V &rarr; X</code></td>
+				</tr>
+
+				<tr>
+					<th>2</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td><code>E &rarr; V</code></td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td><code>N &rarr; E</code></td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td><code>V &rarr; * E</code></td>
+					<td><code>V &rarr; * E</code></td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td><code>E &rarr; V</code></td>
+					<td><code>E &rarr; V</code></td>
+				</tr>
+
+				<tr>
+					<th>8</th>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td><code>N &rarr; V = E</code></td>
+					<td>&nbsp;</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p><strong>Merge Steps: Result</strong></p>
+
+			<p>The previous steps give us the Action/Goto table:</p>
+
+			<table>
+
+				<tr>
+					<th>&nbsp;</th>
+					<th colspan="4">Action</th>
+					<th colspan="4">Goto</th>
+				</tr>
+
+				<tr>
+					<th>Item Set</th>
+					<th>$</th>
+					<th>x</th>
+					<th>=</th>
+					<th>*</th>
+					<th>S</th>
+					<th>N</th>
+					<th>E</th>
+					<th>V</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>4</td>
+					<td>5</td>
+					<td>3</td>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td>r(<code>V &rarr; x</code>)</td>
+					<td>&nbsp;</td>
+					<td>r(<code>V &rarr; x</code>)</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>2</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>6</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td>r(<code>E &rarr; V</code>)</td>
+					<td>&nbsp;</td>
+					<td>s8</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>accept</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td>r(<code>N &rarr; E</code>)</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td>r(<code>V &rarr; * E</code>)</td>
+					<td>&nbsp;</td>
+					<td>r(<code>V &rarr; * E</code>)</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td>r(<code>E &rarr; V</code>)</td>
+					<td>&nbsp;</td>
+					<td>r(<code>E &rarr; V</code>)</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>8</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>9</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td>r(<code>N &rarr; V = E</code>)</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+			</table>
+
+			<p>
+				In this table you'll see the term "Item Set" used.  But after this
+				point the term "state" will become more appropriate.  The two terms
+				will be used interchangeably.
+			</p>
+
+		</div>
+
+		<div class="oddpoint">
+
+			<p>
+				An alternative representation of the previous table, the one we will
+				use to parse input, will be constructed by replacing the reduction
+				rules with the original rules' numbers, rather than the rules.
+			</p>
+
+			<table>
+
+				<tr>
+					<th>&nbsp;</th>
+					<th colspan="4">Action</th>
+					<th colspan="4">Goto</th>
+				</tr>
+
+				<tr>
+					<th>State</th>
+					<th>$</th>
+					<th>x</th>
+					<th>=</th>
+					<th>*</th>
+					<th>S</th>
+					<th>N</th>
+					<th>E</th>
+					<th>V</th>
+				</tr>
+
+				<tr>
+					<th>0</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>4</td>
+					<td>5</td>
+					<td>3</td>
+				</tr>
+
+				<tr>
+					<th>1</th>
+					<td>r4</td>
+					<td>&nbsp;</td>
+					<td>r4</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>2</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>6</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>3</th>
+					<td>r3</td>
+					<td>&nbsp;</td>
+					<td>s8</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>4</th>
+					<td>accept</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>5</th>
+					<td>r2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>6</th>
+					<td>r5</td>
+					<td>&nbsp;</td>
+					<td>r5</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>7</th>
+					<td>r3</td>
+					<td>&nbsp;</td>
+					<td>r3</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+				<tr>
+					<th>8</th>
+					<td>&nbsp;</td>
+					<td>s1</td>
+					<td>&nbsp;</td>
+					<td>s2</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>9</td>
+					<td>7</td>
+				</tr>
+
+				<tr>
+					<th>9</th>
+					<td>r1</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				At this point, I'd like to mention some terminology.  This algorithm
+				generates an LALR-by-SLR, LR parse table.  The only things that are
+				uniquely "LALR(1)" are the reductions and the result.
+				The algorithm used to parse it in the next section
+				is just an LR parser.
+			</p>
+
+			<p>
+				Another thing I'd like to mention is that I think this guide teaches
+				the subject bottom-up instead of top-down.  But you may need to read
+				a formal guide before you see the (slight) pun in this comment.
+			</p>
+
+		</div>
+
+		<hr />
+
+		<h2>Syntax Parsing</h2>
+
+		<p>
+			Using the grammar and Action/Goto table from the previous section, we
+			will parse the string <em>x = * x</em>.
+		</p>
+
+		<div class="oddpoint">
+
+			<p>
+				There are three elements we need to keep track of while parsing the
+				stack:
+			</p>
+
+			<ol>
+				<li>Input String: In our case, it is initially "x = * x$"</li>
+				<li>Output</li>
+				<li>
+					Set Stack: Every time we encounter a shift or a goto, we
+					place the number specified on the stack.  The top of the stack
+					is the current state we're in.  It is initialized at state 0.
+				</li>
+			</ol>
+
+			<p>
+				A fourth element that we don't need to keep track of, but will be of
+				assistance in the explanation of the parser is "Next Action."
+			</p>
+
+		</div>
+
+		<div class="evenpoint">
+
+			<p>
+				In each state there are four possible options:
+			</p>
+
+			<ul>
+				<li>
+					Shift: Denoted by s# (where # is a number) in our table.
+					<ul>
+						<li>Push the number, #, onto the set stack.</li>
+						<li>Remove the first character in the string.</li>
+					</ul>
+				</li>
+				<li>
+					Reduce: Denoted by r#.
+					<ul>
+						<li>Put # into the output.</li>
+						<li>
+							Get the number of tokens on the right-hand side of rule
+							#.  Pop that number of states off the stack.
+						</li>
+						<li>
+							There is a new number at the top of the stack.  This
+							number is our temporary state.  Get the symbol from the
+							left-hand side of the rule #.  Treat it as the next
+							input token in the GOTO table (and place the matching
+							state at the top of the set stack).
+						</li>
+					</ul>
+				</li>
+				<li>Accept: The input is valid and parsed.</li>
+				<li>Other: Syntax Error</li>
+			</ul>
+
+		</div>
+
+		<table style="border: none">
+
+			<tr>
+
+				<td style="border: none">
+
+					<div class="oddpoint">
+
+						<p>
+							Now that we know the rules, let's walk through the first
+							steps in our example <em>x = * x</em>.  The first step is
+							to initialize the table:
+						</p>
+
+						<table>
+							<tr>
+								<th>Input</th>
+								<th>Output</th>
+								<th>Stack</th>
+								<th>Next</th>
+							</tr>
+							<tr>
+								<td>x = * x$</td>
+								<td>&nbsp;</td>
+								<td>0</td>
+								<td>Shift 1</td>
+							</tr>
+						</table>
+
+						<p>
+							The first token we encounter in state 0 is an x, which
+							indicates that a shift to state 1 is in order.  The first x
+							is removed from the input, and 1 is placed on the stack.
+							Leading us to the next row in the table:
+						</p>
+
+						<table>
+
+							<tr>
+								<th>Input</th>
+								<th>Output</th>
+								<th>Stack</th>
+								<th>Next</th>
+							</tr>
+							<tr>
+								<td>x = * x$</td>
+								<td>&nbsp;</td>
+								<td>0</td>
+								<td>Shift 1</td>
+							</tr>
+							<tr>
+								<td>= * x$</td>
+								<td>&nbsp;</td>
+								<td>0, 1</td>
+								<td>Reduce 4</td>
+							</tr>
+
+						</table>
+
+						<p>
+							Reducing by rule 4 will put a 4 in the output.  Rule 4,
+							<code>V &rarr; x</code>, has 1 token (<code>x</code>) on
+							the right-hand side.  So we remove one token from the
+							stack, leaving it with only 0.  In state 0, V (the
+							left-hand side of rule 4) has a goto value of 3, thus we
+							put a 3 on the stack.  This step gives us our table a new
+							row:
+						</p>
+
+						<table>
+
+							<tr>
+								<th>Input</th>
+								<th>Output</th>
+								<th>Stack</th>
+								<th>Next</th>
+							</tr>
+							<tr>
+								<td>x = * x$</td>
+								<td>&nbsp;</td>
+								<td>0</td>
+								<td>Shift 1</td>
+							</tr>
+							<tr>
+								<td>= * x$</td>
+								<td>&nbsp;</td>
+								<td>0, 1</td>
+								<td>Reduce 4</td>
+							</tr>
+							<tr>
+								<td>= * x$</td>
+								<td>4</td>
+								<td>0, 3</td>
+								<td>Shift 8</td>
+							</tr>
+
+						</table>
+
+					</div>
+
+					<div class="evenpoint">
+
+						<p>
+							Now that the two main operations (shift and reduce) have
+							been demonstrated, you can try to do the rest of the table
+							yourself.  If you get into trouble, the result is below:
+						</p>
+
+						<table>
+
+							<tr>
+								<th>Input</th>
+								<th>Output</th>
+								<th>Stack</th>
+								<th>Next</th>
+							</tr>
+							<tr>
+								<td>x = * x$</td>
+								<td>&nbsp;</td>
+								<td>0</td>
+								<td>Shift 1</td>
+							</tr>
+							<tr>
+								<td>= * x$</td>
+								<td>&nbsp;</td>
+								<td>0, 1</td>
+								<td>Reduce 4</td>
+							</tr>
+							<tr>
+								<td>= * x$</td>
+								<td>4</td>
+								<td>0, 3</td>
+								<td>Shift 8</td>
+							</tr>
+							<tr>
+								<td>* x$</td>
+								<td>4</td>
+								<td>0, 3, 8</td>
+								<td>Shift 2</td>
+							</tr>
+							<tr>
+								<td>x$</td>
+								<td>4</td>
+								<td>0, 3, 8, 2</td>
+								<td>Shift 1</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4</td>
+								<td>0, 3, 8, 2, 1</td>
+								<td>Reduce 4</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4, 4</td>
+								<td>0, 3, 8, 2, 7</td>
+								<td>Reduce 3</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4, 4, 3</td>
+								<td>0, 3, 8, 2, 6</td>
+								<td>Reduce 5</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4, 4, 3, 5</td>
+								<td>0, 3, 8, 7</td>
+								<td>Reduce 3</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4, 4, 3, 5, 3</td>
+								<td>0, 3, 8, 9</td>
+								<td>Reduce 1</td>
+							</tr>
+							<tr>
+								<td>$</td>
+								<td>4, 4, 3, 5, 3, 1</td>
+								<td>0, 4</td>
+								<td>Accept</td>
+							</tr>
+
+						</table>
+
+					</div>
+
+				</td>
+
+				<td style="border: none; vertical-align: top">
+
+					<h2>A Handy Reference</h2>
+
+					<h3>Rules</h3>
+
+					<ol start="0" style="margin-left: 5em; font-size: x-large;">
+						<li>S &rarr; N</li>
+						<li>N &rarr; V = E</li>
+						<li>N &rarr; E</li>
+						<li>E &rarr; V</li>
+						<li>V &rarr; x</li>
+						<li>V &rarr; * E</li>
+					</ol>
+
+					<h3>Parse Table</h3>
+
+					<table>
+
+						<tr>
+							<th>&nbsp;</th>
+							<th colspan="4">Action</th>
+							<th colspan="4">Goto</th>
+						</tr>
+
+						<tr>
+							<th>State</th>
+							<th>$</th>
+							<th>x</th>
+							<th>=</th>
+							<th>*</th>
+							<th>S</th>
+							<th>N</th>
+							<th>E</th>
+							<th>V</th>
+						</tr>
+
+						<tr>
+							<th>0</th>
+							<td>&nbsp;</td>
+							<td>s1</td>
+							<td>&nbsp;</td>
+							<td>s2</td>
+							<td>&nbsp;</td>
+							<td>4</td>
+							<td>5</td>
+							<td>3</td>
+						</tr>
+
+						<tr>
+							<th>1</th>
+							<td>r4</td>
+							<td>&nbsp;</td>
+							<td>r4</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>2</th>
+							<td>&nbsp;</td>
+							<td>s1</td>
+							<td>&nbsp;</td>
+							<td>s2</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>6</td>
+							<td>7</td>
+						</tr>
+
+						<tr>
+							<th>3</th>
+							<td>r3</td>
+							<td>&nbsp;</td>
+							<td>s8</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>4</th>
+							<td>accept</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>5</th>
+							<td>r2</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>6</th>
+							<td>r5</td>
+							<td>&nbsp;</td>
+							<td>r5</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>7</th>
+							<td>r3</td>
+							<td>&nbsp;</td>
+							<td>r3</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+						<tr>
+							<th>8</th>
+							<td>&nbsp;</td>
+							<td>s1</td>
+							<td>&nbsp;</td>
+							<td>s2</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>9</td>
+							<td>7</td>
+						</tr>
+
+						<tr>
+							<th>9</th>
+							<td>r1</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+
+					</table>
+
+				</td>
+
+			</tr>
+
+		</table>
+
+		<div class="oddpoint">
+
+			<h3>Interpreting the Result</h3>
+
+			<p>
+				In our example of <em>x = * x</em> we get the output <em>4, 4, 3, 5,
+				3, 1</em>.  To review, we'll construct objects based on the example.
+			</p>
+
+			<p>
+				When the first reduction occurred (r4) we had just inputted the
+				terminal <em>x</em>.  By rule 4, <code>V &rarr; x</code>, x mapped
+				onto the non-terminal V.  Thus we have our first object,
+				<em>V(x)</em>.
+			</p>
+
+			<p>
+				The second time a reduction occurs (r4) is just after we've inputted
+				the entire string meaning that we are turning the last <em>x</em>
+				into a V.  Which gives us our second object, <em>V(x)</em>.  At this
+				point we can re-substitute our objects back into the string, which
+				gives us <em>V(x) = * V(x)</em>.
+			</p>
+
+			<p>
+				Reduction 3 just maps the last <em>V(x)</em> into <em>E(V(x))</em>.
+				Giving us <em>V(x) = * E(V(x))</em>.
+			</p>
+
+			<p>The remaining mappings are:</p>
+
+			<ul>
+				<li>V(x) = V(* E(V(x)))</li>
+				<li>V(x) = E(V( * E(V(x))))</li>
+				<li>N(V(x) = E(V( * E(V(x)))))</li>
+				<li>S(N(V(x) = E(V( * E(V(x))))))</li>
+			</ul>
+
+			<p>
+				It is a cumbersome way of looking at it.  But it shows how to map
+				the LR parsing method into constructors.  And if we give each rule a
+				function, then it should be obvious how to generate code.  For
+				example, <em>V(x)</em> could be used to make token <em>x</em> into
+				an object of type <em>V</em>.  Any object of type <em>E</em> is
+				formed by giving the constructor an object of type <em>V</em>. And
+				so on until we reach the eventual end of this example by creating an
+				object of type <em>S</em> by giving it an object of type <em>N</em>.
+			</p>
+
+		</div>
+
+		<hr />
+
+		<h2>Resources</h2>
+
+		<h3>Web-Based</h3>
+
+		<ul>
+			<li>
+				Wikipedia:
+				<a href="http://en.wikipedia.org/wiki/LR_parser">LR(0)</a>
+				<a href="http://en.wikipedia.org/wiki/Canonical_LR_parser">LR(1)</a>
+				<a href="http://en.wikipedia.org/wiki/LALR_parsers">LALR(1)</a> -
+				The LR(0) page in particular was quite helpful.
+			</li>
+			<li>
+				<a href="http://invisible-island.net/byacc/byacc.html">BYACC</a>:
+				Berkley YACC.  A public domain, traditional LALR(1)
+				compiler-compiler.
+			</li>
+			<li>
+				Robin Cockett's
+				<a href="http://pages.cpsc.ucalgary.ca/%7Erobin/class/411/webnotes.html">
+					Online Notes
+				</a>
+				for his compiler construction class at the University of Calgary.
+			</li>
+			<li>
+				James Bunskill's
+				<a href="http://www.jambe.co.nz/UNI/FirstAndFollowSets.html">
+					Easy Explanation of First and Follow Sets
+				</a>
+			</li>
+			<li>
+				<a href="http://www.cs.vu.nl/~dick/PTAPG.html">Parsing Techniques a Practical Guide</a>
+				An approachable encyclopedia of parsing.
+			</li>
+		</ul>
+
+		<h3>Print</h3>
+
+		<ul>
+			<li>
+				<a href="http://www.cs.princeton.edu/~appel/modern/">Modern Compiler Implementation</a>:
+				Recommended introductory text.<br />
+				The example grammar is a modified version of the one in this book.
+			</li>
+			<li>
+				Compilers: Principles, Techniques, and Tools
+				(<a href="http://dragonbook.stanford.edu/">The Dragon Book</a>).
+				<br />The classic text on compiler construction.  It is advanced,
+				but a good reference.
+			</li>
+		</ul>
+
+		<hr />
+
+		<h2>Copying</h2>
+
+		<p>This document was written by Stephen Jackson, &copy; 2009.</p>
+
+		<p>
+			Feel free to copy, modify, distribute, or link this document.
+			I just ask for fair credit if you use my work.
+		</p>
+
+		<hr />
+
+		<p style="font-size: small">
+			If you've gotten this far and are looking for something else to do,
+			drop me a line (My email is <a href="http://www.sjackson.ca">here</a>) with
+			your opinion of this tutorial.
+		</p>
+
+	</body>
+
+</html>
