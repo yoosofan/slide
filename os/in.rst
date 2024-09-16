@@ -26,6 +26,34 @@ Introduction
 
 -----
 
+Course Review
+=============
+* Introduction
+* Process
+    * Multiprogramming
+    * multithread
+    * Synchronization
+        * software
+        * hardware
+    * Deadlock
+    * Eavluation
+* Memory
+    * Main Memory
+        * Absolute Address
+        * Relative Address
+        * paging
+        * Virtual Memory
+        * segmentation
+        * segmentation and paging combinations
+        * Invert table
+    * Secondary Storage
+        * Disks
+            * disk allocation
+            * free space management
+        * file organization
+
+-----
+
 Making an imaginary computer step by step
 =========================================
 Finding more about how hardware and software works
@@ -144,12 +172,14 @@ Instruction Set(II)
     :class: substep
     
     ..........
+    ..........
     
     LB1:    out
             sko
             bun LB1
 
-     ..........
+    ...........
+    ...........
     
 
 ----
@@ -194,6 +224,34 @@ hex pad connect to microcontroller
 https://www.circuitstoday.com/interfacing-hex-keypad-to-8051
 
 https://circuitdigest.com/microcontroller-projects/keypad-interfacing-with-avr-atmega32
+
+----
+
+General Types of Computers
+===========================
+* Analog Computer
+    * pros
+    * cons
+* Digital Computer
+    * pros
+    * cons
+* Quantum Computer
+    * pros
+    * cons
+
+----
+
+Hardware vs Software
+==========================
+.. class:: substep
+
+* pros
+    * Less code
+    * More speed
+    * Less errors of writing code
+* cons
+    * Cost
+    * Less Flexible
 
 ----
 
@@ -515,20 +573,6 @@ Hardware insead of Software
   جزوهٔ درس معماری کامپیوتر دکتر مختار معصومی 
   https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
   https://www.geeksforgeeks.org/bcd-to-7-segment-decoder/
-
-----
-
-Hardware vs Software
-==========================
-.. class:: substep
-
-* pros
-    * Less code
-    * More speed
-    * Less errors of writing code
-* cons
-    * Cost
-    * Less Flexible
 
 ----
 

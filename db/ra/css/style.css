@@ -243,3 +243,15 @@ div.scrollbar-box800x500px-overflow{
     font-weight: bold;
     background-color: #BFBFBF;
 }
+
+/* 
+https://docs.yugabyte.com
+*/
+
+svg.rrdiagram{max-width:100%}
+svg.rrdiagram .connector{fill:none;stroke:#222}
+svg.rrdiagram .text{fill:#000;font-family:Verdana,sans-serif;font-size:12px}
+svg.rrdiagram .literal{fill:#90d9ff;stroke:#222}
+svg.rrdiagram .rule{fill:#d3f0ff;stroke:#222}
+
+
