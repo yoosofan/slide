@@ -939,19 +939,19 @@ Rename
             times
             (sp rename pn as sppn)
           ) where pn = sppn 
-        ) {pn, pname, weight, color};
+        ) {pn, pname, weight, color, city};
 
 .. csv-table::
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
-    WEIGHT,PN,PNAME,COLOR
-    12,P1,Nut,Red
-    17,P2,Bolt,Green
-    17,P3,Screw,Blue
-    14,P4,Screw,Red
-    12,P5,Cam,Blue
-    19,P6,Cog,Red
+  "COLOR","PNAME","PN","WEIGHT","CITY"
+  "Red","Nut","P1",12,"London"
+  "Green","Bolt","P2",17,"Paris"
+  "Blue","Screw","P3",17,"Oslo"
+  "Red","Screw","P4",14,"london"
+  "Blue","Cam","P5",12,"Paris"
+  "Red","Cog","P6",19,"London"
 
 ----
 
@@ -1045,7 +1045,7 @@ Rename
       ( (p{pn} times s{sn})  minus  sp{sn,pn} )
       times
       (s{sn, sname} rename sn as ssn)
-    ) where sn == ssn
+    ) where sn = ssn
   )
   times
   (p{pn, pname} rename pn as ppn)
@@ -1068,11 +1068,11 @@ Rename
         ( (p{pn} times s{sn})  minus  sp{sn,pn} )
         times
         (s{sn, sname} rename sn as ssn)
-      ) where sn == ssn
+      ) where sn = ssn
     )
     times
       (p{pn, pname} rename pn as ppn)
-  ) where pn == ppn
+  ) where pn = ppn
   ;
 
 .. code:: sql
@@ -1085,7 +1085,7 @@ Rename
       (s{sn, sname} rename sn as ssn)
       times
       (p{pn, pname} rename pn as ppn)
-    ) where pn == ppn and sn == ssn
+    ) where pn = ppn and sn = ssn
   ) 
   {sname, pname}
   ;
@@ -1106,7 +1106,7 @@ Rename
       (s{sn, sname} rename sn as ssn)
       times
       (p{pn, pname} rename pn as ppn)
-    ) where pn == ppn and sn == ssn
+    ) where pn = ppn and sn = ssn
   ) 
   {sname, pname}
   ;
