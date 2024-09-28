@@ -254,7 +254,7 @@ More Samples
 
 * ID, a
 * ASG,
-* CC, "
+* CC, ''
 * SEM,
 
 .. code:: cpp
@@ -526,13 +526,13 @@ Keywords in Symbol Table
     :header-rows: 1
     :class: smallerelementwithfullborder
 
-    Name, Type, Value
-    if, IF,
-    while, WHILE,
-    int, INT,
-    "...","...",
-    a, ID,
-    count, ID,
+    Name, Type
+    if, IF
+    while, WHILE
+    int, INT
+    "...","..."
+    a, ID
+    count, ID
 
   .. code:: cpp
 
