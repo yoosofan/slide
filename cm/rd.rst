@@ -1890,7 +1890,8 @@ Parser Tree
     A23 [label="("]
     A24 [label="E[3-1]"]
     A25 [label=")"]
-    A04 [label="T[3]"]
+    A04 [label="E[3]"]
+    A44 [label="T[3]"]
     A13 [label="-"]
     A16 [label="T[1]"]
     A07 [label="F[1]"]
@@ -1908,7 +1909,8 @@ Parser Tree
     A24   -> A13
     A24   -> A16
     A16   -> A07
-    A04   -> A08
+    A04   -> A44
+    A44   -> A08
     A54   -> A56
   }
 
