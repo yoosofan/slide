@@ -2583,7 +2583,7 @@ Calculation on tuples instead of relations
 
 .. class:: rtl-h1
 
-    زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و دست کم یکی از آن دو عرضه کننده، قطعه یا قطعه‌هایی عرضه کرده باشند.
+    زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و دست کم یکی از آن دو عرضه کننده، قطعه یا قطعه‌هایی را عرضه کرده باشند.
 
 .. csv-table::
   :header-rows: 1
@@ -2639,14 +2639,6 @@ Calculation on tuples instead of relations
 
   sn,sn2
   s1,s2
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و دست کم یکی از آن دو عرضه کننده، قطعه یا قطعه‌هایی عرضه کرده باشند.
 
 .. code:: sql
   :class: substep
@@ -2784,6 +2776,24 @@ Calculation on tuples instead of relations
     sx.sn=spx.sn and 
     exists spx( spx.pn=px.pn) 
   )
+
+.. code:: sql
+  :class: substep
+
+  -- نادرست
+  sx.sname where exists spx(
+    sx.sn=spx.sn and 
+    forall px(spx.pn=px.pn) 
+  )
+
+.. code:: sql
+  :class: substep
+
+  -- نادرست
+  sx.sname where forall spx(
+    exists px(
+      spx.pn=px.pn and sx.sn=spx.sn
+    )
 
 ----
 
