@@ -1,8 +1,7 @@
-class Symbol_table:
-  def __init__(self):
-    self.Global_n=0
-    self.Global_name=[]
-    self.Global_value=[]
+class my_st:
+  n=0
+  name=[]
+  value=[]
 
 tokens = ('NUMBER','PLUS', 'MINUS', 'MUL', 'DIV', 'LPAR', 'RPAR', 'ASG', 'ID')
 t_PLUS     = r'\+'
@@ -31,13 +30,13 @@ def p_SL(p):
   print('S → L ', p[1])
 def p_L(p):
   ' L : ID ASG E' # L → id = E
-  if p[1] not in st.Global_name : 
-    st.Global_name.append(p[1])
-    st.Global_value.append(p[3])
-    st.Global_n += 1
+  if p[1] not in my_st.name : 
+    my_st.name.append(p[1])
+    my_st.value.append(p[3])
+    my_st.n += 1
   else:
-    i = st.Global_name.index(p[1])
-    st.Global_value[i] = p[3]
+    i = my_st.name.index(p[1])
+    my_st.value[i] = p[3]
   print('L : id = E ', p[1],'\t' , p[3])
   p[0] = p[3]
 
@@ -72,8 +71,8 @@ def p_F_a(p):
   print('F → a :', p[1])
 def p_F_id(p):
   'F : ID' # F → a
-  i = st.Global_name.index(p[1])
-  p[0] = st.Global_value[i]
+  i = my_st.name.index(p[1])
+  p[0] = my_st.value[i]
   print('F → a :', p[1])
 def p_F_lpar_E_rpar(p):
   'F : LPAR E RPAR' # F → ( E )
@@ -82,10 +81,7 @@ def p_F_lpar_E_rpar(p):
 def p_error(p):
   print("Syntax error at '%s'" % p.value)
 import ply.yacc as yacc; yacc.yacc()
-
-st = Symbol_table()
 while True:
   s = input('calc > ')
   if s.strip()=='':break
   yacc.parse(s)
-
