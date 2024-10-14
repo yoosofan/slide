@@ -40,7 +40,7 @@ https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 
 .. class:: ltr
 
-   .. image:: img/recursive.descendant.method/calculator/calculator.svg
+   .. image:: img/rd/calculator/calculator.svg
       :height: 20em
       :width:  20em
       :align:  center
