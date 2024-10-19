@@ -88,7 +88,6 @@ Reduce Function Calls
   #. a B $,  [abaa$]
   #. B $,  [baa$]
   #. b A $ , [baa$]
-  #. b A $, [baa$]
   #. A $, [aa$]
   #. a B $, [aa$]
   #. B $, [a$]

@@ -120,4 +120,4 @@ https://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 .. comment:
 
   rst2s5.py calculator_recursive_descendant.rst calculator_recursive_descendant.html -d -t --section-numbering --stylesheet=farsi.css,html4css1.css 
-  rst2html.py calculator_recursive_descendant.rst 22calculator_recursive_descendant.html --stylesheet=../../tools/farsi.css,html4css1.css 
+  rst2html4.py calculator_recursive_descendant.rst 22calculator_recursive_descendant.html --stylesheet=../../tools/farsi.css,html4css1.css 
