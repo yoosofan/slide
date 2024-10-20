@@ -3138,7 +3138,7 @@ Calculation on tuples instead of relations
     
     bookx.author where forall booky(
       bookx.author <> booky.author or 
-      exist borrowx(borrowx.bn=bookx.bn)
+      exist borrowx(borrowx.bn=booky.bn)
     )
 
 ----
