@@ -83,7 +83,7 @@ table.smallerelementwithfullborder,
 table.smallerelementwithfullborder tr, 
 table.smallerelementwithfullborder td, 
 table.smallerelementwithfullborder th 
-{border: 1px solid black;font-size: 90%;/*padding: 0.3rem;*/}
+{border: 1px solid black;/*padding: 0.3rem;*/}
 table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p
 {font-weight: bold;}
 .grid-2col-class{

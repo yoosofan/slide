@@ -1072,40 +1072,39 @@ Use LL Table for Parsing
   :class: smallerelementwithfullborder equal-col
 
   "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
-  E   ,  T E' ,           ,          ,          ,           ,  T E'  ,     ,
-  E'  ,       ,  `+` T E' , `-` T E' ,          ,           ,        ,   λ ,  λ
-  T   ,  F T' ,           ,          ,          ,           , F T'   ,     ,
-  T'  ,       ,     λ     ,    λ     , `*` F T' ,  `/` F T' ,        ,   λ ,  λ
-  F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
+  E   ,  TE' ,           ,          ,          ,           ,  TE'  ,     ,
+  E'  ,       ,  `+` TE' , `-` TE' ,          ,           ,        ,   λ ,  λ
+  T   ,  FT' ,           ,          ,          ,           , FT'   ,     ,
+  T'  ,       ,     λ     ,    λ     , `*` FT' ,  `/` FT' ,        ,   λ ,  λ
+  F   ,   a   ,           ,          ,          ,           , `(`E`)`  ,     ,
 
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder equal-col
 
-  Stack             ,  input       , action
-  E               $ , .( a + a ) a   $ , E → T E'
-  T E'            $ , .( a + a ) a   $ , T → F T'
-  F T' E'         $ , .( a + a ) a   $ , F → ( E )
-  ( E ) T' E'     $ , .( a + a ) a   $ , Remove (
-  E ) T' E'       $ , .  a + a ) a   $ , E → T E' 
-  T E' ) T' E'    $ , .  a + a ) a   $ , T → F T' 
-  F T' E' ) T' E' $ , .  a + a ) a   $ , F → a 
-  a T' E' ) T' E' $ , .  a + a ) a   $ , Remove a
-  T' E' ) T' E'   $ , .  + a ) a     $ , T' → λ
-  E' ) T' E'      $ , .  + a ) a     $ , E' → + T E' 
-  + T E' ) T' E'  $ , .  + a ) a     $ , Remove + 
-  T E' ) T' E'    $ , .  a ) a       $ , T → F T' 
-  F T' E' ) T' E' $ , .  a ) a       $ , F → a 
-  a T' E' ) T' E' $ , .  a ) a       $ , Remove a
-  T' E' ) T' E'   $ , .  ) a         $ , T' → λ
-  E' ) T' E'      $ , .  ) a         $ , E' → λ
-  ) T' E'         $ , .  ) a         $ , Remove )
+  Stack           ,  input       , action
+  E              $, .( a + a ) a$ , E → T E'
+  T E'           $, .( a + a ) a$ , T → F T'
+  F T' E'        $, .( a + a ) a$ , F → ( E )
+  ( E ) T' E'    $, .( a + a ) a$ , Remove (
+  E ) T' E'      $, .  a + a ) a$ , E → T E' 
+  T E' ) T' E'   $, .  a + a ) a$ , T → F T' 
+  F T' E' ) T' E'$, .  a + a ) a$ , F → a 
+  a T' E' ) T' E'$, .  a + a ) a$ , Remove a
+  T' E' ) T' E'  $, .  + a ) a  $ , T' → λ
+  E' ) T' E'     $, .  + a ) a  $ , E' → + T E' 
+  `+` T E' ) T' E'$, .  + a ) a  $ , Remove + 
+  T E' ) T' E'   $, .  a ) a    $ , T → F T' 
+  F T' E' ) T' E'$, .  a ) a    $ , F → a 
+  a T' E' ) T' E'$, .  a ) a    $ , Remove a
+  T' E' ) T' E'  $, .  ) a      $ , T' → λ
+  E' ) T' E'     $, .  ) a      $ , E' → λ
+  ) T' E'        $, .  ) a      $ , Remove )
 
 
-
-  T' E'           $ , .  a           $ , T' → λ
-   E'             $ , .  a           $ , E' → λ
-                  $ , .  a           $ , Reject
+  T' E'          $, .  a       $ , T' → λ
+   E'            $, .  a       $ , E' → λ
+                 $, .  a       $ , Reject
 
 ----
 
@@ -1143,31 +1142,52 @@ Use LL Table for Parsing
   :class: smallerelementwithfullborder equal-col
 
   "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
-  E   ,  T E' ,           ,          ,          ,           ,  T E'  ,     ,
-  E'  ,       ,  `+` T E' , `-` T E' ,          ,           ,        ,   λ ,  λ
-  T   ,  F T' ,           ,          ,          ,           , F T'   ,     ,
-  T'  ,       ,     λ     ,    λ     , `*` F T' ,  `/` F T' ,        ,   λ ,  λ
-  F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
+  E   ,  TE'  ,           ,          ,          ,           ,  TE'  ,     ,
+  E'  ,       ,  `+TE'` , `-TE'` ,          ,           ,        ,   λ ,  λ
+  T   ,  `FT'` ,           ,          ,          ,           , FT'   ,     ,
+  T'  ,       ,     λ     ,    λ     , `*FT'` ,  `/FT'` ,        ,   λ ,  λ
+  F   ,   a   ,           ,          ,          ,           , `(E)`  ,     ,
 
 ----
 
-#. S → i(r) S  | i(r) S e S | o
+:class: t2c
 
-* Eliminate Left Factor
+S → i(r) S  | i(r) S e S | o
+==============================
+.. container:: 
 
-#. S → i(r) S A | o
-#. A → e S | λ
+  * Eliminate Left Factor
 
-* first(S)  = {i, o} , first(A)  = {e, λ}
-* follow(S) = {$, e} , follow(A) = {$, e}
+  #. S → i(r) S A | o
+  #. A → e S | λ
+
+  * first(S)  = {i, o} , first(A)  = {e, λ}
+  * follow(S) = {$, e} , follow(A) = {$, e}
+
+  .. csv-table::
+    :header-rows: 1
+    :class: substep smallerelementwithfullborder equal-col
+
+    "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
+    S   ,  `i(r)SA` ,   ,           ,  o   ,       ,     ,
+    A   ,              ,   , `eS/λ`   ,      ,       ,     ,  λ  
 
 .. csv-table::
   :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+  :class: smallerelementwithfullborder equal-col
 
-  "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
-  S   ,  i ( r ) S A ,   ,           ,  o   ,       ,     ,
-  A   ,              ,   , e S / λ   ,      ,       ,     ,  λ  
+  Stack           ,  input       , action
+  S              $, .i(r)S$ , E → T E'
+  T E'           $, .( a + a ) a$ , T → F T'
+  F T' E'        $, .( a + a ) a$ , F → ( E )
+  ( E ) T' E'    $, .( a + a ) a$ , Remove (
+  E ) T' E'      $, .  a + a ) a$ , E → T E' 
+  T E' ) T' E'   $, .  a + a ) a$ , T → F T' 
+  F T' E' ) T' E'$, .  a + a ) a$ , F → a 
+  a T' E' ) T' E'$, .  a + a ) a$ , Remove a
+  T' E' ) T' E'  $, .  + a ) a  $ , T' → λ
+  E' ) T' E'     $, .  + a ) a  $ , E' → + T E' 
+  `+` T E' ) T' E'$, .  + a ) a  $ , Remove + 
 
 ----
 
