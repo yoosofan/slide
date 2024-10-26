@@ -1279,12 +1279,6 @@ Use Another name for a Table in Query
   Screw
   Cam
 
-.. :
-
-  .. class:: rtl-h3 substep
-
-      راه حل نادرست
-
 .. code:: sql
   :class: substep
 

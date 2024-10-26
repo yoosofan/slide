@@ -377,7 +377,7 @@ Effective Access Time (EAT)
     * EAT = 0.95 * 1 + (1 − 0.95) * (100 + 1)
     * EAT = 0.95 + 0.05 * 101
     * EAT = 0.95 + 5.05
-    * EAT = 5.1 μs
+    * EAT = 6 μs
 
 ----
 
