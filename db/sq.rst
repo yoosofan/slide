@@ -1424,7 +1424,7 @@ Use Another name for a Table in Query
 
   select pname, city
   from p
-  where city like "bn\_%"
+  where city like 'bn\_'
   ;
 
 ----
@@ -1980,15 +1980,26 @@ Except
 
   شمارهٔ قطعات و شمارهٔ عرضه‌کنندگانی را بیابید که قطعات یاد شده را آن عرضه کنندگان عرضه نکرده باشند
 
-.. code:: sql
-  :class: substep
+.. container::
 
-  select pn, sn
-  from p, s
-  except
-  select pn, sn
-  from sp
-  ;
+  .. code:: sql
+    :class: substep
+
+    select pn, sn
+    from p, s
+    except
+    select pn, sn
+    from sp
+    ;
+
+  .. code:: sql
+    :class: substep
+
+      select p.pn, s.sn  -- Wrong
+      from p, s, sp
+      where (s.sn, p.pn) <> (sp.sn, sp.pn)
+      ;
+
 
 .. list-table::
 
@@ -2048,6 +2059,61 @@ Except
           p8, s4
           p8, s5
           p8, s6
+
+----
+
+:class: t2c
+
+.. container::
+
+  .. code:: sql
+
+    select pn, sn
+    from p, s
+    except
+    select pn, sn
+    from sp
+    ;
+  
+  .. code:: sql
+
+      select p.pn, s.sn  -- Wrong
+      from p, s, sp
+      where (s.sn, p.pn) <> (sp.sn, sp.pn)
+      ;
+
+  .. code:: sql
+    :class: substep
+
+      select p.pn, s.sn from p, s, sp
+      where (s.sn, p.pn) <> (sp.sn, sp.pn)
+    except
+      select pn, sn
+      from ( 
+        select pn, sn from p, s
+        except
+        select pn, sn from sp
+      )
+    ;  
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  pn,	sn
+  p1,	s1
+  p1,	s2
+  p2,	s1
+  p2,	s2
+  p2,	s3
+  p2,	s4
+  p2,	s6
+  p3,	s1
+  p4,	s1
+  p4,	s4
+  p5,	s1
+  p5,	s4
+  p6,	s1
 
 ----
 

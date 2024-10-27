@@ -2242,26 +2242,33 @@ Foreign key
 * sn from s
 * pn from p
 
+
+SPJ
 ----
+* S(sn_,sname,status,city) ,
+* P(pn_,pname,color,weight,city) ,
+* J(jn_,jname,budget,city)
+* SPJ(sn_, pn_, jn_, qty)
+
+----
+
+:class: t2c
 
 Project/Deparment/Employee
 ================================
-Design 1
------------
+* Design 1
 * Employee(SSN_, name, salary, Dn)
 * Department(DN_, DeptName, MgrSSN)
 * Project(PN_, location, ProjName)
 * HourLog(SSN_, PN_, hours)
 
-Design 2
---------
-* Employee(SSN_, name, salary, DeptName)
-* Department(DeptName_, MgrSSN)
-* Project(PN_, location, ProjName)
-* HourLog(SSN_, PN_, hours)
+#. Design 2
+#. Employee(SSN_, name, salary, DeptName)
+#. Department(DeptName_, MgrSSN)
+#. Project(PN_, location, ProjName)
+#. HourLog(SSN_, PN_, hours)
 
-Design 3
---------
+* Design 3
 * Employee(SSN_, name, salary, DeptName)
 * Department(DeptName_, MgrSSN)
 * Project(ProjName_, location)
@@ -2269,19 +2276,37 @@ Design 3
 
 ----
 
-SPJ
-=========
-* S(sn_,sname,status,city) ,
-* P(pn_,pname,color,weight,city) ,
-* J(jn_,jname,budget,city)
-* SPJ(sn_, pn_, jn_, qty)
+Library(I)
+===========
+* book(bn_, title, category, fpd, author)
+* member(mn_, name, category, bn)
+* borrow(bn_, mn_, nd, rdt, ret)
 
-Library
---------------
 
-* book( bn_ , title, category, fpd, author )
-* member( mn_ , name , category, bn)
-* borrow( bn_ , mn_ , nd , rdt, ret)
+.. class:: rtl
+
+#. در اینجا فرض می‌کنیم از هر کتابی فقط یک نسخهٔ آن در کتابخانه هست. پس bn می‌تواند همان isbn باشد.
+#. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
+#. book. fpd جریمه دیر آوردن کتاب به ازای روز
+#. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
+#. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+
+----
+
+Library(II)
+===========
+* book(bn_, title, category, fpd, author, nday, isbn)
+* member(mn_, name, category, isbn)
+* borrow(bn_, mn_, nd, rdt, ret)
+
+.. class:: rtl
+
+#. book.bn شمارهٔ کتاب در این کتابخانه زیرا شاید از یک کتاب خاص چند نمونه از آن را داشته باشیم
+#. book.isbn شابک کتاب
+#. book.nday  تعداد روزی که می‌تواند کتاب به امانت برده شود کتاب‌هایی نیز هست که نمی‌توان بیرون برد و برای همین صفر برای nday آنها گذاشته می‌شود.
+#. member.isbn کتابی که بیشتر از همه کتاب‌های کتابخانه این عضو به آن علاقه‌مند است.
+
+
 
 ----
 
