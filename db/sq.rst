@@ -2563,7 +2563,7 @@ Exists
 
 .. class:: rtl-h1
 
-      نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند
+      نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
 
 .. code:: sql
   :class: substep
@@ -2579,23 +2579,21 @@ Exists
     )
   ;
 
+
 .. code:: sql
     :class: substep
 
-    select distinct pname
-    from p
-    where exists(
+      select pname -- ریحانه زمانیان
+      from p natural join sp
+    except
+      select pname
+      from p
+      where exist(
         select *
-        from sp natural join s
-        where sp.pn = p.pn and
-          p.city = s.city
-      ) and not exists(
-        select *
-        from sp natural join s
-        where sp.pn = p.pn and
-          p.city <> s.city
-      )
-    ;
+        from s natural join sp
+        where sp.pn=p.pn and
+            p.city <> s.city
+      ) ;
 
 .. csv-table::
   :header-rows: 1
@@ -2604,21 +2602,6 @@ Exists
     pname
     Screw
     Cog
-
-.. :
-
-
-    select pname -- ریحانه زمانیان
-    from p natural join sp
-    except all
-    select pname
-    from p
-    where exist(
-    select *
-    from s natural join sp
-    where sp.pn=p.pn and
-    p.city<> s.city
-    ) ;
 
 ----
 
