@@ -693,8 +693,6 @@ Maximux memory supported by cpu
 
 Consider a computer with maximum 16 words
 ==========================================
-.. class:: substep
-
 #. Draw Memory Bytes
 #. d = 2
 #. Draw Memory Frames
@@ -722,7 +720,7 @@ Consider a computer with maximum 16 words
     "00 ","01 ","10 ","11 "
     0,1,2,3
 
-  .
+  00 
 
   ..  csv-table::
     :header-rows: 1
@@ -731,7 +729,7 @@ Consider a computer with maximum 16 words
     "00 ","01 ","10 ","11 "
     4,5,6,7
 
-  .
+  01
 
   ..  csv-table::
     :header-rows: 1
@@ -740,7 +738,7 @@ Consider a computer with maximum 16 words
     "00 ","01 ","10 ","11 "
     8,9,10,11
 
-  .
+  10
 
   ..  csv-table::
     :header-rows: 1
@@ -748,6 +746,8 @@ Consider a computer with maximum 16 words
 
     "00 ","01 ","10 ","11 "
     12,13,14,15
+
+  11
 
 ----
 

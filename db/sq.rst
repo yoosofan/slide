@@ -2670,7 +2670,7 @@ Exists
   :class: substep
 
   select distinct pname
-  from p
+  from p join sp
   where not exists(
       select *
       from s
@@ -2681,8 +2681,15 @@ Exists
           where s.sn = sp.sn and
             p.pn = sp.pn
         )
+    ) and exists (
+       select *
+       from s
+       where s.status > 100 and
+        s.sn = sp. sn
     )
   ;
+
+
 
 .. csv-table::
   :header-rows: 1
