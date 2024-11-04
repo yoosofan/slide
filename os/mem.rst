@@ -844,11 +844,24 @@ PTBR
 
 ----
 
-.. class:: rtl-h1
+TLB
+======
+.. image:: img/memory/paging_hardware_with_TLB.png
+   :align: center
 
-    حفاظت از حافظهٔ صفحه‌بندی شده
+----
 
-.. image:: img/memory/paging_valid_invalid.png
+Flowchart of TLB miss
+=========================
+.. image:: img/memory/paging_hardware_TLB_miss.png
+   :align: center
+   :height: 550px
+
+----
+
+Paging Memory Access
+=====================
+.. image:: img/memory/memory_paging_page_table_and_cache.jpg
    :align: center
 
 ----
@@ -865,28 +878,6 @@ PTBR
 
 .. image:: img/memory/paging_sharing_code.png
    :align: center
-
-----
-
-Paging Memory Access
-=====================
-.. image:: img/memory/memory_paging_page_table_and_cache.jpg
-   :align: center
-
-----
-
-TLB
-======
-.. image:: img/memory/paging_hardware_with_TLB.png
-   :align: center
-
-----
-
-Flowchart of TLB miss
-=========================
-.. image:: img/memory/paging_hardware_TLB_miss.png
-   :align: center
-   :height: 550px
 
 ----
 
@@ -1037,6 +1028,15 @@ Frame Size(II)
     * 32 - 20 = 12
     * 2^12 = 4096 Frame
     * ? , Maximum Number of Processes
+
+----
+
+.. class:: rtl-h1
+
+    حفاظت از حافظهٔ صفحه‌بندی شده
+
+.. image:: img/memory/paging_valid_invalid.png
+   :align: center
 
 ----
 

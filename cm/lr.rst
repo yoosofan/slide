@@ -245,7 +245,7 @@ Simple Add(VI)
 
 Simple Add(VII)
 ======================
-#. S → E 
+#. S → E
 #. E → E + a
 #. E → a
 
@@ -291,7 +291,7 @@ Simple Add(VII)
 
 Simple Add(VII)
 ======================
-#. S → E 
+#. S → E
 #. E → E + a
 #. E → a
 
@@ -434,7 +434,7 @@ Simple Calculator(II)
     state0 -> state3 [ label = "F" ];
     state0 -> state4 [  label = "a" ];
     state0 -> state5 [  label = "(" ];
-    
+
   }
 
 ----
@@ -537,6 +537,27 @@ Simple Calculator(XX)
 ----
 
 .. image:: img/lr/slr_etf.png
+
+----
+
+LR Table
+=========
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
+
+    , id, + , * , `(`, `)`, $ , E , T , F
+  I0, s5,   ,   , s4 ,    ,acc,   ,   ,
+  I1,   , s6,   ,    ,    ,   ,   ,   ,
+  I2,   ,   , s7,    ,    ,   ,   ,   ,
+  I3,   ,   ,   ,    ,    ,   ,   ,   ,
+  I4, s5,   ,   , s4 ,    ,   , 8 , 2 , 3
+  I5,   ,   ,   ,    ,    ,   ,   ,   ,
+  I6, s5,   ,   , s4 ,    ,   ,   , 9 , 3
+  I7,   ,   ,   ,    ,    ,   ,   ,   , 10
+  I8,   ,   ,   ,    ,    ,   ,   ,   ,
+
+
 
 ----
 
@@ -672,9 +693,9 @@ An Especial Grammar
 
 :class: t2c
 
-* first(S)  = {a, *}
-* first(L)  = {a, *}
-* first(R)  = {a, *}
+* first(S)  = {a, `*`}
+* first(L)  = {a, `*`}
+* first(R)  = {a, `*`}
 * follow(S) = {$, =}
 * follow(L) = {$, =}
 * follow(R) = {$, =}
@@ -682,19 +703,19 @@ An Especial Grammar
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder equal-col
-  
+
   t , a , * , = , $ , S , L , R
   I0, s5, s4,   ,   , 1 , 2 , 3
-  I1,   ,   ,   ,acc,   ,   , 
-  I2,   ,   ,s8/   ,   ,   ,   , 
-  I3,   ,   ,   ,   ,   ,   , 
-  I4,   ,   ,   ,   ,   ,   , 
-  I5,   ,   ,   ,   ,   ,   , 
-  I6,   ,   ,   ,   ,   ,   , 
-  I7,   ,   ,   ,   ,   ,   , 
-  I8,   ,   ,   ,   ,   ,   , 
+  I1,   ,   ,   ,acc,   ,   ,
+  I2,   ,   ,s8/   ,   ,   ,   ,
+  I3,   ,   ,   ,   ,   ,   ,
+  I4,   ,   ,   ,   ,   ,   ,
+  I5,   ,   ,   ,   ,   ,   ,
+  I6,   ,   ,   ,   ,   ,   ,
+  I7,   ,   ,   ,   ,   ,   ,
+  I8,   ,   ,   ,   ,   ,   ,
 
- 
+
 ----
 
 .. yographviz::
@@ -854,7 +875,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -935,7 +956,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1016,7 +1037,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1097,7 +1118,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1178,7 +1199,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1259,7 +1280,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1340,7 +1361,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1421,7 +1442,7 @@ Look ahead
         state8 -> I4 [  label = "*" ];
         state8 -> I5 [  label = "a" ];
       }
- 
+
 ----
 
 :data-transition-duration: 1
@@ -1513,17 +1534,17 @@ LALR
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder equal-col
-  
+
   t , a , * , = , $ , S , L , R
   I0, s5, s4,   ,   , 1 , 2 , 3
-  I1,   ,   ,   ,acc,   ,   , 
-  I2,   ,   ,s8/   ,   ,   ,   , 
-  I3,   ,   ,   ,   ,   ,   , 
-  I4,   ,   ,   ,   ,   ,   , 
-  I5,   ,   ,   ,   ,   ,   , 
-  I6,   ,   ,   ,   ,   ,   , 
-  I7,   ,   ,   ,   ,   ,   , 
-  I8,   ,   ,   ,   ,   ,   , 
+  I1,   ,   ,   ,acc,   ,   ,
+  I2,   ,   ,s8/   ,   ,   ,   ,
+  I3,   ,   ,   ,   ,   ,   ,
+  I4,   ,   ,   ,   ,   ,   ,
+  I5,   ,   ,   ,   ,   ,   ,
+  I6,   ,   ,   ,   ,   ,   ,
+  I7,   ,   ,   ,   ,   ,   ,
+  I8,   ,   ,   ,   ,   ,   ,
 
 ----
 
