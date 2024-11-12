@@ -3246,7 +3246,7 @@ Average
 .. code:: sql
   :class: substep
 
-  select avg(qt) as sqt
+  select avg(qty) as sqt
   from   sp
   ;
 
