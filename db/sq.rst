@@ -122,7 +122,7 @@ Database
     * s, p, sp
 
     **Database Schema**
-    
+
     .. code:: sql
 
       create database sp;
@@ -130,7 +130,7 @@ Database
 .. container::
 
     **DBMS(Database Management System)**
-    
+
     * An application
     * RDBMS
     * DB2, Oracle, PostgreSQL, MySQL, SqlServer, MariaDB
@@ -2074,7 +2074,7 @@ Except
     select pn, sn
     from sp
     ;
-  
+
   .. code:: sql
 
       select p.pn, s.sn  -- Wrong
@@ -2089,31 +2089,31 @@ Except
       where (s.sn, p.pn) <> (sp.sn, sp.pn)
     except
       select pn, sn
-      from ( 
+      from (
         select pn, sn from p, s
         except
         select pn, sn from sp
       )
-    ;  
+    ;
 
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pn,	sn
-  p1,	s1
-  p1,	s2
-  p2,	s1
-  p2,	s2
-  p2,	s3
-  p2,	s4
-  p2,	s6
-  p3,	s1
-  p4,	s1
-  p4,	s4
-  p5,	s1
-  p5,	s4
-  p6,	s1
+  pn, sn
+  p1, s1
+  p1, s2
+  p2, s1
+  p2, s2
+  p2, s3
+  p2, s4
+  p2, s6
+  p3, s1
+  p4, s1
+  p4, s4
+  p5, s1
+  p5, s4
+  p6, s1
 
 ----
 
@@ -2172,7 +2172,7 @@ Except
         Cog,  Ali
         Cog,  Blake
 
-    - |nbsp| |nbsp| |nbsp| 
+    - |nbsp| |nbsp| |nbsp|
 
     - .. csv-table::
         :header-rows: 1
@@ -2279,7 +2279,7 @@ Exists
     .. code:: sql
       :class: substep
 
-      select distinct sname 
+      select distinct sname
       from s natural join p
       ; --  may have different result
 
@@ -2646,7 +2646,7 @@ Exists
 .. :
 
     select pname
-    from p 
+    from p
     where not exists(
        select pn
        from s, sp
@@ -2709,12 +2709,12 @@ Exists
     where not exists(
       select pn
       from sp, s
-      where sp.sn = s.sn and 
+      where sp.sn = s.sn and
           sp.pn = p.pn and
           status > 100
     );
     -- نام قطعاتی را بیابید که عرضه‌ای از آن قطعات باشد که عرضهٔ کنندهٔ آن عرضه وضعیت بیشتر از ۱۰۰ داشته باشد.
-    
+
 
 
     select distinct pname
@@ -4815,10 +4815,6 @@ Scalar value(V)
     from p natural join sp
     group by pn; -- wrong
 
-
-.. image:: img/left_outer_join1_wrong_inner_join.png
-    :class: substep
-
 .. code:: sql
     :class: substep
 
@@ -4829,9 +4825,31 @@ Scalar value(V)
       ) as sqty
     from p;
 
-.. image:: img/left_outer_join1_using_scalar.png
-    :class: substep
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
 
+  pn, sqty
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+
+.. csv-table::
+  :header-rows: 1
+  :class: substep smallerelementwithfullborder
+
+  pn, sqty
+  p1, 600
+  p2, 1350
+  p3, 400
+  p4, 500
+  p5, 500
+  p6, 100
+  p7,
+  p8,
 
 ----
 
@@ -5314,7 +5332,7 @@ Scalar value(IV)
 
   select jname -- درست
   from j natural join (
-    select jn 
+    select jn
     from p join spj using(pn) join
       j using(jn)
     where exits(
@@ -5739,7 +5757,7 @@ Three-valued logic
 
 .. code:: sql
     :number-lines:
-    
+
     select *
     from List_of_tables
     where (conditions) is unknown;
@@ -5747,7 +5765,7 @@ Three-valued logic
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select *
     from List_of_tables
     where (conditions) is not unknown;
@@ -5755,15 +5773,15 @@ Three-valued logic
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select *
     from List_of_tables
     where not ( (conditions) is not unknown);
-   
+
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select *
     from List_of_tables
     where ( (conditions) is not unknown) is not unknown;
@@ -5795,7 +5813,7 @@ The final result of an uknown condition is False
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select pname
     from p
     where weight > 17;
@@ -5810,19 +5828,19 @@ Pr : is a large combinations of conditions
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     ((pr) is not unknown) and pr ;
 
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select *
     from List_of_tables
     where (conditions) is not unknown;
 
 ----
- 
+
 Check
 =======
 .. code:: sql
@@ -6639,7 +6657,7 @@ Unique(I)
         FirstName varchar(255),
         Age int,
         UNIQUE (ID)
-    ); 
+    );
 
 .. code:: sql
     :class: substep
@@ -6650,7 +6668,7 @@ Unique(I)
         FirstName varchar(255),
         Age int,
         CONSTRAINT UC_Person UNIQUE (ID,LastName)
-    ); 
+    );
 
 .. code:: sql
     :class: substep
@@ -6661,8 +6679,8 @@ Unique(I)
       "student_number" bigint Primary key
       );
 
-    insert into 
-      "student"("SSN", "name", "student_number") 
+    insert into
+      "student"("SSN", "name", "student_number")
     values
     ("38947389", "کامران خداپرستی", 973433),
     ("38472389", "کوروش پارسایی", 9632847),
@@ -6700,13 +6718,13 @@ Unique(II)
 .. code:: sql
 
     ALTER TABLE Persons
-    ADD UNIQUE (ID); 
+    ADD UNIQUE (ID);
 
 .. code:: sql
 
     ALTER TABLE Persons
-    ADD CONSTRAINT UC_Person 
-      UNIQUE (ID,LastName); 
+    ADD CONSTRAINT UC_Person
+      UNIQUE (ID,LastName);
 
 .. code:: sql
 
@@ -7244,7 +7262,7 @@ Sample View
      dept_name    varchar(20),
      tot_cred   numeric(3,0) check (tot_cred >= 0),
      primary key (ID),
-     foreign key (dept_name) 
+     foreign key (dept_name)
       references department (dept_name)
       on delete set null
     );
@@ -7268,7 +7286,7 @@ Sample View
      name     varchar(20) not null,
      dept_name    varchar(20),
      primary key (ID),
-     foreign key (dept_name) 
+     foreign key (dept_name)
       references department (dept_name)
       on delete set null
     );
@@ -7295,16 +7313,16 @@ Sample View
   DROP VIEW [ IF EXISTS ] kashan_parts;
 
 .. code:: sql
-  
+
   drop view if exists m2;
   drop view if exists m1;
-  
+
   create view m1 as
     select sn, city
     from s
-    where status > 8 
+    where status > 8
     ;
-    
+
   create view m2 as
     select sn, pn
     from m1 natural join p
@@ -7411,10 +7429,10 @@ Recursive query
     (course_id    varchar(8),
      title      varchar(50),
      dept_name    varchar(20),
-     credits    numeric(2,0) 
+     credits    numeric(2,0)
        check (credits > 0),
      primary key (course_id),
-     foreign key (dept_name) 
+     foreign key (dept_name)
        references department
        (dept_name)
        on delete set null
@@ -7462,8 +7480,8 @@ General Recursive Form
 
         union [all]
 
-        -- Recursive term. Notice the 
-        -- so-called recursive 
+        -- Recursive term. Notice the
+        -- so-called recursive
         -- self-reference to r.
         (
           select ... from r ...
@@ -7510,7 +7528,7 @@ General Recursive Form
   The WITH clause
 
   The WITH clause (sometimes known as the common table expression) can be used as part of a SELECT statement, an INSERT statement, an UPDATE statement, or a DELETE statement. For this reason, the functionality is described in a dedicated section
-  
+
 ----
 
 Maximum one recursive CTE (Common Table Expression)
@@ -7545,13 +7563,13 @@ Maximum one recursive CTE (Common Table Expression)
   https://docs.yugabyte.com/preview/api/ysql/the-sql-language/
   https://www.mssqltips.com/sqlservertip/1520/recursive-queries-using-common-table-expressions-cte-in-sql-server/
   https://www.kodyaz.com/t-sql/sql-server-recursive-query-with-recursive-cte.aspx
-  https://www.dwhpro.com/teradata-recursive-queries/  
+  https://www.dwhpro.com/teradata-recursive-queries/
 
   sql "with recursive" query s p sp
-  
+
 ----
 
-  
+
 END
 
 .. :
