@@ -135,7 +135,7 @@ Anotated parse tree
 ==========================
 a[8]+a[9]+a[2]
 
-.., yographviz::
+.. yographviz::
 
       digraph g {
         node [ shape = "plaintext" ];

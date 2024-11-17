@@ -4059,7 +4059,7 @@ group by
 
 .. class:: rtl-h1
 
-  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ نیز آنها را عرضه کرده باشند و جمع وزنی عرضه‌های هر کدام از آن پروژه‌ها بیشتر از ۱۰۰ باشد
+  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ نیز آنها را عرضه کرده باشند و جمع وزنی عرضه‌های هر کدام از آن پروژه‌ها بیشتر از ۱۰۰ باشد(I)
 
 .. code:: sql
   :class: substep
@@ -4097,6 +4097,34 @@ group by
     having(sum(weight*qty)>100)
   )
   ;
+
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ نیز آنها را عرضه کرده باشند و جمع وزنی عرضه‌های هر کدام از آن پروژه‌ها بیشتر از ۱۰۰ باشد(II)
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select jname
+  from j natural join (
+    select jn
+    from spj join j using(jn)
+      join p using(pn)
+    where exists (
+        select *
+        from s
+        where s.sn = spj.sn and
+          s.status > 20
+      )
+    group by jn
+    having(sum(weight*qty)>100)
+  );
 
 ----
 
