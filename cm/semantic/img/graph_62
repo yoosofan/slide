@@ -1,0 +1,20 @@
+digraph g {
+  node [ shape = "plaintext" ];
+
+  "A"  [ label = "A {print(B.n0);print(B.n1);}" ];
+  "B0" [ label = "B {Bn0 += 1, Bn1}" ];
+  "B1" [ label = "B {Bn0 +=1, Bn1"} ];
+  "B2" [ label = "B {Bn1 +=1, Bn0}" ];
+  "B3"  [ label = "λ {Bn0 = Bn1 = 0}" ];
+  "Z0"  [ label = " 0" ];
+  "Z1"  [ label = " 0" ];
+  "Z2"  [ label = " 1" ];
+
+  A -> B0 [dir="back"];
+  B0 -> Z0 [dir="back"];
+  B0 -> B1 [dir="back"];
+  B1 -> Z1 [dir="back"];
+  B1 -> B2 [dir="back"];
+  B2 -> Z2 [dir="back"];
+  B2 -> B3 [dir="back"];
+}

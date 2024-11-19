@@ -403,14 +403,18 @@ real a, b, c
 
 :class: t2c
 
-..  csv-table::
-    :header: ,Production, Semantic Rules
-    :class: smallerelementwithfullborder yoosofantextalignleft center
+.. container::
 
-    1, "A → B", "print(B.n0),  print(B.n1)"
-    2, "B → 0 :math:`B_1`", "B.n0=B1.n0+1,  B.n1=B1.n1"
-    3, "B → 1 :math:`B_1`", "B.n0=B1.n0,  B.n1=B1.n1+1"
-    4, "B → λ ", "B.n0=0,  B.n1=0"
+  ..  csv-table::
+      :header: ,Production, Semantic Rules
+      :class: smallerelementwithfullborder yoosofantextalignleft center
+
+      1, "A → B", "print(B.n0),  print(B.n1)"
+      2, "B → 0 :math:`B_1`", "B.n0=B1.n0+1,  B.n1=B1.n1"
+      3, "B → 1 :math:`B_1`", "B.n0=B1.n0,  B.n1=B1.n1+1"
+      4, "B → λ ", "B.n0=0,  B.n1=0"
+
+  input: 0 0 1 $
 
 
 .. yographviz::
@@ -418,23 +422,219 @@ real a, b, c
       digraph g {
         node [ shape = "plaintext" ];
 
-        "A" [ label = "print(B.n0);print(B.n1);" ];
-        "B1" [ label = "E.val=17" ];
-        "r" [ label = "+" ];
-        "p" [ label = "a.val=2" ];
-        "b" [ label = "E.val=8" ];
-        "d" [ label = "+" ];
-        "c" [ label = "a.val=9" ];
-        "e" [ label = "a.val=8" ];
+        "A"  [ label = "A {print(B.n0);print(B.n1);}" ];
+        "B0" [ label = "B {Bn0 += 1, Bn1}" ];
+        "B1" [ label = "B {Bn0 +=1, Bn1}" ];
+        "B2" [ label = "B {Bn1 +=1, Bn0}" ];
+        "B3"  [ label = "λ {Bn0 = Bn1 = 0}" ];
+        "Z0"  [ label = " 0" ];
+        "Z1"  [ label = " 0" ];
+        "Z2"  [ label = " 1" ];
 
-        A -> a [dir="back"];
-        i -> r [dir="back"];
-        i -> p [dir="back"];
-        a -> c [dir="back"];
-        a -> d [dir="back"];
-        a -> b [dir="back"];
-        b -> e [dir="back"];
+        A -> B0 [dir="back"];
+        B0 -> Z0 [dir="back"];
+        B0 -> B1 [dir="back"];
+        B1 -> Z1 [dir="back"];
+        B1 -> B2 [dir="back"];
+        B2 -> Z2 [dir="back"];
+        B2 -> B3 [dir="back"];
       }
+
+----
+
+:class: t2c
+
+..  csv-table::
+    :header: ,Production, Semantic Rules
+    :class: smallerelementwithfullborder yoosofantextalignleft center
+
+    1, "A→B", "print(B.n0),  print(B.n1)"
+    2, :math:`B→ 0 B_1`, ":math:`B.n_0=B_1.n_0+1, B.n_1=B_1.n_1`" 
+    3, :math:`B→ 1 B_1`, ":math:`B.n_0=B_1.n_0, B.n_1=B_1.n_1+1`"
+    4,  B→λ,":math:`B.n_0=0,  B.n_1=0`"
+
+.. yographviz::
+
+      digraph g {
+        graph [splines=true  rankdir = "LR"];
+        ratio = auto;
+        "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>0</sub>)</td></tr>
+          <tr><td align="left" port="r0">S → . A </td></tr>
+          <tr><td align="left" port="r1">A  → . B </td></tr>
+          <tr><td align="left" port="r2">B  → . 0 B</td></tr>
+          <tr><td align="left" port="r3">B  → . 1 B </td></tr>
+          <tr><td align="left" port="r4">B  → .  </td></tr>
+        </table>>];
+        "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>1</sub>)</td></tr>
+          <tr><td align="left" port="r3">S → A . </td></tr>
+        </table>> ];
+        "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>2</sub>)</td></tr>
+          <tr><td align="left" port="r1">A → B . </td></tr>
+        </table>>];
+        "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>3</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 0 . B </td></tr>
+          <tr><td align="left" port="r2">B → . 0 B </td></tr>
+          <tr><td align="left" port="r3">B → . 1 B </td></tr>
+          <tr><td align="left" port="r4">B → . </td></tr>
+        </table>>];
+        "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>4</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 1 . B </td></tr>
+          <tr><td align="left" port="r2">B → . 0 B </td></tr>
+          <tr><td align="left" port="r3">B → . 1 B </td></tr>
+          <tr><td align="left" port="r4">B → . </td></tr>
+        </table>>];
+        "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>5</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 0 B . </td></tr>
+        </table>>];
+        "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>6</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 1 B . </td></tr>
+        </table>>];
+        state0 -> state1 [ label = "A" ];
+        state0 -> state2 [ label = "B" ];
+        state0 -> state3 [ label = "0" ];
+        state0 -> state4 [  label = "1" ];
+        state3 -> state5 [  label = "B" ];
+        state3 -> state3 [  label = "0" ];
+        state3 -> state4 [  label = "1" ];
+        state4 -> state4 [  label = "1" ];
+        state4 -> state3 [  label = "0" ];
+        state4 -> state6 [  label = "B" ];
+      }
+
+----
+
+:class: t2c
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col
+
+  t , 0 , 1 , $ , A , B 
+  I0, s3, s4,   , 1 , 2
+  I1,   ,   ,acc,   ,
+  I2,   ,   , r1,   ,   
+  I3, s3, s4, r4,   , 5  
+  I4, s3, s4, r4,   , 6 
+  I5,   ,   , r2,   ,  
+  I6,   ,   , r3,   ,  
+
+
+.. yographviz::
+
+      digraph g {
+        graph [splines=true  rankdir = "LR"];
+        ratio = auto;
+        "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>0</sub>)</td></tr>
+          <tr><td align="left" port="r0">S → . A </td></tr>
+          <tr><td align="left" port="r1">1)A  → . B </td></tr>
+          <tr><td align="left" port="r2">2)B  → . 0 B</td></tr>
+          <tr><td align="left" port="r3">3)B  → . 1 B </td></tr>
+          <tr><td align="left" port="r4">4)B  → .  </td></tr>
+        </table>>];
+        "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>1</sub>)</td></tr>
+          <tr><td align="left" port="r3">S → A . </td></tr>
+        </table>> ];
+        "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>2</sub>)</td></tr>
+          <tr><td align="left" port="r1">A → B . </td></tr>
+        </table>>];
+        "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>3</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 0 . B </td></tr>
+          <tr><td align="left" port="r2">B → . 0 B </td></tr>
+          <tr><td align="left" port="r3">B → . 1 B </td></tr>
+          <tr><td align="left" port="r4">B → . </td></tr>
+        </table>>];
+        "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>4</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 1 . B </td></tr>
+          <tr><td align="left" port="r2">B → . 0 B </td></tr>
+          <tr><td align="left" port="r3">B → . 1 B </td></tr>
+          <tr><td align="left" port="r4">B → . </td></tr>
+        </table>>];
+        "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>5</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 0 B . </td></tr>
+        </table>>];
+        "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+          <tr><td>(I<sub>6</sub>)</td></tr>
+          <tr><td align="left" port="r1">B → 1 B . </td></tr>
+        </table>>];
+        state0 -> state1 [ label = "A" ];
+        state0 -> state2 [ label = "B" ];
+        state0 -> state3 [ label = "0" ];
+        state0 -> state4 [  label = "1" ];
+        state3 -> state5 [  label = "B" ];
+        state3 -> state3 [  label = "0" ];
+        state3 -> state4 [  label = "1" ];
+        state4 -> state4 [  label = "1" ];
+        state4 -> state3 [  label = "0" ];
+        state4 -> state6 [  label = "B" ];
+      }
+
+
+----
+
+:class: t2c
+
+.. container::
+
+  ..  csv-table::
+      :class: smallerelementwithfullborder yoosofantextalignleft center
+
+      1, "A→B", "print(B.n0),  print(B.n1)"
+      2, :math:`B→ 0\ B_1`, ":math:`B.n_0=B_1.n_0+1, B.n_1=B_1.n_1`" 
+      3, :math:`B→ 1\ B_1`, ":math:`B.n_0=B_1.n_0, B.n_1=B_1.n_1+1`"
+      4,  B→λ,":math:`B.n_0=0, B.n_1=0`"
+
+  .. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder equal-col center
+
+    t , 0 , 1 , $ , A , B 
+    :math:`I_0`, s3, s4,   , 1 , 2
+    :math:`I_1`,   ,   ,acc,   ,
+    :math:`I_2`,   ,   , r1,   ,   
+    :math:`I_3`, s3, s4, r4,   , 5  
+    :math:`I_4`, s3, s4, r4,   , 6 
+    :math:`I_5`,   ,   , r2,   ,  
+    :math:`I_6`,   ,   , r3,   ,  
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  Stack                                           ,input, action
+  :math:`I_0`                                     ,001$ , Shift 3
+  :math:`I_0\ 0\ I_3`                             , 01$ , Shift 3
+  :math:`I_0\ 0\ I_3\ 0\ I_3`                     , 1$  , Shift 4
+  :math:`I_0\ 0\ I_3\ 0\ I_3\ 1\ I_4`             , $   , r4 B[0،0]
+  :math:`I_0\ 0\ I_3\ 0\ I_3\ 1\ I_4\ B[0،0]\ I_6`, $   , r3 B[0،1]
+  :math:`I_0\ 0\ I_3\ 0\ I_3\ B[0،1]\ I_5`        , $   , r2 B[1،1]
+  :math:`I_0\ 0\ I_3\ B[1،1]\ I_5`                , $   , r2 B[2،1]
+  :math:`I_0\ B[2،1]\ I_2`                        , $   , r1 print(B[2،1])
+  :math:`I_0\ I_1`                                , $   , accept
+
+----
+
+Similar Grammar
+===============
+..  csv-table::
+    :class: smallerelementwithfullborder yoosofantextalignleft center
+
+    1, "A→B", "print(B.n0),  print(B.n1)"
+    2, :math:`B→ B_1 \ 0`, ":math:`B.n_0=B_1.n_0+1, B.n_1=B_1.n_1`" 
+    3, :math:`B→ B_1 \ 1`, ":math:`B.n_0=B_1.n_0, B.n_1=B_1.n_1+1`"
+    4,  B→λ,":math:`B.n_0=0,  B.n_1=0`"
 
 ----
 

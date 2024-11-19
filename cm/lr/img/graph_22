@@ -1,0 +1,74 @@
+digraph g {
+  graph [splines=true  rankdir = "LR"];
+  ratio = auto;
+  "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>0</sub>)</td></tr>
+    <tr><td align="left" port="r0">S' → .S, $</td></tr>
+    <tr><td align="left" port="r1">S → .L = R, $ </td></tr>
+    <tr><td align="left" port="r2">S → .R , $ </td></tr>
+    <tr><td align="left" port="r3">L → .* R, = $ </td></tr>
+    <tr><td align="left" port="r4">L → .a, = $ </td></tr>
+    <tr><td align="left" port="r5">R → .L, $ </td></tr>
+  </table>>];
+  "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>1</sub>)</td></tr>
+    <tr><td align="left" port="r3">S' → S., $ </td></tr>
+  </table>> ];
+  "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>2</sub>)</td></tr>
+    <tr><td align="left" port="r1">S → L. = R, $ </td></tr>
+    <tr><td align="left" port="r5">R → L., $ </td></tr>
+  </table>>];
+  "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>3</sub>)</td></tr>
+    <tr><td align="left" port="r1">S → R., $ </td></tr>
+  </table>>];
+  "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>4</sub>)</td></tr>
+    <tr><td align="left" port="r3">L → *.R, = $ </td></tr>
+    <tr><td align="left" port="r5">R → .L, = $ </td></tr>
+    <tr><td align="left" port="r3">L → .* R, = $ </td></tr>
+    <tr><td align="left" port="r4">L → .a, = $ </td></tr>
+  </table>>];
+  "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>5</sub>)</td></tr>
+    <tr><td align="left" port="r1">L → a., = $ </td></tr>
+  </table>>];
+  "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>6</sub>)</td></tr>
+    <tr><td align="left" port="r1">L → * R., = $ </td></tr>
+  </table>>];
+  "state7" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>7</sub>)</td></tr>
+    <tr><td align="left" port="r1">R → L., = $ </td></tr>
+  </table>>];
+  "state8" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>8</sub>)</td></tr>
+    <tr><td align="left" port="r1">S → L =. R, $ </td></tr>
+    <tr><td align="left" port="r5">R → .L, $</td></tr>
+    <tr><td align="left" port="r3">L → .* R, $ </td></tr>
+    <tr><td align="left" port="r4">L → .a, $ </td></tr>
+  </table>>];
+  "state9" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+    <tr><td>(I<sub>9</sub>)</td></tr>
+    <tr><td align="left" port="r1">S → L = R., $ </td></tr>
+  </table>>];
+
+  "I7"     [ shape = "circle"  label = "I7"]
+  "I4"     [ shape = "circle"  label = "I4"]
+  "I5"     [ shape = "circle"  label = "I5"]
+  state0 -> state1 [ label = "S" ];
+  state0 -> state2 [ label = "L" ];
+  state0 -> state3 [ label = "R" ];
+  state0 -> state4 [  label = "*" ];
+  state0 -> state5 [  label = "a" ];
+  state4 -> state6 [  label = "R" ];
+  state4 -> state7 [  label = "L" ];
+  state4 -> state4 [  label = "*" ];
+  state4 -> state5 [  label = "a" ];
+  state2 -> state8 [  label = "=" ];
+  state8 -> state9 [  label = "R" ];
+  state8 -> I7 [  label = "L" ];
+  state8 -> I4 [  label = "*" ];
+  state8 -> I5 [  label = "a" ];
+}
