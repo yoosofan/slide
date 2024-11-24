@@ -5672,16 +5672,9 @@ Unknown
   where weight > 13 or city = 'Paris'
   ;
 
-.. container::
 
-  .. code:: sql
 
-    select n, d
-    from t
-    where n / nullif(d, 0) > 1
-    ;
-
-  .. code:: sql
+.. code:: sql
 
     expression IS TRUE
     expression IS NOT TRUE
@@ -5820,6 +5813,172 @@ The final result of an uknown condition is False
     from p
     where weight > 17;
 
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که وزن آنها بیشتر از ۱۸ است و عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده است. 
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p join sp using(pn) join s using(sn)
+    where weight > 17 and city = 'Paris';
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p join sp using(pn) and s using(sn)
+    where weight is not null and weight > 17 and city = 'Paris';
+
+----
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که وزن آنها بیشتر از ۱۸ است یا وزنی ندارند و عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده است.
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p join sp using(pn) and s using(sn)
+    where (weight is not null or weight > 17) and city = 'Paris';
+
+----
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که وزن آنها بیشتر از ۱۸ است یا وزنی ندارند و عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده است ولی اگر شهر عرضه کننده وارد نشده باشد وزن آن بیشتر از ۳۴ باشد.
+    
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p
+    where weight > 17;
+
+----
+
+  .. code:: sql
+
+    select n, d
+    from t
+    where n / nullif(d, 0) > 1
+    ; -- returns the first value,
+    -- unless it's equal to the second
+    -- in which case it returns NULL. 
+    -- It is equivalent to this CASE statement:
+    -- CASE WHEN A <> B OR B IS NULL THEN A END
+    -- The NULLIF() function returns NULL 
+    -- if two expressions are equal, otherwise
+    -- it returns the first expression.
+
+.. :
+
+   https://www.postgresql.org/docs/current/functions-conditional.html
+   https://stackoverflow.com/q/6220956/886607
+   https://www.w3schools.com/sql/func_sqlserver_nullif.asp
+   https://www.geeksforgeeks.org/postgresql-nullif-function/
+   https://neon.tech/postgresql/postgresql-tutorial/postgresql-nullif
+    
+   SELECT  -- https://neon.tech/postgresql/postgresql-tutorial/postgresql-nullif
+   ( 
+       SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
+   ) * 100 AS "Male/Female ratio"
+   FROM members;
+    
+
+    ERROR:  division by zero
+
+    The reason is that the number of females is zero now. To prevent this division by zero error, you can use the NULLIF function as follows:
+
+    SELECT
+      (
+        SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
+          SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END),
+          0
+        )
+      ) * 100 AS "Male/Female ratio"
+    FROM
+      members;
+
+    COALESCE(value [, ...])
+
+    https://www.postgresql.org/docs/current/functions-conditional.html
+    The COALESCE function returns the first of its arguments that is not null. Null is returned only if all arguments are null. It is often used to substitute a default value for null values when data is retrieved for display, for example:
+
+    SELECT COALESCE(description, short_description, '(none)') ...
+
+    This returns description if it is not null, otherwise short_description if it is not null, otherwise (none).
+
+    The arguments must all be convertible to a common data type, which will be the type of the result (see Section 10.5 for details).
+
+    Like a CASE expression, COALESCE only evaluates the arguments that are needed to determine the result; that is, arguments to the right of the first non-null argument are not evaluated. This SQL-standard function provides capabilities similar to NVL and IFNULL, which are used in some other database systems.
+
+    NULLIF(value1, value2)
+
+    The NULLIF function returns a null value if value1 equals value2; otherwise it returns value1. This can be used to perform the inverse operation of the COALESCE example given above:
+
+    SELECT NULLIF(value, '(none)') ...
+
+    In this example, if value is (none), null is returned, otherwise the value of value is returned.
+
+    The two arguments must be of comparable types. To be specific, they are compared exactly as if you had written value1 = value2, so there must be a suitable = operator available.
+
+    The result has the same type as the first argument — but there is a subtlety. What is actually returned is the first argument of the implied = operator, and in some cases that will have been promoted to match the second argument's type. For example, NULLIF(1, 2.2) yields numeric, because there is no integer = numeric operator, only numeric = numeric.
+
+
+    https://stackoverflow.com/a/2214531/886607
+    SELECT CASE WHEN field IS NULL THEN 'Empty' ELSE field END AS field_alias
+    SELECT coalesce(field, 'Empty') AS field_alias
+
+
+.. code:: sql
+
+  SELECT CASE i WHEN NULL THEN 'Is Null'  -- This will never be returned
+    WHEN    0 THEN 'Is Zero'  -- This will be returned when i = 0
+    WHEN    1 THEN 'Is One'   -- This will be returned when i = 1
+    END
+  FROM t;
+
+----
+
+.. class:: rtl-h1
+  
+    نام همهٔ قطعات را همراه با جمع عرضه‌های آنها بیابید در صورتی که وزن قطعه بیشتر از ۲۰ باشد یا این که وزنی نداشته باشد برای این قطعه‌ها جمع عرضه در نظر گرفته شود وگرنه مانند قطعه‌های عرضه نشده، جمع عرضه‌های آنها صفر در نظر گرفته شود.
+    
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p join sp using(pn) join s using(sn)
+    where weight > 17 and ;
+
+
+----
+
+.. class:: substep rtl-h1
+
+    نام قطعاتی را بیابید که وزن آنها بیشتر از ۱۸ باشد و عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ آنها را عرضه کرده باشد.
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pname
+    from p join sp using(pn) join s using(sn)
+    where weight > 17 and ;
 
 ----
 
