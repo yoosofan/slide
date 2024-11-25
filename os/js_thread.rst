@@ -19,6 +19,11 @@ https://yoosofan.github.io
 
 University of Kashan
 
+.. raw:: html
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
 
 ----
 
@@ -315,8 +320,11 @@ Create Concurrent / Parallel Code
 
     +
 
-.. yographviz::
-  :class: substep
+.. raw:: html
+
+  <div id="graph240"></div>
+  <script>
+  d3.select("#graph240").graphviz().renderDot(`
 
     digraph g{
       Start [label="f2(x) * f3(x) + f4(x, y) / f5(x, y)"]
@@ -345,6 +353,9 @@ Create Concurrent / Parallel Code
       A22 -> A3
       
     }
+  `);
+  </script>
+
  
 ----
 

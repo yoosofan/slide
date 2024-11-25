@@ -4,9 +4,7 @@
         messageStyle: "none",
         TeX : { extensions : ['color.js'] }
       });
-    </script></head><body class="impress-not-supported"><div id="impress" data-width="1024" data-height="768" data-transition-duration="1000"><div class="step step-level-1" step="0" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="0" data-z="0"><h1 id="operating-systems-thread">Operating Systems: Thread</h1><h2 id="ahmad-yoosofan">Ahmad Yoosofan</h2><p><a href="https://yoosofan.github.io">https://yoosofan.github.io</a></p><p>University of Kashan</p><script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
-<script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script></div><div class="step step-level-1" step="1" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="1600" data-y="0" data-z="0"><h1 id="section-1">&#1581;&#1575;&#1604;&#1578;&#8204;&#1607;&#1575;&#1740; &#1606;&#1582;</h1><img src="img/single_threaded.and.multithreaded.processes.png" align="center"></div><div class="step step-level-1" step="2" id="thread-in-python-i-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="0" data-z="0"><h1 id="python-thread-i">Python Thread (I)</h1><pre class="highlight code python substep"><span class="ln">1 </span><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span><span class="w">
+    </script></head><body class="impress-not-supported"><div id="impress" data-width="1024" data-height="768" data-transition-duration="1000"><div class="step step-level-1" step="0" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="0" data-z="0"><h1 id="operating-systems-thread">Operating Systems: Thread</h1><h2 id="ahmad-yoosofan">Ahmad Yoosofan</h2><p><a href="https://yoosofan.github.io">https://yoosofan.github.io</a></p><p>University of Kashan</p></div><div class="step step-level-1" step="1" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="1600" data-y="0" data-z="0"><h1 id="section-1">&#1581;&#1575;&#1604;&#1578;&#8204;&#1607;&#1575;&#1740; &#1606;&#1582;</h1><img src="img/single_threaded.and.multithreaded.processes.png" align="center"></div><div class="step step-level-1" step="2" id="thread-in-python-i-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="0" data-z="0"><h1 id="python-thread-i">Python Thread (I)</h1><pre class="highlight code python substep"><span class="ln">1 </span><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span><span class="w">
 </span><span class="ln">2 </span><span class="w"></span>  <span class="nb">print</span><span class="p">(</span><span class="s2">"This is a test"</span><span class="p">)</span><span class="w">
 </span><span class="ln">3 </span><span class="w">
 </span><span class="ln">4 </span><span class="w"></span><span class="nb">print</span><span class="p">(</span><span class="s2">"main"</span><span class="p">)</span><span class="w">
@@ -245,39 +243,7 @@ python3 240.py &gt; 240output25.txt</span></pre><pre class="highlight code conso
 </span><span class="ln">22 </span><span class="w"></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span><span class="w">
 </span><span class="ln">23 </span><span class="w"></span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span> <span class="k">pass</span><span class="w">
 </span><span class="ln">24 </span><span class="w"></span>  <span class="nb">print</span><span class="p">(</span><span class="n">myShare</span><span class="o">.</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w">
-</span><span class="ln">25 </span><span class="w"></span><span class="n">th1</span><span class="o">.</span><span class="n">join</span><span class="p">();</span> <span class="n">th2</span><span class="o">.</span><span class="n">join</span><span class="p">();</span></pre></div><div class="step step-level-1" step="10" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="16000" data-y="0" data-z="0"><h1 id="create-concurrent-parallel-code">Create Concurrent / Parallel Code</h1><div id="graph240"></div>
-<script>
-d3.select("#graph240").graphviz().renderDot(`
-
-  digraph g{
-    Start [label="f2(x) * f3(x) + f4(x, y) / f5(x, y)"]
-    A11 [label="f2(x)"]
-    A12 [label="f3(x)"]
-    A13 [label="f4(x, y)"]
-    A14 [label="F5(x, y)"]
-
-    A21 [label="*"]
-    A22 [label="/"]
-
-    A3 [label="+"]
-
-    Start -> A11
-    Start -> A12
-    Start -> A13
-    Start -> A14
-
-    A11 -> A21
-    A12 -> A21
-
-    A13 -> A22
-    A14 -> A22
-
-    A21 -> A3
-    A22 -> A3
-
-  }
-`);
-</script></div><div class="step step-level-1" step="11" id="cpp-thread-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="17600" data-y="0" data-z="0"><h1 id="c-thread">C++ Thread</h1><pre class="highlight code cpp substep"><span class="ln"> 1 </span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="ln">25 </span><span class="w"></span><span class="n">th1</span><span class="o">.</span><span class="n">join</span><span class="p">();</span> <span class="n">th2</span><span class="o">.</span><span class="n">join</span><span class="p">();</span></pre></div><div class="step step-level-1" step="10" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="16000" data-y="0" data-z="0"><h1 id="create-concurrent-parallel-code">Create Concurrent / Parallel Code</h1><img src="img/yoo_graphviz_da3676b747d9c40608a3d1a4ebdf1513.png" class="substep"></div><div class="step step-level-1" step="11" id="cpp-thread-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="17600" data-y="0" data-z="0"><h1 id="c-thread">C++ Thread</h1><pre class="highlight code cpp substep"><span class="ln"> 1 </span><span class="cp">#include</span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span><span class="ln"> 2 </span><span class="cp">#include</span><span class="cpf">&lt;thread&gt;</span><span class="c1"> // 620.cpp</span><span class="cp">
 </span><span class="ln"> 3 </span><span class="cp"></span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w">
 </span><span class="ln"> 4 </span><span class="w"></span><span class="c1">// g++ -std=c++17 -pthread
@@ -461,6 +427,6 @@ the next output
 second in main
 thread$</span></pre></div><div class="step step-level-1" step="19" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="30400" data-y="0" data-z="0"><h1 id="threads-and-processes">Threads and Processes</h1><img src="img/a3processes.vs.b1process3thread.png" align="center"></div><div class="step step-level-1" step="20" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="32000" data-y="0" data-z="0"><h1 id="many-to-one-thread">Many to One Thread</h1><img src="img/many2one.svg" width="300px" height="400px" align="center"></div><div class="step step-level-1" step="21" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="33600" data-y="0" data-z="0"><h1 id="different-types-of-threads">Different Types of Threads</h1><img src="img/thread.user_level.kernel.level.png" width="500px" height="350px" align="center"></div><div class="step step-level-1" step="22" id="user-kernel-thread-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="35200" data-y="0" data-z="0"><h1 id="user-and-kernel-thread">User and Kernel Thread</h1><ul><li>user threads</li><li>kernel threads</li></ul></div><div class="step step-level-1" step="23" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="36800" data-y="0" data-z="0"><img src="img/thread.A.user_level.threads.package.b.A.threads.package.managed.by.the.kernel.png" width="500px" height="350px" align="center"></div><div class="step step-level-1" step="24" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="38400" data-y="0" data-z="0"><h1 id="section-2">&#1575;&#1585;&#1578;&#1576;&#1575;&#1591; &#1605;&#1740;&#1575;&#1606; &#1581;&#1575;&#1604;&#1578;&#8204;&#1607;&#1575;&#1740; &#1606;&#1582;&#8204;&#1607;&#1575;</h1><img src="img/thread.Examples.of.the.Relationships.between.User_Level.Thread.States.and.Process.States.png" width="500px" height="350px" align="center"></div><div class="step step-level-1" step="25" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="40000" data-y="0" data-z="0"><h1 id="section-3">&#1587;&#1585;&#1608;&#1740;&#1587; &#1583;&#1607;&#1606;&#1583;&#1607;&#1620; &#1608;&#1576; &#1576;&#1575; &#1670;&#1606;&#1583; &#1606;&#1582;</h1><img src="img/thread.A.multithreaded.Web.server.png" width="500px" height="350px" align="center"></div><div class="step step-level-1" step="26" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="41600" data-y="0" data-z="0"><h1 id="threads-in-webserver">Threads in Webserver</h1><img src="img/thread_Multithreaded_server_architecture.png" width="500px" align="center"></div><div class="step step-level-1" step="27" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="43200" data-y="0" data-z="0"><p>End</p></div></div><div id="slide-number" class="slide-number">
          1
-      </div><script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/gotoSlide.js"></script><script type="text/javascript" src="js/hovercraft.js"></script><script type="text/javascript">
+      </div><script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/gotoSlide.js"></script><script type="text/javascript" src="js/hovercraft.js"></script><script type="text/javascript" src="js/MathJax/es5/tex-mml-chtml.js"></script><script type="text/javascript">
       document.getElementById("impress").addEventListener("impress:stepenter", update_slide_number, false);
     </script></body></html>
