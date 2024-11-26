@@ -5863,25 +5863,27 @@ The final result of an uknown condition is False
     :class: substep
     :number-lines:
 
-    select pname
+    select pname -- incorrect
     from p
     where weight > 17;
 
 ----
 
-  .. code:: sql
+.. code:: sql
 
-    select n, d
-    from t
-    where n / nullif(d, 0) > 1
-    ; -- returns the first value,
-    -- unless it's equal to the second
-    -- in which case it returns NULL. 
-    -- It is equivalent to this CASE statement:
-    -- CASE WHEN A <> B OR B IS NULL THEN A END
-    -- The NULLIF() function returns NULL 
-    -- if two expressions are equal, otherwise
-    -- it returns the first expression.
+  select n, d
+  from t
+  where n / nullif(d, 0) > 1
+  ; -- returns the first value,
+  -- unless it's equal to the second
+  -- in which case it returns NULL. 
+  -- It is equivalent to this CASE statement:
+  -- CASE WHEN A <> B OR B IS NULL THEN A END
+  -- The NULLIF() function returns NULL 
+  -- if two expressions are equal, otherwise
+  -- it returns the first expression.
+
+----
 
 .. :
 
@@ -5890,27 +5892,33 @@ The final result of an uknown condition is False
    https://www.w3schools.com/sql/func_sqlserver_nullif.asp
    https://www.geeksforgeeks.org/postgresql-nullif-function/
    https://neon.tech/postgresql/postgresql-tutorial/postgresql-nullif
-    
-   SELECT  -- https://neon.tech/postgresql/postgresql-tutorial/postgresql-nullif
-   ( 
-       SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
+ 
+.. code:: sql
+  
+   SELECT(
+     SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / 
+       SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END)
    ) * 100 AS "Male/Female ratio"
    FROM members;
     
 
-    ERROR:  division by zero
+   -- ERROR:  division by zero
+   -- The reason is that the number of females is zero now. 
+   -- To prevent this division by zero error, you can use 
+   -- the NULLIF function as follows:
 
-    The reason is that the number of females is zero now. To prevent this division by zero error, you can use the NULLIF function as follows:
-
-    SELECT
-      (
-        SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / NULLIF (
-          SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END),
-          0
+    SELECT (
+        SUM (CASE WHEN gender = 1 THEN 1 ELSE 0 END) / 
+          NULLIF (
+           SUM (CASE WHEN gender = 2 THEN 1 ELSE 0 END),
+           0
         )
       ) * 100 AS "Male/Female ratio"
-    FROM
-      members;
+    FROM members;
+
+----
+
+.. :
 
     COALESCE(value [, ...])
 
@@ -5942,7 +5950,18 @@ The final result of an uknown condition is False
     SELECT CASE WHEN field IS NULL THEN 'Empty' ELSE field END AS field_alias
     SELECT coalesce(field, 'Empty') AS field_alias
 
+.. code:: sql
 
+    SELECT product, (price - COALESCE(discount, 0)) AS net_price
+    FROM items;
+  
+.. code:: sql
+
+    SELECT product, (
+    price - CASE WHEN discount IS NULL THEN 0 ELSE discount END
+      ) AS net_price
+    FROM items;
+  
 .. code:: sql
 
   SELECT CASE i WHEN NULL THEN 'Is Null'  -- This will never be returned
@@ -6019,7 +6038,8 @@ Check
 ----
 
 .. code:: sql
-
+  :number_lines:
+  
   create database sp2;
 
   create table s (
@@ -6049,6 +6069,7 @@ Check
 Foreign Key Error
 ====================
 .. code:: sql
+  :number-lines:
 
   create table "Department"(
     "DN" integer default 0 primary key,
@@ -6075,6 +6096,10 @@ Foreign Key Error
   At line 14:
   insert into "Department"("DN", "DeptName", "MgrSSN")
       values(1, 'computer', '');
+
+.. :
+
+  pragma foreign_keys=off;
 
 ----
 
@@ -6185,7 +6210,6 @@ SQLite is incomplete
   insert into tte1(myid, salary, name1, dept2, fee)
       values(31, 1200, 'هوشنگ', 1, 200);
 
-
 ----
 
 Same Sample in PostgreSQL
@@ -6225,6 +6249,7 @@ Same Sample in PostgreSQL
     "Dn" integer default 0
   );
 
+
 .. code:: sql
 
   insert into "Department"("DN", "DeptName", "MgrSSN")
@@ -6234,6 +6259,7 @@ Same Sample in PostgreSQL
 
   alter table "Department" add constraint "departmentManager" foreign key("MgrSSN")
     references "Employee"("SSN") on update cascade on delete no action;
+  
 
 .. code:: sh
 
@@ -6256,6 +6282,247 @@ no action, restrict, set null, set default or cascade
 
   https://sqlite.org/foreignkeys.html
   https://www.sqlitetutorial.net/sqlite-foreign-key/
+
+----
+
+Constraint(I)
+==============
+* Primary key
+* not null (No field part of primary key can be null)
+* foreign keys
+* unique
+
+
+.. :
+
+    ----
+
+    .. code:: sql
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+        delete from "P" where "pn" = 'P6';
+        Help: foreign key constraint failed
+
+        update "SPJ"
+        set "jn" = 'J8'
+        where "pn" = 'P6';
+        Help: foreign key constraint failed
+
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade,
+          foreign key("pn") references "P"("pn") On delete cascade,
+          foreign key("jn") references "J"("jn") on Delete cascade
+        );
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
+          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
+          foreign key("jn") references "J"("jn") on delete cascade on update cascade,
+        );
+
+
+        delete from "P" where "pn" = 'P6';
+
+        drop table spj;
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
+          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
+          foreign key("jn") references "J"("jn") on Delete cascade on update cascade
+        );
+
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        update P
+        set "pn" = 'P8'
+        where "pn" = 'P6';
+
+        select distinct pn from p;
+
+        select distinct pn from p;
+
+        select distinct pn from spj;
+
+    ----
+
+    .. code:: sql
+
+        update table P
+        set "pn" = 'P6'
+        where "pn" = 'P8';
+
+        drop table if exists spj;
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn") on delete set null on update cascade,
+          foreign key("pn") references "P"("pn") On delete set null on update cascade,
+          foreign key("jn") references "J"("jn") on Delete set null on update cascade
+        );
+
+    ----
+
+    .. code:: sql
+
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
+        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
+        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
+
+    ----
+
+    .. code:: sql
+
+        create table SPJ (
+          sn    char(10) references S,
+          pn    char(10) references P,
+          jn    char(10) references J,
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+        );
+
+        drop table spj;
+
+        create table SPJ (
+          sn    char(10),
+          pn    char(10),
+          jn    char(10),
+          qty   int default 0,
+          primary key (sn, pn ,jn)
+          foreign key("sn") references "S"("sn"),
+          foreign key("pn") references "P"("pn"),
+          foreign key("jn") references "J"("jn")
+        );
+
+----
+
+pragma foreign_keys
+====================
+.. code:: sql
+
+    pragma foreign_keys=off;
+
+    pragma foreign_keys=on;
+
+    pragma foreign_keys=off;
+    insert into "spj"("sn", "pn", "jn", "qty") values('S7', 'P1', 'J1', 123);
+    delete from "SPJ" where "sn" = 'S7';
+    pragma foreign_keys=on;
+    insert into "spj"("sn", "pn", "jn", "qty") values('S7', 'P1', 'J1', 123);
+    Error:
+      Help: foreign key constraint failed
+
+.. :
+
+    https://www.sqlitetutorial.net/sqlite-primary-key/
+    https://www.sqlbook.com/sql/drop-table-if-exists/
+    https://www.tutorialspoint.com/sql/sql-foreign-key.htm
+
+----
+
+SQLite uses the following terminology
+==========================================
+* The parent table is the table that a foreign key constraint refers to. The parent table in the example in this section is the artist table. Some books and articles refer to this as the referenced table, which is arguably more correct, but tends to lead to confusion.
+* The child table is the table that a foreign key constraint is applied to and the table that contains the references clause. The example in this section uses the track table as the child table. Other books and articles refer to this as the referencing table.
+* The parent key is the column or set of columns in the parent table that the foreign key constraint refers to. This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid.
+* The child key is the column or set of columns in the child table that are constrained by the foreign key constraint and which hold the references clause.
+
+.. :
+
+  https://sqlite.org/foreignkeys.html
+
+----
+
+Alter table Foreign key
+================================
+MySQL / SQL Server / Oracle / MS Access
+-----------------------------------------------
+.. code:: sql
+
+    alter table Orders
+    add constraint FK_PersonOrder
+    foreign key (PersonID) references Persons(PersonID);
 
 ----
 
@@ -7117,247 +7384,6 @@ lateral
   where weight < (select avg(weight) from psk) and
     jsk.city = psk.city
   ;
-
-----
-
-Constraint(I)
-==============
-* Primary key
-* not null (No field part of primary key can be null)
-* foreign keys
-* unique
-
-
-.. :
-
-    ----
-
-    .. code:: sql
-
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-        delete from "P" where "pn" = 'P6';
-        Help: foreign key constraint failed
-
-        update "SPJ"
-        set "jn" = 'J8'
-        where "pn" = 'P6';
-        Help: foreign key constraint failed
-
-
-    ----
-
-    .. code:: sql
-
-        create table SPJ (
-          sn    char(10),
-          pn    char(10),
-          jn    char(10),
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-          foreign key("sn") references "S"("sn") on delete cascade,
-          foreign key("pn") references "P"("pn") On delete cascade,
-          foreign key("jn") references "J"("jn") on Delete cascade
-        );
-
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-    ----
-
-    .. code:: sql
-
-        create table SPJ (
-          sn    char(10),
-          pn    char(10),
-          jn    char(10),
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
-          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
-          foreign key("jn") references "J"("jn") on delete cascade on update cascade,
-        );
-
-
-        delete from "P" where "pn" = 'P6';
-
-        drop table spj;
-
-    ----
-
-    .. code:: sql
-
-        create table SPJ (
-          sn    char(10),
-          pn    char(10),
-          jn    char(10),
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-          foreign key("sn") references "S"("sn") on delete cascade on update cascade,
-          foreign key("pn") references "P"("pn") On delete cascade on update cascade,
-          foreign key("jn") references "J"("jn") on Delete cascade on update cascade
-        );
-
-
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-    ----
-
-    .. code:: sql
-
-        update P
-        set "pn" = 'P8'
-        where "pn" = 'P6';
-
-        select distinct pn from p;
-
-        select distinct pn from p;
-
-        select distinct pn from spj;
-
-    ----
-
-    .. code:: sql
-
-        update table P
-        set "pn" = 'P6'
-        where "pn" = 'P8';
-
-        drop table if exists spj;
-
-        create table SPJ (
-          sn    char(10),
-          pn    char(10),
-          jn    char(10),
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-          foreign key("sn") references "S"("sn") on delete set null on update cascade,
-          foreign key("pn") references "P"("pn") On delete set null on update cascade,
-          foreign key("jn") references "J"("jn") on Delete set null on update cascade
-        );
-
-    ----
-
-    .. code:: sql
-
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P1','J1', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P2', 'J1', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P3', 'J1', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P4', 'J2', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P5', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S1', 'P6', 'J2', 100);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P1', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S2', 'P2', 'J3', 400);
-        insert into SPJ(sn, pn, jn, qty) values('S3', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P2', 'J3', 200);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P4', 'J3', 300);
-        insert into SPJ(sn, pn, jn, qty) values('S4', 'P5', 'J3', 400);
-
-    ----
-
-    .. code:: sql
-
-        create table SPJ (
-          sn    char(10) references S,
-          pn    char(10) references P,
-          jn    char(10) references J,
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-        );
-
-        drop table spj;
-
-        create table SPJ (
-          sn    char(10),
-          pn    char(10),
-          jn    char(10),
-          qty   int default 0,
-          primary key (sn, pn ,jn)
-          foreign key("sn") references "S"("sn"),
-          foreign key("pn") references "P"("pn"),
-          foreign key("jn") references "J"("jn")
-        );
-
-----
-
-pragma foreign_keys
-====================
-.. code:: sql
-
-    pragma foreign_keys=off;
-
-    pragma foreign_keys=on;
-
-    pragma foreign_keys=off;
-    insert into "spj"("sn", "pn", "jn", "qty") values('S7', 'P1', 'J1', 123);
-    delete from "SPJ" where "sn" = 'S7';
-    pragma foreign_keys=on;
-    insert into "spj"("sn", "pn", "jn", "qty") values('S7', 'P1', 'J1', 123);
-    Error:
-      Help: foreign key constraint failed
-
-.. :
-
-    https://www.sqlitetutorial.net/sqlite-primary-key/
-    https://www.sqlbook.com/sql/drop-table-if-exists/
-    https://www.tutorialspoint.com/sql/sql-foreign-key.htm
-
-----
-
-SQLite uses the following terminology
-==========================================
-* The parent table is the table that a foreign key constraint refers to. The parent table in the example in this section is the artist table. Some books and articles refer to this as the referenced table, which is arguably more correct, but tends to lead to confusion.
-* The child table is the table that a foreign key constraint is applied to and the table that contains the references clause. The example in this section uses the track table as the child table. Other books and articles refer to this as the referencing table.
-* The parent key is the column or set of columns in the parent table that the foreign key constraint refers to. This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid.
-* The child key is the column or set of columns in the child table that are constrained by the foreign key constraint and which hold the references clause.
-
-.. :
-
-  https://sqlite.org/foreignkeys.html
-
-----
-
-Alter table Foreign key
-================================
-MySQL / SQL Server / Oracle / MS Access
------------------------------------------------
-.. code:: sql
-
-    alter table Orders
-    add constraint FK_PersonOrder
-    foreign key (PersonID) references Persons(PersonID);
 
 
 ----

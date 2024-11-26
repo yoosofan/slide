@@ -10,6 +10,7 @@ It is better to use less javascript libraries because of
 
 d3-graphviz
 ```````````
+* Create uinque name for each graph file name using  hashlib.md5.hexdigest of the source code of that graph
 * Repalcing offline tools like slide.py for converting dot graphviz to image by an online one like d3-graphviz javascript library. Bad internet connection in my classes and in Iran in general and blocking many websites forced me to use more offline approaches which is time consuming.
 
     .. code:: html
