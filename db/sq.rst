@@ -6038,7 +6038,7 @@ Check
 ----
 
 .. code:: sql
-  :number_lines:
+  :number-lines:
   
   create database sp2;
 
@@ -6503,10 +6503,29 @@ pragma foreign_keys
 
 SQLite uses the following terminology
 ==========================================
-* The parent table is the table that a foreign key constraint refers to. The parent table in the example in this section is the artist table. Some books and articles refer to this as the referenced table, which is arguably more correct, but tends to lead to confusion.
-* The child table is the table that a foreign key constraint is applied to and the table that contains the references clause. The example in this section uses the track table as the child table. Other books and articles refer to this as the referencing table.
-* The parent key is the column or set of columns in the parent table that the foreign key constraint refers to. This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid.
-* The child key is the column or set of columns in the child table that are constrained by the foreign key constraint and which hold the references clause.
+* The parent table is the table that a foreign key constraint refers to.
+
+.. : 
+
+    The parent table in the example in this section is the artist table. Some books and articles refer to this as the referenced table, which is arguably more correct, but tends to lead to confusion.
+
+* The child table is the table that a foreign key constraint is applied to and the table that contains the references clause.
+
+.. :
+
+    The example in this section uses the track table as the child table. Other books and articles refer to this as the referencing table.
+
+* The parent key is the column or set of columns in the parent table that the foreign key constraint refers to.
+
+.. :
+
+    This is normally, but not always, the primary key of the parent table. The parent key must be a named column or columns in the parent table, not the rowid.
+
+* The child key is the column or set of columns in the child table 
+
+.. :
+
+    that are constrained by the foreign key constraint and which hold the references clause.
 
 .. :
 
@@ -6530,12 +6549,11 @@ MySQL / SQL Server / Oracle / MS Access
 
 All
 =====
-.. class:: substep rtl-h1
+.. class:: rtl-h1
 
 نام قطعاتی را بیابید که وزن آن قطعه‌ها از وزن همهٔ قطعه‌های درون شهر پاریس بیشتر باشد
 
 .. code:: sql
-  :class: substep
 
   select T.pname
   from p as T
@@ -6547,7 +6565,6 @@ All
   );
 
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -6564,12 +6581,11 @@ All
 
 Some
 ====
-.. class:: rtl-h1 substep
+.. class:: rtl-h1
 
   نام قطعاتی را بیابید که وزن آن قطعه‌ها از دست کم وزن یک قطعه درون شهر پاریس بیشتر باشد
 
 .. code:: sql
-  :class: substep
 
   select T.pname
   from p as T
@@ -6583,7 +6599,6 @@ Some
 
 
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -6600,12 +6615,11 @@ Some
 
 IN
 ===
-.. class:: substep rtl-h1
+.. class:: rtl-h1
 
 نام قطعاتی را بیابید که عرضه‌کننده‌ای همشهری آن قطعه‌ها باشد
 
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -6615,12 +6629,11 @@ IN
     )
   ;
 
-.. class:: substep rtl-h2
+.. class:: rtl-h2
 
 کوشش کنید با exists این پرس‌وجو را حل کنید.
 
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -6706,11 +6719,9 @@ IN
 
 .. class:: rtl-h1
 
-نام قطعاتی را بیابید که هیچ عرضه کنندهٔ همشهری‌شان هیچ قطعه‌ای را عرضه نکرده باشد.
+    نام قطعاتی را بیابید که هیچ عرضه کنندهٔ همشهری‌شان هیچ قطعه‌ای را عرضه نکرده باشد.
 
-.. class:: rtl-h1 substep
-
-نام قطعاتی را بیابید که عرضه کننده‌ای در شهرشان نباشد که قطعه‌ای عرضه کرده باشد.
+    نام قطعاتی را بیابید که عرضه کننده‌ای در شهرشان نباشد که قطعه‌ای عرضه کرده باشد.
 
 .. code:: sql
   :class: substep
@@ -6787,7 +6798,7 @@ IN
 
 .. class:: rtl-h1
 
-  نام قطعاتی را بیابید که وزن آنها از قطعه‌ای در شهر کاشان بزرگ‌تر باشد.
+نام قطعاتی را بیابید که وزن آنها از قطعه‌ای در شهر کاشان بزرگ‌تر باشد.
 
 .. code:: sql
   :class: substep
@@ -6800,7 +6811,6 @@ IN
       where city = 'Kashan'
     )
   ;
-
 
 .. code:: sql
   :class: substep
@@ -6832,8 +6842,7 @@ IN
       select city
       from s
       where status > 6
-    )
-  ;
+    );
 
 .. code:: sql
   :class: substep
@@ -6844,31 +6853,34 @@ IN
       select city
       from s
       where status > 6
-    )
-  ;
-
+    );
 
 .. code:: sql
   :class: substep
 
   select pn
   from p
-  where city = (  -- error
+  where city = ( -- Error
       select city
       from s
       where status > 6
-    )
-  ;
+    );
 
 .. code:: sql
   :class: substep
 
   select city
   from s
-  where status > 6
-  ;
+  where status > 6;
   -- result has more
   -- than a row
+
+.. code:: sql
+  :class: substep
+
+  select pn
+  from p join s using(city)
+  where status > 6;
 
 ----
 
@@ -6876,27 +6888,21 @@ IN
 
 order by
 ===========
-.. class:: substep rtl-h1
+.. class:: rtl-h1
 
 نام و وضعیت عرضه کنندگان را به صورت صعودی بر پایهٔ وضعیت آنها بیابید.
 
 .. code:: sql
-  :class: substep
 
   select sname, status
   from s
-  order by status
-  ;
-
+  order by status ;
 
 .. code:: sql
-  :class: substep
 
   select sname, status
   from s
-  order by status asc
-  ;
-
+  order by status asc;
 
 ..  csv-table::
   :header-rows: 1
@@ -6914,20 +6920,28 @@ order by
 
 order by ..... desc
 ========================
-.. class:: substep rtl-h2
+.. class:: rtl-h2
 
 نام و وضعیت عرضه کنندگان را به صورت نزولی بر پایهٔ وضعیت آنها بیابید.
 
 .. code:: sql
-  :class: substep
 
   select sname, status
   from s
-  order by status desc
-  ;
+  order by status desc;
 
-.. image:: img/order_by_desc.png
-    :class: substep
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  sname,  status
+  sname,	status
+  Ali,	40
+  Blake,	30
+  Adams,	30
+  Smith,	20
+  Clark,	20
+  Jones,	10
 
 ----
 
@@ -6941,7 +6955,6 @@ order by ..... desc
     insert into mytemp(ssn) values(20);
     --- Help: not null constraint failed: mytemp.name
 
-
 .. code:: sql
 
     alter table mytemp add last_name varchar(20);
@@ -6954,6 +6967,10 @@ order by ..... desc
     from mytemp;
 
 ----
+
+:class: t2c
+
+.. class:: rtl-h1
 
 شمارهٔ عرضه‌کنندگانی را بیابید که جمع وزن قطعه‌هایی که عرضه می‌کنند بیشتر از ۱۱ هزار باشد
 
@@ -6972,7 +6989,6 @@ order by ..... desc
                  from p natural join spj
                  where spj.sn = s.sn
                );
-
 
 .. ::
 
@@ -6993,7 +7009,7 @@ order by ..... desc
        where title = 'Let There Be Rock'
     );
 
-      alter table p drop factory_name;
+    alter table p drop factory_name;
 
 -----
 
@@ -7001,7 +7017,7 @@ order by ..... desc
 
 .. class:: rtl-h1
 
-    شماره و نام عرضه کنندگان را بیابید. اگر وضعیت عرضه‌کننده بزرگتر از ۲۰ بود کنار مشخصات عرضه کننده کلمهٔ big و در غیر این صورت کلمهٔ small بگذارید.
+شماره و نام عرضه کنندگان را بیابید. اگر وضعیت عرضه‌کننده بزرگتر از ۲۰ بود کنار مشخصات عرضه کننده کلمهٔ big و در غیر این صورت کلمهٔ small بگذارید.
 
 .. code:: sql
     :class: substep
@@ -7010,11 +7026,11 @@ order by ..... desc
         when status > 20 then 'big'
         else 'small'
         end size_of_supplier
-    from s
-    ;
-
+    from s;
 
 -----
+
+:class: t2c
 
 .. code:: sql
 
@@ -7038,6 +7054,9 @@ order by ..... desc
 
 ----
 
+
+:class: t2c
+
 .. code:: sql
 
   select pn,
@@ -7047,7 +7066,7 @@ order by ..... desc
      ),
      city
   from p
-  order by weight desc
+  order by weight desc;
 
 .. code:: sql
 
@@ -7058,8 +7077,7 @@ order by ..... desc
        ) as sum_status,
        city
     from p
-    order by weight desc
-    ;
+    order by weight desc ;
 
 ----
 
@@ -7114,7 +7132,6 @@ Unique(I)
     ("38472389", "کوروش پارسایی", 9632847),
     ("38947389", ")احمد یوسفان", 93802932);
 
-
 ----
 
 :class: t2c
@@ -7161,6 +7178,8 @@ Unique(II)
 
 ----
 
+:class: t2c
+
 Unique(III)
 =======================
 .. code:: sql
@@ -7197,6 +7216,8 @@ Unique(III)
 
 ----
 
+:class: t2c
+
 Unique condition
 =================
 .. code:: sql
@@ -7225,6 +7246,9 @@ Unique condition
 
 ----
 
+
+:class: t2c
+
 .. class:: rtl-h1
 
   نام شهرهایی را به دست آورید که عرضه کننده‌ای با وضعیت بیشتر از ۱۰۰۰ داشته باشند
@@ -7249,6 +7273,9 @@ Unique condition
 
 ----
 
+
+:class: t2c
+
 .. class:: rtl-h1
 
   نام شهرهایی را به دست آورید که همهٔ عرضه کنندگان آن شهرها وضعیت بیشتر از ۱۰۰۰ داشته باشند
@@ -7261,8 +7288,7 @@ Unique condition
     where not exists
          ( select * from s as T
            where T.city=s.city and T.status<1000
-         )
-
+         );
 
 .. code:: sql
     :class: substep
@@ -7315,12 +7341,13 @@ The following does not work
       colors text check (colors in ('red', 'green', 'blue'))
   );
 
-All native string or numeric operators work.
+.. :
 
-https://stackoverflow.com/a/10984951
+    All native string or numeric operators work.
+
+    https://stackoverflow.com/a/10984951
 
 ----
-
 
 lateral
 =============
@@ -7333,7 +7360,6 @@ lateral
 
     select pn, sn, p.city, t.city -- Error
     from p, (select sn, s.city from s where s.city = p.city) as t;
-
 
 .. code:: sh
 
@@ -7363,15 +7389,13 @@ lateral
 
   with psk as (select city, weight, pn, sn from p natural join s)
     select * from psk
-    where weight < (select avg(weight) from p)
-  ;
+    where weight < (select avg(weight) from p);
 
   with psk as (select city, weight, pn, sn from p natural join s)
     , jsk as (select city, sn, jn, status from s NATURAL join j)
     select psk.city, psk.weight, psk.sn, psk.pn, jsk.jn from psk, jsk
     where weight < (select avg(weight) from p) and
-      jsk.city = psk.city
-  ;
+      jsk.city = psk.city;
 
 ----
 
@@ -7382,23 +7406,17 @@ lateral
   from (select city, weight, pn, sn from p natural join s) as psk
     , (select city, sn, jn, status from s NATURAL join j) as jsk
   where weight < (select avg(weight) from psk) and
-    jsk.city = psk.city
-  ;
-
+    jsk.city = psk.city;
 
 ----
 
 Vacuum
 ===========
-vacuum;
---------
-vacuum full
------------
-SQLite vacuum
--------------
 .. code:: sql
 
     vacuum;
+
+    vacuum full;
 
 auto_vaccum
 ---------------
@@ -7522,10 +7540,26 @@ view
 * select is fine
 * insert, update, delete is problematic
 * unless it depends only on one table almost
+* Speed of execution
 
+.. code:: sql
 
-#. Speed of execution
+    CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] [ RECURSIVE ] VIEW name [ ( column_name [, ...] ) ]
+        [ WITH ( view_option_name [= view_option_value] [, ... ] ) ]
+        AS query
+        [ WITH [ CASCADED | LOCAL ] CHECK OPTION ]
 
+.. code:: sql
+
+    CREATE VIEW employee_department_info AS
+    SELECT e.employee_id, e.first_name, e.last_name, d.department_name
+    FROM employees e
+    JOIN departments d ON e.department_id = d.department_id;
+
+.. :
+
+    https://www.geeksforgeeks.org/sql-create-view-statement/
+    
 ----
 
 MATERIALIZED VIEW
@@ -7538,7 +7572,6 @@ MATERIALIZED VIEW
       [ TABLESPACE tablespace_name ]
       AS query
       [ WITH [ NO ] DATA ]
-
 
 ----
 
