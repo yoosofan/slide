@@ -6064,6 +6064,13 @@ Check
      primary key (sn, pn)
   );
 
+.. :
+
+    The follwing links has also schema and data of database
+    
+    https://github.com/vrajmohan/pgsql-sample-data/blob/master/date_spj.sql
+    https://github.com/vrajmohan/pgsql-sample-data
+    
 ----
 
 Foreign Key Error
@@ -7794,6 +7801,147 @@ END
 
 .. :
 
+    DBMSs
+    -----
+    Search keywords:
+    Sample databases for PostgreSQL
+    
+    https://github.com/morenoh149/postgresDBSamples
+    https://wiki.postgresql.org/wiki/Sample_Databases
+    https://opentextbc.ca/dbdesign01/back-matter/appendix-d-sql-lab-with-solution/
+    
+    
+    SQL
+    ^^^
+    MySQL Sample Databases
+    https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html
+    
+    
+    .. code:: sql
+    
+      CREATE VIEW film_list
+      AS
+      SELECT 
+        film.film_id AS FID,
+        film.title AS title,
+        film.description AS description,
+        category.name AS category,
+        film.rental_rate AS price,
+        film.length AS length,
+        film.rating AS rating,
+        GROUP_CONCAT(CONCAT(actor.first_name, _utf8' ', actor.last_name) SEPARATOR ', ') AS actors
+      FROM category 
+        LEFT JOIN film_category ON category.category_id = film_category.category_id
+        LEFT JOIN film ON film_category.film_id = film.film_id
+        JOIN film_actor ON film.film_id = film_actor.film_id
+        JOIN actor ON film_actor.actor_id = actor.actor_id
+      GROUP BY film.film_id;
+    
+
+      -- Change the MySQL statement delimiter to // as it crashes with procedure's delimiter ';'
+      DELIMITER //
+       
+      CREATE PROCEDURE rewards_report (
+         IN min_monthly_purchases TINYINT UNSIGNED,              -- min number of purchases
+         IN min_dollar_amount_purchased DECIMAL(10,2) UNSIGNED,  -- min dollar amount purchased
+         OUT count_rewardees INT                                 -- number of customers to be rewarded
+      )
+      LANGUAGE SQL
+      NOT DETERMINISTIC
+      READS SQL DATA
+      SQL SECURITY DEFINER
+      COMMENT 'Provides a customizable report on best customers'
+       
+      proc: BEGIN
+         DECLARE last_month_start DATE;
+         DECLARE last_month_end DATE;
+
+         /* Some sanity checks... */
+         IF min_monthly_purchases = 0 THEN
+            SELECT 'Minimum monthly purchases parameter must be > 0';
+            LEAVE proc;
+         END IF;
+         IF min_dollar_amount_purchased = 0.00 THEN
+            SELECT 'Minimum monthly dollar amount purchased parameter must be > $0.00';
+            LEAVE proc;
+         END IF;
+       
+         /* Determine start and end time periods */
+         SET last_month_start = DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH);
+         SET last_month_start = STR_TO_DATE(
+                                   CONCAT(YEAR(last_month_start), '-', MONTH(last_month_start), '-01'),
+                                   '%Y-%m-%d');
+         SET last_month_end = LAST_DAY(last_month_start);
+
+         /* Create a temporary storage area for Customer IDs */
+         CREATE TEMPORARY TABLE tmpCustomer (customer_id SMALLINT UNSIGNED NOT NULL PRIMARY KEY);
+
+         /* Find all customers meeting the monthly purchase requirements */
+         INSERT INTO tmpCustomer (customer_id)
+           SELECT p.customer_id
+           FROM payment AS p
+           WHERE DATE(p.payment_date) BETWEEN last_month_start AND last_month_end
+           GROUP BY customer_id
+           HAVING 
+             SUM(p.amount) > min_dollar_amount_purchased
+             AND COUNT(customer_id) > min_monthly_purchases;
+
+         /* Populate OUT parameter with count of found customers */
+         SELECT COUNT(*) FROM tmpCustomer INTO count_rewardees;
+
+         /* Output ALL customer information of matching rewardees.
+            Customize output as needed. */
+         SELECT c.*
+           FROM tmpCustomer AS t
+           INNER JOIN customer AS c ON t.customer_id = c.customer_id;
+
+         /* Clean up */
+         DROP TABLE tmpCustomer;
+      END //
+       
+      -- Change the MySQL delimiter back to ';'
+      DELIMITER ;
+
+
+
+
+      DELIMITER $$
+      CREATE FUNCTION inventory_in_stock(p_inventory_id INT) RETURNS BOOLEAN
+      READS SQL DATA
+      BEGIN
+         DECLARE v_rentals INT;
+         DECLARE v_out     INT;
+
+         # AN ITEM IS IN-STOCK IF THERE ARE EITHER NO ROWS IN THE rental TABLE
+         # FOR THE ITEM OR ALL ROWS HAVE return_date POPULATED
+         SELECT COUNT(*) INTO v_rentals
+         FROM rental
+         WHERE inventory_id = p_inventory_id;
+       
+         IF v_rentals = 0 THEN
+            RETURN TRUE;
+         END IF;
+       
+         SELECT COUNT(rental_id) INTO v_out
+         FROM inventory LEFT JOIN rental USING(inventory_id)
+         WHERE inventory.inventory_id = p_inventory_id AND rental.return_date IS NULL;
+       
+         IF v_out > 0 THEN
+            RETURN FALSE;
+         ELSE
+            RETURN TRUE;
+         END IF;
+      END $$
+      DELIMITER ;
+
+
+    other books
+    -----------
+    
+    
+    https://opentextbc.ca/dbdesign01/front-matter/about-the-book/
+    Database Design – 2nd Edition
+    
     ----
 
     Problems

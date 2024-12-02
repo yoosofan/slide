@@ -1836,7 +1836,7 @@ Python Semaphore
   :number-lines:
 
   // Share part
-  full = Semaphore(0)
+  full = Semaphore(1)
 
   class MyShare:
     n = 0
@@ -1854,7 +1854,7 @@ Python Semaphore
 
       full.release() # full.V(); full.signal();
 
-.
+src/semaphore10.py
 
 .. code:: python
   :number-lines:
