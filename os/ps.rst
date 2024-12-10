@@ -3123,6 +3123,52 @@ Monitor implementation by Semaphore
     :number-lines: 18
     :start-line: 18
 
+---
+
+:class: t2c
+
+Inter-process Communication (IPC)
+==================================
+#. Message Passing
+    #. send
+    #. receive
+
+* direct
+* indirect (mailbox)
+
+#. unidirectional
+#. bi-directional
+
+* Nonblocking send
+* Blocking receive
+* Nonblocking receive
+
+#. communication
+    #. Symmetric
+    #. asymmetric 
+
+* buffering
+    #. Automatic
+    #. explicit 
+
+#. send by
+    #. copy 
+    #. reference
+
+* Message Size
+    #. Fixed
+        * Zero capacity
+    #. variable
+
+#. Client-Server Communication
+    #. Sockets
+    #. Remote Procedure Calls
+    #. Remote Method Invocation (Java)
+
+.. :
+
+    https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf
+
 ----
 
 :class: t2c

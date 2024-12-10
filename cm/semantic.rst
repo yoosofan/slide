@@ -898,6 +898,30 @@ SDD for typesetting boxes
 
 ----
 
+
+.. csv-table::
+
+  B → S B1          , L1 = newlabel()
+                      B.next = B1.next
+                      B.code = S.code || 'label' || L1 || B1.code
+                      S.next =  L1
+
+  B → λ             , L1 = newlabel(); B.next = L1 ; B.code = 'Label ' || L1
+
+  S → w ( C ) S1    , L1 = newlabel(); L2 = newlabel();
+                      C.false = S.next
+                      C.true = L2
+                      S1.next = L1
+                      S.code = 'label ' || L1 || C.code || 'label ' || L2 || S1.code
+                                || 'goto '  || L1
+
+  S → i = C ;       , S.code = C.code || 'AsG' || i.name || ',' || C.val
+
+  C → o ;           , C.val = 1
+  
+  
+----
+
 End
 ===========
 
