@@ -3123,12 +3123,12 @@ Monitor implementation by Semaphore
     :number-lines: 18
     :start-line: 18
 
----
+----
 
 :class: t2c
 
-Inter-process Communication (IPC)
-==================================
+Inter-process Communication (IPC) I
+====================================
 #. Message Passing
     #. send
     #. receive
@@ -3147,6 +3147,13 @@ Inter-process Communication (IPC)
     #. Symmetric
     #. asymmetric 
 
+
+----
+
+:class: t2c
+
+Inter-process Communication (IPC) II
+=====================================
 * buffering
     #. Automatic
     #. explicit 
@@ -3157,7 +3164,7 @@ Inter-process Communication (IPC)
 
 * Message Size
     #. Fixed
-        * Zero capacity
+        #. Zero capacity
     #. variable
 
 #. Client-Server Communication
