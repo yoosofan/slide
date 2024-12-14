@@ -1,2 +1,0 @@
-const $class = () => true;
-const result = $class();
