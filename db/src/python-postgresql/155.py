@@ -1,6 +1,5 @@
-mport psycopg
-conn = psycopg.connect(dbname="sp", user="postgres", 
-            password="12",host='127.0.0.1')
+import psycopg
+conn = psycopg.connect(dbname="sp", user="postgres", password="12",host='127.0.0.1')
 cur = conn.cursor()
 cur.execute("select * from s;");
 for a in cur.fetchall():
@@ -14,7 +13,9 @@ stmt="update s set status="+str(n1)+" where sn='"+"S12' or \'32\'='32"+"';"
 
 # update s set status=13 where sn='S12' or '32'='32';
 
-stmt="update s set status="+str(n1)+" where sn='"+"S12'; insert into p(pn, pname, weight, city) values('p31', 'ddd', 43, 'Kashan'); select * from p where pn='p4343"+"';"
+stmt="update s set status="+str(n1)+" where sn='"
+stmt+="S12'; insert into p(pn, pname, weight, city) values('p31', 'ddd', 43, 'Kashan');"
+stmt+="select * from p where pn='p4343"+"';"
 
 print(stmt)
 cur.execute(stmt)

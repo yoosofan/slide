@@ -7,7 +7,10 @@ for a in cur.fetchall():
   print(a)
 cur.execute("update a1 set status=10 where sn='s1';")
 cur.execute("update a1 set status=20 where sn='s2';")
+#cur.execute("update a1 set status=10 where st='s1';")
+#cur.execute("update a1 set status=20 where st='s2';")
 conn.commit();
+#cur.execute("select * from a1;")
 for a in cur.fetchall():
   print(a)
 cur.close()
