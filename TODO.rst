@@ -72,6 +72,18 @@ Related tools
 
 Test the follwoing changes
 ------------------------------
+Slidy2 instead of impress.js
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Slidey doesn't have fancy features like impress.js but it has most of the things most slides needs. Therefore, I may replace impress.js by Slidy in future and rewrtie some codes of Bildumilo.
+
+The following slide had implemented by Slidy long time ago. 
+
+os/deadlock.html
+
+http://www.w3.org/Talks/Tools/Slidy2/
+
+Tested but abonded
+-------------------
 Using PrismJS instead of HighlightJS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Some html based slides needs a tool for code highlighting. HighlightJS was my choice but it is big and it lacks some feature like line-number. 
@@ -83,6 +95,11 @@ Converting a code to a highlighted one by tools like pygment was not a good choi
 * https://www.eddymens.com/blog/highlightjs-add-line-numbers
 * https://github.com/wcoder/highlightjs-line-numbers.js
 * http://wcoder.github.io/highlightjs-line-numbers.js/
+
+Rejection Reason
+`````````````````
+Pygment does its job very good. Even for some external old files, it is better to make style by it manuaully by
+https://pygments.org/demo/
 
 Learn more about Hovercraft and change its code
 -----------------------------------------------
