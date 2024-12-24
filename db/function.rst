@@ -283,16 +283,11 @@ Function parts
 
 .. code:: sh
 
-    sp=# select somefunc05('S1','P1');
-
-               somefunc05
+    select somefunc05_3('s2');
+              somefunc05_3           
     ---------------------------------
-     ("S1        ","P1        ",300)
-     ("S2        ","P1        ",300)
-     ("S2        ","P1        ",300)
-     ("S2        ","P2        ",400)
-     ("S3        ","P2        ",200)
-    (5 rows)
+     ("s3        ","p2        ",200)
+    (1 row)
 
 ----
 
