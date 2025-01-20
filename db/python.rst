@@ -161,7 +161,6 @@ Fetch
   ('P2', 'Bolt', 'Green', 17, 'Paris')
   ('P3', 'Screw', 'Blue', 17, 'Oslo')
 
-
 ----
 
 :class: t2c

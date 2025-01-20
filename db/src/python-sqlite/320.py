@@ -6,7 +6,7 @@ c1.execute('''
   insert into p(pn, pname, color, weight, city)
   values('p20','Nut'  ,'Red'  ,12.0,'London')
   ;
- ''')
+''')
 r1 = c2.execute('select * from p;')
 for m1 in r1:
   print(m1)
