@@ -64,6 +64,133 @@ Finding more about how hardware and software works
 
 -----
 
+The Abacus and Counting Board
+==============================
+* https://en.wikipedia.org/wiki/Abacus
+  
+.. image:: img/in/Schoty_abacus.jpg
+
+-----
+
+Mechanical Calculator
+=====================
+Pascaline
+----------
+* A Pascaline signed by Pascal in 1652
+* https://en.wikipedia.org/wiki/Pascaline
+
+.. image:: img/in/Pascaline-CnAM_823-1-IMG_1506-black.jpg
+
+
+-----
+
+Jacquard Machines
+==================
+* Joseph Marie Jacquard in 1804
+* based on 
+    * the Frenchmen Basile Bouchon (1725)
+    * Jean Baptiste Falcon (1728)
+    * Jacques Vaucanson (1740).[8] 
+* https://en.wikipedia.org/wiki/Jacquard_machine
+
+.. image:: img/in/A_Jacquard_loom_showing_information_punchcards,_National_Museum_of_Scotland.jpg
+
+
+-----
+
+Mechanical Computer
+=======================
+* https://en.wikipedia.org/wiki/Mechanical_computer
+* `Charles Babbage <https://en.wikipedia.org/wiki/Charles_Babbage>`_
+* `Ada Lovelace <https://en.wikipedia.org/wiki/Ada_Lovelace>`_
+
+.. image:: img/in/Babbage_Difference_Engine.jpg
+
+-----
+
+Analog Computer
+================
+* https://en.wikipedia.org/wiki/Analog_computer
+* Polish analog computer AKAT-1 (1959)
+
+.. image:: img/in/513px-AKAT-1.jpg
+
+-----
+
+Analog vs Digital
+==================
+* https://en.wikipedia.org/wiki/Capacitance
+* https://www.geeksforgeeks.org/difference-between-analog-computer-and-digital-computer/
+
+.. math::
+
+    i(t) = C \frac{dv(t)}{dt}
+
+-----
+
+Electro Mechanical
+===================
+* `Konrad Zuse <https://en.wikipedia.org/wiki/Konrad_Zuse>`_
+    * `Z1(1936) <https://en.wikipedia.org/wiki/Z1_(computer)>`_
+        	* Programmable
+        	* binary
+        	* electrically motor-driven mechanical computer
+    * `Z2(1940) <https://en.wikipedia.org/wiki/Z2_(computer)>`_
+* `Harvard Mark I(1944) <https://en.wikipedia.org/wiki/Harvard_Mark_I>`_
+
+
+.. image:: img/in/Z1__640px-German_Museum_of_Technology,_Berlin_2017_024.jpg
+
+
+-----
+
+Digital Computer
+================
+* `Vacuum-tube computer <https://en.wikipedia.org/wiki/Vacuum-tube_computer>`_
+* `Atanasoff–Berry computer <https://en.wikipedia.org/wiki/Atanasoff%E2%80%93Berry_computer>`_
+    * neither programmable, nor Turing-complete
+* `Colossus computer <https://en.wikipedia.org/wiki/Colossus_computer>`_
+    * British code breakers 
+    * programmable
+    * electronic
+    * digital computer
+    * programmed by switches and plugs 
+    * not by a stored program
+
+.. image:: img/in/640px-Colossus_Mark2codebreaking1943.jpg
+
+----
+
+Stored Program
+===============
+* `Manchester Mark I <https://www.britannica.com/technology/digital-computer>`_
+* `The 1946 ENIAC computer used more than 17,000 vacuum tubes <https://en.wikipedia.org/wiki/Vacuum-tube_computer>`_
+* `bootstrap_computer_history <https://cs.nyu.edu/courses/summer17/CSCI-UA.0004-002/bootstrap_computer_history_new/index.html>`_
+* `oldest-original-working-digital-computer <https://www.tnmoc.org/news-releases/2012/11/30/the-worlds-oldest-original-working-digital-computer>`_
+
+.. image:: img/in/527px-ENIAC_Penn2.jpg
+
+
+.. :
+
+    analog hardware design for deep learning model
+    
+-----
+
+Analog Chipsets for AI Applications
+====================================
+* `Developers Turn To Analog For Neural Nets <https://semiengineering.com/developers-turn-to-analog-for-neural-nets/>`_
+* `Texas Instuments <https://www.ti.com/tool/TIDA-010955>`_
+* `IIC <https://indianexpress.com/article/cities/bangalore/iisc-develops-design-framework-to-build-next-generation-analog-chipsets-for-ai-applications/>`_
+* `Analog Neural Circuit and Hardware Design of Deep Learning Model <https://www.sciencedirect.com/science/article/pii/S1877050915022644>`_
+* `The Promise of Analog Deep Learning: Recent Advances, Challenges and Opportunities <https://arxiv.org/html/2406.12911v1>`_
+* `Harnessing Analog Hardware for Machine Learning <https://openreview.net/pdf?id=PkduOOJOZA>`_
+
+.. image:: img/in/TID-010955-Texax-Instruments.jpg
+
+-----
+
+
 Imaginary Computer (YIC-220)
 =============================
 Different memory for code and data
