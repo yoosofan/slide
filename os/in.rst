@@ -188,6 +188,40 @@ Analog Chipsets for AI Applications
 
 .. image:: img/in/TID-010955-Texax-Instruments.jpg
 
+----
+
+:class: t2c
+
+General Types of Computers
+===========================
+* Analog Computer
+    * pros
+    * cons
+* Digital Computer
+    * pros
+    * cons
+* Quantum Computer
+    * pros
+    * cons
+
+.. image:: img/in/ibm-quantum-system-one-ces-2020_50252942522_o_jpg.webp
+   :height: 400px
+
+.. :
+
+    https://newsroom.clevelandclinic.org/2023/03/20/cleveland-clinic-and-ibm-unveil-first-quantum-computer-dedicated-to-healthcare-research
+    https://en.wikipedia.org/wiki/Quantum_computing
+    
+    
+    https://en.wikipedia.org/wiki/Wafer_(electronics)
+    https://f450c.org/infographic/
+    
+    
+    In electronics, a wafer (also called a slice or substrate)[1] is a thin slice of semiconductor, such as a crystalline silicon (c-Si, silicium), used for the fabrication of integrated circuits and, in photovoltaics, to manufacture solar cells.
+
+    The wafer serves as the substrate for microelectronic devices built in and upon the wafer. It undergoes many microfabrication processes, such as doping, ion implantation, etching, thin-film deposition of various materials, and photolithographic patterning. Finally, the individual microcircuits are separated by wafer dicing and packaged as an integrated circuit.
+
+    
 -----
 
 
@@ -351,20 +385,6 @@ hex pad connect to microcontroller
 https://www.circuitstoday.com/interfacing-hex-keypad-to-8051
 
 https://circuitdigest.com/microcontroller-projects/keypad-interfacing-with-avr-atmega32
-
-----
-
-General Types of Computers
-===========================
-* Analog Computer
-    * pros
-    * cons
-* Digital Computer
-    * pros
-    * cons
-* Quantum Computer
-    * pros
-    * cons
 
 ----
 
