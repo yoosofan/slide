@@ -25,6 +25,9 @@ University of Kashan
 
 ----
 
+
+:class: t2c
+
 .. code:: cpp
 
   int a, b;

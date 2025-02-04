@@ -9,9 +9,9 @@
   margin: 0;
   padding: 0;
 }*/
-#impress {
+/*#impress {
   transform: scale(1) !important;
-}
+}*/
 body{
   text-align: center;
   font-size: 100%;
@@ -41,6 +41,7 @@ pre.code{
   border-right-width: thin; 
   border-bottom-width: thin; 
   border-color: #95ABD0;
+  font-size: 1.1rem;
 } pre.code > .ln{background-color: #DFE5F1;}
 .rtl{direction:rtl; text-align:justify; }
 .ltr{direction:ltr; text-align:justify;}
