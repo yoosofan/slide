@@ -3,7 +3,6 @@ tokens = ('NUMBER','PLUS', 'MUL')
 t_PLUS    = r'\+'
 t_MUL    = r'\*'
 
-
 def t_NUMBER(t):
   r'[0-9]+'
   t.value = int(t.value)

@@ -9,10 +9,10 @@ t_ignore = " \t\n"
 
 def t_ID(t):
   r'[a-zA-Z_][a-zA-Z_0-9]*'
-  l1 = ['0','1','2','3','4','5','6','7','8','9']
+  l1 = ['if','while','for','do','break','else','continue','delete','new','nullptr']
   for m1 in l1:
     if m1 in t.value:
-      t.type= 'ID2'
+      t.type= m1 #'ID2'
       return t
   return t
 
