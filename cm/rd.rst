@@ -4,6 +4,7 @@
 :substep: true
 :slide-numbers: true
 :data-width: 1024
+:data-height: 768
 
 
 ----
@@ -1524,7 +1525,7 @@ Calculator Grammar
     * E  → T E'
     * E' → + T E' | - T E' | λ
     * T  → F T'
-    * T  → * F T' | / F T' | λ
+    * T'  → * F T' | / F T' | λ
     * F → a | (E)
 
 .. container:: substep
