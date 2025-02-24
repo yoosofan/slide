@@ -324,7 +324,8 @@ Bibliographic Tools
 ==========================
 * Organise citation
     #. Zotero (https://www.zotero.org/)
-    #. Mendely
+    #. Mendely (https://www.mendeley.com/)
+    #. https://endnote.com/
 * Other Tools
     #. https://www.mybib.com/
     #. https://zbib.org/
