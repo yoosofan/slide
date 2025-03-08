@@ -580,6 +580,156 @@ Ambiguous Grammar
 
 ----
 
+:class: t2c
+
+.. container::
+ 
+    * S`  →  S
+    
+    #. S → i S
+    #. S → i S e S
+    #. S → o
+
+.. yographviz::
+  :class: substep
+
+  digraph {
+    graph [splines=true  rankdir = "LR"];
+    ratio = auto;
+    "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>0</sub>)</td></tr>
+      <tr><td align="left" port="r0">S` → .S </td></tr>
+      <tr><td align="left" port="r1">S → .i S </td></tr>
+      <tr><td align="left" port="r2">S → .i S e S </td></tr>
+      <tr><td align="left" port="r3">S → .o </td></tr>
+    </table>>];
+    "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>1</sub>)</td></tr>
+      <tr><td align="left" port="r3">S` → S. </td></tr>
+    </table>> ];
+    "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>2</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i . S  </td></tr>
+      <tr><td align="left" port="r3">S → i . S e S </td></tr>
+      <tr><td align="left" port="r5">S → . i S </td></tr>
+      <tr><td align="left" port="r5">S → . i S e S </td></tr>
+      <tr><td align="left" port="r5">S → . o </td></tr>
+    </table>>];
+    "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>3</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → o . </td></tr>
+    </table>>];
+    "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>4</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S . </td></tr>
+      <tr><td align="left" port="r3">S → i S . e S </td></tr>
+    </table>>];
+    "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>5</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S  e . S </td></tr>
+      <tr><td align="left" port="r2">S → . i S </td></tr>
+      <tr><td align="left" port="r2">S → . i S e S </td></tr>
+      <tr><td align="left" port="r2">S → . o </td></tr>
+    </table>>];
+    "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>6</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S e S . </td></tr>
+    </table>>];
+
+    state0 -> state1 [ label = "S" ];
+    state0 -> state2 [ label = "i" ];
+    state0 -> state3 [ label = "o" ];
+    state2 -> state4 [  label = "S" ];
+    state2 -> state2 [  label = "i" ];
+    state2 -> state3 [  label = "o" ];
+    state4 -> state5 [  label = "e" ];
+    state5 -> state6 [  label = "S" ];
+    state5 -> state3 [  label = "o" ];
+    state5 -> state2 [  label = "i" ];
+  } 
+
+----
+
+.. yographviz::
+
+  digraph {
+    graph [splines=true  rankdir = "LR"];
+    ratio = auto;
+    "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>0</sub>)</td></tr>
+      <tr><td align="left" port="r0">S` → .S </td></tr>
+      <tr><td align="left" port="r1">S → .i S </td></tr>
+      <tr><td align="left" port="r2">S → .i S e S </td></tr>
+      <tr><td align="left" port="r3">S → .o </td></tr>
+    </table>>];
+    "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>1</sub>)</td></tr>
+      <tr><td align="left" port="r3">S` → S. </td></tr>
+    </table>> ];
+    "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>2</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i . S  </td></tr>
+      <tr><td align="left" port="r3">S → i . S e S </td></tr>
+      <tr><td align="left" port="r5">S → . i S </td></tr>
+      <tr><td align="left" port="r5">S → . i S e S </td></tr>
+      <tr><td align="left" port="r5">S → . o </td></tr>
+    </table>>];
+    "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>3</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → o . </td></tr>
+    </table>>];
+    "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>4</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S . </td></tr>
+      <tr><td align="left" port="r3">S → i S . e S </td></tr>
+    </table>>];
+    "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>5</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S  e . S </td></tr>
+      <tr><td align="left" port="r2">S → . i S </td></tr>
+      <tr><td align="left" port="r2">S → . i S e S </td></tr>
+      <tr><td align="left" port="r2">S → . o </td></tr>
+    </table>>];
+    "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+      <tr><td>(I<sub>6</sub>)</td></tr>
+      <tr><td align="left" port="r1">S → i S e S . </td></tr>
+    </table>>];
+
+    state0 -> state1 [ label = "S" ];
+    state0 -> state2 [ label = "i" ];
+    state0 -> state3 [ label = "o" ];
+    state2 -> state4 [  label = "S" ];
+    state2 -> state2 [  label = "i" ];
+    state2 -> state3 [  label = "o" ];
+    state4 -> state5 [  label = "e" ];
+    state5 -> state6 [  label = "S" ];
+    state5 -> state3 [  label = "o" ];
+    state5 -> state2 [  label = "i" ];
+  } 
+
+.. list-table::
+
+  * -  .. csv-table::
+          :header-rows: 1
+          :class: smallerelementwithfullborder equal-col
+
+            , i , e , o ,  $  , S 
+          I0, s2,   , s3,     , 1  
+          I1,   ,   ,   , acc ,   
+          I2, s2,   , s3,     , 4  
+          I3, r3, r3, r3,  r3 ,   
+          I4, r1,s5/r1, r1  ,r1     ,  
+          I5, s2  ,   , s3  ,     ,   6
+          I6, r2, r2  , r2  ,  r2   ,   
+
+    -  .. container::
+
+          #. S → i S
+          #. S → i S e S
+          #. S → o
+
+
+----
 
 #. S → i S M
 #. M → e S
