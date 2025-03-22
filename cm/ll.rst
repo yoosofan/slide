@@ -511,9 +511,9 @@ Wrong Calculator Grammar(I)
   .. class:: substep
 
   #. E  → T E'
-  #. E' → + E | λ
+  #. E' → + E' | λ
   #. T  → F T'
-  #. T' → * T |  λ
+  #. T' → * T' |  λ
   #. F  → ( E ) |  a
 
 .. class:: substep
@@ -1164,30 +1164,13 @@ S → i(r) S  | i(r) S e S | o
   * first(S)  = {i, o} , first(A)  = {e, λ}
   * follow(S) = {$, e} , follow(A) = {$, e}
 
-  .. csv-table::
-    :header-rows: 1
-    :class: substep smallerelementwithfullborder equal-col
-
-    "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
-    S   ,  `i(r)SA` ,   ,           ,  o   ,       ,     ,
-    A   ,              ,   , `eS/λ`   ,      ,       ,     ,  λ  
-
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: substep smallerelementwithfullborder equal-col
 
-  Stack           ,  input       , action
-  S              $, .i(r)S$ , E → T E'
-  T E'           $, .( a + a ) a$ , T → F T'
-  F T' E'        $, .( a + a ) a$ , F → ( E )
-  ( E ) T' E'    $, .( a + a ) a$ , Remove (
-  E ) T' E'      $, .  a + a ) a$ , E → T E' 
-  T E' ) T' E'   $, .  a + a ) a$ , T → F T' 
-  F T' E' ) T' E'$, .  a + a ) a$ , F → a 
-  a T' E' ) T' E'$, .  a + a ) a$ , Remove a
-  T' E' ) T' E'  $, .  + a ) a  $ , T' → λ
-  E' ) T' E'     $, .  + a ) a  $ , E' → + T E' 
-  `+` T E' ) T' E'$, .  + a ) a  $ , Remove + 
+  "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
+  S   ,  `i(r)SA` ,   ,           ,  o   ,       ,     ,
+  A   ,              ,   , `eS/λ`   ,      ,       ,     ,  λ  
 
 ----
 
