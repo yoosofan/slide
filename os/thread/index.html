@@ -77,11 +77,11 @@ After f2
 In f2
 f1</span></pre></div><div class="step step-level-1" step="5" id="thread-in-python-iii-id" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="8000" data-y="0" data-z="0"><h1 id="python-thread-iii">Python Thread (III)</h1><pre class="highlight code python"><span class="ln"> 1 </span><span class="kn">import</span> <span class="nn">threading</span> <span class="c1"># src/thread/240.py</span><span class="w">
 </span><span class="ln"> 2 </span><span class="w"></span><span class="k">def</span> <span class="nf">f1</span><span class="p">():</span><span class="w">
-</span><span class="ln"> 3 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span><span class="w">
+</span><span class="ln"> 3 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span><span class="w">
 </span><span class="ln"> 4 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s2">"__111"</span><span class="p">)</span><span class="w">
 </span><span class="ln"> 5 </span><span class="w">
 </span><span class="ln"> 6 </span><span class="w"></span><span class="k">def</span> <span class="nf">f2</span><span class="p">():</span><span class="w">
-</span><span class="ln"> 7 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span><span class="w">
+</span><span class="ln"> 7 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span><span class="w">
 </span><span class="ln"> 8 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="s2">"__222"</span><span class="p">)</span><span class="w">
 </span><span class="ln"> 9 </span><span class="w">
 </span><span class="ln">10 </span><span class="w"></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span><span class="w">
@@ -89,7 +89,7 @@ f1</span></pre></div><div class="step step-level-1" step="5" id="thread-in-pytho
 </span><span class="ln">12 </span><span class="w"></span>  <span class="n">th2</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">f2</span><span class="p">)</span><span class="w">
 </span><span class="ln">13 </span><span class="w"></span>  <span class="n">th1</span><span class="o">.</span><span class="n">start</span><span class="p">();</span><span class="w">
 </span><span class="ln">14 </span><span class="w"></span>  <span class="n">th2</span><span class="o">.</span><span class="n">start</span><span class="p">();</span><span class="w">
-</span><span class="ln">15 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span><span class="w">
+</span><span class="ln">15 </span><span class="w"></span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span><span class="w">
 </span><span class="ln">16 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">"__main"</span><span class="p">)</span></pre><pre class="highlight code console substep"><span class="go">python3 240.py &gt; 240output65.txt
 python3 240.py &gt; 240output55.txt
 python3 240.py &gt; 240output45.txt
