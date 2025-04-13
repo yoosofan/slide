@@ -1177,7 +1177,7 @@ Assembly implementation
   :number-lines:
 
   Start_Share_region:
-    move flag, #0      ; store 0 in flag
+    move lock, #0      ; store 0 in flag
     ret                ; return to caller
 
 
@@ -1188,7 +1188,7 @@ Assembly implementation
 
   loop:                ; A "jump to" tag
 
-    tsl reg, flag      ; Test and Set Lock; flag is the shared variable; it is copied
+    tsl reg, lock      ; Test and Set Lock; flag is the shared variable; it is copied
                        ; into the register reg and flag then atomically set to 1.
 
     cmp reg, #0        ; Was flag zero on entry_region?
@@ -1202,7 +1202,7 @@ Assembly implementation
 
 
   exit_region:
-    move flag, #0      ; store 0 in flag
+    move lock, #0      ; store 0 in flag
     ret                ; return to caller
 
 .. :
