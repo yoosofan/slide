@@ -1938,7 +1938,7 @@ Producer consumer(II)
             x = sh1.buf[out];
             out = out +1
             consume(x)
-
+            sh1.buf[out-1] = -1
 
 ----
 
@@ -2174,7 +2174,6 @@ Bounded Buffer(Any kind of Queue)
       mutex.acquire()
       Q.append(x)
       mutex.release()
-      in1 = (in1 + 1) % sh1.n
       full.release(); # empty.V()
 
 .. code:: python
@@ -2227,7 +2226,7 @@ Bounded Buffer(Percent Empty)
 
   full = Semaphore(0)
 
-  empty= Semaphore(MyShare.n % 90)
+  empty= Semaphore(int(MyShare.n * 0.9))
 
 .. code:: python
   :number-lines:
