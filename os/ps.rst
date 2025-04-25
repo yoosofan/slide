@@ -2268,13 +2268,11 @@ Readers and Writers(I)
   :number-lines:
   :class: substep
 
-  SharedObjectType sh1 = InitalValue;
+  void write()
+  {}
 
-  void write(SharedObjectType a1)
-  {sh1 = a1;}
-
-  SharedObjectType read(void)
-  {return sh1;}
+  void read()
+  {}
 
 .. code:: cpp
   :number-lines:
@@ -2282,9 +2280,8 @@ Readers and Writers(I)
 
   void writer(void){
     do{
-      x = ProduceOrWhatever()
-      write(x);
-      RemainingWork();
+      write();
+      RemainingTasks();
     }while(1);
   }
 
@@ -2294,9 +2291,8 @@ Readers and Writers(I)
 
   void reader(void){
     do{
-      x = read()
-      consumeOrWhatever(x)
-      RemainingWork();
+      read();
+      RemainingTasks();
     }while(1);
   }
 
@@ -2325,11 +2321,10 @@ Readers and Writers(II)
 
   void writer(void){
     do{
-      x = ProduceOrWhatever()
       wx.P();
-      write(x);
+      write();
       wx.V();
-      RemainingWork();
+      RemainingTasks();
     }while(1);
   }
 
@@ -2340,10 +2335,9 @@ Readers and Writers(II)
   void reader(void){
     do{
       wx.P();
-      x = read()
+      read()
       wx.V();
-      consumeOrWhatever(x)
-      RemainingWork();
+      RemainingTasks();
     }while(1);
   }
 
@@ -2371,7 +2365,7 @@ Readers and Writers(III)
       wx.P();
       write();
       wx.V();
-      RemainingWork();
+      RemainingTasks();
     }while(1);
   }
 
@@ -2413,9 +2407,9 @@ Readers and Writers(IV)
     :class: substep
 
     void writer(void){
-       wrt.P();
-       // writting perform in  share_variable;
-       wrt.V();
+      wrt.P();
+      wirte();
+      wrt.V();
     }
 
 .. code:: cpp
@@ -2423,17 +2417,17 @@ Readers and Writers(IV)
   :class: substep
 
   void readers(void){
-     mutex.P();
-     readCount++;
-     if(readCount==1)
-        wrt.P();
-     mutex.V();
-     // reading performed
-     mutex.P();
-     readCount--;
-     if(readCount==0)
-        wrt.V();
-     mutex.V();
+    mutex.P();
+    readCount++;
+    if(readCount==1)
+      wrt.P();
+    mutex.V();
+    read();
+    mutex.P();
+    readCount--;
+    if(readCount==0)
+      wrt.V();
+    mutex.V();
   }
 
 ----
@@ -2512,7 +2506,6 @@ Dininig Philosophers(III)
       forks[i].V();
     }
   }
-
 
 .. code:: cpp
   :number-lines:
@@ -2881,6 +2874,11 @@ Dininig Philosophers(VI)
       philosopher(3); philosopher(4);
     }
   }
+
+
+.. :
+
+    Use python for the answers for this problem
 
 ----
 
