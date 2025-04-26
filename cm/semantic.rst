@@ -4,6 +4,7 @@
 :substep: true
 :slide-numbers: true
 :data-width: 1024
+:data-height: 768
 
 .. role:: raw-html(raw)
    :format: html
@@ -17,6 +18,8 @@ Ahmad Yoosofan
 Compiler course
 
 University of Kashan
+
+http://yoosofan.github.io/course/compiler.html
 
 ----
 
@@ -317,14 +320,12 @@ real a, b, c
 .. include:: src/rd/aB.plus.E.recursive.parser.py
   :code: python
   :number-lines:
-  :class: substep
   :start-line: 2
   :end-line: 24
 
 .. include:: src/rd/aB.plus.E.recursive.parser.py
   :code: python
   :number-lines:
-  :class: substep
   :start-line: 2
   :end-line: 24
 
