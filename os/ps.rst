@@ -2488,8 +2488,8 @@ Dininig Philosophers(III)
 
   // Shared Eating
 
-  void think(void){cout <<"Eating"<<endl;}
-  void eat(void){cout<<"thinking"<<endl;}
+  void think(void){cout<<"thinking"<<endl;}
+  void eat(void){cout <<"Eating"<<endl;}
   semaphore forks[5]={1,1,1,1,1};
 
 .. code:: cpp
@@ -2645,7 +2645,7 @@ Dininig Philosophers(V - Error 1)
   void pickup(int i){
     state[i] = hungry;
     if(state[(i-1)%5] == eating ||
-        state[(i+1)%5 == eating)
+        state[(i+1)%5] == eating)
       self[i].P()
     state[i] = eating;
   }
@@ -2659,7 +2659,7 @@ Dininig Philosophers(V - Error 1)
         state[(i-2)%5 != eating )
       self[(i-1)%5].V();
     if(state[(i+1)%5] == hungry &&
-        state[(i+2)%5 != eating )
+        state[(i+2)%5] != eating )
       self[(i+1)%5].V();
     state[i]=thinking;
   }
@@ -2712,7 +2712,7 @@ Dininig Philosophers(Error 2)
   void pickup(int i){
     state[i] = hungry;
     if(state[(i-1)%5] == eating ||
-        state[(i+1)%5 == eating)
+        state[(i+1)%5] == eating)
       self[i].P()
     state[i] = eating;
   }
@@ -2728,7 +2728,7 @@ Dininig Philosophers(Error 2)
         state[(i-2)%5 != eating )
       self[(i-1)%5].V();
     if(state[(i+1)%5] == hungry &&
-        state[(i+2)%5 != eating )
+        state[(i+2)%5] != eating )
       self[(i+1)%5].V();
   }
 
