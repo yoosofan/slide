@@ -5,8 +5,10 @@
 :substep: true
 :slide-numbers: true
 :skip-help: true
+:data-width: 1024
+:data-height: 768
 
-.. title: Operating Systems: CPU Scheduling
+.. title: CPU Scheduling
 
 .. role:: raw-html(raw)
    :format: html
@@ -19,7 +21,7 @@
 
 ----
 
-Operating Systems: CPU Scheduling
+CPU Scheduling
 ===============================================
 Ahmad Yoosofan
 -----------------------------
@@ -27,14 +29,14 @@ https://yoosofan.github.io
 
 University of Kashan
 
+https://github.com/yoosofan/slide/blob/main/os/cpu.rst
+
 ----
 
 :class: t2c
 
 CPU Burst / Service Time
 ==============================
-.. class:: substep
-
 * cpu utilization by multiprogramming
 * cpu - I/O cycle of a process
 * cpu : burst time, service time
@@ -49,7 +51,6 @@ CPU Schedular
 ================
 Short Term Schedular
 ----------------------
-.. class:: substep
 
 * ready queue
 * Dispatcher
@@ -135,34 +136,34 @@ First-Come, First-Served (FCFS)
     * 
     * 6
 
-.. class:: substep
-
 *  t = 0: ready queue(q) = [:math:`p_0`, :math:`p_1`]
 *  t = 2: q = [:math:`p_1`]
 *  t = 3: q = [:math:`p_2`]
 *  t = 5: q = [:math:`p_3`]
 
-----
+.. :
 
-:class: t2c
+    ----
 
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data
+    :class: t2c
 
-  :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
-  0, , 2, , 3, , 5, , 6 
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data
 
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data
+      :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
+      0, , 2, , 3, , 5, , 6 
 
-  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
-  0, , 2, , 3, , 5, , 6 
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data
 
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data44
+      |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
+      0, , 2, , 3, , 5, , 6 
 
-  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
-  0, , 2, , 3, , 5, , 6 
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data44
+
+      :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
+      0, , 2, , 3, , 5, , 6 
 
 ----
 
@@ -443,35 +444,35 @@ Estimating Service Time(I)
 =============================
 .. class:: substep
  
-* .. math:: 
-    :class: ltr
+#. .. math:: 
+        :class: ltr
 
-      \tau_n =  \frac{t_0 + t_1 + t_2 + ... + t_{n - 1}}{n}
+          \tau_n =  \frac{t_0 + t_1 + t_2 + ... + t_{n - 1}}{n}
 
-* .. math:: 
-    :class: ltr
+#. .. math:: 
+      :class: ltr
 
-     n * \tau_n = t_0 + t_1 + t_2 + ... + t_{n - 1}
+       n * \tau_n = t_0 + t_1 + t_2 + ... + t_{n - 1}
 
-* .. math::
-    :class: ltr 
-    
-      \tau_{n+1} = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} + t_n}{n+1}
+#. .. math::
+      :class: ltr 
+      
+        \tau_{n+1} = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} + t_n}{n+1}
 
-* .. math::
-    :class: ltr 
-    
-      = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} }{n+1} + \frac{t_n}{n+1}
+#. .. math::
+      :class: ltr 
+      
+        = \frac{t_0 + t_1 + t_2 + ... + t_{n - 1} }{n+1} + \frac{t_n}{n+1}
 
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} = \frac{n * \tau_n}{n + 1} + \frac{t_n}{n+1}
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} = \frac{n * \tau_n}{n + 1} + \frac{t_n}{n+1}
 
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
 
 ----
 
@@ -479,32 +480,32 @@ Estimating Service Time(II)
 =============================
 .. class:: substep
  
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
 
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} = \frac{n + 1 - 1}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} = \frac{n + 1 - 1}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
 
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} =  ( \frac{n + 1}{n + 1} - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} =  ( \frac{n + 1}{n + 1} - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
 
-* .. math::
-    :class: ltr 
-    
-    \tau_{n+1} =  ( 1 - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
+#. .. math::
+      :class: ltr 
+      
+      \tau_{n+1} =  ( 1 - \frac{1}{n + 1} ) * \tau_n + \frac{1}{n+1} * t_n
 
-* .. math::
-    :class: ltr 
-    
-    \alpha = \frac{1}{n+1}
+#. .. math::
+      :class: ltr 
+      
+      \alpha = \frac{1}{n+1}
 
-    \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
+      \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
 
 ----
 
@@ -512,50 +513,76 @@ Estimating Service Time(III)
 =============================
 .. class:: substep
  
-* .. math::
+#. .. math::
     :class: ltr 
     
     \alpha = \frac{1}{n+1}\ , \  \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
 
-* .. math::
+#. .. math::
     :class: ltr 
     
     t_n = actual\ length\ of\ n^{th}\ service\ time
 
-* .. math::
+#. .. math::
     :class: ltr 
     
     \tau_{n+1} = predicted\ value\ for\ the\ next\ service\ time
  
-* .. math::
+#. .. math::
     :class: ltr 
     
     0 ≼ \alpha ≼ 1 \ , \ \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
 
-* .. math::
+#. .. math::
     :class: ltr 
    
     \alpha → 0 
 
 ----
 
-.. class:: substep
 
-* :raw-html:`<h2>` Scheduling Criteria :raw-html:`</h2>`
-    * *CPU utilization* : keep the CPU as busy as possible
-    * *Throughput* : number of processes that complete their execution per time unit
-    * *Turnaround time* : amount of time to execute a particular process
-    * *Waiting time* : amount of time a process has been waiting in the ready queue
-    * *Response time* : amount of time it takes from when a request was submitted until the first response is produced, not output (for time-sharing environment)
-*  :raw-html:`<h2>` Optimization Criteria  :raw-html:`</h2>`
-    * Max CPU utilization
-    * Max throughput
-    * Min turnaround time
-    * Min waiting time
-    * Min response time
+#. :raw-html:`<h2>` Scheduling Criteria :raw-html:`</h2>`
+    #. *CPU utilization* : keep the CPU as busy as possible
+    #. *Throughput* : number of processes that complete their execution per time unit
+    #. *Turnaround time* : amount of time to execute a particular process
+    #. *Waiting time* : amount of time a process has been waiting in the ready queue
+    #. *Response time* : amount of time it takes from when a request was submitted until the first response is produced, not output (for time-sharing environment)
+#.  :raw-html:`<h2>` Optimization Criteria  :raw-html:`</h2>`
+    #. Max CPU utilization
+    #. Max throughput
+    #. Min turnaround time
+    #. Min waiting time
+    #. Min response time
 
 .. :
 
   * p0 :raw-html:`&nbsp&nbsp&nbsp` p1  p2
   * 0 :raw-html:`&nbsp&nbsp&nbsp&nbsp` 1 :raw-html:`&nbsp&nbsp` 2
+
+----
+
+‍:class: t2c
+
+HRRN
+=====
+
+
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data
+
+  :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
+  0, , 2, , 3, , 5, , 6 
+
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data
+
+  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
+  0, , 2, , 3, , 5, , 6 
+
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data44
+
+  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
+  0, , 2, , 3, , 5, , 6 
+
 
