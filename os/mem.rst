@@ -1077,15 +1077,6 @@ Frame Size(II)
 
 ----
 
-Page Translation for 4MB and 4KB Page Sizes
-========================================================================
-.. image:: img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif
-   :align: center
-   :height: 450px
-
-
-----
-
 
 .. class:: rtl-h1
 
@@ -1103,13 +1094,6 @@ Page Translation for 4MB and 4KB Page Sizes
 .. image:: img/memory/paging_three_level_64bit_address.png
    :align: center
 
-
-
-----
-
-Linux Memory Mangement
-==========================
-.. image:: img/memory/Linux_64bit_processors_page_table.png
 
 ----
 
@@ -1241,20 +1225,6 @@ Allocation of frames
 
     *  پاک کردن درخواستی demand cleaning
     *  پیش پاک کردن precleaning
-
-----
-
-Copy-on-Write
-===============
-.. image:: img/memory/memory_virtual_copy_on_write_before.png
-   :align: center
-   :width: 750px
-
-----
-
-.. image:: img/memory/memory_virtual_copy_on_write_after.png
-   :align: center
-   :width: 750px
 
 ----
 
@@ -1562,6 +1532,20 @@ Lock pages
 
 ----
 
+Copy-on-Write
+===============
+.. image:: img/memory/memory_virtual_copy_on_write_before.png
+   :align: center
+   :width: 750px
+
+----
+
+.. image:: img/memory/memory_virtual_copy_on_write_after.png
+   :align: center
+   :width: 750px
+
+----
+
 .. class:: rtl-h1
 
   قطعه‌بندی (segmentation)
@@ -1720,6 +1704,21 @@ IA32 intel
 .. image:: img/memory/memory_real_hardware_example_ARM32.png
    :align: center
    :width: 700px
+
+----
+
+Page Translation for 4MB and 4KB Page Sizes
+========================================================================
+.. image:: img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif
+   :align: center
+   :height: 450px
+
+
+----
+
+Linux Memory Mangement
+==========================
+.. image:: img/memory/Linux_64bit_processors_page_table.png
 
 ----
 
