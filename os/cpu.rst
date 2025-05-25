@@ -1,7 +1,6 @@
-:data-transition-duration: 1
+:data-transition-duration: 1000
 :skip-help: true
-:css: style.css cpu.css
-:js: test1.js
+:css: ./style.css ./cpu.css
 :substep: true
 :slide-numbers: true
 :skip-help: true
@@ -35,6 +34,7 @@ https://github.com/yoosofan/slide/blob/main/os/cpu.rst
 
 :class: t2c
 
+
 CPU Burst / Service Time
 ==============================
 * cpu utilization by multiprogramming
@@ -65,10 +65,8 @@ Time Unit Concept
 * Nanosecond
 * ?
 
-----
-
 Scheduling type
-====================
+----------------
 * nonpreemptive
 * preemptive
 
@@ -95,6 +93,23 @@ Processes Table
   :math:`p_2`, 1, 3
   :math:`p_3`, 2, 5
 
+.. csv-table::
+  :header: prs, st
+  :class: substep
+
+  :math:`p_0`, 3
+  :math:`p_1`, 2
+  :math:`p_2`, 1
+  :math:`p_3`, 2
+
+.. csv-table::
+  :header: prs, st, at
+  :class: substep
+
+  :math:`p_0`, 3, 0
+  :math:`p_1`, 2, 0
+  :math:`p_2`, 1, 3
+  :math:`p_3`, 2, 5
 
 ----
 
@@ -304,8 +319,11 @@ FCFS - Convoy effect
 
 :id: sjf-spn-id
 
+:class: t2c
+
 SJF/SPN
-=========================
+========
+
 .. csv-table::
   :header: process, service time, arrival time
 
@@ -314,41 +332,46 @@ SJF/SPN
   :math:`p_2`, 1, 3
   :math:`p_3`, 3, 4
 
+.. container:: 
 
-.. container:: yoo-gantt-chart 
+    Shortest Job First / Shortest Process Next
 
-    .. class:: withborder substep
 
-    * 
-    * :math:`P_1`
-    * 
-    * :math:`P_2`
-    * 
-    * :math:`P_3`
-    * 
-    * :math:`P_0`
-    * 
+    .. container:: yoo-gantt-chart 
 
-    .. class:: yoo-x-numbers
+        .. class:: withborder substep
 
-    * 0
-    * 
-    * 4
-    * 
-    * 5
-    * 
-    * 8
-    * 
-    * 14
+        * 
+        * :math:`P_1`
+        * 
+        * :math:`P_2`
+        * 
+        * :math:`P_3`
+        * 
+        * :math:`P_0`
+        * 
 
-    .. class:: substep
+        .. class:: yoo-x-numbers
 
-    *Average Waiting Time*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
+        * 0
+        * 
+        * 4
+        * 
+        * 5
+        * 
+        * 8
+        * 
+        * 14
+
+        .. class:: substep
+
+        *Average Waiting Time*: :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
 
 .. class:: substep
 
 * Starvation
 * Nonpreemptive
+* formula : 1 / (service time)
 
 ----
 
@@ -437,6 +460,70 @@ Shortest Remaining Time(SRT), preemptive SJF
 * *Average Waiting Time* 2: 3
 * 1: FCFS
 * 2: Shortest Job First(SJF) or Shortest Process Next(SPN)
+
+----
+
+:class: t2c
+
+Hieghest Response Ratio Rate Next (HRRN)
+========================================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t = 0
+
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data
+
+      |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|
+      0, , 5 
+
+    queue : P1 P2 P3
+
+.. container::
+
+    t = 8
+
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data
+
+      |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp|
+      0, , 5, , 8
+      
+    queue : P2 P3
+      
+    formula : (w + s) / s
+    
+    P2: ( ( 8 - 2 ) + 4 ) / 4 = (6+4)/4 = 10/4
+
+    P3: ( ( 8 - 6 ) + 2 ) / 2 = (2+2)/2 = 4/2 = 8/4
+    
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data
+
+  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
+  0, , 2, , 3, , 5, , 6 
+
+.. csv-table::
+  :class: yoo-gantt-chart-set-width-based-on-data44
+
+  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
+  0, , 2, , 3, , 5, , 6 
+
+.. :
+
+    .. csv-table::
+      :class: yoo-gantt-chart-set-width-based-on-data
+
+      :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
+      0, , 2, , 3, , 5, , 6 
 
 ----
 
@@ -540,14 +627,13 @@ Estimating Service Time(III)
 
 ----
 
-
-#. :raw-html:`<h2>` Scheduling Criteria :raw-html:`</h2>`
+#. *Scheduling Criteria*
     #. *CPU utilization* : keep the CPU as busy as possible
     #. *Throughput* : number of processes that complete their execution per time unit
     #. *Turnaround time* : amount of time to execute a particular process
     #. *Waiting time* : amount of time a process has been waiting in the ready queue
     #. *Response time* : amount of time it takes from when a request was submitted until the first response is produced, not output (for time-sharing environment)
-#.  :raw-html:`<h2>` Optimization Criteria  :raw-html:`</h2>`
+#. *Optimization Criteria*
     #. Max CPU utilization
     #. Max throughput
     #. Min turnaround time
@@ -561,28 +647,6 @@ Estimating Service Time(III)
 
 ----
 
-‍:class: t2c
-
-HRRN
-=====
-
-
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data
-
-  :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
-  0, , 2, , 3, , 5, , 6 
-
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data
-
-  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
-  0, , 2, , 3, , 5, , 6 
-
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data44
-
-  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
-  0, , 2, , 3, , 5, , 6 
+END
 
 
