@@ -321,9 +321,8 @@ FCFS - Convoy effect
 
 :class: t2c
 
-SJF/SPN
-========
-
+Shortest Job First or Shortest Process Next (SJF/SPN) :math:`\frac{1}{s}`
+-------------------------------------------------------------------------
 .. csv-table::
   :header: process, service time, arrival time
 
@@ -465,8 +464,8 @@ Shortest Remaining Time(SRT), preemptive SJF
 
 :class: t2c
 
-Hieghest Response Ratio Rate Next (HRRN)
-========================================
+Hieghest Response Ratio Rate Next (HRRN) :math:`\frac{w + s}{s}`
+=================================================================
 .. csv-table::
   :header: process, service time, arrival time
 
@@ -477,54 +476,73 @@ Hieghest Response Ratio Rate Next (HRRN)
 
 .. container::
 
-    t = 0
+    .. list-table::
+        :class: borderless 
+    
+        * - t = 0 |nbsp| 
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
 
-    .. csv-table::
-      :class: yoo-gantt-chart-set-width-based-on-data
+              |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|
+              0, , 5 
 
-      |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|
-      0, , 5 
+          - |nbsp| queue : P1, P2, P3
 
-    queue : P1 P2 P3
+        * - t = 5 |nbsp|
 
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
+
+              |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp|
+              0, , 5, , 8
+            
+          - queue : P2 P3
+            
 .. container::
 
-    t = 8
+    #. P2: :math:`\frac{( 8 - 2 ) + 4}{4} = \frac{6+4}{4} = \frac{10}{4}`
+    #. P3: :math:`\frac{( 8 - 6 ) + 2}{2} = \frac{2+2}{2} = \frac{4}{2} = \frac{8}{4}`
 
-    .. csv-table::
-      :class: yoo-gantt-chart-set-width-based-on-data
-
-      |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp|
-      0, , 5, , 8
-      
-    queue : P2 P3
-      
-    formula : (w + s) / s
+    .. list-table::
+        :class: borderless 
     
-    P2: ( ( 8 - 2 ) + 4 ) / 4 = (6+4)/4 = 10/4
+        * - t = 8 |nbsp| 
 
-    P3: ( ( 8 - 6 ) + 2 ) / 2 = (2+2)/2 = 4/2 = 8/4
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
+
+              |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp|
+              0, , 5, , 8, ,12
+      
+          - queue : P3
+      
+.. container::
+
+     .. list-table::
+        :class: borderless 
     
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data
+        * - HRRN |nbsp| 
 
-  |nbsp| |nbsp| :math:`P_0` |nbsp| |nbsp|, ,|nbsp| :math:`P_1` |nbsp|, ,|nbsp| |nbsp| :math:`P_2` |nbsp| |nbsp|, , |nbsp| :math:`P_3` |nbsp|,
-  0, , 2, , 3, , 5, , 6 
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
 
-.. csv-table::
-  :class: yoo-gantt-chart-set-width-based-on-data44
+              |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp| , , :math:`P_3` |nbsp|
+              0, , 5, , 8, ,12, , 14
+      
+        * - SJF |nbsp| 
 
-  :math:`P_0` , ,:math:`P_1` , , :math:`P_2` , , :math:`P_3` ,
-  0, , 2, , 3, , 5, , 6 
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
 
-.. :
+              |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp| :math:`P_3` |nbsp| , , |nbsp| :math:`P_2` |nbsp|
+              0, , 5, , 8, ,10, , 14
+      
+Average Waiting Time
 
-    .. csv-table::
-      :class: yoo-gantt-chart-set-width-based-on-data
+HRRN: :math:`\frac{0+(5-1)+(8-2)+(12-6)}{4}=\frac{16}{4}=4`
 
-      :raw-html:`&nbsp;&nbsp;` :math:`P_0` :raw-html:`&nbsp;&nbsp;`, ,:raw-html:`&nbsp;` :math:`P_1` :raw-html:`&nbsp;`, ,:raw-html:`&nbsp;&nbsp;` :math:`P_2` :raw-html:`&nbsp;&nbsp;`, , :raw-html:`&nbsp;` :math:`P_3` :raw-html:`&nbsp;`,
-      0, , 2, , 3, , 5, , 6 
-
+SJF: :math:`\frac{0+(5-1)+(8-6)+(10-2)}{4}=\frac{14}{4}=\frac{7}{2}=3.5`
+  
 ----
 
 Estimating Service Time(I)
@@ -625,6 +643,343 @@ Estimating Service Time(III)
    
     \alpha → 0 
 
+----
+
+:class: t2c
+
+Round Robin (RR , quantum) I
+============================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    .. list-table::
+        :class: borderless 
+
+        * - time quantum or q = 2 , 
+          - Queue (Q): Empty 
+   
+        * - t = 0 , Q: P0 |nbsp|
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
+
+              :math:`P_0` |nbsp| 
+              0, , 2
+
+        * - t=2, Q: P1(3), P2(4), P0(3)
+
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
+
+              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp|
+              0, , 2, , 4 
+
+        * - t=4, Q:P2(4), P0(3), P1(1)
+
+          - .. csv-table::
+              :class: yoo-gantt-chart-set-width-based-on-data
+
+              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp|
+              0, , 2, , 4 , ,6
+ 
+.. container::
+
+        t=6, Q: P0(3), P1(1), P3(2), P2(2)
+
+        - .. csv-table::
+            :class: yoo-gantt-chart-set-width-based-on-data
+
+            :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|
+            0, , 2, , 4 , ,6 , , 8
+
+        t=8, Q: P1(1), P3(2), P2(2), P0(1)
+
+        - .. csv-table::
+            :class: yoo-gantt-chart-set-width-based-on-data
+
+            :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1` 
+            0, , 2, , 4 , ,6 , , 8, , 9
+
+.. container::
+
+    t=9, Q: P3(2), P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`P_3` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+.. container::
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+----
+
+:class: t2c
+
+Round Robin (RR) II
+===================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+Average Waiting Time
+
+.. container::
+
+    :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
+    
+    = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
+    
+    
+
+----
+
+:class: t2c
+
+PRIORITY
+========
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+Average Waiting Time
+
+.. container::
+
+    :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
+    
+    = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
+ 
+----
+
+:class: t2c
+
+Priority Round Robin
+====================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+Average Waiting Time
+
+.. container::
+
+    :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
+    
+    = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
+ 
+----
+
+:class: t2c
+
+Multi Lever Queue
+=================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+Average Waiting Time
+
+.. container::
+
+    :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
+    
+    = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
+ 
+----
+
+:class: t2c
+
+Multi Level Queue Feedback (MLQF)
+=================================
+.. csv-table::
+  :header: process, service time, arrival time
+
+  :math:`p_0`, 5, 0
+  :math:`p_1`, 3, 1
+  :math:`p_2`, 4, 2
+  :math:`p_3`, 2, 6
+
+.. container::
+
+    t=11, Q: P2(2), P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp| 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+
+    t=13, Q: P0(1)
+
+    - .. csv-table::
+        :class: yoo-gantt-chart-set-width-based-on-data
+
+        :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0` 
+        0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+
+Average Waiting Time
+
+.. container::
+
+    :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
+    
+    = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
+             
+.. :
+        #. P2: :math:`\frac{( 8 - 2 ) + 4}{4} = \frac{6+4}{4} = \frac{10}{4}`
+        #. P3: :math:`\frac{( 8 - 6 ) + 2}{2} = \frac{2+2}{2} = \frac{4}{2} = \frac{8}{4}`
+
+        .. list-table::
+            :class: borderless 
+        
+            * - t = 8 |nbsp| 
+
+              - .. csv-table::
+                  :class: yoo-gantt-chart-set-width-based-on-data
+
+                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp|
+                  0, , 5, , 8, ,12
+          
+              - queue : P3
+          
+    .. container::
+
+         .. list-table::
+            :class: borderless 
+        
+            * - HRRN |nbsp| 
+
+              - .. csv-table::
+                  :class: yoo-gantt-chart-set-width-based-on-data
+
+                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp| , , :math:`P_3` |nbsp|
+                  0, , 5, , 8, ,12, , 14
+          
+            * - SJF |nbsp| 
+
+              - .. csv-table::
+                  :class: yoo-gantt-chart-set-width-based-on-data
+
+                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp| :math:`P_3` |nbsp| , , |nbsp| :math:`P_2` |nbsp|
+                  0, , 5, , 8, ,10, , 14
+          
+    Average Waiting Time
+
+    HRRN: :math:`\frac{0+(5-1)+(8-2)+(12-6)}{4}=\frac{16}{4}=4`
+
+    SJF: :math:`\frac{0+(5-1)+(8-6)+(10-2)}{4}=\frac{14}{4}=\frac{7}{2}=3.5`
+      
 ----
 
 #. *Scheduling Criteria*

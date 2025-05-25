@@ -59,6 +59,7 @@ div#cpu-test2-id .yoo-gantt-chart > ul.yoo-x-axis > li:nth-of-type(odd){
   background-color: black;
 }
 */
+table.yoo-gantt-chart-set-width-based-on-data tr td { border: solid 2px;}
 table.yoo-gantt-chart-set-width-based-on-data tr:nth-of-type(1) td:last-of-type{
   border: 0;
 }
