@@ -163,6 +163,12 @@ Contiguous Index Based Block Allocation
 
 ----
 
+Contiguous List Allocation
+==========================
+.. image:: img/disk/disk_free_Linked_space_list_on_disk.png
+
+----
+
 File Structure in Unix
 =========================
 .. image:: img/disk/disk_The_UNIX_inode.png
@@ -227,21 +233,14 @@ Free Space Management
     * Linked List + Grouping
     * Linked List+Address+Count
 
-----
-
-List Based
-=============
-.. image:: img/disk/disk_free_Linked_space_list_on_disk.png
-
-----
-
 Bit Vector
-===============
-* Each block is represented by a bit in a table. Thus, if there are " n " disk blocks, the table has " n " bits.
+------------
+* Each block is represented by a bit in a table. 
 * If a block is free, its corresponding bit is 1.
-* When a block is needed, the table is searched.  If a 1 bit is found in position " k ", block " k " is free.
-* If the disk capacity is small, the whole bit vector can be stored in memory. For a large disk, this bit vector will consume too much memory.
-* We could group a few blocks into a clusterand allocate " clusters ". This saves space and may cause internal fragmentation.
+* When a block is needed, the table is searched.
+* If the disk capacity is small, the whole bit vector can be stored in memory.
+* For a large disk, this bit vector will consume too much memory.
+* We could group a few blocks into a clusterand allocate "clusters".
 * Another possibility is the use of a " summary table ".
 
 ----

@@ -1180,8 +1180,6 @@ Assembly implementation
     move lock, #0      ; store 0 in flag
     ret                ; return to caller
 
-
-
   enter_region:        ; entry point.
 
     move reg, #1       ; Was flag zero on entry_region?
@@ -1198,8 +1196,6 @@ Assembly implementation
 
     ret                ; Exit; i.e., flag was zero on entry. If we get here, tsl
                        ; will have set it non-zero; thus, we have claimed the resource associated with flag.
-
-
 
   exit_region:
     move lock, #0      ; store 0 in flag
@@ -3205,27 +3201,33 @@ Send and Receive(II)
     :number-lines: 15
     :start-line: 14
 
+----
+
+:class: t2c
+
+Producer consumer (Send and Receive)
+====================================
+.. include:: src/ps/pcbmessage_limited_message.cpp
+    :code: cpp
+    :number-lines:
+    :end-line: 16
+
+.. include:: src/ps/pcbmessage_limited_message.cpp
+    :code: cpp
+    :number-lines: 17
+    :start-line: 16
+
 .. :
 
     pcbmessage.cpp
-    pcbmessage_limited_message.cpp
 
 ----
 
-
-END
-=======
-
-.. :
-
-  Other links
-  ****************
-  C++20
-  =========
-  https://www.modernescpp.com/index.php/multithreading-in-c-17-and-c-20
-
-  .. code:: cpp
-
+C++20 Synchronized
+==================
+.. code:: cpp
+    :number-lines:
+   
     int func() {
       static int i = 0;
       synchronized{
@@ -3241,38 +3243,53 @@ END
         t = std::thread([]{ for(int n = 0; n < 10; ++n) func(); });
     }
 
+.. :
 
-  https://www.runoob.com/w3cnote/cpp-std-thread.html
+  https://www.modernescpp.com/index.php/multithreading-in-c-17-and-c-20
 
-  .. code:: cpp
+----
 
-    #include <iostream>
-    #include <thread>
-    #include <chrono>
-    #include <mutex>
+C++20 Synchronized
+==================
+.. code:: cpp
 
-    std::mutex g_display_mutex;
+  #include <iostream>
+  #include <thread>
+  #include <chrono>
+  #include <mutex>
 
-    void foo()
-    {
-      std::thread::id this_id = std::this_thread::get_id();
+  std::mutex g_display_mutex;
 
-      g_display_mutex.lock();
-      std::cout << "thread " << this_id << " sleeping...\n";
-      g_display_mutex.unlock();
+  void foo(){
+    std::thread::id this_id = std::this_thread::get_id();
 
-      std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    g_display_mutex.lock();
+    std::cout << "thread " << this_id << " sleeping...\n";
+    g_display_mutex.unlock();
 
-    int main()
-    {
-      std::thread t1(foo);
-      std::thread t2(foo);
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
 
-      t1.join();
-      t2.join();
-    }
+  int main(){
+    std::thread t1(foo);
+    std::thread t2(foo);
+    t1.join();
+    t2.join();
+  }
 
+.. :
+
+    https://www.runoob.com/w3cnote/cpp-std-thread.html
+
+----
+
+END
+=======
+
+.. :
+
+  Other links
+  ****************
   C#
   ================
   https://developpaper.com/concurrent-programming-in-net-core/
