@@ -823,49 +823,46 @@ Relative Priority
 .. csv-table::
   :header: process, service time, arrival time, Priority
 
-  :math:`p_0`, 2, 0, 4
-  :math:`p_1`, 3, 1, 3
-  :math:`p_2`, 1, 2, 2
-  :math:`p_3`, 2, 5, 1
+  P0, 2, 0, 4
+  P1, 3, 1, 3
+  P2, 1, 2, 3
+  P3, 2, 5, 1
+
+.. list-table::
+    :class: borderless
+    
+    * - t=0, Q: P0(2,4)
+      - .. csv-table::
+          :class: yoo-gantt-chart-set-width-based-on-data
+    
+          P0 |nbsp| , ,
+          0, , 2
+    *  - t=2, Q: P1(3,3), P2(1,3) 
+       - .. csv-table::
+          :class: yoo-gantt-chart-set-width-based-on-data
+    
+          P0 |nbsp| , ,  |nbsp| P1  |nbsp|
+          0, , 2, , 5
 
 .. container::
 
-    t=0, Q: P0(2)
+    t=5, Q: P2(1,3), P3(2,1)
 
     .. csv-table::
       :class: yoo-gantt-chart-set-width-based-on-data
 
-      :math:`P_0` |nbsp| , ,
-      0, , 2
-
-    t=2, Q: P1(3,3), P2(1,2) 
-
-    .. csv-table::
-      :class: yoo-gantt-chart-set-width-based-on-data
-
-      :math:`P_0` |nbsp| , , :math:`P_2`
-      0, , 2, , 3
+      P0 |nbsp| , ,  |nbsp| P1  |nbsp| , , P3
+      0, , 2, , 5, , 7 
 
 .. container::
 
-    t=3, Q: P1(3,3) 
+    t=6, Q: P2(1,3)
 
     .. csv-table::
       :class: yoo-gantt-chart-set-width-based-on-data
 
-      :math:`P_0` |nbsp| , , :math:`P_2`  , ,  |nbsp| :math:`P_1` |nbsp| 
-      0, , 2, , 3, , 6
-
-.. container::
-
-    t=6, Q: P3(2,1)
-
-    .. csv-table::
-      :class: yoo-gantt-chart-set-width-based-on-data
-
-      :math:`P_0` |nbsp| , , :math:`P_2`  , ,  |nbsp| :math:`P_1` |nbsp| , , :math:`P_3` |nbsp| 
-      0, , 2, , 3, , 6, , 8
-
+      P0 |nbsp| , ,  |nbsp| P1  |nbsp| , , P3, , P2 |nbsp|
+      0, , 2, , 5, , 7, , 8
 
 .. :
 
@@ -888,65 +885,46 @@ Absolute Priority
 
   P0, 2, 0, 4
   P1, 3, 1, 3
-  P2, 1, 2, 2
+  P2, 1, 2, 3
   P3, 2, 5, 1
 
 .. list-table::
     :class: borderless
-
-    * - t=0, Q: P0(2)
-
+    
+    * - t=0, Q: P0(2,4)
       - .. csv-table::
           :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , ,
-          0, , 1 
-
-    * - t=1, Q: P0(1,4), P1(3,3) 
-
-      - .. csv-table::
+    
+          P0
+          0, , 2
+    *  - t=1, Q: P1(3,3), P0(1,4) 
+       - .. csv-table::
           :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , , P1
-          0, , 1, , 2
-
-    * - t=2, Q: P0(1,4), P1(2,3), P2(1,2) 
-
-      - .. csv-table::
+    
+          P0  , , |nbsp| P1  |nbsp|
+          0, , 1, , 4
+    *  - t=4, Q: P0(1,4), P2(1,3)
+       - .. csv-table::
           :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , , P1  , , P2
-          0, , 1, , 2, , 3
+    
+          P0 , ,  |nbsp| P1  |nbsp|, , P2
+          0, , 1, , 4, , 5
 
 .. list-table::
     :class: borderless
-
-    * - t=3, Q: P0(1,4), P1(2,3) 
-
-      - .. csv-table::
+    
+    *  - t=5, Q: P0(1,4), P3(2,1)
+       - .. csv-table::
           :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , , P1 , , P2 , , P2
-          0, , 1, , 2, , 3, , 5
-
-    * - t=5, Q: P0(1,4), P3(2,1) 
-
-      - .. csv-table::
+    
+          P0 , ,  |nbsp| P1  |nbsp|, , P2, , P3 |nbsp|
+          0, , 1, , 4, , 5, , 7
+    *  - t=7, Q: P0(1,4)
+       - .. csv-table::
           :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , , P1 , , P2 , , P2 , , P3 |nbsp|
-          0, , 1, , 2, , 3, , 5, , 7
-
-.. list-table::
-    :class: borderless
-
-    * - t=7, Q: P0(1,4) 
-
-      - .. csv-table::
-          :class: yoo-gantt-chart-set-width-based-on-data
-
-          P0 , , P1 , , P2 , , P2 , , P3 |nbsp|, , P0
-          0, , 1, , 2, , 3, , 5, , 7, , 8
+    
+          P0 , ,  |nbsp| P1  |nbsp|, , P2, , P3 |nbsp|, , P0
+          0, , 1, , 4, , 5, , 7, , 8
 
 
 ----
