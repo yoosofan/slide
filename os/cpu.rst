@@ -78,86 +78,95 @@ Processes Table
 ==========================
 .. csv-table::
   :header: process, service(Burst) time
+  :class: center
 
-  :math:`p_0`, 3
-  :math:`p_1`, 2
-  :math:`p_2`, 1
-  :math:`p_3`, 2
+  :math:`P_0`, 3
+  :math:`P_1`, 2
+  :math:`P_2`, 1
+  :math:`P_3`, 2
 
 .. csv-table::
   :header: process, service time, arrival time
-  :class: substep
+  :class: substep center
 
-  :math:`p_0`, 3, 0
-  :math:`p_1`, 2, 0
-  :math:`p_2`, 1, 3
-  :math:`p_3`, 2, 5
+  :math:`P_0`, 3, 0
+  :math:`P_1`, 2, 0
+  :math:`P_2`, 1, 3
+  :math:`P_3`, 2, 5
 
 .. csv-table::
   :header: prs, st
-  :class: substep
+  :class: substep center
 
-  :math:`p_0`, 3
-  :math:`p_1`, 2
-  :math:`p_2`, 1
-  :math:`p_3`, 2
+  :math:`P_0`, 3
+  :math:`P_1`, 2
+  :math:`P_2`, 1
+  :math:`P_3`, 2
 
 .. csv-table::
   :header: pcs, st, at
-  :class: substep
+  :class: substep center
 
-  :math:`p_0`, 3, 0
-  :math:`p_1`, 2, 0
-  :math:`p_2`, 1, 3
-  :math:`p_3`, 2, 5
+  :math:`P_0`, 3, 0
+  :math:`P_1`, 2, 0
+  :math:`P_2`, 1, 3
+  :math:`P_3`, 2, 5
 
 ----
 
-:id: cpu-test2-id
+:class: t2c
 
 First-Come, First-Served (FCFS)
 ==================================
 .. csv-table::
   :header: process, service time, arrival time
+  :class: center
+  
+  :math:`P_0`, 2, 0
+  :math:`P_1`, 1 ,0
+  :math:`P_2`, 2, 3
+  :math:`P_3`, 1, 4
 
-  :math:`p_0`, 2, 0
-  :math:`p_1`, 1 ,0
-  :math:`p_2`, 2, 3
-  :math:`p_3`, 1, 4
+.. csv-table::
+    :class: yoo-gantt-chart-set-width-based-on-data
 
-.. container:: yoo-gantt-chart
+    |nbsp| P0 |nbsp| |nbsp|, , |nbsp| P1 |nbsp| , , |nbsp| P2 |nbsp| |nbsp|, , |nbsp| P3 |nbsp|
+    0, ,                              2, ,                 3, ,                        5, ,     6 
 
-    .. class:: withborder 
-
-    * 
-    * :math:`P_0`
-    * 
-    * :math:`P_1`
-    * 
-    * :math:`P_2`
-    * 
-    * :math:`P_3`
-    * 
-
-    .. class:: yoo-x-numbers
-
-    * 0
-    * 
-    * 2
-    * 
-    * 3
-    * 
-    * 5
-    * 
-    * 6
 
 *  Gantt Chart
-*  t = 0: ready queue(q) = [:math:`p_0`, :math:`p_1`]
-*  t = 2: q = [:math:`p_1`]
-*  t = 3: q = [:math:`p_2`]
-*  t = 5: q = [:math:`p_3`]
+*  t = 0: ready queue(q) = [:math:`P_0`, :math:`P_1`]
+*  t = 2: q = [:math:`P_1`]
+*  t = 3: q = [:math:`P_2`]
+*  t = 5: q = [:math:`P_3`]
 
 .. :
+
+    .. container:: yoo-gantt-chart
+
+        .. class:: withborder 
+
+        * 
+        * :math:`P_0`
+        * 
+        * :math:`P_1`
+        * 
+        * :math:`P_2`
+        * 
+        * :math:`P_3`
+        * 
+
+        .. class:: yoo-x-numbers
+
+        * 0
+        * 
+        * 2
+        * 
+        * 3
+        * 
+        * 5
+        * 
+        * 6
 
     ----
 
@@ -183,43 +192,26 @@ First-Come, First-Served (FCFS)
 
 ----
 
-:id: cpu-average-waiting-id
+:class: t2c
 
 Average Waiting Time
 ==================================
 .. csv-table::
   :header: process, service time, arrival time
+  :class: center
+  
+  :math:`P_0`, 2, 0
+  :math:`P_1`, 1 ,0
+  :math:`P_2`, 2, 3
+  :math:`P_3`, 1, 4
 
-  :math:`p_0`, 2, 0
-  :math:`p_1`, 1 ,0
-  :math:`p_2`, 2, 3
-  :math:`p_3`, 1, 4
+.. csv-table::
+    :class: yoo-gantt-chart-set-width-based-on-data
 
-.. container:: yoo-gantt-chart  substep
+    |nbsp| P0 |nbsp| |nbsp|, , |nbsp| P1 |nbsp| , , |nbsp| P2 |nbsp| |nbsp|, , |nbsp| P3 |nbsp|
+    0, ,                              2, ,                 3, ,                        5, ,     6 
 
-  .. class:: withborder 
-
-  * 
-  * :math:`P_0`
-  * 
-  * :math:`P_1`
-  * 
-  * :math:`P_2`
-  * 
-  * :math:`P_3`
-  * 
-
-  .. class:: yoo-x-numbers
-
-  * 0
-  * 
-  * 2
-  * 
-  * 3
-  * 
-  * 5
-  * 
-  * 6
+.
 
 .. class:: substep
 
@@ -241,13 +233,12 @@ FCFS - Convoy effect
 =========================
 .. csv-table::
   :header: process, service time, arrival time
+  :class: center
 
-  :math:`p_0`, 4, 0
-  :math:`p_1`, 6 ,0
-  :math:`p_2`, 1, 3
-  :math:`p_3`, 3, 4
-
-
+  :math:`P_0`, 4, 0
+  :math:`P_1`, 6 ,0
+  :math:`P_2`, 1, 3
+  :math:`P_3`, 3, 4
 
 .. container:: yoo-gantt-chart 
 
@@ -326,7 +317,8 @@ Shortest Job First or Shortest Process Next (SJF/SPN) :math:`\frac{1}{s}`
 -------------------------------------------------------------------------
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 6, 0
   :math:`p_1`, 4, 0
   :math:`p_2`, 1, 3
@@ -381,7 +373,8 @@ Shortest Remaining Time(SRT), preemptive SJF
 ================================================
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 4, 0
   :math:`p_1`, 6 ,0
   :math:`p_2`, 1, 1
@@ -469,7 +462,8 @@ Hieghest Response Ratio Rate Next (HRRN) :math:`\frac{w + s}{s}`
 =================================================================
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 5, 0
   :math:`p_1`, 3, 1
   :math:`p_2`, 4, 2
@@ -652,7 +646,8 @@ Round Robin (RR , quantum) I
 ============================
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 5, 0
   :math:`p_1`, 3, 1
   :math:`p_2`, 4, 2
@@ -741,7 +736,8 @@ Round Robin (RR) II
 ===================
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 5, 0
   :math:`p_1`, 3, 1
   :math:`p_2`, 4, 2
@@ -822,7 +818,8 @@ Relative Priority
 =================
 .. csv-table::
   :header: process, service time, arrival time, Priority
-
+  :class: center
+  
   P0, 2, 0, 4
   P1, 3, 1, 3
   P2, 1, 2, 3
@@ -882,7 +879,8 @@ Absolute Priority
 =================
 .. csv-table::
   :header: process, service time, arrival time, Priority
-
+  :class: center
+  
   P0, 2, 0, 4
   P1, 3, 1, 3
   P2, 1, 2, 3
@@ -935,7 +933,8 @@ Priority Round Robin
 ====================
 .. csv-table::
   :header: process, service time, arrival time, Priority
-
+  :class: center
+  
   P0, 2, 0, 4
   P1, 3, 1, 3
   P2, 1, 2, 2
@@ -1006,7 +1005,8 @@ Multilevel Queue
 =================
 .. csv-table::
   :header: process, service time, arrival time
-
+  :class: center
+  
   :math:`p_0`, 5, 0
   :math:`p_1`, 3, 1
   :math:`p_2`, 4, 2
@@ -1046,11 +1046,12 @@ Multilevel Queue Feedback (MLQF)
 =================================
 .. csv-table::
   :header: process, service time, arrival time
-
-  :math:`p_0`, 5, 0
-  :math:`p_1`, 3, 1
-  :math:`p_2`, 4, 2
-  :math:`p_3`, 2, 6
+  :class: center
+  
+  :math:`P_0`, 5, 0
+  :math:`P_1`, 3, 1
+  :math:`P_2`, 4, 2
+  :math:`P_3`, 2, 6
 
 .. container::
 

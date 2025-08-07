@@ -65,3 +65,10 @@ table.smallerelementwithfullborder td, table.smallerelementwithfullborder th  {
 table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
   font-weight: bold;
 }
+
+table.center p{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
+}

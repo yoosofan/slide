@@ -1,7 +1,6 @@
 Short Term todo
 -----------------
 * Adding docs for each folder
-* Making a html foldes contain the html coverted form hovercraft files
 * Adding descriptions for each folders
 
 
@@ -77,6 +76,10 @@ Related tools
 * https://github.com/katef/kgt
 * https://katef.github.io/kgt/doc/gallery/c89-ebnf.html
 
+done
+^^^^
+* Making a html foldes contain the html coverted form hovercraft files
+    * It is automatically created after any execution of related rst file
 
 Test the follwoing changes
 ------------------------------

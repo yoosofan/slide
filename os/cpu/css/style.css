@@ -240,3 +240,10 @@ div.scrollbar-box800x500px-overflow{
 }
 
 table.borderless * {border: 0;}
+
+.center {
+  margin: auto;
+  /*width: 50%;*/
+  padding: 5px;
+  text-align: center;
+}
