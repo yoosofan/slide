@@ -134,7 +134,6 @@ First-Come, First-Served (FCFS)
 *  t = 3: q = [:math:`P_2`]
 *  t = 5: q = [:math:`P_3`]
 
-
 ----
 
 :class: t2c
@@ -609,8 +608,6 @@ Average Waiting Time
 
     = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
 
-
-
 ----
 
 :class: t2c
@@ -918,7 +915,6 @@ Average Waiting Time
     :math:`\frac{(0+(6-2)+(13-8))+((2-1)+(8-4))+((4-2)+(11-6))+(9-6)}{4}`
 
     = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
-
 
 ----
 

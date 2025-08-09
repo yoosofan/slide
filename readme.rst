@@ -40,12 +40,12 @@ List of courses and slides
 .. csv-table::
     :header-rows: 1
 
-    course name, folder
-    compiler design, cm
+    folder, course name
+    cm, Compiler Design
     cpp, Advanced Programming: cpp based
-    Fundamental of database systems concepts, db
-    Operating Systems, os
-    Front-end web development fundations and related topics, web
+    db, Fundamental of Database Systems Concepts
+    os, Operating Systems
+    web, Front-end Web Development Fundations and related topics
 
 cm (Compiler)
 -------------
