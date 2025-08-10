@@ -1,15 +1,10 @@
 Short Term todo
 -----------------
-* Adding docs for each folder
-* Adding descriptions for each folders
-
-
 .. code:: sh
 
       File "python3.13/http/server.py", line 731, in send_head
         f = open(path, 'rb')
     FileNotFoundError: [Errno 2] No such file or directory: 'slide/cm/la/favicon.ico'
-
 
 Add to the style.css
 ^^^^^^^^^^^^^^^^^^^^
@@ -80,6 +75,9 @@ done
 ^^^^
 * Making a html foldes contain the html coverted form hovercraft files
     * It is automatically created after any execution of related rst file
+
+* Adding docs for each folder
+* Adding descriptions for each folders
 
 Test the follwoing changes
 ------------------------------

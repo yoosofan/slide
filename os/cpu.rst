@@ -761,7 +761,6 @@ Absolute Priority
           P0 , ,  |nbsp| P1  |nbsp|, , P2, , P3 |nbsp|, , P0
           0, , 1, , 4, , 5, , 7, , 8
 
-
 ----
 
 :class: t2c
@@ -939,4 +938,3 @@ Optimization Criteria
 ----
 
 END
-
