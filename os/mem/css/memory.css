@@ -1,6 +1,3 @@
-:root {
- --yoo-gantt-chart-width: 450px;
-}
 ol.trace-code {justify-self: start; /*background-color: #BEF648;*/}
 pre.code { justify-self: center;}
 tr, td, th{border: 1px solid;}
