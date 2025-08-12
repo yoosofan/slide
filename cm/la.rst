@@ -711,8 +711,3 @@ Regular Expression in Programming(re/regex)
 
 Next topic LEX
 ===================
-
-.. comment:
-
-  rst2s5.py calculator_recursive_descendant.rst calculator_recursive_descendant.html -d -t --section-numbering --stylesheet=farsi.css,html4css1.css
-  rst2html.py calculator_recursive_descendant.rst calculator_recursive_descendant.html --stylesheet=farsi.css,html4css1.css
