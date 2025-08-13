@@ -1,7 +1,0 @@
-/* Use these two if the main document direction is RTL */
-body { font-family: Nazli;}
-div.sidebar { float: left !important; font-family: Nazli;}
-
-/* Allow manual direction override by class directive and roles */
-.rtl { direction: rtl; }
-.ltr { direction: ltr; }
