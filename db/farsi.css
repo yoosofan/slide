@@ -1,6 +1,8 @@
 /* Use these two if the main document direction is RTL */
 body { direction: rtl; font-family: Nazli; font-size: 0.7em}
 div.sidebar { float: left !important; font-family: Nazli;font-size: 0.7em}
+.rtl { direction: rtl; }
+.ltr { direction: ltr; }
 
 /* The next 3 rules are very useful in documents containing pieces
 of code in english */
@@ -12,12 +14,9 @@ tt {direction: ltr; unicode-bidi: embed; font-size: 0.7em }
 cite {direction: ltr; unicode-bidi: embed;font-size: 0.7em  }
 
 /* Allow manual direction override by class directive and roles */
-.rtl { direction: rtl; }
-.ltr { direction: ltr; }
 .center {
   margin: auto;
   width: 50%;
   padding: 10px;
   text-align: center;
 }
-

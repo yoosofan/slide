@@ -1,21 +1,5 @@
-:data-transition-duration: 1000
-:skip-help: true
-:css: ./style.css ./sql.css
-:substep: true
-:slide-numbers: true
-
-.. role:: ltr
-    :class: ltr
-
-.. role:: rtl
-    :class: rtl
-
-----
-
-Database Course
-==================
 Entity Relation Model
----------------------------
+
 Ahmad Yoosofan
 
 University of Kashan
@@ -62,13 +46,10 @@ pgc files
       EXEC SQL DISCONNECT ALL;
   }
 
-
-
 .. code:: cpp
 
     ecpg test_cpp.pgc
     test_cpp.pgc:28: ERROR: variable "dbname" is not declared
-
 
 ----
 
@@ -89,7 +70,6 @@ pgc files
 
 
 ----
-
 
 .. code:: cpp
 
@@ -187,8 +167,6 @@ pgc files
 
     c++ test_cpp.o test_mod.o -lecpg -o test_cpp
     
-    
-
 .. :
 
   ## https://graphviz.org/Gallery/undirected/ER.html
@@ -312,9 +290,7 @@ Database Schema
 
   create database sp;
 
-
 .. :
-
 
   create table classroom
     (building   varchar(15),
@@ -587,332 +563,9 @@ Database Schema
 
 ----
 
-insert
-=========
-DML
+Nut,  **NULL**
 
-.. code:: sql
-
-  insert into s(sn, sname,  status, city)
-    values('s1', 'Smith', 20, 'London')
-  ;
-  insert into s(sn, sname,  status, city)
-    values('s2', 'Jones', 10, 'Paris' )
-  ;
-  insert into s(sn, sname,  status, city)
-    values('s3', 'Blake', 30, 'Paris' )
-  ;
-  insert into s(sn, sname,  "status", city)
-    values('s4', 'Clark', 20, 'London')
-  ;
-  insert into s(sname, status, city, sn)
-    values('Adams', 30, 'Athens', 's5')
-  ;
-  insert into s
-    values('s6', 'Ali', 40, 'کاشان')
-  ;
-
-----
-
-P
-====
-.. code:: sql
-
-  insert into p(pn, pname, color, weight, city)
-    values('p1','Nut'  ,'Red'  ,12.0,'London')
-  ;
-  insert into p(pn, pname, color, weight, city)
-    values
-      ('p2', 'Bolt' , 'Green', 17.0, 'Paris' ),
-      ('p3', 'Screw', 'Blue' , 17.0, 'Oslo'  ),
-      ('p4', 'Screw', 'Red'  , 14.0, 'London'),
-      ('p5', 'Cam'  , 'Blue' , 12.0, 'Paris' ),
-      ('p6', 'Cog'  , 'Red'  , 19.0, 'London')
-  ;
-
-  insert into p(pn, pname, color, city)
-    values('p7', 'Nut', 'Red', 'London')
-  ;
-  insert into p(pn, pname, color, city)
-    values('p8', 'Bolt', 'Green', 'Paris')
-  ;
-
-----
-
-SP
-====
-.. code:: sql
-
-  insert into sp(sn, pn, qty)
-    values
-    ('s1', 'p1', 300),
-    ('s1', 'p2', 200),
-    ('s1', 'p3', 400),
-    ('s1', 'p4', 200),
-    ('s1', 'p5', 100),
-    ('s1', 'p6', 100),
-    ('s2', 'p1', 300),
-    ('s2', 'p2', 400),
-    ('s3', 'p2', 200),
-    ('s4', 'p2', 200),
-    ('s4', 'p4', 300),
-    ('s4', 'p5', 400),
-    ('s6', 'p2', 350)
-  ;
-
-.. :
-
-  insert into p(pn,pname,color,city)
-    values('P7', 'Nut', 'Red', 'London')
-  ;
-  insert into p(pn, pname, color, city)
-    values('P8', 'Bolt', 'Green', 'Paris')
-  ;
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعه‌ها را بیابید.
-
-.. container::
-
-  .. code:: sql
-
-    select pname
-    from p
-    ;
-
-  .. code:: sql
-
-    p{pname};
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname
-  Nut
-  Bolt
-  Screw
-  Screw
-  Cam
-  Cog
-  Nut
-  Bolt
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعه‌ها و وزن آنها را بیابید.
-
-.. container::
-
-  .. code:: sql
-
-    select pname, weight
-    from p
-    ;
-
-  .. code:: sql
-
-    p{pname, weight} ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname, weight
-  Nut,  12
-  Bolt, 17
-  Screw,  17
-  Screw,  14
-  Cam,  12
-  Cog,  19
-  Nut,
-  Bolt,
-
-.. :
-
-  Nut,  **NULL**
-  Bolt, **NULL**
-
-----
-
-.. class:: rtl-h1
-
-  نام قعطه‌ها و وزن آنها را به گرم بیابید.
-
-.. code:: sql
-
-  select pname, weight * 1000
-  from p
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname, weight * 1000
-  Nut,  12000
-  Bolt, 17000
-  Screw,  17000
-  Screw,  14000
-  Cam,  12000
-  Cog,  19000
-  Nut,
-  Bolt,
-
-----
-
-as (rename)
-==============
-.. code:: sql
-
-  select pname, weight * 1000 as gweight
-  from p
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname, gweight
-  Nut,  12000
-  Bolt, 17000
-  Screw,  17000
-  Screw,  14000
-  Cam,  12000
-  Cog,  19000
-  Nut,
-  Bolt,
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام عرضه‌کنندگان شهر کاشان را بیابید.
-
-.. container::
-
-  .. code:: sql
-
-    select sname
-    from s
-    where city = 'کاشان'
-    ;
-
-  .. code:: sql
-    :class: substep
-
-    -- (s where city = 'کاشان') {pname}
-
-  .. code:: sql
-    :class: substep
-
-    select sname
-    from s
-    where city = 'Paris'
-    ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  sname
-  Jones
-  Blake
-
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  شمارهٔ قطعه‌های عرضه شده را بیابید.
-
-.. code:: sql
-  :class: substep
-
-  select pn
-  from sp
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pn
-  p1
-  p2
-  p3
-  p4
-  p5
-  p6
-  p1
-  p2
-  p2
-  p2
-  p4
-  p5
-  p2
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعه‌های عرضه شده را بیابید.
-
-.. container::
-
-  .. code:: sql
-    :class: substep
-
-    select pname
-    from p, sp
-    where p.pn = sp.pn
-    ;
-
-  .. code:: sql
-    :class: substep
-
-    (
-      (
-         (
-           p rename pn as ppn
-         )
-         times sp
-      ) where ppn = pn
-    ) {pname}
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pname
-  Nut
-  Bolt
-  Screw
-  Screw
-  Cam
-  Cog
-  Nut
-  Bolt
-  Bolt
-  Bolt
-  Screw
-  Cam
-  Bolt
+Bolt, **NULL**
 
 ----
 

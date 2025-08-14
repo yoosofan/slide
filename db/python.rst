@@ -32,7 +32,6 @@ Simple Application(I)
     :start-line: 3
     :end-line: 18
 
-
 ----
 
 .. :
