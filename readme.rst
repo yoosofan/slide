@@ -41,24 +41,11 @@ List of courses and slides
     :header-rows: 1
 
     folder, course name
-    cm, Compiler Design
+    cm,  Compiler Design
     cpp, Advanced Programming: cpp based
-    db, Fundamental of Database Systems Concepts
-    os, Operating Systems
+    db,  Fundamental of Database Systems Concepts
+    os,  Operating Systems
     web, Front-end Web Development Fundations and related topics
-
-cm (Compiler)
--------------
-.. csv-table::
-    :header-rows: 1
-
-    File Name, Description
-    in.rst, Intorducton of compiler design and its importance
-    la.rst, Lexical Analyser or Scanner
-    lex.rst, LEX or flex: lexical analyser generator tool.
-    sa.rst, Syntax Alanysis
-    rd.rst, recursive descentant syntax analyser or compiler devepment method
-    
 
 Convert to html
 ==================
