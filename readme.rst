@@ -2,32 +2,111 @@ Slides of some computer courses
 
 Ahmad Yoosofan
 
-Use Bildumilo to view presentations
-===================================
-`Bildumilo <https://github.com/yoosofan/bildumilo>`_
+Use Prezentprogramo to view presentations
+=========================================
+`Prezentprogramo <https://github.com/yoosofan/prezentprogramo>`_
 
 Installation
 ------------
-1. It is better to use virtual environment in python3
+Simple but not the best way to install
 
-    .. code:: sh
+.. code:: sh
 
-        cd ~/destination/directory/
-        python -m venv myvenv
-        source myvenv/bin/activate
-2. Download `Bildumilo <https://github.com/yoosofan/bildumilo>`_ repository to a directory, like :code:`~/path/bildumilo`
-3. Install by pip
+    pip3 install prezentprogramo
 
-    .. code:: sh
+It is better to follow the following steps, then you can have less problems in the long run.
 
-        pip install ~/path/bildumilo/
+Prepare Environment
+^^^^^^^^^^^^^^^^^^^
+These steps can be done once. You don't need to repeat them unless you really need to.
 
+`uv <https://github.com/astral-sh/uv>`_ is a Python package and project manager.
+Using uv has multiple benefits including installing any version of python3 and
+related packages on it. uv can reduce many conflicts and problems you may face if you use pip alone.
+While it is not necessary but I would recommend to use it instead of pip.
+
+#. Install the latest python3 
+    #. uv 
+
+        .. code:: sh
+        
+            # First install curl from
+            # https://curl.se/download.html
+            # Instead on any debian based linux use the following command
+            # apt install curl
+
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            
+            # update uv periodically
+            
+            uv self update
+            
+      #. Install python3
+      
+          .. code:: sh
+          
+              uv python install 3.13.6
+
+#. It is better to use virtual environment in python3
+    #. Create virtual environment
+
+        #. Using uv
+        
+            .. code:: sh
+            
+                uv venv --python 3.13.6 myvenv 
+    
+        #. Pure python
+        
+            .. code:: sh
+
+                python -m venv myvenv
+                            
+    #. Activate virtual environment whenever you want to use prezentprogramo
+    
+        .. code:: sh
+
+            source myvenv/bin/activate
+
+Install Prezentprogramo
+^^^^^^^^^^^^^^^^^^^^^^^
+#. Use the latest changes in github repository
+
+    #. Download `Prezentprogramo <https://github.com/yoosofan/prezentprogramo>`_ repository to a directory, like :code:`~/path/prezentprogramo`
+    #. Install Prezentprogramo by
+    
+        #. uv
+          
+            .. code:: sh
+            
+                uv tool install ~/path/prezentprogramo/
+
+        #. Or pip
+        
+            .. code:: sh
+
+                pip install ~/path/prezentprogramo/
+
+#. Or use pypi.org
+
+    #. uv
+        
+        .. code:: sh
+        
+            uv tool install prezentprogramo
+            
+    #. Or pip
+    
+        .. code:: sh
+        
+            pip3 install prezentprogramo
+            
 Run a simple slide
 ------------------
 .. code:: sh
 
   cd cpp
-  bildumilo cpp.rst
+  prezentprogramo cpp.rst
 
 Open Browser
 ^^^^^^^^^^^^
@@ -49,13 +128,13 @@ List of courses and slides
 
 Convert to html
 ==================
-Bildumilo creates a directory by the name of slide if it possible. Therefore, it doesn't need to do the follwing steps.
+Prezentprogramo creates a directory by the name of slide if it possible. Therefore, it doesn't need to do the follwing steps.
 However, Ii is possible to create a seperate directory.
 
 .. code:: sh
 
   cd os
-  bildumilo cpu.rst cpu_htmls/
+  prezentprogramo cpu.rst cpu_htmls/
 
 Convert to pdf
 =================
@@ -63,7 +142,7 @@ Install google-chrome
 
 .. code:: sh
 
-  bildumilo cpu.rst --pdf cpu.pdf
+  prezentprogramo cpu.rst --pdf cpu.pdf
 
 Old methods for hovercraft
 --------------------------
@@ -72,7 +151,7 @@ Run hovercraft
 .. code:: sh
 
   cd os
-  bildumilo mem.rst
+  prezentprogramo mem.rst
 
   ###  Run browser
 
