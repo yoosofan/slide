@@ -1,5 +1,8 @@
 Short Term todo
 -----------------
+Making a github page based website on this repository, could help 
+students to easily navigate the html slides.
+
 .. code:: sh
 
       File "python3.13/http/server.py", line 731, in send_head
@@ -79,6 +82,16 @@ done
 * Adding docs for each folder
 * Adding descriptions for each folders
 
+Long Term tasks
+---------------
+* Viewer can open slides from a remote Prezentprogramo server and their slide
+    change is controled by the instructor.
+* Adding blackboard to slides. Having modes of slides for keyboard and mouse
+    control (blackboard Javascript Librariy in cotrol or impress.js in
+    in control - edit mode, view mode) can be usefull
+* Adding online voice like hearthis.at to the Prezentprogramo
+* Using more better webservers like FastApi
+
 Test the follwoing changes
 ------------------------------
 Slidy2 instead of impress.js
@@ -90,25 +103,6 @@ The following slide had implemented by Slidy long time ago.
 os/deadlock.html
 
 http://www.w3.org/Talks/Tools/Slidy2/
-
-Tested but abonded
--------------------
-Using PrismJS instead of HighlightJS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Some html based slides needs a tool for code highlighting. HighlightJS was my choice but it is big and it lacks some feature like line-number. 
-Converting a code to a highlighted one by tools like pygment was not a good choice because changing the code leads to make more and more replacing by hands instead of automatic changes.
-
-* https://github.com/PrismJS/prism
-* https://prismjs.com/plugins/line-highlight/
-* https://prismjs.com/
-* https://www.eddymens.com/blog/highlightjs-add-line-numbers
-* https://github.com/wcoder/highlightjs-line-numbers.js
-* http://wcoder.github.io/highlightjs-line-numbers.js/
-
-Rejection Reason
-`````````````````
-Pygment does its job very good. Even for some external old files, it is better to make style by it manuaully by
-https://pygments.org/demo/
 
 Learn more about Hovercraft and change its code
 -----------------------------------------------
@@ -177,7 +171,7 @@ It is better to use less javascript libraries because of
 * Unspecified reduction of performance and increasing memory usage
 
 d3-graphviz
-```````````
+^^^^^^^^^^^
 * Create uinque name for each graph file name using  hashlib.md5.hexdigest of the source code of that graph
 * Repalcing offline tools like slide.py for converting dot graphviz to image by an online one like d3-graphviz javascript library. Bad internet connection in my classes and in Iran in general and blocking many websites forced me to use more offline approaches which is time consuming.
 
@@ -214,3 +208,19 @@ d3-graphviz
   https://sketchviz.com/graphviz-examples
   dot convert to image
 
+Using PrismJS instead of HighlightJS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Some html based slides needs a tool for code highlighting. HighlightJS was my choice but it is big and it lacks some feature like line-number. 
+Converting a code to a highlighted one by tools like pygment was not a good choice because changing the code leads to make more and more replacing by hands instead of automatic changes.
+
+* https://github.com/PrismJS/prism
+* https://prismjs.com/plugins/line-highlight/
+* https://prismjs.com/
+* https://www.eddymens.com/blog/highlightjs-add-line-numbers
+* https://github.com/wcoder/highlightjs-line-numbers.js
+* http://wcoder.github.io/highlightjs-line-numbers.js/
+
+Rejection Reason
+`````````````````
+Pygment does its job very good. Even for some external old files, it is better to make style by it manuaully by
+https://pygments.org/demo/

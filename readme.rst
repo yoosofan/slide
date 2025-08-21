@@ -1,6 +1,10 @@
-Slides of some computer courses
+`فارسی`_
 
-Ahmad Yoosofan
+
+===============================================
+Ahmad Yoosofan Slides for some Computer Courses
+===============================================
+
 
 List of courses and slides
 ==========================
@@ -60,3 +64,16 @@ and type the following link in your browser
 
 http://127.0.0.1:8000
 
+.. _فارسی :
+
+.. class:: rtl-h1
+
+فارسی
+
+.. class:: rtl
+
+اینجا را فارسی می‌نویسم
+
+.. class:: ltr
+
+rst2html5.py readme.rst index.html --stylesheet=tools/farsi.css

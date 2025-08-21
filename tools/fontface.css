@@ -1,0 +1,119 @@
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Vazirmatn;
+  src: url('fonts/vazirmatn/Vazirmatn-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: nastaliq;
+  src: url('fonts/IranNastaliq-Web.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: gandom;
+  src: url('fonts/Gandom.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: behdad;
+  src: url('fonts/Behdad-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: Sahel;
+  src: url('fonts/sahel/Sahel.eot');
+  src: url('fonts/sahel/Sahel.eot?#iefix') format('embedded-opentype'),
+       url('fonts/sahel/Sahel.woff2') format('woff2'),
+       url('fonts/sahel/Sahel.woff') format('woff'),
+       url('fonts/sahel/Sahel.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Sahel;
+  src: url('fonts/sahel/Sahel-Bold.eot');
+  src: url('fonts/sahel/Sahel-Bold.eot?#iefix') format('embedded-opentype'),
+       url('fonts/sahel/Sahel-Bold.woff2') format('woff2'),
+       url('fonts/sahel/Sahel-Bold.woff') format('woff'),
+       url('fonts/sahel/Sahel-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Sahel;
+  src: url('fonts/sahel/Sahel-Light.eot');
+  src: url('fonts/sahel/Sahel-Light.eot?#iefix') format('embedded-opentype'),
+       url('fonts/sahel/Sahel-Light.woff2') format('woff2'),
+       url('fonts/sahel/Sahel-Light.woff') format('woff'),
+       url('fonts/sahel/Sahel-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: Sahel;
+  src: url('fonts/sahel/Sahel-SemiBold.eot');
+  src: url('fonts/sahel/Sahel-SemiBold.eot?#iefix') format('embedded-opentype'),
+       url('fonts/sahel/Sahel-SemiBold.woff2') format('woff2'),
+       url('fonts/sahel/Sahel-SemiBold.woff') format('woff'),
+       url('fonts/sahel/Sahel-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
