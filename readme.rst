@@ -12,11 +12,11 @@ List of courses and slides
     :header-rows: 1
 
     folder, course name
-    `cm <https://github.com/yoosofan/slide/tree/main/cm>`_  ,  Compiler Design
-    `cpp <https://github.com/yoosofan/slide/tree/main/cpp>`_, Advanced Programming: cpp based
-    `db <https://github.com/yoosofan/slide/tree/main/db>`_  ,  Fundamental of Database Systems Concepts
-    `os <https://github.com/yoosofan/slide/tree/main/os>`_  ,  Operating Systems
-    `web <https://github.com/yoosofan/slide/tree/main/web>`_, Front-end Web Development Fundations and related topics
+    `cm <https://yoosofan.github.io/slide/cm>`_  ,  Compiler Design
+    `cpp <https://yoosofan.github.io/slide/cpp>`_, Advanced Programming: cpp based
+    `db <https://yoosofan.github.io/slide/db>`_  ,  Fundamental of Database Systems Concepts
+    `os <https://yoosofan.github.io/slide/os>`_  ,  Operating Systems
+    `web <https://yoosofan.github.io/slide/web>`_, Front-end Web Development Fundations and related topics
 
 For each rst slide files in the above courses, there is a html folder by the same name.
 
@@ -30,7 +30,7 @@ https://download-directory.github.io/ and paste the URL into the text box,
 and hit enter.
 
 For example do download the following folder
-https://github.com/yoosofan/slide/tree/main/os/ps
+https://yoosofan.github.io/slide/os/ps
 just copy it the the box in the following URL
 https://download-directory.github.io/
 The zip file of the whole folder will be downloaded.
