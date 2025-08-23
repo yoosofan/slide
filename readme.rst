@@ -64,16 +64,22 @@ and type the following link in your browser
 
 http://127.0.0.1:8000
 
+.. class:: ltr
+
+How to create html from readme.rst
+
+.. code:: sh
+
+    rst2html5.py readme.rst index.html --stylesheet=tools/farsi.css
+
+
 .. _فارسی :
 
 .. class:: rtl-h1
 
-فارسی
+توضیح‌های فارسی
 
 .. class:: rtl
 
-اینجا را فارسی می‌نویسم
+اسلایدهای احمد یوسفان برای برخی از درس‌های کامپیوتری
 
-.. class:: ltr
-
-rst2html5.py readme.rst index.html --stylesheet=tools/farsi.css

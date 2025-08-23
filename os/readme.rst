@@ -15,6 +15,10 @@ Operating Systems
     deadlock.html,`deadlock <https://yoosofan.github.io/slide/os/deadlock.html>`_,                         Deadlock
     disk.rst,     `disk <https://yoosofan.github.io/slide/os/disk>`_,                       Disk Management
 
+----
 
+How to create html from readme.rst
 
-rst2html5.py readme.rst index.html --stylesheet=../tools/farsi.css
+.. code:: sh
+
+    rst2html5.py readme.rst index.html --stylesheet=../tools/farsi.css
