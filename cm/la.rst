@@ -72,10 +72,13 @@ Ignoring Some Characters
 
 ----
 
-Token (نشانه)
-=============================
+:class: t2c
+
+Token
+=========
 .. code:: cpp
   :class: substep
+  :number-lines:
 
   struct token {
     tokenType t;
@@ -86,7 +89,8 @@ Token (نشانه)
 
 .. code:: cpp
   :class: substep
-
+  :number-lines:
+  
   struct token {
     tokenType t;
     char s[256];
@@ -96,6 +100,7 @@ Token (نشانه)
 
 .. code:: cpp
   :class: substep
+  :number-lines:
 
   struct token {
     tokenType t;
@@ -106,6 +111,7 @@ Token (نشانه)
 
 .. code:: cpp
   :class: substep
+  :number-lines:
 
   struct token {
     tokenType t;
@@ -119,6 +125,7 @@ Token (نشانه)
 ----
 
 .. code:: cpp
+  :number-lines:
 
   struct token {
     tokenType t;
@@ -146,9 +153,9 @@ Token Types
   :class: substep
 
   enum tokenType{
-    INTEGER,             /* 25, 543, 1, 78070*/
-    DOUBLE /* NUMBER */,
-    IDENTIFIER,          /* x, count, f1, power*/
+    INTEGER,             /* 25, 543, 1 */
+    DOUBLE,              /* 2.45, 565.7 */
+    IDENTIFIER,          /* x, count, power*/
     IF,                  /* if */
     WHILE,               /* while */
     OPEN_PARANTHESIS,    /* ( */
@@ -156,8 +163,8 @@ Token Types
     ASSIGN,              /* = */
     OPEN_CURLY_BRACKET,  /* { */
     CLOSE_CURLY_BRACKET, /* } */
-    OPEN_BRACKET,        /* [ */
-    CLOSE_BRACKET,       /* ] */
+    OPEN_SQUARE_BRACKET, /* [ */
+    CLOSE_SQUARE_BRACKET,/* ] */
     EQUAL,               /* == */
     LESS_THAN,           /* <  */
     GREATER_THAN,        /* > */
@@ -173,18 +180,18 @@ Token Types
   :class: substep
 
   enum tokenType{
-    NINT,  /* 25, 543, 1, 78070*/
-    NDOB   /* NUMBER */,
-    ID,    /* x, count, f1, power*/
+    INTN,  /* 25, 543, */
+    DBLN   /* 5.444, 3344.4 */,
+    ID,    /* x, count, power*/
     IF,    /* if */
     WHILE, /* while */
     OP,    /* ( */
     CP,    /* ) */
     ASG,   /* = */
-    OC,    /* { */
-    CC,    /* } */
-    OB,    /* [ */
-    CB,    /* ] */
+    OCB,   /* { */
+    CCB,   /* } */
+    OSB,   /* [ */
+    CSB,   /* ] */
     EQ,    /* == */
     LT,    /* <  */
     GT,    /* > */
@@ -192,42 +199,66 @@ Token Types
     GTE,   /* >= */
     COM,   /* , */
     SEM,   /* ; */
-    EOL,
-    EOF    /* $ */
+    EOL,   /* end of line */
+    EOI    /* $ end of input */
   }
 
 ----
 
-.. code:: cpp
-
-  if(a==4){
-     a++;
-  }
+:class: t2c
 
 .. code:: cpp
 
-  enum tokenType {
-    INT, COM, ID, SEMI, IF, WHILE, OP,
-    CP, EOF, AS, INTG, DOB /* NUM */,
-    EOL, OCB, CCB, OB, CB, EQ, LT, GT, LTE,
-    GTE, PLUS, MINUS, MUL, EOL, EOF
-  };
+    enum tokenType{
+      INTN,  /* 25, 543, */
+      DBLN   /* 5.444, 3344.4 */,
+      ID,    /* x, count, power*/
+      IF,    /* if */
+      WHILE, /* while */
+      OP,    /* ( */
+      CP,    /* ) */
+      ASG,   /* = */
+      OCB,   /* { */
+      CCB,   /* } */
+      OSB,   /* [ */
+      CSB,   /* ] */
+      EQ,    /* == */
+      LT,    /* <  */
+      GT,    /* > */
+      LTE,   /* <= */
+      GTE,   /* >= */
+      COM,   /* , */
+      SEM,   /* ; */
+      EOL,   /* end of line */
+      EOI    /* $ end of input */
+    }
 
-.. class:: substep
 
-* {if}
-* {OP}
-* {ID, "a"}
-* {EQ}
-* {INTG 4}
-* {CP}
-* {OC}
-* {ID "a"}
-* {PLUS}
-* {PLUS}
-* {SEMI}
-* {CB}
-* {EOF}
+.. container:: 
+
+    .. code:: cpp
+
+      if(a==4){
+         a++;
+      }
+
+    .. class:: substep
+
+    * {if}
+    * {OP}
+    * {ID, "a"}
+    * {EQ}
+    * {INTN 4}
+    * {CP}
+    * {OCB}
+    * {EOL}
+    * {ID "a"}
+    * {PLUS}
+    * {PLUS}
+    * {SEMI}
+    * {EOL}
+    * {CCB}
+    * {EOI}
 
 ----
 
@@ -316,7 +347,8 @@ Writing Code
 Applications of Lexical Analyzer
 --------------------------------
 * Editors
-    * `zed.dev <https://zed.dev/>`_ , `zed github <https://github.com/zed-industries/zed>`_
+    * `geany <https://geany.org>`_ , https://github.com/geany/geany
+    * `zed.dev <https://zed.dev>`_ , `zed github <https://github.com/zed-industries/zed>`_
     * `Atom <https://atom-editor.cc/>`_ `Atom github <https://github.com/atom/atom>`_
     * `LPG2 <https://github.com/A-LPG/LPG2>`_
         * `Eclipse IDE <https://github.com/impulse-org>`_
@@ -394,17 +426,26 @@ ID
 
 .. include:: src/la/lexical440.cpp
   :code: cpp
-  :number-lines:
+  :number-lines:  12
   :class: ltr
-  :start-line: 0
-  :end-line: 35
+  :start-line: 11
+  :end-line: 29
 
 .. include:: src/la/lexical440.cpp
   :code: cpp
-  :number-lines:
+  :number-lines: 30
   :class: ltr
-  :start-line: 35
-  :end-line: 74
+  :start-line: 29
+  :end-line:  47
+
+----
+
+.. include:: src/la/lexical440.cpp
+  :code: cpp
+  :number-lines: 49
+  :class: ltr
+  :start-line: 48
+  :end-line: 88
 
 ----
 
@@ -412,17 +453,26 @@ ID
 
 .. include:: src/la/lexical455.cpp
   :code: cpp
-  :number-lines: 3
+  :number-lines: 9
   :class: ltr
-  :start-line: 2
-  :end-line: 35
+  :start-line: 8
+  :end-line: 32
 
 .. include:: src/la/lexical455.cpp
   :code: cpp
-  :number-lines: 36
+  :number-lines: 33
   :class: ltr
-  :start-line: 35
-  :end-line: 74
+  :start-line: 32
+  :end-line: 52
+
+----
+
+.. include:: src/la/lexical455.cpp
+  :code: cpp
+  :number-lines: 52
+  :class: ltr
+  :start-line: 51
+  :end-line: 98
 
 ----
 
