@@ -938,3 +938,13 @@ Optimization Criteria
 ----
 
 END
+
+.. :
+
+    https://www.tutorialspoint.com/operating_system/os_priority_scheduling_algorithm.htm
+    https://os-book.com/OSE2/index.html
+    https://os-book.com/OS10/slide-dir/index.html
+    https://www.24-edu.com/assets/uploads/attachment-1665772802.pdf
+    https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html
+    https://github.com/astral-sh/uv
+    

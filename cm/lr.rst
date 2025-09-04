@@ -738,10 +738,98 @@ Ambiguous Grammar
 
 ----
 
+.. :
+
+    :class: t2c
+
+    An Especial Grammar
+    ===================
+    #. S → a L 
+    #. S → S b
+    #. L → L a
+    #. L →  b
+
+    .. container:: substep
+
+      Augmented Grammer
+
+      * S' → S
+
+      * S → a L 
+      * S → S b
+      * L → L a
+      * L →  b
+
+    .. class:: substep
+
+        * first(S)  = {a}
+        * first(L)  = {b}
+
+    .. class:: substep
+
+        * follow(S)  = {$, b}
+        * follow(L)  = {$, a}
+
+    ----
+
+    .. yographviz::
+
+          digraph g {
+            graph [splines=true  rankdir = "LR"];
+            ratio = auto;
+            "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>0</sub>)</td></tr>
+              <tr><td align="left" port="r0">S' → . S </td></tr>
+              <tr><td align="left" port="r1">S  → . a L </td></tr>
+              <tr><td align="left" port="r2">S  → . S b </td></tr>
+            </table>>];
+            "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>1</sub>)</td></tr>
+              <tr><td align="left" port="r3">S' → S . </td></tr>
+              <tr><td align="left" port="r3">S  → S . b </td></tr>
+            </table>> ];
+            "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>2</sub>)</td></tr>
+              <tr><td align="left" port="r1"> S → a . L </td></tr>
+              <tr><td align="left" port="r5"> L → . L a </td></tr>
+              <tr><td align="left" port="r5"> L → . b </td></tr>
+            </table>>];
+            "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>3</sub>)</td></tr>
+              <tr><td align="left" port="r1">S → S b . </td></tr>
+            </table>>];
+            "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>4</sub>)</td></tr>
+              <tr><td align="left" port="r3"> S → a L . </td></tr>
+              <tr><td align="left" port="r5"> L → L . a </td></tr>
+            </table>>];
+            "state5" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>5</sub>)</td></tr>
+              <tr><td align="left" port="r1"> L → b . </td></tr>
+            </table>>];
+            "state6" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td>(I<sub>6</sub>)</td></tr>
+              <tr><td align="left" port="r1"> L → L a . </td></tr>
+            </table>>];
+
+            state0 -> state1 [ label = "S" ];
+            state0 -> state2 [ label = "a" ];
+            state1 -> state3 [  label = "b" ];
+            state2 -> state4 [  label = "L" ];
+            state2 -> state5 [  label = "b" ];
+            state4 -> state6 [  label = "a" ];
+          }
+
+    .. class:: substep
+
+        * follow(S)  = {$, b}
+
+    ----
+
 :class: t2c
 
 An Especial Grammar
-======================
+=======================
 #. S → L = R
 #. S → R
 #. L → * R
