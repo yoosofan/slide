@@ -14,7 +14,7 @@
 }*/
 body{
   text-align: center;
-  font-size: 110%;
+  font-size: 1.1rem;
   margin: 0;
   padding: 0;
 }/*font-size: 170%;  font-family: Libre Baskerville; font-family: Nazli, Libre Baskerville;  background-color: white /* #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
@@ -23,7 +23,7 @@ p{
   margin-bottom: 0.3em;
   margin-top: 0.3em; /*font-size: 110%;*/
 }
-em{font-size: 122%;} /*font-family: Satisfy;*/
+em{font-size: 1.1rem;} /*font-family: Satisfy;*/
 strong{font-family: Racing Sans One;} /*letter-spacing: -2px;*/
 h1, h2, h3, h4, rtl-h1{
   font-weight: normal; 
@@ -65,7 +65,7 @@ ol.trace-code li::before {
 } 
 #ThreeD H1{
     font-family: Racing Sans One;
-    font-size: 300%;
+    font-size: 3rem;
 }
 #thequestion p {font-family: Racing Sans One;} 
 .footer{position:absolute;top:95%;font-size:50%;}
