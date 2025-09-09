@@ -23,6 +23,8 @@ https://yoosofan.github.io/course/compiler.html
 Lexical Analyser
 ======================
 .. include:: src/ply/120.plus.py
+  :code: cpp
+  :number-lines:
 
 ----
 

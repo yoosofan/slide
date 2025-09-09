@@ -9,7 +9,6 @@
 .. role:: ltr
     :class: ltr
 
-
 ----
 
 Introduction
@@ -288,4 +287,3 @@ Semantic Analysis
 ----
 
 END
-

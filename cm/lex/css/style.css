@@ -9,12 +9,12 @@
   margin: 0;
   padding: 0;
 }*/
-#impress {
+/*#impress {
   transform: scale(1) !important;
-}
+}*/
 body{
   text-align: center;
-  font-size: 100%;
+  font-size: 1.1rem;
   margin: 0;
   padding: 0;
 }/*font-size: 170%;  font-family: Libre Baskerville; font-family: Nazli, Libre Baskerville;  background-color: white /* #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
@@ -23,7 +23,7 @@ p{
   margin-bottom: 0.3em;
   margin-top: 0.3em; /*font-size: 110%;*/
 }
-em{font-size: 122%;} /*font-family: Satisfy;*/
+em{font-size: 1.1rem;} /*font-family: Satisfy;*/
 strong{font-family: Racing Sans One;} /*letter-spacing: -2px;*/
 h1, h2, h3, h4, rtl-h1{
   font-weight: normal; 
@@ -41,6 +41,7 @@ pre.code{
   border-right-width: thin; 
   border-bottom-width: thin; 
   border-color: #95ABD0;
+  font-size: 1.1rem;
 } pre.code > .ln{background-color: #DFE5F1;}
 .rtl{direction:rtl; text-align:justify; }
 .ltr{direction:ltr; text-align:justify;}
@@ -64,7 +65,7 @@ ol.trace-code li::before {
 } 
 #ThreeD H1{
     font-family: Racing Sans One;
-    font-size: 300%;
+    font-size: 3rem;
 }
 #thequestion p {font-family: Racing Sans One;} 
 .footer{position:absolute;top:95%;font-size:50%;}
@@ -83,7 +84,7 @@ table.smallerelementwithfullborder,
 table.smallerelementwithfullborder tr, 
 table.smallerelementwithfullborder td, 
 table.smallerelementwithfullborder th 
-{border: 1px solid black;font-size: 90%;/*padding: 0.3rem;*/}
+{border: 1px solid black;padding-left: 0.3rem;padding-right: 0.3rem;}
 table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p
 {font-weight: bold;}
 .grid-2col-class{
@@ -102,7 +103,7 @@ div.t2c{
   grid-template-columns: auto auto;
   justify-items: center;
   align-items: center ;
-  gap: 10px ;
+  gap: 1px ;
 }
 div.t2c > h1, div.t2c > .rtl-h1{
   grid-column: 1 / 3;
