@@ -238,3 +238,12 @@ div.scrollbar-box800x500px-overflow{
   list-style-type: none;
   text-align: center;
 }
+
+table.borderless * {border: 0;}
+
+.center {
+  margin: auto;
+  /*width: 50%;*/
+  padding: 5px;
+  text-align: center;
+}

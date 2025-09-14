@@ -26,6 +26,8 @@ Introduction
 
 -----
 
+:class: t2c
+
 Course Review
 =============
 * Introduction
@@ -33,11 +35,14 @@ Course Review
     * Multiprogramming
     * multithread
     * Synchronization
-        * software
-        * hardware
     * Deadlock
     * Eavluation
-* Memory
+* Secondary Storage
+    * Disks
+    * file organization
+
+.. container::
+
     * Main Memory
         * Absolute Address
         * Relative Address
@@ -46,11 +51,7 @@ Course Review
         * segmentation
         * segmentation and paging combinations
         * Invert table
-    * Secondary Storage
-        * Disks
-            * disk allocation
-            * free space management
-        * file organization
+
 
 -----
 
@@ -225,7 +226,6 @@ General Types of Computers
     
 -----
 
-
 Imaginary Computer (YIC-220)
 =============================
 Different memory for code and data
@@ -243,6 +243,23 @@ Different memory for code and data
 ----
 
 .. image::  img/in/breadboard.png
+
+----
+
+Real Motherboard
+==================
+.. image:: img/in/Parts-of-Motherboard-and-their-functions-latest.jpg
+
+.. :
+
+    https://www.techchore.com/parts-motherboard-functions/
+
+----
+
+Motherboard Circut
+===================
+.. image:: img/in/StockCakeAdvancedCircuitBoard.jpg
+    :height: 420px
 
 ----
 
@@ -297,6 +314,8 @@ Uniform memory (John von Neumann)
 
 ----
 
+:class: t2c
+
 Instruction Set(I)
 ==================
 .. code:: asm
@@ -311,13 +330,9 @@ Instruction Set(I)
     CLE: Clear E
     CMA: Complement AC
     CME: Complement E
-    CIR: Circulate right (AC and E) [00100 CIR 1] ==> [00010]
-    CIL: Circulate left (AC and E) [00100 CIL 1] ==> [00100]
+    CIR: Circulate right (AC and E)
+    CIL: Circulate left (AC and E) 
 
-----
-
-Instruction Set(II)
-======================
 .. code:: asm
 
     INC:    Increment AC
@@ -330,21 +345,10 @@ Instruction Set(II)
     SKO:    Skip if output flag
     NOP:    No operation
 
-.. code:: asm
-    :class: substep
-    
-    ..........
-    ..........
-    
-    LB1:    out
-            sko
-            bun LB1
-
-    ...........
-    ...........
-    
 
 ----
+
+:class: t2c
 
 Instruction Set Bianary(I)
 ================================
@@ -363,10 +367,6 @@ Instruction Set Bianary(I)
     CIR:    01011
     CIL:    01100
 
-----
-
-Instruction Set Binary(II)
-===========================
 .. code:: asm
 
     INC:    01101
@@ -386,20 +386,6 @@ hex pad connect to microcontroller
 https://www.circuitstoday.com/interfacing-hex-keypad-to-8051
 
 https://circuitdigest.com/microcontroller-projects/keypad-interfacing-with-avr-atmega32
-
-----
-
-Hardware vs Software
-==========================
-.. class:: substep
-
-* pros
-    * Less code
-    * More speed
-    * Less errors of writing code
-* cons
-    * Cost
-    * Less Flexible
 
 ----
 
@@ -435,7 +421,7 @@ Other assembly
 
 .. code:: asm
 
-  00101 00000   1010
+  00101 00000  1010
   00110 00000  1100
   00111 00000  1110
   01000
@@ -472,16 +458,10 @@ Main Type of Processors
 
 ----
 
-Processor Series
-======================
-* AMD (https://developer.amd.com/resources/developer-guides-manuals/)
-* Intel (https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
-
-----
-
 Output
 ==============
 LED
+
 -----
 
 seven segment
@@ -492,6 +472,10 @@ seven segment
 
 ----
 
+:class: t2c
+
+Output Problem
+===============
 .. code:: asm
 
   lda a
@@ -503,25 +487,38 @@ seven segment
   b, 2
   c, 0
 
-
 .. code:: asm
+    :class: substep
+    
+    ..........
+    ..........
+    
+    LB1:    out
+            sko
+            bun LB1
 
-  00101   1010
-  00110   1100
-  00111   1110
-  01000
-  00000
+    ...........
+    ...........
+    
 
-.. code:: asm
+----
 
-  lda a
-  add b
-  sta c
-  out
-  hlt
-  a, 5
-  b, 2
-  c, 0
+Hardware vs Software
+==========================
+* pros
+    * Less code
+    * More speed
+    * Less errors of writing code
+* cons
+    * Cost
+    * Less Flexible
+
+----
+
+Processor Series
+======================
+* AMD (https://developer.amd.com/resources/developer-guides-manuals/)
+* Intel (https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
 
 ----
 
@@ -546,7 +543,6 @@ Stack From end
 * `Assembly Slides <https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/15AssemblyFunctions.pdf>`_
 
 ----
-
 
 .. image::  img/in/thermal_printer_interfacing_with_PIC16F877A.jpg
 
