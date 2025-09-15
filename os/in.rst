@@ -573,6 +573,7 @@ Issues of YIC 30
 * Changing CPU
 * Cost of changes
 * Just one 7 segment ?
+* for every output, seven segment code should be added
 
 ----
 
@@ -667,17 +668,26 @@ Arduino Print 4 to 7-segment
 
 `circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
 
+.. :
+
+    ----
+
+    Processor Series
+    ======================
+    * AMD (https://developer.amd.com/resources/developer-guides-manuals/)
+    * Intel (https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
+
 ----
 
-Processor Series
-======================
-* AMD (https://developer.amd.com/resources/developer-guides-manuals/)
-* Intel (https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
+YIC 40 - BSA
+=============
+Procedure
+----------
+.. class: substep
 
-----
+#. LED output code
+#. 7 segment code
 
-BSA
-===========
 
 ----
 

@@ -392,15 +392,20 @@ http://yoosofan.github.io/webrel/help/help.html
 
   p;
   ------
+
   s minus s ;
+
   ------
+
   RELATION {
     TUPLE{
       PN PN("s4"), SNAME SNAME("Clark"),
       STATUS STATUS(20), CITY CITY("London")
     }
   };
+
   ------
+
   p
   minus
   RELATION {
@@ -409,7 +414,12 @@ http://yoosofan.github.io/webrel/help/help.html
       COLOR("Red"), WEIGHT(12), CITY("London")
     }
   };
-  ------
+
+
+----
+
+.. code:: sql
+
   p
   union
   RELATION {
@@ -438,7 +448,9 @@ http://yoosofan.github.io/webrel/help/help.html
       STATUS STATUS(25), CITY CITY("Shiraz")
     }
   };
+
   ------
+
   RELATION {
     TUPLE{
       SN("s4"), SNAME("Clark"),
@@ -449,7 +461,11 @@ http://yoosofan.github.io/webrel/help/help.html
       STATUS(20), CITY("London")
     }
   };
-  ------
+
+----
+
+.. code:: sql
+
   RELATION {
     TUPLE{SN SN("s4"), SNAME SNAME("Clark"), STATUS STATUS(20), CITY CITY("London")},
     TUPLE{SN SN ("s5"), SNAME SNAME("Adam"), STATUS STATUS(40), CITY CITY("London")}

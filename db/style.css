@@ -8,7 +8,7 @@
   transform: scale(1) !important;
 }
 */
-body { text-align: center; font-weight:normal; font-size:x-large;
+body { text-align: center; font-weight:normal; font-size:large;
 font-family: Nazli, DejaVu Serif, Liberation Serif,  FreeSerif;
 /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
 }
