@@ -261,6 +261,10 @@ Motherboard Circut
 .. image:: img/in/StockCakeAdvancedCircuitBoard.jpg
     :height: 420px
 
+.. :
+
+    https://stockcake.com/i/advanced-circuit-board_401034_571186
+
 ----
 
 .. image::  img/in/cpu_e2prom.png
@@ -287,6 +291,10 @@ Uniform memory (John von Neumann)
 
 ----
 
+:class: t2c
+
+Assembly Code and Machine Code
+==============================
 .. code:: asm
 
     ADD A,B
@@ -298,13 +306,14 @@ Uniform memory (John von Neumann)
     OPcode    DATA_1    DATA_2
     ADD          A               B
 
+.. code:: asm
+
     R1 = R2 + R3
     ADD R1, R2, R3
 
     ; 010101001 0001 0010 0011
 
     OP Code     R1    R2    R3
-
 
     010101001000100100011
 
@@ -462,8 +471,6 @@ Output
 ==============
 LED
 
------
-
 seven segment
 -----------------
 * https://www.rapidtables.com/convert/number/hex-to-binary.html
@@ -493,9 +500,9 @@ Output Problem
     ..........
     ..........
     
-    LB1:    out
-            sko
-            bun LB1
+    LB1: out
+        sko
+        bun LB1
 
     ...........
     ...........

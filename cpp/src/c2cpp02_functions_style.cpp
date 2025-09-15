@@ -1,10 +1,10 @@
 #include<stdio.h>
-
+//c2cpp02_functions_style.cpp
 int min(int, int); 
-int input(void);
-void myf(void);
-void printTriangle(void);
-void printSquare(void);
+int input();
+void myf();
+void printTriangle();
+void printSquare();
 
 int main(){
   int n = 0;
@@ -33,7 +33,7 @@ void printSquare(void){
   }
 }
 
-void printTriangle(void){
+void printTriangle(){
   int n, i, j; 
   n = input();
   for(i = 0; i < n; i++){
@@ -55,7 +55,7 @@ int input(void){
   return a;
 }
 
-void myf(void){
+void myf(){
   int a = input(), b = input();
   printf("min %d\n", min(a, b));
 }

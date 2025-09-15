@@ -287,7 +287,7 @@ new
 
 ----
 
-:id: polym02-id
+:class: t2c
 
 .. include:: src/polym01.cpp
     :code: cpp
@@ -321,7 +321,7 @@ new
 
 ----
 
-:id: polym01-id
+:class: t2c
 
 .. code:: cpp
   :number-lines:

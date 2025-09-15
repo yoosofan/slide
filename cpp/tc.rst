@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :data-width: 1024
-:css: ./style.css ../css/cpp.css
+:css: ./style.css
 :skip-help: true
 :substep: true
 :slide-numbers: true
@@ -1555,7 +1555,7 @@ Copy constructor(VI) - Error
 
   ----
 
-  :class: two-column-yoosofan
+  :class: t2c
 
   .. include:: src/mycomplex/100567.cpp
       :code: cpp
@@ -1615,7 +1615,7 @@ Error
 
 ----
 
-:class: two-column-yoosofan
+:class: t2c
 
 .. include:: src/mycomplex/100567.cpp
     :code: cpp
