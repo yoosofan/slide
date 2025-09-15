@@ -226,7 +226,7 @@ General Types of Computers
     
 -----
 
-Imaginary Computer (YIC-220)
+Imaginary Computer (YIC-10)
 =============================
 Different memory for code and data
 ----------------------------------
@@ -271,8 +271,8 @@ Motherboard Circut
 
 ----
 
-The Second Imaginary Computer
-=============================
+The Second Computer (YIC-10)
+============================
 Uniform memory (John von Neumann)
 ----------------------------------
 .. list-table::
@@ -510,6 +510,85 @@ Output Problem
 
 ----
 
+:class: t2c
+
+Simple LED
+==========================
+.. image::  img/in/led_circut.png
+  :height: 300px
+
+.. image::  img/in/arduino7segment.png
+  :height: 300px
+
+`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
+
+----
+
+:class: t2c
+
+Seven segment display
+==========================
+
+.. image::  img/in/7segment01.png
+  :height: 300px
+
+.. image::  img/in/7segment02.png
+  :height: 300px
+
+`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
+`askingthelot <https://askingthelot.com/how-do-i-connect-7-segment-display/>`_
+
+`youtu.be <https://youtu.be/XCJqoae4hgY>`_
+`element14 <https://community.element14.com/challenges-projects/element14-presents/thelearningcircuit/w/documents/4523/the-learning-circuit-53---how-to-drive-a-7-segment-display?CMP=SOM-YOUTUBE-PRG-E14PRESENTS-LCIRCUIT-53-COMM-7-SEGMENT-DISPLAY>`_
+
+----
+
+Imaginary Computer
+==================
+* Consider it as real a computer
+* Think about business plan
+* Consider customers' need
+* Consider other companies
+
+----
+
+YIC 30
+======
+Seven segment
+--------------
+.. image::  img/in/arduino7segment02.png
+  :height: 300px
+
+`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
+
+----
+
+Issues of YIC 30
+================
+.. class:: substep
+
+* Convert binary number to 7 segment code
+* Old codes only LED
+* LED & seven segment
+* Changing CPU
+* Cost of changes
+* Just one 7 segment ?
+
+----
+
+Hardware insead of Software
+===============================
+.. image:: img/in/BCDto7segment.png
+  :width: 800px
+
+.. :
+
+  جزوهٔ درس معماری کامپیوتر دکتر مختار معصومی 
+  https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
+  https://www.geeksforgeeks.org/bcd-to-7-segment-decoder/
+
+----
+
 Hardware vs Software
 ==========================
 * pros
@@ -519,6 +598,74 @@ Hardware vs Software
 * cons
     * Cost
     * Less Flexible
+
+----
+
+:class: t2c
+
+4 Digit 7-Segment Displays
+===========================
+.. image::  img/in/4digits7segment01.png
+  :height: 250px
+
+.. image::  img/in/4digits7segment02.png
+  :height: 250px
+
+`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
+
+----
+
+Connecting 4 Digit 7-Segment Displays
+============================================
+.. image::  img/in/4digits7segment2arduino.png
+  :height: 400px
+
+----
+
+:class: t2c
+
+Arduino Print 4 to 7-segment
+===============================
+.. code:: cpp
+
+  #include "SevSeg.h"
+  SevSeg sevseg; 
+
+  void setup(){
+    byte numDigits = 1;
+    byte digitPins[] = {};
+    byte segmentPins[] = 
+      {6, 5, 2, 3, 4, 7, 8, 9};
+    bool resistorsOnSegments = true;
+
+    byte hardwareConfig = COMMON_CATHODE; 
+    sevseg.begin(hardwareConfig, 
+      numDigits, digitPins, segmentPins, 
+      resistorsOnSegments
+    );
+    sevseg.setBrightness(90);
+  }
+
+  void loop(){
+    sevseg.setNumber(4);
+    sevseg.refreshDisplay();
+  }
+
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  Segment Pin, Arduino Pin
+  A, 6
+  B, 5
+  C, 2
+  D, 3
+  E, 4
+  F, 7
+  G, 8
+  DP, 9
+
+`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
 
 ----
 
@@ -601,129 +748,6 @@ Simple computer simulator
 Simple Computer Simulator Instruction Set
 ------------------------------------------------
 * http://euler.vcsu.edu/curt.hill/Computer.html
-
-----
-
-:class: t2c
-
-Simple LED
-==========================
-.. image::  img/in/led_circut.png
-  :height: 300px
-
-.. image::  img/in/arduino7segment.png
-  :height: 300px
-
-`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
-
-----
-
-Connecting Seven segment display
-===================================
-.. image::  img/in/arduino7segment02.png
-  :height: 300px
-
-`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
-
-----
-
-:class: t2c
-
-Seven segment display
-==========================
-
-.. image::  img/in/7segment01.png
-  :height: 300px
-
-.. image::  img/in/7segment02.png
-  :height: 300px
-
-`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
-`askingthelot <https://askingthelot.com/how-do-i-connect-7-segment-display/>`_
-
-`youtu.be <https://youtu.be/XCJqoae4hgY>`_
-`element14 <https://community.element14.com/challenges-projects/element14-presents/thelearningcircuit/w/documents/4523/the-learning-circuit-53---how-to-drive-a-7-segment-display?CMP=SOM-YOUTUBE-PRG-E14PRESENTS-LCIRCUIT-53-COMM-7-SEGMENT-DISPLAY>`_
-
-----
-
-:class: t2c
-
-Arduino Print 4 to 7-segment
-===============================
-.. code:: cpp
-
-  #include "SevSeg.h"
-  SevSeg sevseg; 
-
-  void setup(){
-    byte numDigits = 1;
-    byte digitPins[] = {};
-    byte segmentPins[] = 
-      {6, 5, 2, 3, 4, 7, 8, 9};
-    bool resistorsOnSegments = true;
-
-    byte hardwareConfig = COMMON_CATHODE; 
-    sevseg.begin(hardwareConfig, 
-      numDigits, digitPins, segmentPins, 
-      resistorsOnSegments
-    );
-    sevseg.setBrightness(90);
-  }
-
-  void loop(){
-    sevseg.setNumber(4);
-    sevseg.refreshDisplay();
-  }
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  Segment Pin, Arduino Pin
-  A, 6
-  B, 5
-  C, 2
-  D, 3
-  E, 4
-  F, 7
-  G, 8
-  DP, 9
-
-`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
-
-----
-
-:class: t2c
-
-4 Digit 7-Segment Displays
-===========================
-.. image::  img/in/4digits7segment01.png
-  :height: 250px
-
-.. image::  img/in/4digits7segment02.png
-  :height: 250px
-
-`circuitbasics <https://www.circuitbasics.com/arduino-7-segment-display-tutorial/>`_
-
-----
-
-Connecting 4 Digit 7-Segment Displays
-============================================
-.. image::  img/in/4digits7segment2arduino.png
-  :height: 400px
-
-----
-
-Hardware insead of Software
-===============================
-.. image:: img/in/BCDto7segment.png
-  :width: 800px
-
-.. :
-
-  جزوهٔ درس معماری کامپیوتر دکتر مختار معصومی 
-  https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
-  https://www.geeksforgeeks.org/bcd-to-7-segment-decoder/
 
 ----
 
