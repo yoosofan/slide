@@ -4,7 +4,7 @@ int min(int, int); int input(void);
 void myf(void);void printTriangle(void);
 void printSquare(void); void menu(void);
 int main(){
-  menu();
+  menu()
   return 0;
 }
 void menu(void){int n;
@@ -31,16 +31,14 @@ void printTriangle(void){
     for(j=0;j<=i;j++) printf("*");
     printf("\n");
   }
-}
-int min(int a, int b){return a<b ? a : b;}
+}int min(int a, int b){return a<b ? a : b;}
 int input(void){int a;
   do{
     printf("Enter a>0: ");
     scanf("%d",&a);
   }while(a<=0);
   return a;
-}
-void myf(void){
+}void myf(void){
   int a=input(), b=input();
   printf("min %d\n",min(a,b));
 }

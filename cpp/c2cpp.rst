@@ -12,11 +12,11 @@
 .. role:: raw-html(raw)
    :format: html
 
-.. |nbsp| unicode:: 0xA0 
+.. |nbsp| unicode:: 0xA0
 
 Advanced Programming (C++)
 ==============================
-Inheritance
+From C to C++
 -----------------------------
 Ahmad Yoosofan
 
@@ -56,7 +56,7 @@ Methods of Learning a Programming Languange
 Converting C code to C++
 =============================
 #. Rename .c file to .cpp
-#. <stdio.h> to <cstdio> 
+#. <stdio.h> to <cstdio>
     * stdio.h  → cstdio
     * math.h   → cmath
     * stdlib.h → cstdlib
@@ -87,7 +87,7 @@ code1.cpp
 
 ----
 
-:class: t2c 
+:class: t2c
 
 c2cpp01_stdlib.c
 
@@ -215,7 +215,6 @@ Compile and run
 
 ----
 
-
 Editors
 ============
 *  geany: http://www.geany.org
@@ -239,12 +238,12 @@ git
 .. code:: sh
 
     git clone https://github.com/yoosofan/slide.git
-    
+
 .. code:: sh
 
     cd slide
     git pull origin main
-    
+
 ----
 
 IDE
@@ -549,7 +548,7 @@ Errors Default value for parameters(I)
       4:27: note: ...following parameter 3 which has a default argument
       4 | int sum(int x, int y, int z=0, int w){
       |                       ~~~~^~~
- 
+
 -----
 
 Errors Default value for parameters(II)
@@ -593,7 +592,7 @@ Encapsulation(I)
         :start-line: 2
         :end-line: 28
 
-    - |nbsp| 
+    - |nbsp|
 
     - .. include:: src/student/student124.cpp
         :code: cpp
@@ -612,7 +611,7 @@ Encapsulation(II)
     :code: cpp
     :number-lines: 3
     :class: ltr
-    :start-line: 2  
+    :start-line: 2
     :end-line: 28
 
 .. include:: src/struct_method208.cpp
