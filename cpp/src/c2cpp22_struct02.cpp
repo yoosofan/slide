@@ -7,12 +7,10 @@ struct student{
   char stdNumber[15]; 
   date birthDate;
 };
-
 date input_date(void);
 student input_student(void);
 void print_date(date d1);
 void print_student(student st);
-
 int main(){
   student st1[50];
   int n, i=0;
@@ -39,7 +37,8 @@ date input_date(void){
 void print_date(date d1){
   cout << "year = ";  cout << d1.year;
   cout << "\tmonth = "; cout << d1.month;
-  cout << "\tday = "; cout << d1.day; cout << "\n";
+  cout << "\tday = "; 
+  cout << d1.day; cout << "\n";
 }
 student input_student(void){
   student st;

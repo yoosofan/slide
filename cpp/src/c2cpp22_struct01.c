@@ -4,7 +4,6 @@ struct secondStruct{ };
 struct thirdStruct{ };
 struct firstStruct f1(void);
 void f2(struct firstStruct);
-
 int main(){
   struct firstStruct myfs;
   myfs = f1();
@@ -17,7 +16,6 @@ struct firstStruct  f1(void){
   struct thirdStruct ts1;
   return fs1;
 }
-
 void f2(struct firstStruct m1){
   printf("%p\n", &m1);
 }

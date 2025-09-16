@@ -6,16 +6,15 @@ struct student{
   char stdNumber[15]; 
   struct date birthDate;
 };
-
 struct date input_date(void);
 struct student input_student(void);
 void print_date(struct date d1);
 void print_student(struct student st);
-
 int main(){
   struct student st1[50];
   int n, i=0;
-  printf("Enter number of students(0<n<50) ");
+  printf("Enter number of \
+          students(0<n<50) ");
   scanf("%d",&n);
   if(n>0 && n<50)
     do{

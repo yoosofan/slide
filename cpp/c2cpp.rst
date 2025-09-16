@@ -248,6 +248,7 @@ git
 
 IDE
 ====
+*  https://zed.dev/
 *  orwelldevcpp: http://sourceforge.net/projects/orwelldevcpp
 *  codeblocks: http://www.codeblocks.org
 *  Ch: http://www.softintegration.com
@@ -280,19 +281,43 @@ C++
 
 :class: t2c
 
-Variable declaration
-
-cout and cin
+Initialization and Assignment
+==============================
+.. include:: src/c2cpp04_variable.c
+    :code: cpp
+    :number-lines:
 
 .. include:: src/c2cpp04_variable.cpp
     :code: cpp
     :number-lines:
-    :class: ltr
 
+----
+
+:class: t2c
+
+const instead of define
+========================
+.. include:: src/c2cpp04_variable02.c
+    :code: cpp
+    :number-lines:
+    :end-line: 20
+
+.. include:: src/c2cpp04_variable02.c
+    :code: cpp
+    :number-lines: 20
+    :start-line: 20
+
+
+
+----
+
+Cin & cout
+=============
 .. include:: src/c2cpp04_cout.cpp
     :code: cpp
     :number-lines:
     :class: ltr
+
 
 ----
 
@@ -311,35 +336,47 @@ Struct name C++
 
 .. include:: src/c2cpp22_struct01.c
     :code: cpp
-    :number-lines:
-    :class: ltr
+    :number-lines: 2 
+    :start-line: 1
+    :end-line: 28
 
 .. include:: src/c2cpp22_struct01.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
+    :number-lines: 2
+    :start-line: 3
+    :end-line: 28
 
 ----
 
 :class: t2c
 
-struct c
-
-struct cpp
-
 .. include:: src/c2cpp22_struct02.c
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 2
+    :start-line: 2 
     :end-line: 28
 
 .. include:: src/c2cpp22_struct02.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
-    :end-line: 28
+    :number-lines: 3 
+    :start-line: 3
+    :end-line: 29
+
+----
+
+:class: t2c
+
+.. include:: src/c2cpp22_struct02.c
+    :code: cpp
+    :number-lines: 28
+    :start-line: 28
+    :end-line: 58
+
+.. include:: src/c2cpp22_struct02.cpp
+    :code: cpp
+    :number-lines: 29
+    :start-line: 29
+    :end-line: 60
 
 ----
 
