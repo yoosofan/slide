@@ -1,13 +1,1 @@
-ol.trace-code {justify-self: start; /*background-color: #BEF648;*/}
-pre.code { justify-self: center;}
 tr, td, th{border: 1px solid;}
-
-
-table.yoo-gantt-chart tr td { border: solid 1px;}
-table.yoo-gantt-chart tr:nth-of-type(1) td:last-of-type{
-  border: 0;
-}
-table.yoo-gantt-chart tr:nth-of-type(2) td{
-  border: 0;
-  text-align: left;
-}

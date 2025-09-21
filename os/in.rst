@@ -9,6 +9,10 @@
 
 :slide-numbers: true
 
+.. role:: raw-html(raw)
+   :format: html
+
+.. |nbsp| unicode:: 0xA0
 
 .. role:: rtl
     :class: rtl
@@ -677,17 +681,224 @@ Arduino Print 4 to 7-segment
     * AMD (https://developer.amd.com/resources/developer-guides-manuals/)
     * Intel (https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-instruction-set-reference-manual-325383.pdf)
 
+
 ----
+
+:class: t2c
+
+The common segment displays
+==============================
+* `Seven-segment_display <https://en.wikipedia.org/wiki/Seven-segment_display>`_
+* `9 Segments Display <https://en.wikipedia.org/wiki/Nine-segment_display>`_
+* `Fourteen-segment display <https://en.wikipedia.org/wiki/Fourteen-segment_display>`_
+* `Sixteen-segment display <https://en.wikipedia.org/wiki/Sixteen-segment_display>`_
+
+.. container::
+
+    .. image:: img/in/9_segment_abcdefghi.svg
+
+    .. image:: img/in/16-segmente_display.png
+
+.. :
+
+    * https://en.wikipedia.org/wiki/Nine-segment_display
+    * https://en.wikipedia.org/wiki/Fourteen-segment_display
+    * https://en.wikipedia.org/wiki/Sixteen-segment_display
+
+----
+
+:class: t2c
 
 YIC 40 - BSA
 =============
-Procedure
-----------
-.. class: substep
+.. class:: substep
 
 #. LED output code
 #. 7 segment code
+#. Printer
+#. output selector
+#. Adding porecedures
+#. Device Drivers
+#. Adding more devices
+#. No error checking
 
+.. image::  img/in/thermal_printer_interfacing_with_PIC16F877A.jpg
+    :width: 600px
+
+
+----
+
+Epson WideCarriage Line Printer
+=======================================
+.. image:: img/in/Epson_Wide_Carriage_9pin_printer_with_legal_paper_8.5x14.jpg
+  :height: 400px
+
+https://en.wikipedia.org/wiki/Dot_matrix_printing
+
+----
+
+Dot matrix example text
+============================
+.. image:: img/in/Epson_line_printer_Dot_matrix_example_text.png
+
+https://en.wikipedia.org/wiki/Dot_matrix_printing
+
+----
+
+Dot-matrix display
+======================
+.. image:: img/in/16x2_Character_LCD_Display.jpg
+  :height: 400px
+
+* 128×16 (Two-lined)
+* 128×32 (Four-lined)
+* 128×64 (Eight-lined)
+* 92×31 (Four or three-lined)
+* https://en.wikipedia.org/wiki/Dot-matrix_display
+* https://en.wikipedia.org/wiki/History_of_display_technology
+
+----
+
+1969 Braille display
+=======================
+.. image:: img/in/1969_Braille_display.jpg
+  :height: 400px
+
+* https://en.wikipedia.org/wiki/History_of_display_technology
+
+----
+
+split flap display(I)
+======================
+.. image:: img/in/split_flap_displayI.jpg
+  :width: 600px
+
+http://arduinomania.com/tag/split%20flap%20display
+
+----
+
+Split-flap display(II)
+=======================
+.. image:: img/in/Split-flap_display_2016-01-17.gif
+  :height: 400px
+
+* https://en.wikipedia.org/wiki/Split-flap_display
+* https://www.dreamstime.com/illustration/airport-flip-sign.html
+
+----
+
+Enlarged inner workings of a split-flap clock
+===================================================
+.. image:: img/in/1024px-Split-flap_display.jpg
+  :height: 400px
+
+* https://en.wikipedia.org/wiki/Split-flap_display
+
+----
+
+Airport Board with Split-Flip Display
+=======================================
+.. image:: img/in/airport_board_with_flip-flop_display.jpg
+  :height: 400px
+  
+* https://en.wikipedia.org/wiki/Split-flap_display
+
+----
+
+Flip-Dot-Display
+======================
+.. image:: img/in/Flip-dots_display.jpg
+  :width: 800px
+
+* https://en.wikipedia.org/wiki/History_of_display_technology
+* https://en.wikipedia.org/wiki/Flip-disc_display
+
+----
+
+5x7 LED module
+==================
+.. image:: img/in/5x7led.jpg
+  :height: 400px
+
+* https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+
+----
+
+Printer Function
+========================================
+.. image:: img/in/printer_function.png
+
+----
+
+Process along Printer Function
+========================================
+.. image:: img/in/process_along_printer_function.png
+
+----
+
+Jump to Printer Procedure 
+========================================
+.. image:: img/in/call_printer_function.png
+
+----
+
+Return from Printer Procedure
+========================================
+.. image:: img/in/return_from_printer_funtion_with_stack.png
+
+----
+
+Display and Printer Procedure
+===================================================
+.. image:: img/in/printer_old_display_function.png
+
+----
+
+Adding procedurs to memory
+==========================
+.. csv-table::
+    :class: yoo-memory center
+    
+    User Process (P) , |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp|, 
+    0 ,                              800,                       2048
+
+.. csv-table::
+    :class: yoo-memory center
+    
+    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| |nbsp| , LED Procedure 
+    0 ,                              648,                    1024, 2048
+
+.. csv-table::
+    :class: yoo-memory center
+    
+    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| , LED,  7 segment, 
+    0 ,                              456,            1024, 1048, 1096,    2048
+
+.. csv-table::
+    :class: yoo-memory center
+        
+    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp| , LED, 7 , printer, |nbsp| |nbsp|  |nbsp| |nbsp|
+    0 ,  456,           1024,                        1048 ,     1096,  1256,   2048
+
+Users (programmers) should know where these precedures are
+
+----
+
+Array of Addresses
+==========================
+.. csv-table::
+    :class: yoo-memory center
+        
+    P, |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp|, array , LED, 7 , printer, |nbsp| |nbsp|  |nbsp| |nbsp|
+    0,  456,           1000, 1024                       , 1048 ,     1096,  1256,   2048
+
+Array
+
+.. csv-table::
+    :class: yoo-memory center
+        
+    1024, 1048, 1096 , 1256,
+    0,  1, 2, 3, 4,    
 
 ----
 
@@ -705,15 +916,6 @@ Stack From end
 .. image::  img/in/simple_cpu02.png
 
 * `Assembly Slides <https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/15AssemblyFunctions.pdf>`_
-
-----
-
-.. image::  img/in/thermal_printer_interfacing_with_PIC16F877A.jpg
-
-----
-
-Device Drivers
-===================
 
 .. :
 
@@ -744,8 +946,9 @@ Device Drivers
   https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.electronics-lab.com%2Ftop-10-popular-microcontrollers-among-makers%2F&psig=AOvVaw2EXDnrr7QYg4MMA4wzxdcW&ust=1645436126602000&source=images&cd=vfe&ved=2ahUKEwiei_Gv_Y32AhXFQcAKHclhAKQQ3YkBegQIABAL
   http://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.electronics-lab.com%2Ftop-10-popular-microcontrollers-among-makers%2F&psig=AOvVaw2EXDnrr7QYg4MMA4wzxdcW&ust=1645436126602000&source=images&cd=vfe&ved=2ahUKEwiei_Gv_Y32AhXFQcAKHclhAKQQ3YkBegQIABAL
   https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeepbluembedded.com%2Fstm32-lcd-16x2-tutorial-library-alphanumeric-lcd-16x2-interfacing%2F&psig=AOvVaw0WO3faTRa5sedGIgDKGhNt&ust=1645436135855000&source=images&cd=vfe&ved=2ahUKEwip7aW0_Y32AhVjm1wKHfMUB4oQ3YkBegQIABAL
-  
+
 ----
+
 
 Simple computer simulator
 ==============================
@@ -903,141 +1106,44 @@ Tape
 .. image:: img/in/computer.room.tape.png
   :height: 500px
 
-----
-
-Xerox Roman PS Daisywheel
-========================================
-.. image:: img/in/Xerox_Roman_PS_Daisywheel_mono.jpg
-  :height: 450px
-
 .. :
 
-  https://upload.wikimedia.org/wikipedia/commons/0/0e/Xerox_Roman_PS_Daisywheel_-_mono.jpg
+    ----
 
-----
+    Xerox Roman PS Daisywheel
+    ========================================
+    .. image:: img/in/Xerox_Roman_PS_Daisywheel_mono.jpg
+      :height: 450px
 
-Royal Typewriter Company since 1906
-===========================================
-.. image:: img/in/Loyal_royal_typewriter.jpg
+    .. :
 
-https://en.wikipedia.org/wiki/Royal_Typewriter_Company
+      https://upload.wikimedia.org/wikipedia/commons/0/0e/Xerox_Roman_PS_Daisywheel_-_mono.jpg
 
-----
+    ----
 
-IBM Selectric Typewriter 1961(I)
-=================================
-.. image:: img/in/IBM_Selectric_Typewriter_1961.jpg
-  :height: 400px
+    Royal Typewriter Company since 1906
+    ===========================================
+    .. image:: img/in/Loyal_royal_typewriter.jpg
 
-* https://en.wikipedia.org/wiki/IBM_Selectric_typewriter
+    https://en.wikipedia.org/wiki/Royal_Typewriter_Company
 
-----
+    ----
 
-IBM Selectric Typewriter 1961 (II)
-=========================================
-.. image:: img/in/IBM_Selectric_Typewriter_1961_typeball.jpg
-  :height: 400px
+    IBM Selectric Typewriter 1961(I)
+    =================================
+    .. image:: img/in/IBM_Selectric_Typewriter_1961.jpg
+      :height: 400px
 
-* https://en.wikipedia.org/wiki/List_of_IBM_products#Typewriters
+    * https://en.wikipedia.org/wiki/IBM_Selectric_typewriter
 
-----
+    ----
 
-Epson WideCarriage Line Printer
-=======================================
-.. image:: img/in/Epson_Wide_Carriage_9pin_printer_with_legal_paper_8.5x14.jpg
-  :height: 400px
+    IBM Selectric Typewriter 1961 (II)
+    =========================================
+    .. image:: img/in/IBM_Selectric_Typewriter_1961_typeball.jpg
+      :height: 400px
 
-https://en.wikipedia.org/wiki/Dot_matrix_printing
-
-----
-
-The common segment displays
-==============================
-* `Seven-segment_display <https://en.wikipedia.org/wiki/Seven-segment_display>`_
-* `9 Segments Display <https://en.wikipedia.org/wiki/Nine-segment_display>`_
-* `Fourteen-segment display <https://en.wikipedia.org/wiki/Fourteen-segment_display>`_
-* `Sixteen-segment display <https://en.wikipedia.org/wiki/Sixteen-segment_display>`_
-
-----
-
-9 Segments Display
-=====================
-.. image:: img/in/9_segment_abcdefghi.svg
-
-* https://en.wikipedia.org/wiki/Nine-segment_display
-
-----
-
-Fourteen-segment display
-=============================
-.. image:: img/in/14-segment_display.svg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Fourteen-segment_display
-
-----
-
-Sixteen-segment display
-==========================
-.. image:: img/in/16-segmente_display.png
-
-* https://en.wikipedia.org/wiki/Sixteen-segment_display
-
-----
-
-split flap display(I)
-======================
-.. image:: img/in/split_flap_displayI.jpg
-  :width: 600px
-
-http://arduinomania.com/tag/split%20flap%20display
-
-----
-
-Split-flap display(II)
-=======================
-.. image:: img/in/Split-flap_display_2016-01-17.gif
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Split-flap_display
-* https://www.dreamstime.com/illustration/airport-flip-sign.html
-
-----
-
-Enlarged inner workings of a split-flap clock
-===================================================
-.. image:: img/in/1024px-Split-flap_display.jpg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Split-flap_display
-
-----
-
-Airport Board with Split-Flip Display
-=======================================
-.. image:: img/in/airport_board_with_flip-flop_display.jpg
-  :height: 400px
-  
-* https://en.wikipedia.org/wiki/Split-flap_display
-
-----
-
-Flip-Dot-Display
-======================
-.. image:: img/in/Flip-dots_display.jpg
-  :width: 800px
-
-* https://en.wikipedia.org/wiki/History_of_display_technology
-* https://en.wikipedia.org/wiki/Flip-disc_display
-
-----
-
-5x7 LED module
-==================
-.. image:: img/in/5x7led.jpg
-  :height: 400px
-
-* https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+    * https://en.wikipedia.org/wiki/List_of_IBM_products#Typewriters
 
 ----
 
@@ -1095,67 +1201,6 @@ Showing Character D (real refresh)
 .. image:: img/in/showing_character_d_refresh.gif
 
 https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
-
-----
-
-Dot matrix example text
-============================
-.. image:: img/in/Epson_line_printer_Dot_matrix_example_text.png
-
-https://en.wikipedia.org/wiki/Dot_matrix_printing
-
-----
-
-Dot-matrix display
-======================
-.. image:: img/in/16x2_Character_LCD_Display.jpg
-  :height: 400px
-
-* 128×16 (Two-lined)
-* 128×32 (Four-lined)
-* 128×64 (Eight-lined)
-* 92×31 (Four or three-lined)
-* https://en.wikipedia.org/wiki/Dot-matrix_display
-* https://en.wikipedia.org/wiki/History_of_display_technology
-
-----
-
-1969 Braille display
-=======================
-.. image:: img/in/1969_Braille_display.jpg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/History_of_display_technology
-
-----
-
-Printer Function
-========================================
-.. image:: img/in/printer_function.png
-
-----
-
-Process along Printer Function
-========================================
-.. image:: img/in/process_along_printer_function.png
-
-----
-
-Call Printer Function
-========================================
-.. image:: img/in/call_printer_function.png
-
-----
-
-Return from Printer Function
-========================================
-.. image:: img/in/return_from_printer_funtion_with_stack.png
-
-----
-
-Old Display Function and  Printer Function
-===================================================
-.. image:: img/in/printer_old_display_function.png
 
 ----
 
