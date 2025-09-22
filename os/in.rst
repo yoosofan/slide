@@ -884,7 +884,7 @@ Users (programmers) should know where these precedures are
 
 ----
 
-Array of Addresses
+YIC50 - Array of Addresses
 ==========================
 .. csv-table::
     :class: yoo-memory center
