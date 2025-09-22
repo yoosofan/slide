@@ -25,8 +25,8 @@ Ahmad Yoosofan
 
 University of Kashan
 
-Introduction 
------------------
+Introduction
+-------------
 
 -----
 
@@ -72,7 +72,7 @@ Finding more about how hardware and software works
 The Abacus and Counting Board
 ==============================
 * https://en.wikipedia.org/wiki/Abacus
-  
+
 .. image:: img/in/Schoty_abacus.jpg
 
 -----
@@ -86,20 +86,18 @@ Pascaline
 
 .. image:: img/in/Pascaline-CnAM_823-1-IMG_1506-black.jpg
 
-
 -----
 
 Jacquard Machines
 ==================
 * Joseph Marie Jacquard in 1804
-* based on 
+* based on
     * the Frenchmen Basile Bouchon (1725)
     * Jean Baptiste Falcon (1728)
-    * Jacques Vaucanson (1740).[8] 
+    * Jacques Vaucanson (1740).[8]
 * https://en.wikipedia.org/wiki/Jacquard_machine
 
 .. image:: img/in/A_Jacquard_loom_showing_information_punchcards,_National_Museum_of_Scotland.jpg
-
 
 -----
 
@@ -137,15 +135,13 @@ Electro Mechanical
 ===================
 * `Konrad Zuse <https://en.wikipedia.org/wiki/Konrad_Zuse>`_
     * `Z1(1936) <https://en.wikipedia.org/wiki/Z1_(computer)>`_
-        	* Programmable
-        	* binary
-        	* electrically motor-driven mechanical computer
+          * Programmable
+          * binary
+          * electrically motor-driven mechanical computer
     * `Z2(1940) <https://en.wikipedia.org/wiki/Z2_(computer)>`_
 * `Harvard Mark I(1944) <https://en.wikipedia.org/wiki/Harvard_Mark_I>`_
 
-
 .. image:: img/in/Z1__640px-German_Museum_of_Technology,_Berlin_2017_024.jpg
-
 
 -----
 
@@ -155,11 +151,11 @@ Digital Computer
 * `Atanasoff–Berry computer <https://en.wikipedia.org/wiki/Atanasoff%E2%80%93Berry_computer>`_
     * neither programmable, nor Turing-complete
 * `Colossus computer <https://en.wikipedia.org/wiki/Colossus_computer>`_
-    * British code breakers 
+    * British code breakers
     * programmable
     * electronic
     * digital computer
-    * programmed by switches and plugs 
+    * programmed by switches and plugs
     * not by a stored program
 
 .. image:: img/in/640px-Colossus_Mark2codebreaking1943.jpg
@@ -175,11 +171,10 @@ Stored Program
 
 .. image:: img/in/527px-ENIAC_Penn2.jpg
 
-
 .. :
 
     analog hardware design for deep learning model
-    
+
 -----
 
 Analog Chipsets for AI Applications
@@ -217,17 +212,17 @@ General Types of Computers
 
     https://newsroom.clevelandclinic.org/2023/03/20/cleveland-clinic-and-ibm-unveil-first-quantum-computer-dedicated-to-healthcare-research
     https://en.wikipedia.org/wiki/Quantum_computing
-    
-    
+
+
     https://en.wikipedia.org/wiki/Wafer_(electronics)
     https://f450c.org/infographic/
-    
-    
+
+
     In electronics, a wafer (also called a slice or substrate)[1] is a thin slice of semiconductor, such as a crystalline silicon (c-Si, silicium), used for the fabrication of integrated circuits and, in photovoltaics, to manufacture solar cells.
 
     The wafer serves as the substrate for microelectronic devices built in and upon the wafer. It undergoes many microfabrication processes, such as doping, ion implantation, etching, thin-film deposition of various materials, and photolithographic patterning. Finally, the individual microcircuits are separated by wafer dicing and packaged as an integrated circuit.
 
-    
+
 -----
 
 Imaginary Computer (YIC-10)
@@ -344,7 +339,7 @@ Instruction Set(I)
     CMA: Complement AC
     CME: Complement E
     CIR: Circulate right (AC and E)
-    CIL: Circulate left (AC and E) 
+    CIL: Circulate left (AC and E)
 
 .. code:: asm
 
@@ -446,7 +441,7 @@ Other assembly
 اگر حداکثر ۳۲ دستور داشته باشیم پس پنج بیت برای دستورها نیاز داریم
 برای سادگی فرض می‌کنیم که طول همهٔ دستورها یکسان است
 یعنی هم دو بایت را می‌گیرند
-فرض کنید  دستورها پنج بیت نیاز دارند پس ۱۱ بیت برای  
+فرض کنید  دستورها پنج بیت نیاز دارند پس ۱۱ بیت برای
 آدرس
 
 حداکثر حافظهٔ این کامپیوتر چقدر می‌تواند باشد.
@@ -500,17 +495,17 @@ Output Problem
 
 .. code:: asm
     :class: substep
-    
+
     ..........
     ..........
-    
+
     LB1: out
         sko
         bun LB1
 
     ...........
     ...........
-    
+
 
 ----
 
@@ -588,7 +583,7 @@ Hardware insead of Software
 
 .. :
 
-  جزوهٔ درس معماری کامپیوتر دکتر مختار معصومی 
+  جزوهٔ درس معماری کامپیوتر دکتر مختار معصومی
   https://www.electronics-tutorials.ws/blog/7-segment-display-tutorial.html
   https://www.geeksforgeeks.org/bcd-to-7-segment-decoder/
 
@@ -634,18 +629,18 @@ Arduino Print 4 to 7-segment
 .. code:: cpp
 
   #include "SevSeg.h"
-  SevSeg sevseg; 
+  SevSeg sevseg;
 
   void setup(){
     byte numDigits = 1;
     byte digitPins[] = {};
-    byte segmentPins[] = 
+    byte segmentPins[] =
       {6, 5, 2, 3, 4, 7, 8, 9};
     bool resistorsOnSegments = true;
 
-    byte hardwareConfig = COMMON_CATHODE; 
-    sevseg.begin(hardwareConfig, 
-      numDigits, digitPins, segmentPins, 
+    byte hardwareConfig = COMMON_CATHODE;
+    sevseg.begin(hardwareConfig,
+      numDigits, digitPins, segmentPins,
       resistorsOnSegments
     );
     sevseg.setBrightness(90);
@@ -800,7 +795,7 @@ Airport Board with Split-Flip Display
 =======================================
 .. image:: img/in/airport_board_with_flip-flop_display.jpg
   :height: 400px
-  
+
 * https://en.wikipedia.org/wiki/Split-flap_display
 
 ----
@@ -836,7 +831,7 @@ Process along Printer Function
 
 ----
 
-Jump to Printer Procedure 
+Jump to Printer Procedure
 ========================================
 .. image:: img/in/call_printer_function.png
 
@@ -858,25 +853,25 @@ Adding procedurs to memory
 ==========================
 .. csv-table::
     :class: yoo-memory center
-    
-    User Process (P) , |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp|, 
+
+    User Process (P) , |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp| |nbsp|,
     0 ,                              800,                       2048
 
 .. csv-table::
     :class: yoo-memory center
-    
-    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| |nbsp| , LED Procedure 
+
+    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| |nbsp| , LED Procedure
     0 ,                              648,                    1024, 2048
 
 .. csv-table::
     :class: yoo-memory center
-    
-    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| , LED,  7 segment, 
+
+    |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| , LED,  7 segment,
     0 ,                              456,            1024, 1048, 1096,    2048
 
 .. csv-table::
     :class: yoo-memory center
-        
+
     |nbsp| |nbsp| P |nbsp| |nbsp| , |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp| , LED, 7 , printer, |nbsp| |nbsp|  |nbsp| |nbsp|
     0 ,  456,           1024,                        1048 ,     1096,  1256,   2048
 
@@ -888,7 +883,7 @@ YIC50 - Array of Addresses
 ==========================
 .. csv-table::
     :class: yoo-memory center
-        
+
     P, |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp|, array , LED, 7 , printer, |nbsp| |nbsp|  |nbsp| |nbsp|
     0,  456,           1000, 1024                       , 1048 ,     1096,  1256,   2048
 
@@ -896,9 +891,9 @@ Array
 
 .. csv-table::
     :class: yoo-memory center
-        
+
     1024, 1048, 1096 , 1256,
-    0,  1, 2, 3, 4,    
+    0,  1, 2, 3, 4,
 
 ----
 
@@ -938,7 +933,7 @@ Stack From end
   https://www.researchgate.net/figure/Circuit-Diagram-for-Serial-Port-to-Printer-Parallel-Port-Interface-using-AT89C2051_fig4_230799951
   old microcontroller connect to parallel port
   https://en.wikipedia.org/wiki/Call_stack
-  
+
   function call stack
   https://youshaohua.com/post/simply-and-easily-understanding-function-call-stack-by-a-vision
   https://www.researchgate.net/figure/HWTI-Function-Call-Stack-Example_fig3_220844363
@@ -964,7 +959,7 @@ Simple Computer Simulator Instruction Set
 
 ----
 
-Hollerith and IBM keypunches, 1890 
+Hollerith and IBM keypunches, 1890
 ==========================================
 .. image:: img/in/ctr_census_machine.jpg
   :width: 600px
