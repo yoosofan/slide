@@ -179,10 +179,10 @@ Parts, Suppliers and Projects Database
 
   .. math::
 
-	\begin{matrix}
-	1 & 2 & 3\\
-	a & b & c
-	\end{matrix}
+  \begin{matrix}
+  1 & 2 & 3\\
+  a & b & c
+  \end{matrix}
 
 ----
 
@@ -490,7 +490,7 @@ Assignment
           TUPLE{SN("s17"), SNAME("Adam"), STATUS(40), CITY("London")}
         };
 
-.. csv-table: 
+.. csv-table:
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
@@ -501,7 +501,7 @@ Assignment
   S4,Clark,20,London
   S5,Adams,30,Athens
 
-.. csv-table:: 
+.. csv-table::
   :header-rows: 1
   :class: substep  smallerelementwithfullborder
 
@@ -787,7 +787,7 @@ Get part names of P2
 ----
 
 .. class:: rtl-h1
-   
+
 زوج شمارهٔ عرضه‌کنندگان و شمارهٔ قطعاتی را بیابید که آن عرضه کنندگان آن قطعات را عرضه کرده باشند.
 
 
@@ -832,7 +832,6 @@ Times
     Oslo,20
     Oslo,10
     Oslo,30
-
 
 ----
 
@@ -957,12 +956,12 @@ Rename
     .. code:: sql
         :class: substep
 
-        (  
+        (
           (
             p
             times
             (sp rename pn as sppn)
-          ) where pn = sppn 
+          ) where pn = sppn
         ) {pn, pname, weight, color, city};
 
 .. csv-table::
@@ -1027,197 +1026,6 @@ Rename
     Cam
     Cog
 
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (I)
-  
-.. code:: sql
-  :class: substep
-
-  (p{pn} times s{sn})
-  minus
-  sp{sn,pn};
-
-.. code:: sql
-  :class: substep
-
-  ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-  times
-  (s{sn, sname} rename sn as ssn)
-
-  ;
-    
-.. code:: sql
-  :class: substep
-
-  ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-  times
-  (s{sn, sname} rename sn as ssn)
-  times
-  (p{pn, pname} rename pn as ppn)
-  ;
-
-.. code:: sql
-  :class: substep
-
-  (
-    (
-      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-      times
-      (s{sn, sname} rename sn as ssn)
-    ) where sn = ssn
-  )
-  times
-  (p{pn, pname} rename pn as ppn)
-  ;
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (II)
-  
-.. code:: sql
-  :class: substep
-
-  (
-    (
-      (
-        ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-        times
-        (s{sn, sname} rename sn as ssn)
-      ) where sn = ssn
-    )
-    times
-      (p{pn, pname} rename pn as ppn)
-  ) where pn = ppn
-  ;
-
-.. code:: sql
-  :class: substep
-
-  (
-    ( 
-      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-      times
-      (s{sn, sname} rename sn as ssn)
-      times
-      (p{pn, pname} rename pn as ppn)
-    ) where pn = ppn and sn = ssn
-  ) 
-  {sname, pname}
-  ;
-    
-----
-
-.. class:: rtl-h1
-
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد(III)
-
-.. code:: sql
-  :number-lines:
-   
-  (
-    ( 
-      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
-      times
-      (s{sn, sname} rename sn as ssn)
-      times
-      (p{pn, pname} rename pn as ppn)
-    ) where pn = ppn and sn = ssn
-  ) 
-  {sname, pname}
-  ;
-    
-
-.. code:: sql
-  :number-lines:
-
-  A := p{pn, pname} times s{sn, sname}; 
-  B := (sp{sn, pn} times (s{sn, sname} rename sn as ssn1) where sn = ssn1;
-  C := (B times (p{pn, pname} rename pn as pn1) where pn = pn1;
-  A minus (C{sn, sname, pn, pname})
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (IV)
-  
-
-.. code:: sql
-  :number-lines:
-
-  A := p{pn, pname} times s{sn, sname}; 
-  B := (
-          sp{sn, pn} 
-          times 
-          (
-            s{sn, sname} rename sn as ssn1
-          ) where sn = ssn1
-        )
-      ;
-  C := (
-          B 
-          times 
-          (
-            p{pn, pname} rename pn as pn1
-          ) where pn = pn1
-        );
-  A minus (C{sn, sname, pn, pname})
-
-  
-----
-
-.. class:: rtl-h1
-
-  نام عرضه‌کنندگانی را بیابید که هیچ قطعه‌ای عرضه نکرده‌اند.
-  
-.. code:: sql
-  :class: substep
-
-  s{sn}  minus  sp{sn} ;
-    
-.. code:: sql
-  :class: substep
-
-  ( s{sn}  minus  sp{sn} ) times s ; -- wrong
-
-.. code:: sql
-  :class: substep
-
-  ( s{sn}  minus  sp{sn} ) times (s rename sn as ssn) ;
-
-.. code:: sql
-  :class: substep
-
-  ( ( s{sn}  minus  sp{sn} ) times (s rename sn as ssn) ) where sn = ssn;
-
-.. code:: sql
-  :class: substep
-
-  ( ( ( s{sn}  minus  sp{sn} ) times (s rename sn as ssn) ) where sn = ssn) {sname};
-
-
-.. code:: sql
-  :class: substep
-
-  (
-    ( -- better format
-      (s{sn}  minus  sp{sn}) 
-      times 
-      (s rename sn as ssn) 
-    ) where sn = ssn
-  ){sname}
-  ;
 
 ----
 
@@ -1261,7 +1069,6 @@ Rename
     Athens,Paris
     Athens,Oslo
 
-
 ----
 
 :class: t2c
@@ -1300,6 +1107,153 @@ Rename
     Athens,London
     Athens,Paris
     Athens,Oslo
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (I)
+
+.. code:: sql
+  :class: substep
+
+  (p{pn} times s{sn})
+  minus
+  sp{sn,pn};
+
+.. code:: sql
+  :class: substep
+
+  ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+  times
+  (s{sn, sname} rename sn as ssn)
+
+  ;
+
+.. code:: sql
+  :class: substep
+
+  ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+  times
+  (s{sn, sname} rename sn as ssn)
+  times
+  (p{pn, pname} rename pn as ppn)
+  ;
+
+.. code:: sql
+  :class: substep
+
+  (
+    (
+      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+      times
+      (s{sn, sname} rename sn as ssn)
+    ) where sn = ssn
+  )
+  times
+  (p{pn, pname} rename pn as ppn)
+  ;
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (II)
+
+.. code:: sql
+  :class: substep
+
+  (
+    (
+      (
+        ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+        times
+        (s{sn, sname} rename sn as ssn)
+      ) where sn = ssn
+    )
+    times
+      (p{pn, pname} rename pn as ppn)
+  ) where pn = ppn
+  ;
+
+.. code:: sql
+  :class: substep
+
+  (
+    (
+      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+      times
+      (s{sn, sname} rename sn as ssn)
+      times
+      (p{pn, pname} rename pn as ppn)
+    ) where pn = ppn and sn = ssn
+  )
+  {sname, pname}
+  ;
+
+----
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد(III)
+
+.. code:: sql
+  :number-lines:
+
+  (
+    (
+      ( (p{pn} times s{sn})  minus  sp{sn,pn} )
+      times
+      (s{sn, sname} rename sn as ssn)
+      times
+      (p{pn, pname} rename pn as ppn)
+    ) where pn = ppn and sn = ssn
+  )
+  {sname, pname}
+  ;
+
+
+.. code:: sql
+  :number-lines:
+
+  A := p{pn, pname} times s{sn, sname};
+  B := (sp{sn, pn} times (s{sn, sname} rename sn as ssn1) where sn = ssn1;
+  C := (B times (p{pn, pname} rename pn as pn1) where pn = pn1;
+  A minus (C{sn, sname, pn, pname})
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  زوج نام عرضه‌کنندگان و نام قطعاتی را بیابید که آن عرضه کننده آن قطعه را عرضه نکرده باشد (IV)
+
+
+.. code:: sql
+  :number-lines:
+
+  A := p{pn, pname} times s{sn, sname};
+  B := (
+          sp{sn, pn}
+          times
+          (
+            s{sn, sname} rename sn as ssn1
+          ) where sn = ssn1
+        )
+      ;
+  C := (
+          B
+          times
+          (
+            p{pn, pname} rename pn as pn1
+          ) where pn = pn1
+        );
+  A minus (C{sn, sname, pn, pname})
 
 ----
 
@@ -1381,7 +1335,7 @@ Rename
   s
   times
   sp
-  
+
 .. code:: sql
   :class: substep
 
@@ -1546,8 +1500,8 @@ Rename
   )
   times
   (
-    ( 
-      (p rename pn as pn1) 
+    (
+      (p rename pn as pn1)
       where color = "Red"
     ){pn1}
   )
@@ -1555,7 +1509,7 @@ Rename
 .. code:: sql
   :class: substep
   :number-lines:
-  
+
   (
     (
       (
@@ -1567,8 +1521,8 @@ Rename
       )
       times
       (
-        ( 
-          (p rename pn as pn1) 
+        (
+          (p rename pn as pn1)
           where color = "Red"
         ){pn1}
       ) where pn1 = pn
@@ -1645,9 +1599,9 @@ Rename
       (
         (
           (
-            (s rename sn as sn1) 
-            times 
-            sp 
+            (s rename sn as sn1)
+            times
+            sp
           ) where sn=sn1
         ){pn, city}
       )
@@ -1655,8 +1609,8 @@ Rename
       (
         (
           (
-            (p where color = "Red") 
-            where weight > 13 
+            (p where color = "Red")
+            where weight > 13
           ){pn}
         ) rename pn as pn1
       )
@@ -1679,10 +1633,10 @@ Rename
       times
       (
         (
-          (p where color = "Red") 
+          (p where color = "Red")
           where weight > 13
         ){pn}
-      ) 
+      )
     ) where pn1=pn
   ){city};
 
@@ -1758,12 +1712,12 @@ Rename
     :class: substep
     :number-lines:
 
-    ( 
-      ( 
-        p{pn, pname} 
-        times 
+    (
+      (
+        p{pn, pname}
+        times
         (sp rename pn as pn1)
-      ) where pn1 = pn 
+      ) where pn1 = pn
     ) {pname};
 
 .. csv-table::
@@ -1851,6 +1805,65 @@ Rename
 
 :class: t2c
 
+.. class:: rtl-h1
+
+  نام عرضه‌کنندگانی را بیابید که هیچ قطعه‌ای عرضه نکرده‌اند.
+
+.. code:: sql
+  :class: substep
+
+  s{sn}  minus  sp{sn} ;
+
+.. code:: sql
+  :class: substep
+
+  ( s{sn}  minus  sp{sn} )
+  times s ; -- wrong
+
+.. code:: sql
+  :class: substep
+
+  ( s{sn}  minus  sp{sn} )
+  times
+  (s rename sn as ssn) ;
+
+.. code:: sql
+  :class: substep
+
+  (
+    ( s{sn}  minus  sp{sn} )
+    times
+    (s rename sn as ssn)
+  ) where sn = ssn;
+
+
+.. code:: sql
+  :class: substep
+
+  (
+    (
+      (s{sn}  minus  sp{sn})
+      times
+      (s rename sn as ssn)
+    ) where sn = ssn
+  ){sname}
+  ;
+
+.. code:: sql
+  :class: substep
+
+  s{sname} minus
+  (
+    (
+      s times
+      (sp rename sn as sn1)
+    ) where sn = sn1
+  ){sname}
+
+----
+
+:class: t2c
+
 Join پیوند
 ====================
 .. code:: sql
@@ -1860,9 +1873,9 @@ Join پیوند
 .. code:: sql
 
   (
-    p 
-    times 
-    (sp rename pn as sppn) 
+    p
+    times
+    (sp rename pn as sppn)
   ) where sppn = pn
 
 
@@ -1889,9 +1902,9 @@ Join پیوند
 
     (
       (
-        p 
-        times 
-        (sp rename pn as sppn) 
+        p
+        times
+        (sp rename pn as sppn)
       ) where sppn = pn
     ){pname};
 
@@ -1913,17 +1926,17 @@ Join پیوند
     (
       (
         (p where color="Red")
-        times 
-        (sp rename pn as sppn) 
+        times
+        (sp rename pn as sppn)
       ) where sppn = pn
     ){pname};
 
 
 .. code:: sql
 
-    ( 
-      (p where color = "Red") 
-      join 
+    (
+      (p where color = "Red")
+      join
       sp
     ){pname}
 
@@ -1983,14 +1996,14 @@ Join پیوند
   (
     (s{city} minus p{city})
     join
-    s  
+    s
   ){sname};
 
 .. code:: sql
   :class: substep
-   
-  s{sname} 
-  minus 
+
+  s{sname}
+  minus
   ((s join p){sname});
 
 
@@ -2028,7 +2041,7 @@ Join پیوند
       (
         (
           (s{sn, sname} join sp)
-          join 
+          join
           p
         ) where city = "Paris"
       ){sname} ;
@@ -2100,8 +2113,8 @@ Join پیوند
 
   --      نادرست۱
   (
-    (s join sp) 
-    join 
+    (s join sp)
+    join
     (p{city})
   ){sname} ;
 
@@ -2110,8 +2123,8 @@ Join پیوند
 
   --      نادرست۲
   (
-    (s join sp) 
-    join 
+    (s join sp)
+    join
     p{city}
   ){sname} ;
 
@@ -2235,7 +2248,7 @@ Candidate Keys کلیدهای نامزد
     * اگر در هر شهر فقط یک عرضه کننده بتواند باشد.
         * {sn}
         * {city}
-  * SP(sn_, pn_, qty) 
+  * SP(sn_, pn_, qty)
       * {sn, pn}
 
 ----
@@ -2337,7 +2350,7 @@ Library(II)
 University Database
 =========================
 * student(ID_, name, dept_name, tot_cred)
-* instructor(ID_,	name, dept_name, salary)
+* instructor(ID_, name, dept_name, salary)
 * department (dept_name_, building, budget)
 * course(course_id_, title, dept_name, credits)
 * classroom (building_, room_number_, capacity)
@@ -2383,13 +2396,13 @@ Calculation on tuples instead of relations
 ----
 
   { ∃ px ∈ P | px.city = 'kashan'}
-  
+
   { ∃ sx ∈ S | sx.city = 'kashan'}
-  
+
   { ∀ sx ∈ S | sx.status > 1}
 
 .. class:: substep
-  
+
   * px where px.city = 'kashan'
   * sx where sx.city = 'kashan'
   * sx where sx.status > 1
@@ -2401,8 +2414,8 @@ Calculation on tuples instead of relations
 #. sx.sname, sx.staus where sx.status > 100
     * {(sx.sname, sx.status) sx ∈ S | sx.status > 100}
 #. sx.sn, sx.sname
-#. spx.sn, spx.pn 
-#. spx.sn, spy.pn 
+#. spx.sn, spx.pn
+#. spx.sn, spy.pn
 
 .. class:: rtl-h1
 
@@ -2530,13 +2543,13 @@ Calculation on tuples instead of relations
 .. class:: substep
 
   #. px.pname where spx.pn = px.pn
-  
+
   #.  Error
 
   #. px.pname where forall spx (spx.pn = px.pn)
   #. نام همهٔ قطعاتی را بیابید که همهٔ عرضه کنندگان آنها را عرضه کرده باشند
   #. نام همهٔ قطعاتی که عرضه شده‌انده
-  
+
 
 ----
 
@@ -2559,7 +2572,7 @@ Calculation on tuples instead of relations
   * اشکال
 
   * .. code:: sql
-    
+
         sx.city where exists spx (
           spx.sn = sx.sn
         ) and exists px (px.pn = 'P2')
@@ -2652,7 +2665,7 @@ Calculation on tuples instead of relations
 .. code:: sql
   :class: substep
 
-  {sx.sn, sy.sn as sn2} where sx.city = sy.city and 
+  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
     sx.sn <> sy.sn and (exists spx(sx.sn = spx.sn))
 
 .. csv-table::
@@ -2679,7 +2692,7 @@ Calculation on tuples instead of relations
   :class: substep
 
   {sx.sn, sy.sn as sn2} where sx.city = sy.city and
-   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) or 
+   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) or
    exists spy(sy.sn = spy.sn))
 
 .. csv-table::
@@ -2734,7 +2747,7 @@ Calculation on tuples instead of relations
   {sx.sn, sy.sn as sn2} where sx.city = sy.city and
    sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) and
    exists spx(sy.sn = spx.sn))
-   
+
 ----
 
 :class: t2c
@@ -2745,13 +2758,13 @@ Calculation on tuples instead of relations
 
 .. code:: sql
   :class: substep
-  
+
   -- نادرست
   sx.sname where forall spx(sx.sn=spx.sn)
 
 .. code:: sql
   :class: substep
-  
+
   -- نادرست
   sx.sname where forall spx(sx.sn != spx.sn)
 
@@ -2789,7 +2802,7 @@ Calculation on tuples instead of relations
 
   sx.sname where forall px(
     exists spx(
-      spx.pn=px.pn and 
+      spx.pn=px.pn and
 
 
 .. code:: sql
@@ -2822,8 +2835,8 @@ Calculation on tuples instead of relations
 
   -- نادرست
   sx.sname where forall px(
-    sx.sn=spx.sn and 
-    exists spx( spx.pn=px.pn) 
+    sx.sn=spx.sn and
+    exists spx( spx.pn=px.pn)
   )
 
 .. code:: sql
@@ -2831,8 +2844,8 @@ Calculation on tuples instead of relations
 
   -- نادرست
   sx.sname where exists spx(
-    sx.sn=spx.sn and 
-    forall px(spx.pn=px.pn) 
+    sx.sn=spx.sn and
+    forall px(spx.pn=px.pn)
   )
 
 .. code:: sql
@@ -2898,19 +2911,19 @@ Calculation on tuples instead of relations
 .. code:: sql
     :class: substep
 
-     px.pname where not exists spx( 
-       spx.pn = 'p3' and not exists spy( 
+     px.pname where not exists spx(
+       spx.pn = 'p3' and not exists spy(
          spy.sn = spx.sn and spy.pn = px.pn
-       ) 
+       )
     )
 
 .. code:: sql
     :class: substep
-    
-    px.pname where forall spx( 
-      spx.pn <> 'p3' or exists spy( 
+
+    px.pname where forall spx(
+      spx.pn <> 'p3' or exists spy(
         spy.sn = spx.sn and spy.pn = px.pn
-      ) 
+      )
     )
 
 .. class:: rtl-h2 substep
@@ -2921,12 +2934,12 @@ Calculation on tuples instead of relations
 
 .. code:: sql
     :class: substep
-    
+
     -- نادرست
-    px.pname where forall spx( 
-      spx.pn = 'p3' or not exists spy( 
+    px.pname where forall spx(
+      spx.pn = 'p3' or not exists spy(
         spy.sn = spx.sn and spy.pn = px.pn
-      ) 
+      )
     )
 
 ----
@@ -2943,7 +2956,7 @@ Calculation on tuples instead of relations
 
 
     نام قطعات عرضه شده‌ای را بیابید که همهٔ عرضه‌کنندگانِ آن قطعات قطعهٔ p3 را هم حتماً عرضه کرده‌اند و اگر هیچ عرضه‌ای از p3 نبود جواب باید خالی باشد. پاسخ‌های نادرست(I)
-        
+
 
 .. code:: sql
 
@@ -2954,8 +2967,8 @@ Calculation on tuples instead of relations
     )
 
 .. code:: sql
-    
-    px.pname where forall spx( 
+
+    px.pname where forall spx(
       spx.pn='p3' and forall Spy(
         Spy.sn=Spx.sn and Spy.pn <> 'p3' and exists Px(
           px.pn=Spy.pn
@@ -2964,14 +2977,14 @@ Calculation on tuples instead of relations
     )
 
 .. code:: sql
-    
-    px.pname where exists spx( 
+
+    px.pname where exists spx(
       Spx.pn='p3' and exists spy(
         spy.sn=Spx.sn and Spy.pn<>'p3' and exists px(
           px.pn=spy.pn)
       )
     )
-    
+
 
 ----
 
@@ -2982,26 +2995,26 @@ Calculation on tuples instead of relations
 
 .. code:: sql
 
-    px.pname where forall spx( 
-      spx.pn = 'p3’ or exists spy( 
+    px.pname where forall spx(
+      spx.pn = 'p3’ or exists spy(
         spy.sn = spx.sn and spy.pn = px.pn
-       ) 
+       )
     )
 
 .. code:: sql
 
-    px.pname where forall spx( 
-      spx.pn = 'p3' and exists spy( 
+    px.pname where forall spx(
+      spx.pn = 'p3' and exists spy(
         spy.pn = spx.pn and spy.pn = px.pn
-      ) 
+      )
     )
 
 .. code:: sql
-    
-    px.pname where forall spx( 
-      spx.pn = 'p3' or exists spy( 
+
+    px.pname where forall spx(
+      spx.pn = 'p3' or exists spy(
         spy.pn = spx.pn and spy.sn = spx.sn
-      ) 
+      )
     )
 
 .. :
@@ -3037,7 +3050,7 @@ Calculation on tuples instead of relations
 .. class:: rtl-h1 substep
 
     نام قطعاتی را بیابید که برای همهٔ پروژه‌ها عرضه‌ای از آن قطعه وجود داشته باشد.
-  
+
     نام قطعاتی را بیابید که پروژه‌ای وجود نداشته باشد که عرضه‌ای از آن قطعه برای آن پروژه وجود نداشته باشد.
 
 .. code:: sql
@@ -3046,16 +3059,16 @@ Calculation on tuples instead of relations
     px.pname where forall jx(
       exists spjx(
         spjx.jn = jx.jn and px.pn = spjx.pn
-      ) 
+      )
     )
 
 .. code:: sql
     :class: substep
 
-    px.pname where not exists jx( 
+    px.pname where not exists jx(
       not exitst spjx(
         spjx.jn = jx.jn and px.pn = spjx.pn
-      ) 
+      )
     )
 
 ----
@@ -3067,10 +3080,10 @@ Calculation on tuples instead of relations
 .. code:: sql
     :class: substep
 
-    px.pname where exists jx( 
+    px.pname where exists jx(
       not exitst spjx(
         spjx.jn = jx.jn and px.pn = spjx.pn
-      ) 
+      )
     )
 
 
@@ -3087,7 +3100,7 @@ Calculation on tuples instead of relations
 
 .. code:: sql
     :class: substep
-    
+
     px.pname where forall SPJx(
       exists (
         SPJx.pn=px.pn and px.pn=SPJx.pn
@@ -3096,7 +3109,7 @@ Calculation on tuples instead of relations
 
 .. code:: sql
     :class: substep
-    
+
     px.pname where not exist spjx(
       spjx.pn=px.pn and not exist spjy(
         spjy.pn=spjx.pn and spjy.pn=px.pn
@@ -3105,7 +3118,7 @@ Calculation on tuples instead of relations
 
 .. code:: sql
     :class: substep
-    
+
     px.pname where forall px(
       exists spj(spj.pn = px.pn)
     )
@@ -3135,16 +3148,16 @@ Calculation on tuples instead of relations
     bookx.author where forall bookx(
       exists borrowx(bookx.bn = borrowx.bn)
     )
-    
+
 
 .. code:: sql
     :class: substep
-    
+
     bookx.author where not exist memberx(
-      memberx.bn=bookx.bn and 
+      memberx.bn=bookx.bn and
       not exist borrowx(
-        borrowx.bn=memberx.bn and 
-        borrowx.bn=bookx.bn 
+        borrowx.bn=memberx.bn and
+        borrowx.bn=bookx.bn
       )
     )
 
@@ -3166,7 +3179,7 @@ Calculation on tuples instead of relations
     :class: substep
 
     bookx.author where forall booky(
-      bookx.author=booky.author and 
+      bookx.author=booky.author and
       exist borrowx(borrowx.bn=bookx.bn)
     )
 
@@ -3178,15 +3191,15 @@ Calculation on tuples instead of relations
     :class: substep
 
     bookx.author where not exists booky(
-      booky.author = bookx.author and 
-      not exists borrowx(borrowx.bn = booky.bn) 
+      booky.author = bookx.author and
+      not exists borrowx(borrowx.bn = booky.bn)
     )
-    
+
 .. code:: sql
     :class: substep
-    
+
     bookx.author where forall booky(
-      bookx.author <> booky.author or 
+      bookx.author <> booky.author or
       exist borrowx(borrowx.bn=booky.bn)
     )
 

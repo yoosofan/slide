@@ -899,9 +899,24 @@ Array
 
 ----
 
+Input Devices
+===============
+* Card Reader
+* Necessary Loops
+
+
+----
+
 Function call
 ==================
-.. image::  img/in/call_stack_layout.png
+* cons of BSA
+
+    * No recursion
+    * No explicit data transfer
+
+.. :
+
+    .. image::  img/in/call_stack_layout.png
 
 ----
 
