@@ -721,6 +721,8 @@ YIC 40 - BSA
 #. Device Drivers
 #. Adding more devices
 #. No error checking
+#. Send data
+#. API (protocol)
 
 .. image::  img/in/thermal_printer_interfacing_with_PIC16F877A.jpg
     :width: 600px

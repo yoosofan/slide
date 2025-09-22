@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<svg width="192" height="320" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g class="layer">
+  <title>Layer 1</title>
+  <g fill-rule="evenodd" id="segs" stroke="#FFFFFF" stroke-width="4">
+   <polygon fill="#F00" id="a" points=" 33, 32  50, 15  143, 15  160, 33  143, 50  50, 50"/>
+   <polygon fill="#F00" id="b" points=" 160, 33 178, 50 178, 143  161, 160  143, 143  143, 50"/>
+   <polygon fill="#F00" id="c" points=" 161, 160 178,178 178,271  161,288  143,271  143,178"/>
+   <polygon fill="#F00" id="d" points=" 161,288  143,306  50,306  33,288  50,271  143,271"/>
+   <polygon fill="#F00" id="e" points=" 33,288  15,271  15,178  33, 160  50,178  50,271"/>
+   <polygon fill="#F00" id="f" points=" 33, 160  15, 143  15, 50  33, 32  50, 50  50, 143"/>
+   <polygon fill="#F00" id="g" points=" 33, 160  50, 143  143, 143  161, 160  143,178  50,178"/>
+   <polygon fill="#F00" id="h" points=" 143, 50  143, 73  73, 143  50, 143  50, 120  120, 50"/>
+   <polygon fill="#F00" id="i" points=" 143,178  143,201  73,271  50,271  50,248  120,178"/>
+  </g>
+ </g>
+</svg>
