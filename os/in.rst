@@ -1256,14 +1256,215 @@ Array
 
 ----
 
-Relative Address
-================
+YIC75 Relative Address
+======================
+.. image:: img/memory/relocation_register_mmu.png
+   :align: center
+
+.. :
+
+    src/in/loader4_base_register_comments.asm
+    
+    Loaded Program (What gets loaded):
+    
+    // This program gets loaded and thinks it starts at address 0
+    // All addresses are logical - will be translated by base register
+
+            ORG     0
+
+    MAIN,   // Call input procedure via PVT
+            LDA     PVT_INPUT_ADDR  // Logical address 152
+            STA     CALL_PTR
+            BSA     CALL_PTR I      // Indirect call to input
+            
+            STA     NUM1
+            
+            // Call output procedure via PVT  
+            LDA     PVT_OUTPUT_ADDR // Logical address 153
+            STA     CALL_PTR
+            BSA     CALL_PTR I      // Indirect call to output
+            
+            HLT
+
+    // Procedure Vector Table at logical address 150
+            ORG     150
+    PVT_INPUT,  HEX     200    // Logical address of INPUT
+    PVT_OUTPUT, HEX     220    // Logical address of OUTPUT
+
+    // Pointers to PVT entries
+    PVT_INPUT_ADDR,  HEX     150    // Address of PVT_INPUT
+    PVT_OUTPUT_ADDR, HEX     151    // Address of PVT_OUTPUT
+
+    // Input Procedure at logical address 200
+            ORG     200
+    INPUT,  HEX     0
+            // Input code here
+            BSA     READ_CHAR       // Call helper
+            BUN     INPUT I
+
+    READ_CHAR, HEX  0
+            // Character input code
+            BUN     READ_CHAR I
+
+    // Output Procedure at logical address 220  
+            ORG     220
+    OUTPUT, HEX     0
+            // Output code here
+            BSA     WRITE_CHAR      // Call helper
+            BUN     OUTPUT I
+
+    WRITE_CHAR, HEX 0
+            // Character output code
+            BUN     WRITE_CHAR I
+
+    // Data Section for loaded program
+            ORG     300    // Logical address 300
+    NUM1,   DEC     0
+    CALL_PTR, HEX   0
+
+            END
+            
+
+
+
+    Address Translation Example:
+
+    If base register = 256:
+
+        Logical 0 → Physical 256
+
+        Logical 150 (PVT) → Physical 406
+
+        Logical 200 (INPUT) → Physical 456
+
+        Logical 220 (OUTPUT) → Physical 476
+        
+    
+----
+
+address binding, absolute and relocate loader
+
+.. image:: img/memory/memory_absolute_relocate_loader.png
+   :align: center
+   :scale: 90%
+
+----
+
+YIC80 - Interrupt
+=================
+.. :
+
+  .. image:: img/in/interrupt_chart.jpg
+
+.. image:: img/in/Flowchart_for_interrupt_cycle.png
+   :align: center
+   :height: 600px
+   :width: 700px
 
 
 ----
 
-Function call
-==================
+YIC90 - Memory and CPU Protection
+==================================
+.. image:: img/memory/hardware_address_protection.png
+   :align: center
+
+.. class:: substep
+
+#. System Call ?
+#. Change registers by the running process
+
+----
+
+.. image:: img/memory/hardware_address_protection.png
+   :align: center
+
+Software Interrupt
+======================
+.. code:: asm
+
+    mov ah, 0x0e    ; function number = 0Eh : Display Character
+    mov al, '!'     ; AL = code of character to display
+    int 0x10        ; call INT 10h, BIOS video service
+
+----
+
+.. image:: img/in/interrupt_types.png
+   :align: center
+   :height: 400px
+   :width: 500px
+
+
+----
+
+System Call
+=====================
+.. image:: img/in/system_call.png
+   :align: center
+   :height: 350px
+   :width: 800px
+
+----
+
+C System Call
+=====================
+.. image:: img/in/system_call_c.png
+   :align: center
+
+----
+
+Simple Parameters
+=========================
+.. image:: img/in/systemcallpaprameter.png
+   :align: center
+   :height: 350px
+   :width: 800px
+
+----
+
+* kernel mode
+* user mode
+
+Pentium 4 (ESCR)
+
+.. image:: img/in/control_register.png
+   :align: center
+
+----
+
+.. image:: img/in/protection_ring.png
+   :align: center
+
+----
+
+CPU protection
+====================
+Timer interrupt
+-------------------
+Cpu Scheduler
+
+.. image:: img/memory/timer_interrupt.jpg
+    :align: center
+    :width: 700px
+    :height: 500px
+
+----
+
+YIC100 - Adding Keyboard & Disk
+==================================
+* terminal (command prompt)
+* batch system
+* interactive system
+
+----
+
+.. image:: img/in/kernel1process.png
+   :align: center
+
+----
+
+YIC105 - Function call
+=======================
 * cons of BSA
 
     * No recursion
@@ -1316,6 +1517,10 @@ Stack From end
 
 ----
 
+YIC110 - Multiprogramming
+=========================
+
+----
 
 Simple computer simulator
 ==============================
@@ -1426,6 +1631,11 @@ Boot sequence
 ----
 
 .. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
+   :align: center
+
+----
+
+.. image:: img/in/simple_poweron_computer.png
    :align: center
 
 ----

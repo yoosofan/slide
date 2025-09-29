@@ -1,10 +1,3 @@
-:root {
- --yoo-gantt-chart-width: 450px;
-}
-
-#impress {
-  transform: scale(1) !important;
-}
 /*
 @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Racing+Sans+One|Satisfy);
 
@@ -16,8 +9,8 @@
 */
 body { 
   text-align: center;  
-  font-family: DejaVu Serif, Liberation Serif,  FreeSerif;
-  /*font-size: 130%;*/
+  /*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/
+  font-size: large
 
 /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
 }
@@ -79,7 +72,7 @@ ul, ol, pre.code{
 }
 
 
-pre.code{font-size:120%; font-family: monospace; padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; padding-right: 0.2em; border-style: solid; border-left-width: 0.5em; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;}
+pre.code{font-size:120%; font-family: monospace; padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; padding-right: 0.2em; border-style: solid; border-left-width: 0.5em; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;} /*justify-self: center;*/
 pre.code > .ln {background-color: #DFE5F1;}
 pre.code { background-color:#f0f0f0;}
 pre.console{background-color: #F9E0E0;}
@@ -90,6 +83,7 @@ ol.trace-code{
   padding-right: 1em; 
   list-style: none;
   counter-reset: my-awesome-counter;
+  /* justify-self: start; */
 }
 ol.trace-code li {
   counter-increment: my-awesome-counter;
@@ -231,12 +225,29 @@ div.scrollbar-box800x500px-overflow{
     font-weight: bold;
     background-color: #BFBFBF;
 }
-.yoo-gantt-chart > ul.withborder > li:nth-of-type(odd){
-  background-color: black;
+
+table.yoo-gantt-chart tr td { border: solid 1px;}
+table.yoo-gantt-chart tr:nth-of-type(1) td:last-of-type{
+  border: 0;
 }
-.yoo-gantt-chart li{
-  list-style-type: none;
+table.yoo-gantt-chart tr:nth-of-type(2) td{
+  border: 0;
+  text-align: left;
+}
+
+table.yoo-memory {width: 98%;}
+table.yoo-memory tr td { border: solid 1px;}
+table.yoo-memory tr:nth-of-type(1) td{
   text-align: center;
+}
+table.yoo-memory tr:nth-of-type(2) td{
+  border: 0;
+  text-align: left;
+}
+table.yoo-memory tr:nth-of-type(1) td:last-of-type{
+  border: 0;
+  text-align: right;
+  visible: false;
 }
 
 table.borderless * {border: 0;}

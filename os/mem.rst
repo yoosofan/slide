@@ -88,7 +88,6 @@ https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmenta
 
 ----
 
-
 .. class:: rtl-h1
 
     بخش‌بندی پویای حافظه
@@ -96,15 +95,6 @@ https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmenta
 .. image:: img/memory/memory_management_pc.png
    :align: center
    :height: 470px
-
-----
-
-.. class:: rtl-h1
-
-    ارتباط میان آدرس فیزیکی و آدرس منطقی در آدرس دهی نسبی به کمکِ واحد مدیریت حافظه (MMU)
-
-.. image:: img/memory/relocation_register_mmu.png
-   :align: center
 
 ----
 
@@ -139,22 +129,9 @@ Process Control Block (PCB)
 
 ----
 
-.. image:: img/in/kernel1process.png
-   :align: center
-
-----
-
 .. image:: img/in/simple_multiple_process.png
    :align: center
    :height: 500px
-
-----
-
-address binding, absolute and relocate loader
-
-.. image:: img/memory/memory_absolute_relocate_loader.png
-   :align: center
-   :scale: 90%
 
 ----
 
@@ -278,11 +255,6 @@ overlay
    :align: center
    :width: 500px
    :height: 650px
-
-----
-
-.. image:: img/in/simple_poweron_computer.png
-   :align: center
 
 ----
 
@@ -415,20 +387,6 @@ Effective Access Time (EAT)
 
 ----
 
-.. class:: rtl-h1
-
-    حفاظت از حافظه به کمک ثبات‌های پایه و حد
-
-.. image:: img/memory/hardware_address_protection.png
-   :align: center
-
-.. class:: substep
-
-#. System Call ?
-#. Change registers by the running process
-
-----
-
 .. image:: img/in/process_parts.png
    :align: center
 
@@ -475,98 +433,10 @@ address binding, linker
 
 ----
 
-.. image:: img/memory/hardware_address_protection.png
-   :align: center
-
-
-Software Interrupt
-======================
-.. code:: asm
-
-    mov ah, 0x0e    ; function number = 0Eh : Display Character
-    mov al, '!'     ; AL = code of character to display
-    int 0x10        ; call INT 10h, BIOS video service
-
-----
-
-.. image:: img/in/interrupt_types.png
-   :align: center
-   :height: 400px
-   :width: 500px
-
-
-----
-
-.. :
-
-  .. image:: img/in/interrupt_chart.jpg
-
-.. image:: img/in/Flowchart_for_interrupt_cycle.png
-   :align: center
-   :height: 600px
-   :width: 700px
-
-
-----
-
-System Call
-=====================
-.. image:: img/in/system_call.png
-   :align: center
-   :height: 350px
-   :width: 800px
-
-----
-
-C System Call
-=====================
-.. image:: img/in/system_call_c.png
-   :align: center
-
-----
-
-Simple Parameters
-=========================
-.. image:: img/in/systemcallpaprameter.png
-   :align: center
-   :height: 350px
-   :width: 800px
-
-----
-
 Stack
 ===========
 #. Process stack
 #. System stack
-
-----
-
-* kernel mode
-* user mode
-
-Pentium 4 (ESCR)
-
-.. image:: img/in/control_register.png
-   :align: center
-
-----
-
-.. image:: img/in/protection_ring.png
-   :align: center
-
-----
-
-CPU protection
-====================
-Timer interrupt
--------------------
-Cpu Scheduler
-
-.. image:: img/memory/timer_interrupt.jpg
-    :align: center
-    :width: 700px
-    :height: 500px
-
 
 ----
 
