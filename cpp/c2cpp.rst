@@ -613,30 +613,30 @@ Errors Default value for parameters(II)
 
 -----
 
-Encapsulation(I)
-==================
+Obeject Oriented, Encapsulation(I)
+===================================
 * Functions in Struct
-* The Most Important Step on Learning Object Oriented Programming
-* The Most Important Object Oriented Programming Principle
-* Method (Functions in struct)
+* Object Oriented Programming
+* Methods (Functions in struct)
+
+----
 
 .. list-table::
 
   * - .. include:: src/student/student122.cpp
         :code: cpp
-        :number-lines: 2
+        :number-lines: 3
         :class: ltr
         :start-line: 2
-        :end-line: 28
 
     - |nbsp|
 
     - .. include:: src/student/student124.cpp
         :code: cpp
-        :number-lines: 2
+        :number-lines: 3
         :class: ltr
         :start-line: 2
-        :end-line: 28
+        :end-line: 49
 
 ----
 
@@ -658,25 +658,24 @@ Encapsulation(II)
     :start-line: 2
     :end-line: 28
 
-
 -----
 
 :class: t2c
 
-Encapsulation Struct(III)
-===========================
+Encapsulation(III)
+=========================
 .. include:: src/struct_method214.cpp
     :code: cpp
-    :number-lines:
+    :number-lines: 3
     :class: ltr
-    :start-line: 0
+    :start-line: 2
     :end-line: 30
 
 .. include:: src/struct_method218.cpp
     :code: cpp
-    :number-lines:
+    :number-lines: 3
     :class: ltr
-    :start-line: 0
+    :start-line: 2
     :end-line: 30
 
 ----
@@ -684,19 +683,17 @@ Encapsulation Struct(III)
 :class: t2c
 
 Encapsulation(IV)
-===========================
+===================
 .. include:: src/mycomplex/00_one_file/complexCls01.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 3
+    :start-line: 2
     :end-line: 30
 
 .. include:: src/mycomplex/00_one_file/complexCls02.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 3
+    :start-line: 2
     :end-line: 30
 
 ----
@@ -704,19 +701,18 @@ Encapsulation(IV)
 :class: t2c
 
 Attribute Default Value(I)
-=========================================================
+===========================
 .. include:: src/mycomplex/00_one_file/complexCls02.21.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 3
+    :start-line: 2
     :end-line: 34
 
 .. include:: src/mycomplex/00_one_file/complexCls02.22.cpp
     :code: cpp
-    :number-lines:
+    :number-lines: 3
     :class: ltr
-    :start-line: 0
+    :start-line: 2
     :end-line: 34
 
 ----
@@ -724,19 +720,17 @@ Attribute Default Value(I)
 :class: t2c
 
 Attribute Default Value(II)
-====================================
+============================
 .. include:: src/struct_method208.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 3
+    :start-line: 2
     :end-line: 28
 
 .. include:: src/struct_method210.cpp
     :code: cpp
-    :number-lines:
-    :class: ltr
-    :start-line: 0
+    :number-lines: 3
+    :start-line: 2
     :end-line: 28
 
 ----
@@ -744,7 +738,7 @@ Attribute Default Value(II)
 :class: t2c
 
 Attribute Default Value(III)
-==============================
+============================
 .. include:: src/struct_method222.cpp
     :code: cpp
     :number-lines: 2
@@ -764,7 +758,7 @@ Attribute Default Value(III)
 :class: t2c
 
 MyArray Struct(I)
-===================
+=================
 .. include:: src/myArray/100400.cpp
     :code: cpp
     :number-lines:
@@ -778,7 +772,7 @@ MyArray Struct(I)
 :class: t2c
 
 MyArray Struct(II)
-===================
+==================
 .. include:: src/myArray/100420.cpp
   :code: cpp
   :number-lines:
@@ -794,7 +788,7 @@ MyArray Struct(II)
 :class: t2c
 
 MyArray Struct(III) - Error
-================================
+============================
 .. include:: src/myArray/100420.cpp
   :code: cpp
   :number-lines:

@@ -2,17 +2,20 @@
 using namespace std;
 struct point{
   double x, y;
-  void input(void) {
-    cout << "Enter the X value:" << endl;
+
+  void input() {
+    cout << "Enter the X value: ";
     cin >> x;
-    cout << "Enter the Y value:" << endl;
+    cout << "Enter the Y value: ";
     cin >> y;
   }
-  void print(void) {
-    cout << "X value: " << x << endl;
-    cout << "Y value: " << y << endl;
+  void print() {
+    cout << "X value: "
+      << x << endl;
+    cout << "Y value: "
+      << y << endl;
   }
-  void move(double dx, double dy) {
+  void move(double dx, double dy){
     x += dx;
     y += dy;
   }

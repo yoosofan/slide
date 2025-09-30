@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 struct date{ int year, month, day; };
-date input(void){
+date input(){
   date d1;
   cout << "Year: "; 
   cin >> d1.year;

@@ -2,13 +2,13 @@
 using namespace std;
 struct complexCls{
   double re = 0, img = 0; // Default
-  void set(double r=0,double i=0)
-  {re=r;img=i;}
-  void print(void){
+  void set(double r = 0, double i = 0)
+  { re = r; img = i;}
+  void print(){
     cout << '(' << re << ','
       << img << ')' << endl;
   }
-  void input(void){
+  void input(){
     cout << "Enter re "; cin >> re;
     cout << "Enter img "; cin >> img;
   }
