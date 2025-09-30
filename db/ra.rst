@@ -2211,7 +2211,7 @@ Join پیوند
 ----
 
 Keys
-==============
+=====
 Super Keys
 ابر کلیدها
 
@@ -2343,23 +2343,59 @@ Library(II)
 #. book.nday  تعداد روزی که می‌تواند کتاب به امانت برده شود کتاب‌هایی نیز هست که نمی‌توان بیرون برد و برای همین صفر برای nday آنها گذاشته می‌شود.
 #. member.isbn کتابی که بیشتر از همه کتاب‌های کتابخانه این عضو به آن علاقه‌مند است.
 
-
-
 ----
 
-University Database
+:class: t2c
+
+University Database(I)
 =========================
 * student(ID_, name, dept_name, tot_cred)
 * instructor(ID_, name, dept_name, salary)
 * department (dept_name_, building, budget)
 * course(course_id_, title, dept_name, credits)
 * classroom (building_, room_number_, capacity)
-* section(course_id_, sec_id_, semester_, year_, building, room_number, time_slot_id)
+* section(course_id_, sec_id_, semester_, year_,
+      building, room_number, time_slot_id)
 * teaches(ID_, course_id_, sec_id_, semester_, year_)
 * takes(ID_, course_id_, sec_id_, semester_, year_, grade)
 * advisor(s_ID_, i_ID)
 * time_slot(time_slot_id_, day_, start_time_, end_time)
 * prereq(course_id_, prereq_id_)
+
+.. class:: substep
+
+* candidate keys?
+
+----
+
+:class: t2c
+
+University Database(II)
+=========================
+* student(ID_, name, dept_name, tot_cred)
+* instructor(ID_, name, dept_name, salary)
+* department (dept_name_, building, budget)
+* course(course_id_, title, dept_name, credits)
+* classroom (building_, room_number_, capacity)
+* teaches(course_id_, sec_id_, semester_,
+      year_, building, room_number,
+          time_slot_id, inst_id)
+* takes(ID_, course_id_, sec_id_, semester_, year_, grade)
+* advisor(s_ID_, i_ID)
+* time_slot(time_slot_id_, day_, start_time_, end_time)
+* prereq(course_id_, prereq_id_)
+
+.. class:: substep
+
+* If any sections have only one instructor
+* then combine Section and teaches
+* Use teaches name for this new relation
+*
+* section(course_id_, sec_id_, semester_, year_,
+      building, room_number, time_slot_id,
+          inst_id)
+* Is there any new candidate key for this
+    relation (teaches)?
 
 ----
 
@@ -2368,108 +2404,180 @@ University Database
 
 ----
 
+:class: t2c
+
 Relational Calculus
 =====================
-Calculation on tuples instead of relations
+.. code:: sh
+  :number-lines:
 
-.. class:: substep
+    Calculation on tuples instead of relations
 
-    * { px ∈ P | px.city = 'kashan'}
-    * ∀ forall
-    * ∃ exists
-    * ∀ a, b ∈ R | a+b = b + a
-    * ∃ a ∈ R ,  ∀ b ∈ R | a * b  = b
-    * a = 1
-    * ∀x p(x) ≡ ~∃x ~p(x)
+    { px ∈ P | px.city = 'kashan'}
 
-----
+    ∀ forall
 
-.. class:: substep
+    ∃ exists
 
-  * RANGEOVER sx RANGES over S;
-  * RANGEOVER sy RANGES over S;
-  * RANGEOVER px RANGES over P;
-  * RANGEOVER py RANGES over P;
-  * RANGEOVER spx RANGES over SP;
-  * RANGEOVER spy RANGES over SP;
+    ∀ a, b ∈ R | a+b = b + a
 
-----
+    ∃ a ∈ R ,  ∀ b ∈ R | a * b  = b
 
-  { ∃ px ∈ P | px.city = 'kashan'}
+    a = 1
 
-  { ∃ sx ∈ S | sx.city = 'kashan'}
+    ∀x p(x) ≡ ~∃x ~p(x)
 
-  { ∀ sx ∈ S | sx.status > 1}
 
-.. class:: substep
+.. code:: sh
+ :number-lines:
 
-  * px where px.city = 'kashan'
-  * sx where sx.city = 'kashan'
-  * sx where sx.status > 1
+  RANGEOVER sx RANGES over S;
+
+  RANGEOVER sy RANGES over S;
+
+  RANGEOVER px RANGES over P;
+
+  RANGEOVER py RANGES over P;
+
+  RANGEOVER spx RANGES over SP;
+
+  RANGEOVER spy RANGES over SP;
 
 ----
 
-#. sx.sname where sx.sn = 's2'
-    * {sx.sname sx ∈ S | sx.sn = 's2'}
-#. sx.sname, sx.staus where sx.status > 100
-    * {(sx.sname, sx.status) sx ∈ S | sx.status > 100}
-#. sx.sn, sx.sname
-#. spx.sn, spx.pn
-#. spx.sn, spy.pn
+:class: t2c
 
-.. class:: rtl-h1
+.. code:: sql
+  :number-lines:
 
-    نام قطعات را بیابید.
+    px where px.city = 'kashan'
 
-1. px.pname
+    sx where sx.city = 'kashan'
 
-.. class:: rtl
+    sx where sx.status > 1
 
-    نام عرضه‌کنندگان را بیابید
+    sx.sname where sx.sn = 's2'
 
-2. sx.sname
+    sx.sname, sx.staus where sx.status > 100
+
+.. code:: sql
+  :number-lines:
+
+    sx.sn, sx.sname
+
+    spx.sn, spx.pn
+
+    spx.sn, spy.pn
+
+      نام قطعات را بیابید.
+
+    px.pname
+
+      نام عرضه‌کنندگان را بیابید
+
+    sx.sname
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
 نام قطعاتی را بیابید که وزن‌شان بیشتر از ۲۰ باشد
 
-.. class:: substep
+.. code:: sql
+  :class: substep
 
-  * px
-  * px.pname
-  * px.pname where
-  * px.pname where px.weight > 20
+  1. px
+
+.. code:: sql
+  :class: substep
+
+  3. px.pname
+
+.. code:: sql
+  :class: substep
+
+  3. px.pname where
+
+.. code:: sql
+  :class: substep
+
+  4.  px.pname where px.weight > 20
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
 نام قطعاتی را بیابید که وزن‌شان بیشتر از ۲۰ باشد و در شهر کاشان باشند.
 
-.. class:: substep
 
-  * px
-  * px.pname
-  * px.pname where
-  * px.pname where px.weight > 20
-  * px.pname where px.weight > 20 and
-  * px.pname where px.weight > 20 and px.city = 'kashan'
+.. code:: sql
+  :class: substep
+
+  1. px
+
+.. code:: sql
+  :class: substep
+
+  2. px.pname
+
+.. code:: sql
+  :class: substep
+
+  3. px.pname where
+
+.. code:: sql
+  :class: substep
+
+  4. px.pname where px.weight > 20
+
+.. code:: sql
+  :class: substep
+
+  5. px.pname where px.weight > 20 and
+
+.. code:: sql
+  :class: substep
+
+  6. px.pname where px.weight > 20 and
+      px.city = 'kashan'
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
     نام قطعات قرمز رنگ با وزن بیشتر از ۱۲ را بیابید
 
-.. class:: substep
+.. code:: sql
+  :class: substep
 
-  #. px.pname
-  #. px.pname where
-  #. px.pname where px.weight > 12
-  #. px.pname where px.weight > 12 and
-  #. px.pname where px.weight > 12 and px.color = 'red’
+  1. px.pname
+
+.. code:: sql
+  :class: substep
+
+  2. px.pname where
+
+.. code:: sql
+  :class: substep
+
+  3. px.pname where px.weight > 12
+
+.. code:: sql
+  :class: substep
+
+  4. px.pname where px.weight > 12 and
+
+.. code:: sql
+  :class: substep
+
+  5. px.pname where px.weight > 12 and
+      px.color = "red"
 
 ----
 
@@ -2553,6 +2661,8 @@ Calculation on tuples instead of relations
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
   نام شهرهای عرضه‌کنندگانی را بیابید که قطعهٔ با شمارهٔ p2 را عرضه کرده باشند.
@@ -2567,17 +2677,21 @@ Calculation on tuples instead of relations
       * spx.pn = 'p2'
       * )
 
-  * sx.city where exists spx(spx.sn = sx.sn and spx.pn = 'p2')
+  * sx.city where exists spx(
+      spx.sn = sx.sn and
+          spx.pn = 'p2')
 
-  * اشکال
+  * Problem?
 
-  * .. code:: sql
+.. container:: substep
+
+    .. code:: sql
 
         sx.city where exists spx (
           spx.sn = sx.sn
         ) and exists px (px.pn = 'P2')
 
-  * .. code::
+    .. code::
 
       sx.city where exists spx (
         spx.sn = sx.sn
@@ -2585,29 +2699,80 @@ Calculation on tuples instead of relations
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
     زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و قطعه یا قطعه‌هایی عرضه کرده باشند.
 
 
-.. class:: substep
+.. code:: sql
+   :class: substep
 
-  1. {sx.sn, sy.sn as sn2}
-  2. {sx.sn, sy.sn as sn2} where sx.city = sy.city
-  3. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn
-  4. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and
-  5. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn)
-  6. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn) and
-  7. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn) and exists spy
-  8. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn) and exists spy(sy.sn = spy.sn)
+      {sx.sn, sy.sn as sn2}
 
-.. class:: rtl substep
+.. code:: sql
+   :class: substep
 
-    پاسخ نادرست
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city
 
-.. class:: substep
+.. code:: sql
+   :class: substep
 
-  9. {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn and
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn)
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn)
+      and
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn)
+      and exists spy
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and
+      sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn)
+      and exists spy(
+      sy.sn = spy.sn
+      )
+
+.. :
+
+    wrong answers
+
+    {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
 
 ----
 
