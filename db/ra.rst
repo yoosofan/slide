@@ -2776,29 +2776,73 @@ Relational Calculus
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
     نام عرضه‌کنندگانی را بیابید که دست کم یک قطعهٔ قرمز عرضه کرده باشند.
 
-.. class:: substep
+.. code:: sql
+   :class: substep
 
-    #. sx.sname
-    #. sx.sname where
-    #. sx.sname where exists spx(sx.sn=spx.sn and
-    #. sx.sname where exists spx(sx.sn=spx.sn and exists px
-    #. sx.sname where exists spx(sx.sn=spx.sn and exists px(px.pn=spx.pn
-    #. sx.sname where exists spx(sx.sn=spx.sn and exists px(px.pn=spx.pn and
-    #. sx.sname where exists spx(sx.sn=spx.sn and exists px(px.pn=spx.pn and px.color = 'red’))
+   sx.sname
+
+.. code:: sql
+   :class: substep
+
+   sx.sname where
+
+.. code:: sql
+   :class: substep
 
 
-#. sx.sname where exists px(px.color = 'red’  and exists spx(px.pn=spx.pn and sx.sn=spx.sn))
+    sx.sname where exists spx(
+      sx.sn=spx.sn and
+ 
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists spx(
+    sx.sn=spx.sn and exists px(
+ 
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists spx(
+    sx.sn=spx.sn and exists px(
+      px.pn=spx.pn
+ 
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists spx(
+    sx.sn=spx.sn and exists px(
+      px.pn=spx.pn and
+ 
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists spx(
+    sx.sn=spx.sn and exists px(
+      px.pn=spx.pn and 
+        px.color = "red"
+    )
+   )
+
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists px(
+    px.color = "red" and 
+    exists spx(px.pn=spx.pn 
+      and sx.sn=spx.sn
+    )
+   )
 
 
-.. class:: rtl substep
+.. class: rtl substep
 
   پاسخ نادرست
-
-.. class:: substep
 
   1. sx.sname where exists spx(sx.sn=spx.sn) and exists px(px.pn=spx.pn and px.color = 'red’)
   2. sx.sname where exists spx(sx.sn=spx.sn) and exists px(exists spx(px.pn=spx.pn and px.color = 'red’))
