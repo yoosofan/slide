@@ -17,6 +17,10 @@
 .. role:: rtl
     :class: rtl
 
+.. note::
+   The assembly code examples in this section were developed with assistance
+   from DeepSeek AI to demonstrate Morris Mano computer architecture concepts.
+
 ----
 
 Operating Systems
