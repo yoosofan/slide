@@ -427,6 +427,20 @@ Other assembly
 
 ----
 
+.. image:: img/in/Mano_Basic_computer_registers_memory.png
+
+----
+
+.. image:: img/in/Mano_instructions_general_format.png
+
+.. :
+
+    img/in/Mano_Basic_computer_instructions_opcodes.png
+    img/in/Mano_flowchart4instruction_cycle_1.png
+
+----
+
+
 .. code:: asm
 
   00101 00000  1010
@@ -1361,6 +1375,45 @@ YIC80 - Interrupt
    :height: 600px
    :width: 700px
 
+----
+
+:class: t2c
+
+Interrupt-Driven Program
+===========================
+.. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
+    :code: c
+    :number-lines:
+    :start-line: 4
+    :end-line: 22
+
+
+.. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
+    :code: cpp
+    :number-lines: 18
+    :start-line: 22
+    :end-line: 47
+
+----
+
+Loader with interrupt (bootstrap)
+=================================
+.. code:: sh
+
+    # Advanced: Buffered Input with BSA Subroutines
+    src/in/Interrupt_Driven_Program_with_BSA_Subroutines_Advanced_with_buffer.asm
+    
+    # Enhanced bootstrap loader with error checking
+    src/in/Bootstrap_Loader_Program_More_Robust_Version_with_Error_Checking.asm
+    
+    # Relocating Bootstrap Loader with Base Register
+    src/in/loader4_base_register_comments.asm
+    
+    # Uses interrupt-driven I/O instead of polling
+    src/in/loader10_interrupt.asm
+    
+    # Interrupt-driven program that gets loaded
+    src/in/loader10_loaded_program.asm 
 
 ----
 
@@ -1371,6 +1424,7 @@ YIC90 - Memory and CPU Protection
 
 .. class:: substep
 
+#. SKT like SKI and SKO
 #. System Call ?
 #. Change registers by the running process
 
