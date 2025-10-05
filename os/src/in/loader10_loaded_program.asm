@@ -2,9 +2,10 @@
 ; Interrupt-driven program that gets loaded
 ; Has its own interrupt service routine
 
-    ORG     0
+    ORG   500
 PROG,HEX  0
     ;  Useer  
     ;  Program
+    ;  Code
     BUN  PROG I
     END

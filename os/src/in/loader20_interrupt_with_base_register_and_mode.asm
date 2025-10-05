@@ -2,30 +2,35 @@
 ; Relocating Bootstrap Loader with INTERRUPTS
 ; Uses interrupt-driven I/O instead of polling
 
-    ORG 0
-    BUN BOOT
-    BUN ISR
-    ORG 100
+    ORG  0
+    BUN  BOOT
+    BUN  ISR
+    ORG  100
 BOOT, LDA  ZERO ;INIT
-    STA BYTES_LOADED
-    STA LOAD_FLAG
-    STA INP_BUFF
-    STA OUT_BUFF
-    STA SAVE_AC ;END
-    LDA ONE ;READ SIZE
-    STA LOAD_FLAG
-    LDA ZERO
-    STA PROG_SIZE
-WAIT,LDA PROG_SIZE
+    STA  BASE
+    STA  BYTES_LOADED
+    STA  LOAD_FLAG
+    STA  INP_BUFF
+    STA  OUT_BUFF
+    STA  SAVE_AC ;END
+    LDA  ONE ;READ SIZE
+    STA  LOAD_FLAG
+    LDA  ZERO
+    STA  PROG_SIZE
+WAIT, LDA  PROG_SIZE
     SZA
-    BUN DONE
-    BUN WAIT
-DONE, LDA ZERO
-    STA LOAD_FLAG;END
-    BSA LOAD_PROGRAM
+    BUN  DONE
+    BUN  WAIT
+DONE, LDA  ZERO
+    STA  LOAD_FLAG;END
+    LDA  NEXT_FREE
+    STA  BASE
+    BSA  LOAD_PROGRAM
     ION
-    BSA BASE I
-    BUN 100
+    LDA  BASE
+    STA  CALL_PTR
+    BSA  CALL_PTR I
+    BUN  100
 
 ISR,STA  SAVE_AC
     SKI
@@ -109,7 +114,7 @@ PROG_OUTPUT_HANDLER, HEX 120
 ZERO,           DEC     0
 ONE,            DEC     1
 PROG_SIZE,      DEC     0
-BASE,           DEC     500 
+BASE,  DEC     500 
 BYTES_LOADED,   DEC     0
 LOAD_INDEX,     DEC     0
 LOAD_FLAG,   DEC     0

@@ -1279,7 +1279,7 @@ Interrupt-Driven Program
 ===========================
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
     :code: asm
-    :number-lines:
+    :number-lines: 
     :start-line: 4
     :end-line: 22
 
@@ -1306,6 +1306,14 @@ Loader with interrupt (bootstrap)
     src/in/loader4_base_register_comments.asm
 
 
+    # Simple Bootstrap Loader with Absolute Addressing
+    src/in/loader7_interrupt_Simple_Bootstrap_Loader_with_Absolute_Addressing.asm
+    src/in/loader7_interrupt_Simple_Bootstrap_Loader_with_Absolute_Addressing_comments.asm
+
+    src/in/loader7_user_program_comments.asm
+    src/in/loader7_user_program.asm
+
+    
     # Uses interrupt-driven I/O instead of polling
     src/in/loader10_interrupt.asm
     src/in/loader10_interrupt_comments.asm
@@ -1318,23 +1326,73 @@ Loader with interrupt (bootstrap)
 
 :class: grid-3col
 
-.. include:: src/in/loader10_interrupt.asm
+.. include:: src/in/loader7.asm
     :code: asm
     :number-lines:
     :start-line: 4
-    :end-line: 32
+    :end-line: 34
 
-.. include:: src/in/loader10_interrupt.asm
+.. include:: src/in/loader7.asm
     :code: asm
-    :number-lines: 33
-    :start-line: 32
-    :end-line: 62
+    :number-lines: 30
+    :start-line: 34
+    :end-line: 64
 
-.. include:: src/in/loader10_interrupt.asm
+.. include:: src/in/loader7.asm
     :code: asm
-    :number-lines: 63
-    :start-line: 62
-    :end-line: 93
+    :number-lines: 60
+    :start-line: 64
+    :end-line: 95
+
+----
+
+Interrupt and Relative Address Problem
+======================================
+* Normal execution
+
+.. :
+
+    * Effective address = base + logical address
+
+* Interrupt time
+
+.. :
+
+    * PC contains physical address
+
+* ISR needs
+
+    #. predictable, fixed addresses
+    #. resources across all processes
+    #. Safety
+     
+.. :
+
+    : User programs shouldn't be able to interfere with ISR
+
+    * To run at specific logical addresses but with proper relocation
+
+Solution Dual Address Spaces
+----------------------------
+#. User mode   (MOD 0)
+#. Kernel mode (MOD 1)
+
+.. :
+
+    User mode: Base register active
+
+    Kernel mode Base register = 0 (direct physical addressing)
+
+    Interrupt handling must temporarily bypass relocation because:
+
+    In Modern Systems
+    -----------------
+    #. x86: Uses privilege levels (ring 0 vs ring 3)
+    #. ARM: Different processor modes (IRQ, SVC, User)
+    #. All: Have mechanisms to switch address spaces during interrupts
+    
+    Dual-Mode System with Manual Mode Switching
+    mod 0 = Kernel Mode, mod 1 = User Mode
 
 ----
 
