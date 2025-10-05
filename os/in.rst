@@ -18,8 +18,9 @@
     :class: rtl
 
 .. note::
-   The assembly code examples in this section were developed with assistance
-   from DeepSeek AI to demonstrate Morris Mano computer architecture concepts.
+
+    The assembly code examples in this section were developed with assistance
+    from DeepSeek AI to demonstrate Morris Mano computer architecture concepts.
 
 ----
 
@@ -934,115 +935,6 @@ YIC60 - Input Devices
 .. image:: img/in/pile_of_punch_cards_next2woman.png
   :height: 500px
 
-.. :
-
-    ----
-
-    Hollerith and IBM keypunches, 1890
-    ==========================================
-    .. image:: img/in/ctr_census_machine.jpg
-      :width: 600px
-
-    * https://en.wikipedia.org/wiki/Keypunch
-
-    ----
-
-    IBM 011 Electric Key Punch(1923)
-    =================================
-    .. image:: img/in/ekpunch.jpg
-      :width: 800px
-
-    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
-
-    ----
-
-    IBM Type 032 Printing Punch(1935)
-    =====================================
-    .. image:: img/in/ibm032b.jpg
-      :width: 600px
-
-    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
-
-    ----
-
-    A Key Punch Room in the 1960s
-    ==========================================
-    .. image:: img/in/752px-IBM_Keypunch_Machines_in_use.jpg
-      :width: 600px
-
-    * https://en.wikipedia.org/wiki/Keypunch
-
-    ----
-
-    Card Mark sense format
-    =========================
-    .. image:: img/in/HP_Educational_Basic_optical_mark-reader_card._Godfrey_Manning..jpg
-
-    ----
-
-    Cartons of Punch cards(1959)
-    ===================================
-    In a United States National Archives Records Service facility in 1959. Each carton could hold 2,000 cards
-    ----------------------------------------------------------------------------------------------------------------
-    .. image:: img/in/IBM_card_storage.NARA.jpg
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    Punched Card Printing Plate
-    =============================
-    .. image:: img/in/PunchedCardPrintingPlate.agr.jpg
-      :height: 400px
-
-
-    Example of a Punch Card
-    =================================
-    .. image:: img/in/punch_card.png
-      :width: 500px
-
-    ----
-
-    IBM1130 Binary Punched Card
-    ===========================================
-    .. image:: img/in/IBM1130CopyCard.agr.jpg
-      :width: 800px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    A 5081 Card from a non-IBM Manufacturer
-    =================================================
-    .. image:: img/in/Punch-card-5081.jpg
-      :width: 800px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    FORTRAN Port-A-Punch card. Compiler directive "SQUEEZE"
-    ==========================================================
-    .. image:: img/in/FORTRAN_Port-A-Punch_card._Compiler_directive__SQUEEZE__removed_the_alternating_blank_columns_from_the_input._Godfrey_Manning..jpg
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    Punched card from a Fortran program
-    ====================================
-    Z(1) = Y + W(1), plus sorting information in the last 8 columns
-    ------------------------------------------------------------------
-    .. image:: img/in/FortranCardPROJ039.agr.jpg
-      :width: 700px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    img/in/The_IBM_2501_Card_Reader2501.jpg
-    https://www.columbia.edu/cu/computinghistory/2501.html
-
-    ----
-
 ----
 
 :class: t2c
@@ -1282,9 +1174,9 @@ YIC75 Relative Address
 .. :
 
     src/in/loader4_base_register_comments.asm
-    
+
     Loaded Program (What gets loaded):
-    
+
     // This program gets loaded and thinks it starts at address 0
     // All addresses are logical - will be translated by base register
 
@@ -1294,14 +1186,14 @@ YIC75 Relative Address
             LDA     PVT_INPUT_ADDR  // Logical address 152
             STA     CALL_PTR
             BSA     CALL_PTR I      // Indirect call to input
-            
+
             STA     NUM1
-            
-            // Call output procedure via PVT  
+
+            // Call output procedure via PVT
             LDA     PVT_OUTPUT_ADDR // Logical address 153
             STA     CALL_PTR
             BSA     CALL_PTR I      // Indirect call to output
-            
+
             HLT
 
     // Procedure Vector Table at logical address 150
@@ -1324,7 +1216,7 @@ YIC75 Relative Address
             // Character input code
             BUN     READ_CHAR I
 
-    // Output Procedure at logical address 220  
+    // Output Procedure at logical address 220
             ORG     220
     OUTPUT, HEX     0
             // Output code here
@@ -1341,7 +1233,7 @@ YIC75 Relative Address
     CALL_PTR, HEX   0
 
             END
-            
+
 
 
 
@@ -1356,8 +1248,8 @@ YIC75 Relative Address
         Logical 200 (INPUT) → Physical 456
 
         Logical 220 (OUTPUT) → Physical 476
-        
-    
+
+
 ----
 
 address binding, absolute and relocate loader
@@ -1386,14 +1278,13 @@ YIC80 - Interrupt
 Interrupt-Driven Program
 ===========================
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
-    :code: c
+    :code: asm
     :number-lines:
     :start-line: 4
     :end-line: 22
 
-
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
-    :code: cpp
+    :code: asm
     :number-lines: 18
     :start-line: 22
     :end-line: 47
@@ -1406,18 +1297,44 @@ Loader with interrupt (bootstrap)
 
     # Advanced: Buffered Input with BSA Subroutines
     src/in/Interrupt_Driven_Program_with_BSA_Subroutines_Advanced_with_buffer.asm
-    
+    src/in/Interrupt_Driven_Program_with_BSA_Subroutines_Advanced_with_buffer_comments.asm
+
     # Enhanced bootstrap loader with error checking
     src/in/Bootstrap_Loader_Program_More_Robust_Version_with_Error_Checking.asm
-    
+
     # Relocating Bootstrap Loader with Base Register
     src/in/loader4_base_register_comments.asm
-    
+
+
     # Uses interrupt-driven I/O instead of polling
     src/in/loader10_interrupt.asm
-    
+    src/in/loader10_interrupt_comments.asm
+
     # Interrupt-driven program that gets loaded
-    src/in/loader10_loaded_program.asm 
+    src/in/loader10_loaded_program.asm
+    src/in/loader10_loaded_program_comments.asm
+
+----
+
+:class: grid-3col
+
+.. include:: src/in/loader10_interrupt.asm
+    :code: asm
+    :number-lines:
+    :start-line: 4
+    :end-line: 32
+
+.. include:: src/in/loader10_interrupt.asm
+    :code: asm
+    :number-lines: 33
+    :start-line: 32
+    :end-line: 62
+
+.. include:: src/in/loader10_interrupt.asm
+    :code: asm
+    :number-lines: 63
+    :start-line: 62
+    :end-line: 93
 
 ----
 
@@ -1434,16 +1351,42 @@ YIC90 - Memory and CPU Protection
 
 ----
 
-.. image:: img/memory/hardware_address_protection.png
-   :align: center
+:class: t2c
 
 Software Interrupt
 ======================
 .. code:: asm
 
-    mov ah, 0x0e    ; function number = 0Eh : Display Character
-    mov al, '!'     ; AL = code of character to display
-    int 0x10        ; call INT 10h, BIOS video service
+    ISR,    STA     SAVE
+            BSA     IO
+            ION
+            LDA     SAVE
+            BUN     0  I
+
+    IO,     HEX     0
+            SKI
+            BUN     OUTPUT
+            INP
+            STA     BUFFER
+            BUN     IO  I
+    OUTPUT, SKO
+            BUN     TRAP
+            OUT
+    TRAP,   SKT
+            BUN     IO  I
+            BUN     100
+
+.. code:: asm
+
+    mov ah, 0x0e
+    ; function number = 0Eh
+    ; : Display Character
+    mov al, '!'
+    ; AL = code of character
+    ; to display
+    int 0x10
+    ; call INT 10h,
+    ; BIOS video service
 
 ----
 
@@ -1730,4 +1673,114 @@ END
     rst2html.py disk.rst disk.html --stylesheet=../../tools/farsi.css,html4css1.css
     https://www.geeksforgeeks.org/disk-scheduling-algorithms/
     http://www.csl.mtu.edu/cs4411.choi/www/Resource/chap11.pdf
+
+
+.. :
+
+    ----
+
+    Hollerith and IBM keypunches, 1890
+    ==========================================
+    .. image:: img/in/ctr_census_machine.jpg
+      :width: 600px
+
+    * https://en.wikipedia.org/wiki/Keypunch
+
+    ----
+
+    IBM 011 Electric Key Punch(1923)
+    =================================
+    .. image:: img/in/ekpunch.jpg
+      :width: 800px
+
+    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
+
+    ----
+
+    IBM Type 032 Printing Punch(1935)
+    =====================================
+    .. image:: img/in/ibm032b.jpg
+      :width: 600px
+
+    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
+
+    ----
+
+    A Key Punch Room in the 1960s
+    ==========================================
+    .. image:: img/in/752px-IBM_Keypunch_Machines_in_use.jpg
+      :width: 600px
+
+    * https://en.wikipedia.org/wiki/Keypunch
+
+    ----
+
+    Card Mark sense format
+    =========================
+    .. image:: img/in/HP_Educational_Basic_optical_mark-reader_card._Godfrey_Manning..jpg
+
+    ----
+
+    Cartons of Punch cards(1959)
+    ===================================
+    In a United States National Archives Records Service facility in 1959. Each carton could hold 2,000 cards
+    ----------------------------------------------------------------------------------------------------------------
+    .. image:: img/in/IBM_card_storage.NARA.jpg
+
+    * https://en.wikipedia.org/wiki/Punched_card
+
+    ----
+
+    Punched Card Printing Plate
+    =============================
+    .. image:: img/in/PunchedCardPrintingPlate.agr.jpg
+      :height: 400px
+
+
+    Example of a Punch Card
+    =================================
+    .. image:: img/in/punch_card.png
+      :width: 500px
+
+    ----
+
+    IBM1130 Binary Punched Card
+    ===========================================
+    .. image:: img/in/IBM1130CopyCard.agr.jpg
+      :width: 800px
+
+    * https://en.wikipedia.org/wiki/Punched_card
+
+    ----
+
+    A 5081 Card from a non-IBM Manufacturer
+    =================================================
+    .. image:: img/in/Punch-card-5081.jpg
+      :width: 800px
+
+    * https://en.wikipedia.org/wiki/Punched_card
+
+    ----
+
+    FORTRAN Port-A-Punch card. Compiler directive "SQUEEZE"
+    ==========================================================
+    .. image:: img/in/FORTRAN_Port-A-Punch_card._Compiler_directive__SQUEEZE__removed_the_alternating_blank_columns_from_the_input._Godfrey_Manning..jpg
+
+    * https://en.wikipedia.org/wiki/Punched_card
+
+    ----
+
+    Punched card from a Fortran program
+    ====================================
+    Z(1) = Y + W(1), plus sorting information in the last 8 columns
+    ------------------------------------------------------------------
+    .. image:: img/in/FortranCardPROJ039.agr.jpg
+      :width: 700px
+
+    * https://en.wikipedia.org/wiki/Punched_card
+
+    img/in/The_IBM_2501_Card_Reader2501.jpg
+    https://www.columbia.edu/cu/computinghistory/2501.html
+
+    ----
 
