@@ -1374,8 +1374,8 @@ Interrupt and Relative Address Problem
 
 Solution Dual Address Spaces
 ----------------------------
-#. User mode   (MOD 0)
-#. Kernel mode (MOD 1)
+#. User mode   (MOD 1)
+#. Kernel mode (MOD 0)
 
 .. :
 

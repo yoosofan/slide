@@ -346,78 +346,78 @@
 </span><span class="ln">14 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
 </span><span class="ln">15 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">PROG_SIZE</span><span class="w">
 </span><span class="ln">16 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w"> 
-</span><span class="ln">17 </span><span class="w">  </span><span class="no">STA</span><span class="w"> </span><span class="no">PROG_SIZE</span><span class="w">
-</span><span class="ln">18 </span><span class="w">  </span><span class="nf">BSA</span><span class="w"> </span><span class="no">LOAD_PROGRAM</span><span class="w">
-</span><span class="ln">19 </span><span class="w">  </span><span class="nf">ION</span><span class="w">
-</span><span class="ln">20 </span><span class="w">  </span><span class="nf">BSA</span><span class="w"> </span><span class="no">USER_PROG</span><span class="w"> </span><span class="no">I</span><span class="w">
-</span><span class="ln">21 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOADER</span><span class="w">
-</span><span class="ln">22 </span><span class="w">
-</span><span class="ln">23 </span><span class="w"></span><span class="nf">ISR</span><span class="p">,</span><span class="no">STA</span><span class="w"> </span><span class="no">SAVE_AC</span><span class="w">
-</span><span class="ln">24 </span><span class="w">  </span><span class="nf">SKI</span><span class="w">
-</span><span class="ln">25 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">CHECK_OUTPUT</span><span class="w">
-</span><span class="ln">26 </span><span class="w">  </span><span class="nf">INP</span><span class="w">
-</span><span class="ln">27 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
-</span><span class="ln">28 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
-</span><span class="ln">29 </span><span class="w"></span><span class="nf">CHECK_OUTPUT</span><span class="p">,</span></pre><pre class="highlight code asm"><span class="ln">30 </span><span class="w">  </span><span class="nf">SKO</span><span class="w">
-</span><span class="ln">31 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
-</span><span class="ln">32 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
-</span><span class="ln">33 </span><span class="w">  </span><span class="nf">SZA</span><span class="w">
-</span><span class="ln">34 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">HAS_PENDING_OUTPUT</span><span class="w">
-</span><span class="ln">35 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
-</span><span class="ln">36 </span><span class="w"></span><span class="nf">HAS_PENDING_OUTPUT</span><span class="p">,</span><span class="w">
-</span><span class="ln">37 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
-</span><span class="ln">38 </span><span class="w">  </span><span class="nf">OUT</span><span class="w">     
-</span><span class="ln">39 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">ZERO</span><span class="w">
-</span><span class="ln">40 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w"> 
-</span><span class="ln">41 </span><span class="w"></span><span class="no">ISR_EXIT</span><span class="p">,</span><span class="w">
-</span><span class="ln">42 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">SAVE_AC</span><span class="w">
-</span><span class="ln">43 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">INDIRECT</span><span class="w">
-</span><span class="ln">44 </span><span class="w"></span><span class="nf">SYS_WRITE_HANDLER</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="ln">45 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
-</span><span class="ln">46 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">ONE</span><span class="w">
-</span><span class="ln">47 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
-</span><span class="ln">48 </span><span class="w">  </span><span class="nf">SKO</span><span class="w">
-</span><span class="ln">49 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">DEVICE_READY</span><span class="w">
-</span><span class="ln">50 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">SYS_WRITE_RETURN</span><span class="w">
-</span><span class="ln">51 </span><span class="w"></span><span class="nf">DEVICE_READY</span><span class="p">,</span><span class="w">
-</span><span class="ln">52 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
-</span><span class="ln">53 </span><span class="w">  </span><span class="nf">OUT</span><span class="w">   
-</span><span class="ln">54 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">ZERO</span><span class="w">
-</span><span class="ln">55 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
-</span><span class="ln">56 </span><span class="w"></span><span class="nf">SYS_WRITE_RETURN</span><span class="p">,</span><span class="w">
-</span><span class="ln">57 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">SYS_WRITE_HANDLER</span><span class="w"> </span><span class="no">I</span><span class="w">
-</span><span class="ln">58 </span><span class="w">
-</span><span class="ln">59 </span><span class="w"></span><span class="nf">LOAD_PROGRAM</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">0</span></pre><pre class="highlight code asm"><span class="ln">60 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">ZERO</span><span class="w">
-</span><span class="ln">61 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
-</span><span class="ln">62 </span><span class="w"></span><span class="nf">LOAD_LOOP</span><span class="p">,</span><span class="w">
-</span><span class="ln">63 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
-</span><span class="ln">64 </span><span class="w">  </span><span class="nf">SUB</span><span class="w"> </span><span class="no">PROG_SIZE</span><span class="w">
-</span><span class="ln">65 </span><span class="w">  </span><span class="nf">SPA</span><span class="w">
-</span><span class="ln">66 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">WAIT_FOR_BYTE</span><span class="w">
-</span><span class="ln">67 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_DONE</span><span class="w">
-</span><span class="ln">68 </span><span class="w"></span><span class="nf">WAIT_FOR_BYTE</span><span class="p">,</span><span class="w">
-</span><span class="ln">69 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
-</span><span class="ln">70 </span><span class="w">  </span><span class="nf">SZA</span><span class="w">
-</span><span class="ln">71 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">STORE_BYTE</span><span class="w">
-</span><span class="ln">72 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">WAIT_FOR_BYTE</span><span class="w">
-</span><span class="ln">73 </span><span class="w"></span><span class="nf">STORE_BYTE</span><span class="p">,</span><span class="w">
-</span><span class="ln">74 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
-</span><span class="ln">75 </span><span class="w">  </span><span class="nf">ADD</span><span class="w"> </span><span class="no">USER_PROG</span><span class="w">
-</span><span class="ln">76 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">STORE_ADDR</span><span class="w">
-</span><span class="ln">77 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
-</span><span class="ln">78 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">STORE_ADDR</span><span class="w"> </span><span class="no">I</span><span class="w">
-</span><span class="ln">79 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w"> 
-</span><span class="ln">80 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
-</span><span class="ln">81 </span><span class="w">  </span><span class="nf">INC</span><span class="w">
-</span><span class="ln">82 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
-</span><span class="ln">83 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_LOOP</span><span class="w">
-</span><span class="ln">84 </span><span class="w"></span><span class="nf">LOAD_DONE</span><span class="p">,</span><span class="w">
-</span><span class="ln">85 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_PROGRAM</span><span class="w"> </span><span class="no">I</span><span class="w">
-</span><span class="ln">86 </span><span class="w">
-</span><span class="ln">87 </span><span class="w"></span><span class="nf">USER_PROG</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">500</span><span class="w">
-</span><span class="ln">88 </span><span class="w"></span><span class="nf">ZERO</span><span class="p">,</span><span class="w">      </span><span class="no">DEC</span><span class="w"> </span><span class="mi">0</span><span class="w">
-</span><span class="ln">89 </span><span class="w"></span><span class="nf">ONE</span><span class="p">,</span><span class="w">       </span><span class="no">DEC</span><span class="w"> </span><span class="mi">1</span><span class="w">
-</span><span class="ln">90 </span><span class="w"></span><span class="nf">PROG_SIZE</span><span class="p">,</span><span class="w"> </span><span class="no">DEC</span><span class="w"> </span><span class="mi">0</span></pre></div><div class="step step-level-1" step="81" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="129600" data-y="0" data-z="0"><h1 id="interrupt-and-relative-address-problem">Interrupt and Relative Address Problem</h1><ul><li>Normal execution</li></ul><ul><li>Interrupt time</li></ul><ul><li>ISR needs<blockquote><ol><li>predictable, fixed addresses</li><li>resources across all processes</li><li>Safety</li></ol></blockquote></li></ul><h2 id="solution-dual-address-spaces">Solution Dual Address Spaces</h2><ol><li>User mode   (MOD 0)</li><li>Kernel mode (MOD 1)</li></ol></div><div class="step step-level-1" step="82" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="131200" data-y="0" data-z="0"><h1 id="yic90-memory-and-cpu-protection">YIC90 - Memory and CPU Protection</h1><img src="img/hardware_address_protection.png" align="center"><ol><li class="substep">SKT like SKI and SKO</li><li class="substep">System Call ?</li><li class="substep">Change registers by the running process</li></ol></div><div class="step step-level-1 t2c" step="83" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="132800" data-y="0" data-z="0"><h1 id="software-interrupt">Software Interrupt</h1><pre class="highlight code asm"><span class="nf">ISR</span><span class="p">,</span><span class="w">    </span><span class="no">STA</span><span class="w">     </span><span class="no">SAVE</span><span class="w">
+</span><span class="ln">17 </span><span class="w">  </span><span class="no">BSA</span><span class="w"> </span><span class="no">LOAD_PROGRAM</span><span class="w">
+</span><span class="ln">18 </span><span class="w">  </span><span class="nf">ION</span><span class="w">
+</span><span class="ln">19 </span><span class="w">  </span><span class="nf">BSA</span><span class="w"> </span><span class="no">USER_PROG</span><span class="w"> </span><span class="no">I</span><span class="w">
+</span><span class="ln">20 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOADER</span><span class="w">
+</span><span class="ln">21 </span><span class="w">
+</span><span class="ln">22 </span><span class="w"></span><span class="nf">ISR</span><span class="p">,</span><span class="no">STA</span><span class="w"> </span><span class="no">SAVE_AC</span><span class="w">
+</span><span class="ln">23 </span><span class="w">  </span><span class="nf">SKI</span><span class="w">
+</span><span class="ln">24 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">CHECK_OUTPUT</span><span class="w">
+</span><span class="ln">25 </span><span class="w">  </span><span class="nf">INP</span><span class="w">
+</span><span class="ln">26 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
+</span><span class="ln">27 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
+</span><span class="ln">28 </span><span class="w"></span><span class="nf">CHECK_OUTPUT</span><span class="p">,</span><span class="w">
+</span><span class="ln">29 </span><span class="w">  </span><span class="nf">SKO</span></pre><pre class="highlight code asm"><span class="ln">30 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
+</span><span class="ln">31 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
+</span><span class="ln">32 </span><span class="w">  </span><span class="nf">SZA</span><span class="w">
+</span><span class="ln">33 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">HAS_PENDING_OUTPUT</span><span class="w">
+</span><span class="ln">34 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">ISR_EXIT</span><span class="w">
+</span><span class="ln">35 </span><span class="w"></span><span class="nf">HAS_PENDING_OUTPUT</span><span class="p">,</span><span class="w">
+</span><span class="ln">36 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
+</span><span class="ln">37 </span><span class="w">  </span><span class="nf">OUT</span><span class="w">     
+</span><span class="ln">38 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">ZERO</span><span class="w">
+</span><span class="ln">39 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w"> 
+</span><span class="ln">40 </span><span class="w"></span><span class="no">ISR_EXIT</span><span class="p">,</span><span class="w">
+</span><span class="ln">41 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">SAVE_AC</span><span class="w">
+</span><span class="ln">42 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">INDIRECT</span><span class="w">
+</span><span class="ln">43 </span><span class="w"></span><span class="nf">SYS_WRITE_HANDLER</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="ln">44 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
+</span><span class="ln">45 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">ONE</span><span class="w">
+</span><span class="ln">46 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
+</span><span class="ln">47 </span><span class="w">  </span><span class="nf">SKO</span><span class="w">
+</span><span class="ln">48 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">DEVICE_READY</span><span class="w">
+</span><span class="ln">49 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">SYS_WRITE_RETURN</span><span class="w">
+</span><span class="ln">50 </span><span class="w"></span><span class="nf">DEVICE_READY</span><span class="p">,</span><span class="w">
+</span><span class="ln">51 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">OUTPUT_DATA</span><span class="w">
+</span><span class="ln">52 </span><span class="w">  </span><span class="nf">OUT</span><span class="w">   
+</span><span class="ln">53 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">ZERO</span><span class="w">
+</span><span class="ln">54 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">OUTPUT_PENDING</span><span class="w">
+</span><span class="ln">55 </span><span class="w"></span><span class="nf">SYS_WRITE_RETURN</span><span class="p">,</span><span class="w">
+</span><span class="ln">56 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">SYS_WRITE_HANDLER</span><span class="w"> </span><span class="no">I</span><span class="w">
+</span><span class="ln">57 </span><span class="w">
+</span><span class="ln">58 </span><span class="w"></span><span class="nf">LOAD_PROGRAM</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="ln">59 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">ZERO</span></pre><pre class="highlight code asm"><span class="ln">60 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
+</span><span class="ln">61 </span><span class="w"></span><span class="nf">LOAD_LOOP</span><span class="p">,</span><span class="w">
+</span><span class="ln">62 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
+</span><span class="ln">63 </span><span class="w">  </span><span class="nf">SUB</span><span class="w"> </span><span class="no">PROG_SIZE</span><span class="w">
+</span><span class="ln">64 </span><span class="w">  </span><span class="nf">SPA</span><span class="w">
+</span><span class="ln">65 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">WAIT_FOR_BYTE</span><span class="w">
+</span><span class="ln">66 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_DONE</span><span class="w">
+</span><span class="ln">67 </span><span class="w"></span><span class="nf">WAIT_FOR_BYTE</span><span class="p">,</span><span class="w">
+</span><span class="ln">68 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
+</span><span class="ln">69 </span><span class="w">  </span><span class="nf">SZA</span><span class="w">
+</span><span class="ln">70 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">STORE_BYTE</span><span class="w">
+</span><span class="ln">71 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">WAIT_FOR_BYTE</span><span class="w">
+</span><span class="ln">72 </span><span class="w"></span><span class="nf">STORE_BYTE</span><span class="p">,</span><span class="w">
+</span><span class="ln">73 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
+</span><span class="ln">74 </span><span class="w">  </span><span class="nf">ADD</span><span class="w"> </span><span class="no">USER_PROG</span><span class="w">
+</span><span class="ln">75 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">STORE_ADDR</span><span class="w">
+</span><span class="ln">76 </span><span class="w">  </span><span class="nf">LDA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w">
+</span><span class="ln">77 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">STORE_ADDR</span><span class="w"> </span><span class="no">I</span><span class="w">
+</span><span class="ln">78 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">INP_BUF</span><span class="w"> 
+</span><span class="ln">79 </span><span class="w">  </span><span class="no">LDA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
+</span><span class="ln">80 </span><span class="w">  </span><span class="nf">INC</span><span class="w">
+</span><span class="ln">81 </span><span class="w">  </span><span class="nf">STA</span><span class="w"> </span><span class="no">LOAD_INDEX</span><span class="w">
+</span><span class="ln">82 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_LOOP</span><span class="w">
+</span><span class="ln">83 </span><span class="w"></span><span class="nf">LOAD_DONE</span><span class="p">,</span><span class="w">
+</span><span class="ln">84 </span><span class="w">  </span><span class="nf">BUN</span><span class="w"> </span><span class="no">LOAD_PROGRAM</span><span class="w"> </span><span class="no">I</span><span class="w">
+</span><span class="ln">85 </span><span class="w">
+</span><span class="ln">86 </span><span class="w"></span><span class="nf">USER_PROG</span><span class="p">,</span><span class="w"> </span><span class="no">HEX</span><span class="w"> </span><span class="mi">500</span><span class="w">
+</span><span class="ln">87 </span><span class="w"></span><span class="nf">ZERO</span><span class="p">,</span><span class="w">      </span><span class="no">DEC</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="ln">88 </span><span class="w"></span><span class="nf">ONE</span><span class="p">,</span><span class="w">       </span><span class="no">DEC</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="ln">89 </span><span class="w"></span><span class="nf">PROG_SIZE</span><span class="p">,</span><span class="w"> </span><span class="no">DEC</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="ln">90 </span><span class="w"></span><span class="nf">LOAD_INDEX</span><span class="p">,</span><span class="no">DEC</span><span class="w"> </span><span class="mi">0</span></pre></div><div class="step step-level-1" step="81" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="129600" data-y="0" data-z="0"><h1 id="interrupt-and-relative-address-problem">Interrupt and Relative Address Problem</h1><ul><li>Normal execution</li></ul><ul><li>Interrupt time</li></ul><ul><li>ISR needs<blockquote><ol><li>predictable, fixed addresses</li><li>resources across all processes</li><li>Safety</li></ol></blockquote></li></ul><h2 id="solution-dual-address-spaces">Solution Dual Address Spaces</h2><ol><li>User mode   (MOD 1)</li><li>Kernel mode (MOD 0)</li></ol></div><div class="step step-level-1" step="82" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="131200" data-y="0" data-z="0"><h1 id="yic90-memory-and-cpu-protection">YIC90 - Memory and CPU Protection</h1><img src="img/hardware_address_protection.png" align="center"><ol><li class="substep">SKT like SKI and SKO</li><li class="substep">System Call ?</li><li class="substep">Change registers by the running process</li></ol></div><div class="step step-level-1 t2c" step="83" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="132800" data-y="0" data-z="0"><h1 id="software-interrupt">Software Interrupt</h1><pre class="highlight code asm"><span class="nf">ISR</span><span class="p">,</span><span class="w">    </span><span class="no">STA</span><span class="w">     </span><span class="no">SAVE</span><span class="w">
         </span><span class="nf">BSA</span><span class="w">     </span><span class="no">IO</span><span class="w">
         </span><span class="nf">ION</span><span class="w">
         </span><span class="nf">LDA</span><span class="w">     </span><span class="no">SAVE</span><span class="w">

@@ -2655,9 +2655,10 @@ Relational Calculus
   #.  Error
 
   #. px.pname where forall spx (spx.pn = px.pn)
-  #. نام همهٔ قطعاتی را بیابید که همهٔ عرضه کنندگان آنها را عرضه کرده باشند
-  #. نام همهٔ قطعاتی که عرضه شده‌انده
 
+.. class:: rtl-h2 substep
+
+نام قطعه‌ای را بیابید که همهٔ عرضه‌ها فقط از آن قطعه باشد.
 
 ----
 
@@ -2691,11 +2692,19 @@ Relational Calculus
           spx.sn = sx.sn
         ) and exists px (px.pn = 'P2')
 
-    .. code::
+    .. code:: sql
 
       sx.city where exists spx (
         spx.sn = sx.sn
       )  and exists spy (spy.pn = 'P2')
+
+
+    .. code:: sql
+
+       sx.city where exists spx (
+         spx.sn = sx.sn and
+         spx.pn = 'p2'
+        )
 
 ----
 
