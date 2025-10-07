@@ -3498,8 +3498,8 @@ Relational Calculus
 
 References
 ==============
-.. [abs.gov.au] https://www.abs.gov.au/websitedbs/a3121120.nsf/home/statistical+language+-+quantitative+and+qualitative+data
-.. [questionpro] https://www.questionpro.com/blog/quantitative-data/
+* .. [abs.gov.au] https://www.abs.gov.au/websitedbs/a3121120.nsf/home/statistical+language+-+quantitative+and+qualitative+data
+* .. [questionpro] https://www.questionpro.com/blog/quantitative-data/
 
 *  https://www.ntu.edu.sg/home/ehchua/programming/sql/Relational_Database_Design.html
 *  https://dev.to/lmolivera/everything-you-need-to-know-about-relational-databases-3ejl

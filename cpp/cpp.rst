@@ -1,10 +1,11 @@
 :data-transition-duration: 1000
-:data-width: 1024
-:css: ./style.css
 :skip-help: true
+:css: ./style.css
 :substep: true
 :slide-numbers: true
 :skip-help: true
+:data-width: 1024
+:data-height: 768
 
 .. title: Advanced Programming (C++)
 
@@ -2280,7 +2281,7 @@ Four Pillars of OOP
 * Polymorphism
 * Inheritence
 
-.. image:: ../img/oop_4_pillars.png
+.. image: img/oop_4_pillars.png
    :align: center
 
 .. :
