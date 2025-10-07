@@ -3284,10 +3284,20 @@ Relational Calculus
     :class: substep
 
     px.pname where not exists jx(
-      not exitst spjx(
+      not exist spjx(
         spjx.jn = jx.jn and px.pn = spjx.pn
       )
     )
+
+.. code:: sql
+    :class: substep
+
+    px.pname where exists spjx(spjx.px = px.pn) and forall jx(
+      exists spjx(
+        spjx.jn = jx.jn and px.pn = spjx.pn
+      )
+    )
+
 
 ----
 
