@@ -2807,33 +2807,33 @@ Relational Calculus
 
     sx.sname where exists spx(
       sx.sn=spx.sn and
- 
+
 .. code:: sql
    :class: substep
 
    sx.sname where exists spx(
     sx.sn=spx.sn and exists px(
- 
+
 .. code:: sql
    :class: substep
 
    sx.sname where exists spx(
     sx.sn=spx.sn and exists px(
       px.pn=spx.pn
- 
+
 .. code:: sql
    :class: substep
 
    sx.sname where exists spx(
     sx.sn=spx.sn and exists px(
       px.pn=spx.pn and
- 
+
 .. code:: sql
    :class: substep
 
    sx.sname where exists spx(
     sx.sn=spx.sn and exists px(
-      px.pn=spx.pn and 
+      px.pn=spx.pn and
         px.color = "red"
     )
    )
@@ -2842,8 +2842,8 @@ Relational Calculus
    :class: substep
 
    sx.sname where exists px(
-    px.color = "red" and 
-    exists spx(px.pn=spx.pn 
+    px.color = "red" and
+    exists spx(px.pn=spx.pn
       and sx.sn=spx.sn
     )
    )
@@ -3162,7 +3162,7 @@ Relational Calculus
 
 ----
 
-
+:class: t2c
 
 .. class:: rtl-h1
 
@@ -3177,61 +3177,74 @@ Relational Calculus
 
 
 .. code:: sql
+  :number-lines:
 
     px.pname where exists spx(
-      spx.pn = 'p3' and exists spy(
-        spy.pn = px.pn and spy.sn = spx.sn
+      spx.pn = 'p3' and
+      exists spy( spy.pn = px.pn
+        and spy.sn = spx.sn
       )
     )
 
 .. code:: sql
+  :number-lines:
 
     px.pname where forall spx(
       spx.pn='p3' and forall Spy(
-        Spy.sn=Spx.sn and Spy.pn <> 'p3' and exists Px(
+        Spy.sn=Spx.sn and
+        spy.pn <> 'p3' and exists px(
           px.pn=Spy.pn
         )
       )
     )
 
 .. code:: sql
+  :number-lines:
 
     px.pname where exists spx(
       Spx.pn='p3' and exists spy(
-        spy.sn=Spx.sn and Spy.pn<>'p3' and exists px(
-          px.pn=spy.pn)
+        spy.sn=Spx.sn and
+        spy.pn<>'p3' and exists px(
+          px.pn=spy.pn
+        )
       )
     )
 
-
 ----
 
+:class: t2c
 
 .. class:: rtl-h1
 
     نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(II)
 
 .. code:: sql
+  :number-lines:
 
     px.pname where forall spx(
-      spx.pn = 'p3’ or exists spy(
-        spy.sn = spx.sn and spy.pn = px.pn
-       )
-    )
-
-.. code:: sql
-
-    px.pname where forall spx(
-      spx.pn = 'p3' and exists spy(
-        spy.pn = spx.pn and spy.pn = px.pn
+      spx.pn = 'p3' or exists spy(
+        spy.sn = spx.sn and
+        spy.pn = px.pn
       )
     )
 
 .. code:: sql
+  :number-lines:
+
+    px.pname where forall spx(
+      spx.pn = 'p3' and exists spy(
+        spy.pn = spx.pn and
+        spy.pn = px.pn
+      )
+    )
+
+.. code:: sql
+  :number-lines:
 
     px.pname where forall spx(
       spx.pn = 'p3' or exists spy(
-        spy.pn = spx.pn and spy.sn = spx.sn
+        spy.pn = spx.pn and
+        spy.sn = spx.sn
       )
     )
 
@@ -3254,6 +3267,11 @@ Relational Calculus
 
 ----
 
+:class: t2c
+
+.. class:: rtl-h1
+
+    نام قطعاتی را بیابید که در همهٔ پروژه‌ها به کار گرفته شده باشند.
 
 
 * S(sn_,sname,status,city) ,
@@ -3261,11 +3279,7 @@ Relational Calculus
 * J(jn_,jname,budget,city)
 * SPJ(sn_, pn_, jn_, qty)
 
-.. class:: rtl-h1
-
-    نام قطعاتی را بیابید که در همهٔ پروژه‌ها به کار گرفته شده باشند.
-
-.. class:: rtl-h1 substep
+.. container:: rtl-h2 substep
 
     نام قطعاتی را بیابید که برای همهٔ پروژه‌ها عرضه‌ای از آن قطعه وجود داشته باشد.
 
@@ -3273,49 +3287,83 @@ Relational Calculus
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     px.pname where forall jx(
       exists spjx(
-        spjx.jn = jx.jn and px.pn = spjx.pn
+        spjx.jn = jx.jn and
+        px.pn = spjx.pn
       )
     )
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     px.pname where not exists jx(
       not exist spjx(
-        spjx.jn = jx.jn and px.pn = spjx.pn
+        spjx.jn = jx.jn and
+        px.pn = spjx.pn
       )
     )
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    px.pname where exists spjx(spjx.px = px.pn) and forall jx(
+    px.pname where forall jx(
       exists spjx(
-        spjx.jn = jx.jn and px.pn = spjx.pn
+        spjx.jn = jx.jn and
+        px.pn = spjx.pn
       )
+    ) and exists spjx(
+        spjx.px = px.pn
     )
-
 
 ----
 
-.. class:: rtl-h1 substep
+:class: t2c
+
+.. class:: rtl-h1
 
     نام قطعاتی را بیابید که فقط در یک پروژه به کار رفته باشند.
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     px.pname where exists jx(
-      not exitst spjx(
-        spjx.jn = jx.jn and px.pn = spjx.pn
+      not exists spjx(
+        spjx.jn = jx.jn and
+        px.pn = spjx.pn
       )
     )
 
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    px.pname where exists spjx(
+      px.pn = spjx.pn and not
+      exists spjy(
+        spjx.jn = spjy.jn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    px.pname where exists spjx(
+      px.pn = spjx.pn and not
+      exists spjy(spjx.jn <> spjy.jn
+        and spjy.pn = px.pn
+      )
+    )
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
@@ -3323,29 +3371,36 @@ Relational Calculus
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    px.pname where forall spjx(spjx.pn = px.pn)
+    px.pname where forall spjx
+    (spjx.pn = px.pn)
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    px.pname where forall SPJx(
+    px.pname where forall spjx(
       exists (
-        SPJx.pn=px.pn and px.pn=SPJx.pn
+        spjx.pn=px.pn and
+        px.pn=spjx.pn
       )
     )
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    px.pname where not exist spjx(
-      spjx.pn=px.pn and not exist spjy(
-        spjy.pn=spjx.pn and spjy.pn=px.pn
+    px.pname where not exists spjx(
+      spjx.pn=px.pn and not exists 
+      spjy( spjy.pn=spjx.pn and 
+        spjy.pn=px.pn
       )
     )
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     px.pname where forall px(
       exists spj(spj.pn = px.pn)
@@ -3357,10 +3412,8 @@ Relational Calculus
 
 .. class:: rtl-h1
 
-    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.
+    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.۱
 
-
-.. class:: h2
 
 * book( bn_ , title, category, fpd, author )
 * member( mn_ , name , category, bn)
@@ -3372,23 +3425,27 @@ Relational Calculus
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     bookx.author where forall bookx(
-      exists borrowx(bookx.bn = borrowx.bn)
+      exists borrowx(
+        bookx.bn = borrowx.bn
+      )
     )
 
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    bookx.author where not exist memberx(
+    bookx.author where not exists 
+    memberx(
       memberx.bn=bookx.bn and
-      not exist borrowx(
+      not exists borrowx(
         borrowx.bn=memberx.bn and
         borrowx.bn=bookx.bn
       )
     )
-
 
 ----
 
@@ -3396,39 +3453,45 @@ Relational Calculus
 
 .. class:: rtl-h1
 
-    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.
+    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.۲
 
 
-.. class:: rtl substep
-
-      پاسخ‌های نادرست
 
 .. code:: sql
     :class: substep
 
+      -- پاسخ‌های نادرست
     bookx.author where forall booky(
       bookx.author=booky.author and
-      exist borrowx(borrowx.bn=bookx.bn)
+      exists borrowx(
+        borrowx.bn=bookx.bn
+      )
     )
 
-.. class:: rtl substep
+.. class:: rtl-h2 substep
 
     پاسخ‌های درست
 
 .. code:: sql
     :class: substep
-
+    :number-lines:
+    
     bookx.author where not exists booky(
       booky.author = bookx.author and
-      not exists borrowx(borrowx.bn = booky.bn)
+      not exists borrowx(
+        borrowx.bn = booky.bn
+      )
     )
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
     bookx.author where forall booky(
       bookx.author <> booky.author or
-      exist borrowx(borrowx.bn=booky.bn)
+      exists borrowx(
+        borrowx.bn = booky.bn
+      )
     )
 
 ----
