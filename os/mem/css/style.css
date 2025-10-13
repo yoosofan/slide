@@ -1,24 +1,9 @@
-/*
-@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Racing+Sans+One|Satisfy);
-
-@media screen and (min-width:1149px) { #impress { transform: scale(1.15) !important; }}
-@media screen and (min-width:1200px) and (max-width:1148px) { #impress { transform: scale(1.15) !important; }}
-@media screen and (min-width:800px) and (max-width:1199px) { #impress { transform: scale(1.15) !important; }}
-@media screen and (min-width:640px) and (max-width:799px) { #impress { transform: scale(0.8) !important;}}
-@media screen and (min-width:500px) and (max-width:639px) { #impress { transform: scale(0.8) !important;  }}
-*/
 body { 
-  text-align: center;  
-  /*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/
-  font-size: large
-
-/* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
+  text-align: center; /*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/
+  font-size: large; /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
 }
 
-/*
-https://stackoverflow.com/questions/37560602/how-to-fill-the-screen-with-image-in-impress-js
-*/
-#step-X html,body{
+#step-X html,body{ /* https://stackoverflow.com/questions/37560602/how-to-fill-the-screen-with-image-in-impress-js */
     margin:0;
     height:100%;
     overflow:hidden;
@@ -34,14 +19,6 @@ https://stackoverflow.com/questions/37560602/how-to-fill-the-screen-with-image-i
     margin:auto;
 }
 
-/*
-body {
-    font-size: 170%;
-    text-align: center;
-    font-family: Libre Baskerville;
-}
-*/
-
 p {
     font-size: 120%;
     font-weight: normal;
@@ -49,13 +26,11 @@ p {
     margin-top: 0.3em;
 }
 
-em {
-    /*font-family: Satisfy;*/
+em {    /*font-family: Satisfy;*/
     font-size: 122%;
 }
 
-strong {
-    /*font-family: Racing Sans One;*/
+strong { /*font-family: Racing Sans One;*/
     font-size: 117%;
     letter-spacing: -2px;
 }
@@ -71,7 +46,6 @@ ul, ol, pre.code{
     font-size: 120%;
 }
 
-
 pre.code{font-size:120%; font-family: monospace; padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; padding-right: 0.2em; border-style: solid; border-left-width: 0.5em; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;} /*justify-self: center;*/
 pre.code > .ln {background-color: #DFE5F1;}
 pre.code { background-color:#f0f0f0;}
@@ -82,8 +56,7 @@ ol.trace-code{
   padding-left: 1.5em; 
   padding-right: 1em; 
   list-style: none;
-  counter-reset: my-awesome-counter;
-  /* justify-self: start; */
+  counter-reset: my-awesome-counter; /* justify-self: start; */
 }
 ol.trace-code li {
   counter-increment: my-awesome-counter;
@@ -93,25 +66,6 @@ ol.trace-code li::before {
   color: red;
   font-weight: bold;
 }
-/*ul {
-    list-style-position: inside;
-}
-
-li {
-    font-size: 125%;
-    font-family: serif;
-    font-weight: normal;
-    margin-bottom: 0.3em;
-    margin-top: 0.3em;
-    padding-left: 0.3em;
-    line-height: 1.8em;
-    list-style-type: circle;
-}*/
-
-/*a {
-    text-decoration: none;
-    color: black;
-}*/
 
 #ThreeD H1 {
     font-family: Racing Sans One;
@@ -181,10 +135,7 @@ table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
 .grid-2col-class{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: stretch;
-/*
-  overflow: scroll;
-*/
+  align-items: stretch; /*  overflow: scroll;*/
 }
 
 .grid-2col1fr2fr-class{
@@ -192,6 +143,14 @@ table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
   grid-template-columns: 1fr 2fr;
   align-items: stretch;
   overflow: scroll;
+}
+
+.grid-3col{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 2px ;
 }
 
 div.yoo-grid-auto-flow-column{
@@ -253,8 +212,7 @@ table.yoo-memory tr:nth-of-type(1) td:last-of-type{
 table.borderless * {border: 0;}
 
 .center {
-  margin: auto;
-  /*width: 50%;*/
+  margin: auto; /*width: 50%;*/
   padding: 5px;
   text-align: center;
 }

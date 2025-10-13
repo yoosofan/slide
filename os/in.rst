@@ -1509,21 +1509,10 @@ Cpu Scheduler
 
 ----
 
-YIC100 - Adding Keyboard & Disk
-==================================
-* terminal (command prompt)
-* batch system
-* interactive system
-
-----
-
-.. image:: img/in/kernel1process.png
-   :align: center
-
-----
-
-YIC105 - Function call
-=======================
+YIC110 - Multiprogramming
+=========================
+Function call
+-----------------------
 * cons of BSA
 
     * No recursion
@@ -1537,8 +1526,7 @@ YIC105 - Function call
 
 Stack From end
 ===============
-* Call
-* Ret
+Call,  Ret
 
 .. image::  img/in/simple_cpu02.png
 
@@ -1576,11 +1564,6 @@ Stack From end
 
 ----
 
-YIC110 - Multiprogramming
-=========================
-
-----
-
 Simple computer simulator
 ==============================
 * https://github.com/jeaniehandler/OS
@@ -1592,6 +1575,19 @@ Simple computer simulator
 Simple Computer Simulator Instruction Set
 ------------------------------------------------
 * http://euler.vcsu.edu/curt.hill/Computer.html
+
+----
+
+YIC120 - Adding Keyboard & Disk
+==================================
+* terminal (command prompt)
+* batch system
+* interactive system
+
+----
+
+.. image:: img/in/kernel1process.png
+   :align: center
 
 ----
 
@@ -1632,7 +1628,6 @@ https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
   Each of those characters needed eight bytes to store its pattern of 1s and 0s, so the ROM required 1024 bytes (128 x 8). That meant the ROM needed 10 address lines (1024 = 210). Although the ROM used only seven bytes per character, it’s easier to step through binary row addresses eight at a time.
 
   The 10 address lines, A9-A0, separate into a “high” address, A9-A3, and into a “low” address, A2-A0. The high address identifies a specific character; for example, A, f, $, and so on. The low address identifies one of the character’s eight rows (Figure 10).
-
 
 ----
 

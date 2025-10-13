@@ -84,7 +84,6 @@ Error !
 .. include:: src/myArray/100450.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
 
 ----
 
@@ -93,7 +92,6 @@ Const (III)
 .. include:: src/myArray/100460.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
   :start-line: 1
   :end-line: 12
 
@@ -104,7 +102,6 @@ Const (IV)
 .. include:: src/myArray/100470.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
 
 ----
 

@@ -72,6 +72,13 @@ How to create html from readme.rst
 
     rst2html5.py readme.rst index.html --stylesheet=tools/farsi.css
 
+Convert to pdf
+-----------------
+.. code:: sh
+
+  cd cpp
+  prezentprogramo cpp.rst --pdf cpp.pdf
+
 
 .. _فارسی :
 
