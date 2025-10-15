@@ -75,7 +75,6 @@ Error !
 .. include:: src/myArray/100440.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
   :start-line: 3
   :end-line: 11
 
@@ -110,7 +109,6 @@ Error
 .. include:: src/myArray/100475.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
   :start-line: 1
   :end-line: 12
 
@@ -278,12 +276,14 @@ this
 .. include:: src/myArray/100488.01.this.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
+  :start-line: 2 
+  :end-line: 88
 
 .. include:: src/myArray/100488.02.this.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
+  :start-line: 2 
+  :end-line: 88
 
 ----
 
@@ -294,12 +294,12 @@ Reference (I)
 .. include:: src/myArray/100490.cpp
   :code: cpp
   :number-lines:
-  :class: ltr
+  :start-line: 2 
+  :end-line: 88
 
 .. include:: src/myArray/100490_output.txt
   :code: console
   :number-lines:
-  :class: ltr
 
 .. :
 
