@@ -1457,7 +1457,7 @@ Use Another name for a Table in Query
 
   select pname, city
   from p
-  where city like 'bn\_'
+  where city like 'bn\_%'
   ;
 
 ----
