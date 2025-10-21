@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-struct myArray{
+struct myArray{//100650
   static const int MAX = 100;
   double a[MAX];   int n;
   double get(const int index = 0 ){
@@ -10,7 +10,7 @@ struct myArray{
   }
   void set(const int index, const double value){
     if( index >= 0 && index < n ) a[index] = value;
-    cout << "Error accessing myArray " << endl;
+    else cout << "Error accessing myArray " << endl;
   }
   myArray(const double *ma = nullptr, int k = 0){
     if( k > MAX ) 
