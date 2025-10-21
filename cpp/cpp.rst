@@ -932,6 +932,40 @@ More on Dynamic Memory(I)
 
 :class: t2c
 
+More on Dynamic Memory(II)
+=============================
+.. include:: src/myArray/100890.cpp
+  :code: cpp
+  :number-lines:
+
+.. include:: src/myArray/100891.cpp
+  :code: cpp
+  :number-lines:
+  :class: substep
+
+----
+
+:class: t2c
+
+Multidimensional Dynamic Array
+================================
+.. include:: src/102555multidimensional.dynamic.array.cpp
+    :code: cpp
+    :number-lines: 2
+    :class: ltr
+    :start-line: 2
+    :end-line: 22
+
+.. include:: src/102555multidimensional.dynamic.array.cpp
+    :code: cpp
+    :number-lines: 22
+    :class: ltr
+    :start-line: 22
+
+----
+
+:class: t2c
+
 Pointer and Reference
 ===========================
 .. include:: src/myArray/100904.24.cpp
@@ -2249,25 +2283,6 @@ Dynamic Memory in Class(II)
     :number-lines: 26
     :class: ltr
     :start-line: 26
-
-----
-
-:class: t2c
-
-Multidimensional Dynamic Array
-================================
-.. include:: src/102555multidimensional.dynamic.array.cpp
-    :code: cpp
-    :number-lines: 2
-    :class: ltr
-    :start-line: 2
-    :end-line: 22
-
-.. include:: src/102555multidimensional.dynamic.array.cpp
-    :code: cpp
-    :number-lines: 22
-    :class: ltr
-    :start-line: 22
 
 -----
 

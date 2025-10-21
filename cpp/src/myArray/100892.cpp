@@ -2,14 +2,11 @@
 using namespace std;
 void print(double* pa);
 void input(double* pa);
-void getMemory1(double**);
-double* getMemory2();
+void getMemory(double**);
 void f1();//myArray/100890
 int main(){f1();}
-void getMemory1(double** pa)
+void getMemory(double** pa)
 {*pa = new double[10];}
-double* getMemory2()
-{return new double[10];}
 void print(double* pa){
   for(auto i = 0; i < 5; i++)
     cout << "pa[" << i << "]: " 
@@ -21,8 +18,6 @@ void input(double* pa){
 }
 void f1(){
   double *px = nullptr ;
-  getMemory1(&px);
-  double* px2 = getMemory2();
+  getMemory(&px);
   input(px); print(px);
-  input(px2); print(px2); 
 }
