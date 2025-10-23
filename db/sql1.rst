@@ -687,7 +687,6 @@ as (rename)
   Jones
   Blake
 
-
 ----
 
 :class: t2c

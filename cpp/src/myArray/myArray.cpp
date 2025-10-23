@@ -1,17 +1,15 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-class myArray{
+class myArray{// myArray.cpp
   static const int MAX = 100;
-  double a[MAX];
-  int n;
+  double a[MAX]; int n;
   void copy(const  myArray& b){
     this -> n = b.n;
     for(int i = 0; i < n; i++)
-    this -> a[i] = b.a[i];
+	  this -> a[i] = b.a[i];
   }
-  public:
-  // myArray() = delete ;
+  public:// myArray() = delete ;
   double get(const int index = 0 ) const{
     if(index < n) return a[index];
     cout << "Error in getting an element of myArray" << endl;
@@ -55,7 +53,7 @@ class myArray{
       c.a[i] = - c.a[i];
     return c;
   }
-  bool operator!(void) const{
+  bool operator!() const{
     bool retVal = true;
     if( ! n ) // n == 0
       retVal = true;
@@ -113,7 +111,6 @@ myArray operator-(const myArray& a, const myArray& b){
   cout << "operator - in myArray" << endl;
   return c;
 }
-
 bool operator==(const myArray& a, const myArray& b){ // < > <= >= !=
   bool retVal = false;
   int i = 0;
@@ -125,14 +122,13 @@ bool operator==(const myArray& a, const myArray& b){ // < > <= >= !=
     retVal = true;
   return retVal;
 }
-
 istream& operator>>(istream& in1, myArray& b){
   // delete[] b.a;  b.a = nullptr;
   b.n = 0;
   cout << "Enter n ";
   in1 >> b.n;
   while( b.n < 0 || b.n > myArray::MAX ){
-    cout << "number of element must be greater than 0 and less than  " 
+    cout << "number of element must be greater than 0 and less than  "
       << myArray::MAX << endl;
     in1 >> b.n;
   }
@@ -145,7 +141,6 @@ istream& operator>>(istream& in1, myArray& b){
   // else b.a = nullptr;
   return in1;
 }
-
 ostream& operator<<(ostream& out1, const myArray& b){
   out1 << "n = " << b.n << endl;
   for(int i = 0; i < b.n ; i++)
@@ -153,12 +148,8 @@ ostream& operator<<(ostream& out1, const myArray& b){
   return out1;
 }
 myArray operator+(const myArray& a, const myArray& b);
-void f1(void);
-void f2(myArray);
-int main(){
-  f1();
-  return 0;
-}
+void f1(void); void f2(myArray);
+int main(){f1();}
 myArray operator+(const myArray& a, const myArray& b){
     myArray c;
     c = a.n > b.n ? a : b;
@@ -168,8 +159,7 @@ myArray operator+(const myArray& a, const myArray& b){
     cout<< "operator + in myArray" << endl;
     cout << "In + " << endl << c << endl;
     return c;
-  }
-
+}
 void f1(void){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));
@@ -197,5 +187,5 @@ void f2(myArray k){
   if( !b )
     cout << "b is empty (b.n == 0 or all b.a[i] == 0 ) " << endl;
   else
-    cout << "b is not empty (b.n != 0 and exists i for b.a[i] != 0 ) " << endl;  
+    cout << "b is not empty (b.n != 0 and exists i for b.a[i] != 0 ) " << endl;
 }

@@ -1,27 +1,25 @@
 #include <iostream>
 using namespace std;
 class myArray{//myarray/102050.cpp
-  static const int MAX = 100;
-  double a[MAX];
-  int n;
-  public:
-  double get(const int index = 0 ){
-    if(index >=0 && index < n) 
+  static const int MAX=100;
+  double a[MAX]; int n; public:
+  double get(const int index=0){
+    if(index >=0 && index < n)
       return a[index];
     cout << "Error in getting" << endl;
     return 0;
   }
-  void set(const int index, 
+  void set(const int index,
           const double value){
-    if( index >= 0 && index < n ) 
+    if( index >= 0 && index < n )
       a[index] = value;
-    else 
-      cout << "Error accessing myArray" 
+    else
+      cout << "Error accessing myArray"
          << endl;
   }
-  myArray(const double *ma = nullptr, 
+  myArray(const double *ma = nullptr,
       int k = 0){
-    if( k > MAX ) 
+    if( k > MAX )
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
@@ -47,7 +45,7 @@ class myArray{//myarray/102050.cpp
   void print(void){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
-      cout << "a[" << i << "] = " 
+      cout << "a[" << i << "] = "
            << a[i] << endl;
   }
 };

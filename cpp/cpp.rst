@@ -276,13 +276,13 @@ this
 .. include:: src/myArray/100488.01.this.cpp
   :code: cpp
   :number-lines:
-  :start-line: 2 
+  :start-line: 2
   :end-line: 88
 
 .. include:: src/myArray/100488.02.this.cpp
   :code: cpp
   :number-lines:
-  :start-line: 2 
+  :start-line: 2
   :end-line: 88
 
 ----
@@ -294,7 +294,7 @@ Reference (I)
 .. include:: src/myArray/100490.cpp
   :code: cpp
   :number-lines:
-  :start-line: 2 
+  :start-line: 2
   :end-line: 88
 
 .. include:: src/myArray/100490_output.txt
@@ -990,21 +990,21 @@ Pointer and Reference
 
 ----
 
+:class: t2c
+
 Copy constructor
 =====================
-.. code:: cpp
-  :number-lines:
-
-  myComplex a(2, 3);
-  myComplex b=a;
-  myComplex c(a);
-  myComplex d=4;
+.. include:: src/mycomplex/100580_copy_constructor.cpp
+  :code: cpp
+  :number-lines: 3
+  :start-line: 2
+  :end-line: 24
 
 .. include:: src/mycomplex/100580_copy_constructor.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 2
-  :end-line: 17
+  :number-lines: 24
+  :start-line: 25
+  :end-line: 48
 
 ----
 

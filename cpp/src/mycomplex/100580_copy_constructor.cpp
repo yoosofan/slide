@@ -1,22 +1,20 @@
 #include <iostream>
 using namespace std;
-struct myComplex{ // 100580
-  double re, img;
-  myComplex(const double a = 0, 
+struct myComplex{//mycomplex/100580
+  double re=0, img=0;
+  myComplex(const double a = 0,
             const double b = 0)
   {re = a; img = b;}
   myComplex(const myComplex&c){
     re=c.re; img=c.img;
-    cout << "copy constructor"
-         << endl;
+    cout<<"copy constructor"<<endl;
   }
-  void print(void){ 
-    cout << '(' << re << ", " 
-         << img << ')' << endl; 
+  void print(){cout<<'('<<re<<","
+         << img << ')' << endl;
   }
-  void input(void){
-    cout << "Enter real "; cin >> re;
-    cout << "Enter imaginary ";cin >> img;
+  void input(){
+    cout<<"Enter real: ";cin>>re;
+    cout<<"Imaginary: ";cin>>img;
   }
   myComplex add(const myComplex& a){
     myComplex r = a;  r.re  += re;
@@ -33,24 +31,14 @@ struct myComplex{ // 100580
     return r;
   }
 };
-void myFunction(void){
-  myComplex a(2, 3), b=a, c(a);
-  c = a.add(b); c = a.add(2);
-  c.print();  a.input();
-  c = a.sub(b);// c = a - b
-  c.print();  b.input();
-  c = a.mul(b);// c = a * b
+int main(){myComplex a(2,3),b=a,c(a);
+  c=a.add(b); c=a.add(2);c.print();
+  c = a.sub(b);c.print();c=a.mul(b);
   c.print();
-}
-int main(){myFunction();}/*
+}/* copy constructor
 copy constructor
 copy constructor
 copy constructor
-copy constructor
-(4, 3)
-Enter real 2
-Enter imaginary 3
-(0, 0)
-Enter real 4
-Enter imaginary 5
-(-7, 22) */
+(4,3)
+(0,0)
+(-5,12)*/
