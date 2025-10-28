@@ -2362,15 +2362,25 @@ Exists
         T.weight > p.weight
         ; -- May have different result
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
 
-  pname
-  Bolt
-  Screw
-  Screw
-  Cog
+.. container::
+
+	.. code:: sql
+
+		  select distinct T.pname
+		  from p as T join p on
+			T.weight > p.weight
+			; -- May have different result
+
+	.. csv-table::
+	  :header-rows: 1
+	  :class: smallerelementwithfullborder
+
+	  pname
+	  Bolt
+	  Screw
+	  Screw
+	  Cog
 
 ----
 
