@@ -2645,6 +2645,55 @@ Exists
     Screw
     Cog
 
+
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+      نام قطعه‌های عرضه شده‌ای را بیابید که شماره‌های متفاوتی داشته باشند هر چند شاید نام یکسانی داشته باشند که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+  
+    select pname
+    from p natural join(
+          select distinct pn
+          from p natural join sp
+          where not exists(
+              select *
+              from sp,s
+              where sp.sn = s.sn and
+                sp.pn = p.pn and
+                p.city <> s.city
+            )
+      )
+  
+  ;
+
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+    
+    select pname
+    from p
+    where exists(
+        select *
+        from sp
+        where sp.pn = p.pn and
+          not exists (
+                select *
+                from sp natural join s
+                where sp.pn = p.pn and
+                p.city <> s.city
+           )
+     );
+                
+
 ----
 
 :class: t2c
