@@ -1088,14 +1088,14 @@ Destructor(IV)
 ===========================
 .. include:: src/myArray/102154.cpp
   :code: cpp
-  :number-lines:
+  :number-lines: 3
   :start-line: 2
-  :end-line: 31
+  :end-line: 23
 
 .. include:: src/myArray/102154.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 31
+  :number-lines: 24
+  :start-line: 23
   :end-line: 64
 
 ----
@@ -1113,33 +1113,60 @@ Destructor(V)
   :code: cpp
   :number-lines:
   :start-line: 2
-  :end-line: 28
+  :end-line: 22
 
 .. include:: src/myArray/102222.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 28
+  :number-lines: 23
+  :start-line: 22
   :end-line: 64
 
 ----
 
 :class: t2c
 
-.. :
-
-    Destructor(VI)
-    ===========================
-
 .. include:: src/myArray/102234.cpp
   :code: cpp
-  :number-lines:
+  :number-lines: 3
   :start-line: 2
-  :end-line: 34
+  :end-line:  28
 
 .. include:: src/myArray/102234.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 34
+  :number-lines: 28
+  :start-line: 28
+  :end-line: 72
+
+----
+
+:class: t2c
+
+.. include:: src/myArray/102236.cpp
+  :code: cpp
+  :number-lines: 3
+  :start-line: 2
+  :end-line:  22
+
+.. include:: src/myArray/102236.cpp
+  :code: cpp
+  :number-lines: 23
+  :start-line: 22
+  :end-line: 72
+
+----
+
+:class: t2c
+
+.. include:: src/myArray/102238.cpp
+  :code: cpp
+  :number-lines: 3
+  :start-line: 2
+  :end-line:  22
+
+.. include:: src/myArray/102238.cpp
+  :code: cpp
+  :number-lines: 23
+  :start-line: 22
   :end-line: 72
 
 ----
@@ -1150,15 +1177,16 @@ Destructor(VII)
 ===========================
 .. include:: src/myArray/102244.cpp
   :code: cpp
-  :number-lines:
+  :number-lines: 3
   :start-line: 2
-  :end-line: 33
+  :end-line: 28
 
 .. include:: src/myArray/102244.cpp
   :code: cpp
-  :number-lines:
-  :start-line: 33
-  :end-line: 69
+  :number-lines: 29
+  :start-line: 28
+  :end-line: 98
+
 
 ----
 
