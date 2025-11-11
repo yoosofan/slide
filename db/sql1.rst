@@ -2597,8 +2597,6 @@ Exists
         )
     );
 
-
-
 ----
 
 :class: t2c
@@ -2645,8 +2643,6 @@ Exists
     Screw
     Cog
 
-
-
 ----
 
 :class: t2c
@@ -2658,7 +2654,7 @@ Exists
 .. code:: sql
   :class: substep
   :number-lines:
-  
+
     select pname
     from p natural join(
           select distinct pn
@@ -2671,14 +2667,14 @@ Exists
                 p.city <> s.city
             )
       )
-  
+
   ;
 
 
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     select pname
     from p
     where exists(
@@ -2692,7 +2688,6 @@ Exists
                 p.city <> s.city
            )
      );
-                
 
 ----
 
@@ -2779,8 +2774,6 @@ Exists
         s.sn = sp. sn
     )
   ;
-
-
 
 .. csv-table::
   :header-rows: 1
