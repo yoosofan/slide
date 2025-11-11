@@ -27,7 +27,7 @@ complexCls* f2(void){
 }
 void f3(complexCls *p1){delete p1;}
 void f4(void){complexCls *p2;
-  p2=f2(); p2->print();
-  f3(p2);
+  p2=f2();  // p2->print();
+  cout<<"dd"<<endl; f3(p2);
 }
 int main(){f4();}
