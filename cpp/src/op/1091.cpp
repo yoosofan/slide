@@ -4,8 +4,6 @@ using namespace std;
 class complexCls{
   double r, i;
  public:
-  complexCls(int m = 0, int n = 0)
-  {r = m; i = n;}
   void Show(void) const
   {cout << r << "+ i " << i << endl;}
   double Magnitude(void) const
@@ -13,13 +11,6 @@ class complexCls{
   void input(void){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
-  }
-  friend complexCls operator+(
-      const complexCls& a,const complexCls& b){
-    complexCls c;
-    c.r = a.r + b.r;
-    c.i = a.i + b.i;
-    return c;
   }
   friend complexCls operator-(
       const complexCls& a,const complexCls& b){
@@ -42,7 +33,7 @@ class complexCls{
   }
   double& operator[](int index){
     if(index < 0 || index > 1){
-      cout << 
+      cout <<
         "index is out of range"
         << index << endl;
       return r;
@@ -50,6 +41,15 @@ class complexCls{
     if(index) return i;
     return r;
   }
+  friend complexCls operator+(
+      const complexCls& a,const complexCls& b){
+    complexCls c;
+    c.r = a.r + b.r;
+    c.i = a.i + b.i;
+    return c;
+  }
+  complexCls(int m = 0, int n = 0)
+  {r = m; i = n;}
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);

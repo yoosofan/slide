@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r, i;
  public:
   complexCls(int m = 0, int n = 0)
@@ -55,7 +55,7 @@ class complexCls{
   friend bool operator!=(const complexCls& a,
       const complexCls& b)
   {return a == b ? false: true;}
-  bool operator!(void)
+  bool operator!()
   {return r == 0 && i == 0 ? true: false;}
 };
 void f1(void){

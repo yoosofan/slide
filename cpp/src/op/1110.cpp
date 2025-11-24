@@ -39,38 +39,6 @@ class complexCls{
     i = b.i;
     return *this;
   }
-  double& operator[](int index){
-    if(index < 0 || index > 1){
-      cout << "index is out of range" 
-        << index << endl; return r;
-    }
-    if(index) return i;
-    return r;
-  }
-  friend bool operator==(
-      const complexCls& a,
-      const complexCls& b){
-    return (a.r == b.r) && (a.i == b.i) ? 
-      true: false;
-  }
-  friend bool operator!=(
-      const complexCls& a,
-      const complexCls& b)
-  {return a == b ? false: true;}
-  bool operator!(void)
-  {return r == 0 && i == 0 ? true: false;}
-  complexCls operator++(void)// ++a
-  { i++; r++; return *this;}
-  complexCls operator++(int dummy){//a++
-    complexCls result=*this; 
-    r++; i++; return result;
-  }
-  complexCls operator--(void) // --a
-  { i--; r--; return *this;  }
-  complexCls operator--(int dummy){//a--
-    complexCls result=*this; 
-    r--; i--; return result;
-  }
   friend complexCls operator*(
       const complexCls& a,
       const complexCls& b){
@@ -79,12 +47,44 @@ class complexCls{
     c.i = a.r * b.i + a.i * b.r;
     return c;
   }
+  double& operator[](int index){
+    if(index < 0 || index > 1){
+      cout << "index is out of range"
+        << index << endl; return r;
+    }
+    if(index) return i;
+    return r;
+  }
+  friend bool operator==(
+      const complexCls& a,
+      const complexCls& b){
+    return (a.r == b.r) && (a.i == b.i) ?
+      true: false;
+  }
+  friend bool operator!=(
+      const complexCls& a,
+      const complexCls& b)
+  {return a == b ? false: true;}
+  bool operator!(void)
+  {return r == 0 && i == 0 ? true: false;}
+  complexCls operator++()// ++a
+  { i++; r++; return *this;}
+  complexCls operator++(int dummy){//a++
+    complexCls result=*this;
+    r++; i++; return result;
+  }
+  complexCls operator--() // --a
+  { i--; r--; return *this;  }
+  complexCls operator--(int dummy){//a--
+    complexCls result=*this;
+    r--; i--; return result;
+  }
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  c.Show();
   c = a++; // a.operator++(11);
-  c.Show(); c = ++a;// a.operator++(); 
+  c.Show(); c = ++a;// a.operator++();
   c.Show();
   c = a--; c.Show(); c = --a; c.Show();
   if(a == b ) cout << "a == b" << endl;

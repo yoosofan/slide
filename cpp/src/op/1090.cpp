@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r, i;
  public:
   complexCls(int m = 0, int n = 0)
@@ -13,12 +13,6 @@ class complexCls{
   void input(void){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
-  }
-  complexCls operator+(const complexCls& b){
-    complexCls c;
-    c.r = r + b.r;
-    c.i = this->i + b.i;
-    return c;
   }
   complexCls operator-(const complexCls& b){
     complexCls c;
@@ -45,10 +39,16 @@ class complexCls{
     if(index) return i;
     return r;
   }
+  complexCls operator+(const complexCls& b){
+    complexCls c;
+    c.r = r + b.r;
+    c.i = this->i + b.i;
+    return c;
+  }
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
-  c = 2 + a;  c.Show(); 
+  c = 2 + a;  c.Show();
   // c.operator=(2.operator+(a));
   c = a - 2;  c.Show();
   // c.operator=(a.operator+(2));
@@ -57,7 +57,7 @@ void f1(void){
 }
 int main(){f1();}/*
 In function ‘void f1()’:
-1090.cpp:51:9: error: no match for ‘operator+’ 
+1090.cpp:51:9: error: no match for ‘operator+’
 * (operand types are ‘int’ and ‘complexCls’)
    51 |   c = 2 + a;  c.Show();
       |       ~ ^ ~

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r, i;
  public:
   complexCls(int m = 0, int n = 0)
@@ -14,13 +14,13 @@ class complexCls{
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
   }
-  complexCls operator+(const complexCls& b){
+  complexCls operator+(complexCls& b){
     complexCls c;
     c.r = r + b.r;
     c.i = this->i + b.i;
     return c;
   }
-  friend complexCls add(const complexCls& a, 
+  friend complexCls add(const complexCls& a,
       const complexCls& b){
     complexCls c = a;
     c.r += b.r;

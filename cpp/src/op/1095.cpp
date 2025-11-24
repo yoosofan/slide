@@ -1,11 +1,9 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r, i;
  public:
-  complexCls(int m = 0, int n = 0)
-  {r = m; i = n;}
   void Show(void) const
   {cout << r << "+ i " << i << endl;}
   double Magnitude(void) const
@@ -13,12 +11,6 @@ class complexCls{
   void input(void){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
-  }
-  complexCls operator+(const complexCls& b){
-    complexCls c;
-    c.r = r + b.r;
-    c.i = this->i + b.i;
-    return c;
   }
   complexCls operator-(const complexCls& b){
     complexCls c;
@@ -45,10 +37,18 @@ class complexCls{
     if(index) return i;
     return r;
   }
+  complexCls operator+(const complexCls& b){
+    complexCls c;
+    c.r = r + b.r;
+    c.i = this->i + b.i;
+    return c;
+  }
+  complexCls(int m = 0, int n = 0)
+  {r = m; i = n;}
 };
 void f1(void){
   complexCls a(2, 3), b(2, 1), c(a);
-  c = complexCls(2) + a;  c.Show(); 
+  c = complexCls(2) + a;  c.Show();
   // c.operator=(2.operator+(a));
   c = a - 2;  c.Show();
   // c.operator=(a.operator+(2));

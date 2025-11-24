@@ -2228,13 +2228,13 @@ Friend Function(I)
     :number-lines: 2
     :class: ltr
     :start-line: 2
-    :end-line: 36
+    :end-line: 24
 
 .. include:: src/myArray/102300.cpp
     :code: cpp
-    :number-lines: 36
+    :number-lines: 25
     :class: ltr
-    :start-line: 36
+    :start-line: 24
 
 ----
 
@@ -2247,13 +2247,13 @@ Friend Function(II)
     :number-lines: 2
     :class: ltr
     :start-line: 2
-    :end-line: 36
+    :end-line: 24
 
 .. include:: src/myArray/102310.cpp
     :code: cpp
-    :number-lines: 36
+    :number-lines: 25
     :class: ltr
-    :start-line: 36
+    :start-line: 24
 
 ----
 
@@ -2266,13 +2266,13 @@ Friend Class
     :number-lines: 2
     :class: ltr
     :start-line: 2
-    :end-line: 33
+    :end-line: 29
 
 .. include:: src/student/10222student.cpp
     :code: cpp
-    :number-lines: 33
+    :number-lines: 30
     :class: ltr
-    :start-line: 33
+    :start-line: 29
 
 ----
 

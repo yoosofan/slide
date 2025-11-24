@@ -1,10 +1,9 @@
-// Error
 #include <iostream>
 using namespace std;
-class myArray{//myarray/102070.cpp
+class myArray{//myarray/102050.cpp
   static const int MAX = 100;
   double a[MAX];
-  int n;
+  int n = 0;
   public:
   double get(const int index = 0 ){
     if(index < n) return a[index];
@@ -15,18 +14,17 @@ class myArray{//myarray/102070.cpp
           const double value){
     if( index < n )
       a[index] = value;
-    else
-      cout << "Error accessing myArray "
+    cout << "Error accessing myArray "
          << endl;
   }
-  explicit myArray(const double *ma = nullptr,
-          int k = 0){
+  //myArray() = default;
+  myArray(const double* ma, int k){
     if( k > MAX )
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
   }
-  explicit myArray(double x){
+  myArray(double x){
     n = 1;
     a[0] = x;
   }
@@ -54,7 +52,7 @@ class myArray{//myarray/102070.cpp
 int main(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x)/sizeof(double));
-  myArray k(2), r=3;
+  myArray k(2), r=3, b;
   myArray p = d.add(2);//p=d+2;
   p.print(); k.print();
 }

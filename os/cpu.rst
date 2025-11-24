@@ -32,10 +32,17 @@ https://github.com/yoosofan/slide/blob/main/os/cpu.rst
 
 CPU Burst / Service Time
 ==============================
-* cpu utilization by multiprogramming
-* cpu - I/O cycle of a process
-* cpu : burst time, service time
-* I/O : or other blocking events like memory request
+.. container::
+
+    * cpu utilization by multiprogramming
+    * cpu - I/O cycle of a process
+    * cpu : burst time, service time
+    * I/O : or other blocking events like memory request
+
+    Process behaviour
+
+    #. cpu bound
+    #. I/O bound
 
 .. image:: img/cpu/burst.png
   :scale: 80%
@@ -777,7 +784,7 @@ Priority Round Robin
   P3, 2, 5, 1
 
 .. list-table::
-    :class: borderless
+    :class: borderless substep
 
     * - t=0, Q: P0(2)
 
@@ -804,14 +811,14 @@ Priority Round Robin
           0, , 1, , 2, , 3
 
 .. list-table::
-    :class: borderless
+    :class: borderless substep
 
     * - t=3, Q: P0(1,4), P1(2,3)
 
       - .. csv-table::
           :class: yoo-gantt-chart
 
-          P0 , , P1 , , P2 , , P2
+          P0 , , P1 , , P2 , , P1
           0, , 1, , 2, , 3, , 5
 
     * - t=5, Q: P0(1,4), P3(2,1)
@@ -819,18 +826,18 @@ Priority Round Robin
       - .. csv-table::
           :class: yoo-gantt-chart
 
-          P0 , , P1 , , P2 , , P2 , , P3 |nbsp|
+          P0 , , P1 , , P2 , , P1 , , P3 |nbsp|
           0, , 1, , 2, , 3, , 5, , 7
 
 .. list-table::
-    :class: borderless
+    :class: borderless substep
 
     * - t=7, Q: P0(1,4)
 
       - .. csv-table::
           :class: yoo-gantt-chart
 
-          P0 , , P1 , , P2 , , P2 , , P3 |nbsp|, , P0
+          P0 , , P1 , , P2 , , P1 , , P3 |nbsp|, , P0
           0, , 1, , 2, , 3, , 5, , 7, , 8
 
 ----
@@ -917,18 +924,33 @@ Average Waiting Time
 
 ----
 
+:class: t2c
+
 Scheduling Criteria
 ===================
+.. class:: substep
+
+    #. *Waiting time*: Min
+    #. *CPU utilization*: Max
+    #. *Throughput*: Max
+    #. *Turnaround time*: Min
+    #. *Response time*: Min
+        #. Optimainzation
+        #. Operationg Systems
+
+.. class:: substep
+
+* *Fairness*
+* *No starvation*
+
+.. :
+
     #. *CPU utilization* : keep the CPU as busy as possible
     #. *Throughput* : number of processes that complete their execution per time unit
     #. *Turnaround time* : amount of time to execute a particular process
     #. *Waiting time* : amount of time a process has been waiting in the ready queue
     #. *Response time* : amount of time it takes from when a request was submitted until the first response is produced, not output (for time-sharing environment)
 
-----
-
-Optimization Criteria
-=====================
     #. Max CPU utilization
     #. Max throughput
     #. Min turnaround time
@@ -947,4 +969,4 @@ END
     https://www.24-edu.com/assets/uploads/attachment-1665772802.pdf
     https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/5_CPU_Scheduling.html
     https://github.com/astral-sh/uv
-    
+

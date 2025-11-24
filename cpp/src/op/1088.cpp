@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-class complexCls{ 
+class complexCls{
   double r, i;
  public:
   complexCls(int m = 0, int n = 0)
@@ -47,13 +47,13 @@ class complexCls{
     }
     if(index) return i;
     return r;
-  }
+  } // friend void f1();
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = a + 2;  c.Show();
   c = a - 2;  c.Show();
-  c[0] = 56;
+  c[0] = 56;  //c.r = 56;
   c.Show();
 }
 int main(){f1();}/*

@@ -1008,7 +1008,7 @@ group by
     select pn
     from sp join p using(pn)
     group by pn
-    having count(distinct sn) > 2
+    having count(sn) > 2
   );
 
   -- Second solution
@@ -1399,7 +1399,7 @@ group by
   :class: substep
   :number-lines:
 
-  select p.city
+  select p.city -- wrong answer
   from p join sp using(pn)
   where exists(
       select *
@@ -1452,7 +1452,7 @@ group by
       select *
       from p as p2
       where p.city = p2.city and
-        p.pn <> p2.city
+        p.pn <> p2.pn
     )
   group by p.city
   having sum(qty) > 20
@@ -1492,6 +1492,55 @@ group by
       having sum(qty) > 20 and
         count(distinct pn) > 2
       ;
+
+
+----
+
+:class: t2c
+
+.. class:: .rtl-h1
+
+نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(III).
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from p join sp using(pn)
+  where exists(
+      select *
+      from s
+      where status > 10 and
+        s.sn = sp.sn
+    )
+  group by p.city
+  having sum(qty) > 20 and
+    count(distinct pn) > 2
+  ;
+
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select p.city
+  from p join sp using(pn)
+  where exists(
+      select *
+      from s
+      where status > 10 and
+        s.sn = sp.sn
+    ) and exists(
+      select *
+      from p as p2, p as p3
+      where p.city = p2.city and
+        p.pn <> p2.pn and p.city = p3.city
+        and p.pn <> p3.pn and p2.pn <> p3.pn
+    )
+  group by p.city
+  having sum(qty) > 20
+  ;
 
 ----
 
@@ -1825,7 +1874,7 @@ Scalar value(II)
   :class: substep
 
   select pn, weight
-  from p
+  from p  -- Wrong
   where weight = (
       select weight
       from p
@@ -1833,6 +1882,18 @@ Scalar value(II)
       limit 1
   );
 
+.. code:: sql
+  :class: substep
+
+  select pn, weight
+  from p
+  where weight = (
+      select weight
+      from p
+      where weight is not null
+      order by weight asc
+      limit 1
+  );
 
 ----
 
@@ -1904,7 +1965,7 @@ Scalar value(V)
       from sp
       where p.pn = sp.pn
     ) as sqty
-  from p
+  from p ;
 
 .. csv-table::
   :header-rows: 1
@@ -1941,7 +2002,7 @@ Scalar value(V)
            ) as sum_status,
            city
         from p
-        order by weight desc
+        order by weight desc ;
 
     .. code:: sql
         :class: substep

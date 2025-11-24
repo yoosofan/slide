@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./cpp.css
+:css: ./style.css
 :substep: true
 :slide-numbers: true
 :skip-help: true
@@ -307,7 +307,7 @@ ComplexCls(VIII) / Operator + - * =
 
 :class: t2c
 
-c = complexCls(2) + a 
+c = complexCls(2) + a
 =====================
 .. include:: src/op/1095.cpp
     :code: cpp
@@ -318,7 +318,7 @@ c = complexCls(2) + a
 
 .. include:: src/op/1095.cpp
     :code: cpp
-    :number-lines: 29 
+    :number-lines: 29
     :class: ltr
     :start-line: 26
     :end-line: 65
@@ -400,7 +400,7 @@ ComplexCls(VIII) / << >>
     :code: cpp
     :number-lines: 4
     :class: ltr
-    :start-line: 4 
+    :start-line: 4
     :end-line: 18
 
 .. include:: src/op/1130.cpp
@@ -504,7 +504,7 @@ MyArray /  =
     :code: cpp
     :number-lines: 30
     :class: ltr
-    :start-line: 3  
+    :start-line: 3
     :end-line: 30
 
 .. include:: src/op/1260.cpp

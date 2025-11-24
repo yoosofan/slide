@@ -15,7 +15,7 @@ class complexCls{
     cout << "Enter imaginary:";
     cin >> i;
   }
-  complexCls operator+(const complexCls& b){
+  complexCls operator+(complexCls& b){
     complexCls c;
     c.r = r + b.r;
     c.i = this->i + b.i;
