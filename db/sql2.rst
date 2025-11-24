@@ -2010,7 +2010,7 @@ Scalar value(V)
 
         select pn, sum(status) , p.city
         from p natural join sp natural join s
-        order by weight desc -- wrong
+        order by weight desc; -- wrong
 
     .. code:: sql
         :class: substep
@@ -2018,7 +2018,7 @@ Scalar value(V)
 
         select pn, sum(status) , p.city
         from p join s using(city)
-        order by weight desc -- wrong
+        order by weight desc; -- wrong
 
 .. csv-table::
   :header-rows: 1
