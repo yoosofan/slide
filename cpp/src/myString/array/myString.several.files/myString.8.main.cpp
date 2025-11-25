@@ -6,6 +6,5 @@ int main(){
 	const char *st="salam"; cout<<myStringLength(st)<<endl;
 	myString s("Ali");
 	//s.st[2]='c';
-	myStringCopy(s,"Kamran");
-	return 0;
+  s.myStringCopy("Kamran");
 }

@@ -67,7 +67,7 @@ class complexCls{//1130
     return i1;
   }
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  cout << c << endl;
   cin >> c; cout << c << endl;

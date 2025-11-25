@@ -13,7 +13,6 @@ class myArray{ // Error
 	}
 	~myArray(){delete[]a;a=nullptr;n=0;cout<<"in destructor"<<endl;}
 	double& operator[](int index){return a[index];}
-
 	void operator=(const myArray& b){
 		this->a = new double[this->n=b.n];
 		for(int i=0;i<n;i++)a[i]=b.a[i];
@@ -26,7 +25,7 @@ int main(){
 	cout<<d[1]<<endl;
 	cout.flush();
 	myArray g,h;
-	h = g = d;
+	h = g = d;// h.operator=(g.operator=(d));
 	g[1]=8;  //f1(d);
 	cout<<d[3]<<endl;
 	cout<<d[1]<<endl;
