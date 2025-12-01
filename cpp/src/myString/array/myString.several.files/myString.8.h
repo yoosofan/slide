@@ -1,4 +1,4 @@
-#pragma once
+#pragma once // .hpp .h++
 #include<iostream>
 using namespace std;
 #include "stringFunctions.8.h"
@@ -9,5 +9,6 @@ class myString{
 	{strcpy(st,s);}
 	int len();
 	void print();
-	void myStringCopy(const char *src){strcpy(st, src);}
+	void myStringCopy(const char *src)
+	 {strcpy(st, src);}
 };

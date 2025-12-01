@@ -2154,7 +2154,7 @@ Left Outer Join(II)
 
 :class: t2c
 
-.. class:: .rtl-h1
+.. class:: rtl-h1
 
 نام شهرهای همهٔ قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
 
@@ -2206,7 +2206,7 @@ Full Outer Join(I)
     :class: substep
 
     select distinct p.city, s.city
-    from p natural left outer join s;
+    from p natural left outecd inr join s;
 
 
 ----
@@ -2572,13 +2572,13 @@ Scalar value(IV)
     select jn
     from p join spj using(pn) join
       j using(jn)
-    where exits(
+    where exists(
       select *
-      from s natural join (spj as T)
+      from s natural join spj as T
       where T.jn=j.jn and status > 20
     )
     group by jn
-    having (weight*qty)>100
+    having (weight*qty)>100 );
 
 ----
 
@@ -2636,7 +2636,7 @@ Scalar value(IV)
     from sp natural join p
     where p.weight > 12
     group by pn
-    having count(sn)>2
+    having count(sn)>2;
 
 ----
 

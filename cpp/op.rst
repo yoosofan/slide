@@ -410,7 +410,6 @@ ComplexCls(VIII) / << >>
     :start-line: 57
     :end-line: 74
 
-
 -----
 
 :class: t2c
@@ -431,7 +430,6 @@ ComplexCls(VIII) /  ( )
     :start-line: 57
     :end-line: 89
 
-
 -----
 
 :class: t2c
@@ -451,7 +449,6 @@ ComplexCls(VIII) /
     :class: ltr
     :start-line: 57
     :end-line: 89
-
 
 -----
 
@@ -534,7 +531,6 @@ MyArray /  =
     :class: ltr
     :start-line: 30
     :end-line: 89
-
 
 ---
 
