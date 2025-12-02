@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 class A{
-  public: 
+  public:
   void say(void){cout << "A" << endl;}
 };
 class Shape: public A{

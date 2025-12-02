@@ -11,7 +11,7 @@ public:
   Shape() = default;
   friend ostream& operator <<(
       ostream& o1, const Shape& s1){
-    o1 << "name: " << s1.name 
+    o1 << "name: " << s1.name
        << "\tcolor: " << s1.color;
     return o1;
   }
@@ -24,7 +24,7 @@ public:
   Square() = default;
   friend ostream& operator <<(
       ostream& o1, const Square& s1){
-    o1 << Shape(s1) << "\tside: " 
+    o1 << Shape(s1) << "\tside: "
        << s1.d;
     return o1;
   }

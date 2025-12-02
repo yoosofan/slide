@@ -27,14 +27,11 @@ class Square: public Shape{
       "d: " << this->d << endl;
   }
 };
-void f1(){
-  Shape s;
-  cout<<s.Area()<<endl;
+void f2(Shape p)
+{cout<<p.Area()<<endl;}
+void f1(Shape* p)
+{cout<<p->Area()<<endl;}
+int main(){
   Square sq(3);
-  cout << sq.Area() << endl;
-  Shape *ps = &s;
-  cout << ps->Area() << endl;
-  ps = &sq;
-  cout << ps->Area() << endl;
+  f2(sq); f1(&sq);
 }
-int main(){f1();}

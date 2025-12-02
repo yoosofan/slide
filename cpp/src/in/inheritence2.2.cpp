@@ -24,7 +24,7 @@ class Square: public Shape{
   Square() = default;
   friend ostream& operator <<(
       ostream& o1, const Square& s1){
-    o1 << Shape(s1) << "\tside: " 
+    o1 << Shape(s1) << "\tside: "
        << s1.d;
     return o1;
   }

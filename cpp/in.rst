@@ -36,13 +36,13 @@ Simple Shape(I)
     :number-lines:
     :class: ltr
     :start-line: 2
-    :end-line: 24 
+    :end-line: 24
 
 .. include:: src/in/inheritence1.cpp
     :code: cpp
     :number-lines:
     :class: ltr
-    :start-line: 24 
+    :start-line: 24
     :end-line: 67
 
 
@@ -70,7 +70,7 @@ Simple Shape(III) - getColor
 
 ----
 
-Simple Shape(IV) - Class A 
+Simple Shape(IV) - Class A
 =================================
 .. include:: src/in/inheritence2.1.cpp
     :code: cpp
@@ -82,7 +82,7 @@ Simple Shape(IV) - Class A
 
 ----
 
-Simple Shape(V) - Struct A 
+Simple Shape(V) - Struct A
 =================================
 .. include:: src/in/inheritence2.1.1.cpp
     :code: cpp
@@ -106,7 +106,7 @@ Simple Shape(VI) - A aa
 
 ----
 
-Simple Shape(VII) - protected(I) 
+Simple Shape(VII) - protected(I)
 ==================================
 .. include:: src/in/inheritence2.2.cpp
     :code: cpp
@@ -115,10 +115,9 @@ Simple Shape(VII) - protected(I)
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(VIII) - protected(II) 
+Simple Shape(VIII) - protected(II)
 ===================================
 .. include:: src/in/inheritence2.3.cpp
     :code: cpp
@@ -127,10 +126,9 @@ Simple Shape(VIII) - protected(II)
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(IX) - Error name 
+Simple Shape(IX) - Error name
 ===================================
 .. include:: src/in/inheritence2.4.cpp
     :code: cpp
@@ -143,7 +141,7 @@ Simple Shape(IX) - Error name
 
 ----
 
-Simple Shape(X) - Correct Error  
+Simple Shape(X) - Correct Error
 ===================================
 .. include:: src/in/inheritence2.5.cpp
     :code: cpp
@@ -152,10 +150,9 @@ Simple Shape(X) - Correct Error
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(XI) -  Function Call 
+Simple Shape(XI) -  Function Call
 ===================================
 .. include:: src/in/inheritence2.6.cpp
     :code: cpp
@@ -164,10 +161,9 @@ Simple Shape(XI) -  Function Call
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(XII) -  Private Inheritance 
+Simple Shape(XII) -  Private Inheritance
 ==========================================
 .. include:: src/in/inheritence2.7.cpp
     :code: cpp
@@ -176,10 +172,9 @@ Simple Shape(XII) -  Private Inheritance
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(XIII) -  Protected Inheritance 
+Simple Shape(XIII) -  Protected Inheritance
 ==============================================
 .. include:: src/in/inheritence2.8.cpp
     :code: cpp
@@ -188,10 +183,9 @@ Simple Shape(XIII) -  Protected Inheritance
     :start-line: 2
     :end-line: 29
 
-
 ----
 
-Simple Shape(XIV) -  Drive1 
+Simple Shape(XIV) -  Drive1
 ==========================================
 .. include:: src/in/inheritence2.9.cpp
     :code: cpp
@@ -199,7 +193,6 @@ Simple Shape(XIV) -  Drive1
     :class: ltr
     :start-line: 2
     :end-line: 29
-
 
 ----
 
@@ -286,7 +279,7 @@ ComplexCls(IV) / Operator +
       :end-line: 67
 
   .. code:: console
-  
+
     4+ i 4
     4+ i 4
     4+ i 4
@@ -336,7 +329,7 @@ ComplexCls(VI) / Operator + (Error)
       :end-line: 67
 
   .. code:: console
-  
+
     In function ‘void f1()’:
     1046.cpp:33:9: error: no match for ‘operator+’
      (operand types are ‘complexCls’ and ‘int’)
@@ -352,7 +345,7 @@ ComplexCls(VI) / Operator + (Error)
 
 :class: t2c
 
-ComplexCls(VII) / Operator + 
+ComplexCls(VII) / Operator +
 =========================================
 .. include:: src/op/1056.cpp
     :code: cpp
@@ -372,11 +365,11 @@ ComplexCls(VII) / Operator +
 
   .. code:: console
 
-    g++ src/op/1056.cpp 
+    g++ src/op/1056.cpp
     slide$ ./a.out
     4+ i 3
     4+ i 4
- 
+
 -----
 
 :class: t2c
@@ -483,7 +476,7 @@ ComplexCls(VIII) / Operator + - * =
 
 :class: t2c
 
-ComplexCls(IX) / friend 
+ComplexCls(IX) / friend
 ==================================================
 .. include:: src/op/1091.cpp
     :code: cpp
