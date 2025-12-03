@@ -96,13 +96,10 @@ c2cpp01_stdlib.cpp
 .. include:: src/c2cpp01_stdlib.c
     :code: c
     :number-lines:
-    :class: ltr
-
 
 .. include:: src/c2cpp01_stdlib.cpp
     :code: cpp
     :number-lines:
-    :class: ltr
 
 ----
 
@@ -175,89 +172,112 @@ Online Compilers and tools
 * `<http://ideone.com>`_
 * `<https://www.codechef.com/ide>`_
 * `<http://webcompiler.cloudapp.net/>`_
+* https://onecompiler.com/cpp
 * `<https://codepad.remoteinterview.io/GladnessUrgentCactusCostume>`_
 * `<http://www.onlinecompiler.net/>`_
 * `<http://getprogramcode.com/compiler/compile-c-programs-online.html>`_
 * `<http://coliru.stacked-crooked.com/>`_
 * `<https://ide.geeksforgeeks.org/>`_
-* `<https://www.onlinegdb.com/online_c_compiler>`_
+* `<https://www.onlinegdb.com/online_c++_compiler>`_
 * `<https://www.remoteinterview.io/online-c-compiler>`_
 * `<http://www.compileonline.com/compile_c_online.php>`_
 * `<https://www.codechef.com/ide>`_
 * `<https://www.beta.browxy.com/>`_
 * `<compiler.run>`_
+* https://www.programiz.com/cpp-programming/online-compiler/
 
 ----
 
+:class: t2c
+
 Compilers
 =============
-*  gcc(g++): http://gcc.gnu.org
-    * windows:
-        * https://www.mingw-w64.org/downloads/
-        * http://win-builds.org/doku.php
-        * https://www.msys2.org/#installation
-*  `clang <https://clang.llvm.org/>`_
-*  https://visualstudio.microsoft.com/downloads/
+* `gcc <http://gcc.gnu.org>`_
+   * windows
+       * `mingw <https://www.mingw-w64.org/downloads/>`_
+       * `doku <http://win-builds.org/doku.php>`_
+       * `msys2 <https://www.msys2.org/#installation>`_
+   * Linux
+   * Android
+       * `Termux <https://play.google.com/store/apps/details?id=com.termux&hl=en&pli=1>`_
 
-Compile and run
--------------------
+
+* `clang <https://clang.llvm.org/>`_
+* `visualstudio <https://visualstudio.microsoft.com/downloads/>`_
+* `Other Tools <https://isocpp.org/get-started>`_
+
+
 .. code:: sh
+    :number-lines:
 
     cd folder_of_code
     g++ code1.cpp
     ./a.out
 
-.. code:: sh
-
-    cd folder_of_code
     g++ code1.cpp -o code1.o
     ./code1.o
 
-----
+    # Termux
 
-Editors
-============
-*  geany: http://www.geany.org
-*  notepad++ http://www.notepad-plus-plus.org
-*  kate http://kate-editor.org
-*  https://code.visualstudio.com/download
+    pkg install gcc
+    pkg install g++
 
 ----
 
-git
-====
-* https://git-scm.com/
-* https://github.com/yoosofan/slide
+:class: t2c
+
+Editors and IDE
+================
+* `geany <http://www.geany.org>`_
+* vi
+    * `Lazyvim <https://lazyvim.github.io>`_
+    * `nvchad <https://nvchad.com>`_
+* `mc <https://midnight-commander.org/>`_
+* `kate <http://kate-editor.org>`_
+* `visualstudio <https://code.visualstudio.com/download>`_
+* `notepad++ <http://www.notepad-plus-plus.org>`_
+
+#. `Zed <https://zed.dev>`_
+#. `Dev-Cpp <https://www.embarcadero.com/free-tools/dev-cpp>`_
+#. `codeblocks <http://www.codeblocks.org>`_
+#. `Qt Creator <http://qt-project.org>`_
+#. `kdevelop <https://apps.kde.org/kdevelop/>`_
+#. `cbuilder <http://www.embarcadero.com/products/cbuilder>`_
+#. `CLion <https://www.jetbrains.com/clion/>`_
+#. `Visual Studio Express <http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products>`_
+#. `xcode <https://developer.apple.com/xcode/>`_
+
+.. :
+
+    *  `Ch http://www.softintegration.com
+    *  `DevCpp: http://www.bloodshed.net/devcpp.html
+    #. `orwelldevcpp <http://sourceforge.net/projects/orwelldevcpp>`_
+
+----
+
+Other Tools
+===========
+* `git <https://git-scm.com/>`_
 * https://gitlab.com/yoosofan_course/Farsi_gitlab_guide
 
-.. code:: sh
+    .. code:: sh
+        :number-lines:
 
-    git config --global user.name "نام و نام خانوادگی شما"
-    git config --global user.email "رایانامه‌ی شما"
+        git config --global user.name "نام و نام خانوادگی شما"
+        git config --global user.email "رایانامه‌ی شما"
 
-.. code:: sh
+    * https://github.com/yoosofan/slide
 
-    git clone https://github.com/yoosofan/slide.git
+    .. code:: sh
 
-.. code:: sh
+        git clone https://github.com/yoosofan/slide.git
 
-    cd slide
-    git pull origin main
+    .. code:: sh
 
-----
+        cd slide
+        git pull origin main
 
-IDE
-====
-*  https://zed.dev/
-*  orwelldevcpp: http://sourceforge.net/projects/orwelldevcpp
-*  codeblocks: http://www.codeblocks.org
-*  Ch: http://www.softintegration.com
-*  Qt Creator: http://qt-project.org
-*  kdevelop https://apps.kde.org/kdevelop/
-*  cbuilder: http://www.embarcadero.com/products/cbuilder
-*  DevCpp: http://www.bloodshed.net/devcpp.html
-*  Visual Studio Express: http://www.microsoft.com/visualstudio/eng/products/visual-studio-express-products
-*  xcode: https://developer.apple.com/xcode/
+* https://portableapps.com
 
 ----
 
@@ -336,7 +356,7 @@ Struct name C++
 
 .. include:: src/c2cpp22_struct01.c
     :code: cpp
-    :number-lines: 2 
+    :number-lines: 2
     :start-line: 1
     :end-line: 28
 
@@ -353,12 +373,12 @@ Struct name C++
 .. include:: src/c2cpp22_struct02.c
     :code: cpp
     :number-lines: 2
-    :start-line: 2 
+    :start-line: 2
     :end-line: 28
 
 .. include:: src/c2cpp22_struct02.cpp
     :code: cpp
-    :number-lines: 3 
+    :number-lines: 3
     :start-line: 3
     :end-line: 29
 
@@ -536,9 +556,12 @@ Error
 
 ----
 
+:class: t2c
+
 function default values
 =========================
 .. code:: cpp
+    :number-lines:
 
     void point(int x = 3, int y = 4);
 
@@ -547,23 +570,21 @@ function default values
     point();    // calls point(3,4)
 
 .. code:: cpp
+    :number-lines:
 
     int sum(int x, int y, int z=0, int w=0)
-    {
-        return (x + y + z + w);
+    {return (x + y + z + w);}
+
+    int main(){
+      cout << sum(10, 15) << endl;
+      cout << sum(10, 15, 25) << endl;
+      cout << sum(10, 15, 25, 30) << endl;
     }
 
-    /* Driver program to test above function*/
-    int main()
-    {
-        cout << sum(10, 15) << endl;
-        cout << sum(10, 15, 25) << endl;
-        cout << sum(10, 15, 25, 30) << endl;
-    }
+.. :
 
-
-* https://en.cppreference.com/w/cpp/language/default_arguments
-* https://www.geeksforgeeks.org/default-arguments-c/
+    * https://en.cppreference.com/w/cpp/language/default_arguments
+    * https://www.geeksforgeeks.org/default-arguments-c/
 
 -----
 
