@@ -46,7 +46,7 @@ void f2(Square p)
 {cout<<p.Area()<<endl;}
 void f1(Shape* p)
 {cout<<p->Area()<<endl;
-  p->print() ;
+  p->print();
 }
 int main(){
   Square sq(3);
