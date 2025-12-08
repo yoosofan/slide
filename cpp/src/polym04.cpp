@@ -31,6 +31,7 @@ void f2(Shape p)
 void f1(Shape* p)
 {cout<<p->Area()<<endl;}
 int main(){
+  Shape m1;
   Square sq(3);
   f2(sq); f1(&sq);
 }
