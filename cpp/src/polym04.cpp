@@ -10,9 +10,9 @@ class Shape{protected://abstract
 };
 class Square: public Shape{
   int d; public:
-  /*virtual int Area(){
+  virtual int Area(){
     return d*d;
-  }*/
+  }
   Square(int d=1,
     string name="square",
     string color="blue"):
