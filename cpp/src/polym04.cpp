@@ -6,8 +6,7 @@ class Shape{protected:
     string color="white"):
       name(name),color(color)
   {}
-  virtual int Area()
-  {return 0;}
+  virtual int Area() = 0; // abstrtact
 };
 class Square: public Shape{
   int d; public:
