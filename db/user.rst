@@ -135,13 +135,24 @@ Database Administrators
 
 PostgreSQl
 ==============
+* https://www.postgresql.org
+* https://postgresapp.com
+* https://www.postgresql.org/docs/current/
+
+.. :
+
+    * https://gist.github.com/oschannel/1b4eb34f18cc7e573ce57a8c1ed5dc22
+    * https://www.samgalope.dev/2024/09/09/how-to-set-up-postgresql-on-android-using-termux/
+    * android termux pkg install postgresql
+
+
 Ubuntu
 -----------
 .. code:: sh
 
   sudo apt install -y postgresql postgresql-contrib libpq-dev
   apt-cache search postgres
-  sudo apt install pgadmin3 
+  sudo apt install pgadmin3
   sudo apt install libecpg-dev # Embedded PostgreSQL for C
   # sudo apt install ecpg-xc # old
 
@@ -154,10 +165,10 @@ Change Password
 .. code:: sh
 
   sudo -u postgres psql postgres
-  
+
   =#\password postgres
   =#\q
-  
+
 ----
 
 Connect to database
@@ -252,12 +263,12 @@ Create users in PostgreSQL
 
 .. code:: sql
 
-  GRANT { { SELECT | INSERT | UPDATE | DELETE | RULE | 
-            REFERENCES | TRIGGER 
+  GRANT { { SELECT | INSERT | UPDATE | DELETE | RULE |
+            REFERENCES | TRIGGER
           }
       [,...] | ALL [ PRIVILEGES ] }
       ON [ TABLE ] tablename [, ...]
-      TO { username | GROUP groupname | PUBLIC } 
+      TO { username | GROUP groupname | PUBLIC }
       [, ...] [ WITH GRANT OPTION ]
 
 .. reference:
@@ -324,7 +335,7 @@ run sql command in terminal
 
   psql -U username -d mydatabase -c 'SELECT * FROM mytable'
 
-  psql -U username -d mydatabase -c 'select pg_terminate_backend(pid) 
+  psql -U username -d mydatabase -c 'select pg_terminate_backend(pid)
                                      from pg_stat_activity where datname=dc';
 
 .. code:: sql
@@ -361,7 +372,7 @@ Dump
 
   pg_dump --host='127.0.0.1' --username=postgres --password pc > backup.tar
 
-  pg_dumpall 
+  pg_dumpall
 
   pg_dumpall -U postgres > all.sql
 
@@ -391,7 +402,7 @@ Transaction(I)
 
 .. code:: sql
 
-  member( ssn_ , sname, balance) 
+  member( ssn_ , sname, balance)
 
 ----
 
@@ -400,10 +411,10 @@ Transaction(II)
 .. code:: sql
 
   BEGIN TRANSACTION;
-   
+
   update ..
   update ...
-   
+
   COMMIT;  ----  ROLLBACK
 
 ----
@@ -434,7 +445,7 @@ Transaction(III)
 
   INSERT INTO accounts (account_no,balance)
   VALUES (100,20100);
-   
+
   INSERT INTO accounts (account_no,balance)
   VALUES (200,10100);
   SELECT * FROM accounts;
@@ -446,23 +457,23 @@ Transaction(III)
 .. code:: sql
 
   BEGIN TRANSACTION;
-   
+
   UPDATE accounts
      SET balance = balance - 1000
   WHERE account_no = 100;
-   
+
   UPDATE accounts
      SET balance = balance + 1000
   WHERE account_no = 200;
 
   INSERT INTO account_changes(change_no, account_no,flag,amount,changed_at)
   VALUES(10, 100,'-',1000,datetime('now'));
-   
+
   INSERT INTO account_changes(change_no, account_no,flag,amount,changed_at)
   VALUES(11, 200,'+',1000,datetime('now'));
-   
+
   COMMIT;
-  
+
   SELECT * FROM accounts;
 
 ----
@@ -524,10 +535,10 @@ ACID
 ======
 .. class:: substep
 
-* *Atomic*: 
-* *Consistent*: 
-* *Isolation*: 
-* *Durable*: 
+* *Atomic*:
+* *Consistent*:
+* *Isolation*:
+* *Durable*:
 
 DBMS = DataBase Management System (mySql, postgreSQL, SQL server, mariadb, Oracle, DB2)
 

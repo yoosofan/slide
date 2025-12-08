@@ -3,6 +3,7 @@
 :css: ./style.css ./memory.css
 :substep: true
 :data-width: 1024
+:data-height: 768
 
 .. title: Operating Systems - Paging  (By Ahmad Yoosofan)
 
