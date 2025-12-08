@@ -1,12 +1,12 @@
 #include<iostream>
 using namespace std;
-class Shape{protected:
+class Shape{protected://abstract
   string name, color; public:
   Shape(string name="shape",
     string color="white"):
       name(name),color(color)
   {}
-  virtual int Area() = 0; // abstrtact
+  virtual int Area() = 0;//abstract
 };
 class Square: public Shape{
   int d; public:
@@ -26,12 +26,11 @@ class Square: public Shape{
       "d: " << this->d << endl;
   }
 };
-void f2(Shape p)
+void f2(Square p)
 {cout<<p.Area()<<endl;}
-void f1(Shape* p)
+void f1(Square* p)
 {cout<<p->Area()<<endl;}
 int main(){
-  Shape m1;
   Square sq(3);
   f2(sq); f1(&sq);
 }
