@@ -1,15 +1,3 @@
-// Error
-/*
- * Copyright 2018 Ahmad Yoosofan <yoosofan@myfastmail.com>,
- * http://yoosofan.github.io
- * http://yoosofan.kashanu.ac.ir
- * University of Kashan (http://kashanu.ac.ir)
- * 2014/05/03
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
-*/
 #include <iostream>
 #include <cmath>
 using namespace std;
@@ -25,20 +13,13 @@ class complexCls{ double r,i;
     cout<<"Enter real:"; cin>>r;
     cout<<"Enter imaginary:"; cin>>i;
   }
-  complexCls add(complexCls b){
-    complexCls c;
-    c.r = r + b.r;
-    c.i = this->i + b.i;
+  friend complexCls operator+(const complexCls& a, const complexCls& b);
+    complexCls c=a;
+    c.r += b.r;
+    c.i += b.i;
     return c;
   }
-  friend complexCls add(complexCls a, complexCls b);
 };
-complexCls add(complexCls a, complexCls b){
-  complexCls c=a;
-  c.r += b.r;
-  c.i += b.i;
-  return c;
-}
 class side{
   unsigned d;
   public:
@@ -67,10 +48,23 @@ class side{
   bool operator>(side& a){cout<<d<<" > "<<a.d<<endl; return d>a.d;}
   void show(void){cout<<d;}
 };
+class Shape{protected://abstract
+  string name, color; public:
+  Shape(string name="shape",
+    string color="white"):
+      name(name),color(color)
+  {}
+  virtual double Area() = 0;//abstract
+  virtual void print(){
+    cout << "name: " << name
+      << endl << "color: "
+      << color << endl;
+  }
+};
 class triangle{
   side a, b, c;
-                       // (a.operator+(b)).operator>(c)
-  bool check(void){return (a+b>c && a+c>b && b+c>a);}// true, false
+  bool check()
+  {return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
   triangle(side a, side b, side c){
 	  this->a=a;
