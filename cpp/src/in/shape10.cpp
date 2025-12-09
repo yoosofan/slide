@@ -29,7 +29,7 @@ class Circle: public Shape{
 };
 class Rectangle: public Shape{
   int h=1,w=1; public:
-  Circle(int h1=1,int w1=1
+  Rectangle(int h1=1,int w1=1
     string name="Rectangle",
     string color="Black"):
       Shape(name, color)
