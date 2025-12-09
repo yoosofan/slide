@@ -53,12 +53,13 @@ struct Square: public Rectangle{
       cout << "d: " <<w<<endl;
   }
 };
-void f1(Shape* p){
-  cout<<p->Area()<<endl;
-  p->print();
-}
-int main(){Rectangle r1(4,5);
-  Square sq(3);
-  Circle c1(5);
-  f1(&sq); f1(&c1); f1(&r1);
+int main(){
+  Shape* p1[3];
+  p1[0] = new Circle(4);
+  p1[1] = new Rectangle(3,5);
+  p1[2] = new Square(6);
+  for(int i=0; i< 3; i++){
+    cout << p1[i]-> Area() << endl;
+    p1[i] -> print() ;
+  }
 }

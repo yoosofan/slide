@@ -27,8 +27,10 @@ class Circle: public Shape{
   virtual double Area()
   {return r*r*3.14;}
 };
+struct Square;
+//void Square::print();
 class Rectangle: public Shape{
-  protected: int h=1,w=1;public:
+  int h=1,w=1;public:
   Rectangle(int h1=1,int w1=1,
     string name="Rectangle",
     string color="Black"):
@@ -41,6 +43,7 @@ class Rectangle: public Shape{
   }
   virtual double Area()
   {return h*w;}
+  friend void Square::print();
 };
 struct Square: public Rectangle{
   Square(int d=1,
