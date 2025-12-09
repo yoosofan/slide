@@ -27,6 +27,22 @@ class Circle: public Shape{
   virtual double Area()
   {return r*r*3.14;}
 };
+class Rectangle: public Shape{
+  int h=1,w=1; public:
+  Circle(int h1=1,int w1=1
+    string name="Rectangle",
+    string color="Black"):
+      Shape(name, color)
+  {h=h1;w=w1;}
+  virtual void print(){
+    Shape::print();
+    cout<<"w: "<< w
+      "\th: "<< w << endl;
+  }
+  virtual double Area()
+  {return h*w;}
+};
+
 class Square: public Shape{
   int d; public:
   virtual double Area()
