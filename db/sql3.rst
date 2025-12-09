@@ -12,7 +12,6 @@
 .. role:: rtl
     :class: rtl
 
-
 .. |nbsp| unicode:: 0xA0
    :trim:
 
@@ -120,11 +119,76 @@ Condition on delete
 
 ----
 
+:class: t2c
+
 .. code:: sql
+  :number-lines:
+
+  select sum(weight) as sq
+  from p where pn='p7';
+
+.. code:: sql
+  :number-lines:
+
+  select case
+    when sum(weight) is null then 0
+    else sum(weight)
+  end as sq
+  from p
+  where pn='p7';
+
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  sq
+  |nbsp|
+
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  sq
+  0
+
+----
+
+:class: t2c
+
+.. container::
+
+  .. code:: sql
+    :number-lines:
+
+    update student S
+    set tot_cred = (
+      select sum(credits)
+      from takes, course
+      where takes.course_id = course.course_id
+        and S.ID= takes.ID and
+        takes.grade <> 'F' and
+        takes.grade is not null
+    );
+
+  .. code:: sql
+    :number-lines:
+
+    case
+      when sum(credits) is not null
+        then sum(credits)
+      else 0
+    end
+
+.. code:: sql
+  :number-lines:
 
   update student S
   set tot_cred = (
-    select sum(credits)
+    select case
+      when sum(credits) is not
+        null then sum(credits)
+      else 0
+    end
     from takes, course
     where takes.course_id = course.course_id
       and S.ID= takes.ID and
@@ -132,12 +196,6 @@ Condition on delete
       takes.grade is not null
   );
 
-.. code:: sql
-
-  case
-    when sum(credits) is not null then sum(credits)
-    else 0
-  end
 
 .. :
 
