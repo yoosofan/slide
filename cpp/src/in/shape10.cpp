@@ -36,7 +36,7 @@ class Rectangle: public Shape{
   {h=h1;w=w1;}
   virtual void print(){
     Shape::print();
-    cout<<"w: "<< w
+    cout<<"w: "<< w <<
       "\th: "<< w << endl;
   }
   virtual double Area()
