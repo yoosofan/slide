@@ -46,10 +46,11 @@ class side{
     return b;
   }
   bool operator>(side& a){cout<<d<<" > "<<a.d<<endl; return d>a.d;}
-  void show(void){cout<<d;}
+  void print(){cout<<d;}
 };
 class Shape{protected://abstract
-  string name, color; public:
+  string name, color;
+  public:
   Shape(string name="shape",
     string color="white"):
       name(name),color(color)
@@ -61,22 +62,26 @@ class Shape{protected://abstract
       << color << endl;
   }
 };
-class triangle{
+class Triangle: public Shape{
   side a, b, c;
   bool check()
   {return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
-  triangle(side a, side b, side c){
+  Triangle(side a, side b, side c):Shape("Triangle" , "Red"){
 	  this->a=a;
 	  this->b=b;
 	  this->c=c;
 	  if(!check()){
 		  cout<<"These sides do not generate a triangle: ";
-		  show();
+		  print();
 	  }
   }
-  void show(void){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
-  void input(void){
+  virtual void print(){
+    Shape::print();
+    a.print();cout<<",\t";b.print();
+    cout<<",\t";c.print();cout<<endl;
+  }
+  void input(){
     //int k;
     do{
       //cout<<"Enter a: ";cin>>k;
