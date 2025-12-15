@@ -24,7 +24,7 @@ public:
   virtual void Show(void){
       A::Show();
       B::Show(); cout << B::b1 << endl;
-      cout << "\tb1:   " << b1 << endl;
+      cout << b1 << endl;
   }
 }; void print(A a1){
     cout << a1.a1 << endl;
@@ -42,15 +42,18 @@ class C {int i; public:
 static int GLOBAL_VARIABLE_I=12;
 int D::si = 7;
 int main(){
-  A a1(2);  myPrint(a1); A* pa1 = &a1;
-  B b1(9);  myPrint(b1);
-  C c1;     myPrint(b1);
-  D d1(2, 3, 4); d1.Show(); pa1 = &d1;
+  //A a1(2);  myPrint(a1); A* pa1 = &a1;
+  //B b1(9);  myPrint(b1);
+  //C c1;     myPrint(b1);
+  D d1(2, 3, 4);
+  d1.A::Show();
+  d1.B::Show(); cout << endl;
+  d1.Show();
   // D* pd1 = &a1; // pa1 -> f1();
-  pa1->Show();  D::printHello();
-  int GLOBAL_VARIABLE_I = 15;
-  cout<<"i: "<< GLOBAL_VARIABLE_I <<endl;
-  cout<<"External i "
-      << ::GLOBAL_VARIABLE_I << endl;
-  print(a1);
+  //pa1->Show();  D::printHello();
+  //int GLOBAL_VARIABLE_I = 15;
+  //cout<<"i: "<< GLOBAL_VARIABLE_I <<endl;
+  //cout<<"External i "
+  //    << ::GLOBAL_VARIABLE_I << endl;
+  //print(a1);
 }

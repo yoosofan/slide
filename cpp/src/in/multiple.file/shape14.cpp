@@ -28,7 +28,7 @@ class Circle: public Shape{
   {return r*r*3.14;}
 };
 struct Square;
-//void Square::print();
+void Square::print();
 class Rectangle: public Shape{
   int h=1,w=1;public:
   Rectangle(int h1=1,int w1=1,

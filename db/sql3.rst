@@ -498,7 +498,7 @@ The final result of an uknown condition is False
 
     select pname
     from p join sp using(pn) join s using(sn)
-    where weight > 17 and city = 'Paris';
+    where weight >= 18 and p.city = 'Paris';
 
 .. code:: sql
     :class: substep
@@ -506,9 +506,12 @@ The final result of an uknown condition is False
 
     select pname
     from p join sp using(pn) and s using(sn)
-    where weight is not null and weight > 17 and city = 'Paris';
+    where weight is not null
+      and weight >= 18 and p.city = 'Paris';
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
@@ -520,7 +523,8 @@ The final result of an uknown condition is False
 
     select pname
     from p join sp using(pn) and s using(sn)
-    where (weight is not null or weight > 17) and city = 'Paris';
+    where (weight is null or weight > 18)
+      and s.city = 'Paris';
 
 ----
 
@@ -637,6 +641,7 @@ The final result of an uknown condition is False
   SELECT CASE i WHEN NULL THEN 'Is Null'  -- This will never be returned
     WHEN    0 THEN 'Is Zero'  -- This will be returned when i = 0
     WHEN    1 THEN 'Is One'   -- This will be returned when i = 1
+    ELSE  'Other'
     END
   FROM t;
 
@@ -667,7 +672,7 @@ The final result of an uknown condition is False
 
     select pname
     from p join sp using(pn) join s using(sn)
-    where weight > 17 and ;
+    where weight > 17 and s.status >20;
 
 ----
 
@@ -783,6 +788,7 @@ Foreign Key Error
 Foreign Key Error(PostgreSQL)
 ==================================
 .. code:: sql
+  :number-lines:
 
   create table "Department"(
     "DN" integer default 0 primary key,
@@ -795,6 +801,7 @@ Foreign Key Error(PostgreSQL)
   ERROR:  relation "Employee" does not exist
 
 .. code:: sql
+  :number-lines:
 
   create table "Employee"(
     "SSN" varchar(20) primary key,
@@ -810,6 +817,7 @@ Foreign Key Error(PostgreSQL)
 ----
 
 .. code:: sql
+  :number-lines:
 
   create table "Department"(
     "DN" integer default 0 primary key,
@@ -825,6 +833,7 @@ Foreign Key Error(PostgreSQL)
   );
 
 .. code:: sql
+  :number-lines:
 
   insert into "Department"("DN", "DeptName", "MgrSSN")
     values(1, 'computer', '');
@@ -840,6 +849,7 @@ Foreign Key Error(PostgreSQL)
 ----
 
 .. code:: sql
+  :number-lines:
 
   update "Department" set "MgrSSN"='e2' where "DN"=1;
   update "Department" set "MgrSSN"='e10' where "DN"=2;
@@ -971,7 +981,6 @@ Constraint(I)
 * not null (No field part of primary key can be null)
 * foreign keys
 * unique
-
 
 ----
 

@@ -1,7 +1,6 @@
 #include<iostream>
 #include "shape.h"
-#include "rectangle.h"
-#include "square.h"
+//#include "square.h"
 using namespace std;
 void f1(Shape* p){
   cout<<p->Area()<<endl;

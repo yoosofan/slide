@@ -28,3 +28,24 @@ class Circle: public Shape{
   virtual double Area()
   {return r*r*3.14;}
 };
+struct Square;
+void Square::print();
+class Rectangle: public Shape{
+  int h=1,w=1;public:
+  Rectangle(int h1=1,int w1=1,
+    string name="Rectangle",
+    string color="Black"):
+      Shape(name, color)
+  {h=h1;w=w1;}
+  virtual void print();
+  virtual double Area();
+  friend void Square::print();
+};
+struct Square: public Rectangle{
+  Square(int d=1,
+    string name="Square",
+    string color="Blue"):
+    Rectangle(d, d, name, color)
+  {}
+  virtual void print();
+};

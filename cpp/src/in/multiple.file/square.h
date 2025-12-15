@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #include "shape.h"
-#include "rectangle.h"
+//#include "rectangle.h"
 using namespace std;
 struct Square: public Rectangle{
   Square(int d=1,

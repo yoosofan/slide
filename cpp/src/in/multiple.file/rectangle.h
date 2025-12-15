@@ -2,7 +2,7 @@
 #include<iostream>
 #include "shape.h"
 using namespace std;
-struct Square;
+//struct Square;
 class Rectangle: public Shape{
   int h=1,w=1;public:
   Rectangle(int h1=1,int w1=1,
