@@ -14,17 +14,17 @@ void f4(int mm){
 	if(mm < 10) throw s1;
 	cout << "In f4 mm " << mm << endl;
 }
-void f3(void){
-	try{ f1(3); f4(2);}catch(int mm)
+void f3(){
+	try{f1(3); f4(2);}catch(int mm)
   {cout <<"In f3 "<<mm<<endl;}
 }
 struct RootCls{double root1 , root2;};
 RootCls solve(double a, double b, double c){
-	RootCls retVal ; 
+	RootCls retVal ;
 	double delta;
 	if(a == 0 && b == 0) 	throw 6;
-	if(a==0){ 
-		retVal.root1 = retVal.root2 = -c / b ; 
+	if(a==0){
+		retVal.root1 = retVal.root2 = -c / b ;
 	}else{
 		delta = (b * b - 4 * a * c) ;
 		if(delta < 0 ) 	throw 7;
@@ -35,7 +35,8 @@ RootCls solve(double a, double b, double c){
 	return retVal;
 }
 int main(){
-	try{ f1(1); f2(12);f3();}catch(int m){
+	try{ f1(1); f2(12);f3();}
+	catch(int m){
 		cout <<"catch expception "<<m<<endl;
 	}catch (char const* sm){
 		cout << "catch f4 error in main "
@@ -46,7 +47,7 @@ int main(){
 		cout << rc1.root1 << " root2  "
       << rc1.root2 << endl;
 	}catch(int nn){
-		cout << "Second catch in main " << nn 
+		cout << "Second catch in main " << nn
       << endl;
 	}
 	try{ throw 5;
