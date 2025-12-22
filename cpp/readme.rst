@@ -17,3 +17,11 @@ How to create html from readme.rst
 .. code:: sh
 
     rst2html5.py readme.rst index.html --stylesheet=../tools/farsi.css
+
+
+.. :
+
+    https://stackoverflow.com/a/15402972/886607
+
+    find src/ -iname "*.cpp" -type f -exec sed -i 's/(void)/()/g' {} \;
+
