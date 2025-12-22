@@ -3,7 +3,7 @@ using namespace std;
 int stringLenght(const char* s){
   int i=0;
   while(*s++)
-    i++; 
+    i++;
   return i;
 }
 void stringCopy(char* dest, const char* src){
@@ -25,5 +25,4 @@ int main(){
   stringCopy(s2,s1);
   cout << stringLenght(s2) << ":\t" << s2 << endl;
   myString m(s2);
-  return 0;
 }

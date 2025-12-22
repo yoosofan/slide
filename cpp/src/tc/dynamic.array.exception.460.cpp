@@ -165,5 +165,4 @@ int main(){
   catch(...){cout<<"unknown exception"<<endl;}
   ArrayCls<double> y=f1<double>(5);
   cout<<"after f1"<<endl;
-  return 0;
 }

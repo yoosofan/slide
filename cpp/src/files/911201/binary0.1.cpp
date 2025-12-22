@@ -9,7 +9,6 @@ int main(){
   x++;
   f1.write((char*)&x,sizeof(x));
   f1.close();
-  return 0;
 }/*
 big indian
 little indian

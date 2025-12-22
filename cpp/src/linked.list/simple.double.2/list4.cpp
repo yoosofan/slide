@@ -33,5 +33,4 @@ int main(){
     for(int i=0; i < 10; i++, cur = cur -> link)
         cur -> link = new Node(i+6);
     print(head.link);
-    return 0;
 }

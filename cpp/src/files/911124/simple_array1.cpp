@@ -24,4 +24,4 @@ void f1(){double t[]={3.4 , 5.6, 6,4};
   //a1.init(30,4);a2.init(3);
   a1.print();a2.print();a4.print();
 }
-int main(){f1(); return 0;}
+int main(){f1();}

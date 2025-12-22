@@ -14,7 +14,7 @@ class MyClass{
       cout<<"year "<<year<<endl;
       cout<<"month "<<month<<endl;
       cout<<"day  "<<day<<endl;
-    }   
+    }
   };
   struct person{
     char fname[20],lname[20],ssn[15];
@@ -38,7 +38,7 @@ public:
   void write(person p)
   {
     f1.write((char*)&p,sizeof(p));
-    //f1.flush();    
+    //f1.flush();
   }
   person read(){person p;
     f1.read((char*)&p,sizeof(p));
@@ -74,5 +74,4 @@ public:
 int main(){
   MyClass m1;
   m1.run();
-  return 0;
-}  
+}

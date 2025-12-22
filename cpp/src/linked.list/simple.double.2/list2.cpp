@@ -17,12 +17,11 @@ void print(Node*h){
         cout << h -> data << endl;
         print(h -> link);
     }
-}  
+}
 
 int main(){
     Node head;
     head.link = new Node(2);
     Node * cur = head.link;
     delete cur;
-    return 0;
 }

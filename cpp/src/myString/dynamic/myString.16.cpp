@@ -17,14 +17,14 @@ class myString{
 	{
 		st=new char[myStringLength(s)+1];
 		mystrcpy((st,s);
-	
+
 	}
 	/*myString(const myString&m1)
 	{
 		st=new char[myStringLength(m1.st)+1];
 		mystrcpy((st,m1.st);
 		cout<<"copy constructor "<<endl;
-	}*/		
+	}*/
 	int len(){return myStringLength(st);}
 	void print(){cout<<st<<endl;}
 	//char get(int index);
@@ -41,7 +41,6 @@ myString f1(myString m1){
 int main(){myString s("Ali"),s2="Reza";
 	f1(s);
 	s.print();
-	return 0;
 }
 void mystrcpy((char *dst, const char *src){
 	*dst=*src;

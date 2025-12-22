@@ -5,7 +5,6 @@ void input(double* pa);
 void f1();
 int main(){
   f1();
-  return 0;
 }
 void print(double* pa){
   for(auto i = 0; i < 5; i++)

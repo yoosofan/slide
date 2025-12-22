@@ -5,7 +5,6 @@ void myf();void printTriangle();
 void printSquare(); void menu();
 int main(){
   menu()
-  return 0;
 }
 void menu(){int n;
   do{

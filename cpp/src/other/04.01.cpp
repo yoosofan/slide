@@ -11,8 +11,8 @@ double& setValues( int i ) {
   for ( int i = 0; i < 5; i++ ) {
     cout << "vals[" << i << "] = ";
     cout << vals[i] << endl;
-  }  
-  cout << "after change" << endl;  
+  }
+  cout << "after change" << endl;
   return vals[i];   // return a reference to the ith element
 }
 
@@ -20,5 +20,4 @@ double& setValues( int i ) {
 int main () {
   setValues(1) = 20.23; // change 2nd element
   setValues(3) = 70.8;  // change 4th element
-  return 0;
 }

@@ -15,7 +15,6 @@ int main(){
   display(f);complexCls g;
   init(g,2);
   display(g);
-  return 0;
 }
 void init(complexCls &a, double m, double n)
 {a.r=m; a.i=n;}

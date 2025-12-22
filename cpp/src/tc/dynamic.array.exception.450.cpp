@@ -188,5 +188,4 @@ int main(){
   cout<<"before read from file"<<endl<<b<<endl;
   b.readFromFile();cout<<"after read from file"<<endl<<b<<endl;
 }catch(myException & ex1){cout<<"exception file"<<endl;}
-  return 0;
 }

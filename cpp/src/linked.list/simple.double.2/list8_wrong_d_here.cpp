@@ -32,5 +32,4 @@ int main(){
   d_here(head.link->link);
   cout<<endl<<endl;
   print(head.link);
-  return 0;
 }

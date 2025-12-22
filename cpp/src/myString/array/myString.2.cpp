@@ -20,9 +20,8 @@ class myString{
   //myString substr(int start,int end)    //friend myStringCopy(char*,const char*src);
 };
 int main(){
-  const char *st="salam"; 
+  const char *st="salam";
   cout << myStringLength(st) << endl;
   myString s("Ali");
   myStringCopy(s.st,"Kamran");
-  return 0;
 }

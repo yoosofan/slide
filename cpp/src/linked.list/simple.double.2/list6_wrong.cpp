@@ -25,5 +25,4 @@ int main(){
   for(int i=0;i<10;i++)
     append(head,i+6);
   print(head.link);
-  return 0;
 }

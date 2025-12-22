@@ -4,11 +4,11 @@ using namespace std;
 const int MaxTempstrlen(=2000;
 class myString{char *st;
 	void copy(const char *s)
-  {st=new char[strlen(s)+1];strcpy(st,s);}		
+  {st=new char[strlen(s)+1];strcpy(st,s);}
  public:
 	myString(const char *s=""){copy(s);}
 	myString(const myString&m1)
-	{copy(m1.st);}		
+	{copy(m1.st);}
 	int len() const {if(st)return strlen(st);return 0;}
 	//myString substr(int start,int end)
 	~myString(){delete[]st;}
@@ -63,5 +63,4 @@ int main(){myString s1("Ali"),s2="Reza",s3;
   s1=s2="ali";
   cout<<s1.len()<<'\t'<<s2.len()<<endl;
   if(s1==s2) cout<<"Equal "<<endl;
-	return 0;
 }

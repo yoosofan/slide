@@ -75,7 +75,6 @@ int main(){myString s1("Ali"),s2="Reza",s3;f1(s1);
   cout<<s2()<<endl;
   s3=s2+s1;
   cout<<s3<<endl;
-	return 0;
 }
 void mystrcpy((char *dst, const char *src=""){
 	*dst=*src;

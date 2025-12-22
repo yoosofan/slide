@@ -31,5 +31,4 @@ int main(){
   cout << m.len() << ":\t" << m << endl;
   m2 = m;
   cout << m << endl;
-  return 0;
 }

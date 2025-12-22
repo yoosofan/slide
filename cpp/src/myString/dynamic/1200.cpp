@@ -21,5 +21,4 @@ int main(){
   cout << stringLenght(s2) << ":\t" << s2 << endl;
   myString m(s2);
   cout << m.len() << endl;
-  return 0;
 }

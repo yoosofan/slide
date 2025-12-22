@@ -96,7 +96,6 @@ void f2();
 
 int main(){
   f1();
-  return 0;
 }
 
 void f2(){
@@ -129,4 +128,4 @@ void f1(){
   z[0][0]=4;
   z[0][1]=5;
   z[0].Show();
-}  
+}

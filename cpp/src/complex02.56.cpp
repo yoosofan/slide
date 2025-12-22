@@ -2,7 +2,7 @@
 using namespace std;
 struct complexCls{
   double re = 0, img = 0;
-  void set(const double& r=0, 
+  void set(const double& r=0,
     const double& i=0)
   {re=r;img=i;}
   double getRe()const {return re;}
@@ -27,5 +27,4 @@ void f1(complexCls& c1){
 int main(){
   complexCls c1;
   f1(c1);
-  return 0;
 }

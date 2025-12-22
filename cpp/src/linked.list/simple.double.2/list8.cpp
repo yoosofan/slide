@@ -30,7 +30,7 @@ bool insert(Node*h,int index = 0, double d=0){
   for(int i=0;i<index && h->link ;i++, h=h->link);
   if(h->link){ h->link=new Node(d,h->link);retVal=true;}
   return retVal;
-}  
+}
 //bool remove(Node*h,int index=0)
 int main(){
   Node head;
@@ -42,5 +42,4 @@ int main(){
   print(head.link);
   cout<<endl<<endl;
   print(head.link);
-  return 0;
 }

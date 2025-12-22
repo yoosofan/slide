@@ -26,5 +26,4 @@ void f1(complexCls& c1){
 int main(){
   complexCls c1;
   f1(c1);
-  return 0;
 }

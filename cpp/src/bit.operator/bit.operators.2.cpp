@@ -6,5 +6,4 @@ int main(){unsigned int i=020;
 	cout<<i<<"\t"<<oct<<i<<endl;
 	unsigned int j=011;
 	cout<<(i^j);
-	return 0;
 }

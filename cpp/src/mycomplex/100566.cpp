@@ -30,15 +30,15 @@ class myComplex{ double re, img; public: //100565
   }
 };
 void myFunction(){
-  myComplex a(2, 3), b=4, c; 
-  c = a.add(b);  
+  myComplex a(2, 3), b=4, c;
+  c = a.add(b);
   c.print();
-  c = a.sub(b); 
+  c = a.sub(b);
   c.print();
-  c = a.mul(b); 
+  c = a.mul(b);
   c.print();
 }
-int main(){myFunction();return 0;}/*
+int main(){myFunction();}/*
 Copy Constructor
 Destructor
 (6, 3)

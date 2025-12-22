@@ -18,5 +18,4 @@ class myString{
 int main(){
   myString m("rose");
   cout << m.len() << ":\t" << m << endl;
-  return 0;
 }

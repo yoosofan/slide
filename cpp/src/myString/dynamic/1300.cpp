@@ -14,5 +14,4 @@ class myString{
 };
 int main(){
   myString m("rose");
-  return 0;
 }

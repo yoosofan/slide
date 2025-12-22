@@ -3,13 +3,13 @@ using namespace std;
 class myComplex{ // 100562
   double re, img;
   public:
-  myComplex(double a = 0, double b = 0){ 
-    re = a; 
+  myComplex(double a = 0, double b = 0){
+    re = a;
     img = b;
   }
-  void print(){ 
-    cout << '(' << re << ", " 
-         << img << ')' << endl; 
+  void print(){
+    cout << '(' << re << ", "
+         << img << ')' << endl;
   }
   void input(){
     cout << "real part ";
@@ -37,23 +37,22 @@ class myComplex{ // 100562
   }
 };
 void myFunction(){
-  myComplex a(2, 3), b(4), c; 
+  myComplex a(2, 3), b(4), c;
   // b(4, 0), c(0, 0);
-  c = a.add(b); 
+  c = a.add(b);
   c = a.add(2);// 2+2.3
   // c = a + 2; // i+x
   // (double)i + x
   c.print();
   a.input();
-  c = a.sub(b); 
+  c = a.sub(b);
   // c = a - b
   c.print();
   b.input();
-  c = a.mul(b); 
+  c = a.mul(b);
   // c = a * b
   c.print();
 }
 int main(){
   myFunction();
-  return 0;
 }

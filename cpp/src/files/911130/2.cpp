@@ -11,12 +11,12 @@ bool extractIntFromStr(char **str,int&a){
   }
   return true;
 }
-class myIntArray{ int **a; 
+class myIntArray{ int **a;
  fstream f1;int n,m;
  public:
   myIntArray(const char*fileName="input2.txt"){
     int i,b,j,k; char str[3000];char *p;
-    f1.open(fileName); 
+    f1.open(fileName);
     if(!f1){cout<<"file ";exit(0);}
     for(i=0,j=0;f1.getline(str,3000-1);i++)
     {
@@ -26,7 +26,7 @@ class myIntArray{ int **a;
     }
     n=i;
     cout<<m<<"  "<<n<<endl;
-    f1.close(); 
+    f1.close();
     a = new int*[n=i];
     for(i=0;i<n;i++)
       a[i]=new int[m];
@@ -65,5 +65,4 @@ int main(){
   myIntArray m1("input2.txt");
   //m1.sort();cout<<m1.search(12)<<endl;
   m1.print();
-  return 0;
 }

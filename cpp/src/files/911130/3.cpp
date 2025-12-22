@@ -5,10 +5,10 @@ using namespace std;
 bool extractIntFromStr(char **str,int&a){
   for(;**str==' '||**str=='\t';(*str)++);
   a=0;
-  if(!**str || **str == '\n') 
+  if(!**str || **str == '\n')
     return false;
 //   cout<<*str<<endl;cout.flush();
-  for(;**str && !(**str ==' '|| 
+  for(;**str && !(**str ==' '||
           **str == '\t'||**str == '\n');
           (*str)++){
     a = a*10 +**str-48;
@@ -27,12 +27,12 @@ fstream f1("dflj.txt",ios::out | ios::trunc);
 fstream f1("dflj.txt",ios::in | ios::out);
 open("dfds.txt",ios::in)
 */
-class myIntArray{ int **a; 
+class myIntArray{ int **a;
  fstream f1;int n,m;
  public:
   myIntArray(const char*fileName="input2.txt"){
     int i,b,j,k; char str[3000];char *p;
-    f1.open(fileName); 
+    f1.open(fileName);
     if(!f1){cout<<"file ";exit(0);}
     f1.getline(str,3000-1);
 //     for(i=0,j=0;!f1.eof();i++)
@@ -46,7 +46,7 @@ class myIntArray{ int **a;
     }
     n=i;
     cout<<m<<"  "<<n<<endl;
-    f1.close(); 
+    f1.close();
     a = new int*[n=i];
     for(i=0;i<n;i++)
       a[i]=new int[m];
@@ -85,5 +85,4 @@ int main(){
   myIntArray m1("input2.txt");
   //m1.sort();cout<<m1.search(12)<<endl;
   m1.print();
-  return 0;
 }

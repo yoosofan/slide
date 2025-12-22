@@ -2,7 +2,7 @@
 using namespace std;
 struct myComplex{ // op/1024
   double re, img;
-  myComplex(const double a = 0, 
+  myComplex(const double a = 0,
             const double b = 0)
   {re = a; img = b;}
   myComplex(const myComplex&c){
@@ -10,9 +10,9 @@ struct myComplex{ // op/1024
     cout << "copy constructor"
          << endl;
   }
-  void print(){ 
-    cout << '(' << re << ", " 
-         << img << ')' << endl; 
+  void print(){
+    cout << '(' << re << ", "
+         << img << ')' << endl;
   }
   void input(){
     cout << "Enter real "; cin >> re;
@@ -42,7 +42,7 @@ void myFunction(){
   c = a.mul(b);// c = a * b
   c.print();
 }
-int main(){myFunction();return 0;}/*
+int main(){myFunction();}/*
 copy constructor
 copy constructor
 copy constructor

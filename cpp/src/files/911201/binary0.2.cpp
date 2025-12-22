@@ -8,5 +8,4 @@ int main(){
   cout<<x<<endl;
   f1.read((char*)&x,sizeof(int));
   cout<<x<<endl;
-  return 0;
 }

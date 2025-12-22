@@ -1,4 +1,4 @@
-// Error 
+// Error
 #include<iostream>
 using namespace std;
 struct complexCls{
@@ -17,4 +17,4 @@ void f1(){
   complexCls c3(2, 4);
   cout<<c1.getRe()<<endl;
 }
-int main(){f1();return 0;}
+int main(){f1();}

@@ -19,7 +19,6 @@ int main(){
   strcpy(s1.cs,"salam khobam to chetori ");
   f1.write((char*)&s1,sizeof(s1));
   f1.close();
-  return 0;
 }
-  
-  
+
+

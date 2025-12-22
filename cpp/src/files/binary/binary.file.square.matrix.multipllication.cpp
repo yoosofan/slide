@@ -88,9 +88,8 @@ myMat mult(myMat m1, myMat m2){
 int main(){
   //myMat m1,m2; m1=input();m2=input();write("mat1.in",m1);write("mat2.in",m2);
   myMat m1=read("mat1.in"),m2=read("mat2.in"),m3;
-  print(m1);print(m2);  
-  m3=mult(m1,m2);  
+  print(m1);print(m2);
+  m3=mult(m1,m2);
   write("mat3.in",m3);
   print(m3);
-  return 0;
 }

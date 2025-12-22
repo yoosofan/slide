@@ -14,11 +14,11 @@ class myString{
 	void copy(const char *s){
 		st=new char[myStringLength(s)+1];
 		mystrcpy((st,s);
-	}		
+	}
   public:
 	myString(const char *s=""){copy(s);}
 	myString(const myString&m1)
-	{copy(m1.st);}		
+	{copy(m1.st);}
 	int len(){return myStringLength(st);}
 	void print(){cout<<st<<endl;}
 	//char get(int index);
@@ -43,10 +43,9 @@ myString f1(myString m1){m1.set();m1.print();return m1;}
 int main(){myString s1("Ali"),s2="Reza",s3;f1(s1);
 	s1.print();s1[1]='d';s1.print();cout<<s1[1]<<endl;
 	//s3.operator=(s1.operator=(s2));
-	s3=s1=s2; 
+	s3=s1=s2;
 	//int i=1,j=1,k=3; i+j=k;
 	s1[0]='p'; s2.print();
-	return 0;
 }
 void mystrcpy((char *dst, const char *src=""){
 	*dst=*src;

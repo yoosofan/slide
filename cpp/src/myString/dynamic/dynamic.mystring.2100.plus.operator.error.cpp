@@ -12,12 +12,12 @@ class myString{
   int len(){return strlen(s);}
   ~myString(){delete[]s;}
   myString& operator=(myString& mys){
-    delete[] s; 
-    init(mys.s); 
+    delete[] s;
+    init(mys.s);
     return *this;
   }
   char& operator[](int index){
-    if(index<len() && index >= 0) 
+    if(index<len() && index >= 0)
       return s[index];
     throw "index out of range";
   }
@@ -46,10 +46,9 @@ int main(){
   cin >> m1;
   cout << m1.len() << ":\t" << m1 << endl;
   cout << m2.len() << ":\t" << m2 << endl;
-  m3 = m1 + m2; 
+  m3 = m1 + m2;
   cout << m3 << endl;
   cout << m2[2] << endl;
   m2[2] = 'z';
   cout << m2 << endl;
-  return 0;
 }

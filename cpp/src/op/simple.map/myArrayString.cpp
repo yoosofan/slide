@@ -21,5 +21,4 @@ int main(){
   m1["ali"]=23;
   m1["reza"]=45;
   cout<<m1["ali"]<<endl;
-  return 0;
 }

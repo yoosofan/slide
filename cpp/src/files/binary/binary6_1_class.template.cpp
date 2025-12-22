@@ -66,7 +66,7 @@ int main(){
   myArray<student> myi("temp6.in");
   //~ unsigned aa =1;
   //~ unsigned int ddd = 33;
-  //~ unsigned char dddrr = 'c'; 
+  //~ unsigned char dddrr = 'c';
   student st1 = {"Ali", "933424", 15.1};
   int a = 1;
   cout << st1[a] << endl;
@@ -79,9 +79,8 @@ int main(){
   myi.rewind();
   cout << myi.readNext() << endl;
   student* ps = &myi.readNext(); //Error
-  cout << *ps <<endl;  
-  cout << myi.readNext() <<endl;  
-  cout << myi.read(0) << endl;  
+  cout << *ps <<endl;
+  cout << myi.readNext() <<endl;
+  cout << myi.read(0) << endl;
   cout << myi.read(1) << endl;
-  return 0;
 }

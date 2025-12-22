@@ -23,7 +23,6 @@ int main(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));
   f1(d);
-  return 0;
 }
 void f1(myArray a){
   a.print();

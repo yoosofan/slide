@@ -132,7 +132,7 @@ istream& operator>>(istream& in1, myArray& b){
   cout << "Enter n ";
   in1 >> b.n;
   while( b.n < 0 || b.n > myArray::MAX ){
-    cout << "number of element must be greater than 0 and less than  " 
+    cout << "number of element must be greater than 0 and less than  "
       << myArray::MAX << endl;
     in1 >> b.n;
   }
@@ -157,7 +157,6 @@ void f1();
 void f2(myArray);
 int main(){
   f1();
-  return 0;
 }
 myArray operator+(const myArray& a, const myArray& b){
     myArray c;
@@ -197,5 +196,5 @@ void f2(myArray k){
   if( !b )
     cout << "b is empty (b.n == 0 or all b.a[i] == 0 ) " << endl;
   else
-    cout << "b is not empty (b.n != 0 and exists i for b.a[i] != 0 ) " << endl;  
+    cout << "b is not empty (b.n != 0 and exists i for b.a[i] != 0 ) " << endl;
 }

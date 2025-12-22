@@ -19,5 +19,4 @@ void print_date(date d1){
 int main(){
   date birthDate = input_date();
   print_date(birthDate);
-  return 0;
 }

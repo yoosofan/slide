@@ -26,5 +26,4 @@ int main () {
       cout << "vals[" << i << "] = ";
       cout << vals[i] << endl;
    }
-   return 0;
 }

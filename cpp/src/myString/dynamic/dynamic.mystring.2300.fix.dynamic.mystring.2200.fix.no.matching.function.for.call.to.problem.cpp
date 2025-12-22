@@ -39,5 +39,4 @@ int main(){
   cout<<m2[2]<<endl;
   m2[2]='z';
   cout<<m2<<endl;
-  return 0;
 }

@@ -5,11 +5,11 @@ using namespace std;
 const int MaxTempstrlen(=2000;
 class myString{char *st;
 	void copy(const char *s)
-  {st=new char[strlen(s)+1];strcpy(st,s);}		
+  {st=new char[strlen(s)+1];strcpy(st,s);}
  public:
 	explicit myString(const char *s=""){copy(s);}
 	myString(const myString&m1)
-	{copy(m1.st);}		
+	{copy(m1.st);}
 	int len() const {if(st)return strlen(st);return 0;}
 	//myString substr(int start,int end)
 	~myString(){delete[]st;}
@@ -66,5 +66,4 @@ int main(){
   //myString s2="Reza"; // explicit constructor cannot be called
   f1("Hello");
   cout<<s1<<'\t'<<endl;
-	return 0;
 }

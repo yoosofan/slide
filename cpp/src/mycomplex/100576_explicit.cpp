@@ -3,14 +3,14 @@
 using namespace std;
 struct myComplex{ // 100575
   double re, img; // explicit
-  explicit myComplex(const double a = 0, 
-            const double b = 0){ 
-    re = a; 
+  explicit myComplex(const double a = 0,
+            const double b = 0){
+    re = a;
     img = b;
   }
-  void print(){ 
-    cout << '(' << re << ", " 
-         << img << ')' << endl; 
+  void print(){
+    cout << '(' << re << ", "
+         << img << ')' << endl;
   }
   void input(){
     cout << "Enter real ";
@@ -40,7 +40,7 @@ struct myComplex{ // 100575
 int main(){
   myComplex a(2, 3), b(4), c;
   myComplex d = 4;
-  c = a.add(b); 
+  c = a.add(b);
   c = a.add(2);
   c.print();
   a.input();
@@ -50,5 +50,4 @@ int main(){
   c = a.mul(b);// c = a * b
   c.print();
   c.print();
-  return 0;
 }

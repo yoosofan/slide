@@ -11,9 +11,9 @@ template<typename T> class myArray{
     if(!f1){
       f1.open(fname, ios::out | ios::binary);
       if(!f1)
-        throw fname + "Can not open file" ; 
+        throw fname + "Can not open file" ;
       else{
-        f1.close(); 
+        f1.close();
         f1.open(fname, ios::in | ios::out | ios::binary);
       }
     }
@@ -38,7 +38,7 @@ template<typename T> class myArray{
     f1.write((char*) &j, sizeof(T));
     f1.flush();
   }
-  void rewind(){ 
+  void rewind(){
     f1.seekg(0, ios::beg);
     f1.seekp(0, ios::beg);}
  };
@@ -52,7 +52,7 @@ struct student{
     return o1;
   }
   char& operator[](const int& index){
-    if(unsigned(index) < strlen(stdno)) 
+    if(unsigned(index) < strlen(stdno))
       return stdno[index];
     return stdno[0];
   }
@@ -73,5 +73,4 @@ int main(){
   cout << myi.readNext() << endl;
   cout << myi.read(0) << endl;
   cout << myi.read(1) << endl;
-  return 0;
 }

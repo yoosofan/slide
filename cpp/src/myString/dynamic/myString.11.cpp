@@ -7,7 +7,6 @@ void mystrcpy((char *dst, const char *src);
 void mystrcpy((myString & dst, const char *src);
 int myStringLength(const char *s){
 	if(*s) return 1+myStringLength(s+1);
-	return 0;
 }
 class myString{
 	char *st;

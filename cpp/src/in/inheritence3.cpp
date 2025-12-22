@@ -22,5 +22,4 @@ int main(){
   Shape *ps=&s; cout<<ps->Area()<<endl;
   ps=&sq; cout<<ps->Area()<<endl;
   sq.printAll();
-  return 0;
 }

@@ -14,4 +14,4 @@ void f1(){
   complexCls c1(12,14);
   cout<<c1.getRe()<<endl;
 }
-int main(){f1();return 0;}
+int main(){f1();}

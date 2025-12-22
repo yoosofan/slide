@@ -6,12 +6,12 @@ int * f2();
 int& f4();
 
 int main(){
-	int a = 0;
-	int& b = a;
-	int c = a;
-	std::cout << __LINE__ << ":\t" << a << "\t" << c << "\t" << std::endl;
-	b = 3;
-	std::cout << __LINE__ << ":\t" << a << "\t" << b << '\t' << c << "\t" << std::endl;
+  int a = 0;
+  int& b = a;
+  int c = a;
+  std::cout << __LINE__ << ":\t" << a << "\t" << c << "\t" << std::endl;
+  b = 3;
+  std::cout << __LINE__ << ":\t" << a << "\t" << b << '\t' << c << "\t" << std::endl;
   int *pa = nullptr;
   pa = & a;
   std:: cout << __LINE__ << ":\t" << *pa << std::endl;
@@ -29,7 +29,6 @@ int main(){
   std::cout << __LINE__ << ":\t" << f4() <<  std::endl;
   f4() = 21;
   std::cout << __LINE__ << ":\t" << f4() <<  std::endl;
-  return 0;
 }
 
 void f1(int* pk){

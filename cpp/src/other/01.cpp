@@ -14,5 +14,4 @@ int main(){
   std:: cout << *pa << std::endl;
   b = c;
 	std::cout << a << "\t" << c << "\t" << std::endl;
-	return 0;
 }

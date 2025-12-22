@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 class complexCls{
-  double re = 0, img = 0; 
+  double re = 0, img = 0;
  public:
   complexCls(double r = 0, double i = 0){
     img = i;    re = r;
@@ -12,7 +12,7 @@ class complexCls{
   ~complexCls()
   {cout << "destructor:"; print();}
   void print(){
-    cout << '(' << re << ',' 
+    cout << '(' << re << ','
       << img << ')' << endl;
   }
 };
@@ -25,21 +25,20 @@ void f3(complexCls *p1)
 {delete p1;}
 void f4(){
   complexCls *p2;
-  p2 = f2();  
-  p2 -> print();  
+  p2 = f2();
+  p2 -> print();
   f3(p2);
   p2 = new complexCls[2]{
-      complexCls(21, 21), 
+      complexCls(21, 21),
       complexCls(32, 31)
   };
-  for(int i = 0; i < 2; i++)    
+  for(int i = 0; i < 2; i++)
     p2[i].print();
   delete[] p2;
 }
 int main(){
   complexCls c1(34, 21);
-  f4();  
-  return 0;
+  f4();
 }/*
 constructor:(34,21)
 constructor:(2,4)

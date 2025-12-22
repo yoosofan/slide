@@ -14,8 +14,8 @@ class myString{
   int len(){return strlen(s);}
   ~myString(){delete[]s;}
   myString& operator=(const myString& mys){
-    delete[] s; 
-    init(mys.s); 
+    delete[] s;
+    init(mys.s);
     return *this;
   }
   friend ostream& operator<<(ostream&out, const myString& mys){
@@ -29,7 +29,7 @@ class myString{
     mys.init(st);
     return in;
   }
-    
+
 };
 int main(){
   myString m("rose"), m2;
@@ -37,5 +37,4 @@ int main(){
   cin >> m;
   cout << m.len() << ":\t" << m << endl;
   cout<< m2.len() <<":\t" << m2 << endl;
-  return 0;
 }

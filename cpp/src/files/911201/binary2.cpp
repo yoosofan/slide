@@ -14,7 +14,7 @@ class MyClass{
       cout<<"year "<<year<<endl;
       cout<<"month "<<month<<endl;
       cout<<"day  "<<day<<endl;
-    }   
+    }
   };
   struct person{
     char fname[20],lname[20],ssn[15];
@@ -35,10 +35,10 @@ public:
     }
   }
   ~MyClass(){f1.close();}
-  void write(person p,int index=0){ 
+  void write(person p,int index=0){
     if(index>0)
       f1.seekp((index-1)*sizeof(p),ios::beg);
-    f1.write((char*)&p,sizeof(p)); 
+    f1.write((char*)&p,sizeof(p));
   }
   person read(int index=0){person p;
     if(index>0)
@@ -76,5 +76,4 @@ public:
 int main(){
   MyClass m1;
   m1.run();
-  return 0;
-}  
+}

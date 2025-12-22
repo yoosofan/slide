@@ -1,6 +1,6 @@
 //Error
-/* 
- * Copyright 2018 Ahmad Yoosofan <yoosofan@myfastmail.com>, 
+/*
+ * Copyright 2018 Ahmad Yoosofan <yoosofan@myfastmail.com>,
  * http://yoosofan.github.io
  * http://yoosofan.kashanu.ac.ir
  * University of Kashan (http://kashanu.ac.ir)
@@ -84,7 +84,7 @@ class triangle{
   bool check(){return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
   triangle(side a, side b, side c){
-	  this->a=a; 
+	  this->a=a;
 	  this->b=b;
 	  this->c=c;
 	  if(!check()){
@@ -129,7 +129,7 @@ void f2(){
 	y = (double)i;
 	y = double(i);
 	y = static_cast<double>(i);
-	
+
 	//triangle t(a,b,c);
 	//t.show();
 }
@@ -139,7 +139,7 @@ int f1(){
   c.Show();
   c=add(a,b);
   c.Show();
-  
+
 }
 void f3(){
   side s1(1);
@@ -151,5 +151,4 @@ int main(){
   //f1();
   //f2();
   f3();
-  return 0;
 }

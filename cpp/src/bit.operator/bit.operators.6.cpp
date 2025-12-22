@@ -14,14 +14,13 @@ int main(){
   cout<<(i^j)<<endl;
   unsigned char c=0x20;
   showbits(c);showbits(~c);
-  return 0;
 }
-void showbits(unsigned int x){int i; 
+void showbits(unsigned int x){int i;
   for(i=(sizeof(int)*8)-1; i>=0; i--)
       (x&(1<<i))? cout<<'1': cout<<'0';
   cout<<endl;
 }
-void showbits(unsigned char x){int i; 
+void showbits(unsigned char x){int i;
   for(i=(sizeof(char)*8)-1; i>=0; i--)
       (x&(1<<i))? cout<<'1': cout<<'0';
   cout<<endl;

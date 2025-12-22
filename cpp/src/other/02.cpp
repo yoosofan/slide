@@ -8,7 +8,6 @@ int& test();
 int main(){
     test() = 5;
     cout << global_num << endl;
-    return 0;
 }
 int& test(){
     return global_num;

@@ -20,7 +20,6 @@ int main(){
   f1.read((char*)&s1,sizeof(s1));
   s1.print();
   f1.close();
-  return 0;
 }
-  
-  
+
+

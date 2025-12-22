@@ -13,9 +13,9 @@ class complexCls{
   //complexCls operator+(complexCls&a)
   //{complexCls b=a; b.re+=re;b.im+=im; return b;}
   complexCls operator+(complexCls a){
-    complexCls b=a; 
+    complexCls b=a;
     b.re+=re;
-    b.im+=im; 
+    b.im+=im;
     return b;
   }
   complexCls operator=(const complexCls& a){
@@ -33,7 +33,7 @@ class complexCls{
   {cout<<'('<<re<<','<<im<<')'<<'\t'<<endl;}
   double Magnitude()
   {return sqrt(re*re+im*im);}
-}; 
+};
 void f1(){
   const int n=10;
   int ar[n];
@@ -45,7 +45,7 @@ void f1(){
   else  cout<< " c is not zero "<<endl;
   numberOfErrors++;
   c.Show();
-  c=a+b; 
+  c=a+b;
   //c.Show();
   //c = a+1;
   //c = a + 12;
@@ -55,5 +55,4 @@ void f1(){
 int main(){
   f1();
   cout<<"This will not appear in main"<<endl;
-  return 0;
 }

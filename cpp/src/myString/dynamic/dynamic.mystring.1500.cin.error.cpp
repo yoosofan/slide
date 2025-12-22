@@ -20,5 +20,4 @@ istream& operator>>(istream&in,myString m) // myString &m
 int main(){
   myString m("rose");
   cin>>m;cout<<m.len()<<":\t"<<m<<endl;
-  return 0;
 }

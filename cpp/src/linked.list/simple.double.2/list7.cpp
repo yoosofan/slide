@@ -28,5 +28,4 @@ int main(){
   append(head.link->link,56);
   insert_here(head.link->link,87);
   print(head.link);
-  return 0;
 }
