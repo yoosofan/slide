@@ -12,7 +12,7 @@ using namespace std;
       strcpy(fname,f);
       strcpy(lname,l);
     }
-    void print(void){
+    void print(){
       cout<<"ssid "<<ssid;
       cout<<"  fname "<<fname;
       cout<<"  lname "<<lname;

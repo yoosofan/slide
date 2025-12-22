@@ -4,7 +4,7 @@ struct complexCls{
   double r,i;
   void init(double m=0, double n=0)
   {r=m; i=n;}
-  void display(void)
+  void display()
   {cout<<r<<"+i "<<i<<endl;}
   void input(string str1){
     cout<<str1<<"  ";

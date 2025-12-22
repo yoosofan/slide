@@ -23,7 +23,7 @@ class side{
     d = a;
   }
 
-  void input(void){
+  void input(){
     cout << "Enter length of side:";
     cin >> d;
     while(d <= 0){
@@ -44,14 +44,14 @@ class side{
     return d > a.d;
   }
 
-  void show(void){cout<<d;}
+  void show(){cout<<d;}
 };
 
 class triangle{
   side a, b, c;
   // (a.operator+(b)).operator>(c)
 
-  bool check(void){
+  bool check(){
     return (a + b > c && a + c > b && b + c > a );
   }// true, false
   public:
@@ -64,13 +64,13 @@ class triangle{
       throw "These sides do not generate a triangle: ";
   }
 
-  void show(void){
+  void show(){
     cout << "\t";  a.show();
     cout << ",\t"; b.show();
     cout << ",\t"; c.show();
     cout << endl;
   }
-  void input(void){
+  void input(){
     //int k;
     do{
       a.input();
@@ -79,7 +79,7 @@ class triangle{
     }while(!check());
   }
 };
-void f2(void){
+void f2(){
   side a(3), b(4), c(5), d;
   d = a + b; // d = a.operator+(b);
   d.show(); cout << endl;

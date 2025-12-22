@@ -42,7 +42,7 @@ class myIntArray{ int **a;
     f1.close();
   }/*
   ~myIntArray(){delete[] a;}
-  void sort(void){
+  void sort(){
     int i,j;
     for(i=0;i<n-1;i++)
       for(j=i+1;j<n;j++)
@@ -52,7 +52,7 @@ class myIntArray{ int **a;
     for(int i=0;i<n;i++) if(a[i]==key) return i;
     return -1;
   }*/
-  void print(void){
+  void print(){
     for(int i=0; i<n; i++){
       cout<<endl;
       for(int j=0;j<m;j++)

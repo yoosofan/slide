@@ -4,12 +4,12 @@ class Shape{
   string name;
   string color;
 public:
-  virtual int Area(void){return 0;}
+  virtual int Area(){return 0;}
 };
 class Square: public Shape{
   int d;
 public:
-  virtual int Area(void){return d*d;}
+  virtual int Area(){return d*d;}
   Square(int d=1){this->d=d;}
 };
 int main(){

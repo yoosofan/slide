@@ -21,8 +21,8 @@ class myString{
 	}
 	myString(const myString&m1)
 	{st=new char[myStringLength(m1.st)+1];mystrcpy((st,m1.st);}		
-	int len(void){return myStringLength(st);}
-	void print(void){cout<<st<<endl;}
+	int len(){return myStringLength(st);}
+	void print(){cout<<st<<endl;}
 	//char get(int index);
 	void set(char c='a', int index=0){
 		if(index<myStringLength(st))st[index]=c;

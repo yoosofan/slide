@@ -15,7 +15,7 @@ struct student{
     f1 >> m;       
     f1 >> n;  
   }
-  void print(void){
+  void print(){
     cout << std_no <<'\t';
     cout << name << '\t';
     cout << avg << '\t';

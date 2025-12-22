@@ -6,7 +6,7 @@ class Shape{
 public:
   Shape(string na, string co)
   {name=na; color = co;}
-  int Area(void){return 0;}
+  int Area(){return 0;}
   Shape() = default;
   friend ostream& operator <<(
       ostream& o1, const Shape& s1){
@@ -14,12 +14,12 @@ public:
        << "\tcolor: " << s1.color;
     return o1;
   }
-  string getColor(void){return color;}
+  string getColor(){return color;}
 };
 class Square: public Shape{
   int d = 1;
 public:
-  int Area(void){return d*d;}
+  int Area(){return d*d;}
   Square(int d): Shape("bb", "blue"){this->d=d;}
   Square() = default;
   friend ostream& operator <<(

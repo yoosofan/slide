@@ -19,7 +19,7 @@ struct side{
     d=a;
   }
   side(const side&a){d = a.d;cout<<"copy constructor:"<<d<<endl;}
-  void input(void){
+  void input(){
     cout<<"Enter length of side:"; cin>>d;
     while(d<=0){
       cout<<"Side must be >0"<<endl;
@@ -30,7 +30,7 @@ struct side{
 };
 class triangle{
   side a=1, b=1, c=1;
-  bool check(void){return (a.d+b.d>c.d && a.d+c.d>b.d && b.d+c.d>a.d);}// true, false
+  bool check(){return (a.d+b.d>c.d && a.d+c.d>b.d && b.d+c.d>a.d);}// true, false
   public:
   triangle(const side& a, const side& b, const side& c){
       this->a=a;

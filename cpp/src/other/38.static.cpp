@@ -14,17 +14,17 @@
 using namespace std;
 struct complexCls{
    static int count;
-   static int numberCount(void){return count;}
+   static int numberCount(){return count;}
    double r,i;
    //explicit complexCls(double m=0 , double n=0) {r=m;i=n;}
    complexCls(double m=0 , double n=0) {r=m;i=n;count++;}
-   ~complexCls(void) {count--;}
+   ~complexCls() {count--;}
    //complexCls(int m=0 , int n=0) {r=m;i=n;}
    void Show(){cout<<'('<<r<<','<<i<<')'<<'\t'<<endl;}
    double Magnitude(){return sqrt(r*r+i*i);}
    //operator bool() const {cout<<"aaa:::: "<<endl;return r==0 && i==0 ? false : true;}
    bool operator!() const {cout<<"aaa:::: "<<endl;return !(r==0 && i==0 ? false : true);}
-   complexCls operator++(void){   // ++a
+   complexCls operator++(){   // ++a
     cout<<"not int";    i++; r++;    return *this;  }
    complexCls operator++(int dummy){ // a++
     cout<<"int";    complexCls result=*this;    r++;    i++; return result;  }

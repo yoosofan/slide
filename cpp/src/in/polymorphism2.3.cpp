@@ -8,8 +8,8 @@ class Person{
     int year1 = 12):name(name1), year(year1)
   {}
   //Person(string name1="Ali",int year1=12){name=name1;year=year1;}
-  virtual string getJob(void) = 0; // abstract function
-  void print(void){
+  virtual string getJob() = 0; // abstract function
+  void print(){
     cout <<"name :" << name <<endl;
     cout <<"year :" << year <<endl;
     cout <<"job  :" << getJob() << endl;
@@ -18,14 +18,14 @@ class Person{
 class Student: public Person{
   string stdnm;
   public:
-  virtual string getJob(void)
+  virtual string getJob()
   {return "student";}
   Student(string name1="Ali", int year1=12,string d="234234"):Person(name1,year1)
   {stdnm=d;}
 };
 class Employee: public Person{
   public:
-  virtual string getJob(void)
+  virtual string getJob()
   {return "employee";}
   Employee(string name1="Ali",int year1=12):Person(name1,year1){}
 };

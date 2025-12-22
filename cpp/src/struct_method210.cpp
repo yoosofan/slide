@@ -2,7 +2,7 @@
 using namespace std;
 struct date{ 
   int year=1384, month=10, day=28; 
-  void input(void){
+  void input(){
     cout << "Year: "; 
     cin >> year;
     cout << "Month: "; 
@@ -10,7 +10,7 @@ struct date{
     cout << "Day: "; 
     cin >> day;
   }
-  void print(void){
+  void print(){
     cout << year << '/' << month 
       << '/' << day << endl;
   }

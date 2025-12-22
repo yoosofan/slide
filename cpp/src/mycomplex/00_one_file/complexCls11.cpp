@@ -10,18 +10,18 @@ class complexCls{
     cout << "constructor:"; 
     print();
   }
-  double getRe(void){return re;}
-  double getImg(void){return img;}
+  double getRe(){return re;}
+  double getImg(){return img;}
   ~complexCls(){
     cout << "destructor:" ; 
     print();
   }
-  void print(void){
+  void print(){
     cout << '(' << re << ',' << img 
       << ')' <<endl;
   }
 };
-void f1(void){
+void f1(){
   complexCls c1(12,14);
   c1.print();  
   int i=0;
@@ -29,13 +29,13 @@ void f1(void){
   if(i){complexCls c3(3);}
   else{complexCls c4(9);}
 }
-complexCls* f2(void){
+complexCls* f2(){
   complexCls *pc;
   pc=new complexCls(2,4);
   return pc;
 }
 void f3(complexCls *p1){delete p1;}
-void f4(void){ 
+void f4(){ 
   complexCls *p2;
   p2=f2(); //p2->re=65;
   p2->print(); f3(p2);

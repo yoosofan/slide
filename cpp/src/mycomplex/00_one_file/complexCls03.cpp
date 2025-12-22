@@ -6,10 +6,10 @@ struct complexCls{
   {img=i;re=r;cout<<re<<endl;}
   //complexCls(double r=0,double i)
   //{img=i;re=r;}//Error
-  double getRe(void){return re;}
-  double getImg(void){return img;}
+  double getRe(){return re;}
+  double getImg(){return img;}
 };
-void f1(void){
+void f1(){
   complexCls c1(12,14);
   complexCls c2 = 12;
   c2 = 992;

@@ -6,7 +6,7 @@ template<typename T> int search(T* a, T v, int n){
       return i;
   return -1;
 }
-void f1(void); //~ void f2(void);
+void f1(); //~ void f2();
 int main(){f1();f2();}
 void f1(){
   double ae[20] = {3,4,5,6,8,9};

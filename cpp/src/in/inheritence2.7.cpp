@@ -7,17 +7,17 @@ protected:
   string name;
   string color;
 public:
-  int Area(void){
+  int Area(){
     cout << "in Shape" << endl;
     return 0;
   }
-  void show(void)
+  void show()
   {cout<<"show in shape"<<endl;}
 };
 class Square: private Shape{
   int d;
 public:
-  int Area(void){
+  int Area(){
     cout << "in Square" << endl;
     return d*d;
   }

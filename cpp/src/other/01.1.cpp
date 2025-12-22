@@ -2,8 +2,8 @@
 
 void f1(int*);
 void f3(int&);
-int * f2(void);
-int& f4(void);
+int * f2();
+int& f4();
 
 int main(){
 	int a = 0;
@@ -38,7 +38,7 @@ void f1(int* pk){
   std::cout << __LINE__ << "\t pk: " << *pk << std::endl;
 }
 
-int* f2(void){
+int* f2(){
   static int a = 5;
   return &a;
 }
@@ -47,7 +47,7 @@ void f3(int& z){
   z = 9;
 }
 
-int& f4(void){
+int& f4(){
   static int a = 17;
   return a;
 }

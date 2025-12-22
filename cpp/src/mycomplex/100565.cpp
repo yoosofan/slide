@@ -9,7 +9,7 @@ class myComplex{ double re, img; public:
     cout << "Copy Constructor" << endl;
   }
   ~myComplex(){cout<<"Destructor"<<endl;}
-  void print(void) const
+  void print() const
   {cout<<'(' << re<<", "<<img<<')'<< ndl;}
   myComplex add(const myComplex a){
     myComplex r = a;
@@ -30,7 +30,7 @@ class myComplex{ double re, img; public:
     return r;
   }
 };
-void myFunction(void){
+void myFunction(){
   myComplex a(2, 3),
      b=4, c; 
   c = a.add(b);  

@@ -3,13 +3,13 @@
 using namespace std;
 struct point{
   double x=0, y=0;
-  void input(void) {
+  void input() {
     cout << "Enter X: ";
     cin >> x;
     cout << "Enter Y: ";
     cin >> y;
   }
-  void print(void) {
+  void print() {
     cout << '(' << x << ','
       << y << ')' << endl;
   }
@@ -17,7 +17,7 @@ struct point{
     x += dx;
     y += dy;
   }
-  double magnitude(void){ // length
+  double magnitude(){ // length
     return sqrt(pow(x, 2)+pow(y, 2));
   }
 };

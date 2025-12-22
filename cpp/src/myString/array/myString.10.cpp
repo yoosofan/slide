@@ -14,8 +14,8 @@ class myString{
     public:
     myString(const char *s)
     {myStringCopy(st,s);cout<<"constructor "<<endl;}
-    int len(void){return myStringLength(st);}
-    void print(void){}
+    int len(){return myStringLength(st);}
+    void print(){}
     //char get(int index);
     //void set(char c, int index);
     //myString substr(int start,int end)

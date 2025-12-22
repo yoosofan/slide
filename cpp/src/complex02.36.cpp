@@ -4,15 +4,15 @@ struct complexCls{
   double re = 0, img = 0;
   void set(const double r=0, const double i=0)
   {re=r;img=i;}
-  double getRe(void){return re;}
-  double getImg(void){return img;}
+  double getRe(){return re;}
+  double getImg(){return img;}
   void setRe(const double r){re = r;}
   void setImg(const double i){img = i;}
-  void print(void){
+  void print(){
     cout << '(' << re << ','
       << img << ')' << endl;
   }
-  void input(void){
+  void input(){
     cout << "Enter re "; cin >> re;
     cout << "Enter img "; cin >> img;
   }

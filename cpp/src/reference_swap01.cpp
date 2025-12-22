@@ -10,7 +10,7 @@ void mySwap1(int a, int b){
   a=b;
   b=t;
 }
-void f1(void){
+void f1(){
   int m = 2, n = 8;
   cout << "m: " << m << "\tn: " << n << endl;
   mySwap1(m, n);

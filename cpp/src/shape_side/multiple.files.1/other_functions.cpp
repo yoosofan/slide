@@ -5,7 +5,7 @@ using namespace std;
 #include "mycomplex.h"
 #include "triangle.h"
 #include "other_functions.h"
-void f2(void){
+void f2(){
 	side a(3);
 	side b(4),c(5);
 	side d;
@@ -30,7 +30,7 @@ void f2(void){
 	//triangle t(a,b,c);
 	//t.show();
 }
-int f1(void){
+int f1(){
   complexCls a(2,3),b(2,1),c(a);
   c=a.add(b);
   c.Show();

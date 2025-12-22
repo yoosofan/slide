@@ -6,7 +6,7 @@ struct stCls{
   int a;
   int b;
   char cs[200];
-  void print(void){
+  void print(){
     cout<<"a : "<<a<<endl;
     cout<<"b : "<<b<<endl;
     cout<<"cs: "<<cs<<endl;

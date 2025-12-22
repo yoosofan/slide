@@ -7,10 +7,10 @@ struct complexCls{
   complexCls(double r,double i=0){img=i;re=r;}
  public:
   complexCls()=default;
-  double getRe(void){return re;}
-  double getImg(void){return img;}
+  double getRe(){return re;}
+  double getImg(){return img;}
 };
-void f1(void){
+void f1(){
   //complexCls c1(12,14);
   complexCls c1;
   complexCls c2(1);

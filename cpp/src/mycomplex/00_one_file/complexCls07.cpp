@@ -4,13 +4,13 @@ class complexCls{
   double re,img;
   public:
   complexCls(double r=0,double i=0){img=i;re=r;}
-  double getRe(void){return re;}
+  double getRe(){return re;}
   void setRe(double r){re=r;}
-  double getImg(void){return img;}
+  double getImg(){return img;}
   ~complexCls()
   {cout<<"destructor: "<<re<<"  "<<img<<endl;}
 };
-void f1(void){
+void f1(){
   complexCls c1(12,14);
   cout<<c1.getRe()<<endl;
   int i=0;

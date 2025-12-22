@@ -28,11 +28,11 @@ class complexCls{ double r, i;  public: //1150
     c.i = a.i - b.i;
     return c;
   }
-  complexCls operator++(void)   // ++a
+  complexCls operator++()   // ++a
   { i++; r++; return *this;  }
   complexCls operator++(int dummy) // a++
   {complexCls result=*this; r++; i++; return result;}
-  complexCls operator--(void)   // --a
+  complexCls operator--()   // --a
   { i--; r--; return *this;  }
   complexCls operator--(int dummy) // a--
   {complexCls result=*this; r--; i--; return result;}
@@ -61,7 +61,7 @@ class complexCls{ double r, i;  public: //1150
   bool operator()(double a, double b)
   {return r == a && i == b;}
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  cout << c << endl;
   cout << c(1) << ' ' << c(0) << endl;

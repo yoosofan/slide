@@ -13,7 +13,7 @@ struct myArray{
     for(int i=0;i<n;i++) a[i]=b[i];
   }
 
-  void print(void){cout<<endl;
+  void print(){cout<<endl;
     for(int i=0;i<n;i++)
       cout<<"A["<<i<<"]:"<<a[i];
   }

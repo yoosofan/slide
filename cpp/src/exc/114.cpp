@@ -22,7 +22,7 @@ bool f4(int mm){
     cout << "In f4 mm " << mm << endl;
   return retVal;
 }
-bool f3(void){
+bool f3(){
     if(!f1(3)){ 
       cout << "In f3 " << endl;
       return false;

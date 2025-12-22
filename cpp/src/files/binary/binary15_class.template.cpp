@@ -32,7 +32,7 @@ template<typename T>class myFileArray{fstream f1;
      f1.seekp(index*sizeof(T),ios::beg);
      f1.write((char *) &j , sizeof(T));
    }
-   T readNext(void){
+   T readNext(){
      T j;
      long long int pos=f1.tellg();
      f1.seekg(0,ios::end);
@@ -47,7 +47,7 @@ template<typename T>class myFileArray{fstream f1;
      f1.write((char *)&j, sizeof(T));
      f1.flush();
    }
-   void rewind(void){ f1.seekg(0,ios::beg);f1.seekp(0,ios::beg);}
+   void rewind(){ f1.seekg(0,ios::beg);f1.seekp(0,ios::beg);}
  };
 struct student{
   char name[20];

@@ -11,7 +11,7 @@ class myString{
   public:
   myString(const char* m=""){init(m);}
   myString(myString&mys){init(mys.s);}
-  int len(void){return strlen(s);}
+  int len(){return strlen(s);}
   ~myString(){delete[]s;}
   myString& operator=(const myString& mys){
     delete[] s; 

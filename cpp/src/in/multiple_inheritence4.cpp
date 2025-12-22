@@ -4,24 +4,24 @@ class A{int a1;
   friend void print(A); // A(){}
 public: // A() = delete;
   A(int a):a1(a){}
-  virtual void Show(void)
+  virtual void Show()
   { cout << a1 << endl; }
 };
 class B{ protected: int b1;
   friend void print(A);
-public: void f1(void){}
+public: void f1(){}
   B(int b){b1=b;}
-  virtual void Show(void)
+  virtual void Show()
   {cout << b1 << endl;}
 };
 class D: public A, public B{
   int d1=0, b1=0;
   static int si;
 public:
-  static void printHello(void)
+  static void printHello()
   {cout << "Hello world" << si << endl;}
   D(int a,int b,int d):A(a),B(b){b1=d;}
-  virtual void Show(void){
+  virtual void Show(){
       A::Show();
       B::Show(); cout << B::b1 << endl;
       cout << b1 << endl;
@@ -35,7 +35,7 @@ void myPrint(A a1){a1.Show();}
 void myPrint(B a1){a1.Show();}
 class C {int i; public:
   C(){ i = 0; }
-  void Show(void){ int i = 7;
+  void Show(){ int i = 7;
     cout << i <<"   " << this->i << endl;
   }
 };

@@ -17,11 +17,11 @@ class complexCls{ double r,i;
  public:
   complexCls(int m=0,int n=0)
   {r=m;i=n;}
-  void Show(void)
+  void Show()
   {cout<<r<<"+ i "<<i<<endl;}
-  double Magnitude(void)
+  double Magnitude()
   {return sqrt(r*r+i*i);}
-  void input(void){
+  void input(){
     cout<<"Enter real:"; cin>>r;
     cout<<"Enter imaginary:"; cin>>i;
   }
@@ -46,7 +46,7 @@ class side{
     if(a<=0){cout<<"Side of a shape connot be negative or zero"<<endl;exit(0);}
     a=d;
   }
-  void input(void){
+  void input(){
     cout<<"Enter length of side:"; cin>>d;
     while(d<=0){
       cout<<"Side must be >0"<<endl;
@@ -59,12 +59,12 @@ class side{
     return b;
   }
   bool operator>(side a){ return d>a.d;}
-  void show(void){cout<<d;}
+  void show(){cout<<d;}
 };
 class triangle{
   side a, b, c;
                        // (a.operator+(b)).operator>(c)
-  bool check(void){return (a+b>c && a+c>b && b+c>a);}// true, false
+  bool check(){return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
   triangle(side a1, side b1, side c1): a(a1), b(b1), c(c1){
 	  if(!check()){
@@ -72,8 +72,8 @@ class triangle{
 		  show();
 	  }
   }
-  void show(void){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
-  void input(void){
+  void show(){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
+  void input(){
     //int k;
     do{
       //cout<<"Enter a: ";cin>>k;
@@ -88,11 +88,11 @@ class triangle{
     }while(!check());
   }
 };
-void f2(void){
+void f2(){
 	side a(3),b(4),c(5);
 	triangle t(a,b,c);
 }
-void f1(void){
+void f1(){
   complexCls a(2,3),b(2,1),c(a);
   c=a.add(b);
   c.Show();

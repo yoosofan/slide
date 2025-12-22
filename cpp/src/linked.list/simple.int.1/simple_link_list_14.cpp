@@ -25,7 +25,7 @@ class list{
       else retVal = false;
       return retVal;
    }
-   void displayAll(void){
+   void displayAll(){
       for(Node *pn= head.next ; pn ; pn = pn -> next)
          cout<<pn->data<<endl;
    }

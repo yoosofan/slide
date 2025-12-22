@@ -17,9 +17,9 @@ class myClass {
 	
   public: 
 	static int count;
-	void my(void);
+	void my();
 };
-void myClass::my(void){std::cout<<"my"<<std::endl;}
+void myClass::my(){std::cout<<"my"<<std::endl;}
 int myClass::count=3;
 
 int main(){

@@ -8,7 +8,7 @@ class Node{
 class list{
   Node *head=nullptr;
  public: 
-  void displayAll(void){
+  void displayAll(){
     cout<<"The list is empty "<<endl;
   }
 };

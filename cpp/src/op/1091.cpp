@@ -4,11 +4,11 @@ using namespace std;
 class complexCls{
   double r, i;
  public:
-  void Show(void) const
+  void Show() const
   {cout << r << "+ i " << i << endl;}
-  double Magnitude(void) const
+  double Magnitude() const
   {return sqrt(r * r + i * i);}
-  void input(void){
+  void input(){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
   }
@@ -51,7 +51,7 @@ class complexCls{
   complexCls(int m = 0, int n = 0)
   {r = m; i = n;}
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  c.Show();
   // c.operator=(operator+(2, a));

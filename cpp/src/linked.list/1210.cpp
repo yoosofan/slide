@@ -16,7 +16,7 @@ class listCls{
     ;
     p -> next = new nodeCls(d);
   }
-  void print(void){
+  void print(){
     nodeCls* p = head.next;
     for(; p; p = p -> next)
       cout << p -> data << '\t';

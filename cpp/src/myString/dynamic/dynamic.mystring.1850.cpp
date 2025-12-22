@@ -11,7 +11,7 @@ class myString{
   public:
   myString(const char *m=""){init(m);}
   myString(myString& mys){init(mys.s);}
-  int len(void){return strlen(s);}
+  int len(){return strlen(s);}
   ~myString(){delete[]s;}
   friend ostream& operator<<(ostream& out, const myString& mys){
     out << mys.s;

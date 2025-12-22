@@ -4,7 +4,7 @@ using namespace std;
 struct firstStruct{  };
 struct secondStruct{ };
 struct thirdStruct{ };
-firstStruct f1(void);
+firstStruct f1();
 void f2(firstStruct);
 int main(){
   firstStruct myfs;

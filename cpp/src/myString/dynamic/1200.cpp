@@ -9,7 +9,7 @@ class myString{
     s = new char[stringLenght(m)+1];
     stringCopy(s,m);
   }
-  int len(void)
+  int len()
   {return stringLenght(s);}
 };
 

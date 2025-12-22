@@ -8,7 +8,7 @@ class myString{
     s = new char[strlen(m)+1];
     strcpy(s,m);
   }
-  int len(void){return strlen(s);}
+  int len(){return strlen(s);}
   ~myString(){delete[]s;}
   friend ostream& operator<<(ostream&o1, myString m){
     o1 << m.s;

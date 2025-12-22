@@ -29,5 +29,5 @@ class side{
     return b;
   }
   bool operator>(side a){cout<<d<<" > "<<a.d<<endl; return d>a.d;}
-  void show(void){cout<<d;}
+  void show(){cout<<d;}
 };

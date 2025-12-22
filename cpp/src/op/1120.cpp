@@ -10,7 +10,7 @@ class complexCls{//1120
     o1 << a.r << "+i" << a.i;
     return o1;
   }
-  void input(void){
+  void input(){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
   }
@@ -28,11 +28,11 @@ class complexCls{//1120
     c.i = a.i - b.i;
     return c;
   }
-  complexCls operator++(void)   // ++a
+  complexCls operator++()   // ++a
   { i++; r++; return *this;  }
   complexCls operator++(int dummy) // a++
   {complexCls result=*this; r++; i++; return result;}
-  complexCls operator--(void)   // --a
+  complexCls operator--()   // --a
   { i--; r--; return *this;  }
   complexCls operator--(int dummy) // a--
   {complexCls result=*this; r--; i--; return result;}
@@ -62,10 +62,10 @@ class complexCls{//1120
   friend bool operator!=(const complexCls& a,
       const complexCls& b)
   {return a == b ? false: true;}
-  bool operator!(void)
+  bool operator!()
   {return r == 0 && i == 0 ? true: false;}
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a;  cout << c << endl;
   c = a++; cout << c << endl;

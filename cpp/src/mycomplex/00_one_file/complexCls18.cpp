@@ -8,15 +8,15 @@ class complexCls{
     re = r;
     cout << "constructor:"; print();
   }
-  double getRe(void)
+  double getRe()
   {return re;}
-  double getImg(void)
+  double getImg()
   {return img;}
   void setRe(double a)
   {re = a;}
   ~complexCls()
   {cout << "destructor:"; print();}
-  void print(void){
+  void print(){
     cout << '(' << re << ',' 
       << img << ')' << endl;
   }

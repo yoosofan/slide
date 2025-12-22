@@ -19,7 +19,7 @@ class myString{
   char st[200];
   public:
   myString(const char *s){myStringCopy(st, s);}
-  int len(void){return myStringLength(st);}
+  int len(){return myStringLength(st);}
 };
 int main(){ const char *st="salam";  // string st;
   cout << myStringLength(st) << endl;

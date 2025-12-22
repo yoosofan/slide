@@ -6,7 +6,7 @@ class Node{    public:
 };
 class list{
   Node *head = nullptr; public:     //static int value;
-  void displayAll(void){
+  void displayAll(){
     Node *pn = head;
     if(!pn)
       cout << "List is empty" << endl;
@@ -52,7 +52,7 @@ class list{
     return pn->data;
   }
 };// int list::value=0;
-void myFunction(void){ list l1;
+void myFunction(){ list l1;
     l1.insert(0,-4); l1.insert(0,-3);
     l1.insert(0,-2); l1.insert(0,-1);
     l1.displayAll();

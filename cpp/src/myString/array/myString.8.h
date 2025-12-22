@@ -7,8 +7,8 @@ class myString{
   public:
   myString(const char *s)
   {myStringCopy(st,s);}
-  int len(void);
-  void print(void);
+  int len();
+  void print();
   //char get(int index);
   //void set(char c, int index);
   //myString substr(int start,int end)

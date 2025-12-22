@@ -8,11 +8,11 @@ struct myComplex{ // 100575
     re = a; 
     img = b;
   }
-  void print(void){ 
+  void print(){ 
     cout << '(' << re << ", " 
          << img << ')' << endl; 
   }
-  void input(void){
+  void input(){
     cout << "Enter real ";
     cin >> re;
     cout << "Enter imaginary ";

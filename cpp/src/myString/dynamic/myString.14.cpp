@@ -14,8 +14,8 @@ class myString{
   public:
 	myString(const char *s)
 	{st=new char[myStringLength(s)+1];mystrcpy((st,s);}
-	int len(void){return myStringLength(st);}
-	void print(void){cout<<st<<endl;}
+	int len(){return myStringLength(st);}
+	void print(){cout<<st<<endl;}
 	//char get(int index);
 	void set(char c='a', int index=0){
 		if(index<myStringLength(st))st[index]=c;

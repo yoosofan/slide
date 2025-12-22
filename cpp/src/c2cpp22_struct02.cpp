@@ -7,8 +7,8 @@ struct student{
   char stdNumber[15]; 
   date birthDate;
 };
-date input_date(void);
-student input_student(void);
+date input_date();
+student input_student();
 void print_date(date d1);
 void print_student(student st);
 int main(){
@@ -24,7 +24,7 @@ int main(){
     }while(i<n);
   else  { cout << "0<n<50 "; cout << n;}
 }
-date input_date(void){
+date input_date(){
   date d1;
   cout << "Enter year:{1350..1390} "; 
   cin >> d1.year;
@@ -40,7 +40,7 @@ void print_date(date d1){
   cout << "\tday = "; 
   cout << d1.day; cout << "\n";
 }
-student input_student(void){
+student input_student(){
   student st;
   cout << "Enter name :";
   cin >> st.name;

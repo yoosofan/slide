@@ -6,7 +6,7 @@ using namespace std;
 class triangle{
   side a, b, c;
                        // (a.operator+(b)).operator>(c)
-  bool check(void){return (a+b>c && a+c>b && b+c>a);}// true, false
+  bool check(){return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
   triangle(side a, side b, side c){
 	  this->a=a;
@@ -17,8 +17,8 @@ class triangle{
 		  show();
 	  }
   }
-  void show(void){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
-  void input(void){
+  void show(){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
+  void input(){
     //int k;
     do{
       //cout<<"Enter a: ";cin>>k;

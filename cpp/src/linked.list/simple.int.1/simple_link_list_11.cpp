@@ -4,7 +4,7 @@ class Node{ public: int data; Node *next;};
 class list{ 
   Node *head=nullptr;
  public: 
-  void dispAll(void){
+  void dispAll(){
     Node*pn=head;
     if(!pn) cout<<"List is empty"<<endl;
     for(;pn;pn=pn->next) cout<<pn->data<<endl;

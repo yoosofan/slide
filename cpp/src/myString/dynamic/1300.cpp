@@ -9,7 +9,7 @@ class myString{
     s = new char[stringLenght(m)+1];
     stringCopy(s,m);
   }
-  int len(void){return stringLenght(s);}
+  int len(){return stringLenght(s);}
   ~myString(){delete[]s;}
 };
 int main(){

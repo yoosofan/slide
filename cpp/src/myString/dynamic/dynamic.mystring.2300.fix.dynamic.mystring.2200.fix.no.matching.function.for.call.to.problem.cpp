@@ -10,7 +10,7 @@ class myString{
   public:
   myString(const char *m=""){init(m);}
   myString(const myString&mys){init(mys.s);}
-  int len(void){return stringLenght(s);}
+  int len(){return stringLenght(s);}
   ~myString(){delete[]s;}
   myString& operator=(myString mys)
   {delete[] s; init(mys.s); return *this;}

@@ -9,9 +9,9 @@ public:
   Person(string name1="Ali",int year1=12,
 	string job1="student"):name(name1),
 	year(year1), job(job1){}
-  virtual string getJob(void)
+  virtual string getJob()
   {return job;}
-  void print(void){
+  void print(){
     cout<<"name :"<<name<<endl;
     cout<<"year :"<<year<<endl;
     cout<<"job  :"<<job <<endl;
@@ -20,7 +20,7 @@ public:
 class Student: public Person{
   string stdnm;
 public:
-  virtual string getJob(void)
+  virtual string getJob()
   {return job;}
   Student(string name1="Ali", int year1=12,
 	  string job1 = "student", string d = "234234"):

@@ -7,7 +7,7 @@ class Node{public:
 class list{
   Node *head = nullptr;
   public:
-  void dispAll(void){
+  void dispAll(){
     Node* pn = head;
     if(!head)
       cout<<"list is empty\n";

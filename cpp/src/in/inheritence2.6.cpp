@@ -6,7 +6,7 @@ protected:
   string name;
   string color;
 public:
-  int Area(void){
+  int Area(){
     cout << "in Shape" << endl;
     return 0;
   }
@@ -14,7 +14,7 @@ public:
 class Square: public Shape{
   int d;
 public:
-  int Area(void){
+  int Area(){
     cout << "in Square" << endl;
     return d*d;
   }

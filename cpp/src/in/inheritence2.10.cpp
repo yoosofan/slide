@@ -5,13 +5,13 @@ protected:
   string name;
   string color;
 public:
-  int Area(void){cout<<"in Shape"<<endl;return 0;}
-  void show(void){cout<<"show in shape"<<endl;}
+  int Area(){cout<<"in Shape"<<endl;return 0;}
+  void show(){cout<<"show in shape"<<endl;}
 };
 class Square: public Shape{
   int d;
 public:
-  int Area(void)
+  int Area()
   {cout<<"in Square"<<endl;return d*d;}
   Square(int d=1){this->d=d;}
 };

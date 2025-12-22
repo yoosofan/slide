@@ -12,7 +12,7 @@ struct complexCls{
     cout << '(' << re << ','
       << img << ')' << endl;
   }
-  void input(void){
+  void input(){
     cout << "Enter re "; cin >> re;
     cout << "Enter img "; cin >> img;
   }

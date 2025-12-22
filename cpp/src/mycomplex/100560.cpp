@@ -7,11 +7,11 @@ class myComplex{ //100560
     re = a; 
     img = b;
   }
-  void print(void){ 
+  void print(){ 
     cout << '(' << re << ", " 
         << img << ')' << endl; 
   }
-  void input(void){
+  void input(){
     cout << "real ";
     cin >> re;
     cout << "imaginary";
@@ -36,7 +36,7 @@ class myComplex{ //100560
     return r;
   }
 };
-void myFunction(void){
+void myFunction(){
   myComplex a(2, 3), b(4), c; 
   // b(4, 0), c(0, 0);
   c = a.add(b);  

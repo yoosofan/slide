@@ -28,12 +28,12 @@ template<typename T>class myArray{
     f1.seekp(index * sizeof(T), ios::beg);
     f1.write((char*) &j , sizeof(T));
   }
-  T readNext(void){ T j;
+  T readNext(){ T j;
     f1.read((char*) &j , sizeof(T));
     return j;
   }
   void writeNext(T j){f1.write((char*) &j, sizeof(T));}
-  void rewind(void){
+  void rewind(){
     f1.seekg(0, ios::beg);
     f1.seekp(0, ios::beg);
   }

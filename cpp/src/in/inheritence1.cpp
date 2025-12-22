@@ -4,7 +4,7 @@ class Shape{
   string name = "shape";//char name[100]; '\0' رشته
   string color = "white";//strcpy, strcmp; char*color; str1=str2
  public:
-  int Area(void){return 0;}
+  int Area(){return 0;}
   Shape() = default;
   friend ostream& operator <<(ostream& o1, const Shape& s1){
     o1 << "name: " << s1.name << "\tcolor: " << s1.color;
@@ -14,7 +14,7 @@ class Shape{
 class Square: public Shape{
   int d = 1;
  public:
-  int Area(void){return d*d;}
+  int Area(){return d*d;}
   Square(int d){this->d=d;}
   Square() = default;
   friend ostream& operator <<(ostream& o1, const Square& s1){

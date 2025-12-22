@@ -32,7 +32,7 @@ public:
     cout << counter << "\tcopy constructor:" << d << endl;
   }
 
-  void input(void){
+  void input(){
     cout << "Enter length of side:";
     cin >> d;
     while(d <= 0){
@@ -66,7 +66,7 @@ public:
   }
 };
 
-void f3(void){
+void f3(){
   side s1(1);
   cout << "Enter side ";
   cin >> s1;

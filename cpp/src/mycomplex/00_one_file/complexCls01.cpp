@@ -6,9 +6,9 @@ struct complexCls{
   {re=r;}
   void setImg(double i)
   {img=i;}
-  double getRe(void)
+  double getRe()
   {return re;}
-  double getImg(void)
+  double getImg()
   {return img;}
 };
 void f1(){

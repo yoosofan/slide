@@ -19,7 +19,7 @@ class myIntArray{
     n = i;
     f1.close();
   }
-  void sort(void){
+  void sort(){
     int i, j;
     for(i = 0; i < n-1; i++)
       for(j = i+1; j < n; j++)
@@ -35,7 +35,7 @@ class myIntArray{
         return i;
     return -1;
   }
-  void print(void){
+  void print(){
     for(auto i = 0; i < n; i++) 
       cout << a[i] << endl;
     }

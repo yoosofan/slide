@@ -30,19 +30,19 @@ template<typename T> class myArray{
     f1.seekp(index * sizeof(T), ios::beg);
     f1.write((char*) &data, sizeof(T));
   }
-  T readNext(void){T data;
+  T readNext(){T data;
     f1.read((char*) &data, sizeof(T));
     return data;
   }
   void writeNext(T data)
   {f1.write((char*) &data, sizeof(T));}
-  void rewind(void)
+  void rewind()
   {f1.seekg(0, ios::beg);f1.seekp(0, ios::beg);}
 };
 struct student{
   char name[20]; char stdno[14];
   double avg;
-  void print(void){
+  void print(){
     cout << "name:" << name << endl << "stdno:" << stdno
       << endl << "avg:" << avg << endl;
   }

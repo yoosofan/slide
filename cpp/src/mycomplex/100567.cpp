@@ -15,7 +15,7 @@ class myComplex{//100569 Error
   ~myComplex(){
     cout << "Destructor" << endl;
   }
-  void print(void) const {
+  void print() const {
     cout << '(' << re << ", " 
       << img << ')' << endl;
   }

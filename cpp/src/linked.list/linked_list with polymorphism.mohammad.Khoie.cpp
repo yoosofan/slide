@@ -110,7 +110,7 @@ class linked_list{
         for(node* pa=head;pa;pa=pa->next)
             (pa->p)->print();
     }
-    int lenth_linked_list(void){
+    int lenth_linked_list(){
         node* pa=head;
         int count=0;
         for(;pa;pa=pa->next,count++);

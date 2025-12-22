@@ -10,11 +10,11 @@ struct myComplex{ // op/1022
     cout << "copy constructor"
          << endl;
   }
-  void print(void){ 
+  void print(){ 
     cout << '(' << re << ", " 
          << img << ')' << endl; 
   }
-  void input(void){
+  void input(){
     cout << "Enter real "; cin >> re;
     cout << "Enter imaginary ";cin >> img;
   }
@@ -33,7 +33,7 @@ struct myComplex{ // op/1022
     return r;
   }
 };
-void myFunction(void){
+void myFunction(){
   myComplex a(2, 3), b=a, c(a);
   c = a.add(b); c = a.add(2);
   c.print();  a.input();

@@ -28,7 +28,7 @@ class myIntArray{
     f1.close();
   }
   ~myIntArray(){delete[] a;}
-  void sort(void){
+  void sort(){
     int i, j, temp;
     for(i=0; i<n-1; i++)
       for(j=i+1; j<n; j++)
@@ -44,7 +44,7 @@ class myIntArray{
         return i;
     return -1;
   }
-  void print(void){
+  void print(){
     for(int i=0; i<n; i++) 
       cout << a[i] << endl;
   }

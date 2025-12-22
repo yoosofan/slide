@@ -22,12 +22,12 @@ struct myException2 : public exception {
 class myACls{ int mm;
   public:
     myACls(int a=12){mm=a;}
-    void f1(void) const {
+    void f1() const {
       int tt; tt=15;
       cout<<mm<<tt<<endl;
-    } //void f2(void) const { mm=15; }
-    void f3(void) {mm = 19;}
-    void f4(void) const {/*f3();*/}
+    } //void f2() const { mm=15; }
+    void f3() {mm = 19;}
+    void f4() const {/*f3();*/}
   };
 void fff() throw(){cout <<"In ffff "<<endl;}
 void f1(int i){
@@ -42,7 +42,7 @@ void f4(int mm){
   if(mm<10) throw "Error ";
   cout << "In f4 mm "<< mm<<endl;
 }
-void f3(void){
+void f3(){
   try {f1(-3);f4(2);}catch(int mm)
   {cout <<"In f3 "<<mm<<endl;}
 }

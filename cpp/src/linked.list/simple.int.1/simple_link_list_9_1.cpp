@@ -3,13 +3,13 @@ using namespace std;
 struct Node{int data; Node *next=nullptr;};
 class list{
   Node *head=nullptr; public:
-  void displayAll(void){
+  void displayAll(){
     Node *pn=head;
     if(!pn)cout << "List is empty" << endl;
     for(; pn; pn=pn->next)
       cout << pn->data << endl;
   }
-  int len(void){ int i=0;
+  int len(){ int i=0;
     Node* cur = head;
     for(; cur; cur=cur->next, i++) ;
     return i;
@@ -65,7 +65,7 @@ class list{
       return pv->data;
   }
 };
-void myFunction(void){
+void myFunction(){
   list l1;
   l1[0] = 2;
   l1[1] = 3;

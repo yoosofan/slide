@@ -25,8 +25,8 @@ class myString{
 		mystrcpy((st,m1.st);
 		cout<<"copy constructor "<<endl;
 	}*/		
-	int len(void){return myStringLength(st);}
-	void print(void){cout<<st<<endl;}
+	int len(){return myStringLength(st);}
+	void print(){cout<<st<<endl;}
 	//char get(int index);
 	void set(char c='a', int index=0){
 		if(index<myStringLength(st))st[index]=c;

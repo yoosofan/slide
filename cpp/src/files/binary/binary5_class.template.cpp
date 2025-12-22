@@ -27,12 +27,12 @@ template<typename T> class myArray{
   } void write(const T data, int index){
     f1.seekp(index * sizeof(T), ios::beg);
     f1.write((char*) &data, sizeof(T));
-  } T readNext(void){ T data;
+  } T readNext(){ T data;
     f1.read((char*) &data , sizeof(T));
     return data;
   } void writeNext(T data)
   {f1.write((char*) &data, sizeof(T));}
-  void rewind(void)
+  void rewind()
   {f1.seekg(0, ios::beg);f1.seekp(0, ios::beg);}
  };
 struct student{

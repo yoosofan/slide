@@ -6,11 +6,11 @@ class complexCls{
  public:
   explicit complexCls(int m = 0, int n = 0)
   {r = m; i = n;}
-  void Show(void)
+  void Show()
   {cout << r << "+ i " << i << endl;}
-  double Magnitude(void)
+  double Magnitude()
   {return sqrt(r * r + i * i);}
-  void input(void){
+  void input(){
     cout << "Enter real:"; cin >> r;
     cout << "Enter imaginary:"; cin >> i;
   }
@@ -65,15 +65,15 @@ class complexCls{
       const complexCls& a,
       const complexCls& b)
   {return a == b ? false: true;}
-  bool operator!(void)
+  bool operator!()
   {return r == 0 && i == 0 ? true: false;}
-  complexCls operator++(void)// ++a
+  complexCls operator++()// ++a
   { i++; r++; return *this;}
   complexCls operator++(int dummy){//a++
     complexCls result=*this; 
     r++; i++; return result;
   }
-  complexCls operator--(void) // --a
+  complexCls operator--() // --a
   { i--; r--; return *this;  }
   complexCls operator--(int dummy){//a--
     complexCls result=*this; 
@@ -88,7 +88,7 @@ class complexCls{
     return c;
   }
 };
-void f1(void){
+void f1(){
   complexCls a(2, 3), b(2, 1), c(a);
   c = 2 + a; c = a + 2; c.Show();
   c = a++; // a.operator++(11);

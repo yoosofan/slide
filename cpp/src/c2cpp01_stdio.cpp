@@ -10,5 +10,4 @@ int main(){
   scanf("%d", &s3);
   sum = s1 + s2 + s3;
   printf("%d\n", sum);
-  return 0;
 }

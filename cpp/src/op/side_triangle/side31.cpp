@@ -17,11 +17,11 @@ class complexCls{ double r,i;
  public:
   complexCls(int m=0,int n=0)
   {r=m;i=n;}
-  void Show(void)
+  void Show()
   {cout<<r<<"+ i "<<i<<endl;}
-  double Magnitude(void)
+  double Magnitude()
   {return sqrt(r*r+i*i);}
-  void input(void){
+  void input(){
     cout<<"Enter real:"; cin>>r;
     cout<<"Enter imaginary:"; cin>>i;
   }
@@ -50,7 +50,7 @@ class side{
     d=a;
   }
   side(const side&a){static int counter=0;counter+=1; this->d = a.d;cout<<counter<<"\tcopy constructor:"<<d<<endl;}
-  void input(void){
+  void input(){
     cout<<"Enter length of side:"; cin>>d;
     while(d<=0){
       cout<<"Side must be >0"<<endl;
@@ -65,7 +65,7 @@ class side{
     return b;
   }
   bool operator>(const side &a){cout<<d<<" > "<<a.d<<endl; return d>a.d;}
-  void show(void){cout<<d;}
+  void show(){cout<<d;}
   friend ostream& operator<<(ostream& o1, side a1);
   friend istream& operator>>(istream& i1, side a1);
 };
@@ -81,7 +81,7 @@ istream& operator>>(istream& i1, side a1){
 class triangle{
   side a, b, c;
                        // (a.operator+(b)).operator>(c)
-  bool check(void){return (a+b>c && a+c>b && b+c>a);}// true, false
+  bool check(){return (a+b>c && a+c>b && b+c>a);}// true, false
   public:
   triangle(side a, side b, side c){
 	  this->a=a; 
@@ -92,8 +92,8 @@ class triangle{
 		  show();
 	  }
   }
-  void show(void){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
-  void input(void){
+  void show(){cout<<"\t";a.show();cout<<",\t";b.show();cout<<",\t";c.show();cout<<endl;}
+  void input(){
     //int k;
     do{
       //cout<<"Enter a: ";cin>>k;
@@ -108,7 +108,7 @@ class triangle{
     }while(!check());
   }
 };
-void f2(void){
+void f2(){
 	side a(3);
 	side b(4),c(5);
 	side d;
@@ -133,7 +133,7 @@ void f2(void){
 	//triangle t(a,b,c);
 	//t.show();
 }
-int f1(void){
+int f1(){
   complexCls a(2,3),b(2,1),c(a);
   c=a.add(b);
   c.Show();
@@ -141,7 +141,7 @@ int f1(void){
   c.Show();
   
 }
-void f3(void){
+void f3(){
   side s1(1);
   cout<< "Enter side ";
   cin >> s1;

@@ -30,7 +30,7 @@ class complexCls{
   {cout<<"destructor "<<endl;}
   bool operator==(complexCls&a)
   {return re == a.re && im == a.im ;}
-  bool operator!(void)
+  bool operator!()
   {return !(re == 0 && im == 0);}
   void Show()
   {cout<<'('<<re<<','<<im<<')'<<'\t'<<endl;}

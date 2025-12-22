@@ -8,7 +8,7 @@ class myString{
   void init(const char *m=""){s=new char[stringLenght(m)+1];stringCopy(s,m);}
   public:
   myString(const char *m=""){init(m);}
-  int len(void){return stringLenght(s);}
+  int len(){return stringLenght(s);}
   ~myString(){delete[]s;}
   friend ostream& operator<<(ostream&out,myString );
   friend istream& operator>>(istream&in,myString );

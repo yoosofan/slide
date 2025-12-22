@@ -6,15 +6,15 @@ struct complexCls{
   {re=r;}
   void setImg(double i)
   {img=i;}
-  double getRe(void)
+  double getRe()
   {return re;}
-  double getImg(void)
+  double getImg()
   {return img;}
 
   void set(double r=0, double i=0)
   {re = r; img = i;}
 };
-void f1(void){
+void f1(){
   complexCls c1;
   c1.set(12,14);
   cout << c1.getRe() << endl;

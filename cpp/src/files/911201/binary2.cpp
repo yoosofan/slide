@@ -5,12 +5,12 @@ using namespace std;
 class MyClass{
   fstream f1;
   struct myDate{int year,month,day;
-    void input(void){
+    void input(){
       cout<<"Enter year ";cin>>year;
       cout<<"Enter month ";cin>>month;
       cout<<"Enter day ";cin>>this->day;
     }
-    void print(void){
+    void print(){
       cout<<"year "<<year<<endl;
       cout<<"month "<<month<<endl;
       cout<<"day  "<<day<<endl;
@@ -46,7 +46,7 @@ public:
     f1.read((char*)&p,sizeof(p));
     return p;
   }
-  person input(void){person p;
+  person input(){person p;
     cout<<"Enter first name ";
     cin>>p.fname;
     cout<<"Enter last name ";
@@ -65,7 +65,7 @@ public:
     cout<<"birth date :"<<endl;
     p.bd.print();
   }
-  void run(void){ person p;int i;
+  void run(){ person p;int i;
     for(i=0;i<1;i++)
     {p=input();  write(p); }
     f1.seekg(0,ios::beg);

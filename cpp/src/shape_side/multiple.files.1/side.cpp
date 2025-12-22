@@ -9,7 +9,7 @@ class side{
     d=a;
   }
   side(const side&a){static int counter=0;counter+=1; this->d = a.d;cout<<counter<<"\tcopy constructor:"<<d<<endl;}
-  void input(void){
+  void input(){
     cout<<"Enter length of side:"; cin>>d;
     while(d<=0){
       cout<<"Side must be >0"<<endl;
@@ -24,5 +24,5 @@ class side{
     return b;
   }
   bool operator>(side a){cout<<d<<" > "<<a.d<<endl; return d>a.d;}
-  void show(void){cout<<d;}
+  void show(){cout<<d;}
 };

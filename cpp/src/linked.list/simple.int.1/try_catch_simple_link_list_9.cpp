@@ -9,7 +9,7 @@ class list{
     Node * head = nullptr;
     public:
     static int value;
-    void displayAll(void){
+    void displayAll(){
         Node * pn = head;
         if(!pn)
             cout << "List is empty" << endl;
@@ -42,7 +42,7 @@ class list{
   }
 };
 int list::value=0;
-void myFunction(void){
+void myFunction(){
     list l1;
     l1[0] = 2;
     l1[1] = 3;

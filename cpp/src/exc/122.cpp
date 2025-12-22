@@ -26,7 +26,7 @@ bool f4(int mm){
     cout << "In f4 mm " << mm << endl;
   return retVal;
 }
-retFlagInt f3(void){
+retFlagInt f3(){
   retFlagInt x;
   x.ret = 4;
   if(!f1(3)){ 

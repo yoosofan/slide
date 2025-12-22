@@ -19,8 +19,8 @@ class myString{
 	myString(const char *s=""){copy(s);}
 	myString(const myString&m1)
 	{copy(m1.st);}		
-	int len(void) const {return myStringLength(st);}
-	void print(void){cout<<st<<endl;}
+	int len() const {return myStringLength(st);}
+	void print(){cout<<st<<endl;}
 	//char get(int index);
 	void set(char c='a', int index=0){
 		if(index<myStringLength(st))st[index]=c;
@@ -40,7 +40,7 @@ class myString{
 	}
   myString operator+=(const myString m)
   { return (*this) = (*this) + m;}
-	const char * operator()(void){st[0]='z';return st;}
+	const char * operator()(){st[0]='z';return st;}
 	friend ostream& operator<<(ostream & o1, const myString & m1);
 	friend istream& operator>>(istream & i1, myString & m1);
   friend myString operator+(const myString s1,const myString m1);

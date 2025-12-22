@@ -5,11 +5,11 @@ class complexCls{ double r,i;
  public:
   complexCls(int m=0,int n=0)
   {r=m;i=n;}
-  void Show(void)
+  void Show()
   {cout<<r<<"+ i "<<i<<endl;}
-  double Magnitude(void)
+  double Magnitude()
   {return sqrt(r*r+i*i);}
-  void input(void){
+  void input(){
     cout<<"Enter real:"; cin>>r;
     cout<<"Enter imaginary:"; cin>>i;
   }
@@ -31,7 +31,7 @@ class side{
     d=a;
   }
   side(const side&a){static int counter=0;counter+=1; this->d = a.d;cout<<counter<<"\tcopy constructor:"<<d<<endl;}
-  void input(void){
+  void input(){
     cout<<"Enter length of side:"; cin>>d;
     while(d<=0){
       cout<<"Side must be >0"<<endl;
@@ -96,7 +96,7 @@ class Triangle: public Shape{
     }while(!check());
   }
 };
-void f2(void){
+void f2(){
 	side a(3);
 	side b(4),c(5);
 	side d;
@@ -107,7 +107,7 @@ void f2(void){
 	//triangle t(a,b,c);
 	//t.show();
 }
-int f1(void){
+int f1(){
   complexCls a(2,3),b(2,1),c(a);
   c=a.add(b);
   c.Show();

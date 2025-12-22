@@ -39,7 +39,7 @@ class myArray{
   ~myArray(){
     cout << "Destructor" << endl;
   }
-  void print(void) const{
+  void print() const{
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = " << a[i] << endl;
@@ -49,13 +49,13 @@ class myArray{
     copy(b);
     return *this;
   }
-  myArray operator-(void) const{
+  myArray operator-() const{
     myArray c(*this);
     for(int i=0; i<n; i++)
       c.a[i] = - c.a[i];
     return c;
   }
-  bool operator!(void) const{
+  bool operator!() const{
     bool retVal = true;
     if( ! n ) // n == 0
       retVal = true;
@@ -153,7 +153,7 @@ ostream& operator<<(ostream& out1, const myArray& b){
   return out1;
 }
 myArray operator+(const myArray& a, const myArray& b);
-void f1(void);
+void f1();
 void f2(myArray);
 int main(){
   f1();
@@ -170,7 +170,7 @@ myArray operator+(const myArray& a, const myArray& b){
     return c;
   }
 
-void f1(void){
+void f1(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));
   cin >> d ;

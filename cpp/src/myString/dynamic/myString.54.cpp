@@ -9,7 +9,7 @@ class myString{char *st;
 	myString(const char *s=""){copy(s);}
 	myString(const myString&m1)
 	{copy(m1.st);}		
-	int len(void) const {if(st)return strlen(st);return 0;}
+	int len() const {if(st)return strlen(st);return 0;}
 	~myString(){delete[]st;}
 	char& operator[](int i){
 		if(i<signed(strlen(st)) && i>=0) return st[i];
@@ -32,7 +32,7 @@ class myString{char *st;
 	friend istream& operator>>(istream & i1, myString & m1);
   friend myString operator+(const myString s1,const myString m1);
   friend bool operator==(myString,myString);
-  bool operator!(void){
+  bool operator!(){
     bool retVal=true;
     if(len()>0)
       retVal = false;

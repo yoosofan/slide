@@ -6,8 +6,8 @@ protected:
   string color = "white";
   int test = 2;
 public:
-  int Area(void){return 0;}
-  int testValue(void){return test;}
+  int Area(){return 0;}
+  int testValue(){return test;}
   Shape() = default;
   friend ostream& operator <<(ostream& o1, const Shape& s1){
     o1 << "name: " << s1.name 
@@ -18,10 +18,10 @@ public:
 class Square: public Shape{
   int d = 1;
 public:
-  int Area(void){return d*d;}
+  int Area(){return d*d;}
   Square(int d)
   {this->d=d; test = 4; name="Square"; color="Red";}
-  int testValue(void){return test;}
+  int testValue(){return test;}
   Square() = default;
   friend ostream& operator <<(
       ostream& o1, const Square& s1){

@@ -5,7 +5,7 @@ class myException {
   string message; public:
   myException(string msg)
   {message = msg;}
-  string what(void)
+  string what()
   {return message;}
 };
 class doubleArrayCls{

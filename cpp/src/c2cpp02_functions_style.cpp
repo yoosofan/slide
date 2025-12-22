@@ -23,7 +23,7 @@ int main(){
   }while(n != 4);
 }
 
-void printSquare(void){
+void printSquare(){
   int n, i = 0, j; 
   n = input();
   for(i = 0; i < n; i++){
@@ -46,7 +46,7 @@ void printTriangle(){
 int min(int a, int b)
 {return a < b ? a : b;}
 
-int input(void){
+int input(){
   int a;
   do{
     printf("Enter a>0: ");

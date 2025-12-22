@@ -34,14 +34,14 @@ class myArray{
         ios::beg);
     f1.write((char*)&data,sizeof(int));
   }
-  int readNext(void){
+  int readNext(){
     int j;
     f1.read((char*)&j, sizeof(int));
     return j;
   }
   void writeNext(int j)
   {f1.write((char*) &j, sizeof(int));}
-  void rewind(void){ 
+  void rewind(){ 
     f1.seekg(0, ios::beg);
     f1.seekp(0, ios::beg);
   }

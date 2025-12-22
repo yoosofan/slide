@@ -12,12 +12,12 @@ void f4(int mm){
   if(mm < 10)  throw 5;
   cout << "In f4 mm " << mm << endl;
 }
-int f3(void){ int x = 3;
+int f3(){ int x = 3;
   f1(3); x++; cout << "f3: " << x << endl;
   f4(-22); x++; cout << "f3: " << x << endl;
   return x;
 }
-void f8(void){
+void f8(){
   try{
     f1(1);
     f2(12);

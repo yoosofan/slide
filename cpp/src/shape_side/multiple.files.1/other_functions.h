@@ -6,5 +6,5 @@ using namespace std;
 #include "mycomplex.h"
 #include "triangle.h"
 
-void f2(void)
-int f1(void);
+void f2()
+int f1();

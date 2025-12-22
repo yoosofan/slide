@@ -8,20 +8,20 @@ public:
   Shape(string name="shape", 
       string color="white"):
         name(name),color(color){}
-  virtual int Area(void) = 0;
-  // virtual static void f(void){cout<<"Shape virtual static f"<<endl;}
+  virtual int Area() = 0;
+  // virtual static void f(){cout<<"Shape virtual static f"<<endl;}
 };
 class Square: public Shape{
   int d;
 public:
-  virtual int Area(void){return d*d;}
+  virtual int Area(){return d*d;}
   Square(int d=1, string name="square",
     string color="blue"):Shape(name, color){this->d=d;}
-  void printAll(void){
+  void printAll(){
       cout<<"name: "<<this->name<<'\t'<<"color: "<<
       this->color<<'\t'<<"d: "<<this->d<<endl;
   }
-  // virtual static void f(void){cout<<"Square virtual static f"<<endl;}
+  // virtual static void f(){cout<<"Square virtual static f"<<endl;}
 };
 int main(){
   // Shape s;  cout<<s.Area()<<endl;

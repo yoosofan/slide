@@ -13,12 +13,12 @@ class complexCls{
     re  = a.re;
     cout << "copy constructor "; print();
   }
-  double getRe(void) {return re;}
-  double getImg(void) {return img;}
+  double getRe() {return re;}
+  double getImg() {return img;}
   void setRe(double a)  {re = a;}
   ~complexCls()
   {cout << "destructor:"; print();}
-  void print(void){
+  void print(){
     cout << '(' << re << ',' 
       << img << ')' << endl;
   }

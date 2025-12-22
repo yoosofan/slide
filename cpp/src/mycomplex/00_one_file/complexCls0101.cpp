@@ -4,10 +4,10 @@ struct complexCls{
   double re,img;
   void setRe(double r){re=r;}
   void setImg(double i){img=i;}
-  double getRe(void){return re;}
-  double getImg(void){return img;}
+  double getRe(){return re;}
+  double getImg(){return img;}
 };
-void f1(void){
+void f1(){
   //complexCls c1=2; // Error
   //complexCls c1(2,3); // Error
   complexCls c1{2,3};

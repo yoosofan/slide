@@ -18,12 +18,12 @@ int f3(int x = 34){
   f4(x); x++ ; cout << "f3: " << x << endl;
   return x;
 }
-void f5(void){
+void f5(){
   cout << "start of F5" << endl;
   f3(3);
   cout << "End of F5" << endl;
 }
-void f8(void){
+void f8(){
   try{
     cout << f3() << endl;
     f5();

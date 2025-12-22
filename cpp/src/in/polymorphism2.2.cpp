@@ -8,19 +8,19 @@ public:
   Person(string name1="",
 	 int year1=12):name(name1),
 	 year(year1){}
-  virtual string getJob(void)
+  virtual string getJob()
   {return "";}
-  void print(void){
+  void print(){
     cout<<"name :"<<name<<endl;
     cout<<"year :"<<year<<endl;
     cout<<"job  :"<<getJob()<<endl;
   }
-  int nameLen(void){return name.length();}
+  int nameLen(){return name.length();}
 };
 class Student: public Person{
   string stdnm;
 public:
-  virtual string getJob(void)
+  virtual string getJob()
   {return "student";}
   Student(string name1="Ali", int year1=12,
 	  string d="234234"):
@@ -29,7 +29,7 @@ public:
 };
 class Employee: public Person{
 public:
-  virtual string getJob(void)
+  virtual string getJob()
   {return "employee";}
   Employee(string name1="Ali",int year1=12):
     Person(name1,year1){}

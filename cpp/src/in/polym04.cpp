@@ -18,7 +18,7 @@ class Square: public Shape{
     string color="blue"):
       Shape(name, color)
   {this->d=d;}
-  void printAll(void){
+  void printAll(){
     cout << "name: " <<
       this->name << '\t'
       << "color: " <<

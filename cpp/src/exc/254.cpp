@@ -14,7 +14,7 @@ void f4(int mm){
 	if(mm<10) throw s1;
 	cout << "In f4 mm "<< mm<<endl;
 }
-void f3(void){
+void f3(){
 	try{f1(3); f4(2);}
   catch(int mm){cout <<"In f3 "<<mm<<endl;}
 }

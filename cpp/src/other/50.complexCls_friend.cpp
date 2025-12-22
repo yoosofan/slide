@@ -52,7 +52,7 @@ class complexCls{
     return r;
   }
 
-  double& operator ()(void){return r;}
+  double& operator ()(){return r;}
 
    double& operator ()(int index){
       double& m = r;
@@ -91,15 +91,15 @@ complexCls operator *(const complexCls  a , const complexCls  b){
    result.i = a.i * b.r + a.r * b.i;
    return result;
 }
-void f1(void);
-void f2(void);
+void f1();
+void f2();
 
 int main(){
   f1();
   return 0;
 }
 
-void f2(void){
+void f2(){
   int a = 2, b = 1;
   int& m = a;
   m = b;
@@ -108,7 +108,7 @@ void f2(void){
   cout << m << endl;
 }
 
-void f1(void){
+void f1(){
   complexCls a(2,3);
   complexCls b(4,5);
   complexCls c;

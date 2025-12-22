@@ -53,7 +53,7 @@ bool write2(const char*name,mat2 m){
   f1.close();
   return true;
 }
-myMat input(void){
+myMat input(){
   int i,j;myMat m;
   cout<<"enter n "; cin>>m.n;
   m.p=new double*[m.n];
