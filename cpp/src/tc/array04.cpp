@@ -9,9 +9,9 @@ class complexCls{
     im = b;
   }
 };
-template<typename Type> class array{
+template<typename Type> class myArray{
   static const int MAX = 200;
-  Type a[MAX];  
+  Type a[MAX];
   int n = 0;
 public:
   void input(void){
@@ -29,10 +29,10 @@ public:
   }
 };
 int main(){
-  array<int> m1, m2, m3; 
-  array<double> dm;   
-  array<char> cm;
-  array<complexCls> ccm1; 
+  myArray<int> m1, m2, m3;
+  myArray<double> dm;
+  myArray<char> cm;
+  myArray<complexCls> ccm1;
   ccm1.input();
   m1.input();
   m1.print();

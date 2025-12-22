@@ -5,8 +5,8 @@ class complexCls{ double re, im; public:
   {re=a;im=b;}
   friend istream& operator>>(
       istream& io1, complexCls &m1){
-    cout<<"re: "; io1>>m1.re; 
-    cout<<"im: "; io1>>m1.im;  
+    cout<<"re: "; io1>>m1.re;
+    cout<<"im: "; io1>>m1.im;
     return io1;
   }
   friend ostream& operator<<(
@@ -14,7 +14,7 @@ class complexCls{ double re, im; public:
     io1 << m1.re << ',' << m1.im << endl; return io1;
   }
 };
-template<typename Type> class array{ 
+template<typename Type> class myArray{
   static const int MAX = 200;
   Type a[MAX];  int n = 0; public:
   void input(void){
@@ -31,7 +31,7 @@ template<typename Type> class array{
   }
 };
 int main(){
-  array<complexCls> ccm1; 
+  myArray<complexCls> ccm1;
   ccm1.input();
   ccm1.print();
 }

@@ -7,7 +7,7 @@ class complexCls{
   friend istream& operator>>(
       istream& io1,complexCls &m1){
     cout<<"re: "; io1>>m1.re;
-    cout<<"im: "; io1>>m1.im; 
+    cout<<"im: "; io1>>m1.im;
     return io1;
   }
   friend ostream& operator<<(
@@ -16,7 +16,7 @@ class complexCls{
     return io1;
   }
 };
-template<typename Type> class array{
+template<typename Type> class myArray{
   static const int MAX = 200;
   Type a[MAX];  int n = 0;
 public:
@@ -34,6 +34,6 @@ public:
   }
 };
 int main(){
-  array<complexCls> ccm1; ccm1.input();
+  myArray<complexCls> ccm1; ccm1.input();
   ccm1.print();
 }

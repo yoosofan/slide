@@ -13,7 +13,7 @@ class complexCls{
   friend bool operator==(const complexCls &m1,const complexCls&m2)
   {if(m1.re==m2.re && m1.im==m2.im) return true; return false;}
 };
-template<typename Type> class array{Type a[MAX];  int n;
+template<typename Type> class myArray{Type a[MAX];  int n;
 public:
   void input(void){cout<<"Enter n: ";cin>>n;
     if(n<0 || n>MAX) throw "n is greater than 200";
@@ -30,9 +30,9 @@ public:
   }
 };
 int main(){
-  //array<int> m1,m2,m3; array<double> dm;   array<char> cm;
+  //myArray<int> m1,m2,m3; myArray<double> dm;   myArray<char> cm;
   try{
-    array<complexCls> ccm1; ccm1.input();ccm1.print();
+    myArray<complexCls> ccm1; ccm1.input();ccm1.print();
     complexCls c2(4);if(c2==4) cout<<"equals"<<endl;
     //complexCls c3(4);if(operator==(c3, complexCls(4))) cout<<"equals"<<endl;
     complexCls c1(4);if(4==c1) cout<<"equals"<<endl;

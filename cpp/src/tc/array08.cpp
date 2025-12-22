@@ -8,7 +8,7 @@ class complexCls{
   friend istream& operator>>(
       istream& io1,complexCls &m1){
     cout << "re: "; io1 >> m1.re;
-    cout << "im: "; io1 >> m1.im; 
+    cout << "im: "; io1 >> m1.im;
     return io1;
   }
   friend ostream& operator<<(
@@ -18,26 +18,26 @@ class complexCls{
   }
   friend bool operator==(
       const complexCls &m1,const complexCls&m2){
-    if(m1.re == m2.re && m1.im == m2.im) 
-      return true; 
+    if(m1.re == m2.re && m1.im == m2.im)
+      return true;
     return false;
   }
 };
-template<class Type> class array{
+template<class Type> class myArray{
   static const int MAX = 200;
   Type a[MAX];
   int n = 0;
 public:
-  void input(void){
+  void input(){
     cout<<"Enter n: "; cin>>n;
-    if(n<0 || n>MAX) 
+    if(n<0 || n>MAX)
       throw "n is greater than 200";
     for(int i=0;i<n;i++){
       cout<<"Enter a["<<i<<"]: ";
       cin>>a[i];
     }
   }
-  void print(void){
+  void print(){
     cout<<"n: "<<n<<endl;
     for(int i=0;i<n;i++)cout<<a[i]<<endl;
   }
@@ -46,14 +46,14 @@ public:
     return -1;
   }
   Type&  operator[](int index){
-    if(index < 0 || index >= n) 
+    if(index < 0 || index >= n)
       throw "index out of range";
     return a[index];
   }
 };
 int main(){
   try{
-    array<complexCls> ccm1; ccm1.input();ccm1.print();
+    myArray<complexCls> ccm1; ccm1.input();ccm1.print();
     complexCls c2(4);if(c2==4) cout<<"equals"<<endl;
     complexCls c1(4);if(4==c1) cout<<"equals"<<endl;
     cout<<ccm1.search(c1)<<endl;

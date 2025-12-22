@@ -4,11 +4,11 @@ using namespace std;
 class complexCls{
   double r,i;
  public:
-  complexCls(double a=0,double b=0)  
+  complexCls(double a=0,double b=0)
   {r=a; i=b;}
   complexCls operator+(const complexCls& a){
-    complexCls ret; ret.r=r+a.r;   
-    ret.i=i+a.i; return ret;  
+    complexCls ret; ret.r=r+a.r;
+    ret.i=i+a.i; return ret;
   }
   friend ostream& operator<<(
     ostream&o1, const complexCls& m)
@@ -24,29 +24,29 @@ template<typename T> class Node{
   bool operator==(Node m2)
   {return v==m2.v;}
 };
-template<typename Type=string, 
-  typename Index=int, int N=20> 
-class array{
-  Type* a = nullptr;  
-  int n = N, 
-  count = 0; 
+template<typename Type=string,
+  typename Index=int, int N=20>
+class myArray{
+  Type* a = nullptr;
+  int n = N,
+  count = 0;
   Index *ind = nullptr;
 public:
-  array(){
+  myArray(){
     this->n=N;
     a=new Type[n];
     ind=new Index[n];
     count=0;
   }
-  ~array()
+  ~myArray()
   {n=0; delete[] a; delete[]ind;}
-  array(const array& m1){
-    n=m1.n; a=new Type[n]; 
-    ind=new Index[n]; 
+  myArray(const myArray& m1){
+    n=m1.n; a=new Type[n];
+    ind=new Index[n];
     count=m1.count;
     for(int i=0;i<count;i++)
       a[i]=m1.a[i] , ind[i]=m1.ind[i];
-  }/*array(array&& m1){n=m1.n; a=m1.a; ind=m1.ind; count=m1.count; m1.n=0; m1.a=nullptr;m1.ind=nullptr;}*/
+  }/*myArray(myArray&& m1){n=m1.n; a=m1.a; ind=m1.ind; count=m1.count; m1.n=0; m1.a=nullptr;m1.ind=nullptr;}*/
   Type& operator[](const Index& index){
     int i;
     for(i=0; i<count;i++)
@@ -54,25 +54,25 @@ public:
     if(i<n){ind[count]=index; return a[count++];}
     throw 1;
   }
-  array operator=(const array&m1){
+  myArray operator=(const myArray&m1){
     n=m1.n;a=new Type[n]; ind=new Index[n]; count=m1.count;
     for(int i=0;i<count;i++)
       a[i]=m1.a[i] , ind[i]=m1.ind[i];
     return *this;
   }
   template<class T,class I,int K>
-  friend ostream&operator<<(ostream&o1,array<T,I,K>);
+  friend ostream&operator<<(ostream&o1,myArray<T,I,K>);
 };
 template<class T,class I,int K>
-ostream&operator<<(ostream&o1,const array<T,I,K>m1){
+ostream&operator<<(ostream&o1,const myArray<T,I,K>m1){
   o1<<m1.n<<"   "<<m1.count<<endl;
   for(int i=0;i<m1.count;i++)
     o1<<'['<<m1.ind[i]<<"]="<<m1.a[i]<<endl;
   return o1;
-} 
-void f1(void){throw "dghdd";} 
+}
+void f1(void){throw "dghdd";}
 int main(){
-  array<int, Node<int> >m1;
+  myArray<int, Node<int> >m1;
   int aa=12; Node<int> n1(&aa);
   m1[n1]=44;
   cout<<m1[n1]<<endl;
@@ -80,11 +80,11 @@ int main(){
   m1[Node<int>(&aa)]=4;
   cout<<m1[Node<int>(new int(4))]<<endl;
   try{
-    array<int,string,3> cm1; 
-    array<string,complexCls> am1;
-    array<string> kl1; kl1[0]="dddd";kl1[13]="asddd"; cout<<kl1;
+    myArray<int,string,3> cm1;
+    myArray<string,complexCls> am1;
+    myArray<string> kl1; kl1[0]="dddd";kl1[13]="asddd"; cout<<kl1;
     cm1["ali"]=4; cout<<"line 56 "<<endl;
-    cm1["Reza"]=7; array<> hk1;// array cfw1;
+    cm1["Reza"]=7; myArray<> hk1;// myArray cfw1;
     cout<<cm1["ali"]<<endl;
     cout<<cm1["Reza"]<<endl;
     am1[complexCls(3,4)]="Hamid";

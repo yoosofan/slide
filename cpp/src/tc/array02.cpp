@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
-template<typename Type> class array{
+template<typename Type> class myArray{
   static const int MAX = 200;
-  Type a[MAX];  
+  Type a[MAX];
   int n = 0;
 public:
   void input(void){
@@ -20,9 +20,9 @@ public:
     }
 };
 int main(){
-  array<int> m1,m2,m3; 
-  array<double> dm;   
-  array<char> cm;
+  myArray<int> m1,m2,m3;
+  myArray<double> dm;
+  myArray<char> cm;
   m1.input(); // m2.input();
   m1.print();
 }

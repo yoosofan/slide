@@ -8,7 +8,7 @@ class complexCls{
   friend istream& operator>>(
       istream& io1,complexCls &m1){
     cout << "re: "; io1 >> m1.re;
-    cout << "im: "; io1 >> m1.im; 
+    cout << "im: "; io1 >> m1.im;
     return io1;
   }
   friend ostream& operator<<(
@@ -19,44 +19,44 @@ class complexCls{
   friend bool operator==(
       const complexCls &m1,
       const complexCls &m2){
-    if(m1.re == m2.re && m1.im == m2.im) 
-      return true; 
+    if(m1.re == m2.re && m1.im == m2.im)
+      return true;
     return false;
   }/*
   bool operator==(const complexCls&m2){
-    if(re == m2.re && this->im == m2.im) 
-      return true; 
+    if(re == m2.re && this->im == m2.im)
+      return true;
     return false;
   }*/
 };
-template<typename Type> class array{
+template<typename Type> class myArray{
   static const int MAX = 200;
   Type a[MAX];  int n = 0;
   public:
-  void input(void){
+  void input(){
     cout<<"Enter n: ";
     cin>>n;
-    if(n < 0 || n > MAX) 
+    if(n < 0 || n > MAX)
       throw "n is greater than 200";//exit(0);
     for(int i=0; i < n; i++){
       cout << "Enter a[" << i << "]: ";
       cin >> a[i];
     }
   }
-  void print(void){
+  void print(){
     cout<<"n: "<<n<<endl;
     for(int i=0;i<n;i++)
       cout<<a[i]<<endl;
   }
   int search(Type key){
     for(int i=0;i<n;i++)
-      if(a[i] == key) 
+      if(a[i] == key)
         return i;
     return -1;
   }
 };
 int main(){
-  array<complexCls> ccm1; 
+  myArray<complexCls> ccm1;
   ccm1.input();ccm1.print();
   complexCls c2(4);
   if(c2==4) cout<<"equals"<<endl;

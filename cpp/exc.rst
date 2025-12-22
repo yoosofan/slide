@@ -30,8 +30,6 @@ http://yoosofan.github.io/course/cpp.html
     :code: c
     :number-lines:
 
-
-
 ----
 
 .. include:: src/exc/122.cpp
