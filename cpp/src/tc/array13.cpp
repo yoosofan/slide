@@ -70,7 +70,7 @@ ostream&operator<<(ostream&o1,const myArray<T,I,K>m1){
     o1<<'['<<m1.ind[i]<<"]="<<m1.a[i]<<endl;
   return o1;
 }
-void f1(void){throw "dghdd";}
+void f1(){throw "dghdd";}
 int main(){
   myArray<int, Node<int> >m1;
   int aa=12; Node<int> n1(&aa);

@@ -6,17 +6,17 @@ struct myArray{
   double a[MAX];
   int n;
   myArray(const double ma[], int k){
-    if( k > MAX) 
+    if( k > MAX)
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
   }
-  void print(void){
-    cout << " n = " << n 
-      << "\t other_static: " 
+  void print(){
+    cout << " n = " << n
+      << "\t other_static: "
       << other_static << endl;
     for(int i = 0; i < n; i++)
-      cout << "a[" << i << "] = " 
+      cout << "a[" << i << "] = "
       << a[i] << endl;
   }
 };
@@ -26,6 +26,6 @@ int main(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));
   myArray b(x, sizeof(x) / sizeof(double));
-  d.print();  b.a[1] = 94;  
+  d.print();  b.a[1] = 94;
   b.other_static = 94; d.print();  b.print();
 }

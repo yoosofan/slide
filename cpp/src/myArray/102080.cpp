@@ -10,16 +10,16 @@ class myArray{//myarray/102080.cpp
     cout << "Error in getting" << endl;
     return 0;
   }
-  void set(const int index, 
+  void set(const int index,
           const double value){
-    if( index < n ) 
+    if( index < n )
       a[index] = value;
-    cout << "Error accessing myArray " 
+    cout << "Error accessing myArray "
          << endl;
   }
   myArray() = default;
   myArray(const double* ma, int k = 0){
-    if( k > MAX ) 
+    if( k > MAX )
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
@@ -42,10 +42,10 @@ class myArray{//myarray/102080.cpp
   ~myArray(){
     cout << "Destructor" << endl;
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
-      cout << "a[" << i << "] = " 
+      cout << "a[" << i << "] = "
            << a[i] << endl;
   }
 };

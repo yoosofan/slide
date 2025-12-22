@@ -15,12 +15,12 @@ class student{
   long long  id;
   char address[50]="";
   public:
-  void input(void){
+  void input(){
     cout<<"Enter name:"; cin>>name;
     cout<<"id:"; cin>>id;
     cout<<"address:"; cin>>address;
   }
-  void print(void){
+  void print(){
     cout << "name:\t" << name << endl;
     cout << "id:\t" << id << endl;
     cout << "address:\t" << address << endl;
@@ -33,7 +33,7 @@ class universityClass{
   int n=0;
   char instructor[20]="";
   public:
-  void input(void){
+  void input(){
     cout << "Enter number of students:";
     cin >> n;
     for(int i=0; i<n; i++)
@@ -41,16 +41,16 @@ class universityClass{
     cout << "Enter name of instructor:";
     cin >> instructor;
   }
-  void print(void){
+  void print(){
     cout << "number of students:" << n;
-    cout << endl << "instructor: " 
+    cout << endl << "instructor: "
       << instructor << endl;
     for(int i=0; i < n; i++){
       st[i].print();
       cout << "mark: " << marks[i] << endl;
     }
   }
-  void changeMark(char stName[20], 
+  void changeMark(char stName[20],
     double mark){
     int i;
     for(i=0; i < n; i++)
@@ -58,7 +58,7 @@ class universityClass{
        marks[i] = mark;
   }
 };
-int main(){ universityClass stList; 
+int main(){ universityClass stList;
   stList.input();
   stList.print();
 }

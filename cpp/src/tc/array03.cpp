@@ -9,10 +9,10 @@ template<typename Type> class myArray{
   Type a[MAX];
   int n = 0;
   public:
-  void input(void){cout<<"Enter n: ";cin>>n;
+  void input(){cout<<"Enter n: ";cin>>n;
     for(int i=0;i<n;i++){cout<<"Enter a["<<i<<"]: ";cin>>a[i];}
   }
-  void print(void){cout<<"n: "<<n<<endl;for(int i=0;i<n;i++)cout<<a[i]<<endl;}
+  void print(){cout<<"n: "<<n<<endl;for(int i=0;i<n;i++)cout<<a[i]<<endl;}
 };
 int main(){
   myArray<int> m1,m2,m3;

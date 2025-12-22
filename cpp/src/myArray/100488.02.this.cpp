@@ -1,4 +1,4 @@
-#include <iostream> 
+#include <iostream>
 using namespace std;
 struct myArray{// 100488.02.this
   static const int MAX = 100;
@@ -10,14 +10,14 @@ struct myArray{// 100488.02.this
     for(this->n = n--; n >= 0; n--)
       this-> a[n] = a[n];
   }
-  void print(void){int i=0;
-    cout<<" n= "<<this->n<<"\tother:" 
+  void print(){int i=0;
+    cout<<" n= "<<this->n<<"\tother:"
       << other_static << endl;
     for(; i < (*this).n; i++)
       cout<< this->a[i] << endl;
   }
-  static void printStatic(void){
-    cout<<"MAX: "<<MAX<<"\tother: " 
+  static void printStatic(){
+    cout<<"MAX: "<<MAX<<"\tother: "
       << other_static << endl;
   }
 };

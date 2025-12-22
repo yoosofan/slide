@@ -8,7 +8,7 @@ class student{
   long long id;
   char* address = nullptr;
   public:
-  student(const char* mn1=nullptr, 
+  student(const char* mn1=nullptr,
     long long d=0, char* ad=nullptr)
   {
     name=new char[strlen(mn1)];
@@ -16,7 +16,7 @@ class student{
     address=new char[strlen(ad)];
     strcpy(address,ad);
   }
-  void input(void){
+  void input(){
     char nm[1000], ad[1000];
     cout << "Enter name: ";
     cin >> nm;
@@ -29,7 +29,7 @@ class student{
     cout << "Enter id: ";
     cin >> id;
   }
-  void print(void){
+  void print(){
     cout << "name:\t" << name << endl;
     cout << "id:\t" << id << endl;
     cout << "address:\t" << address << endl;
@@ -39,13 +39,13 @@ class student{
     delete[] address;
     name = nullptr;
     address = nullptr;
-  } 
+  }
 };
-void f1(void){
+void f1(){
   student s1[100];
   s1[0].input();
 }
-void f2(void){
+void f2(){
   student s1[2000];
   s1[0].input();
 }

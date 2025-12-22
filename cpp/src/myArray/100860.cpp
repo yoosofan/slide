@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 void print(double *pa);
-void f1(void);
+void f1();
 int main(){
   f1();
   auto s1 = "Hello";
@@ -17,10 +17,10 @@ int main(){
 }
 void print(double *pa){
   for(auto i = 0; i < 5; i++)
-    cout << "pa[" << i << "]: " 
+    cout << "pa[" << i << "]: "
       << pa[i] << endl;
 }
-void f1(void){
+void f1(){
   auto *px = new double[10];
   for(auto i = 0; i < 5 ; i++)
     px[i] = i+1;

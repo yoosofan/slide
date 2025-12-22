@@ -14,7 +14,7 @@ template<typename Type> class myArray{
   Type a[MAX];
   int n = 0;
 public:
-  void input(void){
+  void input(){
     cout<<"Enter n < " << MAX << " : ";
     do{cin >> n;} while(n<0 || n>MAX);
     for(auto i = 0; i < n; i++){
@@ -22,7 +22,7 @@ public:
       cin >> a[i];
     }
   }
-  void print(void){
+  void print(){
     cout << "n: " << n << endl;
     for(auto i = 0; i < n; i++)
       cout << a[i] << endl;

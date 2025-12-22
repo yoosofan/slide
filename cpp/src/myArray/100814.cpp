@@ -1,8 +1,8 @@
 #include <iostream>
 using namespace std;
-double* f1(void);
+double* f1();
 void f2(double* a);
-double* f3(void);
+double* f3();
 void f4(double* a);
 int main(){ // 100814
   double* pa = f1();
@@ -11,14 +11,14 @@ int main(){ // 100814
   f4(pa);
   pa = nullptr;
 }
-double* f1(void){
+double* f1(){
   double* px = new double[10];
   return px;
 }
 void f2(double* a){
   delete[] a;
 }
-double* f3(void){
+double* f3(){
   return new double;
 }
 void f4(double* a){

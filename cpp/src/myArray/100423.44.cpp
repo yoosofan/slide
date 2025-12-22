@@ -6,10 +6,10 @@ struct myArray{
       for(n = k--; k >= 0; k--)
         a[k] = ma[k];
     else
-      cout << "Number of Elements is wrong" 
+      cout << "Number of Elements is wrong"
         << k << endl;
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = "

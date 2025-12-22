@@ -13,19 +13,19 @@ struct myArray{//100650
     else cout << "Error accessing myArray " << endl;
   }
   myArray(const double *ma = nullptr, int k = 0){
-    if( k > MAX ) 
+    if( k > MAX )
       k = MAX ;
     for(n = k--; k >= 0; k--)  a[k] = ma[k];
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = " << a[i] << endl;
   }
 };
-void f1(void);
-int main(){ f1();return 0;}
-void f1(void){
+void f1();
+int main(){ f1();}
+void f1(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x) / sizeof(double));
   d.set(30, 500);  d.print();

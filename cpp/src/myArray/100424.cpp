@@ -11,10 +11,10 @@ struct myArray{
         a[i] = ma[i];
     }
     else
-      cout << "Number of Elements is wrong" 
-        << k << endl;    
+      cout << "Number of Elements is wrong"
+        << k << endl;
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = "

@@ -37,7 +37,7 @@ class myArray{
     {ind[count]=index;return a[count++];}
     throw "Out of Range";
   }
-  void print(void){
+  void print(){
     for(int i=0;i<count;i++)
       cout<<ind[i]<<" = "<<a[i]<<endl;
   }

@@ -9,14 +9,14 @@ double* getMemory()
 {return new double[10];}
 void print(double *pa){
   for(auto i = 0; i < 5; i++)
-    cout << "pa[" << i << 
+    cout << "pa[" << i <<
 	  "]: " << pa[i] << endl;
 }
 void input(double *pa){
   for(auto i = 0; i < 5 ; i++)
     pa[i] = i+1;
 }
-void f1(void){
+void f1(){
   double *px = getMemory();
   input(px);  print(px);
 }

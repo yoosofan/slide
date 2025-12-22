@@ -5,14 +5,14 @@ class student{
   long long id;
   char* address = nullptr;
   public:
-  void input(void){
+  void input(){
     char nm[1000], ad[1000];
     int i;
     cout << "Enter name: ";
     cin >> nm;
     for(i=0; nm[i]; i++);
     name = new char[++i];
-    for(; i >= 0; i--) 
+    for(; i >= 0; i--)
       name[i] = nm[i];
     cout << "Enter address: ";
     cin >> ad;
@@ -23,7 +23,7 @@ class student{
     cout << "Enter id: ";
     cin >> id;
   }
-  void print(void){
+  void print(){
     cout << "name:\t" << name << endl;
     cout << "id:\t" << id << endl;
     cout << "address:\t" << address << endl;
@@ -33,18 +33,17 @@ class student{
     delete[] address;
     name = nullptr;
     address = nullptr;
-  } 
+  }
 };
-void f1(void){
+void f1(){
   student s1[100];
   s1[0].input();
 }
-void f2(void){
+void f2(){
   student s1[2000];
   s1[0].input();
 }
 int main(){
   f1();
   f2();
-  return 0;
 }

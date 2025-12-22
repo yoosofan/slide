@@ -5,12 +5,12 @@ struct myArray{
   double a[MAX];
   int n;
   myArray(const double ma[], int k){
-    if( k > MAX) 
+    if( k > MAX)
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = " << a[i] << endl;

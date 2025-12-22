@@ -8,10 +8,10 @@ struct myArray{
     for(int i=0; i < n; i++)
       a[i] = ma[i];
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
-      cout << "a[" << i << "] = " 
+      cout << "a[" << i << "] = "
         << a[i] << endl;
   }
 };

@@ -7,7 +7,7 @@ template<typename Type> class myArray{
   Type a[MAX];
   int n = 0;
   public:
-  void input(void){
+  void input(){
     do{
       cout << "Enter number of Elements > 0 :";
       cin >> n;

@@ -17,14 +17,14 @@ class complexCls{ double re, im; public:
 template<typename Type> class myArray{
   static const int MAX = 200;
   Type a[MAX];  int n = 0; public:
-  void input(void){
+  void input(){
     cout<<"Enter n > 0: "; cin>>n;
     for(int i=0;i<n;i++){
       cout << "Enter a[" << i << "]: ";
       cin >> a[i];
     }
   }
-  void print(void){
+  void print(){
     cout<<"n: "<<n<<endl;
     for(int i=0;i<n;i++)
       cout<<a[i]<<endl;

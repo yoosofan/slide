@@ -6,7 +6,7 @@ class myException {
 /*  string message;
    public:
   myException(string msg){message = msg;}
-  string what(void){return message;}*/
+  string what(){return message;}*/
 };
 template<typename T> class ArrayCls{
   T* data = nullptr;
@@ -16,7 +16,7 @@ template<typename T> class ArrayCls{
   ArrayCls(T* a, int sz){
     data = new T[ size = sz ] ;
     if (!data) throw myException();//
-    for(int i=0 ; i<size; i++) 
+    for(int i=0 ; i<size; i++)
       data[i] = a[i];
   }
   ~ArrayCls(){
@@ -25,11 +25,11 @@ template<typename T> class ArrayCls{
   }
   ArrayCls(const ArrayCls& a){
     data=new T[size=a.size];
-    for(int i=0; i<size; i++)     
+    for(int i=0; i<size; i++)
       data[i]=a.data[i];
   }
   ArrayCls operator+(ArrayCls& a){
-    if(size != a.size) 
+    if(size != a.size)
       throw myException();
     ArrayCls retVal(size);
     for(int i=0; i<size ; i++)
@@ -130,7 +130,7 @@ template<typename T> ArrayCls<T> f1(int n){
 }
 int main(){
   complexCls t1[]={
-    complexCls(1,4),complexCls(2,9),3,4,5,6} , 
+    complexCls(1,4),complexCls(2,9),3,4,5,6} ,
     t2[]= {11,12,13,14,15,16};
   for(int k=0;k<5;k++)cout<<t1[k]<<endl;
   complexCls t3[]={21,22,23,24,25,26} , t4[]= {1,2}, t5[]={3,4} ;

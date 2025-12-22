@@ -7,41 +7,41 @@ class myArray{ // 102130
   public:
   double get(const int index = 0 ){
     if(index < n) return a[index];
-    cout << "Error get myArray" 
+    cout << "Error get myArray"
          << endl;
     return 0;
   }
-  void set(const int index, 
+  void set(const int index,
            const double value){
     if( index < n ) a[index] = value;
     else
-      cout << "Error set myArray" 
+      cout << "Error set myArray"
            << endl;
   }
-  myArray(const double* ma=nullptr, 
+  myArray(const double* ma=nullptr,
           int k = 0){
-    if( k > MAX ) 
+    if( k > MAX )
       k = MAX ;
     for(n = k--; k >= 0; k--)
       a[k] = ma[k];
   }
   myArray(const myArray& b){
-    cout << "copy constructor" 
+    cout << "copy constructor"
          << endl;
   }
   ~myArray(){
     cout << "Destructor" << endl;
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
-      cout << "a[" << i << "] = " 
+      cout << "a[" << i << "] = "
            << a[i] << endl;
   }
 };
-void f1(void);
+void f1();
 int main(){f1();}
-void f1(void){
+void f1(){
   double x[]{10, 12, 34, 54};
   myArray d(x, sizeof(x)/sizeof(x[0]));
   myArray p(d);

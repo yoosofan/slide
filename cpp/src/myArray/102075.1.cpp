@@ -42,7 +42,7 @@ class myArray{//myarray/102050.cpp
   ~myArray(){
     cout << "Destructor" << endl;
   }
-  void print(void){
+  void print(){
     cout << " n = " << n << endl;
     for(int i = 0; i < n; i++)
       cout << "a[" << i << "] = "

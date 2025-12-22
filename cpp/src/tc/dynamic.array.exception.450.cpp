@@ -5,10 +5,10 @@
 using namespace std;
 
 class myException {
-  string message; 
+  string message;
  public:
   myException(string msg){message = msg;}
-  string what(void){return message;}
+  string what(){return message;}
 };
 template <typename T> class ArrayCls{
   T *data;
@@ -28,7 +28,7 @@ template <typename T> class ArrayCls{
     data=new T[size];
     f1.read((char*)data,sizeof(T)*size);
     f1.close();
-  }  
+  }
   ArrayCls(int sz = 10 ){
     data = new T[ size = sz ] ;
     if (!data) throw myException("Could not allocate memory");
@@ -46,7 +46,7 @@ template <typename T> class ArrayCls{
   {for(int i=0;i<size;i++) if(data[i]==k)return true; return false;}
   bool search2(T k)
   {return recursiveSearch(data,size,k);}
-  void sort(void){
+  void sort(){
     for(int i=0;i<size;i++)
       for(int j=i+1;j<size;j++)
         if(data[i]<data[j]){
@@ -55,7 +55,7 @@ template <typename T> class ArrayCls{
           data[j]=temp;
         }
   }
-  //void sort2(void){recursiveSort(data,size);}
+  //void sort2(){recursiveSort(data,size);}
   //int binarySearch(T k){return binarySearch(data,0,size,k)}
   ArrayCls operator+(ArrayCls & a){
     if(size != a.size) throw myException("Length of two arrays are inequal");
@@ -87,7 +87,7 @@ template<class T> bool recursiveSearch(T *data,int n,T k){
   if(n==0) return false;
   if(*data==k) return true;
   return recursiveSearch<T>(data+1,n-1,k);
-}  
+}
 class complexCls{double r,i;public:
    complexCls(int m=0 , int n=0){r=m;i=n;}
    void Show(){cout<<r<<"+ i "<<i<<endl;}
@@ -165,7 +165,7 @@ int main(){
     f=a;
     cout<<"after first assignment"<<endl;
     g = e + f;
-    
+
     f = a - e;
     f = b - d;
   }
