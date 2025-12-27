@@ -3,10 +3,7 @@
 #include<cmath>
 #include<fstream>
 using namespace std;
-
-class myException {
-  string message;
- public:
+class myException { string message; public:
   myException(string msg){message = msg;}
   string what(){return message;}
 };

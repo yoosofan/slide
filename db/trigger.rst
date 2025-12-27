@@ -290,6 +290,9 @@ where *event* can be one of:
       FOR EACH ROW
       EXECUTE PROCEDURE befo_update();
 
+
+----
+
 .. code:: sql
 
     postgres=# SELECT * FROM STUDENT_MARKS;
@@ -323,6 +326,8 @@ where *event* can be one of:
       ON student_mast
       FOR EACH ROW
       EXECUTE PROCEDURE aft_delete();
+
+----
 
 .. code:: sql
 

@@ -73,22 +73,18 @@ ostream&operator<<(ostream&o1,const myArray<T,I,K>m1){
 void f1(){throw "dghdd";}
 int main(){
   myArray<int, Node<int> >m1;
-  int aa=12; Node<int> n1(&aa);
-  m1[n1]=44;
-  cout<<m1[n1]<<endl;
-  aa=4;
+  int aa=12; Node<int> n1(&aa);  m1[n1]=44;
+  cout<<m1[n1]<<endl;  aa=4;
   m1[Node<int>(&aa)]=4;
   cout<<m1[Node<int>(new int(4))]<<endl;
-  try{
-    myArray<int,string,3> cm1;
+  try{ myArray<int,string,3> cm1;
     myArray<string,complexCls> am1;
     myArray<string> kl1; kl1[0]="dddd";kl1[13]="asddd"; cout<<kl1;
-    cm1["ali"]=4; cout<<"line 56 "<<endl;
+    cm1["ali"]=4; cout<<"line: "<< __LINE__ <<endl;
     cm1["Reza"]=7; myArray<> hk1;// myArray cfw1;
     cout<<cm1["ali"]<<endl;
     cout<<cm1["Reza"]<<endl;
-    am1[complexCls(3,4)]="Hamid";
-    f1();
+    am1[complexCls(3,4)]="Hamid";   f1();
     cout<<am1[complexCls(3,4)]<<endl;
     cout<<cm1;  cout<<am1;
   }catch(const int &a){cout<<"out of range"<<endl;}
