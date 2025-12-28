@@ -209,6 +209,9 @@ General Types of Computers
 * Quantum Computer
     * pros
     * cons
+* Biocomputing
+    * pros
+    * cons
 
 .. image:: img/in/ibm-quantum-system-one-ces-2020_50252942522_o_jpg.webp
    :height: 400px
@@ -1279,7 +1282,7 @@ Interrupt-Driven Program
 ===========================
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
     :code: asm
-    :number-lines: 
+    :number-lines:
     :start-line: 4
     :end-line: 22
 
@@ -1313,7 +1316,7 @@ Loader with interrupt (bootstrap)
     src/in/loader7_user_program_comments.asm
     src/in/loader7_user_program.asm
 
-    
+
     # Uses interrupt-driven I/O instead of polling
     src/in/loader10_interrupt.asm
     src/in/loader10_interrupt_comments.asm
@@ -1365,7 +1368,7 @@ Interrupt and Relative Address Problem
     #. predictable, fixed addresses
     #. resources across all processes
     #. Safety
-     
+
 .. :
 
     : User programs shouldn't be able to interfere with ISR
@@ -1390,7 +1393,7 @@ Solution Dual Address Spaces
     #. x86: Uses privilege levels (ring 0 vs ring 3)
     #. ARM: Different processor modes (IRQ, SVC, User)
     #. All: Have mechanisms to switch address spaces during interrupts
-    
+
     Dual-Mode System with Manual Mode Switching
     mod 0 = Kernel Mode, mod 1 = User Mode
 

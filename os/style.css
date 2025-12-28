@@ -1,6 +1,6 @@
-body { 
+body {
   text-align: center; /*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/
-  font-size: large; /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
+  font-size: x-large; /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
 }
 
 #step-X html,body{ /* https://stackoverflow.com/questions/37560602/how-to-fill-the-screen-with-image-in-impress-js */
@@ -50,11 +50,11 @@ pre.code{font-size:120%; font-family: monospace; padding-top: 0.1em; padding-bot
 pre.code > .ln {background-color: #DFE5F1;}
 pre.code { background-color:#f0f0f0;}
 pre.console{background-color: #F9E0E0;}
-ol.trace-code{ 
-  background-color: #F3F2CD; 
+ol.trace-code{
+  background-color: #F3F2CD;
   color: #27435F/* #466E95*/;
-  padding-left: 1.5em; 
-  padding-right: 1em; 
+  padding-left: 1.5em;
+  padding-right: 1em;
   list-style: none;
   counter-reset: my-awesome-counter; /* justify-self: start; */
 }
@@ -177,7 +177,7 @@ div.t2c > h1, div.t2c > .rtl-h1{
 }
 div.scrollbar-box800x500px-overflow{
   width: 800px;
-  height: 500px;  
+  height: 500px;
   overflow: scroll;
 }
 .tableheaderwithgraybackground th {

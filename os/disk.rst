@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: style.css
+:css: ./style.css
 :substep: true
 :data-width: 1024
 :data-heigh: 768
@@ -52,7 +52,7 @@ Storrage Areaa Network(SAN)
 
 File Management System
 =============================
-File Access Methods 
+File Access Methods
 --------------------
 * Sequential Access
 * Random Access
@@ -139,7 +139,7 @@ Contiguous Block Allocation
 
 ----
 
-List Block Allocation 
+List Block Allocation
 =============================
 .. image:: img/disk/disk_Linked_allocation_of_disk_space.png
 
@@ -189,7 +189,7 @@ RAM in DISK
   .. image:: img/disk/0fdaa514-25ae-494d-b4a6-4e1ca52633f1.jpg
 
 .. :
-    
+
     internal ssd disk ram hierarchy
     https://www.utmel.com/blog/categories/memory%20chip/solid-state-drive-ssd-classification-and-architecture
     https://www.diskmfr.com/know-how-internal-structure-details-of-solid-state-drives/
@@ -235,7 +235,7 @@ Free Space Management
 
 Bit Vector
 ------------
-* Each block is represented by a bit in a table. 
+* Each block is represented by a bit in a table.
 * If a block is free, its corresponding bit is 1.
 * When a block is needed, the table is searched.
 * If the disk capacity is small, the whole bit vector can be stored in memory.
@@ -267,14 +267,14 @@ Hardware Ports
 Status of Disk Requests
 ===========================
 .. image:: img/disk/IO_Device_status_table.png
-  :width: 700px
+  :width: 950px
 
 ----
 
 Linux Block I/O Stack
 ===========================
 .. image:: img/disk/Linux_block_IO_stack.jpg
-   :width: 600px
+   :width: 800px
 
 `informit <https://www.informit.com/articles/article.aspx?p=2995360>`_
 
@@ -283,8 +283,7 @@ Linux Block I/O Stack
 Disk I/O OS Terminology
 ===========================
 .. image:: img/disk/disk_io_operating_system_terminology.jpg
-   :width: 900px
-   :height: 600px
+   :width: 950px
 
 `informit <https://www.informit.com/articles/article.aspx?p=2995360>`_
 
@@ -293,7 +292,7 @@ Disk I/O OS Terminology
 Disk Arm Scheduling Algorithms
 ====================================
 .. image:: img/disk/hdd_platter.svg
-   :width: 800px
+   :width: 900px
 
 http://gudok.xyz/sspar/
 
@@ -302,8 +301,7 @@ http://gudok.xyz/sspar/
 Operations performed during random access
 =================================================
 .. image:: img/disk/hdd_random_operations.svg
-   :width: 550px
-   :height: 550px
+   :width: 850px
 
 http://gudok.xyz/sspar/
 
@@ -410,12 +408,14 @@ N-Step Scan
 چند الگوریتم زمان‌بندی دیسک
 ============================================
 .. image:: img/disk/disk_Disk_Scheduling_Algorithms2.png
+    :width: 950px
 
 ----
 
 نمونه‌ای از مقایسهٔ چند الگوریتم
 ==============================================
 .. image:: img/disk/disk_Comparison_of_Disk_Scheduling_Algorithms2.png
+    :width: 950px
 
 ----
 
@@ -423,14 +423,14 @@ N-Step Scan
 =======================================================================================================
 .. image:: img/disk/IO_The_life_cycle_of_an_I_O_request.png
    :align: center
-   :height: 700px
-
+   :width: 900px
 
 ----
 
 RAID
 =======================================================================================================
 .. image:: img/disk/disk_raid_levels.png
+   :width: 990px
 
 ----
 
@@ -444,8 +444,8 @@ RAID
 
     https://www.slideshare.net/J.T.A.JONES/disk-scheduling
     img/disk/disk-scheduling-general-view.png
-    
-    
+
+
     https://www.geeksforgeeks.org/transforming-of-i-o-requests-to-hardware-operations/
     https://medium.com/@bundetcom/understanding-disk-scheduling-947f67f2b160
     pyq.ravindrababuravula.com/topic/?tp=Disk-Scheduling
