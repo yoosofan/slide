@@ -5,7 +5,7 @@ int main(){
   ifstream f1("input.integers.txt");
   //ifstream f1("folder2/folder3/file1.txt");
   //ifstream f1("../../folder2/folder3/file1.txt");
-/*
+/* \\
   Relative addressing:
   آدرس دهی نسبی در این جا یعنی از پوشه‌ی کنونی یکی بالاتر برو
   سپس در آن پوشه به داخل پوشه‌ی folder2 برو سپس از آنجا به پوشه‌ی folder3 برو

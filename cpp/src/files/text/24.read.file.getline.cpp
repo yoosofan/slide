@@ -1,6 +1,6 @@
 #include<fstream>
 #include<iostream>
-//#include<iomanip>
+#include<cstdio>
 using namespace std;
 const int MAX_STR = 200;
 int main(){
@@ -11,8 +11,8 @@ int main(){
     cout << "couldn't open" << endl;
     throw "Cannot open file";
   }
-  f1.read(st, MAX_STR - 1); // 199 charactes + \0 
-  //cout << f1.read(st, MAX_STR - 1).gcount() << endl; // 199 charactes + \0 
+  f1.read(st, MAX_STR - 1); // 199 charactes + \0
+  //cout << f1.read(st, MAX_STR - 1).gcount() << endl; // 199 charactes + \0
   while(!f1.eof()){
   //~ while(getline(f1, st2)){
     //~ st[9]= 0;
@@ -24,8 +24,8 @@ int main(){
   cout << st << endl;
   f1.close();
   cout << std::hex << int('9') << endl;
-  // sscanf
-  //~ cout << std::hex << int('7') << endl;
+  int a; sscanf("11", "%d", &a);
+  cout << std::hex << a << endl;
   //~ cout << std::hex << int('4') << endl;
   //~ cout << std::hex << int('3') << endl;
 }
