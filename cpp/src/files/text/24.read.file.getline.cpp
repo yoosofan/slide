@@ -22,9 +22,9 @@ int main(){
     f1.read(st, MAX_STR - 1);
   }
   cout << st << endl;
-  f1.close();
+  f1.close(); // hex 0 - 9 a b c d e f
   cout << std::hex << int('9') << endl;
-  int a; sscanf("11", "%d", &a);
+  int a; sscanf("11", "%d", &a); //sprintf(
   cout << std::hex << a << endl;
   //~ cout << std::hex << int('4') << endl;
   //~ cout << std::hex << int('3') << endl;
