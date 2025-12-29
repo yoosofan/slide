@@ -10,10 +10,10 @@ int main(){
     throw 1;
   }
   //cout<<f1.getline(st,200).gcount()<<endl;
-  while(f1.getline(st, MAX_STR - 1).gcount() > 0 )    
+  while(f1.getline(st, MAX_STR - 1).gcount() > 0 )
     cout << st << endl;
   f1.close();
-  int i; cout << "Enter i: "; 
+  int i; cout << "Enter a line: ";
   // cout << (cin >> i).gcount() << endl;
   cout << cin.getline(st, MAX_STR - 1).gcount() << endl;
   cout << st << endl;

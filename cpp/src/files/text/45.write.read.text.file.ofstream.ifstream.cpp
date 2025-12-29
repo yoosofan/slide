@@ -18,7 +18,7 @@ int main(){
   f2 << "Sadegh" << "  Salehi " << endl;
   f2.close();
   f1.close();
-  fstream f3("2.out.txt", ios::in);
+  fstream f3("2.out.txt", ios::in); //ifstream
   if(!f3){
     cout << "Can not open f3" << endl;
     throw 0;
