@@ -3,7 +3,7 @@
 using namespace std;
 int main(){
   int i = 12, j;
-  ofstream f1("a1.txt", ios::binary);
+  ofstream f1("out1.bin", ios::binary);
   if(!f1)
     throw "Cannot Open File";
   f1.write((char*) &i, sizeof(int));
@@ -19,7 +19,7 @@ int main(){
   f1.write((char*)&(++i), sizeof(int));
   f1.write((char*)&(i += 234234), sizeof(int));
   f1.close();
-  fstream f3("a1.txt",ios::in | ios::binary);
+  fstream f3("a1.txt", ios::in | ios::binary);
   if(!f3)  throw "Cannot Open File";
   f3.read((char*) &j, sizeof(int));
   char ast[20];
