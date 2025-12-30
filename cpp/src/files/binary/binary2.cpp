@@ -20,12 +20,12 @@ void write2file(const char* fname = "a1.bin"){
 void readFromFile(const char* fname = "a1.bin"){
     //fstream f3(fname, ios::in | ios::binary);
     ifstream f3(fname, ios::binary);
-    if(!f3)   throw "Cannot Open File";
+    if(!f3) throw "Cannot Open File";
     int n, j;
     f3.read((char*) &n, sizeof(int));
     for(; n > 0; n--){
-        f3.read((char*) &j, sizeof(int));
-        cout << j << endl;
+      f3.read((char*) &j, sizeof(int));
+      cout << j << endl;
     }
     f3.close();
 }

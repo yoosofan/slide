@@ -36,7 +36,7 @@ template<typename T> class myArray{
   {f1.seekg(0, ios::beg);f1.seekp(0, ios::beg);}
  };
 struct student{
-  char name[20]; char stdno[14]; double avg
+  char name[20]; char stdno[14]; double avg;
   friend ostream & operator<<(ostream & o1, student m1){
     o1 << "( " << m1.name << " , " << m1.stdno
       << " , " << m1.avg << " ) ";
