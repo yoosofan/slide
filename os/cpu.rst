@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./cpu.css
+:css: ./style.css
 :substep: true
 :slide-numbers: true
 :skip-help: true

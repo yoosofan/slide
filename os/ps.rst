@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./ps.css
+:css: ./style.css
 :substep: true
 :slide-numbers: true
 :skip-help: true
@@ -8,6 +8,11 @@
 :data-height: 768
 
 .. title: Operating Systems: Process Synchronization
+
+.. role:: raw-html(raw)
+   :format: html
+
+.. |nbsp| unicode:: 0xA0
 
 ----
 
@@ -27,9 +32,6 @@ Critical Section
 ------------------------
 Processes try to use resources simultaneously
 
-
-.. class:: substep
-
 * Sharing Physical Resources
 
   * printer
@@ -48,31 +50,37 @@ Processes try to use resources simultaneously
 
 ----
 
-:id: ps-desc-i-id
+:class: ts2c4c
 
 Sharing Simple Variables(I)
 =======================================
-Share code
+.. container::
 
-.. code:: cpp
+    Share code
 
-  double x = 0, y = 1;
+    .. code:: cpp
 
-:math:`p_0`
+      double x = 0, y = 1;
 
-.. code:: cpp
-  :number-lines:
+.. container::
 
-  x = y + 4 ;
-  y = x - 2 ;
+    :math:`p_0`
 
-:math:`p_1`
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
+      x = y + 4 ;
+      y = x - 2 ;
 
-  x = y + 4 ;
-  y = x - 2 ;
+.. container::
+
+    :math:`p_1`
+
+    .. code:: cpp
+      :number-lines:
+
+      x = y + 4 ;
+      y = x - 2 ;
 
 .. class:: substep trace-code
 
@@ -104,31 +112,37 @@ Share code
 
 ----
 
-:id: ps-desc-ii-id
+:class: ts2c4c
 
 Sharing Simple Variables(II)
-=======================================
-Share code
+===============================
+.. container::
 
-.. code:: cpp
+    Share code
 
-  double x = 0 , y = 1;
+    .. code:: cpp
 
-:math:`p_0`
+      double x = 0 , y = 1;
 
-.. code:: cpp
-  :number-lines:
+.. container::
 
-  x = y + 1 ;
-  y = x + 2 ;
+    :math:`p_0`
 
-:math:`p_1`
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
+      x = y + 1 ;
+      y = x + 2 ;
 
-  x = y + 3 ;
-  y = x + 5 ;
+.. container::
+
+    :math:`p_1`
+
+    .. code:: cpp
+      :number-lines:
+
+      x = y + 3 ;
+      y = x + 5 ;
 
 .. class:: substep trace-code
 
@@ -160,17 +174,21 @@ Share code
 
 ----
 
-:id: ps-mcode-id
+:class: ts2c4c
 
 Machine code
 =======================================
-Share code
+.. container::
 
-.. code:: cpp
+    Share code
 
-  double x = 2;
+    .. code:: cpp
+
+      double x = 2;
 
 :math:`p_0`
+
+:math:`p_1`
 
 .. code:: cpp
   :number-lines:
@@ -183,7 +201,6 @@ Share code
   t1 = x + 2 ;
   x = t1
 
-:math:`p_1`
 
 .. code:: cpp
   :number-lines:
@@ -244,11 +261,12 @@ General Solutions
 
 ----
 
-:id: simplyfing-race-conditions-id
+:class: t2c
 
-Simplifying
-=============
+Simplifying(I)
+==============
 .. list-table::
+  :class: borderless
 
   * - .. code:: cpp
         :number-lines:
@@ -269,7 +287,7 @@ Simplifying
 
         ........
 
-    - `.`
+    - |nbsp|
 
     - .. code:: cpp
         :number-lines:
@@ -292,10 +310,9 @@ Simplifying
 
         ........
 
-    - `.`
+    - |nbsp|
 
 .. table::
-  :class: smallerelementwithfullborder
 
   +--------+--------+--------+--------+--------+
   | time   | p0     | p1     | p2     | p3     |
@@ -352,20 +369,17 @@ Simplifying
   | `....` | `....` | `....` | `....` |
   +--------+--------+--------+--------+
 
-
-
 ----
 
 :class: t2c
 
-Simplify
-===========
+Simplifying(II)
+===============
 .. list-table::
+  :class: borderless
 
   * - .. code:: cpp
         :number-lines:
-
-        P0
 
         P0_rs0
 
@@ -387,12 +401,10 @@ Simplify
 
         ........
 
-    - `.`
+    - |nbsp|
 
     - .. code:: cpp
         :number-lines:
-
-        P1
 
         P1_rs0
 
@@ -418,7 +430,7 @@ Simplify
 
         ........
 
-    - `.`
+    - |nbsp|
 
 .. container:: substep
 
@@ -460,188 +472,176 @@ Requirements for Software Based Solution
         :class: substep
 #. Memory restriction (one request, no parallel respond)
 
-
 ----
 
-:id: first-try-id
+:class: ts2c
 
 Using one Shared Variable
 ==============================
-.. class:: substep
+.. container::
 
-Share code
+  Share code
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+  .. code:: cpp
+    :number-lines:
 
-  bool busy = false;
+    bool busy = false;
 
-.. class:: substep
+.. container::
 
-:math:`P_0`
+    :math:`P_0`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  do {
-      if( busy == false ) // Entry
-      {
-            busy = true ;
+      do {
+          if( busy == false ) // Entry
+          {
+                busy = true ;
 
-            // Critical Section
+                // Critical Section
 
-            busy = false ; // Exit
-      }
+                busy = false ; // Exit
+          }
 
-      // Reminder Section
+          // Reminder Section
 
-  }while(1);
+      }while(1);
 
-.. class:: substep
+.. container::
 
-:math:`P_1`
+    :math:`P_1`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  do {
-      if( busy == false ) // Entry
-      {
-            busy = true;
+      do {
+          if( busy == false ) // Entry
+          {
+                busy = true;
 
-            // Critical Section
+                // Critical Section
 
-            busy = false ; // Exit
-      }
+                busy = false ; // Exit
+          }
 
-      // Reminder Section
+          // Reminder Section
 
-  }while(1);
+      }while(1);
 
 ----
 
-:id: second-try-id
+:class: ts2c
 
 Using one Shared Variable(busy)
 ================================
-.. class:: substep
+.. container::
 
-Share code
+    Share code
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  bool busy = false;
+      bool busy = false;
 
-.. class:: substep
+.. container::
 
-:math:`P_0`
+    :math:`P_0`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  do {
-    while( busy == true ) // Entry
-          ;
-    busy = true ; // Entry
+      do {
+        while( busy == true ) // Entry
+              ;
+        busy = true ; // Entry
 
-    // Critical Section
+        // Critical Section
 
-    busy = false ; // Exit
+        busy = false ; // Exit
 
-    // Reminder Section
+        // Reminder Section
 
-  }  while(1);
+      }  while(1);
 
-.. class:: substep
+.. container::
 
-:math:`P_1`
+    :math:`P_1`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  do {
-    while( busy == true ) // Entry
-          ;
-    busy = true ; // Entry
+      do {
+        while( busy == true ) // Entry
+              ;
+        busy = true ; // Entry
 
-    // Critical Section
+        // Critical Section
 
-    busy = false ; // Exit
+        busy = false ; // Exit
 
-    // Reminder Section
+        // Reminder Section
 
-  }  while(1);
+      }  while(1);
 
 ----
 
-:id: second-try-run-id
+:class: ts2c
 
 Mutual Exclusion Violation
 ================================
-.. class:: substep
+.. container::
 
-Share code
+    Share code
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  bool busy = false;
+      bool busy = false;
 
-.. class:: substep
+.. container::
 
-:math:`P_0`
+    :math:`P_0`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  while( busy == true )
-    ;
-  busy = true ; // Entry
+      while( busy == true )
+        ;
+      busy = true ; // Entry
 
-  //Critical Section: CS
+      //Critical Section: CS
 
-  busy = false ; // Exit
+      busy = false ; // Exit
 
-.. class:: substep
+.. container::
 
-:math:`P_1`
+    :math:`P_1`
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  while( busy == true )
-          ;
-  busy = true ; // Entry
+      while( busy == true )
+              ;
+      busy = true ; // Entry
 
-  //Critical Section: CS
+      //Critical Section: CS
 
-  busy = false ; // Exit
+      busy = false ; // Exit
 
 ----
 
-:id: second-try-trace-id
+:class: ts2c
 
 Trace Second Try
 ================================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   bool busy = false;
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
       while( busy != false ) // P0
           ;
@@ -653,7 +653,6 @@ Trace Second Try
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
       while( busy != false ) // P1
           ;
@@ -684,70 +683,65 @@ Trace Second Try
 
 ----
 
-:id: third-try-id
+:class: ts2c
 
 Sharing turn
 ================================
-.. class:: substep
+.. container::
 
-Share code
+    Share code
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  int turn = 0;
+      int turn = 0;
 
-.. class:: substep
 
-:math:`P_0`
+.. container::
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    :math:`P_0`
 
-  while(turn == 1)
-    ;
+    .. code:: cpp
+      :number-lines:
 
-  // CS
+      while(turn == 1)
+        ;
 
-  turn = 1 ;
+      // CS
 
-.. class:: substep
+      turn = 1 ;
 
-:math:`P_1`
+.. container::
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    :math:`P_1`
 
-  while(turn == 0)
-    ;
+    .. code:: cpp
+      :number-lines:
 
-  // CS
+      while(turn == 0)
+        ;
 
-  turn = 0 ;
+      // CS
 
-.. class:: substep
+      turn = 0 ;
 
-  Problem ?
+
+Problem ?
 
 ----
 
-:id: software-cs-turn-i-j-id
+:class: ts2c1c2c
 
-turn i j
-================================
+turn i, j
+============
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Share code
   int turn = 0;
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // P0
   while(turn == 1)
@@ -759,7 +753,6 @@ turn i j
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // P1
   while(turn == 0)
@@ -771,14 +764,12 @@ turn i j
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Share code
   int turn = i;
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pi
   while(turn == j)
@@ -790,7 +781,6 @@ turn i j
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pj
   while(turn == i)
@@ -802,20 +792,18 @@ turn i j
 
 ----
 
-:id: software-cs-need-id
+:class: ts2c
 
 need CS
 ================================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Share Code
   bool need[2] = {false, false};
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pi
   need[i] = true;
@@ -828,7 +816,6 @@ need CS
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pj
   need[j] = true;
@@ -853,13 +840,12 @@ need CS
 
 ----
 
-:id: software-cs2processes-id
+:class: ts2c
 
 Software Soloution 2 processes
 ================================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Share Code
   bool need[2] = {false, false};
@@ -867,62 +853,44 @@ Software Soloution 2 processes
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pi
   need[i] = true;
   turn = j;
   while(need[j] == true && turn == j)
     ;
-
   // CS
-
   need[i] = false ;
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pj
   need[j] = true;
   turn = i;
   while(need[i] == true && turn == i)
     ;
-
   // CS
-
   need[j] = false ;
 
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Pi
   need[i] = true;
   turn = j;
-  b1 = (need[j] == true);
-  b2 = (turn == j);
-  b3 = b1 && b2
-  while(b3)
-    ;
-
+  do{
+    b1 = (need[j] == true);
+    b2 = (turn == j);
+    b3 = b1 && b2
+  }while(b3);
   // CS
-
   need[i] = false ;
 
 ----
 
-
-* https://en.wikipedia.org/wiki/Mutual_exclusion
-* https://en.wikipedia.org/wiki/Dekker%27s_algorithm
-* https://en.wikipedia.org/wiki/Peterson%27s_algorithm
-* https://en.wikipedia.org/wiki/Lamport%27s_bakery_algorithm
-
-* operating system process synchronization history dekker peterson
-
-----
-
+:class: t2c
 
 Python Code
 ================
@@ -934,7 +902,7 @@ Python Code
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Software Soloution n processes(I)
 ========================================
@@ -971,23 +939,25 @@ Software Soloution n processes(I)
 :class: t2c
 
 Software Soloution n processes(II)
-========================================
-.. code:: cpp
-   :number-lines:
+====================================
+.. container::
 
-    // Share section
-    int number[n] = {0};
+    .. code:: cpp
+       :number-lines:
 
-.. code:: cpp
-   :number-lines:
+        // Share section
+        int number[n] = {0};
 
-    // Each process
-    number[i] = max(number, n)+1;
-    for(j = (i+1) % n; j != i; j = (j+1) % n)
-      while(number[i] >= number[j] && number[j] != 0)
-          ;
-    /* Critical Section */
-    number[i] = 0;
+    .. code:: cpp
+       :number-lines:
+
+        // Each process
+        number[i] = max(number, n)+1;
+        for(j = (i+1) % n; j != i; j = (j+1) % n)
+          while(number[i] >= number[j] && number[j] != 0)
+              ;
+        /* Critical Section */
+        number[i] = 0;
 
 .. class:: substep trace-code
 
@@ -1007,6 +977,18 @@ Software Soloution n processes(II)
 
 Software Soloution n processes(III)
 ========================================
+.. container::
+
+    .. code:: cpp
+       :number-lines:
+
+        // Share section
+        int number[n]={0};
+
+    .. class:: substep trace-code
+
+    #. Test
+
 .. code:: cpp
    :number-lines:
 
@@ -1019,22 +1001,12 @@ Software Soloution n processes(III)
     /* Critical Section */
     number[i] = 0;
 
-.. code:: cpp
-   :number-lines:
-
-    // Share section
-    int number[n]={0};
-
-.. class:: substep trace-code
-
-#. Test
-
 ----
 
-:id: software-cs-n-processes-ii-id
+:class: t2c
 
-Software Soloution n processes(III)
-========================================
+Software Soloution n processes(IV)
+====================================
 .. code:: cpp
    :number-lines:
 
@@ -1057,7 +1029,7 @@ Software Soloution n processes(III)
 
 :class: t2c
 
-Software Soloution n processes(III)
+Software Soloution n processes(V)
 ========================================
 .. container::
 
@@ -1109,8 +1081,10 @@ Software Soloution n processes(III)
 
 ----
 
-Software Soloution n processes(III)
-==========================================
+:class: ts2c
+
+Lamport's Bakery Algorithm
+==========================
 .. code:: cpp
    :number-lines:
 
@@ -1133,9 +1107,17 @@ Software Soloution n processes(III)
 
     number[i] = 0;
 
+----
+
+* operating system process synchronization history dekker peterson
+* https://en.wikipedia.org/wiki/Mutual_exclusion
+* https://en.wikipedia.org/wiki/Dekker%27s_algorithm
+* https://en.wikipedia.org/wiki/Peterson%27s_algorithm
 * https://en.wikipedia.org/wiki/Lamport%27s_bakery_algorithm
 
 ----
+
+:class: t2c
 
 Hardware Soloution(I)
 ==========================================
@@ -1171,10 +1153,62 @@ Hardware Soloution(I)
 
 ----
 
+:class: t2c
+
 Assembly implementation
 ==============================
-.. code:: asm
-  :number-lines:
+.. container::
+
+    .. code:: asm
+      :number-lines:
+
+      Start_Share_region:
+
+        move lock, #0
+        ret
+
+
+    .. code:: asm
+
+      ; Process or Thread
+
+      ; Reminder Secion
+
+      CALL enter_region
+
+      ; Critical Section
+
+      CALL exit_region
+
+      ; Reminder Secion
+
+.. container::
+
+        .. code:: asm
+          :number-lines:
+
+          enter_region:
+
+            move reg, #1
+
+          loop:
+
+            tsl reg, lock
+            cmp reg, #0
+            jnz loop
+            ret
+
+       .. code:: asm
+         :number-lines:
+
+          exit_region:
+
+            move lock, #0
+            ret
+
+.. :
+
+  https://en.wikipedia.org/wiki/Test-and-set
 
   Start_Share_region:
     move lock, #0      ; store 0 in flag
@@ -1201,49 +1235,45 @@ Assembly implementation
     move lock, #0      ; store 0 in flag
     ret                ; return to caller
 
-.. :
-
-  https://en.wikipedia.org/wiki/Test-and-set
-
 ----
 
-:id: hardware-cs-i-trace-id
+:class: n2c
 
-.. code:: cpp
-  :number-lines:
+.. container::
 
-    // P0
-    do{
-      while(TS(lock))
-        ;
-      // CS
-      lock = false;
-      // RS
-    }while(1);
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
+        do{ // P0
+          while(TS(lock))
+            ;
+          // CS
+          lock = false;
+          // RS
+        }while(1);
 
-    // P1
-    do{
-      while(TS(lock))
-        ;
-      // CS
-      lock = false;
-      // RS
-    }while(1);
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
 
-    // P2
-    do{
-      while(TS(lock))
-        ;
-      // CS
-      lock = false;
-      // RS
-    }while(1);
+        do{ // P1
+          while(TS(lock))
+            ;
+          // CS
+          lock = false;
+          // RS
+        }while(1);
+
+    .. code:: cpp
+      :number-lines:
+
+        do{ // P2
+          while(TS(lock))
+            ;
+          // CS
+          lock = false;
+          // RS
+        }while(1);
 
 .. class:: substep trace-code
 
@@ -1263,48 +1293,45 @@ Assembly implementation
 
 ----
 
-Hardware Soloution(II)
+:class: t2c
+
+Hardware Soloution( without Starvation)
 ========================================
 .. code:: cpp
   :number-lines:
 
   // Share section
   const int n=20;
-  bool waiting[n]={false, ... , false};
+  bool waiting[n]=
+  {false, ... , false};
   bool lock=false;
 
-  // Each Process
-  do{
+.. code:: cpp
+  :number-lines:
+
+  do{// Each Process
     waiting[i] = true;
     bool key=true;
     while(waiting[i] && key)
       key = testAndSet(lock);
-
     waiting[i]=false;
-
     // CRITICAL SECTION
-
     int j=(i+1)%n;
     while((j!=i) && !waiting[j])
        j=(j+1)%n;
     if(j==i)  lock=false;
     else      waiting[j]=false;
-
     // REMINDER SECTION
-
-  }while(1);
-
-.. class:: substep
-
-busy waiting
+  }while(1); // busy waiting
 
 ----
 
-Can We Use Queue?
-====================
+:class: t2c
+
+Is it possible to use Queue?
+============================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   const int max;
   int Queue[max];
@@ -1313,35 +1340,28 @@ Can We Use Queue?
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
     while(testAndset(busyQueue));
     Queue.Append(process_number);
     busyQueue = false;
     bool key = true;
-    while(Queue.front() != process_number || key) // or &&
+    while(Queue.front() != process_number || key)
       key = testAndSet(lock);
-    //cs
-
+    //Critical Section
     while(testAndset(busyQueue));
     Queue.remove();
     busyQueue = false;
     lock = false;
-    //rs
-
-.. class:: substep
-
-**Wrong Answer**
+    // Reminder Section
 
 ----
 
-Hardware Soloution(III)
+:class: t2c
+
+Hardware Soloution swap
 ==========================
-Swap
------------------
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void swap(booelan& a, boolean& b){
       boolean temp = a;
@@ -1351,13 +1371,11 @@ Swap
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   bool lock = false
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   bool key = true;
   while( key == true )
@@ -1367,13 +1385,9 @@ Swap
 
   lock = false;
 
-.. class:: substep
+.. container::
 
-  processor xchg instructions
-
-  http://qcd.phys.cmu.edu/QCDcluster/intel/vtune/reference/6400380.htm
-
-  The memory read and write are guaranteed to be atomic.
+  `xchg instructions <http://qcd.phys.cmu.edu/QCDcluster/intel/vtune/reference/6400380.htm>`_
 
   `ARM  SWP <https://developer.arm.com/documentation/dht0008/a/swp-and-swpb/legacy-synchronization-instructions/swp-and-swpb>`_
 
@@ -1381,19 +1395,30 @@ Swap
 
   https://developer.arm.com/documentation/dui0489/c/arm-and-thumb-instructions/memory-access-instructions/swp-and-swpb
 
+  The memory read and write are guaranteed to be atomic.
+
 ----
 
-Disable / Enable Interrupt
+:class: t2c
+
+Disable / Enable Interrupt ?
 =============================
-Why don't they use this feature of interrupt?
--------------------------------------------------
 .. code:: cpp
+  :number-lines:
+
+  // RS
 
   DisableInterrupt()
 
   // CS
 
   EnableInterrupt()
+
+  // RS
+
+.. note:
+
+    Why don't they use this feature of interrupt?
 
 ----
 
@@ -1413,7 +1438,6 @@ Semaphore(I)
 ================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
     class Semaphore{
       int s;
@@ -1434,17 +1458,15 @@ Semaphore(I)
 
   .. code:: cpp
     :number-lines:
-    :class: substep
 
       // Shared section
       Semaphore mutex=1;
 
   .. code:: cpp
     :number-lines:
-    :class: substep
 
 
-      // Each process use the following structure for CS
+      // Each process
       void f(void){
         do{
           mutex.P();
@@ -1459,7 +1481,7 @@ Semaphore(I)
 :class: t2c
 
 Semaphore(II - no busy waiting)
-====================================
+================================
 .. code:: cpp
   :number-lines:
 
@@ -1473,29 +1495,26 @@ Semaphore(II - no busy waiting)
           blockMe();
         }
       }
-      void V(void){
+      void V(){
         s++;
         if(s <= 0){
           int i = q.del();
           wakeupProcess(i);
         }
       }
-      semaphore(int i=1){s=i;}
+      semaphore(int i){s=i;}
     };
 
 .. container::
 
   .. code:: cpp
     :number-lines:
-    :class: substep
 
       // Shared section
       Semaphore mutex=1;
 
   .. code:: cpp
     :number-lines:
-    :class: substep
-
 
       void f(void){
         do{
@@ -1511,7 +1530,7 @@ Semaphore(II - no busy waiting)
 :class: t2c
 
 Sempahore(III) extra functions
-================================================
+=================================
 .. code:: cpp
   :number-lines:
 
@@ -1788,9 +1807,10 @@ Simple Deadlock
 .. code:: cpp
   :number-lines:
 
-  semaphore sem_printer=1, sem_scanner=1;
+  semaphore sem_printer=1
+  semaphore sem_scanner=1;
 
-.
+|nbsp|
 
 .. code:: cpp
   :number-lines:
@@ -1831,11 +1851,13 @@ Python Semaphore
 .. code:: python
   :number-lines:
 
-  // Share part
+  # Share section
   full = Semaphore(1)
 
   class MyShare:
     n = 0
+
+src/ps/semaphore10.py
 
 .. code:: python
   :number-lines:
@@ -1843,14 +1865,12 @@ Python Semaphore
   def f1(sh1):
     i = 1
     while i < 999999:
-      full.acquire() # full.P(); full.wait();
+      full.acquire() # full.P()
 
       sh1.n = i
       i += 1
 
-      full.release() # full.V(); full.signal();
-
-src/semaphore10.py
+      full.release() # full.V()
 
 .. code:: python
   :number-lines:
@@ -1865,7 +1885,6 @@ src/semaphore10.py
     th2.join()
     print("counter ", sh1.n)
 
-
 ----
 
 Producer consumer(I)
@@ -1879,75 +1898,72 @@ Producer consumer(I)
 
 ----
 
+:class: t2c
+
 Producer consumer(II)
 =======================
-.. list-table::
+.. code:: python
+    :number-lines:
 
-  * - .. code:: python
-        :number-lines:
+    class MyShare:
+      counter = 0
+      n = 100000
+      buf = [-1] * n
 
-        class MyShare:
-          counter = 0
-          n = 100000
-          buf = [-1] * n
+    def produce():
+      x = random()
+      print('produce ', (x+1)%100)
+      return (x+1)%100
 
-        def produce():
-          x = random()
-          print('produce ', (x+1)%100)
-          return (x+1)%100
+    def consume(x):
+      print('consume ',x)
 
-        def consume(x):
-          print('consume ',x)
+.. code:: python
+    :number-lines:
 
-    - .. code:: python
-        :number-lines:
+    if __name__ == "__main__":
+      sh1 = MyShare()
+      th1=Thread(target=consumer,args=(sh1,))
+      th2=Thread(target=producer,args=(sh1,))
+      th1.start();
+      th2.start();
+      th1.join();
+      th2.join()
+      for i in range(4): print(sh1.buf[i])
+      print("counter ", sh1.counter)
 
-        if __name__ == "__main__":
-          sh1 = MyShare()
-          th1=Thread(target=consumer,args=(sh1,))
-          th2=Thread(target=producer,args=(sh1,))
-          th1.start();
-          th2.start();
-          th1.join();
-          th2.join()
-          for i in range(4): print(sh1.buf[i])
-          print("counter ", sh1.counter)
+.. code:: python
+    :number-lines:
 
-  * - .. code:: python
-        :number-lines:
+    def producer(sh1):
+      x = -1
+      in1 = 0
+      for i in range(5000):
+        x = produce()
+        sh1.buf[in1] = x
+        in1 = in1 + 1
 
-        def producer(sh1):
-          x = -1
-          in1 = 0
-          for i in range(5000):
-            x = produce()
-            sh1.buf[in1] = x
-            in1 = in1 + 1
+.. code:: python
+    :number-lines:
 
-    - .. code:: python
-        :number-lines:
-
-        def consumer(sh1):
-          out = 0
-          x=0
-          for i in range(5000):
-            x = sh1.buf[out];
-            out = out +1
-            consume(x)
-            sh1.buf[out-1] = -1
+    def consumer(sh1):
+      out = 0
+      x=0
+      for i in range(5000):
+        x = sh1.buf[out];
+        out = out +1
+        consume(x)
+        sh1.buf[out-1] = -1
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Unbounded Buffer(Wrong Answer)
 =================================
 .. code:: python
-  :number-lines:
 
   mutex = Semaphore(1)
-
-.
 
 .. code:: python
   :number-lines:
@@ -1978,16 +1994,13 @@ Unbounded Buffer(Wrong Answer)
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Unbounded Buffer(II)
 =====================
 .. code:: python
-  :number-lines:
 
   full = Semaphore(0)
-
-.
 
 .. code:: python
   :number-lines:
@@ -2016,16 +2029,13 @@ Unbounded Buffer(II)
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Unbounded Buffer(III - better)
 ==============================
 .. code:: python
-  :number-lines:
 
   full = Semaphore(0)
-
-.
 
 .. code:: python
   :number-lines:
@@ -2054,16 +2064,13 @@ Unbounded Buffer(III - better)
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Bounded Buffer(I)
 ==================
 .. code:: python
-  :number-lines:
 
   full = Semaphore(0)
-
-.
 
 .. code:: python
   :number-lines:
@@ -2107,7 +2114,6 @@ Bounded Buffer(II)
 .. code:: python
   :number-lines:
 
-
   full = Semaphore(0)
 
   empty= Semaphore(MyShare.n)
@@ -2143,21 +2149,17 @@ Bounded Buffer(II)
 
 :class: t2c
 
-Bounded Buffer(Any kind of Queue)
-==================================
+Using any kind of Queue
+=========================
 .. code:: python
   :number-lines:
 
   Q = Any kind of complex Queue
-  // with append and delete
-
   full = Semaphore(0)
-
   empty= Semaphore(10)
-
   mutex = Semaphore(1)
 
-.
+src/ps/producer_consumer.8.py
 
 .. code:: python
   :number-lines:
@@ -2189,24 +2191,6 @@ Bounded Buffer(Any kind of Queue)
 
 :class: t2c
 
-Producer consumer full
-==========================
-.. include:: src/ps/producer_consumer.8.py
-  :code: python
-  :number-lines:
-  :start-line: 0
-  :end-line: 33
-
-.. include:: src/ps/producer_consumer.8.py
-  :code: python
-  :number-lines: 33
-  :start-line: 33
-  :end-line: 70
-
-----
-
-:class: t2c
-
 Bounded Buffer(Percent Empty)
 ======================================
 .. code:: python
@@ -2221,8 +2205,8 @@ Bounded Buffer(Percent Empty)
   :number-lines:
 
   full = Semaphore(0)
-
-  empty= Semaphore(int(MyShare.n * 0.9))
+  m = int(MyShare.n * 0.9)
+  empty= Semaphore(m)
 
 .. code:: python
   :number-lines:
@@ -2262,7 +2246,6 @@ Readers and Writers(I)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void write()
   {}
@@ -2272,9 +2255,8 @@ Readers and Writers(I)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void writer(void){
+  void writer(){
     do{
       write();
       RemainingTasks();
@@ -2283,9 +2265,8 @@ Readers and Writers(I)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void reader(void){
+  void reader(){
     do{
       read();
       RemainingTasks();
@@ -2299,23 +2280,19 @@ Readers and Writers(I)
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Readers and Writers(II)
 ========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   semaphore wx = 1;
 
-.
-
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void writer(void){
+  void writer(){
     do{
       wx.P();
       write();
@@ -2326,9 +2303,8 @@ Readers and Writers(II)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void reader(void){
+  void reader(){
     do{
       wx.P();
       read()
@@ -2339,24 +2315,20 @@ Readers and Writers(II)
 
 ----
 
-:class: t2c
+:class: ts2c
 
 Readers and Writers(III)
 =========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   semaphore wx = 1;
   int read_count = 0;
 
-.
-
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void writer(void){
+  void writer(){
     do{
       wx.P();
       write();
@@ -2367,9 +2339,8 @@ Readers and Writers(III)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void reader(void){
+  void reader(){
     do{
       if(read_count == 0)
         wx.P();
@@ -2382,7 +2353,6 @@ Readers and Writers(III)
     }while(1);
   }
 
-
 ----
 
 :class: t2c
@@ -2393,16 +2363,14 @@ Readers and Writers(IV)
 
   .. code:: cpp
     :number-lines:
-    :class: substep
 
     semaphore wrt = 1, mutex = 1;
     int readCount = 0;
 
   .. code:: cpp
     :number-lines:
-    :class: substep
 
-    void writer(void){
+    void writer(){
       wrt.P();
       wirte();
       wrt.V();
@@ -2410,9 +2378,8 @@ Readers and Writers(IV)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
-  void readers(void){
+  void readers(){
     mutex.P();
     readCount++;
     if(readCount==1)
@@ -2440,7 +2407,6 @@ Dininig Philosophers(II)
 ==========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   //
   // Shared Eating Objects
@@ -2450,7 +2416,6 @@ Dininig Philosophers(II)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher(int i){
     while (1){
@@ -2462,10 +2427,9 @@ Dininig Philosophers(II)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   int main(){
-    cobegin{
+    cobegin{ // C--
       philosopher(0); philosopher(1);
       philosopher(2); philosopher(3);
       philosopher(4);
@@ -2480,17 +2444,15 @@ Dininig Philosophers(III)
 ==========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Shared Eating
 
-  void think(void){cout<<"thinking"<<endl;}
-  void eat(void){cout <<"Eating"<<endl;}
+  void think(){cout<<"thinking"<<endl;}
+  void eat(){cout <<"Eating"<<endl;}
   semaphore forks[5]={1,1,1,1,1};
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher(int i){
     while (1){
@@ -2505,7 +2467,6 @@ Dininig Philosophers(III)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   int main(){
     cobegin{ philosopher(0);
@@ -2513,7 +2474,6 @@ Dininig Philosophers(III)
       philosopher(3); philosopher(4);
     }
   }
-
 
 ----
 
@@ -2523,17 +2483,15 @@ Dininig Philosophers(IV)
 ==========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Shared Eating
 
-  void think(void){cout <<"Eating"<<endl;}
-  void eat(void){cout<<"thinking"<<endl;}
+  void think(){cout <<"Eating"<<endl;}
+  void eat(){cout<<"thinking"<<endl;}
   semaphore forks[5]={1,1,1,1,1};
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher(int i){
     while (1){
@@ -2548,7 +2506,6 @@ Dininig Philosophers(IV)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher0(int i=0){
     while (1){
@@ -2563,7 +2520,6 @@ Dininig Philosophers(IV)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   int main(){
     cobegin{ philosopher0(0);
@@ -2580,12 +2536,11 @@ Dininig Philosophers(IV - method 2)
 ===================================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Shared Eating
 
-  void think(void){cout <<"Eating"<<endl;}
-  void eat(void){cout<<"thinking"<<endl;}
+  void think(){cout <<"Eating"<<endl;}
+  void eat(){cout<<"thinking"<<endl;}
   semaphore forks[5]={1,1,1,1,1};
 
   void philosopher(int);
@@ -2599,7 +2554,6 @@ Dininig Philosophers(IV - method 2)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher(int i){
     while (1){
@@ -2618,73 +2572,71 @@ Dininig Philosophers(IV - method 2)
     }
   }
 
-
 ----
 
 :class: t2c
 
 Dininig Philosophers(V - Error 1)
 =================================
-.. code:: cpp
-  :number-lines:
-  :class: substep
+.. container::
 
-  enum {thinking , hungry , eating }
-    state[5];
+    .. code:: cpp
+      :number-lines:
 
-  semaphore self[5]{0,0,0,0,0};
+      enum {thinking , hungry , eating }
+        state[5];
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      semaphore self[5]{0,0,0,0,0};
 
-  void pickup(int i){
-    state[i] = hungry;
-    if(state[(i-1)%5] == eating ||
-        state[(i+1)%5] == eating)
-      self[i].P()
-    state[i] = eating;
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      void philosopher(int i){
+        do{
+          //thinking
+          pickup(i);
+          // eating
+          putdown(i);
+        }while(1);
+      }
 
-  void putdown(int i){
-    if(state[(i-1)%5] == hungry &&
-        state[(i-2)%5 != eating )
-      self[(i-1)%5].V();
-    if(state[(i+1)%5] == hungry &&
-        state[(i+2)%5] != eating )
-      self[(i+1)%5].V();
-    state[i]=thinking;
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      int main(){
+        for(int i=0; i<5; i++)
+          state[i]= thinking;
+        cobegin{ philosopher(0);
+          philosopher(1);philosopher(2);
+          philosopher(3);philosopher(4);
+        }
+      }
 
-  void philosopher(int i){
-    do{
-      //thinking
-      pickup(i);
-      // eating
-      putdown(i);
-    }while(1);
-  }
+.. container::
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  int main(){
-    for(int i=0; i<5; i++)
-      state[i]= thinking;
-    cobegin{ philosopher(0);
-      philosopher(1);philosopher(2);
-      philosopher(3);philosopher(4);
-    }
-  }
+      void pickup(int i){
+        state[i] = hungry;
+        if(state[(i-1)%5] == eating ||
+            state[(i+1)%5] == eating)
+          self[i].P()
+        state[i] = eating;
+      }
+
+    .. code:: cpp
+      :number-lines:
+
+      void putdown(int i){
+        if(state[(i-1)%5] == hungry &&
+            state[(i-2)%5 != eating )
+          self[(i-1)%5].V();
+        if(state[(i+1)%5] == hungry &&
+            state[(i+2)%5] != eating )
+          self[(i+1)%5].V();
+        state[i]=thinking;
+      }
 
 ----
 
@@ -2692,67 +2644,66 @@ Dininig Philosophers(V - Error 1)
 
 Dininig Philosophers(Error 2)
 =============================
-.. code:: cpp
-  :number-lines:
-  :class: substep
+.. container::
 
-  enum {thinking , hungry , eating }
-    state[5];
+    .. code:: cpp
+      :number-lines:
 
-  semaphore self[5]{0,0,0,0,0};
+      enum {thinking , hungry , eating }
+        state[5];
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      semaphore self[5]{0,0,0,0,0};
 
-  void pickup(int i){
-    state[i] = hungry;
-    if(state[(i-1)%5] == eating ||
-        state[(i+1)%5] == eating)
-      self[i].P()
-    state[i] = eating;
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      void philosopher(int i){
+        do{
+          //thinking
+          pickup(i);
+          // eating
+          putdown(i);
+        }while(1);
+      }
 
-  void putdown(int i){
-    state[i]=thinking;
+    .. code:: cpp
+      :number-lines:
 
-    if(state[(i-1)%5] == hungry &&
-        state[(i-2)%5 != eating )
-      self[(i-1)%5].V();
-    if(state[(i+1)%5] == hungry &&
-        state[(i+2)%5] != eating )
-      self[(i+1)%5].V();
-  }
+      int main(){
+        for(int i=0; i<5; i++)
+          state[i]= thinking;
+        cobegin{ philosopher(0);
+          philosopher(1);philosopher(2);
+          philosopher(3);philosopher(4);
+        }
+      }
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+.. container::
 
-  void philosopher(int i){
-    do{
-      //thinking
-      pickup(i);
-      // eating
-      putdown(i);
-    }while(1);
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      void pickup(int i){
+        state[i] = hungry;
+        if(state[(i-1)%5] == eating ||
+            state[(i+1)%5] == eating)
+          self[i].P()
+        state[i] = eating;
+      }
 
-  int main(){
-    for(int i=0; i<5; i++)
-      state[i]= thinking;
-    cobegin{ philosopher(0);
-      philosopher(1);philosopher(2);
-      philosopher(3);philosopher(4);
-    }
-  }
+    .. code:: cpp
+      :number-lines:
+
+      void putdown(int i){
+        state[i]=thinking;
+
+        if(state[(i-1)%5] == hungry &&
+            state[(i-2)%5 != eating )
+          self[(i-1)%5].V();
+        if(state[(i+1)%5] == hungry &&
+            state[(i+2)%5] != eating )
+          self[(i+1)%5].V();
+      }
 
 ----
 
@@ -2760,71 +2711,70 @@ Dininig Philosophers(Error 2)
 
 Dininig Philosophers(V)
 ==========================
-.. code:: cpp
-  :number-lines:
-  :class: substep
+.. container::
 
-  enum {thinking , hungry , eating }
-    state[5];
+    .. code:: cpp
+      :number-lines:
 
-  semaphore self[5]{0,0,0,0,0};
-  semaphore mutex=1;
+      enum {thinking , hungry , eating }
+        state[5];
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      semaphore self[5]{0,0,0,0,0};
+      semaphore mutex=1;
 
-  void pickup(int i){
-    mutex.P();
-    state[i] = hungry;
-    if(state[(i-1)%5] == eating ||
-        state[(i+1)%5 == eating)
-      self[i].P()
-    state[i] = eating;
-    mutex.V();
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      void philosopher(int i){
+        do{
+          //thinking
+          pickup(i);
+          // eating
+          putdown(i);
+        }while(1);
+      }
 
-  void putdown(int i){
-    mutex.P();
-    if(state[(i-1)%5] == hungry &&
-        state[(i-2)%5 != eating )
-      self[(i-1)%5].V();
-    if(state[(i+1)%5] == hungry &&
-        state[(i+2)%5 != eating )
-      self[(i+1)%5].V();
-    state[i]=thinking;
-    mutex.V();
-  }
+    .. code:: cpp
+      :number-lines:
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+      int main(){
+        for(int i=0; i<5; i++)
+          state[i]= thinking;
+        cobegin{ philosopher(0);
+          philosopher(1);philosopher(2);
+          philosopher(3);philosopher(4);
+        }
+      }
 
-  void philosopher(int i){
-    do{
-      //thinking
-      pickup(i);
-      // eating
-      putdown(i);
-    }while(1);
-  }
+.. container::
 
-.. code:: cpp
-  :number-lines:
-  :class: substep
+    .. code:: cpp
+      :number-lines:
 
-  int main(){
-    for(int i=0; i<5; i++)
-      state[i]= thinking;
-    cobegin{ philosopher(0);
-      philosopher(1);philosopher(2);
-      philosopher(3);philosopher(4);
-    }
-  }
+      void pickup(int i){
+        mutex.P();
+        state[i] = hungry;
+        if(state[(i-1)%5] == eating ||
+            state[(i+1)%5 == eating)
+          self[i].P()
+        state[i] = eating;
+        mutex.V();
+      }
+
+    .. code:: cpp
+      :number-lines:
+
+      void putdown(int i){
+        mutex.P();
+        if(state[(i-1)%5] == hungry &&
+            state[(i-2)%5 != eating )
+          self[(i-1)%5].V();
+        if(state[(i+1)%5] == hungry &&
+            state[(i+2)%5 != eating )
+          self[(i+1)%5].V();
+        state[i]=thinking;
+        mutex.V();
+      }
 
 ----
 
@@ -2834,18 +2784,16 @@ Dininig Philosophers(VI)
 ==========================
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   // Shared Eating
 
-  void think(void){cout <<"Eating"<<endl;}
-  void eat(void){cout<<"thinking"<<endl;}
+  void think(){cout <<"Eating"<<endl;}
+  void eat(){cout<<"thinking"<<endl;}
   semaphore forks[5]={1,1,1,1,1};
   semaphore numberOfPh = 4;
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   void philosopher(int i){
     while (1){
@@ -2862,7 +2810,6 @@ Dininig Philosophers(VI)
 
 .. code:: cpp
   :number-lines:
-  :class: substep
 
   int main(){
     cobegin{ philosopher(0);
@@ -2870,7 +2817,6 @@ Dininig Philosophers(VI)
       philosopher(3); philosopher(4);
     }
   }
-
 
 .. :
 
@@ -2883,26 +2829,30 @@ Dininig Philosophers(VI)
 Monitor(I)
 ==========
 .. image:: img/ps/simple.monitor.jpg
+    :width: 140%
 
 .. code:: cpp
+    :number-lines:
 
-  monitor mp{
-    // Shared data
-    static const int n = 200;
-    int buffer[n];
-    int count;
+    monitor mp{
+      // Shared data
+      static const int n = 200;
+      int buffer[n];
+      int count;
 
-    // Operations
-    void f1(void){/* .... */ }
-    void f2(void){/* .... */ }
-    void f3(void){/* .... */ }
+      // Operations
+      void f1(){/* ... */}
+      void f2(){/* ... */}
+      void f3(){/* ... */}
 
-    // Initialization code
-    // Constructor
-    count = 0;
-    for(int &m1:buffer)
-      m1 = -1;
-  };
+      // Initialization code
+      // Constructor
+      count = 0;
+      //for(int &m1:buffer)
+      //  m1 = -1;
+      for(int i=0;i<n;i++)
+        buffer[i] = -1
+    };
 
 ----
 
@@ -2911,13 +2861,13 @@ Monitor(I)
 Monitor(II)
 ===========
 .. include:: src/ps/simple.monitor.cpp
-  :code: python
+  :code: cpp
   :number-lines:
   :start-line: 0
   :end-line: 19
 
 .. include:: src/ps/simple.monitor.cpp
-  :code: python
+  :code: cpp
   :number-lines: 18
   :start-line: 19
   :end-line: 50
@@ -2932,6 +2882,7 @@ Monitor(III)
    :width: 70%
 
 .. code:: cpp
+  :number-lines:
 
   monitor mp{
     // Shared data
@@ -2943,15 +2894,16 @@ Monitor(III)
     condition x,y;
 
     // Operations
-    void f1(void){/* .... */ }
-    void f2(void){/* .... */ }
-    void f3(void){/* .... */ }
+    void f1(){/* .... */ }
+    void f2(){/* .... */ }
+    void f3(){/* .... */ }
 
-    // Initialization code
-    // Constructor
-    count = 0;
-    for(int &m1:buffer)
-      m1 = -1;
+    // Initialization
+    mp(){
+      count = 0;
+      for(int &m1:buffer)
+        m1 = -1;
+    }
   };
 
 ----
@@ -2985,7 +2937,6 @@ Monitor(V) Dininig Philosophers
     :code: cpp
     :number-lines: 23
     :start-line: 22
-
 
 ----
 
@@ -3138,7 +3089,7 @@ Inter-process Communication (IPC) I
 
 #. communication
     #. Symmetric
-    #. asymmetric 
+    #. asymmetric
 
 
 ----
@@ -3149,10 +3100,10 @@ Inter-process Communication (IPC) II
 =====================================
 * buffering
     #. Automatic
-    #. explicit 
+    #. explicit
 
 #. send by
-    #. copy 
+    #. copy
     #. reference
 
 * Message Size
@@ -3221,65 +3172,41 @@ Producer consumer (Send and Receive)
 
     pcbmessage.cpp
 
+    ----
+
+    C++20 Synchronized
+    ==================
+    .. code:: cpp
+        :number-lines:
+
+        int func() {
+          static int i = 0;
+          synchronized{
+            std::cout << "Not interleaved \n";
+            ++i;
+            return i;
+          }
+        }
+
+        int main(){
+          std::vector<std::thread> v(10);
+          for(auto& t: v)
+            t = std::thread([]{ for(int n = 0; n < 10; ++n) func(); });
+        }
+
+    .. :
+
+      https://www.modernescpp.com/index.php/multithreading-in-c-17-and-c-20
+
 ----
+
+:class: t2c
 
 C++20 Synchronized
 ==================
-.. code:: cpp
-    :number-lines:
-   
-    int func() {
-      static int i = 0;
-      synchronized{
-        std::cout << "Not interleaved \n";
-        ++i;
-        return i;
-      }
-    }
-
-    int main(){
-      std::vector<std::thread> v(10);
-      for(auto& t: v)
-        t = std::thread([]{ for(int n = 0; n < 10; ++n) func(); });
-    }
-
-.. :
-
-  https://www.modernescpp.com/index.php/multithreading-in-c-17-and-c-20
-
-----
-
-C++20 Synchronized
-==================
-.. code:: cpp
-
-  #include <iostream>
-  #include <thread>
-  #include <chrono>
-  #include <mutex>
-
-  std::mutex g_display_mutex;
-
-  void foo(){
-    std::thread::id this_id = std::this_thread::get_id();
-
-    g_display_mutex.lock();
-    std::cout << "thread " << this_id << " sleeping...\n";
-    g_display_mutex.unlock();
-
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-  }
-
-  int main(){
-    std::thread t1(foo);
-    std::thread t2(foo);
-    t1.join();
-    t2.join();
-  }
-
-.. :
-
-    https://www.runoob.com/w3cnote/cpp-std-thread.html
+.. include:: src/ps/cpp20synchronized.cpp
+  :number-lines:
+  :code: cpp
 
 ----
 

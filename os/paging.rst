@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./memory.css
+:css: ./style.css
 :substep: true
 :data-width: 1024
 :data-height: 768
@@ -326,10 +326,12 @@ Effective Access Time
 
     زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.
 
+.. class:: substep
 
 * :math:`t_t` = 1,  :math:`t_c` = 5, :math:`t_m` = 100, :math:`h_t` = 0.95, :math:`h_c` = 0.90
 
 .. math::
+    :class: substep
 
     EAT = table +  memory
 

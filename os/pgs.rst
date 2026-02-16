@@ -1,8 +1,9 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./memory.css
+:css: ./style.css
 :substep: true
 :data-width: 1024
+:data-height: 768
 
 .. title: Operating Systems - Memory paging, segmentation and more (By Ahmad Yoosofan)
 

@@ -6,7 +6,6 @@
 :data-width: 1024
 :data-height: 768
 
-
 ----
 
 Triggers
@@ -34,9 +33,6 @@ Uses for triggers
 
 ----
 
-:data-rotate: 90
-
-
 Benefits of using triggers in business
 ===========================================
 *   Faster application development. Because the database stores triggers, you do not have to code the trigger actions into each database application.
@@ -46,13 +42,11 @@ Benefits of using triggers in business
 
 ----
 
-:data-y: r1000
-
 Synopsis
 ===============
 .. code:: sql
     :number-lines:
-    
+
     CREATE [ CONSTRAINT ] TRIGGER name { BEFORE | AFTER | INSTEAD OF }
         { event [ OR ... ] }    ON table_name
         [ FROM referenced_table_name ]
@@ -75,9 +69,6 @@ where *event* can be one of:
 
 ----
 
-:data-y: r1000
-
-
 .. class:: smallerelementwithfullborder
 
     .. csv-table::
@@ -96,7 +87,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE OR REPLACE FUNCTION test()
       RETURNS trigger AS
     $$
@@ -120,16 +111,14 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     INSERT INTO "test_table"("col1", "col2") VALUES("A", "B");
 
 ----
 
-:data-rotate: 90
-
 .. code:: sql
     :number-lines:
-    
+
     CREATE OR REPLACE FUNCTION rec_insert()
     RETURNS trigger AS
     $$
@@ -143,7 +132,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-            
+
     CREATE TRIGGER ins_same_rec
       AFTER INSERT
       ON emp_details
@@ -152,19 +141,15 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     INSERT INTO emp_details VALUES(236, 'RABI', 'CHANDRA', 'RABI',
     '590.423.45700', '2013-01-12', 'AD_VP', 15000, .5);
 
 ----
 
-:id: ThreeD
-:data-y: r1200
-:data-rotate-x: 180
-
 .. code:: sql
     :number-lines:
-    
+
     CREATE OR REPLACE FUNCTION befo_insert()
       RETURNS trigger AS $$
     BEGIN
@@ -176,7 +161,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE TRIGGER che_val_befo_ins
       BEFORE INSERT
       ON emp_details
@@ -185,13 +170,11 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     INSERT INTO emp_details VALUES (334, ' Ana ', ' King', 'ANA',
     '690.432.45701', '2013-02-05', 'it_prog', 17000, .50);
 
 ----
-
-:data-x: r800
 
 .. code:: sql
 
@@ -222,7 +205,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE TRIGGER updt_log
       AFTER UPDATE
       ON student_mast
@@ -260,7 +243,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE OR REPLACE FUNCTION befo_update()
       RETURNS trigger AS $$
     BEGIN
@@ -283,7 +266,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE TRIGGER updt_marks
       BEFORE UPDATE
       ON student_marks
@@ -308,7 +291,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE OR REPLACE FUNCTION aft_delete()
       RETURNS trigger AS $$
     BEGIN
@@ -320,7 +303,7 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     CREATE TRIGGER delete_stu
       AFTER DELETE
       ON student_mast
@@ -353,13 +336,13 @@ where *event* can be one of:
 
 .. code:: sql
     :number-lines:
-    
+
     DROP TRIGGER [ IF EXISTS ] name ON table_name [ CASCADE | RESTRICT ]
 
 
 .. code:: sql
     :number-lines:
-    
+
     DROP TRIGGER delete_stu on student_mast;
 
 
@@ -387,7 +370,6 @@ where *event* can be one of:
 
 Related
 ==============
-
 * https://w3resource.com/PostgreSQL/postgresql-triggers.php
 * https://www.postgresql.org/docs/current/sql-createtrigger.html
 
@@ -396,8 +378,8 @@ Related
 
     rst2html function.rst function.html --stylesheet=farsi.css,html4css1.css
 
-    
-    
+
+
     postgresql function example
     http://www.postgresqltutorial.com/postgresql-create-function/
     https://www.postgresql.org/docs/9.1/sql-createfunction.html

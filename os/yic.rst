@@ -653,7 +653,7 @@ YIC60 - Input Devices
 
 ----
 
-:class: t2c
+:class: n2c
 
 .. image:: img/in/punch-card-machine.png
 
@@ -848,7 +848,7 @@ Array
 
 -----
 
-:class: t2c
+:class: n2c
 
 .. include:: src/in/loader1.asm
     :code: asm
@@ -865,7 +865,7 @@ Array
 
 -----
 
-:class: t2c
+:class: n2c
 
 .. include:: src/in/loader1.asm
     :code: asm

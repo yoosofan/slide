@@ -1,150 +1,92 @@
-body { 
-  text-align: center; /*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/
-  font-size: large; /* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
-}
-
+html{font-size: 16px;}
+body{text-align: center;}
 #step-X html,body{ /* https://stackoverflow.com/questions/37560602/how-to-fill-the-screen-with-image-in-impress-js */
-    margin:0;
-    height:100%;
-    overflow:hidden;
+  margin:0;  height:100%;  overflow:hidden;
 }
 #step-X img{
-    min-height:100%;
-    min-width:100%;
-    height:auto;
-    width:auto;
-    position:absolute;
-    top:-100%; bottom:-100%;
-    left:-100%; right:-100%;
-    margin:auto;
+  min-height:100%;
+  min-width:100%;
+  height:auto;
+  width:auto;
+  position:absolute;
+  top:-100%; bottom:-100%;
+  left:-100%; right:-100%;
+  margin:auto;
 }
-
-p {
-    font-size: 120%;
-    font-weight: normal;
+h1, h2, h3, h4 {    /* font-weight: normal;*/
     margin-bottom: 0.3em;
     margin-top: 0.3em;
 }
-
-em {    /*font-family: Satisfy;*/
-    font-size: 122%;
-}
-
-strong { /*font-family: Racing Sans One;*/
-    font-size: 117%;
-    letter-spacing: -2px;
-}
-
-h1, h2, h3, h4 {
-    font-weight: normal;
-    margin-bottom: 0.3em;
-    margin-top: 0.3em;
-}
-
-ul, ol, pre.code{
-    text-align: left;
-    font-size: 120%;
-}
-
-pre.code{font-size:120%; font-family: monospace; padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; padding-right: 0.2em; border-style: solid; border-left-width: 0.5em; border-top-width: thin; border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;} /*justify-self: center;*/
+tr, td, th{border: 1px solid;}
+ul, ol, pre.code{text-align: left;}
+pre.code{/*font-size:100%;*/
+  font-family: monospace;
+  padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; padding-right: 0.2em;
+  border-style: solid; border-left-width: 0.5em; border-top-width: thin;
+  border-right-width: thin; border-bottom-width: thin;
+  border-color: #95ABD0;
+} /*justify-self: center;*/
 pre.code > .ln {background-color: #DFE5F1;}
-pre.code { background-color:#f0f0f0;}
+pre.code { background-color:#f0f0f0; justify-self:center;}
 pre.console{background-color: #F9E0E0;}
-ol.trace-code{ 
-  background-color: #F3F2CD; 
+ol.trace-code{
+  background-color: #F3F2CD;
   color: #27435F/* #466E95*/;
-  padding-left: 1.5em; 
-  padding-right: 1em; 
+  padding-left: 1.5em;
+  padding-right: 1em;
   list-style: none;
-  counter-reset: my-awesome-counter; /* justify-self: start; */
+  counter-reset: my-awesome-counter;
+  text-align: left;
+  justify-self: start;
+  /* justify-self: start; background-color: #BEF648;*/
 }
-ol.trace-code li {
-  counter-increment: my-awesome-counter;
-}
-ol.trace-code li::before {
-  content: counter(my-awesome-counter) ". ";
-  color: red;
-  font-weight: bold;
-}
-
-#ThreeD H1 {
-    font-family: Racing Sans One;
-    font-size: 300%;
-}
-
-#thequestion p {
-    font-family: Racing Sans One;
-}
-
+ol.trace-code li{counter-increment: my-awesome-counter;}
+ol.trace-code li::before {content: counter(my-awesome-counter) ". ";  color: red;}
 .footer {
     position: absolute;
     top: 95%;
-    font-size: 50%;
+    /*font-size: 50%;*/
 }
-
-table.smallerelementwithfullborder, table.smallerelementwithfullborder tr, table.smallerelementwithfullborder td, table.smallerelementwithfullborder th {
-    border: 1px solid black;
-    font-size: 90%;
-}
-.rtl {direction:rtl;text-align:right;font-family:Nazli;font-size:large;}
-.ltr {direction:ltr;text-align:left;}
-
+.rtl, .rtl * {direction:rtl;text-align:right;font-size:large;}
+.ltr, .ltr * {direction:ltr;text-align:left;}
 .rtl-h1{
   direction: rtl;
   font-size: xx-large;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
-  font-family: Nazli;
 }
-
 .rtl-h2{
   direction: rtl;
   font-size: x-large;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
-  font-family: Nazli;
 }
-
 .rtl-h3{
   direction: rtl;
   font-size: large;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
-  font-family: Nazli;
 }
-
 ol.rtl-h1, ol.rtl-h2, ol.rtl-h3, ul.rtl-h1, ul.rtl-h2, ul.rtl-h3{
   text-align: right;
-  font-size: large;
 }
-
 ol.rtl-h1 li, ol.rtl-h2 li, ol.rtl-h3 li, ul.rtl-h1 li, ul.rtl-h2 li, ul.rtl-h3 li{
   text-align: right;
-  font-size: large;
 }
-
-table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
-  font-weight: bold;
-}
-
-#imporatnce-of-track-or-cylinder-id > ol {direction: rtl; text-align: right;}
-
 .grid-2col-class{
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch; /*  overflow: scroll;*/
 }
-
 .grid-2col1fr2fr-class{
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: stretch;
   overflow: scroll;
 }
-
 .grid-3col{
   display: grid;
   grid-template-columns: auto auto auto;
@@ -152,7 +94,6 @@ table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
   align-items: center ;
   gap: 2px ;
 }
-
 div.yoo-grid-auto-flow-column{
   display: grid;
   gap: 2rem;
@@ -164,6 +105,16 @@ div.yoo-grid-auto-flow-column{
    * https://css-tricks.com/flexbox-like-just-put-elements-in-a-row-with-css-grid/
   */
 }
+
+div.n2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
+
 div.t2c{
   display: grid;
   grid-template-columns: auto auto;
@@ -171,13 +122,120 @@ div.t2c{
   align-items: center ;
   gap: 10px ;
 }
-div.t2c > h1, div.t2c > .rtl-h1{
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t2c > :first-child{
   grid-column: 1 / 3;
   background-color: #E6F4FA;
 }
+div.t3c{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t3c > :first-child{
+  grid-column: 1 / 4;
+  background-color: #E6F4FA;
+}
+
+div.ts2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
+div.ts2c > :first-child{
+  grid-column: 1 / 3;
+  background-color: #E6F4FA;
+}
+div.ts2c > :nth-child(2){
+  grid-column: 1 / 3;
+}
+
+div.ts2c1c2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
+div.ts2c1c2c > :first-child{
+  grid-column: 1 / 3;
+  background-color: #E6F4FA;
+}
+div.ts2c1c2c > :nth-child(2){
+  grid-column: 1 / 3;
+}
+div.ts2c1c2c > :nth-child(5){
+  grid-column: 1 / 3;
+}
+
+div.t2c4c{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 3px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t2c4c > :first-child{
+  grid-column: 1 / 5;
+  background-color: #E6F4FA;
+}
+div.t2c4c > :nth-child(2){
+  grid-column: 1 / 3;
+}
+div.t2c4c > :nth-child(3){
+  grid-column: 3 / 5;
+}
+
+div.ts2c4c{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 3px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.ts2c4c > :first-child{
+  grid-column: 1 / 5;
+  background-color: #E6F4FA;
+}
+div.ts2c4c > :nth-child(2){
+  grid-column: 1 / 5;
+}
+div.ts2c4c > :nth-child(3){
+  grid-column: 1 / 3;
+}
+div.ts2c4c > :nth-child(4){
+  grid-column: 3 / 5;
+}
+
+div.t2c3c{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 3px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t2c3c > :first-child{
+  grid-column: 1 / 4;
+  background-color: #E6F4FA;
+}
+div.t2c3c > :nth-child(2){
+  grid-column: 1 / 3;
+}
+div.t2c3c > :nth-child(3){
+  grid-column: 3 / 4;
+}
+
 div.scrollbar-box800x500px-overflow{
   width: 800px;
-  height: 500px;  
+  height: 500px;
   overflow: scroll;
 }
 .tableheaderwithgraybackground th {
@@ -193,7 +251,6 @@ table.yoo-gantt-chart tr:nth-of-type(2) td{
   border: 0;
   text-align: left;
 }
-
 table.yoo-memory {width: 98%;}
 table.yoo-memory tr td { border: solid 1px;}
 table.yoo-memory tr:nth-of-type(1) td{
@@ -208,11 +265,54 @@ table.yoo-memory tr:nth-of-type(1) td:last-of-type{
   text-align: right;
   visible: false;
 }
-
-table.borderless * {border: 0;}
-
+table.borderless, table.borderless > tr, table.borderless > tr > td, table.borderless > tr > th,
+table.borderless > tbody, table.borderless > tbody > tr, table.borderless > tbody > tr > td,
+table.borderless > tbody > tr > th
+{border: 0;}
 .center {
   margin: auto; /*width: 50%;*/
   padding: 5px;
   text-align: center;
 }
+
+/*
+@media screen and (min-width:1599) { #impress { transform: scale(1.6) !important; }}
+@media screen and (min-width:1200px) and (max-width:1599px) { #impress { transform: scale(1.3) !important; }}
+@media screen and (min-width:800px) and (max-width:1199px) { #impress { transform: scale(1.25) !important; }}
+@media screen and (min-width:640px) and (max-width:799px) { #impress { transform: scale(0.8) !important;}}
+@media screen and (min-width:500px) and (max-width:639px) { #impress { transform: scale(0.8) !important;  }}
+body { text-align: center;
+  font-family: Nazli, FreeSerif, DejaVu Serif;
+  font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7
+  #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;
+}
+@media screen and (min-width:1149px) { #impress { transform: scale(1.4) !important; }}
+@media screen and (min-width:800px) and (max-width:1148px) { #impress { transform: scale(1.3) !important; }}
+@media screen and (min-width:640px) and (max-width:799px) { #impress { transform: scale(0.8) !important;}}
+@media screen and (min-width:500px) and (max-width:639px) { #impress { transform: scale(0.8) !important;  }}
+body { text-align: center;  font-family: Nazli, Libre Baskerville;  background-color: #D1D8E4; #728ec2;}
+
+p{
+  font-size: 120%;
+   font-weight: normal;
+  margin-bottom: 0.3em;
+  margin-top: 0.3em;
+}
+em { font-family: Satisfy;font-size: 100%;}
+strong { font-family: Racing Sans One;
+    font-size: 117%;
+    letter-spacing: -2px;
+}
+
+*/
+/*
+table.smallerelementwithfullborder, table.smallerelementwithfullborder tr, table.smallerelementwithfullborder td, table.smallerelementwithfullborder th {
+    border: 1px solid black;
+    font-size: 90%;
+}
+table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p{
+  font-weight: bold;
+}*/
+
+/* font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1 #F0F1E0 #E0EAF1 #E2E5E7 #ECEFDE #DEEFDE #007bff #00b2e3 #D0F0D0 #F3E2E2 #D1D8E4; #728ec2;*/
+/*font-family: DejaVu Serif, Liberation Serif,  FreeSerif;*/

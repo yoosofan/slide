@@ -1,8 +1,9 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./memory.css
+:css: ./style.css
 :substep: true
 :data-width: 1024
+:data-height: 768
 
 .. title: Operating Systems - Memory  (By Ahmad Yoosofan)
 
@@ -36,14 +37,13 @@ University of Kashan
 
 ----
 
-.. class:: rtl-h1
-
-    بخش‌بندی ثابت حافظه
-
 .. image:: img/memory/memory_fixed_partitioning.png
    :align: center
-   :height: 470px
+   :height: 600px
 
+.. note:
+
+    Fixed Partitioining
 
 ----
 
@@ -60,6 +60,7 @@ University of Kashan
 
     مشکلات بخش‌بندی ثابت
 
+.. class:: rtl
 
     #. انعطاف بسیار پایین
     #. محدودیت زیاد برای اندازهٔ فرایند در حالی که فضای حافظه خالی است.
@@ -161,7 +162,7 @@ Queue
     برگزیدن فضای آزاد برای فرآیند تازه وارد
 
 
-.. class:: substep rtl-h2
+.. class:: substep rtl
 
     *  اولین برازش(First Fit)
     *  بهترین برازش(Best Fit)
@@ -191,7 +192,6 @@ Compaction
    :align: center
 
 .. ::
-
 
     https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
 
@@ -233,10 +233,8 @@ Compaction
 
 ----
 
-.. class:: rtl-h1
-
-    جابجا کردن فرآیند میان حافظهٔ‌اصلی و حافظهٔ جانبی (دیسک)، شکل ساده‌ای از حافظهٔ مجازی
-
+Process Suspension
+==================
 .. image:: img/memory/swapping_processes.png
    :align: center
 
@@ -254,7 +252,7 @@ overlay
 .. image:: img/memory/memory_ovelay_turbo_c.jpg
    :align: center
    :width: 500px
-   :height: 650px
+   :height: 600px
 
 ----
 
@@ -338,7 +336,7 @@ Effective Access Time (EAT)
 
 ----
 
-.. class:: rtl-h2
+.. class:: rtl-h1
 
     اگر ضریب اصابت (یا نسبت اصابت) برای پردازنده‌ای 0.95 باشد و سرعت دسترسی به حافظهٔ اصلی 100 میکرو ثانیه باشد و سرعت دسترسی حافظهٔ نهان 1 میکرو ثانیه باشد در این صورت زمان دسترسی مؤثر برابر خواهد بود با
 
@@ -358,7 +356,7 @@ Effective Access Time (EAT)
 
 .. raw:: html
 
-    <table border="1px" ><tr >
+    <table border="1px" class="center"><tr >
     <td>ms</td><td>μs</td><td>ns</td><td>action</td><tr >
     <td></td><td></td><td>0.5</td><td>CPU L1 dCACHE reference</td></tr><tr >
     <td></td><td></td><td>1</td><td>speed-of-light (a photon) travel a 1 ft (30.5cm) distance</td></tr><tr >
@@ -377,10 +375,6 @@ Effective Access Time (EAT)
     <a href="https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory#4087315">[link]</a>
 
 ----
-
-.. class:: rtl-h1
-
-    به کارگیری حافظهٔ نسبی برای نگهداری مکان چندین فرآیند در حافظه
 
 .. image:: img/memory/base_limit_register.png
    :align: center
@@ -473,6 +467,10 @@ DMA
 
 ----
 
+END
+
+----
+
 References(I)
 ==================================================
 * `<https://stackoverflow.com/questions/18550370/calculate-the-effective-access-time>`_
@@ -484,23 +482,28 @@ References(I)
 * `<https://en.wikipedia.org/wiki/Page_(computer_memory)>`_
 * http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/
 * `<https://www.tldp.org/LDP/tlk/mm/memory.html>`_
-* https://www.geeksforgeeks.org/operating-system-paging/
-* https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/
 * https://www.cse.iitb.ac.in/~mythili/teaching/cs347_autumn2016/notes/07-memory.pdf
-* https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html
-* https://www.javatpoint.com/os-segmented-paging
-* https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/
-* https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
-* https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html
-* https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing
-* https://github.com/mor1/ia-operating-systems
-* https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/
-* https://slideplayer.com/slide/7084682/
 
 ----
 
 References(II)
 ==================================================
+* https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html
+* https://www.geeksforgeeks.org/operating-system-paging/
+* https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/
+* https://www.javatpoint.com/os-segmented-paging
+* https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/
+* https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
+* https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html
+* https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing
+
+----
+
+References(III)
+==================================================
+* https://github.com/mor1/ia-operating-systems
+* https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/
+* https://slideplayer.com/slide/7084682/
 * https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg
 * http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
 * https://en.wikipedia.org/wiki/Cache_(computing)
@@ -508,19 +511,24 @@ References(II)
 * https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg
 * https://en.wikipedia.org/wiki/CPU_cache
 * https://tutorialspoint.dev/image/Translation.png
-* https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf
-* http://harmanani.github.io/classes/csc320/Notes/ch05.pdf
-* https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf
-* http://harmanani.github.io/classes/csc320/Notes/ch05.pdf
 
 ----
 
-References(III)
+References(IV)
 ==================================================
+* https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf
+* http://harmanani.github.io/classes/csc320/Notes/ch05.pdf
+* https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf
+* http://harmanani.github.io/classes/csc320/Notes/ch05.pdf
 * https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/
 * https://www.amazon.com/ASUS-DDR3-Intel-Motherboard-H61M/dp/B00BN36V4W
 * https://www.asus.com/Motherboards-Components/Motherboards/Workstation/P10S-WS/
 * https://commons.wikimedia.org/wiki/File:Intel_D945GCCR_Socket_775.png
+
+----
+
+References(V)
+==================================================
 * https://witscad.com/course/computer-architecture/chapter/dma-controller-and-io-processor
 * https://www.uou.ac.in/lecturenotes/computer-science/BCA-17/Computer%20Organization%20Part%202.pdf
 * https://www.pvpsiddhartha.ac.in/dep_it/lecturenotes/CSA/unit-5.pdf

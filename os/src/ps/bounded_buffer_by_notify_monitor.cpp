@@ -1,5 +1,5 @@
 monitor mp{
-  condition notfull, notempty;  
+  condition notfull, notempty;
   int count=0, nextin=0, nextout=0;
   void append(char x){
     while(count==N) notfull.wait();
@@ -8,7 +8,7 @@ monitor mp{
     count++;
     notempty.notify();
   }
-  char take (void){
+  char take (){
     while(count==0) notempty.wait();
     char x = buffer[nextout];
     nextout = (nextout + 1) % N);
@@ -17,15 +17,15 @@ monitor mp{
     return x
   }
 };
-void producer(void){char x;
-  do{ 
-    x = produce();  
+void producer(){char x;
+  do{
+    x = produce();
     mp.append(x);
   }while(1);
 }
-void consume(void){char x;
-  do{ 
-    x = mp.take();  
-    consume(x); 
+void consume(){char x;
+  do{
+    x = mp.take();
+    consume(x);
   }while(1);
 }

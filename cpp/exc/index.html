@@ -1,0 +1,177 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title></title><meta charset="UTF-8"><meta name="generator" content="prezentprogramo 1.0 https://github.com/yoosofan/prezentprogramo"><link rel="stylesheet" href="css/hovercraft.css" media="all"><link rel="stylesheet" href="css/highlight.css" media="all"><link rel="stylesheet" href="css/style.css" media="all"><script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        messageStyle: "none",
+        TeX : { extensions : ['color.js'] }
+      });
+    </script></head><body class="impress-not-supported"><div id="impress" data-width="1024" data-height="768" data-transition-duration="1000"><div class="step step-level-1" step="0" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="0" data-y="0" data-z="0"><h1 id="advanced-programming-c">Advanced Programming (C++)</h1><h2 id="from-c-to-c">From C to C++</h2><p>Ahmad Yoosofan</p><p>University of Kashan</p><p><a href="http://yoosofan.github.io/course/cpp.html">http://yoosofan.github.io/course/cpp.html</a></p></div><div class="step step-level-1" step="1" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="1600" data-y="0" data-z="0"><pre class="highlight code c"><span class="ln">1 </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="ln">2 </span><span class="cp"></span><span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">std</span><span class="p">;</span><span class="w">
+</span><span class="ln">3 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">){</span><span class="w">
+</span><span class="ln">4 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span><span class="ln">5 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">6 </span><span class="w">  </span><span class="k">else</span><span class="w">
+</span><span class="ln">7 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">8 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">9 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">10 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mm</span><span class="p">){</span><span class="w">
+</span><span class="ln">11 </span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mm</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w">
+</span><span class="ln">12 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">13 </span><span class="w">  </span><span class="k">else</span><span class="w">
+</span><span class="ln">14 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mm</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">15 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">16 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">17 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f4</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mm</span><span class="p">){</span><span class="w">
+</span><span class="ln">18 </span><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">retVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">19 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">mm</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">)</span><span class="w"> 
+</span><span class="ln">20 </span><span class="w">    </span><span class="n">retVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span><span class="ln">21 </span><span class="w">  </span><span class="k">else</span><span class="w"> 
+</span><span class="ln">22 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f4 mm "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mm</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">23 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">retVal</span><span class="p">;</span><span class="w">
+</span><span class="ln">24 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">25 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f3</span><span class="p">(){</span><span class="w">
+</span><span class="ln">26 </span><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">)){</span><span class="w"> 
+</span><span class="ln">27 </span><span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f3 "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">28 </span><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">29 </span><span class="w">    </span><span class="p">}</span><span class="w">
+</span><span class="ln">30 </span><span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f4</span><span class="p">(</span><span class="mi">2</span><span class="p">)){</span><span class="w"> 
+</span><span class="ln">31 </span><span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f3 "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">32 </span><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">33 </span><span class="w">    </span><span class="p">}</span><span class="w">
+</span><span class="ln">34 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">35 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">36 </span><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span><span class="w">
+</span><span class="ln">37 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">38 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">39 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f2</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">40 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">41 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f3</span><span class="p">())</span><span class="w"> 
+</span><span class="ln">42 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">43 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f2</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">44 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">45 </span><span class="w">  </span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"End"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">46 </span><span class="w"></span><span class="p">}</span></pre></div><div class="step step-level-1" step="2" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="3200" data-y="0" data-z="0"><pre class="highlight code c"><span class="ln">1 </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="ln">2 </span><span class="cp"></span><span class="n">using</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">std</span><span class="p">;</span><span class="w">
+</span><span class="ln">3 </span><span class="w"></span><span class="k">struct</span><span class="w"> </span><span class="nc">retFlagInt</span><span class="p">{</span><span class="w">
+</span><span class="ln">4 </span><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">5 </span><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span><span class="ln">6 </span><span class="w"></span><span class="p">};</span><span class="w">
+</span><span class="ln">7 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">){</span><span class="w">
+</span><span class="ln">8 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span><span class="ln">9 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">10 </span><span class="w">  </span><span class="k">else</span><span class="w">
+</span><span class="ln">11 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">12 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">13 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">14 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mm</span><span class="p">){</span><span class="w">
+</span><span class="ln">15 </span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mm</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span><span class="w">
+</span><span class="ln">16 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">17 </span><span class="w">  </span><span class="k">else</span><span class="w">
+</span><span class="ln">18 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mm</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">19 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">20 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">21 </span><span class="w"></span><span class="kt">bool</span><span class="w"> </span><span class="nf">f4</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">mm</span><span class="p">){</span><span class="w">
+</span><span class="ln">22 </span><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">retVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w">
+</span><span class="ln">23 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">mm</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">)</span><span class="w"> 
+</span><span class="ln">24 </span><span class="w">    </span><span class="n">retVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span><span class="ln">25 </span><span class="w">  </span><span class="k">else</span><span class="w"> 
+</span><span class="ln">26 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f4 mm "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">mm</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">27 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">retVal</span><span class="p">;</span><span class="w">
+</span><span class="ln">28 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">29 </span><span class="w"></span><span class="n">retFlagInt</span><span class="w"> </span><span class="nf">f3</span><span class="p">(){</span><span class="w">
+</span><span class="ln">30 </span><span class="w">  </span><span class="n">retFlagInt</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="ln">31 </span><span class="w">  </span><span class="n">x</span><span class="p">.</span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w">
+</span><span class="ln">32 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f1</span><span class="p">(</span><span class="mi">3</span><span class="p">)){</span><span class="w"> 
+</span><span class="ln">33 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f3 "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">34 </span><span class="w">    </span><span class="n">x</span><span class="p">.</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">35 </span><span class="w">  </span><span class="p">}</span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f4</span><span class="p">(</span><span class="mi">2</span><span class="p">)){</span><span class="w"> 
+</span><span class="ln">36 </span><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In f3 "</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">37 </span><span class="w">    </span><span class="n">x</span><span class="p">.</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">
+</span><span class="ln">38 </span><span class="w">  </span><span class="p">}</span><span class="w">
+</span><span class="ln">39 </span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span><span class="ln">40 </span><span class="w"></span><span class="p">}</span><span class="w">
+</span><span class="ln">41 </span><span class="w"></span><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span><span class="w">
+</span><span class="ln">42 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f1</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">43 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">44 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f2</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">45 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">46 </span><span class="w">  </span><span class="n">retFlagInt</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f3</span><span class="p">();</span><span class="w">
+</span><span class="ln">47 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">z</span><span class="p">.</span><span class="n">flag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span><span class="w">
+</span><span class="ln">48 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">49 </span><span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">f2</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span><span class="w"> 
+</span><span class="ln">50 </span><span class="w">  </span><span class="p">{</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"In main"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;}</span><span class="w">
+</span><span class="ln">51 </span><span class="w">  </span><span class="n">cout</span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">"End"</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">
+</span><span class="ln">52 </span><span class="w"></span><span class="p">}</span></pre></div><div class="step step-level-1" step="3" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="4800" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/132.cpp</p></div><div class="step step-level-1" step="4" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="6400" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+
+</pre><p>src/exc/134.cpp</p></div><div class="step step-level-1" step="5" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="8000" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/232.cpp</p></div><div class="step step-level-1" step="6" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="9600" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/242.cpp</p></div><div class="step step-level-1" step="7" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="11200" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/254.cpp</p></div><div class="step step-level-1" step="8" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="12800" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/263.cpp</p></div><div class="step step-level-1" step="9" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="14400" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+</pre><p>src/exc/265.cpp</p></div><div class="step step-level-1" step="10" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="16000" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/267.cpp</p></div><div class="step step-level-1" step="11" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="17600" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/269.cpp</p></div><div class="step step-level-1" step="12" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="19200" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/271.cpp</p></div><div class="step step-level-1" step="13" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="20800" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/274.cpp</p></div><div class="step step-level-1" step="14" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="22400" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/284.cpp</p></div><div class="step step-level-1" step="15" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="24000" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/323.cpp</p></div><div class="step step-level-1" step="16" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="0" data-scale="1" data-x="25600" data-y="0" data-z="0"><p>Error in "include" directive:
+1 argument(s) required, 0 supplied.</p><pre class="highlight ">.. include::
+    :code: c
+    :number-lines:
+
+</pre><p>src/exc/332.cpp</p></div></div><div id="slide-number" class="slide-number">
+         1
+      </div><script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/gotoSlide.js"></script><script type="text/javascript" src="js/hovercraft.js"></script><script type="text/javascript" src="js/MathJax/es5/tex-mml-chtml.js"></script><script type="text/javascript">
+      document.getElementById("impress").addEventListener("impress:stepenter", update_slide_number, false);
+    </script></body></html>

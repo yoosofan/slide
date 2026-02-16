@@ -2311,9 +2311,9 @@ Project/Deparment/Employee
 * Project(ProjName_, location)
 * HourLog(SSN_, ProjName_, hours)
 
-- e(en_, name, sly, dn)      
+- e(en_, name, sly, dn)
 - d(dn_, dname, en)
-- j(jn_, jname, loc)       
+- j(jn_, jname, loc)
 - h(en_, jn_, hrs)
 
 یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند. هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند. هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است. در جدول h مشخص می‌شود که یک کارمند(en) در یک پروژه(jn) چه تعداد ساعت hrs کار کرده است.
@@ -3399,8 +3399,8 @@ Relational Calculus
     :number-lines:
 
     px.pname where not exists spjx(
-      spjx.pn=px.pn and not exists 
-      spjy( spjy.pn=spjx.pn and 
+      spjx.pn=px.pn and not exists
+      spjy( spjy.pn=spjx.pn and
         spjy.pn=px.pn
       )
     )
@@ -3445,7 +3445,7 @@ Relational Calculus
     :class: substep
     :number-lines:
 
-    bookx.author where not exists 
+    bookx.author where not exists
     memberx(
       memberx.bn=bookx.bn and
       not exists borrowx(
@@ -3482,7 +3482,7 @@ Relational Calculus
 .. code:: sql
     :class: substep
     :number-lines:
-    
+
     bookx.author where not exists booky(
       booky.author = bookx.author and
       not exists borrowx(
@@ -3617,7 +3617,7 @@ END
 .. _DN:
 .. _DeptName:
 .. _ProjName:
-
+.. _en:
 
 
 .. _ID:

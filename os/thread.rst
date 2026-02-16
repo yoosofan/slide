@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :skip-help: true
-:css: ./style.css ./thread.css
+:css: ./style.css
 :substep: true
 :slide-numbers: true
 :skip-help: true
@@ -19,11 +19,9 @@ https://yoosofan.github.io
 
 University of Kashan
 
-
 ----
 
-
-حالت‌های نخ
+Thread
 ==================
 .. image:: img/thread/single_threaded.and.multithreaded.processes.png
    :align: center
@@ -34,7 +32,7 @@ University of Kashan
 
 ----
 
-:id: thread-in-python-i-id
+:class: t2c4c
 
 Python Thread (I)
 =======================
@@ -78,22 +76,22 @@ Python Thread (I)
 
 ----
 
+:class: t2c
+
 Python main
 =======================
 .. include:: src/thread/162.py
   :number-lines:
   :code: python
-  :class: substep
 
 .. include:: src/thread/172.py
   :number-lines:
   :code: python
   :class: substep
 
-
 ----
 
-:id: thread-in-python-ii-id
+:class: t2c
 
 Python Thread (II)
 =======================
@@ -101,54 +99,58 @@ Python Thread (II)
   :number-lines:
   :code: python
 
-.. code:: console
-  :class: substep
+.. container::
 
-  main
-  After f1
-  After f2
-  In f1
-  In f2
+    .. code:: console
+      :class: substep
 
-.. code:: console
-  :class: substep
+      main
+      After f1
+      After f2
+      In f1
+      In f2
 
-  main
-  After f1
-  In f1
-  After f2
-  In f2
+    .. code:: console
+      :class: substep
 
-.. code:: console
-  :class: substep
+      main
+      After f1
+      In f1
+      After f2
+      In f2
 
-  main
-  After f1
-  In f1
-  After f2
-  In f2
+    .. code:: console
+      :class: substep
 
-.. code:: console
-  :class: substep
+      main
+      After f1
+      In f1
+      After f2
+      In f2
 
-  main
-  After f1
-  After f2
-  In f2
-  In f1
+.. container::
 
-.. code:: console
-  :class: substep
+    .. code:: console
+      :class: substep
 
-  main
-  After In f1
-  After f2
-  In f2
-  f1
+      main
+      After f1
+      After f2
+      In f2
+      In f1
+
+    .. code:: console
+      :class: substep
+
+      main
+      After In f1
+      After f2
+      In f2
+      f1
 
 ----
 
-:id: thread-in-python-iii-id
+:class: t2c3c
 
 Python Thread (III)
 =====================
@@ -156,24 +158,26 @@ Python Thread (III)
   :number-lines:
   :code: python
 
-.. code:: console
-  :class: substep
+.. container::
 
-  python3 240.py > 240output65.txt
-  python3 240.py > 240output55.txt
-  python3 240.py > 240output45.txt
-  python3 240.py > 240output35.txt
-  python3 240.py > 240output25.txt
+    .. code:: console
+      :class: substep
 
-.. code:: console
-  :class: substep
+      python3 240.py > 240output65.txt
+      python3 240.py > 240output55.txt
+      python3 240.py > 240output45.txt
+      python3 240.py > 240output35.txt
+      python3 240.py > 240output25.txt
 
-  5314 __111
-  5315 __111 __main
-  1459 __main
-  1460 __main
+    .. code:: console
+      :class: substep
 
-  240output55.txt : 9108
+      5314 __111
+      5315 __111 __main
+      1459 __main
+      1460 __main
+
+      240output55.txt : 9108
 
 .. code:: console
   :class: substep
@@ -208,7 +212,7 @@ Python Thread (III)
 
 ----
 
-:id: thread-in-python-join-i-id
+:class: t2c
 
 Thread Python join(I)
 ========================
@@ -223,7 +227,7 @@ Thread Python join(I)
 
 ----
 
-:id: thread-in-python-join-ii-id
+:class: t2c
 
 Thread Python join(II)
 ========================
@@ -238,7 +242,7 @@ Thread Python join(II)
 
 ----
 
-:id: thread-in-python-parameter-id
+:class: t2c
 
 Thread Python parameter
 ========================
@@ -253,7 +257,7 @@ Thread Python parameter
 
 ----
 
-:id: thread-in-python-sharing-id
+:class: t2c
 
 Thread Python Sharing
 ===========================
@@ -268,53 +272,8 @@ Thread Python Sharing
 
 ----
 
-.. :
-
-  :id: paralell-func-id
-
 Create Concurrent / Parallel Code
 ===================================
-.. :
-
-  .. code:: cpp
-
-    f2(x) * f3(x) + f4(x, y) / f5(x, y)
-
-  .. code:: cpp
-    :class: substep
-
-    f2(x)
-    
-  .. code:: cpp
-    :class: substep
-
-    f3(x)
-
-  .. code:: cpp
-    :class: substep
-
-    f4(x, y)
-
-  .. code:: cpp
-    :class: substep
-
-    f5(x, y)
-
-  .. code:: cpp
-    :class: substep
-
-    f2(x) *  f3(x)
-
-  .. code:: cpp
-    :class: substep
-
-    f4(x, y) / f5(x, y)
-
-  .. code:: cpp
-    :class: substep
-
-    +
-
 .. yographviz::
   :class: substep
 
@@ -324,59 +283,56 @@ Create Concurrent / Parallel Code
       A12 [label="f3(x)"]
       A13 [label="f4(x, y)"]
       A14 [label="F5(x, y)"]
-      
+
       A21 [label="*"]
       A22 [label="/"]
-      
+
       A3 [label="+"]
-      
+
       Start -> A11
       Start -> A12
       Start -> A13
       Start -> A14
-      
+
       A11 -> A21
       A12 -> A21
-      
+
       A13 -> A22
       A14 -> A22
-      
+
       A21 -> A3
       A22 -> A3
-      
     }
- 
+
 ----
 
-:id: cpp-thread-id
+:class: t2c
 
 C++ Thread
 ===============
 .. include:: src/thread/620.cpp
   :number-lines:
   :code: cpp
-  :class: substep
 
 .. code:: console
   :class: substep
-  
+
   thread$ ./a.out
   In main
   second in main
-  In thread 
+  In thread
   the next output in thread
   thread$ ./a.out
 
 ----
 
-:id: cpp-thread-join-id
+:class: t2c
 
 C++ Thread join
 =================
 .. include:: src/thread/630.cpp
   :number-lines:
   :code: cpp
-  :class: substep
 
 .. include:: src/thread/630_out.txt
   :code: console
@@ -384,36 +340,32 @@ C++ Thread join
 
 ----
 
-:id: cpp-thread-func-array-id
+:class: t2c
 
 Array of Thread
 ====================
 .. include:: src/thread/640.cpp
   :number-lines:
   :code: cpp
-  :class: substep
 
 .. include:: src/thread/640_out10.txt
   :code: console
-  :class: substep
 
 ----
 
-:id: cpp-thread-func-array-out-id
+:class: t2c
 
 Array of Thread output
 ==========================
 .. include:: src/thread/640_out20.txt
   :code: console
-  :class: substep
 
 .. include:: src/thread/640_out40.txt
   :code: console
-  :class: substep
 
 ----
 
-:id: cpp-thread-func-array-out2-id
+:class: t2c
 
 Array of Thread output(II)
 ==========================
@@ -427,7 +379,7 @@ Array of Thread output(II)
 
 ----
 
-:id: cpp-thread-func-array-out4-id
+:class: t2c
 
 Array of Thread(III)
 ======================
@@ -442,7 +394,7 @@ Array of Thread(III)
 
 ----
 
-:id: cpp-thread-func-array-out5-id
+:class: t2c
 
 Array of Thread(III)
 ======================
@@ -456,7 +408,7 @@ Array of Thread(III)
 
 ----
 
-:id: cpp-thread-func-array-out6-id
+:class: t2c
 
 Array of Thread(III)
 ======================
@@ -494,8 +446,6 @@ Different Types of Threads
    :height: 350px
 
 ----
-
-:id: user-kernel-thread-id
 
 User and Kernel Thread
 ========================
@@ -543,16 +493,16 @@ User and Kernel Thread
 
 ----
 
-ارتباط میان حالت‌های نخ‌ها
+Relations Between Threads
 ===========================================
 .. image:: img/thread/thread.Examples.of.the.Relationships.between.User_Level.Thread.States.and.Process.States.png
    :align: center
-   :width: 500px
-   :height: 350px
+   :width: 700px
+   :height: 550px
 
 ----
 
-سرویس دهندهٔ وب با چند نخ
+Multithreaded Web Server
 ==========================================
 .. image:: img/thread/thread.A.multithreaded.Web.server.png
    :align: center
@@ -575,9 +525,9 @@ End
 
   cd yoosofan/course/
   bash run_slide.sh os/slide/thread.rst
-  
+
   hovercraft thread.rst
-  
+
   rst2html.py thread.rst thread.html --stylesheet=../../tools/farsi.css,html4css1.css
 
   https://www.c-sharpcorner.com/article/programming-concurrency-in-cpp-part-1/
@@ -586,4 +536,4 @@ End
   https://medium.com/@sanju.skm/parallel-programming-vs-concurrent-programming-f993d3f9ceea
   https://medium.com/@sanju.skm/parallel-programming-vs-concurrent-programming-f993d3f9ceea
   https://www.eclipse.org/lists/platform-ui-dev/msg07521.html
-  
+

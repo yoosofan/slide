@@ -1,12 +1,12 @@
 #include<iostream>
 using namespace std;
 // simple monitor
-struct mp{
+monitor mp{
   // Shared data
   static const int n = 200;
   int buffer[n];
   int count;
-  
+
   // Operations
   void f1(){/*....*/}
   void f2(){/*....*/}
@@ -16,7 +16,7 @@ struct mp{
       cout << m1 << ' ';
     cout << endl << n << endl;
   }
-  
+
   // initialization code
   mp(){
     count = 0;

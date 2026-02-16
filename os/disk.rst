@@ -31,7 +31,6 @@ Disk structure
 .. image:: img/disk/disk_Moving_head_disk_mechanism.png
    :align: center
 
-
 ----
 
 .. image:: img/disk/one_layer_disk.png
@@ -198,12 +197,13 @@ RAM in DISK
 
 File Allocation Methods Comparison
 ---------------------------------------
+
 .. :
 
     .. image:: img/disk/disk_File_Allocation_Methods.png
 
 
-.. class:: smallerelementwithfullborder
+.. class:: smallerelementwithfullborder center
 
 +----------------------------------+--------------+--------------+--------------+-----------+
 | Method                           | Contiguous   | Chained      | Indexed                  |
@@ -326,8 +326,6 @@ Important Disk Parameters
 
 ----
 
-:id: imporatnce-of-track-or-cylinder-id
-
 Imporatnce of Track or Cylinder
 =====================================
 زمان پیگیرد یا زمان جستجو
@@ -431,6 +429,27 @@ RAID
 =======================================================================================================
 .. image:: img/disk/disk_raid_levels.png
    :width: 990px
+
+.. :
+
+    https://docs.okd.io/4.14/virt/virtual_machines/virtual_disks/virt-hot-plugging-virtual-disks.html
+    hot pluggable cpu
+
+
+    RAID
+    ----
+    raid supported motherboards levels comparison
+    https://en.wikipedia.org/wiki/Standard_RAID_levels
+    raid levels table
+    https://www.techtarget.com/searchstorage/answer/RAID-types-and-benefits-explained
+
+
+
+    Error Detection
+    checksum
+
+    Error Correction
+    https://en.wikipedia.org/wiki/Hamming_code
 
 ----
 

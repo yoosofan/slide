@@ -9,7 +9,7 @@ class MyShare:
 def f1(sh1, j: int):
   i = 1
   while i < 999999999:
-    full.acquire() # full.P(); full.wait();
+    full.acquire()# full.P()
 
     sh1.n = i
     i += 1
@@ -18,7 +18,7 @@ def f1(sh1, j: int):
     print(j, '__second print')
     print(j, '__third print')
 
-    full.release() # full.V(); full.signal();
+    full.release()#full.V()
     #if i % 10000 == 0:
     #  time.sleep(0.01)
 
@@ -31,5 +31,3 @@ if __name__ == "__main__":
   th1.join()
   th2.join()
   print("counter ", sh1.n)
-
-
