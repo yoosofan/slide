@@ -192,15 +192,6 @@ B = Byte
 
 ----
 
-Main Type of Processors
-==========================
-* RISC (Reduced instruction set computer)
-    * https://en.wikipedia.org/wiki/Reduced_instruction_set_computer
-* CISC (Complex Instruction Set Computer)
-    * https://en.wikipedia.org/wiki/Complex_instruction_set_computer
-
-----
-
 Output
 ==============
 LED
@@ -324,18 +315,6 @@ Hardware insead of Software
 
 ----
 
-Hardware vs Software
-==========================
-* pros
-    * Less code
-    * More speed
-    * Less errors of writing code
-* cons
-    * Cost
-    * Less Flexible
-
-----
-
 :class: t2c
 
 4 Digit 7-Segment Displays
@@ -416,29 +395,6 @@ Arduino Print 4 to 7-segment
 
 :class: t2c
 
-The common segment displays
-==============================
-* `Seven-segment_display <https://en.wikipedia.org/wiki/Seven-segment_display>`_
-* `9 Segments Display <https://en.wikipedia.org/wiki/Nine-segment_display>`_
-* `Fourteen-segment display <https://en.wikipedia.org/wiki/Fourteen-segment_display>`_
-* `Sixteen-segment display <https://en.wikipedia.org/wiki/Sixteen-segment_display>`_
-
-.. container::
-
-    .. image:: img/in/9_segment_abcdefghi.svg
-
-    .. image:: img/in/16-segmente_display.png
-
-.. :
-
-    * https://en.wikipedia.org/wiki/Nine-segment_display
-    * https://en.wikipedia.org/wiki/Fourteen-segment_display
-    * https://en.wikipedia.org/wiki/Sixteen-segment_display
-
-----
-
-:class: t2c
-
 YIC 40 - BSA
 =============
 .. class:: substep
@@ -456,103 +412,6 @@ YIC 40 - BSA
 
 .. image::  img/in/thermal_printer_interfacing_with_PIC16F877A.jpg
     :width: 600px
-
-
-----
-
-Epson WideCarriage Line Printer
-=======================================
-.. image:: img/in/Epson_Wide_Carriage_9pin_printer_with_legal_paper_8.5x14.jpg
-  :height: 400px
-
-https://en.wikipedia.org/wiki/Dot_matrix_printing
-
-----
-
-Dot matrix example text
-============================
-.. image:: img/in/Epson_line_printer_Dot_matrix_example_text.png
-
-https://en.wikipedia.org/wiki/Dot_matrix_printing
-
-----
-
-Dot-matrix display
-======================
-.. image:: img/in/16x2_Character_LCD_Display.jpg
-  :height: 400px
-
-* 128×16 (Two-lined)
-* 128×32 (Four-lined)
-* 128×64 (Eight-lined)
-* 92×31 (Four or three-lined)
-* https://en.wikipedia.org/wiki/Dot-matrix_display
-* https://en.wikipedia.org/wiki/History_of_display_technology
-
-----
-
-1969 Braille display
-=======================
-.. image:: img/in/1969_Braille_display.jpg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/History_of_display_technology
-
-----
-
-split flap display(I)
-======================
-.. image:: img/in/split_flap_displayI.jpg
-  :width: 600px
-
-http://arduinomania.com/tag/split%20flap%20display
-
-----
-
-Split-flap display(II)
-=======================
-.. image:: img/in/Split-flap_display_2016-01-17.gif
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Split-flap_display
-* https://www.dreamstime.com/illustration/airport-flip-sign.html
-
-----
-
-Enlarged inner workings of a split-flap clock
-===================================================
-.. image:: img/in/1024px-Split-flap_display.jpg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Split-flap_display
-
-----
-
-Airport Board with Split-Flip Display
-=======================================
-.. image:: img/in/airport_board_with_flip-flop_display.jpg
-  :height: 400px
-
-* https://en.wikipedia.org/wiki/Split-flap_display
-
-----
-
-Flip-Dot-Display
-======================
-.. image:: img/in/Flip-dots_display.jpg
-  :width: 800px
-
-* https://en.wikipedia.org/wiki/History_of_display_technology
-* https://en.wikipedia.org/wiki/Flip-disc_display
-
-----
-
-5x7 LED module
-==================
-.. image:: img/in/5x7led.jpg
-  :height: 400px
-
-* https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
 
 ----
 
@@ -704,52 +563,6 @@ YIC60 - Input Devices
     https://www.pinterest.com/pin/326299935478491352/
 
     old ibm card punch reader
-
-----
-
-Tape
-==========
-.. image:: img/in/computer.room.tape.png
-  :height: 500px
-
-.. :
-
-    ----
-
-    Xerox Roman PS Daisywheel
-    ========================================
-    .. image:: img/in/Xerox_Roman_PS_Daisywheel_mono.jpg
-      :height: 450px
-
-    .. :
-
-      https://upload.wikimedia.org/wikipedia/commons/0/0e/Xerox_Roman_PS_Daisywheel_-_mono.jpg
-
-    ----
-
-    Royal Typewriter Company since 1906
-    ===========================================
-    .. image:: img/in/Loyal_royal_typewriter.jpg
-
-    https://en.wikipedia.org/wiki/Royal_Typewriter_Company
-
-    ----
-
-    IBM Selectric Typewriter 1961(I)
-    =================================
-    .. image:: img/in/IBM_Selectric_Typewriter_1961.jpg
-      :height: 400px
-
-    * https://en.wikipedia.org/wiki/IBM_Selectric_typewriter
-
-    ----
-
-    IBM Selectric Typewriter 1961 (II)
-    =========================================
-    .. image:: img/in/IBM_Selectric_Typewriter_1961_typeball.jpg
-      :height: 400px
-
-    * https://en.wikipedia.org/wiki/List_of_IBM_products#Typewriters
 
 ----
 
@@ -1280,20 +1093,6 @@ Call,  Ret
 
 ----
 
-Simple computer simulator
-==============================
-* https://github.com/jeaniehandler/OS
-* https://github.com/Naheel-Azawy/Simple-Computer-Simulator
-* https://web.njit.edu/~carpinel/Applets.html
-* http://www.science.smith.edu/dftwiki/index.php/IBooks
-* http://www.science.smith.edu/dftwiki/index.php/
-
-Simple Computer Simulator Instruction Set
-------------------------------------------------
-* http://euler.vcsu.edu/curt.hill/Computer.html
-
-----
-
 YIC120 - Adding Keyboard & Disk
 ==================================
 * terminal (command prompt)
@@ -1327,56 +1126,6 @@ https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
   https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
   https://handsontec.com/index.php/modular-dot-matrix-display/
   dot matrix display character set
-
-----
-
-GET THE DOTS, FORM A LETTER using ROM
-==================================================
-.. image:: img/in/5x7_LED_GET_THE_DOTS_FORM_A_LETTER_using_ROM.jpg
-  :width: 600px
-
-https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
-
-.. :
-
-  So far, so good, but where do the bits come from to create alphanumeric characters and symbols? (For clarity, I’ll refer to all of these as “characters.”) Years ago, displays used a read-only memory (ROM) preloaded with the 1s and 0s that form characters. A character-generator ROM held patterns for the 96 “printable” ASCII characters and 32 extra characters such as arrows, checkmarks, and other symbols, for a total of 128 characters (see Resources).
-
-  Each of those characters needed eight bytes to store its pattern of 1s and 0s, so the ROM required 1024 bytes (128 x 8). That meant the ROM needed 10 address lines (1024 = 210). Although the ROM used only seven bytes per character, it’s easier to step through binary row addresses eight at a time.
-
-  The 10 address lines, A9-A0, separate into a “high” address, A9-A3, and into a “low” address, A2-A0. The high address identifies a specific character; for example, A, f, $, and so on. The low address identifies one of the character’s eight rows (Figure 10).
-
-----
-
-Showing Character D
-========================
-.. image:: img/in/showing_character_d.jpeg
-
-https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
-
-----
-
-Showing Character D (real refresh)
-========================================
-.. image:: img/in/showing_character_d_refresh.gif
-
-https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
-
-----
-
-Card reader instead of Hex pad input
-========================================
-.. image:: img/in/card_reader_instead_of_hex_pad.png
-
-----
-
-Display
-============
-* https://en.wikipedia.org/wiki/IBM_3270
-
-IBM 3270 Display Terminal
---------------------------------
-* https://en.wikipedia.org/wiki/File:IBM_3277_Model_2_terminal.jpg
-* http://www.columbia.edu/cu/computinghistory/fisk.pdf
 
 ----
 
@@ -1442,114 +1191,3 @@ END
     rst2html.py disk.rst disk.html --stylesheet=../../tools/farsi.css,html4css1.css
     https://www.geeksforgeeks.org/disk-scheduling-algorithms/
     http://www.csl.mtu.edu/cs4411.choi/www/Resource/chap11.pdf
-
-
-.. :
-
-    ----
-
-    Hollerith and IBM keypunches, 1890
-    ==========================================
-    .. image:: img/in/ctr_census_machine.jpg
-      :width: 600px
-
-    * https://en.wikipedia.org/wiki/Keypunch
-
-    ----
-
-    IBM 011 Electric Key Punch(1923)
-    =================================
-    .. image:: img/in/ekpunch.jpg
-      :width: 800px
-
-    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
-
-    ----
-
-    IBM Type 032 Printing Punch(1935)
-    =====================================
-    .. image:: img/in/ibm032b.jpg
-      :width: 600px
-
-    * `columbia.edu <http://www.columbia.edu/cu/computinghistory/oldpunch.html>`-
-
-    ----
-
-    A Key Punch Room in the 1960s
-    ==========================================
-    .. image:: img/in/752px-IBM_Keypunch_Machines_in_use.jpg
-      :width: 600px
-
-    * https://en.wikipedia.org/wiki/Keypunch
-
-    ----
-
-    Card Mark sense format
-    =========================
-    .. image:: img/in/HP_Educational_Basic_optical_mark-reader_card._Godfrey_Manning..jpg
-
-    ----
-
-    Cartons of Punch cards(1959)
-    ===================================
-    In a United States National Archives Records Service facility in 1959. Each carton could hold 2,000 cards
-    ----------------------------------------------------------------------------------------------------------------
-    .. image:: img/in/IBM_card_storage.NARA.jpg
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    Punched Card Printing Plate
-    =============================
-    .. image:: img/in/PunchedCardPrintingPlate.agr.jpg
-      :height: 400px
-
-
-    Example of a Punch Card
-    =================================
-    .. image:: img/in/punch_card.png
-      :width: 500px
-
-    ----
-
-    IBM1130 Binary Punched Card
-    ===========================================
-    .. image:: img/in/IBM1130CopyCard.agr.jpg
-      :width: 800px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    A 5081 Card from a non-IBM Manufacturer
-    =================================================
-    .. image:: img/in/Punch-card-5081.jpg
-      :width: 800px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    FORTRAN Port-A-Punch card. Compiler directive "SQUEEZE"
-    ==========================================================
-    .. image:: img/in/FORTRAN_Port-A-Punch_card._Compiler_directive__SQUEEZE__removed_the_alternating_blank_columns_from_the_input._Godfrey_Manning..jpg
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    ----
-
-    Punched card from a Fortran program
-    ====================================
-    Z(1) = Y + W(1), plus sorting information in the last 8 columns
-    ------------------------------------------------------------------
-    .. image:: img/in/FortranCardPROJ039.agr.jpg
-      :width: 700px
-
-    * https://en.wikipedia.org/wiki/Punched_card
-
-    img/in/The_IBM_2501_Card_Reader2501.jpg
-    https://www.columbia.edu/cu/computinghistory/2501.html
-
-    ----
-
