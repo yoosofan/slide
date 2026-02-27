@@ -415,33 +415,9 @@ YIC 40 - BSA
 
 ----
 
-Printer Function
+Printer Routine
 ========================================
 .. image:: img/in/printer_function.png
-
-----
-
-Process along Printer Function
-========================================
-.. image:: img/in/process_along_printer_function.png
-
-----
-
-Jump to Printer Procedure
-========================================
-.. image:: img/in/call_printer_function.png
-
-----
-
-Return from Printer Procedure
-========================================
-.. image:: img/in/return_from_printer_funtion_with_stack.png
-
-----
-
-Display and Printer Procedure
-===================================================
-.. image:: img/in/printer_old_display_function.png
 
 ----
 
@@ -473,6 +449,20 @@ Adding procedurs to memory
 
 Users (programmers) should know where these precedures are
 
+.. :
+
+    1. protocol
+
+    2. API
+
+    Data:
+    1. Fixed Address
+    2. Register
+    3. Address in register
+
+    Address of functions
+    BSA
+
 ----
 
 YIC50 - Array of Addresses
@@ -490,6 +480,11 @@ Array
 
     1024, 1048, 1096 , 1256,
     0,  1, 2, 3, 4,
+
+
+indirect BSA
+
+User chooses between old cpu or new one
 
 ----
 
@@ -1126,6 +1121,30 @@ https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
   https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
   https://handsontec.com/index.php/modular-dot-matrix-display/
   dot matrix display character set
+
+----
+
+Process along Printer Function
+========================================
+.. image:: img/in/process_along_printer_function.png
+
+----
+
+Jump to Printer Procedure
+========================================
+.. image:: img/in/call_printer_function.png
+
+----
+
+Return from Printer Procedure
+========================================
+.. image:: img/in/return_from_printer_funtion_with_stack.png
+
+----
+
+Display and Printer Procedure
+===================================================
+.. image:: img/in/printer_old_display_function.png
 
 ----
 

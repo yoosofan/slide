@@ -749,10 +749,26 @@ Get part names of P2
 
     نام شهرهایی را بیابید که یا قطعه‌ای با وزن بیشتر از 13 در آنها هست یا عرضه‌کننده‌ای با وضعیت بیشتر از ۳۴ در آنها هست.
 
+.. class:: rtl-h2 substep
+
+    1. نام شهرهایی را بیابید که قطعه‌ای با وزن بیشتر از 13 در آنها هست
+
+    2. نام شهرهایی را بیابید که   عرضه‌کننده‌ای با وضعیت بیشتر از ۳۴ در آنها هست.
+
 .. code:: sql
     :class: substep
 
-    (p where weight > 13){city} union (s where status > 34){city};
+    (p where weight > 13){city};
+    
+    (s where status > 34){city};
+
+
+.. code:: sql
+    :class: substep
+
+    (p where weight > 13){city} 
+    union 
+    (s where status > 34){city};
 
 .. csv-table::
   :header-rows: 1
@@ -769,10 +785,27 @@ Get part names of P2
 
     نام شهرهایی را بیابید که یا قطعه‌ای با وزن بیشتر از ۲۴ در آنها هست یا عرضه‌کننده‌ای با وضعیت بیشتر از ۲۱ در آنها هست.
 
+.. class:: rtl-h2 substep
+
+    1. نام شهرهایی را بیابید که قطعه‌ای با وزن بیشتر از ۲۴ در آنها هست 
+
+    2. نام شهرهایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۱ در آنها هست.
+
 .. code:: sql
     :class: substep
 
-    (p where weight > 24){city} union (s where status > 21){city};
+    (p where weight > 24){city} 
+
+ 
+    (s where status > 21){city};
+
+
+.. code:: sql
+    :class: substep
+
+    (p where weight > 24){city} 
+    union 
+    (s where status > 21){city};
 
 .. csv-table::
   :header-rows: 1

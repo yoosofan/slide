@@ -5,7 +5,7 @@ string typeString[] = {
   "INT", "PLUS", "MINUS", "MUL",
   "DIV", "OP", "CP", "EOI"
 };
- 
+
 enum TokenType{
   INT, PLUS, MINUS, MUL,
   DIV, OP, CP, EOI
@@ -25,7 +25,7 @@ class lexical{
 
   public:
 
-  void read(void){
+  void read(){
     cout << "Enter: ";
     cin.get(buffer,200);
   }
@@ -37,7 +37,7 @@ class lexical{
       <<"\t int "<< t.n << endl;
   }
 
-  Token getToken(void);
+  Token getToken();
 };
 
 int main(){
@@ -50,7 +50,7 @@ int main(){
   }while(t.type != EOI);
 }
 
-Token lexical::getToken(void){
+Token lexical::getToken(){
   t.n = -1;
   if(buffer[tindex] == '(')        t.type = OP;
   else if(buffer[tindex] == ')')   t.type = CP;
@@ -67,6 +67,6 @@ Token lexical::getToken(void){
     tindex --;
   }
   else    error("unknown character");
-  tindex++; 
+  tindex++      ;
   return t;
 }

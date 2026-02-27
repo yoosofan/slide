@@ -90,7 +90,7 @@ Token
 .. code:: cpp
   :class: substep
   :number-lines:
-  
+
   struct token {
     tokenType t;
     char s[256];
@@ -234,7 +234,7 @@ Token Types
     }
 
 
-.. container:: 
+.. container::
 
     .. code:: cpp
 
@@ -304,17 +304,17 @@ More Samples
 
 * ID, a
 * ASG
-* NINT, 2
+* INTN, 2
 * SEM
 * ID, b
 * ASG,
 * ID, a
 * PLUS,
-* NINT, 21
+* INTN, 21
 * SEM,
 * ID, c
 * ASG,
-* NINT, 323
+* INTN, 323
 * SEM
 
 ----

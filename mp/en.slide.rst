@@ -30,8 +30,6 @@ It is a paper that
 Academic paper
 ================
 
-----
-
 Original Approach
 ====================
 Own idea
@@ -41,21 +39,30 @@ Own idea
 
 Primary and Secondary Sources
 ===================================
-As you do your background reading, look for research sources that help to answer your research question and either
------------------------------------------------------------------------------------------------------------------------
+Background reading and look for research sources
+-------------------------------------------------
 • strengthen
 • challenge
 • modify
 • illustrate
 
-----
+* Primary sources are “raw materials”
 
-* Primary sources are “raw materials” that directly reflect the topic you are writing about. They are usually created by participants or others who lived at the time of the events you are writing about.
+.. note::
+
+    that directly reflect the topic you are writing about.
+
+    They are usually created by participants or others
+    who lived at the time of the events you are writing about.
 
 
-* Secondary sources are reports of the research done by other people into your topic. They are usually written after the events you are writing about by people who didn’t participate in or witness those events
+* Secondary sources
 
-----
+.. note:
+
+    are reports of the research done by other people into your topic.
+    They are usually written after the events you are writing about by people
+    who didn’t participate in or witness those events
 
 Your First Source: The Library
 =================================
@@ -81,8 +88,6 @@ Here are nine main categories of reference materials
 • Handbooks and sourcebooks
 • Bibliographies
 
-----
-
 Scholars
 ============
 Building new knowledge
@@ -100,9 +105,25 @@ Why learning how to write a research paper
 * draw information from several sources
 * Practical life reasons
 
+  * computer engineer
+
+      1. many changes
+
+      2. over short period time
+
+      3. should be updated
+
+      4. Many false advertisments
+
   * economics
   * any kind of decisions
-  * Understanding how to analyze, evaluate, criticize, combine, and draw conclusions
+  * Understanding how to
+      * analyze
+      * evaluate
+      * criticize
+      * combine
+      * draw conclusions
+
   * Who is telling truth
   * Even buying a house can be research
 
@@ -127,34 +148,104 @@ The Hierarchy of a Research Paper
 
 Subject
 ===========
-1. Look at the Table of Contents in the textbook for the course you’re studying. Which chapter, part, or section names cover people, things, places, events, or ideas that you have found especially interesting? Your subject could be one of these general areas.
-2. Take a stroll through the library or bookstore, paying careful attention to books, periodicals, and other media that are related to the course you’re studying. Your subject could be one of the general areas covered by these materials.
-3. Ask your teachers or professors for some guidance: In their experience, what sorts of sub-jects have their most successful students covered in their research papers? What sorts ofsubjects have they rarely seen a research paper cover but would find most interesting
+1. Look at the Table of Contents in the textbook
 
-----
+.. note:
 
-Topic(I)
+        for the course you’re studying.
+        Which chapter, part, or section names cover people, things, places, events, or
+        ideas that you have found especially interesting?
+        Your subject could be one of these general areas.
+
+2. Take a stroll through the library or bookstore
+
+.. note:
+
+    paying careful attention to books, periodicals, and other media
+
+    that are related to the course you’re studying.
+
+    Your subject could be one of the general areas covered by these materials.
+
+3. Ask your teachers or professors for some guidance
+
+
+.. note:
+
+    In their experience, what sorts of sub-jects have their most
+    successful students covered in their research papers?
+    What sorts ofsubjects have they rarely seen a research paper cover
+    but would find most interesting
+
+Topic
 ==========
-1. Think about an important turning point in the events within your subject. Your topic could relate to the causes or effects of this turning point.
-2. Think about some fact you discovered that surprised you about your subject, something that thwarted your expectations. What made it surprising? Why did you expect something else? Your topic could relate to why your expectations were wrong.
-3. Think about an oversimplification that is commonly made regarding your subject. Your topic could relate to the complexitities that undermine this oversimplification.
-4. Think about a trend or “story” that connects several different events within your subject. Your topic could relate to connecting these events together, tracing the trend or “story” along the way.
+* Think about
+
+    1. an important turning point in the events within your subject.
+
+      .. note:
+
+          Your topic could relate to the causes or effects of this turning point.
+
+    2. some fact you discovered that surprised you about your subject
+
+        .. note:
+
+            , something that thwarted your expectations. What made it surprising? Why did you expect something else? Your topic could relate to why your expectations were wrong.
+
+    3. an oversimplification
+
+        .. note:
+
+            that is commonly made regarding your subject.
+
+            Your topic could relate to the complexitities that undermine this oversimplification.
+
+    4. a trend or “story”
+
+        .. note:
+
+            that connects several different events within your subject.
+
+            Your topic could relate to connecting these events together, tracing the trend or “story” along the way.
+
+    5. two or more situations or personalities within your subject
+
+        .. note:
+
+              that have qualities that are either similar or different.
+
+              What caused them to have these qualities? What effects did these qualities have? Your topic could relate to comparing and/or contrasting these situations or personalities
 
 
-----
+6. Take a stroll through the library or bookstore
 
-Topic(II)
-===============
-5. Think about two or more situations or personalities within your subject that have qualities that are either similar or different. What caused them to have these qualities? What effects did these qualities have? Your topic could relate to comparing and/or contrasting these situations or personalities
-6. Take a stroll through the library or bookstore, paying careful attention to books, periodicals, and other media that are related to the course you’re studying. When you find an interesting topic that is only addressed in about a dozen or so materials, consider addressing a similar or related topic in your research paper.
-7. Ask your teachers or professors for some guidance: In their experience, what sorts of topics have their most successful students covered in their research papers? What sorts of topics have they rarely seen a research paper cover but would find most interesting?
+    .. note:
 
-----
+        paying careful attention to books, periodicals, and other media that are related to the course you’re studying. When you find an interesting topic that is only addressed in about a dozen or so materials, consider addressing a similar or related topic in your research paper.
 
-Topic(III)
-===========
-* Your topic shouldn’t be so broad that literally hundreds of books or articles have been written about it (in which case it would be too broad, and thus large enough to be considered a subject).
-* Your topic shouldn’t be so narrow that only a handful of books or articles have been written about it (in which case it would be too narrow, and thus you would not be able to locate sufficient research sources)
+7. Ask your teachers or professors for some guidance
+
+    .. note:
+
+        In their experience, what sorts of topics have their most successful students covered in their research papers? What sorts of topics have they rarely seen a research paper cover but would find most interesting?
+
+* Your topic shouldn’t be so
+
+  1. broad that literally hundreds of books or articles
+
+      .. note:
+
+            have been written about it (in which case it would be too broad,
+
+            and thus large enough to be considered a subject).
+
+
+  2. narrow that only a handful of books or articles have been written about it
+
+      .. note:
+
+          (in which case it would be too narrow, and thus you would not be able to locate sufficient research sources)
 
 ----
 
@@ -167,14 +258,10 @@ A good topic
 • has not been overdone
 • interests you
 
-----
-
 Question
 ============
 Your research question is just the question or “puzzle” about the topic that your research paper will attempt to answer or solve
 ------------------------------------------------------------------------------------------------------------------------------------
-
-----
 
 Thesis
 =========
@@ -244,10 +331,10 @@ Search Engines and Meta Search Engines
 * "Strict phrase"
 * `-` does not occure
 * regular expression
-* ( ) + or and 
+* ( ) + or and
 * refine results based on date and other options
 * site: yoosofan.github.io
-* 
+*
 
 ----
 
@@ -296,7 +383,7 @@ Scientific Online Library
   https://www.sciencedirect.com/science/article/pii/S1053811921002755
   https://d1wqtxts1xzle7.cloudfront.net/64052117/12%2010183-with-cover-page-v2.pdf?Expires=1645973416&Signature=TbSeTcaBdDC6Xjs1GL-QZGG5zRG6P4T8iWguNJSBRGpflkoqg8pjznwEaXVQISS1fzKyGVybUp5eDuqfSH~B5hUARrEO7j6JWuHBfWivmpVb60LKYERhs-lSD9KM5NO0pwTAo0hxNtR47dh4iPmAS5DfiFP0-xyXLD-3m7jFem57N-IMbeSVxNNuKi~9dQyzGA0VNVwgShddmRq34Ri03LEyjBIUCDa2uIJYn2rUcU~0Y9dHVjFuljyEfA4KQts8Ysxw99~5rTdaB8o26IgRkODlT092D6Mu5cz5KPCQ7TjrvCoqRRAUCarwiAyPkVoAxwOgCGCznb~EG4fHLKE~ow__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
   https://www.isca-speech.org/archive_v0/Interspeech_2019/pdfs/1418.pdf
-  
+
 ----
 
 Article Samples
@@ -408,7 +495,7 @@ Journal Paper
 .. container:: substep
 
   .. class:: substep
-  
+
   * The process of research that leads to a paper can include
       * Uninteresting failures,
       * Invalid hypotheses,
@@ -437,7 +524,7 @@ A paper in conference proceedings
   .. class:: substep
 
     extended abstract
-    
+
     * Omitting detail of the work
     * review the results of a research program
     * may not include enough detail to make a solid argument for the claims.
@@ -491,9 +578,9 @@ Steps of the Scientific Method(I)
 
 Steps of the Scientific Method(II)
 ===================================
-.. class:: substep 
+.. class:: substep
 
-1. Ask a Question 
+1. Ask a Question
     * Your Question
     * Laboratory Notebook
 2. Do Background Research
@@ -506,7 +593,7 @@ Steps of the Scientific Method(II)
     * Variables for Beginners
     * Hypothesis
 
-.. class:: substep 
+.. class:: substep
 
 .. raw:: html
 
@@ -537,7 +624,7 @@ Steps of the Scientific Method(II)
 .. :
 
   https://www.sciencebuddies.org/science-fair-projects/science-fair/steps-of-the-scientific-method
- 
+
 ----
 
 Steps of the Scientific Method(III)
@@ -567,7 +654,7 @@ End
   page break
   تورفتگی هر پاراگراف درون متن بجز نخستین پاراگ
 
-  https://www.slideserve.com/emmet/cmsc-601-writing-3  
+  https://www.slideserve.com/emmet/cmsc-601-writing-3
   Presentation Transcript
 
 
