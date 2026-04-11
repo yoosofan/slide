@@ -490,28 +490,47 @@ User chooses between old cpu or new one
 
 :class: t2c
 
-YIC60 - Input Devices
-=====================
-* Card Reader
-* Necessary Loops
-* Check Errors
-* Polling Method
+YIC60 - Input Device (Card Reader)
+==================================
+.. container::
 
-* Hollerith and IBM keypunches, 1890
-* IBM 011 Electric Key Punch(1923)
-* IBM Type 032 Printing Punch(1935)
-* A Key Punch Room in the 1960s
+    .. class:: substep
 
-.. image:: img/in/pile_of_punch_cards_next2woman.png
-  :height: 500px
+    #. Card Reader
+    #. Necessary Loops
+    #. Check Errors
+    #. Polling Method
+
+    * Hollerith and IBM keypunches, 1890
+    * IBM 011 Electric Key Punch(1923)
+    * IBM Type 032 Printing Punch(1935)
+    * A Key Punch Room in the 1960s
+
+.. image:: img/in/The_IBM_2501_Card_Reader2501.jpg
 
 ----
 
 :class: n2c
 
-.. image:: img/in/punch-card-machine.png
+.. container::
+
+
+    card punch
+
+    .. image:: img/in/punch-card-machine.png
+
+.. container::
+
+    card reader
+
+
+    .. image:: img/in/pile_of_punch_cards_next2woman.png
+      :height: 500px
+
+----
 
 .. code:: asm
+    :number-lines:
 
            ORG 0
     START, BSA READ1
@@ -527,6 +546,8 @@ YIC60 - Input Devices
            BUN (READ1)
 
     OUTCH, HEX 0
+    OUTPR, SKO
+           BUN OUTPR
            OUT
            BUN (OUTCH)
 
