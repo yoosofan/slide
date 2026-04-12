@@ -657,15 +657,14 @@ YIC60 code with array(II)
 
 ----
 
-:class: t2c
-
 YIC70 - Adding Loader
 =====================
 .. csv-table::
     :class: yoo-memory center
 
-    Loader, P, |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp|, array , LED, 7 , printer, |nbsp| |nbsp|  |nbsp| |nbsp|
-    0, 100,  556,           1000, 1024                       , 1048 ,     1096,  1256,   2048
+    Loader, user process, |nbsp| |nbsp| |nbsp| |nbsp|  |nbsp| |nbsp|, array , LED, 7 , printer,  Card Reader,|nbsp|  |nbsp| |nbsp| ,
+    0, 100,  556,           1000, 1024                       , 1048 ,     1096,  1256, 1450,  2048
+
 
 Array
 
@@ -677,37 +676,25 @@ Array
 
 -----
 
-:class: n2c
+:class: grid-3col
 
 .. include:: src/in/loader1.asm
     :code: asm
     :number-lines:
-    :start-line: 5
-    :end-line: 27
+    :start-line: 4
+    :end-line: 25
 
 
 .. include:: src/in/loader1.asm
     :code: asm
     :number-lines: 21
-    :start-line: 27
-    :end-line: 44
-
------
-
-:class: n2c
+    :start-line: 25
+    :end-line: 49
 
 .. include:: src/in/loader1.asm
     :code: asm
-    :number-lines:
-    :start-line: 43
-    :end-line: 64
-
-
-.. include:: src/in/loader1.asm
-    :code: asm
-    :number-lines: 21
-    :start-line: 64
-    :end-line: 84
+    :number-lines: 44
+    :start-line: 49
 
 ----
 
