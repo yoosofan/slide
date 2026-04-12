@@ -6,6 +6,11 @@
 :substep: true
 :slide-numbers: true
 
+.. role:: raw-html(raw)
+   :format: html
+
+.. |nbsp| unicode:: 0xA0
+
 .. role:: ltr
     :class: ltr
 
@@ -205,7 +210,7 @@ Token Types
 
 ----
 
-:class: t2c
+:class: n2c
 
 .. code:: cpp
 
@@ -637,15 +642,6 @@ Keywords in Symbol Table
 
 Memory Allocation
 ===================
-
-.. csv-table::
-  :class: smallerelementwithfullborder
-
-  " i "," f "," w "," h "," i "
-  " l "," e "," i "," n "," t "
-  " a "," c "," o "," u "," n "
-  " t ","\\0 "
-
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder
@@ -656,6 +652,12 @@ Memory Allocation
   7, INT,
   10, ID,
   11, ID,
+
+.. csv-table::
+  :class: yoo-memory
+
+  i, f, w, h,i, l,e,i, n, t, a,c,o,u,n,t,\\0,
+  0 |nbsp|,1 |nbsp|,2 |nbsp|,3 |nbsp|,4 |nbsp|, 5 |nbsp|,6 |nbsp|,7 |nbsp|, 8 |nbsp|, 9 |nbsp|, 10,11,12,13,14,15,16
 
 ----
 
