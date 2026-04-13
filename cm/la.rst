@@ -667,6 +667,8 @@ Regular Expression
 =======================
 .. container::
 
+  .. class:: substep
+
   #. 0|1|2|3 : 0 or 1 or 2 or 3
   #. [0123] : 0 or 1 or 2 or 3
   #. [0-3] : 0 or 1 or 2 or 3
@@ -686,6 +688,8 @@ Regular Expression
   #. [\\n\\t] : new line or tab
 
 .. container::
+
+  .. class:: substep
 
   #. a+ ``:`` Match 1 or more a
   #. [0-9]+
@@ -761,5 +765,5 @@ Regular Expression in Programming(re/regex)
 
 ----
 
-Next topic LEX
+End
 ===================

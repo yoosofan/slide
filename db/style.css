@@ -41,7 +41,8 @@ ol.trace-code li::before {
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
-  font-family: Nazli;
+  /*font-family: Nazli;*/
+
 }
 .rtl-h2{
   direction: rtl;
@@ -110,7 +111,7 @@ div.t2c{
   align-items: center ;
   gap: 5px ;
 }
-div.t2c > h1, div.t2c > .rtl-h1{
+div.t2c > :first-child{
   grid-column: 1 / 3;
   background-color: #E6F4FA;
 }
