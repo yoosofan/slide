@@ -1933,7 +1933,7 @@ Join پیوند
 
 .. code:: sql
     :class: substep
-    
+
     (
       (
         p
@@ -1957,7 +1957,7 @@ Join پیوند
 
 .. code:: sql
     :class: substep
-    
+
     (
       (
         (p where color="Red")
@@ -2271,6 +2271,8 @@ Super Keys
 
 ----
 
+:class: t2c
+
 Candidate Keys کلیدهای نامزد
 ================================================
 .. class:: substep
@@ -2287,25 +2289,150 @@ Candidate Keys کلیدهای نامزد
   * SP(sn_, pn_, qty)
       * {sn, pn}
 
+.. container:: substep
+
+    **Rules for Identification**
+
+    .. class:: substep
+
+    1. Uniqueness Property
+    2. Irreducibility (Minimality)
+    3. Functional Dependency
+    4. Existence
+
+.. note:
+
+    Gemini and Grok AI helped in Rules for Identification
+
+    1. **Uniqueness Property**: At any given time, no two tuples in the relation can have the same value for the candidate key.
+    2. **Irreducibility (Minimality)**: No proper subset of the candidate key attributes can satisfy the uniqueness property. If you can remove an attribute and the key remains unique, the original set was a *superkey*, not a *candidate key*.
+    3. **Functional Dependency**: The candidate key must functionally determine all other attributes in the relation:
+       K → R
+    4. **Existence**: Every relation must have at least one candidate key (in the worst case, the set of all attributes combined).
+
 ----
+
+:class: t2c
 
 Primary key کلید اصلی
 ========================================
-
 .. class:: substep
 
-  * SP(sn_, pn_, qty)
-  * S(sn_, sname, status, city)
+* SP(sn_, pn_, qty)
+* S(sn_, sname, status, city)
 
+* {sn}
+* هیچ دو عرضه‌کننده‌ای در یک شهر نام یکسانی ندارند.
     * {sn}
-    * هیچ دو عرضه‌کننده‌ای در یک شهر نام یکسانی ندارند.
-        * {sn}
-        * {sname, city}
-        * فقط یکی از این دو بالایی کلید اصلی گذاشته شود.
-    * اگر در هر شهر فقط یک عرضه کننده بتواند باشد.
-        * {sn}
-        * {city}
-        * فقط یکی از این دو بالایی کلید اصلی گذاشته شود.
+    * {sname, city}
+    * فقط یکی از این دو بالایی کلید اصلی گذاشته شود.
+* اگر در هر شهر فقط یک عرضه کننده بتواند باشد.
+    * {sn}
+    * {city}
+    * فقط یکی از این دو بالایی کلید اصلی گذاشته شود.
+
+.. container:: substep
+
+
+    **Guidelines for Optimal Selection**
+
+    .. class:: substep
+
+    #. Derived from Candidate Keys
+    #. Attribute Stability
+    #. Minimality
+    #. High Frequency Usage
+    #. Non-Nullability
+
+.. note:
+
+
+    * **Derived from Candidate Keys**: A primary key must be selected from the set of identified candidate keys.
+    * **Attribute Stability**: Prioritize keys that are least likely to change over the lifetime of the record.
+    * **Minimality**: Prefer a single-attribute key or a small composite key to improve indexing performance and simplify Foreign Key relationships.
+    * **High Frequency Usage**: Select the candidate key most frequently used by applications and users to identify specific tuples.
+    * **Non-Nullability**: By definition, a primary key must strictly prohibit null values.
+
+
+    #. The best choice for primary ke is a candidate key that
+        * Most important in real data usage
+        * could be use many times to find record
+        * used mostly by user
+    #. Don't add arbitrary field for Primary key
+    #. The primary key should be selected from one of the candidate keys
+    #. is meaningfull
+    #. If there
+        * is no candidate key or
+        * or cadidate keys consist large number of field
+        * then it is possible to add extra field
+        * Try to add meaningful field or field that can be used for some usage
+        * In another word, just don't add field for the sake of having key
+        * Adding a field of autoincrement should be the last resort
+
+----
+
+:class: t2c
+
+Surrogate Keys vs. Natural Keys
+===============================
+.. class:: substep
+
+#. Avoid Arbitrary Fields
+#. Criteria for Surrogate Keys
+    * No natural candidate keys exist.
+    * Existing candidate keys are excessively "wide"
+    * Table structure, business rules, or attribute values are expected to change frequently in the future.
+#. Surrogate Limitations
+#. Last Resort Principle
+
+.. container:: substep
+
+    **Common Mistakes to Avoid**
+
+    .. class:: substep
+
+    #. Using Volatile Data
+    #. Using Large Strings
+    #. External Identifiers
+    #. Meaningful Key Updates
+
+.. note:
+
+
+    Table structure and its fields may change a lot in future 
+    because of external forces that changes the fields and table structure 
+    
+    
+    * **Avoid Arbitrary Fields**: Do not introduce surrogate keys (e.g., UUIDs, Auto-increments) if a stable, simple natural key exists.
+    * **Criteria for Surrogate Keys**: Consider adding an artificial identifier only if:
+        * No natural candidate keys exist.
+        * Existing candidate keys are excessively "wide" (consist of too many fields or large strings).
+    * **Surrogate Limitations**: If a surrogate key is used, ensure it does not replace the requirement for uniqueness constraints on the original natural data.
+    * **Last Resort Principle**: Auto-incrementing integers are often a structural necessity in implementation, but in logical design, they should be utilized only when natural identifiers fail the stability or minimality tests.
+
+    Common Mistakes to Avoid
+    ------------------------
+    .. class:: substep
+
+    * **Using Volatile Data**: Never use fields that change, such as ``Email``, ``Phone_Number``, or ``Mailing_Address``.
+    * **Using Large Strings**: Using long text fields as primary keys increases index size and degrades join performance.
+    * **External Identifiers**: Relying on external keys (e.g., Social Security Numbers or National IDs) is risky due to privacy regulations (GDPR), potential format changes, or duplicate assignments by external agencies.
+    * **Meaningful Key Updates**: If a primary key has "meaning," users may want to update it. Updating a primary key requires expensive cascading updates to all related foreign keys.
+
+
+
+   Surrogate keys are excellent for **stability and decoupling** when business data evolves, but they must never replace proper enforcement of natural uniqueness rules.
+
+    **Rationale for the New Criterion (Table Structure May Change)**
+    The addition you made is **excellent** and academically sound.
+    Frequent schema or business-rule changes are a very common real-world reason to choose surrogate keys. Natural keys often embed business meaning that can become obsolete or require updates (e.g., email formats, product codes, regulatory IDs). A surrogate key remains unchanged even if the rest of the table evolves.
+
+    **Suggested Improvements (already incorporated above)**
+    * Made the new bullet parallel and concise.
+    * Changed “may change a lot” → “are expected to change frequently” (more precise academic tone).
+    * Kept the original numbering style you preferred while improving clarity and flow.
+    * Added a short “Limitations” reminder — this is critical so students do not think surrogate keys let them ignore natural uniqueness.
+    * Added a boxed “Key Principle” for slide emphasis.
 
 ----
 
