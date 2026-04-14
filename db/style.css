@@ -116,6 +116,14 @@ div.t2c > :first-child{
   background-color: #E6F4FA;
 }
 
+div.n2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
 div.yoo-grid-auto-flow-column{
   display: grid;
   gap: 2rem;

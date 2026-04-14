@@ -2314,8 +2314,8 @@ Candidate Keys کلیدهای نامزد
 
 :class: t2c
 
-Primary key کلید اصلی
-========================================
+Primary key(PK) 
+===============
 .. class:: substep
 
 * SP(sn_, pn_, qty)
@@ -2436,19 +2436,341 @@ Surrogate Keys vs. Natural Keys
 
 ----
 
-Foreign key
+:class: t2c
+
+Foreign Key(FK)
 =================
-* SP(sn_, pn_, qty)
-* sn from s
-* pn from p
+.. container::
 
+    **SP**
+     
+    * SP(sn_, pn_, qty)
+    * sn from s
+    * pn from p
 
-SPJ
+.. yographviz::
+
+   digraph S_P_SP { // Thanks to Gemini from Google
+       // Layout direction: Left to Right
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [fontname="Helvetica", fontsize=10, color="#555555"];
+
+       // Table: Suppliers (s)
+       s [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa" colspan="2"><b>s (Suppliers)</b></td></tr>
+               <tr><td port="sn" bgcolor="#ffffff"><b>sn (PK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="sname" bgcolor="#ffffff">sname</td><td bgcolor="#ffffff">char(30)</td></tr>
+               <tr><td port="status" bgcolor="#ffffff">status</td><td bgcolor="#ffffff">int</td></tr>
+               <tr><td port="city" bgcolor="#ffffff">city</td><td bgcolor="#ffffff">char(20)</td></tr>
+           </table>
+       >];
+
+       // Table: Shipments (sp)
+       // Placed in the middle visually
+       sp [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4" colspan="2"><b>sp (Shipments)</b></td></tr>
+               <tr><td port="sn" bgcolor="#ffffff"><b>sn (PK, FK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>pn (PK, FK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="qty" bgcolor="#ffffff">qty</td><td bgcolor="#ffffff">int</td></tr>
+           </table>
+       >];
+
+       // Table: Parts (p)
+       p [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9" colspan="2"><b>p (Parts)</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>pn (PK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="pname" bgcolor="#ffffff">pname</td><td bgcolor="#ffffff">char(30)</td></tr>
+               <tr><td port="color" bgcolor="#ffffff">color</td><td bgcolor="#ffffff">char(20)</td></tr>
+               <tr><td port="weight" bgcolor="#ffffff">weight</td><td bgcolor="#ffffff">numeric(9, 2)</td></tr>
+               <tr><td port="city" bgcolor="#ffffff">city</td><td bgcolor="#ffffff">char(20)</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+       // The syntax node:port -> node:port connects the specific table rows
+
+       sp:sn -> s:sn [label=" references", arrowtail=none, arrowhead=normal];
+       sp:pn -> p:pn [label=" references", arrowtail=none, arrowhead=normal];
+   }
+  
+
 ----
+
+
+:class: n2c
+
 * S(sn_,sname,status,city) ,
 * P(pn_,pname,color,weight,city) ,
 * J(jn_,jname,budget,city)
 * SPJ(sn_, pn_, jn_, qty)
+
+
+.. yographviz::
+
+    digraph SPJ_Database { // Thanks to Grok AI from x.com (aka Twitter)
+        graph [
+            rankdir=LR,
+            splines=curved,
+            nodesep=0.45,
+            ranksep=0.85,
+            bgcolor="transparent",
+            label="SPJ Database",
+            labelloc="t",
+            fontsize=12,
+            fontname="Arial Bold"
+        ];
+
+        node [
+            shape=plain,
+            fontsize=11,
+            fontname="Arial"
+        ];
+
+        edge [
+            arrowsize=0.9,
+            penwidth=2.2,
+            color="#1F618D"
+        ];
+
+        /* Left column: S (top) and J (bottom) */
+        S [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#AED6F1" COLSPAN="1"><B><FONT POINT-SIZE="13">S</FONT></B></TD></TR>
+            <TR><TD PORT="sn" ALIGN="LEFT"><B><U>sn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">sname</TD></TR>
+            <TR><TD ALIGN="LEFT">status</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        J [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#D7BDE2" COLSPAN="1"><B><FONT POINT-SIZE="13">J</FONT></B></TD></TR>
+            <TR><TD PORT="jn" ALIGN="LEFT"><B><U>jn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">jname</TD></TR>
+            <TR><TD ALIGN="LEFT">budget</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        /* Center: SPJ */
+        SPJ [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#FAD7A0" COLSPAN="1"><B><FONT POINT-SIZE="13">SPJ</FONT></B></TD></TR>
+            <TR><TD PORT="sn" ALIGN="LEFT"><B><U>sn</U></B></TD></TR>
+            <TR><TD PORT="pn" ALIGN="LEFT"><B><U>pn</U></B></TD></TR>
+            <TR><TD PORT="jn" ALIGN="LEFT"><B><U>jn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">qty</TD></TR>
+            </TABLE>
+        >];
+
+        /* Right: P */
+        P [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#A9DFBF" COLSPAN="1"><B><FONT POINT-SIZE="13">P</FONT></B></TD></TR>
+            <TR><TD PORT="pn" ALIGN="LEFT"><B><U>pn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">pname</TD></TR>
+            <TR><TD ALIGN="LEFT">color</TD></TR>
+            <TR><TD ALIGN="LEFT">weight</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        /* Keep S above J on the left */
+        S -> J [style=invis];
+
+        /* Directed foreign-key arrows from SPJ fields to target PK fields */
+        SPJ:sn -> S:sn;
+        SPJ:pn -> P:pn;
+        SPJ:jn -> J:jn;
+    }
+
+
+.. :
+
+    digraph SPJ_Database { // Thanks to Grok AI from x.com (aka Twitter)
+        graph [
+            rankdir=LR,
+            splines=curved,
+            nodesep=0.35,
+            ranksep=0.65,
+            bgcolor="transparent",
+            // label="SPJ Database",
+            // labelloc="t",
+            fontsize=12,
+            fontname="Arial Bold"
+        ];
+
+        node [
+            shape=plain,
+            fontsize=11,
+            fontname="Arial"
+        ];
+
+        edge [
+            arrowsize=0.9,
+            penwidth=2.2,
+            color="#1F618D"
+        ];
+
+        /* S (top-left) */
+        S [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#AED6F1" COLSPAN="1"><B><FONT POINT-SIZE="13">S</FONT></B></TD></TR>
+            <TR><TD PORT="sn" ALIGN="LEFT"><B><U>sn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">sname</TD></TR>
+            <TR><TD ALIGN="LEFT">status</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        /* J (bottom-left) */
+        J [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#D7BDE2" COLSPAN="1"><B><FONT POINT-SIZE="13">J</FONT></B></TD></TR>
+            <TR><TD PORT="jn" ALIGN="LEFT"><B><U>jn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">jname</TD></TR>
+            <TR><TD ALIGN="LEFT">budget</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        /* SPJ (center) */
+        SPJ [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#FAD7A0" COLSPAN="1"><B><FONT POINT-SIZE="13">SPJ</FONT></B></TD></TR>
+            <TR><TD PORT="sn" ALIGN="LEFT"><B><U>sn</U></B></TD></TR>
+            <TR><TD PORT="pn" ALIGN="LEFT"><B><U>pn</U></B></TD></TR>
+            <TR><TD PORT="jn" ALIGN="LEFT"><B><U>jn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">qty</TD></TR>
+            </TABLE>
+        >];
+
+        /* P (right) */
+        P [label=<
+            <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+            <TR><TD BGCOLOR="#A9DFBF" COLSPAN="1"><B><FONT POINT-SIZE="13">P</FONT></B></TD></TR>
+            <TR><TD PORT="pn" ALIGN="LEFT"><B><U>pn</U></B></TD></TR>
+            <TR><TD ALIGN="LEFT">pname</TD></TR>
+            <TR><TD ALIGN="LEFT">color</TD></TR>
+            <TR><TD ALIGN="LEFT">weight</TD></TR>
+            <TR><TD ALIGN="LEFT">city</TD></TR>
+            </TABLE>
+        >];
+
+        /* Force S above J on the left */
+        { rank=same; S; J; }   /* invisible connection keeps them vertically aligned */
+        S -> J [style=invis];
+
+        /* Directed foreign-key edges from SPJ fields to target PK fields */
+        SPJ:sn -> S:sn;
+        SPJ:pn -> P:pn;
+        SPJ:jn -> J:jn;
+    }
+    
+
+----
+
+
+:class: t2c
+
+Company Database Schema
+=======================
+.. class:: substep
+
+* Employee, Project, HourLog
+* Employee(SSN_, name, salary, MgrSSN)
+* Project(ProjName_, location )
+* HourLog(SSN_, ProjName_, hours)
+* MgrSSN is foreign Key to SSN of its own table 
+* If the ProjName can be repeated?
+ 
+.. yographviz::
+   :class: substep db-schema-graph
+
+   digraph Company {
+       // Layout direction
+       rankdir=LR;
+       
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: Employee
+       employee [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>Employee</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="salary" bgcolor="#ffffff">salary</td></tr>
+               <tr><td port="mgrssn" bgcolor="#ffffff">MgrSSN</td></tr>
+           </table>
+       >];
+
+       // Table: HourLog
+       hourlog [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>HourLog</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="projname" bgcolor="#ffffff"><b>ProjName</b></td></tr>
+               <tr><td port="hours" bgcolor="#ffffff">hours</td></tr>
+           </table>
+       >];
+
+       // Table: Project
+       project [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9"><b>Project</b></td></tr>
+               <tr><td port="projname" bgcolor="#ffffff"><b>ProjName</b></td></tr>
+               <tr><td port="location" bgcolor="#ffffff">location</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+       // Using compass points (:e for East) loops the arrow cleanly outside the right edge
+       employee:mgrssn:e -> employee:ssn:e;
+       
+       // Foreign keys from HourLog to Employee and Project
+       hourlog:ssn -> employee:ssn;
+       hourlog:projname -> project:projname;
+   }
+   
+----
+
+:class: t2c
+
+Company, Project Name repetitions
+=================================
+* Employee(SSN_, name, salary, MgrSSN)
+* Project(ProjName_, location )
+* HourLog(SSN_, ProjName_, hours)
+
+.. class:: substep
+
+* Employee(SSN_, name, salary, MgrSSN)
+* Project(PN_, ProjName, location )
+* HourLog(SSN_, PN_, hours)
+* If the company gets larger and needs departments? 
+
+.. class:: substep
+
+#. Employee(SSN_, name, salary, DeptName)
+#. Department(DeptName_, MgrSSN)
+#. Project(PN_, location, ProjName)
+#. HourLog(SSN_, PN_, hours)
+
+.. class:: substep
+
+* Employee(SSN_, name, salary, DeptName)
+* Department(DeptName_, MgrSSN)
+* Project(ProjName_, location)
+* HourLog(SSN_, ProjName_, hours)
 
 ----
 
@@ -2456,32 +2778,26 @@ SPJ
 
 Project/Deparment/Employee
 ================================
-* Design 1
 * Employee(SSN_, name, salary, Dn)
 * Department(DN_, DeptName, MgrSSN)
 * Project(PN_, location, ProjName)
 * HourLog(SSN_, PN_, hours)
-
-#. Design 2
-#. Employee(SSN_, name, salary, DeptName)
-#. Department(DeptName_, MgrSSN)
-#. Project(PN_, location, ProjName)
-#. HourLog(SSN_, PN_, hours)
-
-* Design 3
-* Employee(SSN_, name, salary, DeptName)
-* Department(DeptName_, MgrSSN)
-* Project(ProjName_, location)
-* HourLog(SSN_, ProjName_, hours)
 
 - e(en_, name, sly, dn)
 - d(dn_, dname, en)
 - j(jn_, jname, loc)
 - h(en_, jn_, hrs)
 
-یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند. هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند. هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است. در جدول h مشخص می‌شود که یک کارمند(en) در یک پروژه(jn) چه تعداد ساعت hrs کار کرده است.
+.. class:: rtl
+
+* یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند. 
+* هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند. 
+* هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است. 
+* در جدول h مشخص می‌شود که یک کارمند(en) در یک پروژه(jn) چه تعداد ساعت hrs کار کرده است.
 
 ----
+
+:class: t2c
 
 Library(I)
 ===========
@@ -2489,10 +2805,13 @@ Library(I)
 * member(mn_, name, category, bn)
 * borrow(bn_, mn_, nd, rdt, ret)
 
+#. B(bn_, title, ctg, fpd, author)
+#. M(mn_, name, ctg, bn)
+#. R(bn_, mn_, nd, rdt, ret)
 
 .. class:: rtl
 
-#. در اینجا فرض می‌کنیم از هر کتابی فقط یک نسخهٔ آن در کتابخانه هست. پس bn می‌تواند همان isbn باشد.
+#. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
 #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
 #. book. fpd جریمه دیر آوردن کتاب به ازای روز
 #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
