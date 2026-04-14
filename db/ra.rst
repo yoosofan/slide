@@ -2745,7 +2745,7 @@ Company Database Schema
 
 :class: t2c
 
-Company, Project Name repetitions
+Company, Project Name duplication
 =================================
 * Employee(SSN_, name, salary, MgrSSN)
 * Project(ProjName_, location )
@@ -2758,6 +2758,12 @@ Company, Project Name repetitions
 * HourLog(SSN_, PN_, hours)
 * If the company gets larger and needs departments? 
 
+----
+
+:class: t2c
+
+Company with Departments
+==========================
 .. class:: substep
 
 #. Employee(SSN_, name, salary, DeptName)
@@ -2765,12 +2771,70 @@ Company, Project Name repetitions
 #. Project(PN_, location, ProjName)
 #. HourLog(SSN_, PN_, hours)
 
-.. class:: substep
+ 
+.. yographviz::
+   :class: substep db-schema-graph
 
-* Employee(SSN_, name, salary, DeptName)
-* Department(DeptName_, MgrSSN)
-* Project(ProjName_, location)
-* HourLog(SSN_, ProjName_, hours)
+   digraph UpdatedCompany {// Thanks to Gemeni AI from Google
+       // Layout direction
+       rankdir=LR;
+       
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: Employee
+       employee [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>Employee</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="salary" bgcolor="#ffffff">salary</td></tr>
+               <tr><td port="deptname" bgcolor="#ffffff">DeptName</td></tr>
+           </table>
+       >];
+
+       // Table: Department
+       department [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>Department</b></td></tr>
+               <tr><td port="deptname" bgcolor="#ffffff"><b>DeptName</b></td></tr>
+               <tr><td port="mgrssn" bgcolor="#ffffff">MgrSSN</td></tr>
+           </table>
+       >];
+
+       // Table: HourLog
+       hourlog [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>HourLog</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>PN</b></td></tr>
+               <tr><td port="hours" bgcolor="#ffffff">hours</td></tr>
+           </table>
+       >];
+
+       // Table: Project
+       project [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9"><b>Project</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>PN</b></td></tr>
+               <tr><td port="location" bgcolor="#ffffff">location</td></tr>
+               <tr><td port="projname" bgcolor="#ffffff">ProjName</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+       
+       // Employee belongs to a Department (Exits right side of Employee, enters left side of Dept)
+       employee:deptname:e -> department:deptname:w;
+       
+       // Department is managed by an Employee (Exits left side of Dept, enters right side of Employee)
+       department:mgrssn:w -> employee:ssn:e;
+       
+       // Foreign keys from HourLog to Employee and Project
+       hourlog:ssn -> employee:ssn;
+       hourlog:pn -> project:pn;
+   }
 
 ----
 
@@ -2783,12 +2847,14 @@ Project/Deparment/Employee
 * Project(PN_, location, ProjName)
 * HourLog(SSN_, PN_, hours)
 
+.. class:: substep
+
 - e(en_, name, sly, dn)
 - d(dn_, dname, en)
 - j(jn_, jname, loc)
 - h(en_, jn_, hrs)
 
-.. class:: rtl
+.. class:: rtl substep
 
 * یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند. 
 * هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند. 
@@ -2797,40 +2863,83 @@ Project/Deparment/Employee
 
 ----
 
-:class: t2c
-
-Library(I)
-===========
-* book(bn_, title, category, fpd, author)
+Simple Library
+==============
+* book(bn_, title, category, author)
 * member(mn_, name, category, bn)
-* borrow(bn_, mn_, nd, rdt, ret)
-
-#. B(bn_, title, ctg, fpd, author)
-#. M(mn_, name, ctg, bn)
-#. R(bn_, mn_, nd, rdt, ret)
+* borrow(bn_, mn_, rdt, ret)
 
 .. class:: rtl
 
-#. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
-#. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
-#. book. fpd جریمه دیر آوردن کتاب به ازای روز
 #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
 #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+#. rdt تاریخ برگشت کتاب در آخرین امانت
+#. ret کتاب برای آخرین امانت برگردانده شده یا خیر 
+
+.. :
+
+
+    #. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
+    #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
+    #. book. fpd جریمه دیر آوردن کتاب به ازای روز
+    #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
+    #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+
 
 ----
 
-Library(II)
-===========
-* book(bn_, title, category, fpd, author, nday, isbn)
+:class: t2c
+
+Library with Fine
+=======================================
+* book(bn_, title, category, author, fpd, isbn)
 * member(mn_, name, category, isbn)
-* borrow(bn_, mn_, nd, rdt, ret)
+* borrow(bn_, mn_, rdt, ret, nd)
+
+#. B(bn_, title, ctg, fpd, author, isbn)
+#. M(mn_, name, ctg, isbn)
+#. R(bn_, mn_, rdt, ret, nd)
 
 .. class:: rtl
 
-#. book.bn شمارهٔ کتاب در این کتابخانه زیرا شاید از یک کتاب خاص چند نمونه از آن را داشته باشیم
-#. book.isbn شابک کتاب
-#. book.nday  تعداد روزی که می‌تواند کتاب به امانت برده شود کتاب‌هایی نیز هست که نمی‌توان بیرون برد و برای همین صفر برای nday آنها گذاشته می‌شود.
-#. member.isbn کتابی که بیشتر از همه کتاب‌های کتابخانه این عضو به آن علاقه‌مند است.
+#. fpd جریمه دیر آوردن کتاب به ازای روز
+#. nd جمع روزهای دیرکرد به جز آخرین بار برگردانده نشده
+#. از هر کتابی(isbn) چند نسخه(bn) در کتابخانه است
+    
+.. :
+
+
+    #. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
+    #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
+    #. book. fpd جریمه دیر آوردن کتاب به ازای روز
+    #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
+    #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+    #. rdt تاریخی که کتاب باید برگردانده شود
+
+----
+
+Library with Return dates and limited days 
+===========================================
+* book(bn_, title, category, author, fpd, , isbn, nday)
+* member(mn_, name, category, isbn, sump)
+* borrow(bn_, mn_, rdt_, ardt)
+
+.. class:: rtl
+
+#. book.nday تعداد روزی که می‌تواند کتاب به امانت برده شود
+#. nd == 0 نمی‌توان کتاب را بیرون برد
+#. sump جمع پرداخت‌های عضو-
+#. rdt تاریخی که باید کتاب در این بار امانت برگردانده می‌شد.
+#. ardt تاریخی که عضو واقعا کتاب را برگردانده است
+
+
+----
+
+.. image:: img/relational_model/university_relations.png
+
+.. :
+
+  :width: 800px
 
 ----
 
@@ -2885,11 +2994,6 @@ University Database(II)
           inst_id)
 * Is there any new candidate key for this
     relation (teaches)?
-
-----
-
-.. image:: img/relational_model/university_relations.png
-  :width: 800px
 
 ----
 
@@ -4095,6 +4199,7 @@ END
 .. _jn:
 .. _bn:
 .. _mn:
+.. _rdt:
 .. _SSN:
 .. _DN:
 .. _DeptName:

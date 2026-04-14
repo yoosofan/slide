@@ -1154,6 +1154,161 @@ Company Database Schema
        hourlog:projname -> project:projname;
    }
 
+Company department 2026/04/14 19:23:14
+```````````````````````````````````````
+Please do the same for the following database. In this database Department is a new table that specify departments in the company and employees work in different departments. "MgrSSN" field is foreign key in this table that relate it to Employee table. It means every department has one manager who himself is an employee.
+
+Gemeni answer 2026/04/14 19:27:04
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Extended Company Database Schema
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph ExtendedCompany {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: Employee
+       employee [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>Employee</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="salary" bgcolor="#ffffff">salary</td></tr>
+               <tr><td port="mgrssn" bgcolor="#ffffff">MgrSSN</td></tr>
+               <tr><td port="dnumber" bgcolor="#ffffff">DNumber</td></tr>
+           </table>
+       >];
+
+       // Table: Department
+       department [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>Department</b></td></tr>
+               <tr><td port="dnumber" bgcolor="#ffffff"><b>DNumber</b></td></tr>
+               <tr><td port="dname" bgcolor="#ffffff">DName</td></tr>
+               <tr><td port="mgrssn" bgcolor="#ffffff">MgrSSN</td></tr>
+           </table>
+       >];
+
+       // Table: HourLog
+       hourlog [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>HourLog</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="projname" bgcolor="#ffffff"><b>ProjName</b></td></tr>
+               <tr><td port="hours" bgcolor="#ffffff">hours</td></tr>
+           </table>
+       >];
+
+       // Table: Project
+       project [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9"><b>Project</b></td></tr>
+               <tr><td port="projname" bgcolor="#ffffff"><b>ProjName</b></td></tr>
+               <tr><td port="location" bgcolor="#ffffff">location</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Employee self-referencing foreign key for Manager (loops on the East side)
+       employee:mgrssn:e -> employee:ssn:e;
+
+       // Employee belongs to a Department
+       employee:dnumber -> department:dnumber;
+
+       // Department is managed by an Employee
+       department:mgrssn -> employee:ssn;
+
+       // Foreign keys from HourLog to Employee and Project
+       hourlog:ssn -> employee:ssn;
+       hourlog:projname -> project:projname;
+   }
+
+Add tables
+``````````
+Please, I forgot to add tables of this new database. Please consider the following tables:
+
+
+#. Employee(SSN_, name, salary, DeptName)
+#. Department(DeptName_, MgrSSN)
+#. Project(PN_, location, ProjName)
+#. HourLog(SSN_, PN_, hours)
+
+Gemeni Answer
+~~~~~~~~~~~~~
+2026/04/14 19:43:37
+
+Updated Company Database Schema
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph UpdatedCompany {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: Employee
+       employee [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>Employee</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="salary" bgcolor="#ffffff">salary</td></tr>
+               <tr><td port="deptname" bgcolor="#ffffff">DeptName</td></tr>
+           </table>
+       >];
+
+       // Table: Department
+       department [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>Department</b></td></tr>
+               <tr><td port="deptname" bgcolor="#ffffff"><b>DeptName</b></td></tr>
+               <tr><td port="mgrssn" bgcolor="#ffffff">MgrSSN</td></tr>
+           </table>
+       >];
+
+       // Table: HourLog
+       hourlog [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>HourLog</b></td></tr>
+               <tr><td port="ssn" bgcolor="#ffffff"><b>SSN</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>PN</b></td></tr>
+               <tr><td port="hours" bgcolor="#ffffff">hours</td></tr>
+           </table>
+       >];
+
+       // Table: Project
+       project [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9"><b>Project</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>PN</b></td></tr>
+               <tr><td port="location" bgcolor="#ffffff">location</td></tr>
+               <tr><td port="projname" bgcolor="#ffffff">ProjName</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Employee belongs to a Department (Exits right side of Employee, enters left side of Dept)
+       employee:deptname:e -> department:deptname:w;
+
+       // Department is managed by an Employee (Exits left side of Dept, enters right side of Employee)
+       department:mgrssn:w -> employee:ssn:e;
+
+       // Foreign keys from HourLog to Employee and Project
+       hourlog:ssn -> employee:ssn;
+       hourlog:pn -> project:pn;
+   }
 
 foreign key
 ^^^^^^^^^^^^^^^^
