@@ -6,6 +6,20 @@
 :data-width: 1024
 :data-height: 768
 
+
+.. title: Databse System, relations (By Ahmad Yoosofan)
+
+:slide-numbers: true
+
+.. role:: raw-html(raw)
+   :format: html
+
+.. |nbsp| unicode:: 0xA0
+
+.. role:: rtl
+    :class: rtl
+
+
 ----
 
 Database Course
@@ -2434,12 +2448,13 @@ Surrogate Keys vs. Natural Keys
     * Added a short “Limitations” reminder — this is critical so students do not think surrogate keys let them ignore natural uniqueness.
     * Added a boxed “Key Principle” for slide emphasis.
 
+
 ----
 
 :class: t2c
 
-Foreign Key(FK)
-=================
+SP
+==
 .. container::
 
     **SP**
@@ -2503,8 +2518,10 @@ Foreign Key(FK)
 ----
 
 
-:class: n2c
+:class: t2c
 
+SPJ
+===
 * S(sn_,sname,status,city) ,
 * P(pn_,pname,color,weight,city) ,
 * J(jn_,jname,budget,city)
@@ -2674,6 +2691,86 @@ Foreign Key(FK)
         SPJ:jn -> J:jn;
     }
     
+
+----
+
+:class: t2c
+
+Simple Library
+==============
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph NormalizedLibrary {
+       // Layout direction
+       rankdir=LR;
+       
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: member
+       member [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>member</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="bn" bgcolor="#ffffff">bn</td></tr>
+           </table>
+       >];
+
+       // Table: borrow
+       borrow [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>borrow</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="rdt" bgcolor="#ffffff">rdt</td></tr>
+               <tr><td port="ret" bgcolor="#ffffff">ret</td></tr>
+           </table>
+       >];
+
+       // Table: book
+       book [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>book</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="title" bgcolor="#ffffff">title</td></tr>
+               <tr><td port="author" bgcolor="#ffffff">author</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+       
+       // Member references their favorite book
+       // (Exits East side of member, enters West side of book)
+       member:bn:e -> book:bn:w;
+       
+       // Borrow references both the book and the member
+       borrow:bn:e -> book:bn:w;
+       borrow:mn:e -> member:mn:w;
+   }
+
+* book(bn_, title, author)
+* member(mn_, name, bn)
+* borrow(bn_, mn_, rdt, ret)
+
+.. class:: rtl
+
+#. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+#. rdt تاریخ برگشت کتاب در آخرین امانت
+#. ret کتاب برای آخرین امانت برگردانده شده یا خیر 
+
+.. :
+
+
+    #. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
+    #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
+    #. book. fpd جریمه دیر آوردن کتاب به ازای روز
+    #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
+    #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+
 
 ----
 
@@ -2861,29 +2958,228 @@ Project/Deparment/Employee
 * هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است. 
 * در جدول h مشخص می‌شود که یک کارمند(en) در یک پروژه(jn) چه تعداد ساعت hrs کار کرده است.
 
+
 ----
 
-Simple Library
-==============
-* book(bn_, title, category, author)
-* member(mn_, name, category, bn)
-* borrow(bn_, mn_, rdt, ret)
+:class: t2c
 
-.. class:: rtl
+Foreign Key(FK)
+=================
+.. container::
 
-#. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
-#. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
-#. rdt تاریخ برگشت کتاب در آخرین امانت
-#. ret کتاب برای آخرین امانت برگردانده شده یا خیر 
+    **Core Principles of Referential Integrity**
+
+    .. class:: substep
+    
+    * **Definition**
+    * **Subset Dependency**
+    * **Domain Matching**
+    * **Self-Referencing Keys**
+    * **Nullability**
 
 .. :
 
+    * **Definition**: A Foreign Key (FK) is an attribute (or set of attributes) in one relation that refers to a candidate key (typically the Primary Key) in another, or the same, relation.
+    * **Subset Dependency**: Every non-null value in the foreign key must explicitly exist in the referenced key of the parent relation.
+    * **Domain Matching**: The foreign key attributes must possess the exact same data type, length, and domain as the referenced primary key.
+    * **Self-Referencing Keys**: A foreign key can reference the primary key of its *own* relation (e.g., an ``Employee_ID`` primary key referenced by a ``Manager_ID`` foreign key in the same table) to represent hierarchical data.
+    * **Nullability**: Unlike Primary Keys, Foreign Keys *can* accept ``NULL`` values unless explicitly constrained. A ``NULL`` indicates the absence of a relationship for that specific tuple.
 
-    #. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
-    #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
-    #. book. fpd جریمه دیر آوردن کتاب به ازای روز
-    #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
-    #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+.. container:: substep
+
+    **Common Mistakes and Anti-Patterns**
+
+    .. class:: substep
+    
+    * **Application-Level Enforcement**
+    * **Mismatched Data Types**
+    * **Referencing Non-Unique Columns**
+    * **Cyclic Dependencies**
+
+.. :
+
+    Common Mistakes and Anti-Patterns
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Application-Level Enforcement**: Defining relationships only in application code while omitting actual Foreign Key constraints in the database schema. This inevitably leads to orphaned records and data anomalies.
+    * **Overusing CASCADE DELETE**: Applying ``CASCADE`` indiscriminately can result in catastrophic, unintended mass data deletion if a core entity is removed. Use ``RESTRICT`` unless cascading is a strict business requirement.
+    * **Mismatched Data Types**: Defining an ``INT`` primary key but a ``BIGINT`` foreign key. Even if the DBMS allows it, this disables efficient index usage and severely degrades ``JOIN`` performance.
+    * **Referencing Non-Unique Columns**: Attempting to point a foreign key to a column that is not guaranteed to be unique (i.e., not a Primary Key or explicitly marked with a ``UNIQUE`` constraint).
+    * **Cyclic Dependencies**: Designing schemas where Table A requires a foreign key from Table B, and Table B requires a foreign key from Table A. This creates deadlocks during row insertion and deletion.
+
+----
+
+**Guidelines for Optimal Definition**
+
+
+* **Must Reference a Candidate Key**: A foreign key must always reference a primary key or a candidate key that has a ``UNIQUE`` constraint in the parent table.
+* **Data-Type Compatibility**: The foreign-key column(s) must have exactly the same data type, length, and collation as the referenced primary-key column(s).
+* **Allow NULL (by default)**: Foreign keys may contain ``NULL`` values unless explicitly declared ``NOT NULL`` (optional relationship).
+* **Minimality**: Prefer single-attribute foreign keys when possible; composite foreign keys should only be used when the business rule genuinely requires multiple columns.
+* **Naming Convention**: Use clear, consistent names (e.g., ``fk_student_course_student_id`` or ``student_id``) to improve readability and maintenance.
+* **Index Recommendation**: Always create an index on foreign-key columns to speed up joins, lookups, and referential checks.
+
+**Common Mistakes to Avoid**
+
+
+* Forgetting to create an index on the foreign-key column → slow joins and poor performance.
+* Using a foreign key that references a non-unique column → violates referential integrity rules.
+* Circular foreign-key references (Table A → Table B → Table A) without careful design → can cause deadlock or insertion problems.
+* Mismatched data types between foreign key and primary key → prevents creation of the constraint.
+* Overusing ``CASCADE`` without understanding consequences → accidental mass deletion of data.
+* Ignoring business rules when choosing actions → e.g., using ``SET NULL`` on a required relationship.
+* Creating foreign keys to surrogate keys only and forgetting ``UNIQUE`` constraints on natural keys → loses business integrity.
+
+----
+
+**Best Practices for Bachelor-Level Design**
+
+* Prefer **natural or meaningful** foreign keys when they are stable (e.g., ``CourseCode`` instead of only a surrogate ID).
+* When using surrogate primary keys, still keep the foreign key referencing the surrogate for performance.
+* Document every foreign key with a comment explaining the business relationship.
+* Test referential actions thoroughly during schema design (use small test data).
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 35 35
+
+   * - Situation
+     - Recommended Foreign-Key Approach
+     - Reason
+   * - One-to-many relationship (e.g., Student → Course)
+     - Single-column FK + ``RESTRICT``
+     - Simple and safe
+   * - Weak entity (e.g., OrderLine)
+     - Composite FK (OrderID + LineNo)
+     - Reflects full identifying relationship
+   * - Optional relationship
+     - FK declared ``NULL`` allowed
+     - Allows “no parent” records
+   * - High-performance joins needed
+     - Add index on FK column
+     - Essential for query speed
+
+.. :
+
+    Core Principles of Referential Integrity
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Definition**: A Foreign Key (FK) is an attribute (or set of attributes) in one relation that refers to a candidate key (typically the Primary Key) in another, or the same, relation.
+    * **Subset Dependency**: Every non-null value in the foreign key must explicitly exist in the referenced key of the parent relation.
+    * **Domain Matching**: The foreign key attributes must possess the exact same data type, length, and domain as the referenced primary key.
+    * **Self-Referencing Keys**: A foreign key can reference the primary key of its *own* relation (e.g., an ``Employee_ID`` primary key referenced by a ``Manager_ID`` foreign key in the same table) to represent hierarchical data.
+    * **Nullability**: Unlike Primary Keys, Foreign Keys *can* accept ``NULL`` values unless explicitly constrained. A ``NULL`` indicates the absence of a relationship for that specific tuple.
+
+    Referential Actions (Update and Delete Rules)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    When a referenced Primary Key is updated or deleted, the Database Management System (DBMS) enforces referential integrity using specific policies:
+
+    * **RESTRICT (or NO ACTION)**: The DBMS rejects the update or deletion of the parent tuple if any matching foreign key records exist in the child relation. This is the safest default.
+    * **CASCADE**:
+        * *On Delete*: Deleting a parent tuple automatically deletes all associated child tuples.
+        * *On Update*: Changing a parent's primary key value automatically updates the foreign key value in all associated child tuples.
+    * **SET NULL**: Deleting or updating the parent tuple leaves the child tuples intact but sets their foreign key attributes to ``NULL`` (requires the FK to be nullable).
+    * **SET DEFAULT**: Deleting or updating the parent tuple sets the child's foreign key attributes to their predefined default values.
+
+    Common Mistakes and Anti-Patterns
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Application-Level Enforcement**: Defining relationships only in application code while omitting actual Foreign Key constraints in the database schema. This inevitably leads to orphaned records and data anomalies.
+    * **Overusing CASCADE DELETE**: Applying ``CASCADE`` indiscriminately can result in catastrophic, unintended mass data deletion if a core entity is removed. Use ``RESTRICT`` unless cascading is a strict business requirement.
+    * **Mismatched Data Types**: Defining an ``INT`` primary key but a ``BIGINT`` foreign key. Even if the DBMS allows it, this disables efficient index usage and severely degrades ``JOIN`` performance.
+    * **Referencing Non-Unique Columns**: Attempting to point a foreign key to a column that is not guaranteed to be unique (i.e., not a Primary Key or explicitly marked with a ``UNIQUE`` constraint).
+    * **Cyclic Dependencies**: Designing schemas where Table A requires a foreign key from Table B, and Table B requires a foreign key from Table A. This creates deadlocks during row insertion and deletion.
+    ```
+
+    ### Teaching Note for the Slides:
+    When presenting the **"Referential Actions"** slide to your Bachelor students, it is highly effective to emphasize that `RESTRICT` should be their default mindset as junior engineers. They should only reach for `CASCADE DELETE` when the child record absolutely cannot exist logically without the parent (e.g., deleting an `Invoice` should cascade to `Invoice_Line_Items`, but deleting a `Customer` should usually *not* cascade to their `Invoices`).
+
+    Let me know if you need to tackle Normalization (1NF, 2NF, 3NF, BCNF) or ER-to-Relational Mapping next
+
+    Grok Answer 2026/04/14 11:37:08
+    ```````````````````````````````
+    A **foreign key** is an attribute (or set of attributes) in one relation (child table) that references the **primary key** (or a candidate key) of another relation (parent table).
+    It enforces **referential integrity** — ensuring that every value in the foreign key exists in the referenced primary key.
+
+    .. admonition:: Core Purpose
+       :class: note
+
+       Foreign keys prevent “orphan” records and maintain consistent relationships between tables.
+
+    Guidelines for Optimal Definition
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Must Reference a Candidate Key**: A foreign key must always reference a primary key or a candidate key that has a ``UNIQUE`` constraint in the parent table.
+    * **Data-Type Compatibility**: The foreign-key column(s) must have exactly the same data type, length, and collation as the referenced primary-key column(s).
+    * **Allow NULL (by default)**: Foreign keys may contain ``NULL`` values unless explicitly declared ``NOT NULL`` (optional relationship).
+    * **Minimality**: Prefer single-attribute foreign keys when possible; composite foreign keys should only be used when the business rule genuinely requires multiple columns.
+    * **Naming Convention**: Use clear, consistent names (e.g., ``fk_student_course_student_id`` or ``student_id``) to improve readability and maintenance.
+    * **Index Recommendation**: Always create an index on foreign-key columns to speed up joins, lookups, and referential checks.
+
+    Referential Actions (ON DELETE / ON UPDATE)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    When a primary-key value in the parent table is deleted or updated, the database must decide what happens to matching foreign-key values. Common options:
+
+    * ``RESTRICT`` (or ``NO ACTION``) — Prevent the delete/update if any child rows exist (default in most DBMS).
+    * ``CASCADE`` — Automatically delete or update the child rows.
+    * ``SET NULL`` — Set the foreign-key value to ``NULL`` in child rows.
+    * ``SET DEFAULT`` — Set the foreign-key value to the column’s default value.
+
+    .. code-block:: sql
+
+       FOREIGN KEY (student_id)
+           REFERENCES Student(student_id)
+           ON DELETE RESTRICT      -- safest for most academic examples
+           ON UPDATE CASCADE
+
+    Common Mistakes to Avoid
+    ~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Forgetting to create an index on the foreign-key column → slow joins and poor performance.
+    * Using a foreign key that references a non-unique column → violates referential integrity rules.
+    * Circular foreign-key references (Table A → Table B → Table A) without careful design → can cause deadlock or insertion problems.
+    * Mismatched data types between foreign key and primary key → prevents creation of the constraint.
+    * Overusing ``CASCADE`` without understanding consequences → accidental mass deletion of data.
+    * Ignoring business rules when choosing actions → e.g., using ``SET NULL`` on a required relationship.
+    * Creating foreign keys to surrogate keys only and forgetting ``UNIQUE`` constraints on natural keys → loses business integrity.
+
+    Best Practices for Bachelor-Level Design
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Prefer **natural or meaningful** foreign keys when they are stable (e.g., ``CourseCode`` instead of only a surrogate ID).
+    * When using surrogate primary keys, still keep the foreign key referencing the surrogate for performance.
+    * Document every foreign key with a comment explaining the business relationship.
+    * Test referential actions thoroughly during schema design (use small test data).
+
+    .. list-table::
+       :header-rows: 1
+       :widths: 30 35 35
+
+       * - Situation
+         - Recommended Foreign-Key Approach
+         - Reason
+       * - One-to-many relationship (e.g., Student → Course)
+         - Single-column FK + ``RESTRICT``
+         - Simple and safe
+       * - Weak entity (e.g., OrderLine)
+         - Composite FK (OrderID + LineNo)
+         - Reflects full identifying relationship
+       * - Optional relationship
+         - FK declared ``NULL`` allowed
+         - Allows “no parent” records
+       * - High-performance joins needed
+         - Add index on FK column
+         - Essential for query speed
+
+    Summary Rule (for slides)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    **“A foreign key is only as good as the integrity it enforces and the performance it delivers.”**
+    Always define it with the correct reference, appropriate action, and supporting index.
+
+
 
 
 ----
@@ -2892,8 +3188,10 @@ Simple Library
 
 Library with Fine
 =======================================
-* book(bn_, title, category, author, fpd, isbn)
-* member(mn_, name, category, isbn)
+* category(categoryName_, description, related_category)
+* book(isbn_, title, categoryName, author)
+* books(bn_, isbn, fpd)
+* member(mn_, name, categoryName, isbn)
 * borrow(bn_, mn_, rdt, ret, nd)
 
 #. B(bn_, title, ctg, fpd, author, isbn)
@@ -2902,15 +3200,18 @@ Library with Fine
 
 .. class:: rtl
 
+#. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
 #. fpd جریمه دیر آوردن کتاب به ازای روز
 #. nd جمع روزهای دیرکرد به جز آخرین بار برگردانده نشده
 #. از هر کتابی(isbn) چند نسخه(bn) در کتابخانه است
 
-
-* book(bn_, title, category, author, fpd, isbn)
-* member(mn_, name, category, isbn, debt)
+* category(categoryName_, description, related_category)
+* book(isbn_, title, categoryName, author)
+* books(bn_, isbn, fpd)
+* member(mn_, name, categoryName, isbn, debt)
 * borrow(bn_, mn_, rdt, ret)
 
+.. class:: rtl
 
 #. debt مجموع بدهکاری این عضو تا کنون
   
@@ -2928,16 +3229,17 @@ Library with Fine
 
 Library with Return dates and limited days 
 ===========================================
-* book(bn_, title, category, author, fpd, , isbn, nday)
-* member(mn_, name, category, isbn, sump)
+* category(categoryName_, description, related_category)
+* book(isbn_, title, categoryName, author)
+* books(bn_, isbn, fpd, nday)
+* member(mn_, name, categoryName, isbn, debt)
 * borrow(bn_, mn_, rdt_, ardt)
 
 .. class:: rtl
 
-#. book.nday تعداد روزی که می‌تواند کتاب به امانت برده شود
-#. nd == 0 نمی‌توان کتاب را بیرون برد
-#. sump جمع پرداخت‌های عضو-
-#. rdt تاریخی که باید کتاب در این بار امانت برگردانده می‌شد.
+#. books.nday تعداد روزی که می‌تواند کتاب به امانت برده شود
+#. nday == 0 نمی‌توان کتاب را بیرون برد
+#. rdt تاریخی که باید کتاب در این بار امانت برگردانده شود.
 #. ardt تاریخی که عضو واقعا کتاب را برگردانده است
 
 
@@ -4208,6 +4510,8 @@ END
 .. _bn:
 .. _mn:
 .. _rdt:
+.. _categoryname:
+.. _isbn:
 .. _SSN:
 .. _DN:
 .. _DeptName:

@@ -1311,7 +1311,7 @@ Updated Company Database Schema
    }
 
 Simple Library(I) 2026/04/15 23:30:52
-`````````````````````````````````````
+```````````````````````````````````````
 Thanks, please  make similar dot (graphviz) for a simple library with following tables
 
 * book(bn_, title, category, author)
@@ -1409,6 +1409,123 @@ As you are presenting this to bachelor students, this specific schema provides a
 In the requirement, `member.category` references `book.category`. You can point out to your students that in standard relational database design, **a Foreign Key must reference a column that is guaranteed to be unique** (almost always the Primary Key, or a column with a `UNIQUE` constraint).
 
 Because `book.category` will have duplicate values (many books can be "Science Fiction"), most Database Management Systems (like PostgreSQL or MySQL) will actually throw an error if you try to create this exact Foreign Key constraint! To fix it in a real-world scenario, you would normally extract `category` into its own table (e.g., `Category(CategoryName_PK)`), and have both `book` and `member` reference that new table. It is a great "spot the error" exercise for a database class!
+
+Fix problem 2026/04/15 23:56:21
+``````````````````````````````````
+Thanks, it is a good point. Please meke one for the following tables as you mentioned
+
+* book(bn_, title, author)
+* member(mn_, name, bn)
+* borrow(bn_, mn_, rdt, ret)
+
+Gemini Answer 2026/04/16 00:11:33
+
+This is a great, clean revision of the schema! Removing the un-normalized `category` field makes it a perfect, textbook example of a relational database structure.
+
+Here is the updated reStructuredText snippet with the Graphviz DOT code for this normalized library schema.
+
+Normalized Library Database Schema
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph NormalizedLibrary {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: member
+       member [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>member</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="bn" bgcolor="#ffffff">bn</td></tr>
+           </table>
+       >];
+
+       // Table: borrow
+       borrow [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>borrow</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="rdt" bgcolor="#ffffff">rdt</td></tr>
+               <tr><td port="ret" bgcolor="#ffffff">ret</td></tr>
+           </table>
+       >];
+
+       // Table: book
+       book [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>book</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="title" bgcolor="#ffffff">title</td></tr>
+               <tr><td port="author" bgcolor="#ffffff">author</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Member references their favorite book
+       // (Exits East side of member, enters West side of book)
+       member:bn:e -> book:bn:w;
+
+       // Borrow references both the book and the member
+       borrow:bn:e -> book:bn:w;
+       borrow:mn:w -> member:mn:e;
+   }
+
+
+### 💡 Teaching Note for Your Slides:
+This schema perfectly highlights the difference between a **One-to-Many (1:N)** relationship and a **Many-to-Many (M:N)** relationship:
+
+* **1:N Relationship:** `member` to `book` (via `member.bn`). A member has one "favorite" book, but a book can be the favorite of many members. The foreign key sits directly inside the `member` table.
+* **M:N Relationship:** `member` to `book` (via `borrow`). A member can borrow many books, and a book can be borrowed by many members. This *requires* the associative/junction table (`borrow`) to resolve the relationship, which holds foreign keys pointing back to both parent tables.
+
+Book and category and fine
+``````````````````````````
+
+Thanks, please  make similar dot (graphviz) for a simple library with following tables
+
+* book(bn_, title, categoryName, author, fpd, isbn)
+* member(mn_, name, categoryName, isbn)
+* borrow(bn_, mn_, rdt, ret, nd)
+* category(categoryName_, description, related_category)
+
+#. fields of book table
+
+    #. "bn" is book number and the primary key of book table
+    #. "title" is the title of book
+    #. "categoryName" in book is the category of a book, let assume every book has only one category or it is the most important category of the book. It is foreign key refrences catagory.categoryName
+    #. "author" is the author of book
+    #. "isbn" is the isbn of the book, it could be repeated because the library may have more than one copy of the same book
+    #. "fpd" is fine per day. It means if a member returns this book lateer than rdt, then he or she will be penalized based on the times of fpd and number of delayed days
+
+#. fields of member table
+
+    #. "mn" member number and primary key
+    #. "name" of the member
+    #. "categoryName" is the category that is member likes most. It is foreign key refrences to category.categoryName
+    #. "isbn" is the book number that member like most. It is foreign key refrences to bn in book table.
+
+#. fields of borrow table
+
+    #. "bn" is foreign key refrences to book table
+    #. "mn" is foreign key refrences to member table
+    #. ("bn", "mn") is the primary key of borrow table
+    #. "rdt" is return date of the book for the last time that this member borrowed this bookdow
+    #. "ret" is book returned (true) or not (false)
+
+
+
+Getting better DOT 2026/04/16 00:14:47
+``````````````````````````````````````
+Thanks, The edge between borrow.mn to member.mn is not straight it has unnecessary curve. It could be better that this edge is more look like the edge between borrow.bn and book.bn.
+
 
 foreign key
 ^^^^^^^^^^^^^^^^
