@@ -2905,7 +2905,15 @@ Library with Fine
 #. fpd جریمه دیر آوردن کتاب به ازای روز
 #. nd جمع روزهای دیرکرد به جز آخرین بار برگردانده نشده
 #. از هر کتابی(isbn) چند نسخه(bn) در کتابخانه است
-    
+
+
+* book(bn_, title, category, author, fpd, isbn)
+* member(mn_, name, category, isbn, debt)
+* borrow(bn_, mn_, rdt, ret)
+
+
+#. debt مجموع بدهکاری این عضو تا کنون
+  
 .. :
 
 

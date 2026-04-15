@@ -1310,6 +1310,106 @@ Updated Company Database Schema
        hourlog:pn -> project:pn;
    }
 
+Simple Library(I) 2026/04/15 23:30:52
+`````````````````````````````````````
+Thanks, please  make similar dot (graphviz) for a simple library with following tables
+
+* book(bn_, title, category, author)
+* member(mn_, name, category, bn)
+* borrow(bn_, mn_, rdt, ret)
+
+#. fields of book table
+
+    #. "bn" is book number and the primary key of book table
+    #. "title" is the title of book
+    #. "category" in book is the category of a book, let assume every book has only one category or it is the most important category of the book
+    #. "author" is the author of book
+
+#. fields of member table
+
+    #. "mn" member number and primary key
+    #. "name" of the member
+    #. "category" is the category that is member likes most. It is foreign key refrences to category in table book
+    #. "bn" is the book number that member like most. It is foreign key refrences to bn in book table.
+
+#. fields of borrow table
+
+    #. "bn" is foreign key refrences to book table
+    #. "mn" is foreign key refrences to member table
+    #. ("bn", "mn") is the primary key of borrow table
+    #. "rdt" is return date of the book for the last time that this member borrowed this bookdow
+    #. "ret" is book returned (true) or not (false)
+
+Gemini Answer 2026/04/15 23:44:05
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here is the reStructuredText snippet containing the Graphviz DOT code for the Library database schema.
+
+I have arranged the edges so that the data flows cleanly from left to right, with `member` and `borrow` appropriately pointing to `book` and `member`.
+
+Library Database Schema
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph Library {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: member
+       member [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>member</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="category" bgcolor="#ffffff">category</td></tr>
+               <tr><td port="bn" bgcolor="#ffffff">bn</td></tr>
+           </table>
+       >];
+
+       // Table: borrow
+       borrow [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>borrow</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="rdt" bgcolor="#ffffff">rdt</td></tr>
+               <tr><td port="ret" bgcolor="#ffffff">ret</td></tr>
+           </table>
+       >];
+
+       // Table: book
+       book [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>book</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="title" bgcolor="#ffffff">title</td></tr>
+               <tr><td port="category" bgcolor="#ffffff">category</td></tr>
+               <tr><td port="author" bgcolor="#ffffff">author</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Member references
+       member:category:e -> book:category:w;
+       member:bn:e -> book:bn:w;
+
+       // Borrow references
+       borrow:bn:e -> book:bn:w;
+       borrow:mn:w -> member:mn:e;
+   }
+
+### 💡 Teaching Note for Your Slides:
+As you are presenting this to bachelor students, this specific schema provides an excellent opportunity to discuss **Normalization and Foreign Key constraints**:
+
+In the requirement, `member.category` references `book.category`. You can point out to your students that in standard relational database design, **a Foreign Key must reference a column that is guaranteed to be unique** (almost always the Primary Key, or a column with a `UNIQUE` constraint).
+
+Because `book.category` will have duplicate values (many books can be "Science Fiction"), most Database Management Systems (like PostgreSQL or MySQL) will actually throw an error if you try to create this exact Foreign Key constraint! To fix it in a real-world scenario, you would normally extract `category` into its own table (e.g., `Category(CategoryName_PK)`), and have both `book` and `member` reference that new table. It is a great "spot the error" exercise for a database class!
+
 foreign key
 ^^^^^^^^^^^^^^^^
 Thanks, please suggest similar notes and rules about foreign key in database course.
