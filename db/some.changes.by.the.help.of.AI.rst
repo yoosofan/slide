@@ -939,6 +939,78 @@ SPJ Database
         SPJ:jn -> J:jn;
     }
 
+Add some fields to the library
+``````````````````````````````
+Thanks, I want to add some new fields to the library database Please create a similar DOT syntax for Graphviz
+
+* book(bn_, title, author, ofpd)
+* member(mn_, name, bn, fines)
+* borrow(bn_, mn_, ddt_, dtr)
+
+#. "ofpd" overdue fine per day
+#. "fines" Outstanding Balance or debt of a member
+#. "ddt" due date
+#. "dtr" date returned
+
+Gemini Answer
+
+Enhanced Library Database Schema
+--------------------------------
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph EnhancedLibrary {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: member
+       member [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>member</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="bn" bgcolor="#ffffff">bn</td></tr>
+               <tr><td port="fines" bgcolor="#ffffff">fines</td></tr>
+           </table>
+       >];
+
+       // Table: borrow
+       borrow [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>borrow</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="ddt" bgcolor="#ffffff"><b>ddt</b></td></tr>
+               <tr><td port="dtr" bgcolor="#ffffff">dtr</td></tr>
+           </table>
+       >];
+
+       // Table: book
+       book [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>book</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="title" bgcolor="#ffffff">title</td></tr>
+               <tr><td port="author" bgcolor="#ffffff">author</td></tr>
+               <tr><td port="ofpd" bgcolor="#ffffff">ofpd</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Member references their favorite book
+       member:bn:e -> book:bn:w;
+
+       // Borrow references both the book and the member
+       borrow:bn:e -> book:bn:w;
+       borrow:mn:w -> member:mn:e;
+   }
+
 SPJ Database
 ------------
 

@@ -2328,7 +2328,7 @@ Candidate Keys کلیدهای نامزد
 
 :class: t2c
 
-Primary key(PK) 
+Primary key(PK)
 ===============
 .. class:: substep
 
@@ -2413,10 +2413,10 @@ Surrogate Keys vs. Natural Keys
 .. note:
 
 
-    Table structure and its fields may change a lot in future 
-    because of external forces that changes the fields and table structure 
-    
-    
+    Table structure and its fields may change a lot in future
+    because of external forces that changes the fields and table structure
+
+
     * **Avoid Arbitrary Fields**: Do not introduce surrogate keys (e.g., UUIDs, Auto-increments) if a stable, simple natural key exists.
     * **Criteria for Surrogate Keys**: Consider adding an artificial identifier only if:
         * No natural candidate keys exist.
@@ -2458,7 +2458,7 @@ SP
 .. container::
 
     **SP**
-     
+
     * SP(sn_, pn_, qty)
     * sn from s
     * pn from p
@@ -2513,7 +2513,7 @@ SP
        sp:sn -> s:sn [label=" references", arrowtail=none, arrowhead=normal];
        sp:pn -> p:pn [label=" references", arrowtail=none, arrowhead=normal];
    }
-  
+
 
 ----
 
@@ -2690,7 +2690,7 @@ SPJ
         SPJ:pn -> P:pn;
         SPJ:jn -> J:jn;
     }
-    
+
 
 ----
 
@@ -2698,6 +2698,78 @@ SPJ
 
 Simple Library
 ==============
+.. container::
+
+    * book(bn_, title, author, ofpd)
+    * member(mn_, name, bn, fines)
+    * borrow(bn_, mn_, ddt_, dtr)
+
+    #. "ofpd" overdue fine per day
+    #. "fines" Outstanding Balance or debt of a member
+    #. "ddt" due date
+    #. "dtr" date returned
+
+
+.. yographviz::
+   :class: db-schema-graph
+
+   digraph EnhancedLibrary {
+       // Layout direction
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [color="#555555", arrowtail=none, arrowhead=normal];
+
+       // Table: member
+       member [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#f3e5f5"><b>member</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="name" bgcolor="#ffffff">name</td></tr>
+               <tr><td port="bn" bgcolor="#ffffff">bn</td></tr>
+               <tr><td port="fines" bgcolor="#ffffff">fines</td></tr>
+           </table>
+       >];
+
+       // Table: borrow
+       borrow [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4"><b>borrow</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="mn" bgcolor="#ffffff"><b>mn</b></td></tr>
+               <tr><td port="ddt" bgcolor="#ffffff"><b>ddt</b></td></tr>
+               <tr><td port="dtr" bgcolor="#ffffff">dtr</td></tr>
+           </table>
+       >];
+
+       // Table: book
+       book [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa"><b>book</b></td></tr>
+               <tr><td port="bn" bgcolor="#ffffff"><b>bn</b></td></tr>
+               <tr><td port="title" bgcolor="#ffffff">title</td></tr>
+               <tr><td port="author" bgcolor="#ffffff">author</td></tr>
+               <tr><td port="ofpd" bgcolor="#ffffff">ofpd</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+
+       // Member references their favorite book
+       member:bn:e -> book:bn:w;
+
+       // Borrow references both the book and the member
+       borrow:bn:e -> book:bn:w;
+       borrow:mn:w -> member:mn:e;
+   }
+
+
+
+
+----
+
+:class: n2c
 
 .. yographviz::
    :class: db-schema-graph
@@ -2705,7 +2777,7 @@ Simple Library
    digraph NormalizedLibrary {
        // Layout direction
        rankdir=LR;
-       
+
        // Global node and edge settings
        node [shape=none, fontname="Helvetica", fontsize=12];
        edge [color="#555555", arrowtail=none, arrowhead=normal];
@@ -2742,34 +2814,45 @@ Simple Library
        >];
 
        // Foreign Key Relationships
-       
+
        // Member references their favorite book
        // (Exits East side of member, enters West side of book)
        member:bn:e -> book:bn:w;
-       
+
        // Borrow references both the book and the member
        borrow:bn:e -> book:bn:w;
        borrow:mn:e -> member:mn:w;
    }
 
-* book(bn_, title, author)
-* member(mn_, name, bn)
-* borrow(bn_, mn_, rdt, ret)
+* book(bn_, title, author, ofpd)
+* member(mn_, name, bn, fines)
+* borrow(bn_, mn_, ddt_, dtr)
 
 .. class:: rtl
 
 #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
 #. rdt تاریخ برگشت کتاب در آخرین امانت
-#. ret کتاب برای آخرین امانت برگردانده شده یا خیر 
 
 .. :
 
+    Thanks, I want to add some new fields to the library database.
+
+    * book(bn_, title, author, ofpd)
+    * member(mn_, name, bn, fines)
+    * borrow(bn_, mn_, ddt_, dtr)
+
+    "ofpd" overdue fine per day
+    "fines" Outstanding Balance or debt of a member
+    "ddt" due date
+    "dtr" date returned
 
     #. اگر از هر کتابی فقط یک نسخهٔ آن در کتابخانه باشد، آن‌گاه bn می‌تواند همان isbn باشد.
     #. book.category موضوع کتاب با این فرض که هر کتاب فقط یک موضوع دارد
     #. book. fpd جریمه دیر آوردن کتاب به ازای روز
     #. member.category موضوعی که عضو بیشتر از همه به آن علاقه‌مند است
     #. member.bn شمارهٔ کتابی که عضو بیشتر از همه به آن کتاب علاقه‌مند است
+    #. ret کتاب برای آخرین امانت برگردانده شده یا خیر
+
 
 
 ----
@@ -2785,16 +2868,16 @@ Company Database Schema
 * Employee(SSN_, name, salary, MgrSSN)
 * Project(ProjName_, location )
 * HourLog(SSN_, ProjName_, hours)
-* MgrSSN is foreign Key to SSN of its own table 
+* MgrSSN is foreign Key to SSN of its own table
 * If the ProjName can be repeated?
- 
+
 .. yographviz::
    :class: substep db-schema-graph
 
    digraph Company {
        // Layout direction
        rankdir=LR;
-       
+
        // Global node and edge settings
        node [shape=none, fontname="Helvetica", fontsize=12];
        edge [color="#555555", arrowtail=none, arrowhead=normal];
@@ -2832,12 +2915,12 @@ Company Database Schema
        // Foreign Key Relationships
        // Using compass points (:e for East) loops the arrow cleanly outside the right edge
        employee:mgrssn:e -> employee:ssn:e;
-       
+
        // Foreign keys from HourLog to Employee and Project
        hourlog:ssn -> employee:ssn;
        hourlog:projname -> project:projname;
    }
-   
+
 ----
 
 :class: t2c
@@ -2853,7 +2936,7 @@ Company, Project Name duplication
 * Employee(SSN_, name, salary, MgrSSN)
 * Project(PN_, ProjName, location )
 * HourLog(SSN_, PN_, hours)
-* If the company gets larger and needs departments? 
+* If the company gets larger and needs departments?
 
 ----
 
@@ -2868,14 +2951,14 @@ Company with Departments
 #. Project(PN_, location, ProjName)
 #. HourLog(SSN_, PN_, hours)
 
- 
+
 .. yographviz::
    :class: substep db-schema-graph
 
    digraph UpdatedCompany {// Thanks to Gemeni AI from Google
        // Layout direction
        rankdir=LR;
-       
+
        // Global node and edge settings
        node [shape=none, fontname="Helvetica", fontsize=12];
        edge [color="#555555", arrowtail=none, arrowhead=normal];
@@ -2921,13 +3004,13 @@ Company with Departments
        >];
 
        // Foreign Key Relationships
-       
+
        // Employee belongs to a Department (Exits right side of Employee, enters left side of Dept)
        employee:deptname:e -> department:deptname:w;
-       
+
        // Department is managed by an Employee (Exits left side of Dept, enters right side of Employee)
        department:mgrssn:w -> employee:ssn:e;
-       
+
        // Foreign keys from HourLog to Employee and Project
        hourlog:ssn -> employee:ssn;
        hourlog:pn -> project:pn;
@@ -2953,9 +3036,9 @@ Project/Deparment/Employee
 
 .. class:: rtl substep
 
-* یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند. 
-* هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند. 
-* هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است. 
+* یک کارمند(e) دارای شماره کارمندی یکتا en و نام و میزان حقوق(sly) و شمارهٔ بخش(dn) است. هر کارمند تنها در یک بخش کار می‌کند.
+* هر بخش (d) دارای شمارهٔ بخش یکتا dn، نام بخش و شمارهٔ en مدیر آن بخش است. هر بخش تنها یک مدیر دارد که در همان بخش کار می‌کند.
+* هر پروژه(j) دارای شمارهٔ یکتای پروژه jn، نام پروژه(jname) و مکان انجام پروژه(loc) است.
 * در جدول h مشخص می‌شود که یک کارمند(en) در یک پروژه(jn) چه تعداد ساعت hrs کار کرده است.
 
 
@@ -2970,7 +3053,7 @@ Foreign Key(FK)
     **Core Principles of Referential Integrity**
 
     .. class:: substep
-    
+
     * **Definition**
     * **Subset Dependency**
     * **Domain Matching**
@@ -2990,7 +3073,7 @@ Foreign Key(FK)
     **Common Mistakes and Anti-Patterns**
 
     .. class:: substep
-    
+
     * **Application-Level Enforcement**
     * **Mismatched Data Types**
     * **Referencing Non-Unique Columns**
@@ -3214,7 +3297,7 @@ Library with Fine
 .. class:: rtl
 
 #. debt مجموع بدهکاری این عضو تا کنون
-  
+
 .. :
 
 
@@ -3227,7 +3310,7 @@ Library with Fine
 
 ----
 
-Library with Return dates and limited days 
+Library with Return dates and limited days
 ===========================================
 * category(categoryName_, description, related_category)
 * book(isbn_, title, categoryName, author)
