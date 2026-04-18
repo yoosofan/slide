@@ -5,14 +5,14 @@ font-family: Nazli, Libre Baskerville;  background-color: white  #EBEEEE #E8E0F1
 p {font-weight: normal; margin-bottom: 0.3em; margin-top: 0.3em;}
 ul, ol, pre.code{text-align: left;}
 pre.code{
- font-family: monospace; 
- font-weight:normal; 
- font-size:x-large;
- padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em; 
- padding-right: 0.2em; border-style: solid; 
- border-left-width: 0.5em; 
- border-top-width: thin; 
- border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;}
+  font-family: monospace;
+  font-weight:normal;
+  font-size:x-large;
+  padding-top: 0.1em; padding-bottom: 0.1em; padding-left: 0.2em;
+  padding-right: 0.2em; border-style: solid;
+  border-left-width: 0.5em;
+  border-top-width: thin;
+  border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;}
 pre.code > .ln {background-color: #DFE5F1;}
 .rtl { direction: rtl; text-align: justify; font-family: Nazli; font-size:large;/*font-weight: bold;*/}
 .ltr { direction: ltr;  text-align: justify;}
@@ -41,7 +41,8 @@ ol.trace-code li::before {
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
-  font-family: Nazli;
+  /*font-family: Nazli;*/
+
 }
 .rtl-h2{
   direction: rtl;
@@ -110,11 +111,19 @@ div.t2c{
   align-items: center ;
   gap: 5px ;
 }
-div.t2c > h1, div.t2c > .rtl-h1{
+div.t2c > :first-child{
   grid-column: 1 / 3;
   background-color: #E6F4FA;
 }
 
+div.n2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
 div.yoo-grid-auto-flow-column{
   display: grid;
   gap: 2rem;
@@ -133,7 +142,7 @@ div.scrollbar-box800x500px-overflow{
     background-color: #BFBFBF;
 }
 
-/* 
+/*
 https://docs.yugabyte.com
 */
 

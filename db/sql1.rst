@@ -27,6 +27,8 @@ University of Kashan
 
 ----
 
+:class: t2c
+
 create table
 ================
 .. code:: sql
@@ -38,16 +40,17 @@ create table
      city    char(20)
   );
 
+.. container::
 
-DSL(Data Sub Language)
--------------------------
-SQL (Structured Query Language)
+    **DSL(Data Sub Language)**
 
-* DDL: Data Definition Language
-* DML: Data Manipluation Language
-* DCL: Data Control Language
+    SQL (Structured Query Language)
 
-DDL: create table
+    * DDL: Data Definition Language
+    * DML: Data Manipluation Language
+    * DCL: Data Control Language
+
+    DDL: create table
 
 ----
 
@@ -88,6 +91,10 @@ SQLite
 
 ----
 
+:class: t2c
+
+SP
+==
 .. code:: sql
 
   create table s (
@@ -111,6 +118,59 @@ SQLite
      qty   int default(0),
      primary key (sn, pn)
   );
+
+
+.. yographviz::
+
+   digraph S_P_SP { // Thanks to Gemini from Google
+       // Layout direction: Left to Right
+       rankdir=LR;
+
+       // Global node and edge settings
+       node [shape=none, fontname="Helvetica", fontsize=12];
+       edge [fontname="Helvetica", fontsize=10, color="#555555"];
+
+       // Table: Suppliers (s)
+       s [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e0f7fa" colspan="2"><b>s (Suppliers)</b></td></tr>
+               <tr><td port="sn" bgcolor="#ffffff"><b>sn (PK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="sname" bgcolor="#ffffff">sname</td><td bgcolor="#ffffff">char(30)</td></tr>
+               <tr><td port="status" bgcolor="#ffffff">status</td><td bgcolor="#ffffff">int</td></tr>
+               <tr><td port="city" bgcolor="#ffffff">city</td><td bgcolor="#ffffff">char(20)</td></tr>
+           </table>
+       >];
+
+       // Table: Shipments (sp)
+       // Placed in the middle visually
+       sp [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#fff9c4" colspan="2"><b>sp (Shipments)</b></td></tr>
+               <tr><td port="sn" bgcolor="#ffffff"><b>sn (PK, FK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>pn (PK, FK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="qty" bgcolor="#ffffff">qty</td><td bgcolor="#ffffff">int</td></tr>
+           </table>
+       >];
+
+       // Table: Parts (p)
+       p [label=<
+           <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+               <tr><td bgcolor="#e8f5e9" colspan="2"><b>p (Parts)</b></td></tr>
+               <tr><td port="pn" bgcolor="#ffffff"><b>pn (PK)</b></td><td bgcolor="#ffffff">char(10)</td></tr>
+               <tr><td port="pname" bgcolor="#ffffff">pname</td><td bgcolor="#ffffff">char(30)</td></tr>
+               <tr><td port="color" bgcolor="#ffffff">color</td><td bgcolor="#ffffff">char(20)</td></tr>
+               <tr><td port="weight" bgcolor="#ffffff">weight</td><td bgcolor="#ffffff">numeric(9, 2)</td></tr>
+               <tr><td port="city" bgcolor="#ffffff">city</td><td bgcolor="#ffffff">char(20)</td></tr>
+           </table>
+       >];
+
+       // Foreign Key Relationships
+       // The syntax node:port -> node:port connects the specific table rows
+
+       sp:sn -> s:sn [label=" references", arrowtail=none, arrowhead=normal];
+       sp:pn -> p:pn [label=" references", arrowtail=none, arrowhead=normal];
+   }
+
 
 ----
 
@@ -1671,7 +1731,7 @@ escape
 :class: t2c
 
 Record Comparison
-==================================
+==================
 .. class:: rtl-h1
 
   نام قطعاتی را بیاید که عرضه کننده‌ای در شهر آن قطعه‌ها آنها را عرضه کرده باشد
@@ -2938,7 +2998,11 @@ NULL
      city    char(20)
     );
 
-.. ::
+.. :
+
+    null
+
+    “null”
 
     https://www.ibm.com/support/knowledgecenter/en/SSEPEK_11.0.0/intro/src/tpc/db2z_joindatafromtables.html
     https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/intro/src/art/bkntjoin.gif

@@ -955,7 +955,6 @@ Thanks, I want to add some new fields to the library database Please create a si
 Gemini Answer
 
 Enhanced Library Database Schema
---------------------------------
 
 .. yographviz::
    :class: db-schema-graph
@@ -1010,6 +1009,122 @@ Enhanced Library Database Schema
        borrow:bn:e -> book:bn:w;
        borrow:mn:w -> member:mn:e;
    }
+
+Use NULL or new field
+`````````````````````
+
+Is it better to use null values of "dtr" in "borrow" to show that the book has not returned? Or should I add a boolean field for this purpose
+
+Gemini Answer 2026/04/17 00:06:21
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is a fantastic question and a classic discussion point in database design!
+
+**The short answer:** It is absolutely better to use **`NULL` values in the `dtr` (Date Returned) field** to indicate the book has not been returned. You should **not** add a separate boolean field.
+
+Here is why, and I have written it as a slide note so you can share this exact reasoning with your students:
+
+```rst
+Handling State: Nulls vs. Booleans
+
+
+When designing a schema to track whether an event has completed (like returning a borrowed book), it is a common beginner mistake to use a boolean flag alongside a date field.
+
+**The Best Practice: Use a Nullable Date Field**
+* In the ``borrow`` table, if a book has not yet been returned, the ``dtr`` (Date Returned) field should simply be ``NULL``.
+* To find all currently borrowed (overdue) books, you write: ``SELECT * FROM borrow WHERE dtr IS NULL;``
+
+**Why avoid a separate boolean field (e.g., ``is_returned``)?**
+
+1. **Redundancy & Update Anomalies:** A boolean field introduces redundant data. If you have both ``dtr`` and ``is_returned``, you risk contradictory states. What happens if a software bug sets ``is_returned = TRUE`` but leaves ``dtr = NULL``? The database is now in an inconsistent, impossible state.
+2. **Normalization:** The boolean value is functionally dependent on the date field (If Date is NULL, then False; if Date is NOT NULL, then True). Storing calculated or derived states explicitly in the table violates normalization principles.
+3. **Storage Efficiency:** Adding a boolean column requires extra bytes per row for information that the database already intrinsically knows from the date column.
+```
+
+### 💡 Teaching Note for Your Slides:
+This is a great moment in class to emphasize that **in SQL, `NULL` does not just mean "empty"—it often means "unknown" or "not yet applicable."** Because a book cannot have a return date before it is actually returned, `NULL` is the mathematically and logically correct state for a book currently in a member's possession!
+
+DDL for library 2026/04/18 01:25:27
+```````````````````````````````````
+Thanks, please create SQL instructions for building library database and insert data into tables
+
+Gemeni Answer
+``````````````
+Here are the complete SQL instructions to build the Enhanced Library Database and populate it with sample data.
+
+I have written this using standard, universally compatible SQL (which works across PostgreSQL, MySQL, and SQLite). You can copy and paste this directly into a new section in your slides.
+
+Library Database SQL Implementation
+
+Building the Tables (DDL)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Notice the order of creation: we must create the ``book`` table first because the ``member`` table relies on it. Then, we create ``borrow`` last, as it relies on both ``book`` and ``member``.
+
+.. code:: sql
+
+    -- 1. Create the Book table
+    CREATE TABLE book (
+        bn INT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        author VARCHAR(255) NOT NULL,
+        ofpd DECIMAL(5, 2) NOT NULL DEFAULT 0.50
+        -- Overdue fine per day, defaulting to $0.50
+    );
+
+    -- 2. Create the Member table
+    CREATE TABLE member (
+        mn INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        bn INT, -- Favorite book
+        fines DECIMAL(10, 2) DEFAULT 0.00,
+        FOREIGN KEY (bn) REFERENCES book(bn) ON DELETE SET NULL
+        -- If the book is removed from the library, the member's favorite book becomes NULL
+    );
+
+    -- 3. Create the Borrow table (The associative entity)
+    CREATE TABLE borrow (
+        bn INT,
+        mn INT,
+        ddt DATE, -- Due date
+        dtr DATE, -- Date returned (NULL means still borrowed)
+        PRIMARY KEY (bn, mn, ddt), -- Composite historical primary key
+        FOREIGN KEY (bn) REFERENCES book(bn) ON DELETE CASCADE,
+        FOREIGN KEY (mn) REFERENCES member(mn) ON DELETE CASCADE
+    );
+
+Inserting Sample Data (DML)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: sql
+
+    -- Insert Books
+    INSERT INTO book (bn, title, author, ofpd) VALUES
+    (101, 'Dune', 'Frank Herbert', 0.50),
+    (102, '1984', 'George Orwell', 0.25),
+    (103, 'Foundation', 'Isaac Asimov', 0.50),
+    (104, 'The Hobbit', 'J.R.R. Tolkien', 0.25),
+    (105, 'Neuromancer', 'William Gibson', 1.00);
+
+    -- Insert Members
+    INSERT INTO member (mn, name, bn, fines) VALUES
+    (1, 'Alice Smith', 101, 0.00),  -- Alice's favorite is Dune
+    (2, 'Bob Johnson', 104, 2.50),  -- Bob's favorite is The Hobbit
+    (3, 'Charlie Davis', NULL, 0.00); -- Charlie hasn't picked a favorite yet
+
+    -- Insert Borrowing Records
+    INSERT INTO borrow (bn, mn, ddt, dtr) VALUES
+    -- Alice borrowed Dune and returned it early
+    (101, 1, '2023-10-01', '2023-09-28'),
+
+    -- Bob borrowed The Hobbit and returned it 5 days late
+    (104, 2, '2023-10-15', '2023-10-20'),
+
+    -- Alice borrowed Neuromancer and hasn't returned it yet (NULL)
+    (105, 1, '2023-11-01', NULL),
+
+    -- Charlie borrowed 1984 and hasn't returned it yet (NULL)
+    (102, 3, '2023-11-05', NULL);
+
 
 SPJ Database
 ------------
