@@ -18,6 +18,7 @@ ISR,    STA     SAVE
         BSA     IO
         ION
         LDA     SAVE
+        ION
         BUN     0  I
 
 IO,     HEX     0

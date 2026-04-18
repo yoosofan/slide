@@ -53,7 +53,7 @@ RD_BYT, SKI
         INP
         BUN     READ_BYTE I
 
-        ORG     100
+        ORG     128
 EXECUTE, HEX 0
 
         LDA     ZERO
