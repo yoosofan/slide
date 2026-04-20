@@ -842,7 +842,13 @@ Input, Add and Output
 
 ----
 
-:class: grid-3col
+:class: t4c
+
+.. csv-table::
+    :class: yoo-memory center
+
+     , |nbsp| |nbsp| Loader  |nbsp| |nbsp| , READ , WRITE, ISR |nbsp| , DATA, user process,
+    0,4                                    , 100  , 150  , 200 , 250,  300         , 1024
 
 .. include:: src/yic/loader1.asm
     :code: asm
@@ -863,7 +869,7 @@ Input, Add and Output
 
 ----
 
-Loader with interrupt (bootstrap)
+Other Loader Samples
 =================================
 .. code:: sh
 
