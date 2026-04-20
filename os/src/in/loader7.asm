@@ -1,8 +1,3 @@
-; Developed with assistance from DeepSeek AI for educational purposes in OS course slides
-; Simple Bootstrap Loader with Absolute Addressing
-; No base register - uses fixed physical addresses
-; Uses interrupt-driven I/O
-
   ORG 0
   BUN LOADER
   BUN ISR
@@ -18,7 +13,7 @@ W4SIZE,LDA INP_BUF
 STORE_SIZE,
   LDA INP_BUF
   STA PROG_SIZE
-  STA INP_BUF 
+  STA INP_BUF
   BSA LOAD_PROGRAM
   ION
   BSA USER_PROG I
@@ -39,9 +34,9 @@ CHECK_OUTPUT,
   BUN ISR_EXIT
 HAS_PENDING_OUTPUT,
   LDA OUTPUT_DATA
-  OUT     
+  OUT
   LDA ZERO
-  STA OUTPUT_PENDING 
+  STA OUTPUT_PENDING
 ISR_EXIT,
   LDA SAVE_AC
   BUN INDIRECT
@@ -54,7 +49,7 @@ SYS_WRITE_HANDLER, HEX 0
   BUN SYS_WRITE_RETURN
 DEVICE_READY,
   LDA OUTPUT_DATA
-  OUT   
+  OUT
   LDA ZERO
   STA OUTPUT_PENDING
 SYS_WRITE_RETURN,
@@ -80,7 +75,7 @@ STORE_BYTE,
   STA STORE_ADDR
   LDA INP_BUF
   STA STORE_ADDR I
-  STA INP_BUF 
+  STA INP_BUF
   LDA LOAD_INDEX
   INC
   STA LOAD_INDEX
@@ -100,3 +95,9 @@ SAVE_AC,  DEC     0
 STORE_ADDR, HEX   0
 INDIRECT,   HEX   0
         END
+
+; Developed with assistance from DeepSeek, Grok, Gemini and Grok AI for educational purposes in OS course slides
+; Simple Bootstrap Loader with Absolute Addressing
+; No base register - uses fixed physical addresses
+; Uses interrupt-driven I/O
+

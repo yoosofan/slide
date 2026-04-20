@@ -1,4 +1,4 @@
-; Developed with assistance from DeepSeek AI for educational purposes in OS course slides
+; Developed with assistance from DeepSeek, Grok, Gemini and Grok AI for educational purposes in OS course slides
 ; Program with Procedure Vector Table (like interrupt vectors)
 ; Uses polling I/O with indirect BSA calls
 

@@ -36,7 +36,6 @@ Yoosofan Imaginary Computer
 ---------------------------
 
 Based on Morris Mano's famous book
-----------------------------------
 
 ----
 
@@ -787,21 +786,20 @@ YIC75 Relative Address
 address binding, absolute and relocate loader
 
 .. image:: img/memory/memory_absolute_relocate_loader.png
-   :align: center
-   :scale: 90%
+    :align: center
 
 ----
 
 YIC80 - Interrupt
 =================
-.. :
-
-  .. image:: img/in/interrupt_chart.jpg
-
 .. image:: img/in/Flowchart_for_interrupt_cycle.png
    :align: center
    :height: 600px
    :width: 700px
+
+.. :
+
+  .. image:: img/in/interrupt_chart.jpg
 
 ----
 
@@ -812,13 +810,34 @@ Interrupt-Driven Program
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
     :code: asm
     :number-lines:
-    :start-line: 4
-    :end-line: 22
+    :end-line: 19
 
 .. include:: src/in/Interrupt_Driven_Program_with_BSA_Subroutines.asm
     :code: asm
-    :number-lines: 18
-    :start-line: 22
+    :number-lines: 20
+    :start-line: 19
+    :end-line: 35
+
+**Save E flag**
+
+
+`src/in/Interrupt_save_E.asm`
+
+----
+
+:class: t2c
+
+Input, Add and Output
+=====================
+.. include:: src/yic/inp.add.out.asm
+    :code: asm
+    :number-lines:
+    :end-line: 23
+
+.. include:: src/yic/inp.add.out.asm
+    :code: asm
+    :number-lines: 24
+    :start-line: 23
     :end-line: 47
 
 ----
@@ -1191,30 +1210,19 @@ Boot sequence
 * https://github.com/openbios
 * https://github.com/openbios/openbios
 
-
+----
 
 Context Switch
 =================
-
-----
-
 END
 
 .. :
 
-  .. image:: img/in/windows_system_idle_process.jpg
+    .. image:: img/in/windows_system_idle_process.jpg
       :align: center
-
-.. :
 
     https://www.drivereasy.com/knowledge/system-idle-process-high-cpu-solved/
 
-----
-
-.. comments:
-
-    hovercraft in.rst
-    hovercraft disk.slide.rst disk.slide/
     rst2html.py disk.rst disk.html --stylesheet=../../tools/farsi.css,html4css1.css
     https://www.geeksforgeeks.org/disk-scheduling-algorithms/
     http://www.csl.mtu.edu/cs4411.choi/www/Resource/chap11.pdf
