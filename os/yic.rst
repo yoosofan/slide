@@ -842,6 +842,27 @@ Input, Add and Output
 
 ----
 
+:class: grid-3col
+
+.. include:: src/yic/loader1.asm
+    :code: asm
+    :number-lines:
+    :end-line: 32
+
+.. include:: src/yic/loader1.asm
+    :code: asm
+    :number-lines: 33
+    :start-line: 32
+    :end-line: 64
+
+.. include:: src/yic/loader1.asm
+    :code: asm
+    :number-lines: 65
+    :start-line: 64
+    :end-line: 96
+
+----
+
 Loader with interrupt (bootstrap)
 =================================
 .. code:: sh
@@ -872,28 +893,6 @@ Loader with interrupt (bootstrap)
     # Interrupt-driven program that gets loaded
     src/in/loader10_loaded_program.asm
     src/in/loader10_loaded_program_comments.asm
-
-----
-
-:class: grid-3col
-
-.. include:: src/in/loader7.asm
-    :code: asm
-    :number-lines:
-    :start-line: 4
-    :end-line: 34
-
-.. include:: src/in/loader7.asm
-    :code: asm
-    :number-lines: 30
-    :start-line: 34
-    :end-line: 64
-
-.. include:: src/in/loader7.asm
-    :code: asm
-    :number-lines: 60
-    :start-line: 64
-    :end-line: 95
 
 ----
 
