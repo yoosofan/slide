@@ -42,7 +42,19 @@ pre.code{
   border-bottom-width: thin;
   border-color: #95ABD0;
   font-size: 1.1rem;
-} pre.code > .ln{background-color: #DFE5F1;}
+}
+
+pre.code > .ln{
+    background-color: #DFE5F1;
+
+    display: inline-block;
+    width: 1.5em; /* Adjust based on your largest line number */
+    text-align: right;
+    padding-right: 0.4em;
+    user-select: none; /* Prevents selecting numbers during copy-paste */
+
+}
+
 .rtl{direction:rtl; text-align:justify; }
 .ltr{direction:ltr; text-align:justify;}
 pre.code{background-color:#f0f0f0;}

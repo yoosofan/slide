@@ -1,12 +1,12 @@
-         ORG     0
-         BUN     MAIN
-         BUN     ISR
+        ORG     0
+        BUN     MAIN
+        BUN     ISR
 
- MAIN,   LDA     ZERO
-         STA     COUNT
-         ION
+MAIN,   LDA     ZERO
+        STA     COUNT
+        ION
 
- WORK,   LDA     COUNT
+WORK,   LDA     COUNT
         INC
         STA     COUNT
         BUN     WORK

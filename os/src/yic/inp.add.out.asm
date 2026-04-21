@@ -1,12 +1,12 @@
-         ORG     0
-         BUN     MAIN
-         BUN     ISR
- MAIN,   LDA     ZERO
-         STA     READY
-         ION
- WAIT,   LDA     READY
-         SZA
-         BUN     PROCESS
+        ORG     0
+        BUN     MAIN
+        BUN     ISR
+MAIN,   LDA     ZERO
+        STA     READY
+        ION
+WAIT,   LDA     READY
+        SZA
+        BUN     PROCESS
         BUN     WAIT
 PROCESS,LDA     BUFFER
         ADD     TEN

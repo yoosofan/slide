@@ -26,7 +26,17 @@ pre.code{/*font-size:100%;*/
   border-right-width: thin; border-bottom-width: thin;
   border-color: #95ABD0;
 } /*justify-self: center;*/
-pre.code > .ln {background-color: #DFE5F1;}
+
+pre.code > .ln{
+    background-color: #DFE5F1;
+
+    display: inline-block;
+    width: 1.5em; /* Adjust based on your largest line number */
+    text-align: right;
+    padding-right: 0.4em;
+    user-select: none; /* Prevents selecting numbers during copy-paste */
+
+}
 pre.code { background-color:#f0f0f0; justify-self:center;}
 pre.console{background-color: #F9E0E0;}
 ol.trace-code{

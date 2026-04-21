@@ -12,8 +12,20 @@ pre.code{
   padding-right: 0.2em; border-style: solid;
   border-left-width: 0.5em;
   border-top-width: thin;
-  border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;}
-pre.code > .ln {background-color: #DFE5F1;}
+  border-right-width: thin; border-bottom-width: thin; border-color: #95ABD0;
+}
+
+pre.code > .ln{
+    background-color: #DFE5F1;
+
+    display: inline-block;
+    width: 1.5em; /* Adjust based on your largest line number */
+    text-align: right;
+    padding-right: 0.4em;
+    user-select: none; /* Prevents selecting numbers during copy-paste */
+
+}
+
 .rtl { direction: rtl; text-align: justify; font-family: Nazli; font-size:large;/*font-weight: bold;*/}
 .ltr { direction: ltr;  text-align: justify;}
 pre.code { background-color:#f0f0f0;}
@@ -151,3 +163,41 @@ svg.rrdiagram .connector{fill:none;stroke:#222}
 svg.rrdiagram .text{fill:#000;font-family:Verdana,sans-serif;font-size:12px}
 svg.rrdiagram .literal{fill:#90d9ff;stroke:#222}
 svg.rrdiagram .rule{fill:#d3f0ff;stroke:#222}
+
+/* Container for the diagram */
+.db-schema-graph {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    font-family: sans-serif;
+}
+
+/* Individual table card */
+.db-schema-graph .table-node {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    background-color: white;
+}
+
+/* Table header (name) */
+.db-schema-graph .table-header {
+    background-color: #f4f4f4;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+/* Table columns/rows */
+.db-schema-graph .table-columns {
+    padding: 5px;
+}
+
+/* Styling for relationships/lines */
+.db-schema-graph .relationship-link {
+    stroke: #666;
+    stroke-width: 2;
+    fill: none;
+}

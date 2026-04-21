@@ -1,10 +1,11 @@
 :data-transition-duration: 1000
-:data-width: 1024
 :css: ./style.css
 :skip-help: true
 :substep: true
 :slide-numbers: true
 :skip-help: true
+:data-width: 1024
+:data-height: 768
 
 .. title: Advanced Programming (C++)
 
