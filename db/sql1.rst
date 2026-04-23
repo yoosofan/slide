@@ -74,28 +74,29 @@ SQLite
 SP
 ==
 .. code:: sql
+    :number-lines:
 
-  create table s (
+    create table s (
      sn      char(10) primary key,
      sname   char(30),
      status  int  default(0),
      city    char(20)
-  );
+    );
 
-  create table p (
+    create table p (
      pn     char(10) primary key,
      pname  char(30),
      color  char(20),
      weight NUMERIC(9, 2),
      city   char(20)
-  );
+    );
 
-  create table sp (
+    create table sp (
      sn    char(10) references s,
      pn    char(10) references p,
      qty   int default(0),
      primary key (sn, pn)
-  );
+   );
 
 
 .. yographviz::
