@@ -766,8 +766,6 @@ YIC75 Relative Address
             END
 
 
-
-
     Address Translation Example:
 
     If base register = 256:
@@ -952,86 +950,66 @@ Solution Dual Address Spaces
 
 ----
 
-YIC90 - Memory and CPU Protection
-==================================
-.. image:: img/memory/hardware_address_protection.png
-   :align: center
+YIC90 Interrupt and Relative Address
+====================================
+RTI instruction
+---------------
+When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
 
-.. class:: substep
+1. **$t_3$: $AR \leftarrow 0$** *(Put absolute address 0 into the Address Register)*
+2. **$t_4$: $DR \leftarrow M[AR]$** *(Read the saved return address from memory into the Data Register)*
+3. **$t_5$: $PC \leftarrow DR$, $MODE \leftarrow 1$, $IEN \leftarrow 1$, $SC \leftarrow 0$** *(Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)*
 
-#. SKT like SKI and SKO
-#. System Call ?
-#. Change registers by the running process
+.. :
 
-----
-
-:class: t2c
-
-Software Interrupt
-======================
-.. code:: asm
-    :number-lines:
-
-    ISR,    STA     SAVE
-            BSA     IO
-            ION
-            LDA     SAVE
-            BUN     0  I
-
-    IO,     HEX     0
-            SKI
-            BUN     OUTPUT
-            INP
-            STA     BUFFER
-            BUN     IO  I
-    OUTPUT, SKO
-            BUN     TRAP
-            OUT
-    TRAP,   SKT
-            BUN     IO  I
-            BUN     100
-
-.. code:: asm
-    :number-lines:
-
-    mov ah, 0x0e
-
-    ; function number = 0Eh
-    ; : Display Character
-
-    mov al, '!'
-
-    ; AL = code of character
-    ; to display
-
-    int 0x10
-
-    ; call INT 10h,
-    ; BIOS video service
-
-----
-
-.. image:: img/in/interrupt_types.png
-   :align: center
-   :height: 400px
-   :width: 500px
+    Thanks, the YIC 90 design described in the following:
 
 
-----
+    We need kernel mode and user mode because in user mode all addresses must be added to the base register but in kernel mode it directly uses the address.
 
-System Call
-=====================
-.. image:: img/in/system_call.png
-   :align: center
-   :height: 350px
-   :width: 800px
+    Hardware Change:
+    1. Adding Base register
+    2. Adding a flag as cpu mode. Zero means kernel mode and one means user mode
+    3. A new micro-operations for an interrupt must be:
+        a. M[0]      ← PC
+        b. PC        ← 1
+        c. IEN       ← 0
+        d. MODE  ← 0
+     4. Physical Address = AR + (MODE * Base)
 
-----
 
-C System Call
-=====================
-.. image:: img/in/system_call_c.png
-   :align: center
+    New Instructions:
+    1. `ATB` (AC to Base): Transfers the 12 rightmost bits of the AC into the Base Register. Suggested code: `7004` (Bit 2 is currently unused)
+
+    ```assembly
+            LDA     PROG_BASE    / Load the starting address (500) into AC
+            ATB                  / Move AC to Base Register
+    ```
+
+    2. Return from Interrupt (RTI) instruction to use at the end of interrupt service routine. RTI should also be used at the loader program for jumping to the loaded (user) program. Before RTI in the loader, the address of the user program must be put in address zero of memory.
+    The Micro-Operations for `RTI` :
+    When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+
+    a. t_3: AR ← 0 (Put absolute address 0 into the Address Register)
+    b. t_4: DR ← M[AR] (Read the saved return address from memory into the Data Register)
+    c. t_5: PC ← DR , MODE ← 1 , IEN ← 1 , SC ← 0 (Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)
+
+    ```assembly
+    / --- End of Interrupt Service Routine ---
+    ISR_EXIT, LDA   SAVE_E          / Restore E flag
+              CIR
+              LDA   SAVE_AC         / Restore Accumulator
+
+              RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
+    ```
+
+
+    4. Return to Kernel (RTK) :
+         a. PC ← 030 (near the end of the loops of the loader)
+         b. MODE ← 0 (Switch to Kernel Mode)*
+
+    5.
+    Are the above designs complete? Doesn’t YIC 90 need anything else to add only relative addresses after introducing interrupts in YIC 80?
 
 ----
 
@@ -1044,18 +1022,17 @@ Simple Parameters
 
 ----
 
-* kernel mode
-* user mode
-
-Pentium 4 (ESCR)
-
-.. image:: img/in/control_register.png
+YIC 100 Memory Protection
+==================================
+.. image:: img/memory/hardware_address_protection.png
    :align: center
 
-----
+.. class:: substep
 
-.. image:: img/in/protection_ring.png
-   :align: center
+#. SKT like SKI and SKO
+#. System Call ?
+#. Change registers by the running process
+
 
 ----
 
@@ -1063,7 +1040,6 @@ CPU protection
 ====================
 Timer interrupt
 -------------------
-Cpu Scheduler
 
 .. image:: img/memory/timer_interrupt.jpg
     :align: center
@@ -1072,8 +1048,12 @@ Cpu Scheduler
 
 ----
 
-YIC110 - Multiprogramming
-=========================
+YIC 110 cpu protection
+======================
+
+
+----
+
 Function call
 -----------------------
 * cons of BSA
@@ -1127,39 +1107,71 @@ Call,  Ret
 
 ----
 
-YIC120 - Adding Keyboard & Disk
-==================================
-* terminal (command prompt)
-* batch system
-* interactive system
+:class: t2c
+
+Software Interrupt
+======================
+.. code:: asm
+    :number-lines:
+
+    ISR,    STA     SAVE
+            BSA     IO
+            LDA     SAVE
+            ION
+            BUN     0  I
+
+    IO,     HEX     0
+            SKI
+            BUN     OUTPUT
+            INP
+            STA     BUFFER
+            BUN     IO  I
+    OUTPUT, SKO
+            BUN     TRAP
+            OUT
+    TRAP,   SKT
+            BUN     IO  I
+            BUN     100
+
+.. code:: asm
+    :number-lines:
+
+    mov ah, 0x0e
+
+    ; function number = 0Eh
+    ; : Display Character
+
+    mov al, '!'
+
+    ; AL = code of character
+    ; to display
+
+    int 0x10
+
+    ; call INT 10h,
+    ; BIOS video service
 
 ----
 
-.. image:: img/in/kernel1process.png
+.. image:: img/in/interrupt_types.png
    :align: center
+   :height: 400px
+   :width: 500px
 
 ----
 
-When a controller rapidly turns on LEDs in one row at a time
-===============================================================
-.. image:: img/in/5x7led_B_refresh.jpg
-  :width: 750px
+Adding PSW
+===========
+Flags:
 
-https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+* Carry
+* E
+* Mode
 
-.. :
+----
 
-  8x8 dot matrix display
-  https://www.circuitstoday.com/interfacing-dot-matrix-led-display-to-8051
-  https://pic-microcontroller.com/interfacing-dot-matrix-led-display-pic-microcontroller/
-  https://www.best-microcontroller-projects.com/led-dot-matrix-display.html
-  5x7 dot matrix LED display character patterns
-  http://www.farnell.com/datasheets/37926.pdf
-  http://elektro.fs.cvut.cz/dokument/LCD/LCD_Manual_ShortVersion.pdf
-  https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
-  https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
-  https://handsontec.com/index.php/modular-dot-matrix-display/
-  dot matrix display character set
+YIC 150 - Multiprogramming
+===========================
 
 ----
 
@@ -1221,6 +1233,68 @@ Boot sequence
 * https://openfirmware.info/Welcome_to_OpenBIOS
 * https://github.com/openbios
 * https://github.com/openbios/openbios
+
+----
+
+* kernel mode
+* user mode
+
+Pentium 4 (ESCR)
+
+.. image:: img/in/control_register.png
+   :align: center
+
+----
+
+System Call
+=====================
+.. image:: img/in/system_call.png
+   :align: center
+   :height: 350px
+   :width: 800px
+
+----
+
+C System Call
+=====================
+.. image:: img/in/system_call_c.png
+   :align: center
+
+----
+
+YIC120 - Adding Keyboard & Disk
+==================================
+* terminal (command prompt)
+* batch system
+* interactive system
+
+----
+
+.. image:: img/in/kernel1process.png
+   :align: center
+
+----
+
+When a controller rapidly turns on LEDs in one row at a time
+===============================================================
+.. image:: img/in/5x7led_B_refresh.jpg
+  :width: 750px
+
+https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+
+.. :
+
+  8x8 dot matrix display
+  https://www.circuitstoday.com/interfacing-dot-matrix-led-display-to-8051
+  https://pic-microcontroller.com/interfacing-dot-matrix-led-display-pic-microcontroller/
+  https://www.best-microcontroller-projects.com/led-dot-matrix-display.html
+  5x7 dot matrix LED display character patterns
+  http://www.farnell.com/datasheets/37926.pdf
+  http://elektro.fs.cvut.cz/dokument/LCD/LCD_Manual_ShortVersion.pdf
+  https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
+  https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
+  https://handsontec.com/index.php/modular-dot-matrix-display/
+  dot matrix display character set
 
 ----
 

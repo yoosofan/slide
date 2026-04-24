@@ -607,6 +607,460 @@ OS_WRITE,   HEX     020         / Fixed address of SYS_WRITE in Kernel
 * **Clean Context Saving:** The `E` flag is safely backed up in the `ISR` to ensure user program arithmetic isn't corrupted.
 
 
+YIC 90 interrupt and memory protection
+``````````````````````````````````````
+After adding interrupt to the imaginary computer (yic) in my operating systems teaching slide, it needs to add two mode of cpu execution:
+1. Kernel mode: execute all machine code, access to all registers and use absolute addressing.
+
+2. User mode: restricted codes, not all registered can be accessed and use relative addressing .
+
+Therefore, I need at least the following thing to Mano’s CPU to fully support relative address and cpu protection:
+1. More registers: namely
+      a. Base register
+      b. Limit register
+      c. Extra registers like R0, R1, …, etc.
+
+2. An instruction for changing the cpu mode to user mode something like
+`MOD 1`
+
+3. Adding software interrupt instruction that create an interrupt which run interrupt correspondence interrupt routine and change the mode to kernel mod automatically, like
+`INT 10`
+
+By having these changes, we can have the next generation of imaginary computers (YIC 90) to teach students. But the following questions arises:
+
+1. Are these changes enough to have a complete cpu with interrupt and memory protection? Or should we add more things to it Or consider more factors?
+
+2. Is it possible to give these instructions a proper machine code in two byte on instruction of Mano’s CPU? I mean, every instruction in Mano’s CPU has associated zeros and ones in two bytes. Is there enough free pattern to add the above instructions or we need to change the instructions length or other changes that can fit these new instructions.
+
+Answer 2026/04/24 13:07:48
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is a fantastic evolution for your operating systems course. Upgrading Mano’s basic computer to the "YIC 90" to teach memory protection and user/kernel space bridges the gap between basic digital logic and modern OS architecture perfectly.
+
+Here is a technical analysis of your proposed changes, structured around your two questions.
+
+### 1. Are these changes enough for a complete CPU with OS support?
+
+While your proposed additions (Base/Limit registers, User/Kernel mode, and Software Interrupts) are the foundation of memory protection, a complete OS-capable CPU requires a few more critical hardware features. Without these, the OS cannot maintain control over the system.
+
+You should consider adding the following to YIC 90:
+
+* **Hardware Timer (Preemption):** Without a hardware timer that triggers a periodic interrupt, a user program containing an infinite loop (e.g., `BUN *`) will seize the CPU forever. The OS needs a timer interrupt to preempt user processes and enforce scheduling.
+* **Hardware Traps (Privileged Instructions):** Changing the mode to User Mode is easy (`MOD 1`), but the user program must **never** be able to change it back, nor should it be able to change the Base/Limit registers or execute `INP`, `OUT`, `ION`, or `HLT`. If a user program attempts any of these privileged instructions, the CPU hardware must instantly abort the instruction and generate an internal interrupt (a "Trap") to jump back to the Kernel's error handler.
+* **Stack Pointer (SP):** Mano’s computer uses the `BSA` instruction, which writes the return address directly into the target subroutine's memory. This is fatal in a protected OS environment. If user code is read-only (protected by the limit register), `BSA` will fail to write the return address. Furthermore, interrupts require a safe place to save the CPU state. A dedicated Stack Pointer register and `PUSH/POP` instructions are practically mandatory for an OS to separate User Stacks from the Kernel Stack.
+* **Processor Status Word (PSW):** Instead of just a `MOD` instruction, modern CPUs bundle the current mode (User/Kernel), the Interrupt Enable flag (IEN), and the ALU flags (E, Z, C) into a single PSW register. When an `INT 10` occurs, the hardware automatically pushes the PSW and Program Counter (PC) to the stack, and switches the mode to Kernel automatically.
+
+### 2. Can these instructions fit into Mano’s 2-byte (16-bit) machine code?
+
+The short answer is: **Some can fit easily, but adding General Purpose Registers (R0, R1...) will break Mano's 16-bit format.**
+
+Here is the breakdown of the instruction set architecture (ISA) constraints:
+
+**What fits perfectly:**
+Mano’s 16-bit format uses the top 4 bits for addressing mode and opcode, leaving 12 bits. For Register-Reference instructions (Opcode `0111`) and I/O instructions (Opcode `1111`), those 12 bits are used for specific operations.
+* **`MOD 1` (Switch to User Mode):** This does not need a memory address. You can easily assign it a free Register-Reference code. For example, `7008` (Binary: `0111 0000 0000 1000`) is currently unused in Mano's design.
+* **`INT n` (Software Interrupt):** You can use the I/O instruction space for this. If you limit `n` to a 4-bit or 8-bit number, an instruction like `F10A` (where `F1` means `INT` and `0A` is 10) fits perfectly.
+
+**What causes a severe bottleneck:**
+The moment you introduce General Purpose Registers (GPRs) like R0, R1, R2, and R3, Mano’s instruction format runs out of space.
+
+Mano’s architecture is an **Accumulator-based** machine. The instruction `ADD 500` implicitly knows to add memory `500` to the Accumulator (AC). If you add multiple registers, the CPU needs to know *which* register to use.
+
+If you want an instruction like `LDA R1, Address` (Load Address into R1), you must encode the register number into the 16 bits:
+* Opcode: 3 bits
+* Addressing Mode (I): 1 bit
+* Destination Register (R0-R3): 2 bits
+* Remaining bits for Address: **10 bits**
+
+By using 2 bits to specify the register, your memory address space shrinks from 12 bits (4096 words) down to 10 bits (1024 words).
+
+**How to solve this for YIC 90:**
+To keep unambiguous rules for instruction parsing while adding GPRs, you have three architectural choices for your new CPU design:
+
+1.  **Variable-Length Instructions:** The first 16-bit word contains the opcode and register selections. The *next* 16-bit word contains the 16-bit memory address. This allows massive memory addressing but makes the instruction fetch cycle complex.
+2.  **Drop GPRs, Keep the Accumulator:** Keep the CPU Accumulator-based. You can still implement User/Kernel mode, Base/Limit relative addressing, and `INT` without changing the 16-bit format. The hardware simply adds the Base Register to the 12-bit address implicitly during the memory fetch phase if the CPU is in User Mode.
+3.  **Upgrade to 32-bit:** Frame the "YIC 90" as a 32-bit machine. 8 bits for opcodes, 4 bits for registers, and 20 bits for addressing. This is historically accurate to how computers evolved in the late 1980s and makes writing the assembler much easier.
+
+Keep it simple for YIC 90
+`````````````````````````
+It is better to keep it simple, therefore, we don't need stack, timer and general registers. They will be introduced to the next generations of imaginary computer step by step. Because we don't need to have multiprogramming yet.
+
+We don't need to concern about the exact hardware implementation. Therefore, we just need an instruction similar to SKI and  SKO to be used in interrupt routine to detect that a trap has happend. We can call it SKT. This instruction can detect that the interrup routine has called because of a trap.
+We also needs instruction(s) to set base and limit registers.
+
+Are these instructions can easily be added to current architecture.
+
+Answer 2026/04/24 13:20:18
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is a brilliant pedagogical approach. Introducing operating system concepts iteratively—starting with simple memory protection and trapping before throwing in stacks, timers, and multiprogramming—is exactly how students build a strong mental model.
+
+To answer your question: **Yes, these instructions can be added very easily to Mano’s architecture, provided we use a specific trick for the Base and Limit registers.**
+
+Here is exactly how they fit into the 16-bit instruction format:
+
+### 1. The `SKT` Instruction (Skip on Trap)
+This fits perfectly into the architecture without any major changes. Mano’s CPU uses the `1111` opcode (Hex `F`) for I/O and Interrupt instructions.
+
+Currently, the bits are assigned like this:
+* `INP` = `F800` (Bit 11)
+* `OUT` = `F400` (Bit 10)
+* `SKI` = `F200` (Bit 9)
+* `SKO` = `F100` (Bit 8)
+* `ION` = `F080` (Bit 7)
+* `IOF` = `F040` (Bit 6)
+
+You have bits 0 through 5 completely free! You can simply assign:
+* **`SKT` = `F020`** (Bit 5).
+
+In hardware terms, when a Trap occurs (like the user trying to run `INP` in user mode), a "Trap Flag" flip-flop is set to 1. `SKT` just checks this flip-flop and increments the Program Counter if it is 1, exactly like `SKI` and `SKO`.
+
+### 2. Setting Base and Limit Registers
+This is where we hit a fascinating constraint of Mano’s architecture, but there is a very elegant solution.
+
+**The Constraint:** You might initially want an instruction like `LDB 500` (Load Base Register with address 500). However, Mano uses a 3-bit Opcode for memory-reference instructions. There are exactly 8 combinations (`000` to `111`).
+* `000` to `110` are already taken (`AND`, `ADD`, `LDA`, `STA`, `BUN`, `BSA`, `ISZ`).
+* `111` is the escape code used to signal Register/IO instructions.
+**There are absolutely no free memory-reference opcodes left.**
+
+**The Elegant Solution:**
+Instead of loading the registers directly from memory, you load the value into the **Accumulator (AC)** first, and then transfer it to the Base or Limit register using **Register-Reference instructions**.
+
+Mano’s Register-Reference instructions use the `0111` opcode (Hex `7`). Similar to the I/O instructions, several bits are still unused.
+
+You can invent two new Register-Reference instructions:
+* **`ATB` (AC to Base):** Transfers the 12 rightmost bits of the AC into the Base Register.
+    * *Suggested code:* `7004` (Bit 2 is currently unused)
+* **`ATL` (AC to Limit):** Transfers the 12 rightmost bits of the AC into the Limit Register.
+    * *Suggested code:* `7002` (Bit 1 is currently unused)
+
+### How it looks in your OS Kernel code:
+
+When your loader prepares to run the user program, it would look like this:
+
+```assembly
+        / ... (Loader finishes loading program into address 500) ...
+
+        LDA     PROG_BASE    / Load the starting address (500) into AC
+        ATB                  / Move AC to Base Register
+
+        LDA     PROG_SIZE    / Load the size of the program into AC
+        ATL                  / Move AC to Limit Register
+
+        MOD     1            / Switch to User Mode
+        BUN     0            / Jump to user program!
+                             / (Hardware adds Base to 0, actually executing 500)
+```
+
+By doing it this way, you:
+1. Don't have to redesign Mano's 16-bit instruction format.
+2. Teach students how data routes through the Accumulator to reach specialized registers (a core concept in early CPU design).
+3. Have a fully functioning mechanism for your "YIC 90" to support base/limit protection!
+
+
+BUN at the end of the interrupt routine  2026/04/24 14:30:00
+````````````````````````````````````````````````````````````
+There are some flaws in our design. If we consider UMD instruction as an instruction for changing the cpu mode to user mode, then at the end of our interrupt routine we should have something like this:
+
+```asm
+    UMD
+    BUN     0 I
+```
+But it has the following problems at least:
+1. Accessing Address zero will create a trap in user mode.
+2. Logical address zero will be added to base register and it will not be really zero address.
+
+Do you have any suggestions?
+
+Answer
+~~~~~~
+You have just stumbled upon one of the most classic and fundamental problems in computer architecture and operating system design! Your analysis is **100% correct**.
+
+If you switch to User Mode *before* executing the return branch, the CPU instantly applies User Mode rules (Base register offset and memory protection) to the very instruction that is supposed to get you out of the Kernel. You trap yourself!
+
+To solve this, YIC 90 needs what almost every modern CPU uses to solve this exact problem: a dedicated **Return from Interrupt (RTI)** instruction.
+
+Here is how you can implement it in your architecture without complicating the hardware too much.
+
+### The Solution: The `RTI` Instruction
+We cannot separate the act of returning from the act of switching modes. They must happen **atomically** (at the exact same time, within a single instruction cycle).
+
+You should introduce a new 16-bit instruction, **`RTI` (Return From Interrupt)**, which replaces the `ION`, `UMD`, and `BUN 0 I` sequence entirely.
+
+Since `RTI` does not need a memory address (it implicitly knows the return address is saved at address `0` in Mano's design), you can assign it an unused opcode in the I/O & Interrupt space (Opcode `1111` / Hex `F`).
+* **Suggested Opcode for `RTI`:** `F010` (Bit 4 is currently unused).
+
+### The Micro-Operations for `RTI`
+When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+
+1. **$t_3$: $AR \leftarrow 0$** *(Put absolute address 0 into the Address Register)*
+2. **$t_4$: $DR \leftarrow M[AR]$** *(Read the saved return address from memory into the Data Register)*
+3. **$t_5$: $PC \leftarrow DR$, $MODE \leftarrow 1$, $IEN \leftarrow 1$, $SC \leftarrow 0$** *(Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)*
+
+### Why this solves your flaws perfectly:
+1. **No Trap on Address 0:** Because the `RTI` instruction is fetched and executed while the CPU is *still in Kernel Mode*, reading from `M[0]` is perfectly legal.
+2. **No Base Register Interference:** Since `RTI` explicitly sets $AR \leftarrow 0$ at the hardware level, it ignores the Base Register entirely for the fetch of the return address.
+3. **Safe Transition:** The Mode flip-flop flips to User Mode at clock cycle $t_5$. The very next clock cycle will be $t_0$ of the *next* instruction. Because $MODE$ is now 1, that next instruction fetch will use the Base Register and User Mode protections.
+
+### How the end of your ISR looks now:
+
+```assembly
+/ --- End of Interrupt Service Routine ---
+ISR_EXIT, LDA   SAVE_E          / Restore E flag
+          CIR
+          LDA   SAVE_AC         / Restore Accumulator
+
+          RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
+```
+
+### Educational Value for Your Slides
+This is a fantastic teaching moment for your students. You can present the exact flawed code you wrote in your prompt (`UMD` followed by `BUN 0 I`) and ask the class, *"What goes wrong here?"* Once they realize the paradox (you need to be in Kernel mode to read address 0, but you need to be in User mode when you jump), you can introduce `RTI`. This teaches them why CISC and RISC architectures alike (from the 6502 to x86 to ARM) feature a dedicated Return-from-Interrupt instruction rather than relying on standard branching!
+
+
+YIC 90 relative address after interrupt in YIC 80
+`````````````````````````````````````````````````
+Thanks, Therefore, it is better to redesign YIC 90 without memory and cpu protection, the design doesn’t need software interrupt too. The rest of changes (like memory protection, timer, stack and etc.) will be used in the next YIC generations.
+
+We need kernel mode and user mode because in user mode all addresses must be added to the base register but in kernel mode it directly uses the address.
+
+The design needs :
+1. Base register
+
+2. An instruction for putting an address in the base register. Gemini AI suggested the following instruction:
+* **`ATB` (AC to Base):** Transfers the 12 rightmost bits of the AC into the Base Register.
+    * *Suggested code:* `7004` (Bit 2 is currently unused)
+
+```assembly
+        LDA     PROG_BASE    / Load the starting address (500) into AC
+        ATB                  / Move AC to Base Register
+
+```
+
+3. Return from Interrupt (RTI) instruction to use at the end of interrupt service routine. RTI should also be used at the loader program for jumping to the loaded (user) program. Before RTI in the loader, the address of the user program must be put in address zero of memory.
+
+4. `kmd` to change cpu mode to kernel mode. It is used at the end of the user program right before `BUN loader_loop` . Therefore
+
+Are the above designs complete? Doesn’t YIC 90 need anything else to add only relative addresses after introducing interrupts in YIC 80?
+
+Answer
+~~~~~~
+This is a very logical and pedagogically sound approach! Stripping away the complexities of memory protection and software traps to focus *strictly* on **Relocation (Base Register)** and **User/Kernel Addressing Modes** will make the transition much easier for your students.
+
+Your proposed design for YIC 90 is excellent and very close to complete. Using `RTI` to kickstart the user program from the loader is an incredibly elegant trick used in real operating systems.
+
+However, there are **two critical architectural flaws** in how the CPU handles the Program Counter (PC) that will crash the system if we don't adjust the design.
+
+Here is what you need to fix:
+
+### Flaw 1: The `KMD` + `BUN` Paradox (Instruction Fetch Crash)
+In a Base Register architecture, the PC usually holds the **logical** address. Every time the CPU fetches an instruction, the hardware does this: $AR \leftarrow PC + Base$.
+
+If your user program executes `KMD` (switch to Kernel Mode), the mode switches *immediately*.
+Let's look at what happens in the next clock cycle:
+1. The PC is pointing to the next instruction (logical address, say `15`).
+2. The CPU tries to fetch `BUN loader_loop`.
+3. Because the CPU is now in Kernel Mode, it does **not** add the Base Register.
+4. The hardware does $AR \leftarrow PC$, meaning $AR \leftarrow 15$.
+5. The CPU fetches whatever is at **absolute physical address 15** (which is probably garbage or OS data), completely missing your `BUN` instruction! The system crashes.
+
+**The Solution:**
+You cannot separate the act of changing the mode from the act of branching. They must happen at the exact same time (atomically).
+
+Instead of `KMD`, you should introduce **`RTK` (Return to Kernel)**.
+Because your loader loop is at a fixed, known address (like `030`), `RTK` doesn't need to specify an address. It can be a Register-Reference instruction (using the `7xxx` opcode space, just like `ATB`).
+
+When `RTK` executes, the hardware does:
+* $PC \leftarrow 030$ *(Or whatever your OS entry point is)*
+* $MODE \leftarrow 0$ *(Switch to Kernel Mode)*
+
+Your user program then safely ends with a single `RTK` instruction instead of `KMD` and `BUN`.
+
+### Flaw 2: The Hardware Interrupt Cycle
+When a hardware interrupt happens (e.g., the user presses a key), Mano's CPU executes a hardwired interrupt cycle. Currently, that cycle does this:
+1. $M[0] \leftarrow PC$
+2. $PC \leftarrow 1$
+3. $IEN \leftarrow 0$
+
+If an interrupt triggers while the CPU is in **User Mode**, the hardware will jump to address `1`. But if it stays in User Mode, the next instruction fetch will add the Base Register, trying to fetch the ISR from `Base + 1` instead of absolute address `1`!
+
+**The Solution:**
+You must update the fundamental hardware interrupt cycle so that it automatically forces the CPU back into Kernel Mode. The new hardware micro-operations for an interrupt must be:
+1. $M[0] \leftarrow PC$
+2. $PC \leftarrow 1$
+3. $IEN \leftarrow 0$
+4. **$MODE \leftarrow 0$**
+
+### Summary of the Complete YIC 90 Architecture
+
+If you make those two adjustments, your design is perfectly complete for teaching relative addressing!
+
+1. **Hardware State:** Add a Base Register and a 1-bit `MODE` flip-flop (0 = Kernel, 1 = User).
+2. **Instruction Fetch/Execute:** If $MODE = 1$, all memory accesses are $AR \leftarrow \text{Address} + Base$.
+3. **`ATB` (AC to Base):** Sets the Base Register (used by the Kernel).
+4. **`RTI` (Return from Interrupt):** Restores PC from $M[0]$, sets $MODE \leftarrow 1$, $IEN \leftarrow 1$. (Used by Kernel to jump to User).
+5. **`RTK` (Return to Kernel):** Atomically jumps to the Kernel OS loop and sets $MODE \leftarrow 0$. (Used by User to gracefully exit).
+6. **Interrupt Cycle:** Hardware automatically saves PC to $M[0]$, jumps to 1, disables interrupts, and sets $MODE \leftarrow 0$.
+
+Does this atomic `RTK` instruction make sense for how you want the students to write their user programs?
+
+YIC 90 again
+`````````````
+Thanks, the YIC 90 design described in the following:
+
+
+We need kernel mode and user mode because in user mode all addresses must be added to the base register but in kernel mode it directly uses the address.
+
+Hardware Change:
+1. Adding Base register
+2. Adding a flag as cpu mode. Zero means kernel mode and one means user mode
+3. A new micro-operations for an interrupt must be:
+    a. M[0]      ← PC
+    b. PC        ← 1
+    c. IEN       ← 0
+    d. MODE  ← 0
+ 4. When MODE == 1 then, AR ← PC + Base
+     Otherwise AR ← PC
+
+New Instructions:
+1. `ATB` (AC to Base): Transfers the 12 rightmost bits of the AC into the Base Register. Suggested code: `7004` (Bit 2 is currently unused)
+
+```assembly
+        LDA     PROG_BASE    / Load the starting address (500) into AC
+        ATB                  / Move AC to Base Register
+```
+
+2. Return from Interrupt (RTI) instruction to use at the end of interrupt service routine. RTI should also be used at the loader program for jumping to the loaded (user) program. Before RTI in the loader, the address of the user program must be put in address zero of memory.
+The Micro-Operations for `RTI` :
+When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+
+a. t_3: AR ← 0 (Put absolute address 0 into the Address Register)
+b. t_4: DR ← M[AR] (Read the saved return address from memory into the Data Register)
+c. t_5: PC ← DR , MODE ← 1 , IEN ← 1 , SC ← 0 (Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)
+
+```assembly
+/ --- End of Interrupt Service Routine ---
+ISR_EXIT, LDA   SAVE_E          / Restore E flag
+          CIR
+          LDA   SAVE_AC         / Restore Accumulator
+
+          RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
+```
+
+
+4. Return to Kernel (RTK) :
+     a. PC ← 030 (near the end of the loops of the loader)
+     b. MODE ← 0 (Switch to Kernel Mode)*
+
+Are the above designs complete? Doesn’t YIC 90 need anything else to add only relative addresses after introducing interrupts in YIC 80?
+
+Answer 2026/04/24 19:42:38
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Your summary of the YIC 90 architecture is incredibly precise. You have successfully distilled the core mechanics of a protected architecture down to its absolute essentials for your students.
+
+The design is *almost* perfectly complete for supporting relative addressing. However, there are **two logical gaps** that arise when we actually try to run a program with this new design.
+
+Here is what YIC 90 still needs to function correctly:
+
+### 1. Data Relocation (The Memory Bus Adder)
+In your summary, you specified: `When MODE == 1 then, AR ← PC + Base`.
+
+This successfully relocates the **Instruction Fetch** phase ($t_0$). However, you must also relocate the **Data Fetch** phase.
+
+If a user program has a variable at logical address `050`, the instruction `LDA 050` moves `050` into the Address Register ($AR$) during clock cycle $t_2$. When the CPU tries to read the data ($DR \leftarrow M[AR]$), it will access absolute physical memory `050` (which belongs to the Kernel) instead of `Base + 050`.
+
+**The Fix:** Instead of modifying the $t_0$ micro-operations, the most elegant hardware solution is to place the adder *between* the Address Register and the Memory Unit. This acts as a rudimentary Memory Management Unit (MMU).
+
+Update rule #4 to this:
+* **The $AR$ always holds the Logical Address.**
+* **Whenever the CPU accesses memory (Read or Write), the Physical Address sent to the RAM chip is calculated as:** `Physical Address = AR + (MODE * Base)`
+
+This single hardware rule automatically fixes instruction fetches, direct data fetches (`LDA`, `STA`), indirect data pointers, and the `ISZ` instruction without needing to rewrite Mano's standard micro-operations.
+
+### 2. The System Call Mechanism (How to do I/O)
+In the previous YIC 80 design (using absolute addresses), the user program requested I/O by calling the kernel directly via `BSA 010` (SYS_READ).
+
+Now that YIC 90 uses relative addressing, the user program is "trapped" in its own memory space. If it tries to execute `BSA 010`, the memory bus will translate that to `Base + 010`. The user program can no longer reach the Kernel's I/O routines!
+
+You previously noted that we dropped Software Interrupts (`INT`) to keep things simple. Fortunately, **your `RTK` instruction perfectly solves this problem if we use it creatively.**
+
+**The Fix:**
+You can teach your students to use `RTK` as a "System Call" instruction. Since `RTK` instantly jumps to the Kernel at absolute address `030`, the user program just needs to tell the Kernel *why* it is returning. It can do this using the Accumulator (AC).
+
+* `AC = 0`: Program is finished (Load the next program).
+* `AC = 1`: The user program wants to Read a character.
+* `AC = 2`: The user program wants to Write a character.
+
+**How it looks in the User Program:**
+```assembly
+        / User wants to output a character
+        LDA     CHAR_TO_PRINT
+        STA     USER_OUTPUT_BUFFER  / Save it in a shared memory space
+        LDA     WRITE_CODE          / Load '2' into AC
+        RTK                         / Jump to OS!
+```
+
+**How it looks in the OS Kernel (at address 030):**
+```assembly
+        ORG     030
+OS_LOOP, SZA                        / Is AC zero?
+         BUN     CHECK_SYSCALL      / No, check if it's a read/write
+         BUN     LOAD_NEXT_PROG     / Yes, program is done!
+
+CHECK_SYSCALL, ... / Check AC for 1 or 2 and jump to SYS_READ or SYS_WRITE
+```
+
+### Final Verdict
+If you update the hardware memory access rule to act as a simple MMU (`Physical = AR + (MODE * Base)`) and teach the students to use the AC combined with `RTK` for system calls, **your YIC 90 design is 100% complete and fully functional.** It achieves memory relocation and User/Kernel separation brilliantly without the bloat of general-purpose registers or complex trapping hardware.
+
+
+YIC 90 2026/04/24 19:51:21
+``````````````````````````
+Thanks, final design of the YIC 90 described in the following:
+
+We need kernel mode and user mode because in user mode all addresses must be added to the base register but in kernel mode it directly uses the address.
+
+Hardware Change:
+1. Adding Base register
+2. Adding a flag as cpu mode. Zero means kernel mode and one means user mode
+3. A new micro-operations for an interrupt must be:
+    a. M[0]      ← PC
+    b. PC        ← 1
+    c. IEN       ← 0
+    d. MODE  ← 0
+ 4. When MODE == 1 then, AR ← PC + Base
+     Otherwise AR ← PC
+
+New Instructions:
+1. `ATB` (AC to Base): Transfers the 12 rightmost bits of the AC into the Base Register. Suggested code: `7004` (Bit 2 is currently unused)
+
+```assembly
+        LDA     PROG_BASE    / Load the starting address (500) into AC
+        ATB                  / Move AC to Base Register
+```
+
+2. Return from Interrupt (RTI) instruction to use at the end of interrupt service routine. RTI should also be used at the loader program for jumping to the loaded (user) program. Before RTI in the loader, the address of the user program must be put in address zero of memory.
+The Micro-Operations for `RTI` :
+When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+
+a. t_3: AR ← 0 (Put absolute address 0 into the Address Register)
+b. t_4: DR ← M[AR] (Read the saved return address from memory into the Data Register)
+c. t_5: PC ← DR , MODE ← 1 , IEN ← 1 , SC ← 0 (Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)
+
+```assembly
+/ --- End of Interrupt Service Routine ---
+ISR_EXIT, LDA   SAVE_E          / Restore E flag
+          CIR
+          LDA   SAVE_AC         / Restore Accumulator
+
+          RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
+```
+
+
+4. Return to Kernel (RTK) :
+     a. PC ← 030 (near the end of the loops of the loader)
+     b. MODE ← 0 (Switch to Kernel Mode)*
+
+Are the above designs complete? Doesn’t YIC 90 need anything else to add only relative addresses after introducing interrupts in YIC 80?
+
+
 ChatGpt
 ^^^^^^^
 https://chatgpt.com/c/69e495d5-5a88-832d-a195-5fc6ee47bca4
@@ -1875,9 +2329,6 @@ We can extend this into:
 * **Stage 4 → Memory protection simulation**
 
 That would complete a *full historical OS evolution pipeline* based on your imaginary machine.
-
-
-
 
 Grok
 ^^^^
