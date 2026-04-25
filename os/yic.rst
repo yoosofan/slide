@@ -964,52 +964,79 @@ When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware pe
 
     Thanks, the YIC 90 design described in the following:
 
-
     We need kernel mode and user mode because in user mode all addresses must be added to the base register but in kernel mode it directly uses the address.
 
     Hardware Change:
     1. Adding Base register
     2. Adding a flag as cpu mode. Zero means kernel mode and one means user mode
     3. A new micro-operations for an interrupt must be:
-        a. M[0]      ← PC
-        b. PC        ← 1
-        c. IEN       ← 0
-        d. MODE  ← 0
+	a. M[0]      ← PC
+	b. PC        ← 1
+	c. IEN       ← 0
+	d. MODE  ← 0
      4. Physical Address = AR + (MODE * Base)
-
 
     New Instructions:
     1. `ATB` (AC to Base): Transfers the 12 rightmost bits of the AC into the Base Register. Suggested code: `7004` (Bit 2 is currently unused)
 
-    ```assembly
-            LDA     PROG_BASE    / Load the starting address (500) into AC
-            ATB                  / Move AC to Base Register
-    ```
-
+	```assembly
+		LDA     PROG_BASE    / Load the starting address (500) into AC
+		ATB                  / Move AC to Base Register
+	```
     2. Return from Interrupt (RTI) instruction to use at the end of interrupt service routine. RTI should also be used at the loader program for jumping to the loaded (user) program. Before RTI in the loader, the address of the user program must be put in address zero of memory.
     The Micro-Operations for `RTI` :
     When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+	a. t_3: AR ← 0 (Put absolute address 0 into the Address Register)
+	b. t_4: DR ← M[AR] (Read the saved return address from memory into the Data Register)
+	c. t_5: PC ← DR , MODE ← 1 , IEN ← 1 , SC ← 0 (Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)
 
-    a. t_3: AR ← 0 (Put absolute address 0 into the Address Register)
-    b. t_4: DR ← M[AR] (Read the saved return address from memory into the Data Register)
-    c. t_5: PC ← DR , MODE ← 1 , IEN ← 1 , SC ← 0 (Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)
+	```assembly
+	/ --- End of Interrupt Service Routine ---
+	ISR_EXIT, LDA   SAVE_E          / Restore E flag
+		  CIR
+		  LDA   SAVE_AC         / Restore Accumulator
 
-    ```assembly
-    / --- End of Interrupt Service Routine ---
-    ISR_EXIT, LDA   SAVE_E          / Restore E flag
-              CIR
-              LDA   SAVE_AC         / Restore Accumulator
+		  RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
+	```
+    3. Return to Kernel (RTK)  micro-operation:
+	a. M[030] ← PC  (Save User's logical return address)
+	b. PC     ← 031 (Jump to Kernel Syscall Handler)
+	c. MODE   ← 0   (Switch to Kernel Mode)
+	d. IEN    ← 0   (Disable interrupts so the kernel isn't interrupted while setting up the Syscall)
 
-              RTI                   / Atomic: Restores PC from M[0], Enables Interrupts, Switches to User Mode
-    ```
+    4. System Call using RTK (Return to Kernel) by using the Accumulator(AC) for telling the kernel what did happen:
+	a. AC = 0: Program is finished (Load the next program).
+	b. AC = 1: The user program wants to Read a character.
+	c. AC = 2: The user program wants to Write a character.
 
+	User Program
 
-    4. Return to Kernel (RTK) :
-         a. PC ← 030 (near the end of the loops of the loader)
-         b. MODE ← 0 (Switch to Kernel Mode)*
+	 ```assembly
+		/ User wants to output a character
+		LDA     CHAR_TO_PRINT
+		STA     USER_OUTPUT_BUFFER  / Save it in a shared memory space
+		LDA     WRITE_CODE          / Load '2' into AC
+		RTK                         / Jump to OS!
+	```
 
-    5.
+	OS Kernel (at address 030)
+
+	    ```assembly
+		ORG     030
+	OS_LOOP, SZA                        / Is AC zero?
+		 BUN     CHECK_SYSCALL      / No, check if it's a read/write
+		 BUN     LOAD_NEXT_PROG     / Yes, program is done!
+
+	CHECK_SYSCALL, ... / Check AC for 1 or 2 and jump to SYS_READ or SYS_WRITE
+	```
+
+    5. The Shared Memory "Mailbox": Because `AC` is being used to store the Syscall code (0, 1, or 2), the data must be passed through memory.
+
     Are the above designs complete? Doesn’t YIC 90 need anything else to add only relative addresses after introducing interrupts in YIC 80?
+    Please Write a full assembly loader and ISR (kernel) and user program.
+
+    yic90.int.base.kernel_Gemini_AI.asm
+
 
 ----
 
@@ -1032,7 +1059,6 @@ YIC 100 Memory Protection
 #. SKT like SKI and SKO
 #. System Call ?
 #. Change registers by the running process
-
 
 ----
 
