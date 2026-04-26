@@ -32,8 +32,8 @@ University of Kashan
 
 https://yoosofan.github.io/en/
 
-Yoosofan Imaginary Computer
----------------------------
+Yoosofan Imaginary Computer (YIC)
+---------------------------------
 
 Based on Morris Mano's famous book
 
@@ -45,8 +45,8 @@ Based on Morris Mano's famous book
 
 :class: t2c
 
-Instruction Set(I)
-==================
+YIC 10, Instruction Set(I)
+==========================
 .. code:: asm
 
     AND: Logical AND memory with AC
@@ -78,8 +78,8 @@ Instruction Set(I)
 
 :class: t2c
 
-Instruction Set Bianary(I)
-================================
+YIC 10, Instruction Set Bianary(II)
+===================================
 .. code:: asm
 
     AND:    00001
@@ -276,10 +276,8 @@ Imaginary Computer
 
 ----
 
-YIC 30
-======
-Seven segment
---------------
+YIC 30, Seven segment
+=====================
 .. image::  img/in/arduino7segment02.png
   :height: 300px
 
@@ -818,8 +816,9 @@ Interrupt-Driven Program
 
 **Save E flag**
 
+.. :
 
-`src/in/Interrupt_save_E.asm`
+    `src/yic/Interrupt_save_E.asm`
 
 ----
 
@@ -830,13 +829,13 @@ Input, Add and Output
 .. include:: src/yic/inp.add.out.asm
     :code: asm
     :number-lines:
-    :end-line: 23
+    :end-line: 28
 
 .. include:: src/yic/inp.add.out.asm
     :code: asm
-    :number-lines: 24
-    :start-line: 23
-    :end-line: 47
+    :number-lines: 29
+    :start-line: 28
+    :end-line: 56
 
 ----
 
@@ -900,53 +899,102 @@ Other Loader Samples
 
 ----
 
-Interrupt and Relative Address Problem
+:class: t2c
+
+Review YICs
+===========
+.. class: substep
+
+#. Connect memory to power
+#. Connect HEX Pad keyboard to memory.
+#. Enter machine code of user
+#. Enter machine code of OS Routines
+#. Connect cpu to memory
+#. Connect output device to cpu
+#. Connect input device to cpu
+#. Turn on CPU (start runnig codes)
+#. HLT at the end of user code
+#. Give output(s) to user
+#. Back to step 1
+
+----
+
+:class: t2c
+
+Relative Address Problem
 ======================================
 * Normal execution
+    * Logical Address
+    * Base or Relocation Register
+    * Physical address ← PC + Base
+    * AR ← Base + PC
+    * Kernel Mode
+    * UMD: Change CPU mode to user
+    * mode = 1, a flag in CPU Like C
+* Kernel
+    * Interrupt Service Routine (ISR)
+    * Boot
+    * Loader
+    * OS routines and libraries
+    * Effective address = logical address
+    * KMD: change CPU mode to kernel
+    * mode = 0
 
-.. :
+----
 
-    * Effective address = base + logical address
+There is a flaw in your code. In YIC 80 and 90, the kernel (loader, ISR and other system routines) put in the memory (RAM, random access memory) directly by a device like HEX Pad(Hexadecimal) keyboard without CPU involvement.
 
-* Interrupt time
+   1.  Turn on memory by connecting to power supply (battery or anything like that) and will not turn off afterwards
+   2.  Connect HEX Pad keyboard (or any similar device) to memory.
+   3.  Enter kernel machine code by the Hexpad keyboard
+   4.  Disconnect  HEX Pad keyboard from memory after kernel entered to the memory
+   5.  Connect cpu to memory
+   6.  Connect printer or another simple output device to cpu
+   7.  Connect card reader or another simple input device to cpu
+   8.  Turn on cpu by connecting it to a power supply (battery or anything like that)
+   9.  Mano's cpu starts at 0 address
+   10. Read user program from input device by loader (part of kernel)
+   11. RTI to user program
+   12. RTK to loader after the user program finished
+   13. Load another user program from input
 
-.. :
+Your code put a ``hex 0`` in address zero of memory while it should be a ``BUN ``
+Please fix this problem and any other problems in your suggested code and rewrite the whole code.
 
-    * PC contains physical address
+.. code::
+   :number-lines:
+   :class: substep
 
-* ISR needs
+    ORG 0
+    BUN     LOADER
+    BUN     ISR
+    LOADER, ION
+    LOOP,   BSA READ_WORD
+    STA     SIZE
+    BSA     LOAD
+    UMD
+    BSA     300
+    BUN     LOOP
 
-    #. predictable, fixed addresses
-    #. resources across all processes
-    #. Safety
+    ; ISR
+    ; Routines
+    END
 
-.. :
+    ORG     300 ; User program
+    UPRG,   HEX 0
+    BSA     100
+    ADD     TEN
+    BSA     150
+    BUN     300 I
+    TEN,    DEC 10
+    END
 
-    : User programs shouldn't be able to interfere with ISR
 
-    * To run at specific logical addresses but with proper relocation
+----
 
-Solution Dual Address Spaces
-----------------------------
-#. User mode   (MOD 1)
-#. Kernel mode (MOD 0)
-
-.. :
-
-    User mode: Base register active
-
-    Kernel mode Base register = 0 (direct physical addressing)
-
-    Interrupt handling must temporarily bypass relocation because:
-
-    In Modern Systems
-    -----------------
-    #. x86: Uses privilege levels (ring 0 vs ring 3)
-    #. ARM: Different processor modes (IRQ, SVC, User)
-    #. All: Have mechanisms to switch address spaces during interrupts
-
-    Dual-Mode System with Manual Mode Switching
-    mod 0 = Kernel Mode, mod 1 = User Mode
+.. image:: img/in/Mano_flowchart4instruction_cycle_1.png
+   :width: 500px
+   :height: 600px
 
 ----
 
@@ -1076,6 +1124,15 @@ Timer interrupt
 
 YIC 110 cpu protection
 ======================
+.. image:: img/in/control_register.png
+   :width: 450px
+
+.. image:: img/in/protection_ring.png
+
+.. :
+
+    #. ARM: Different processor modes (IRQ, SVC, User)
+    #. Pentium 4 (ESCR)
 
 
 ----
@@ -1262,15 +1319,6 @@ Boot sequence
 
 ----
 
-* kernel mode
-* user mode
-
-Pentium 4 (ESCR)
-
-.. image:: img/in/control_register.png
-   :align: center
-
-----
 
 System Call
 =====================
