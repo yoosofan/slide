@@ -31,72 +31,34 @@ https://yoosofan.github.io/slide/db/sql1/
 
 ----
 
-
 :class: t2c
 
-SQLite
-======
-.. container::
-
-    *Terminal and GUI*
-
-    #. https://www.sqlite.org/download.html
-    #. https://sqlite.org/src/timeline
-    #. https://github.com/sqlite/sqlite
-    #. https://www.sqlite.org/cli.html
-    #. https://sqlitebrowser.org/
-    #. https://github.com/sqlitebrowser/sqlitebrowser
-
-.. container::
-
-    *Online*
-
-    #. https://sql.js.org/examples/GUI/
-    #. https://sql.js.org/#/
-    #. https://www.sqlitetutorial.net/
-    #. https://sqliteonline.com/
-    #. `<https://extendsclass.com/sqlite-browser.html#>`_
-    #. https://inloop.github.io/sqlite-viewer/
-    #. https://github.com/inloop/sqlite-viewer
-    #. https://github.com/sql-js/sql.js
-    #. https://sql.js.org/#/
-    #. http://sqlfiddle.com/
-    #. https://github.com/coleifer/sqlite-web
-    #. https://sqlitestudio.pl/
-    #. https://www.onworks.net/programs/sqlite-online?amp=0
-    #. https://www.heidisql.com/#featurelist
-    #. https://sqlzoo.net/
-
-----
-
-:class: t2c
-
-SP
-==
+Database Schema of SP
+=====================
 .. code:: sql
     :number-lines:
 
     create table s (
-     sn      char(10) primary key,
-     sname   char(30),
-     status  int  default(0),
-     city    char(20)
+        sn      char(10) primary key,
+        sname   char(30),
+        status  int  default(0),
+        city    char(20)
     );
 
     create table p (
-     pn     char(10) primary key,
-     pname  char(30),
-     color  char(20),
-     weight NUMERIC(9, 2),
-     city   char(20)
+        pn     char(10) primary key,
+        pname  char(30),
+        color  char(20),
+        weight NUMERIC(9, 2),
+        city   char(20)
     );
 
     create table sp (
-     sn    char(10) references s,
-     pn    char(10) references p,
-     qty   int default(0),
-     primary key (sn, pn)
-   );
+        sn    char(10) references s,
+        pn    char(10) references p,
+        qty   int default(0),
+        primary key (sn, pn)
+    );
 
 
 .. yographviz::
@@ -150,133 +112,93 @@ SP
        sp:pn -> p:pn [label=" references", arrowtail=none, arrowhead=normal];
    }
 
-
 ----
 
 :class: t2c
 
-insert
-=========
+DSL(Data Sub Language)
+======================
 .. code:: sql
+    :number-lines:
 
     insert into s(sn, sname,  status, city)
     values('s1', 'Smith', 20, 'London')
     ;
-    insert into s(sn, sname,  status, city)
-    values('s2', 'Jones', 10, 'Paris' )
+
+    insert into p(pn, pname, color, weight, city)
+    values('p1','Nut'  ,'Red'  ,12.0,'London')
     ;
-    insert into s(sn, sname,  status, city)
-    values('s3', 'Blake', 30, 'Paris' )
-    ;
-    insert into s(sn, sname,  "status", city)
-    values('s4', 'Clark', 20, 'London')
-    ;
-    insert into s(sname, status, city, sn)
-    values('Adams', 30, 'Athens', 's5')
-    ;
-    insert into s
-    values('s6', 'Ali', 40, 'کاشان')
+
+    insert into p(pn, pname, color, weight, city)
+    values
+      ('p2', 'Bolt' , 'Green', 17.0, 'Paris' ),
+      ('p5', 'Cam'  , 'Blue' , 12.0, 'Paris' ),
+      ('p6', 'Cog'  , 'Red'  , 19.0, 'London')
     ;
 
 .. container::
 
     .. class:: substep
 
-        **DSL(Data Sub Language)**
+        .. code:: sql
 
-        SQL (Structured Query Language)
+            delete sp;
+
+        .. code:: sql
+
+            drop table sp;
 
         * DDL: Data Definition Language
         * DML: Data Manipluation Language
         * DCL: Data Control Language
 
-        #. DDL: create table
-        #. DML: insert
-
-----
-
-P
-====
-.. code:: sql
-
-  insert into p(pn, pname, color, weight, city)
-    values('p1','Nut'  ,'Red'  ,12.0,'London')
-  ;
-  insert into p(pn, pname, color, weight, city)
-    values
-      ('p2', 'Bolt' , 'Green', 17.0, 'Paris' ),
-      ('p3', 'Screw', 'Blue' , 17.0, 'Oslo'  ),
-      ('p4', 'Screw', 'Red'  , 14.0, 'London'),
-      ('p5', 'Cam'  , 'Blue' , 12.0, 'Paris' ),
-      ('p6', 'Cog'  , 'Red'  , 19.0, 'London')
-  ;
-
-  insert into p(pn, pname, color, city)
-    values('p7', 'Nut', 'Red', 'London')
-  ;
-  insert into p(pn, pname, color, city)
-    values('p8', 'Bolt', 'Green', 'Paris')
-  ;
-
-----
-
-SP
-====
-.. code:: sql
-
-  insert into sp(sn, pn, qty)
-    values
-    ('s1', 'p1', 300),
-    ('s1', 'p2', 200),
-    ('s1', 'p3', 400),
-    ('s1', 'p4', 200),
-    ('s1', 'p5', 100),
-    ('s1', 'p6', 100),
-    ('s2', 'p1', 300),
-    ('s2', 'p2', 400),
-    ('s3', 'p2', 200),
-    ('s4', 'p2', 200),
-    ('s4', 'p4', 300),
-    ('s4', 'p5', 400),
-    ('s6', 'p2', 350)
-  ;
-
-.. :
-
-  insert into p(pn,pname,color,city)
-    values('P7', 'Nut', 'Red', 'London')
-  ;
-  insert into p(pn, pname, color, city)
-    values('P8', 'Bolt', 'Green', 'Paris')
-  ;
+        #. DDL: create, drop
+        #. DML: insert, delete
 
 ----
 
 :class: t2c
 
-Database
-===========
-.. container::
+DBMS(Database Management System)
+================================
+.. container:: substep
 
-    SP database includes the following
-
-    * s, p, sp
-
-    **Database Schema**
-
-    .. code:: sql
-
-      create database sp;
-
-.. container::
-
-    **DBMS(Database Management System)**
+    .. class:: substep
 
     * An application
-    * RDBMS
+    * RDBMS (Relational Datababase Management System)
+    * SQL (Structured Query Language)
     * DB2, Oracle, PostgreSQL, MySQL, SqlServer, MariaDB
     * SQLite (Lack of DCL commands, each db on a file)
 
+.. container:: substep
+
+    *SQLite*
+
+    .. class:: substep
+
+    #. `SQLite <https://www.sqlite.org/download.html>`_
+    #. `SQLite browser <https://sqlitebrowser.org/>`_
+    #. `SQLite studio <https://sqlitestudio.pl/>`_
+    #. `SQLite-web <https://github.com/coleifer/sqlite-web>`_
+    #. `Database Viewer <https://github.com/Dyaland/DatabaseViewer>`_
+
+.. container:: substep
+
+    *Online*
+
+    .. class:: substep
+
+    #. `sql.js <https://sql.js.org/examples/GUI/>`_
+    #. `sqlite online <https://sqliteonline.com/>`_
+    #. `sqlite-browser <https://extendsclass.com/sqlite-browser.html#>`_
+    #. `sqlite-viewer <https://inloop.github.io/sqlite-viewer/>`_
+    #. `sqlfiddle <https://sqlfiddle.com/sqlite/online-compiler>`_
+
+.. :
+
+    #. https://sqlzoo.net/
+    #. `tutorial <https://www.sqlitetutorial.net/>`_
 
 ----
 
@@ -311,6 +233,115 @@ Database
   Cog
   Nut
   Bolt
+
+----
+
+:class: n2c
+
+.. container::
+
+    .. code:: sql
+        :number-lines:
+
+        select sname, status
+        from s
+        ;
+
+    .. code:: sql
+        :number-lines:
+
+        s{sname, status};
+
+        -- Relational Algebra
+
+
+.. raw:: html
+
+    <pre>
+        ╭───────┬────────╮
+        │ sname │ status │
+        ╞═══════╪════════╡
+        │ Smith │     20 │
+        │ Jones │     10 │
+        │ Blake │     30 │
+        │ Clark │     20 │
+        │ Adams │     30 │
+        │ Ali   │     40 │
+        ╰───────┴────────╯
+    </pre>
+
+.. code:: sql
+    :number-lines:
+
+    select *
+    from s;
+    ;
+
+.. raw:: html
+
+    <pre>
+        ╭────┬───────┬────────┬────────╮
+        │ sn │ sname │ status │  city  │
+        ╞════╪═══════╪════════╪════════╡
+        │ s1 │ Smith │     20 │ London │
+        │ s2 │ Jones │     10 │ Paris  │
+        │ s3 │ Blake │     30 │ Paris  │
+        │ s4 │ Clark │     20 │ London │
+        │ s5 │ Adams │     30 │ Athens │
+        │ s6 │ Ali   │     40 │ کاشان  │
+        ╰────┴───────┴────────┴────────╯
+    </pre>
+
+
+----
+
+:class: t2c
+
+as (rename)
+==============
+.. code:: sql
+    :number-lines:
+
+    select sname, status + 4
+    from s;
+    ;
+
+.. raw:: html
+
+    <pre>
+        ╭───────┬────────────╮
+        │ sname │ status + 4 │
+        ╞═══════╪════════════╡
+        │ Smith │         24 │
+        │ Jones │         14 │
+        │ Blake │         34 │
+        │ Clark │         24 │
+        │ Adams │         34 │
+        │ Ali   │         44 │
+        ╰───────┴────────────╯
+    </pre>
+
+.. code:: sql
+    :number-lines:
+
+    select sname, status + 4 as st4
+    from s;
+    ;
+
+.. raw:: html
+
+    <pre>
+        ╭───────┬─────╮
+        │ sname │ st4 │
+        ╞═══════╪═════╡
+        │ Smith │  24 │
+        │ Jones │  14 │
+        │ Blake │  34 │
+        │ Clark │  24 │
+        │ Adams │  34 │
+        │ Ali   │  44 │
+        ╰───────┴─────╯
+    </pre>
 
 ----
 
@@ -353,45 +384,113 @@ Database
 
 ----
 
+:class: t2c
+
+NULL
+=====
+.. container::
+
+    .. code:: sql
+        :number-lines:
+
+        insert into p(pn, pname, color, city)
+        values('p7', 'Nut', 'Red', 'London')
+        ;
+
+    .. code:: sql
+        :number-lines:
+        :class: substep
+
+        insert into p(pn, pname, color, weight, city)
+        values('p8', 'Bolt', 'Green', null, 'Paris')
+        ;
+
+.. container::
+
+     .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pname
+        from p
+        where weight is not null;
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pname
+        from p
+        where weight is null;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    create table s (
+     sn      char(10) primary key,
+     sname   char(30) not null,
+     status  int  default 0,
+     city    char(20)
+    );
+
+.. class:: substep
+
+    #. null
+    #. not 'null'
+    #. not 0
+    #. not '0'
+    #. not ''
+
+.. class:: substep
+
+    #. Do not know the value
+    #. Not applicable
+        * Address: city, street, alley, number
+
+.. :
+
+    https://www.ibm.com/support/knowledgecenter/en/SSEPEK_11.0.0/intro/src/tpc/db2z_joindatafromtables.html
+    https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/intro/src/art/bkntjoin.gif
+
+    برای حالتی که فیلدی در جدول مقدارهای null نیز داشته باشد و نتیجه‌های unknown بدهد در این صورت باید منطق سه گزاره‌ای را به کار ببریم تا نتیجهٔ نهایی را متوجه بشویم.
+
+    نام قطعاتی را به دست آورید که نام شهر آنها کاشان باشد یا وزن آنها بیشتر از ۲۰ باشد.
+
+    select pname
+    from p
+    where city='kashan' or wight>20;
+
+    اگر دستور زیر را بنویسیم می‌تواند پاسخ دیگری را بدهد.
+
+    select pname
+    from p
+    where (city in not null and city='kashan') or weight>20;
+
+----
+
+:class: t2c
+
 .. class:: rtl-h1
 
   نام قعطه‌ها و وزن آنها را به گرم بیابید.
 
-.. code:: sql
+.. container:: substep
 
-  select pname, weight * 1000
-  from p
-  ;
+    .. code:: sql
+        :number-lines:
+
+        select pname, weight * 1000
+        from p
+        ;
+
+    NULL * 1000 → NULL
 
 ..  csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder
+  :class: smallerelementwithfullborder substep
 
   pname, weight * 1000
-  Nut,  12000
-  Bolt, 17000
-  Screw,  17000
-  Screw,  14000
-  Cam,  12000
-  Cog,  19000
-  Nut,
-  Bolt,
-
-----
-
-as (rename)
-==============
-.. code:: sql
-
-  select pname, weight * 1000 as gweight
-  from p
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname, gweight
   Nut,  12000
   Bolt, 17000
   Screw,  17000
@@ -412,6 +511,7 @@ as (rename)
 .. container::
 
   .. code:: sql
+    :number-lines:
 
     select sname
     from s
@@ -859,42 +959,44 @@ Use Another name for a Table in Query
   a,  name, a,  name
   1,  a,  2,  b
 
-
 ----
 
 :class: t2c
 
-Use Another name for a Table in Query
-=========================================
-.. class:: substep rtl-h2
+.. class:: rtl-h1
 
     نام قطعاتی را بیابید که وزن آنها دست کم از وزن یک قطعهٔ دیگر بیشتر باشد
 
-    نام همهٔ قطعات را بیابید به جز قطعه‌ یا قطعه‌هایی که کمترین وزن را دارند
-
 .. container::
 
-  .. code:: sql
+    .. class:: substep rtl-h2
 
-    select T.pname
-    from p as T
-    ;
+        نام همهٔ قطعات را بیابید به جز قطعه‌ یا قطعه‌هایی که کمترین وزن را دارند
 
-  .. code:: sql
-    :class: substep
 
-    select T.pname
-    from p as T, p
-    where p.weight < T.weight
-    ;
+    .. code:: sql
+        :class: substep
+        :number-lines:
 
-  .. code:: sql
-    :class: substep
+        select T.pname
+        from p as T
+        ;
 
-    select T.pname
-    from p as T join p on
-      p.weight < T.weight
-    ;
+    .. code:: sql
+        :class: substep
+
+        select T.pname
+        from p as T, p
+        where p.weight < T.weight
+        ;
+
+    .. code:: sql
+        :class: substep
+
+        select T.pname
+        from p as T join p on
+          p.weight < T.weight
+        ;
 
 ..  csv-table::
   :header-rows: 1
@@ -1199,9 +1301,7 @@ Use Another name for a Table in Query
 
 .. class:: rtl-h1
 
-  نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ زیر آغاز شود.
-
-`bn_`
+  نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ `_bn` آغاز شود.
 
 .. code:: sql
   :class: substep
@@ -1213,10 +1313,11 @@ Use Another name for a Table in Query
 
 ----
 
+:class: t2c
+
 escape
 ========
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -1240,10 +1341,13 @@ escape
   where city like 'P#_%' escape '#'
   ;
 
-  select pname
-  from p
-  where city like "an\_%" escape "\"
-  ; -- "
+.. code:: sql
+    :class: substep
+
+    select pname
+    from p
+    where city like "an\_%" escape "\"
+    ; -- "
 
 ----
 
@@ -2644,74 +2748,6 @@ DDL
   alter table sp add "comment" varchar(50) default '';
 
 .. image:: img/sql/alter_table_sqlite.png
-
-----
-
-:class: t2c
-
-NULL
-=====
-.. code:: sql
-    :class: substep
-
-    insert into p(pn, pname, color, city)
-    values('p7', 'Nut', 'Red', 'London')
-    ;
-
-.
-
-.. class:: substep
-
-    #. Do not know the value
-    #. Not applicable
-        * Address: city, street, alley, number
-
-.. code:: sql
-    :class: substep
-
-    select pname
-    from p
-    where weight is null;
-
-.. code:: sql
-    :class: substep
-
-    select pname
-    from p
-    where weight is not null;
-
-.. code:: sql
-    :class: substep
-
-    create table s (
-     sn      char(10) primary key,
-     sname   char(30) not null,
-     status  int  default 0,
-     city    char(20)
-    );
-
-.. :
-
-    null
-
-    “null”
-
-    https://www.ibm.com/support/knowledgecenter/en/SSEPEK_11.0.0/intro/src/tpc/db2z_joindatafromtables.html
-    https://www.ibm.com/support/knowledgecenter/SSEPEK_11.0.0/intro/src/art/bkntjoin.gif
-
-    برای حالتی که فیلدی در جدول مقدارهای null نیز داشته باشد و نتیجه‌های unknown بدهد در این صورت باید منطق سه گزاره‌ای را به کار ببریم تا نتیجهٔ نهایی را متوجه بشویم.
-
-    نام قطعاتی را به دست آورید که نام شهر آنها کاشان باشد یا وزن آنها بیشتر از ۲۰ باشد.
-
-    select pname
-    from p
-    where city='kashan' or wight>20;
-
-    اگر دستور زیر را بنویسیم می‌تواند پاسخ دیگری را بدهد.
-
-    select pname
-    from p
-    where (city in not null and city='kashan') or weight>20;
 
 ----
 

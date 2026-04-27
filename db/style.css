@@ -27,7 +27,7 @@ pre.code > .ln{
 }
 
 .rtl { direction: rtl; text-align: justify; font-family: Nazli; font-size:large;/*font-weight: bold;*/}
-.ltr { direction: ltr;  text-align: justify;}
+.ltr { direction: ltr;  text-align: left;}
 pre.code { background-color:#f0f0f0;}
 pre.console{background-color: #F9E0E0;}
 
