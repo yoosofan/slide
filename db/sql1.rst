@@ -635,7 +635,7 @@ Where
 :class: t2c
 
 join
-=========
+=====
 .. class:: rtl-h1
 
   نام قطعه‌های عرضه شده را بیابید.
@@ -673,7 +673,7 @@ join
 
   نام قطعه‌هایی را بیابید که در شهر آن قطعه‌ها عرضه کننده‌ای وجود داشته باشد
 
-.. container::
+.. container:: substep
 
   .. code:: sql
 
@@ -682,12 +682,61 @@ join
     ;
 
   .. code:: sql
+    :class: substep
 
     select pname
     from p natural join s
     ;
 
-..  csv-table::
+  .. code:: sql
+    :class: substep
+
+    select distinct pname
+    from p natural join s
+    ;
+
+
+.. raw:: html
+
+    <pre>
+
+        ╭───────╮
+        │ pname │
+        ╞═══════╡
+        │ Nut   │
+        │ Nut   │
+        │ Bolt  │
+        │ Bolt  │
+        │ Screw │
+        │ Screw │
+        │ Cam   │
+        │ Cam   │
+        │ Cog   │
+        │ Cog   │
+        │ Nut   │
+        │ Nut   │
+        │ Bolt  │
+        │ Bolt  │
+        ╰───────╯
+    </pre>
+
+.. container:: substep
+
+    .. raw:: html
+
+        <pre>
+            ╭───────╮
+            │ pname │
+            ╞═══════╡
+            │ Nut   │
+            │ Bolt  │
+            │ Screw │
+            │ Cam   │
+            │ Cog   │
+            ╰───────╯
+        </pre>
+
+..  csv-table:
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
@@ -707,66 +756,40 @@ join
   Bolt
   Bolt
 
-----
+    ----
 
-:class: t2c
+    :class: t2c
 
-.. class:: rtl-h1
+    .. class:: rtl-h1
 
-  اطلاعات عرضه‌کنندگان را بیابید
+      اطلاعات عرضه‌کنندگان و قطعه‌هایی را که عرضه کرده‌اند، بیابید.
 
-.. code:: sql
+    .. code:: sql
+      :class: substep
 
-  select *
-  from s
-  ;
+      select *
+      from (p join sp using(pn))
+        join s using(sn)
+      ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+    ..  csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder substep
 
-  sn, sname,  status, city
-  s1, Smith,  20,   London
-  s2, Jones,  10,   Paris
-  s3, Blake,  30,   Paris
-  s4, Clark,  20,   London
-  s5, Adams,  30,   Athens
-  s6, Ali,    40,   کاشان
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  اطلاعات عرضه‌کنندگان و قطعه‌هایی را که عرضه کرده‌اند، بیابید.
-
-.. code:: sql
-  :class: substep
-
-  select *
-  from (p join sp using(pn))
-    join s using(sn)
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pn, pname,  color,  weight, city, sn, qty,  sname,  status, city
-  p1, Nut,  Red,  12, London, s1, 300,  Smith,  20, London
-  p2, Bolt, Green,  17, Paris,  s1, 200,  Smith,  20, London
-  p3, Screw,  Blue, 17, Oslo, s1, 400,  Smith,  20, London
-  p4, Screw,  Red,  14, London, s1, 200,  Smith,  20, London
-  p5, Cam,  Blue, 12, Paris,  s1, 100,  Smith,  20, London
-  p6, Cog,  Red,  19, London, s1, 100,  Smith,  20, London
-  p1, Nut,  Red,  12, London, s2, 300,  Jones,  10, Paris
-  p2, Bolt, Green,  17, Paris,  s2, 400,  Jones,  10, Paris
-  p2, Bolt, Green,  17, Paris,  s3, 200,  Blake,  30, Paris
-  p2, Bolt, Green,  17, Paris,  s4, 200, Clark, 20, London
-  p4, Screw,  Red,  14, London, s4, 300,  Clark,  20, London
-  p5, Cam,  Blue, 12, Paris,  s4, 400,  Clark,  20, London
-  p2, Bolt, Green,  17, Paris,  s6, 350,  Ali,  40, کاشان
+      pn, pname,  color,  weight, city, sn, qty,  sname,  status, city
+      p1, Nut,  Red,  12, London, s1, 300,  Smith,  20, London
+      p2, Bolt, Green,  17, Paris,  s1, 200,  Smith,  20, London
+      p3, Screw,  Blue, 17, Oslo, s1, 400,  Smith,  20, London
+      p4, Screw,  Red,  14, London, s1, 200,  Smith,  20, London
+      p5, Cam,  Blue, 12, Paris,  s1, 100,  Smith,  20, London
+      p6, Cog,  Red,  19, London, s1, 100,  Smith,  20, London
+      p1, Nut,  Red,  12, London, s2, 300,  Jones,  10, Paris
+      p2, Bolt, Green,  17, Paris,  s2, 400,  Jones,  10, Paris
+      p2, Bolt, Green,  17, Paris,  s3, 200,  Blake,  30, Paris
+      p2, Bolt, Green,  17, Paris,  s4, 200, Clark, 20, London
+      p4, Screw,  Red,  14, London, s4, 300,  Clark,  20, London
+      p5, Cam,  Blue, 12, Paris,  s4, 400,  Clark,  20, London
+      p2, Bolt, Green,  17, Paris,  s6, 350,  Ali,  40, کاشان
 
 ----
 
@@ -804,108 +827,92 @@ join
   pname
   Bolt
 
-----
+.. :
 
-:class: t2c
+    ----
 
-..  class:: rtl-h1
+    :class: t2c
 
-  نام قطعات را بیابید و نام ستون آن را name بگذارید
+    .. class:: rtl-h1
 
-.. code:: sql
-  :class: substep
+      نام قطعاتی را بیابید که وزن آنها بیشتر از ۲۰ است
 
-  select pname as name
-  from p
-  ;
+    .. code:: sql
+      :class: substep
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+      select pname
+      from p
+      where weight > 20
+      ;
 
-  name
-  Nut
-  Bolt
-  Screw
-  Screw
-  Cam
-  Cog
-  Nut
-  Bolt
+    ..  csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder substep
+
+      pname
+      ""
 
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+SQLite (I)
+==========
+.. class:: substep
 
-  شماره قطعه‌های عرضه شده را بدون شمارهٔ تکراری بیابید
+#. sqlite3
+#. sqlite3 sp.sqlte
+#. .exit or .quit
+#. .help
+#. .read sp.sql
+#. .output sp2.sql
+#. .dump
+#. .output
 
-.. code:: sql
+.. class:: substep
 
-  select distinct pn
-  from sp
-  ;
+#. .open database.db
+#. .databases
+#. .backup  FILE
+#. .restore FILE
+#. .system CMD
+#. .system clear
+#. .tables
+#. .schema s
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+.. :
 
-  pn
-  p1
-  p2
-  p3
-  p4
-  p5
-  p6
+    .mode box
+    .mode csv
+    .mode column
+    .mode markdown
 
-----
+    .. csv-table::
+        :header-rows: 1
+        :class: smallerelementwithfullborder substep
 
-:class: t2c
+        Command,Description
+        sqlite3,Open SQLite3 in interactive mode
+        sqlite3 database.db,Open (or create) a database file
+        .exit or .quit,Exit SQLite3
+        .help,List all available SQLite3 dot commands
+        .read file.sql, read and execute file.sql
+        .dump ?TABLE?,Export database (or table) as SQL script
 
-.. class:: rtl-h1
+    .. csv-table::
+        :header-rows: 1
+        :class: smallerelementwithfullborder substep
 
-  نام قطعاتی را بیابید که وزن آنها بیشتر از ۲۰ است
+        Command,Description
+        .open database.db,Open (or create) a database file
+        .databases,List attached databases
+        .backup ?DB? FILE,Backup database to a file
+        .restore ?DB? FILE,Restore database from a file
+        .system CMD, run CMD command from operating system
 
-.. code:: sql
-  :class: substep
-
-  select pname
-  from p
-  where weight > 20
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pname
-  ""
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام شهرهای عرضه‌کنندگان را بدون تکرار بیابید
-
-.. code:: sql
-  :class: substep
-
-  select distinct city
-  from s
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  city
-  London
-  Paris
-  Athens
-  کاشان
+    https://database.guide/an-overview-of-dot-commands-in-sqlite/
+    https://stephentech.bearblog.dev/sqlite3-commands-cheat-sheet/
+    https://www.sqlitetutorial.net
 
 ----
 
@@ -973,25 +980,26 @@ Use Another name for a Table in Query
 
 .. class:: rtl-h1
 
-    نام قطعاتی را بیابید که وزن آنها دست کم از وزن یک قطعهٔ دیگر بیشتر باشد
+نام قطعاتی را بیابید که وزن آنها دست کم از وزن یک قطعهٔ دیگر بیشتر باشد نام تکراری در پاسخ نیاید.
+
+.. class:: substep rtl-h2
+
+    نام همهٔ قطعات را بیابید به جز قطعه‌ یا قطعه‌هایی که کمترین وزن را دارند
+
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select T.pname
+    from p as T
+    ;
 
 .. container::
-
-    .. class:: substep rtl-h2
-
-        نام همهٔ قطعات را بیابید به جز قطعه‌ یا قطعه‌هایی که کمترین وزن را دارند
-
 
     .. code:: sql
         :class: substep
         :number-lines:
-
-        select T.pname
-        from p as T
-        ;
-
-    .. code:: sql
-        :class: substep
 
         select T.pname
         from p as T, p
@@ -1000,13 +1008,35 @@ Use Another name for a Table in Query
 
     .. code:: sql
         :class: substep
+        :number-lines:
 
-        select T.pname
+        select distinct T.pname
+        from p as T, p
+        where p.weight < T.weight
+        ;
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select distinct T.pname
         from p as T join p on
           p.weight < T.weight
         ;
 
-..  csv-table::
+.. raw:: html
+
+    <pre>
+    ╭───────╮
+    │ pname │
+    ╞═══════╡
+    │ Bolt  │
+    │ Screw │
+    │ Cog   │
+    ╰───────╯
+    </pre>
+
+..  csv-table:
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
@@ -1029,73 +1059,9 @@ Use Another name for a Table in Query
 
 :class: t2c
 
-
 .. class:: rtl-h1
 
-  مانند مسألهٔ پیش با این تفاوت که نام‌های تکراری در  پاسخ نباشد
-
-.. code:: sql
-  :class: substep
-
-  select distinct T.pname
-  from p as T, p
-  where p.weight < T.weight
-  ;
-
-.. class:: substep rtl-h2
-
-    راه حل دیگر
-
-.. code:: sql
-  :class: substep
-
-  select distinct T.pname
-  from p as T join p on
-    p.weight < T.weight
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pname
-  Bolt
-  Screw
-  Cog
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعاتی را بیابید که وزن آنها دست کم از وزن یک قطعهٔ دیگر کمتر باشد
-
-.. code:: sql
-  :class: substep
-
-  select distinct T.pname
-  from p as T join p on
-    p.weight > T.weight
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pname
-  Nut
-  Bolt
-  Screw
-  Cam
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعه‌های عرضه شده را همراه با نام عرضه‌کنندگان‌شان بیابید
+نام قطعه‌های عرضه شده را همراه با نام عرضه‌کنندگان‌شان بیابید زوج نام تکراری در پاسخ نیاید.
 
 .. container::
 
@@ -1111,12 +1077,33 @@ Use Another name for a Table in Query
   .. code:: sql
     :class: substep
 
-    select pname, sname
+    select distinct pname, sname
     from s natural join sp
       join p using(pn)
     ;
 
-..  csv-table::
+.. raw:: html
+
+    <pre>
+        ╭───────┬───────╮
+        │ pname │ sname │
+        ╞═══════╪═══════╡
+        │ Nut   │ Smith │
+        │ Bolt  │ Smith │
+        │ Screw │ Smith │
+        │ Cam   │ Smith │
+        │ Cog   │ Smith │
+        │ Nut   │ Jones │
+        │ Bolt  │ Jones │
+        │ Bolt  │ Blake │
+        │ Bolt  │ Clark │
+        │ Screw │ Clark │
+        │ Cam   │ Clark │
+        │ Bolt  │ Ali   │
+        ╰───────┴───────╯
+    </pre>
+
+..  csv-table:
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
@@ -1192,58 +1179,16 @@ Use Another name for a Table in Query
       Cog
       Screw
 
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    نام قطعاتی را بیابید که نام شهر آنها با L آغاز شده باشد
-
-.. code:: sql
-
-  select pname
-  from p
-  where city like 'L%'
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pname
-  Nut
-  Screw
-  Cog
-  Nut
-
-.. code:: sql
-
-  select *
-  from p
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  pn, pname,  color,  weight, city
-  p1, Nut,  Red,  12, London
-  p2, Bolt, Green,  17, Paris
-  p3, Screw,  Blue, 17, Oslo
-  p4, Screw,  Red,  14, London
-  p5, Cam,  Blue, 12, Paris
-  p6, Cog,  Red,  19, London
-  p7, Nut,  Red,  ,  London
-  p8, Bolt, Green, ,   Paris
 
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+LIKE
+====
+.. class:: rtl-h2
 
-    نام شهرهای قطعاتی را بیابید که با P آغاز شده باشد
+نام شهرهای قطعاتی را بیابید که با P آغاز شده باشد
 
 .. code:: sql
   :class: substep
@@ -1253,42 +1198,21 @@ Use Another name for a Table in Query
   where city like 'P%'
   ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+.. class:: rtl-h2 substep
 
-  pname, city
-  Bolt, Paris
-  Cam, Paris
-  Bolt, Paris
-
-----
-
-.. class:: rtl-h1
-
-    نام قطعاتی را بیابید که نام شهر آنها پنج حرفی باشد  با S آغاز شده باشد
+نام قطعاتی را بیابید که کاراکتر دوم نام‌شان o باشد.
 
 .. code:: sql
+  :class: substep
 
   select pname
   from p
-  where city like 'S____'
+  where city like '_o%'
   ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+.. class:: rtl-h2 substep
 
-  pname
-  Screw
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    نام شهر قطعاتی را بیابید که درون نام شهر آنها رشتهٔ is وجود داشته باشد
+نام شهر قطعاتی را بیابید که درون نام شهر آنها رشتهٔ is وجود داشته باشد
 
 .. code:: sql
   :class: substep
@@ -1298,16 +1222,7 @@ Use Another name for a Table in Query
   where city like '%is%'
   ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-  city
-  Paris
-
-----
-
-.. class:: rtl-h1
+.. class:: rtl-h2 substep
 
   نام قطعات و شهرهای آنها را بیابید که شهر آنها دست کم سه‌حرفی باشند و با رشتهٔ `_bn` آغاز شود.
 
@@ -1361,41 +1276,14 @@ escape
 
 :class: t2c
 
-
-.. class:: rtl-h1
-
-نام قطعاتی را بیابید که نام شهر آنها با an پایان نیافته باشد
-
-.. code:: sql
-
-  select pname
-  from p
-  where city not like "%an"
-  ;
-
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
-
-    pname
-    Nut
-    Bolt
-    Screw
-    Screw
-    Cam
-    Cog
-    Nut
-    Bolt
-
-----
-
-.. class:: rtl-h1
+ORDER BY
+========
+.. class:: rtl-h2
 
 نام قطعاتی را بیابید که در شهر پاریس باشند و پاسخ بر پایهٔ نام قطعه از کوچک به بزرگ مرتب شده باشد.
 
 
 .. code:: sql
-  :class: substep
 
   select pname
   from p
@@ -1415,6 +1303,8 @@ escape
   where city='Paris'
   order by weight
   ;
+
+.
 
 .. code:: sql
   :class: substep
@@ -1453,13 +1343,43 @@ escape
     Cam,  12
     Bolt,
 
+.. code:: sql
+  :class: substep
+
+  select pname, weight
+  from p
+  where city='Paris' and weight is not null
+  order by weight desc
+  ;
+
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+    pname,  weight
+    Bolt, 17
+    Cam,  12
+
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+BETWEEN
+=======
+.. container::
 
-  نام و وزن قطعاتی را بیابید که وزن‌شان بین ۱۲ و ۱۴ باشد
+    .. class:: rtl-h2
+
+      نام و وزن قطعاتی را بیابید که وزن‌شان بین ۱۲ و ۱۴ باشد
+
+    .. csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder, substep
+
+      pname, weight
+      Nut,12
+      Screw,14
+      Cam,12
 
 .. container::
 
@@ -1478,22 +1398,20 @@ escape
       from p
       where weight between 12 and 14;
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder, substep
+.. container::
 
-  pname, weight
-  Nut,12
-  Screw,14
-  Cam,12
+    .. class:: rtl-h2 substep
 
-----
+      نام و وزن قطعاتی را بیابید که وزن‌شان بین ۱۲ و ۱۴ نباشد
 
-:class: t2c
+    .. csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder, substep
 
-.. class:: rtl-h1
-
-  نام و وزن قطعاتی را بیابید که وزن‌شان بین ۱۲ و ۱۴ نباشد
+      pname, weight
+      Bolt,17
+      Screw,17
+      Cog,19
 
 .. container::
 
@@ -1513,73 +1431,66 @@ escape
       where weight not between 12 and 14
       ;
 
-    .. code:: sql
-      :class: substep
+.. code:: sql
+  :class: substep
 
-      select pname, weight
-      from p
-      where weight < 12 or weight > 14
-      ;
+  select pname, weight
+  from p
+  where weight < 12 or weight > 14
+  ;
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder, substep
-
-  pname, weight
-  Bolt,17
-  Screw,17
-  Cog,19
 
 ----
 
 :class: t2c
 
-Record Comparison
-==================
+.. :
+
+
 .. class:: rtl-h1
 
   نام قطعاتی را بیاید که عرضه کننده‌ای در شهر آن قطعه‌ها آنها را عرضه کرده باشد
 
-.. container::
+Record Comparison
+------------------
+.. code:: sql
+  :class: substep
 
-    .. code:: sql
-      :class: substep
+  select pname
+  from p, s, sp
+  where p.city = s.city and
+    p.pn = sp.pn and
+    s.sn = sp.sn
+  ;
 
-      select pname
-      from p, s, sp
-      where (p.city, p.pn) = (s.city, sp.pn)
-        and s.sn = sp.sn
-      ;
+.. code:: sql
+  :class: substep
 
-    .. code:: sql
-      :class: substep
+  select pname
+  from p, s, sp
+  where (p.city, p.pn) = (s.city, sp.pn)
+    and s.sn = sp.sn
+  ;
 
-      select pname
-      from p, s, sp
-      where p.city = s.city and
-        p.pn = sp.pn and
-        s.sn = sp.sn
-      ;
+.. code:: sql
+  :class: substep
 
-    .. code:: sql
-      :class: substep
-
-      select pname
-      from p join s on
-        p.city = s.city
-        join sp on
-        (p.pn, s.sn) = (sp.pn, sp.sn)
-      ;
+  select pname
+  from p join s on
+    p.city = s.city
+    join sp on
+    (p.pn, s.sn) = (sp.pn, sp.sn)
+  ;
 
 
-    .. code:: sql
-      :class: substep
+.. code:: sql
+  :class: substep
 
-      select pname
-      from p  natural join sp  natural join s
-      ;
+  select pname
+  from p natural join sp natural join s
+  ;
 
-.. csv-table::
+.. csv-table:
   :header-rows: 1
   :class: smallerelementwithfullborder, substep
 
@@ -1597,9 +1508,20 @@ Record Comparison
 
 Union
 ========
-.. container::
+.. class:: rtl-h2
 
-  .. code:: sql
+نام قطعاتی از شهر پاریس را بیابید که وزن آن‌ها بیشتر از ۱۲ است.
+
+.. code:: sql
+    :class: substep
+
+    select distinct pname
+    from p
+    where city = 'Paris' or
+      weight > 12;
+
+.. code:: sql
+    :class: substep
 
       select pname
       from p
@@ -1607,17 +1529,19 @@ Union
     union
       select pname
       from p
-      where weight>12
-    ;
+      where weight>12;
 
-  .. code:: sql
-    :class: substep
+.. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder, substep
 
-    select distinct pname
-    from p
-    where city = 'Paris' or
-      weight > 12
-    ;
+    pname
+    Bolt
+    Cam
+    Cog
+    Screw
+
+.. container::
 
   .. code:: sql
     :class: substep
@@ -1631,23 +1555,7 @@ Union
       where weight>10
      ;
 
-
-.. container::
-
-  .. csv-table::
-    :header-rows: 1
-    :class: smallerelementwithfullborder, substep
-
-
-    pname
-    Bolt
-    Cam
-    Cog
-    Screw
-
-  .
-
-  .. csv-table::
+.. csv-table::
     :header-rows: 1
     :class: smallerelementwithfullborder, substep
 
@@ -1658,7 +1566,6 @@ Union
     Screw
     Cam
     Cog
-
 
 ----
 
@@ -1958,7 +1865,7 @@ Except
 
 ----
 
-:class: t2c
+:class: n2c
 
 .. container::
 
