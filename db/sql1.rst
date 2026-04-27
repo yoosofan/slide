@@ -155,6 +155,19 @@ DSL(Data Sub Language)
         #. DDL: create, drop
         #. DML: insert, delete
 
+.. code:: sql
+    :number-lines:
+
+    insert into s(sn, sname,  "status", city)
+    values('s4', 'Clark', 20, 'London')
+    ;
+    insert into s(sname, status, city, sn)
+    values('Adams', 30, 'Athens', 's5')
+    ;
+    insert into s
+    values('s6', 'Ali', 40, 'کاشان')
+    ;
+
 ----
 
 :class: t2c
@@ -272,25 +285,28 @@ DBMS(Database Management System)
 
 .. code:: sql
     :number-lines:
+    :class: substep
 
     select *
     from s;
     ;
 
-.. raw:: html
+.. container:: substep
 
-    <pre>
-        ╭────┬───────┬────────┬────────╮
-        │ sn │ sname │ status │  city  │
-        ╞════╪═══════╪════════╪════════╡
-        │ s1 │ Smith │     20 │ London │
-        │ s2 │ Jones │     10 │ Paris  │
-        │ s3 │ Blake │     30 │ Paris  │
-        │ s4 │ Clark │     20 │ London │
-        │ s5 │ Adams │     30 │ Athens │
-        │ s6 │ Ali   │     40 │ کاشان  │
-        ╰────┴───────┴────────┴────────╯
-    </pre>
+    .. raw:: html
+
+        <pre>
+            ╭────┬───────┬────────┬────────╮
+            │ sn │ sname │ status │  city  │
+            ╞════╪═══════╪════════╪════════╡
+            │ s1 │ Smith │     20 │ London │
+            │ s2 │ Jones │     10 │ Paris  │
+            │ s3 │ Blake │     30 │ Paris  │
+            │ s4 │ Clark │     20 │ London │
+            │ s5 │ Adams │     30 │ Athens │
+            │ s6 │ Ali   │     40 │ کاشان  │
+            ╰────┴───────┴────────┴────────╯
+        </pre>
 
 
 ----
@@ -351,7 +367,7 @@ as (rename)
 
   نام قطعه‌ها و وزن آنها را بیابید.
 
-.. container::
+.. container:: substep
 
   .. code:: sql
 
@@ -365,7 +381,7 @@ as (rename)
 
 ..  csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder
+  :class: smallerelementwithfullborder substep
 
   pname, weight
   Nut,  12
@@ -405,23 +421,6 @@ NULL
         values('p8', 'Bolt', 'Green', null, 'Paris')
         ;
 
-.. container::
-
-     .. code:: sql
-        :class: substep
-        :number-lines:
-
-        select pname
-        from p
-        where weight is not null;
-
-    .. code:: sql
-        :class: substep
-        :number-lines:
-
-        select pname
-        from p
-        where weight is null;
 
 .. code:: sql
     :class: substep
@@ -473,14 +472,14 @@ NULL
 
 .. class:: rtl-h1
 
-  نام قعطه‌ها و وزن آنها را به گرم بیابید.
+نام قطعه‌ها و وزن آن‌ها را به گرم بیابید.
 
 .. container:: substep
 
     .. code:: sql
         :number-lines:
 
-        select pname, weight * 1000
+        select pname, weight * 1000 as gweight
         from p
         ;
 
@@ -490,7 +489,7 @@ NULL
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pname, weight * 1000
+  pname, gweight
   Nut,  12000
   Bolt, 17000
   Screw,  17000
@@ -504,14 +503,15 @@ NULL
 
 :class: t2c
 
-.. class:: rtl-h1
-
-  نام عرضه‌کنندگان شهر کاشان را بیابید.
+Where
+=====
 
 .. container::
 
   .. code:: sql
     :number-lines:
+
+    --   نام عرضه‌کنندگان شهر کاشان را بیابید.
 
     select sname
     from s
@@ -531,13 +531,21 @@ NULL
     where city = 'Paris'
     ;
 
-..  csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+.. container:: substep
 
-  sname
-  Jones
-  Blake
+    ..  csv-table::
+        :header-rows: 1
+        :class: smallerelementwithfullborder
+
+        sname
+        Jones
+        Blake
+
+    * Arithmetic Operators
+        * **`+ - * / %`**
+    * Comparison Operators
+        * **`= < > >= <= <>`**
+
 
 ----
 
@@ -2141,6 +2149,26 @@ Except
   sname,  sname
   Smith,  Clark
   Jones,  Blake
+
+----
+
+.. container::
+
+     .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pname
+        from p
+        where weight is not null;
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        select pname
+        from p
+        where weight is null;
 
 ----
 

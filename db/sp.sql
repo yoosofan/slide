@@ -1,6 +1,6 @@
 create table s (
     sn      char(10) primary key,
-    sname   char(30),
+    sname   char(30) not null,
     status  int  default(0),
     city    char(20)
 );
@@ -75,3 +75,7 @@ values
     ('s4', 'p5', 400),
     ('s6', 'p2', 350)
 ;
+
+-- insert into s(sn, status, city)
+-- values('s31', 20, 'London')
+-- ;
