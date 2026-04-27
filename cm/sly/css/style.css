@@ -26,23 +26,35 @@ p{
 em{font-size: 1.1rem;} /*font-family: Satisfy;*/
 strong{font-family: Racing Sans One;} /*letter-spacing: -2px;*/
 h1, h2, h3, h4, rtl-h1{
-  font-weight: normal; 
-  margin-bottom: 0.3em;  
+  font-weight: normal;
+  margin-bottom: 0.3em;
   margin-top: 0.3em;
 } ul, ol, pre.code{text-align: left;}
 pre.code{
-  padding-top: 0.1em; 
-  padding-bottom: 0.1em; 
-  padding-left: 0.2em; 
-  padding-right: 0.2em; 
-  border-style: solid; 
-  border-left-width: 0.5em; 
-  border-top-width: thin; 
-  border-right-width: thin; 
-  border-bottom-width: thin; 
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  border-style: solid;
+  border-left-width: 0.5em;
+  border-top-width: thin;
+  border-right-width: thin;
+  border-bottom-width: thin;
   border-color: #95ABD0;
   font-size: 1.1rem;
-} pre.code > .ln{background-color: #DFE5F1;}
+}
+
+pre.code > .ln{
+    background-color: #DFE5F1;
+
+    display: inline-block;
+    width: 1.5em; /* Adjust based on your largest line number */
+    text-align: right;
+    padding-right: 0.4em;
+    user-select: none; /* Prevents selecting numbers during copy-paste */
+
+}
+
 .rtl{direction:rtl; text-align:justify; }
 .ltr{direction:ltr; text-align:justify;}
 pre.code{background-color:#f0f0f0;}
@@ -62,16 +74,16 @@ ol.trace-code li::before {
   content: counter(my-awesome-counter) ". ";
   color: red;
   font-weight: bold;
-} 
+}
 #ThreeD H1{
     font-family: Racing Sans One;
     font-size: 3rem;
 }
-#thequestion p {font-family: Racing Sans One;} 
+#thequestion p {font-family: Racing Sans One;}
 .footer{position:absolute;top:95%;font-size:50%;}
 
-table.have-border, table.have-border tr, 
-table.have-border td, table.have-border th{ 
+table.have-border, table.have-border tr,
+table.have-border td, table.have-border th{
   border: 1px solid black;
 }
 table.have-border th, table.have-border th p
@@ -80,10 +92,10 @@ table.equal-col{
   table-layout: fixed;
   width: 400px;
 }
-table.smallerelementwithfullborder, 
-table.smallerelementwithfullborder tr, 
-table.smallerelementwithfullborder td, 
-table.smallerelementwithfullborder th 
+table.smallerelementwithfullborder,
+table.smallerelementwithfullborder tr,
+table.smallerelementwithfullborder td,
+table.smallerelementwithfullborder th
 {border: 1px solid black;padding-left: 0.3rem;padding-right: 0.3rem;}
 table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p
 {font-weight: bold;}
@@ -91,13 +103,23 @@ table.smallerelementwithfullborder th, table.smallerelementwithfullborder th p
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;  /*overflow: scroll;*/
-} 
+}
 .grid-2col1fr2fr-class{
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: stretch;
   overflow: scroll;
 }
+
+div.n2c{
+  display: grid;
+  grid-template-columns: auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
+
 div.t2c{
   display: grid;
   grid-template-columns: auto auto;
@@ -130,10 +152,24 @@ div.yoo-grid-auto-flow-column{
 }
 div.scrollbar-box800x500px-overflow{
   width: 800px;
-  height: 500px;  
+  height: 500px;
   overflow: scroll;
 }
 .tableheaderwithgraybackground th {
     font-weight: bold;
     background-color: #BFBFBF;
+}
+table.yoo-memory {width: 98%;}
+table.yoo-memory tr td { border: solid 1px;}
+table.yoo-memory tr:nth-of-type(1) td{
+  text-align: center;
+}
+table.yoo-memory tr:nth-of-type(2) td{
+  border: 0;
+  text-align: left;
+}
+table.yoo-memory tr:nth-of-type(1) td:last-of-type{
+  border: 0;
+  text-align: right;
+  visible: false;
 }

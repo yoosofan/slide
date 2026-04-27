@@ -958,7 +958,9 @@ There is a flaw in your code. In YIC 80 and 90, the kernel (loader, ISR and othe
    12. RTK to loader after the user program finished
    13. Load another user program from input
 
-Your code put a ``hex 0`` in address zero of memory while it should be a ``BUN ``
+----
+
+Your code put a `hex 0` in address zero of memory while it should be a `BUN`
 Please fix this problem and any other problems in your suggested code and rewrite the whole code.
 
 .. code::

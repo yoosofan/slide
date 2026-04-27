@@ -22,70 +22,59 @@ Compiler course
 University of Kashan
 
 * https://yoosofan.github.io/course/compiler.html
-
-----
-
-.. :
-
-  PLY
-  ================
-  * http://www.dabeaz.com/ply/
-  * https://github.com/dabeaz/ply
-  * https://ply.readthedocs.io/en/latest/
-  * zero-dependency Python implementation of the traditional parsing tools lex and yacc
-  * Using Python Langauge which is very good at text processing.
-  * Based on Old Yacc notation.
-  * Straight implementation of Lex/Yacc
-  * Support old version of Python
-  * It's free software that you are free to copy and modify in any way that makes sense.
-
-Sly
-=====
-* https://github.com/dabeaz/sly
-* https://sly.readthedocs.io/en/latest/
-* zero-dependency Python implementation of the traditional parsing tools lex and yacc
-* Using Python Langauge which is very good at text processing.
-* SLY provides very extensive error reporting and diagnostic information to assist in parser construction.
-* SLY provides full support for empty productions, error recovery, precedence specifiers, and moderately ambiguous grammars.
-* SLY uses various Python metaprogramming features to specify lexers and parsers.
-* A moderinized form of PLY (It is not follow the same rule of old Lex/Yacc)
-* SLY requires the use of Python 3.6 or greater.
-* 3-BSD like license
-
-Install SLY
----------------
-.. code:: console
-
-  # install python (already installed in most Linux)
-  # install pip3
-  # sudo apt-get install python3-pip # for Debian and Ubuntu
-  
-  pip3 install sly
-  
-  # or just copy sly files in the same folder of the project
+* https://yoosofan.github.io/slide/cm/sly/
 
 ----
 
 :class: t2c
 
-Simple Lexer Code
-================================
-.. include:: src/sly/222.plus.py
-  :code: python
-  :number-lines:
+Sly
+=====
+* https://github.com/dabeaz/sly
+* https://sly.readthedocs.io/en/latest/
+* zero-dependency Python
+* Based on lex and yacc
+* Python language
+* Simplicity
+* easy to start and use
+* Based on powerfull theory
+* Extensive error reporting
+* Support empty productions
+* Using metaprogramming
+* A moderinized form of PLY
+* Python 3.6 or above
+* 3-BSD license
+* No pip
+* no installation
+* no internet
+* Copy SLY folder
 
-.. code:: console
-  :number-lines:
-  :class: substep
+.. container::
 
-  python3 222.plus.py 
+    .. include:: src/sly/222.plus.py
+      :code: python
+      :number-lines:
 
-  type='NUMBER', value='3'
-  type='PLUS', value='+'
-  type='NUMBER', value='42'
-  type='PLUS', value='+'
-  type='NUMBER', value='8'
-  
+    .. code:: console
+      :number-lines:
+
+      python3 222.plus.py
+
+      type='NUMBER', value='3'
+      type='PLUS', value='+'
+      type='NUMBER', value='42'
+      type='PLUS', value='+'
+      type='NUMBER', value='8'
+
+.. code: console
+
+  # install python (already installed in most Linux)
+  # install pip3
+  # sudo apt-get install python3-pip # for Debian and Ubuntu
+
+  pip3 install sly
+
+  # or just copy sly files in the same folder of the project
 
 ----
 
@@ -101,7 +90,7 @@ Simple Error handling
   :number-lines:
   :class: substep
 
-  python3 233.error.py 
+  python3 233.error.py
 
   type='NUMBER', value='3'
   type='PLUS', value='+'
@@ -127,7 +116,7 @@ Converting Value Based on Type
   :number-lines:
   :class: substep
 
-  python3 244.plus.py 
+  python3 244.plus.py
 
   number: 3
   type='NUMBER', value=3
@@ -152,7 +141,7 @@ Index of Token in Buffer
   :number-lines:
   :class: substep
 
-  python3 255.index.py 
+  python3 255.index.py
 
   type='NUMBER', value=3, index=0
   type='PLUS', value='+', index=2
@@ -245,7 +234,7 @@ Counting Lines (Error)
   type='NUMBER', value=343, index=64, lineno=1
   type='PLUS', value='+', index=67, lineno=1
   type='NUMBER', value=43, index=68, lineno=1
-    
+
 ----
 
 :class: t2c
@@ -277,7 +266,7 @@ Line Number of Tokens
   type='NUMBER', value=343, index=64, lineno=3
   type='PLUS', value='+', index=67, lineno=3
   type='NUMBER', value=43, index=68, lineno=3
-  
+
 ----
 
 :class: t2c
@@ -495,7 +484,7 @@ Complete Example
   :code: python
   :number-lines:
   :start-line: 1
-  
+
 .. code:: console
   :number-lines:
   :class: substep
@@ -532,7 +521,7 @@ Syntax Analysis(Recursive Descendant)
 .. :
 
   # http://cs.indstate.edu/~jkinne/cs420-s2019/code/?view=./sly-calc.py
-  
+
   # note - use python3
   # note - example from https://github.com/dabeaz/sly
   # note - type ctrl-d as the end of input.
@@ -568,13 +557,13 @@ Syntax Analysis(Recursive Descendant)
       # Tokens
       EXPONENT = r'\*\*'
       EQUALS = r'=='
-      
+
       MOD = r'%'
-      
+
       NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
       NUMBER = r'\d+'
 
-      NAME['inc'] = INC 
+      NAME['inc'] = INC
       #NAME['if'] = IF # note - if-then will be in sly-calc2.py
       #NAME['then'] = THEN
       NAME['prompt_flip'] = PROMPT_FLIP
@@ -587,7 +576,7 @@ Syntax Analysis(Recursive Descendant)
       ASSIGN = r'='
       LPAREN = r'\('
       RPAREN = r'\)'
-      
+
       # Ignored pattern
       ignore_newline = r'\n+'
 
@@ -630,7 +619,7 @@ Syntax Analysis(Recursive Descendant)
               self.names[p.NAME] += 1
           except LookupError:
               print(f'Undefined name {p.NAME!r}')
-          
+
       @_('NAME ASSIGN expr')
       def statement(self, p):
           self.names[p.NAME] = p.expr
@@ -647,7 +636,7 @@ Syntax Analysis(Recursive Descendant)
       @_('expr EXPONENT expr')
       def expr(self, p):
           return p.expr0 ** p.expr1
-      
+
       @_('expr PLUS expr')
       def expr(self, p):
           return p.expr0 + p.expr1
@@ -691,7 +680,7 @@ Syntax Analysis(Recursive Descendant)
           except LookupError:
               print(f'Undefined name {p.NAME!r}')
               return 0
-          
+
 
   if __name__ == '__main__':
       lexer = CalcLexer()
@@ -713,14 +702,14 @@ Syntax Analysis(Recursive Descendant)
                   parser.parse(x)
               else:
                   parser.parse(lexer.tokenize(text))
-                  
-                  
+
+
 
 
 .. :
 
   # http://cs.indstate.edu/~jkinne/cs420-s2019/code/?view=./sly-prog.py
-  
+
   # note - use python3
   # note - example from https://github.com/dabeaz/sly
   # note - type ctrl-d as the end of input.
@@ -757,7 +746,7 @@ Syntax Analysis(Recursive Descendant)
       NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
       NUMBER = r'\d+'
 
-      NAME['if'] = IF 
+      NAME['if'] = IF
       NAME['then'] = THEN
       NAME['while'] = WHILE
       NAME['do'] = DO
@@ -773,7 +762,7 @@ Syntax Analysis(Recursive Descendant)
       ASSIGN = r'='
       LPAREN = r'\('
       RPAREN = r'\)'
-      
+
       # Ignored pattern
       ignore_newline = r'\n+'
 
@@ -834,7 +823,7 @@ Syntax Analysis(Recursive Descendant)
       @_('') # basically epsilon, for comment lines that don't parse to anything
       def statement(self, p):
           return
-      
+
       @_('expr PLUS expr')
       def expr(self, p):
           return ('plus', p.expr0, p.expr1)
@@ -871,7 +860,7 @@ Syntax Analysis(Recursive Descendant)
       global names
 
       if tree == None: return
-      
+
       rule = tree[0]
       if rule == 'statement-expr':
           value = evaluate(tree[1])
@@ -910,7 +899,7 @@ Syntax Analysis(Recursive Descendant)
       elif rule == 'while':
           while evaluate(tree[1]):
               evaluate(tree[2])
-      
+
   if __name__ == '__main__':
       lexer = CalcLexer()
       parser = CalcParser()
@@ -918,4 +907,3 @@ Syntax Analysis(Recursive Descendant)
       text = sys.stdin.read()
       tree = parser.parse(lexer.tokenize(text))
       evaluate(tree)
-  
