@@ -1304,8 +1304,6 @@ ORDER BY
   order by weight
   ;
 
-.
-
 .. code:: sql
   :class: substep
 
@@ -1314,6 +1312,20 @@ ORDER BY
   where city='Paris'
   order by weight asc
   ;
+
+.. container:: substep
+
+    .. raw:: html
+
+        <pre>
+            ╭───────┬────────╮
+            │ pname │ weight │
+            ╞═══════╪════════╡
+            │ Bolt  │ NULL   │
+            │ Cam   │     12 │
+            │ Bolt  │     17 │
+            ╰───────┴────────╯
+        </pre>
 
 ----
 
@@ -1613,13 +1625,11 @@ Style of Writing
 
 ----
 
-:class: t2c
+:class: t3c
 
 Intersect
 ===============
-.. container::
-
-  .. code:: sql
+.. code:: sql
     :class: substep
 
       select pname
@@ -1631,7 +1641,7 @@ Intersect
       where weight>10
     ;
 
-  .. code:: sql
+.. code:: sql
     :class: substep
 
     select distinct pname
@@ -1640,19 +1650,27 @@ Intersect
       weight>10
     ;
 
-  .. code:: sql
+.. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder, substep
+
+    pname
+    Bolt
+    Cam
+
+.. code:: sql
     :class: substep
 
       select pname
       from p
       where city = 'Paris'
-    intersect all
+    intersect all -- sqlite error
       select pname
       from p
       where weight > 10
     ;
 
-  .. code:: sql
+.. code:: sql
     :class: substep
 
     select pname
@@ -1661,19 +1679,8 @@ Intersect
       weight>10
     ;
 
-.. container::
 
-  .. csv-table::
-    :header-rows: 1
-    :class: smallerelementwithfullborder, substep
-
-    pname
-    Bolt
-    Cam
-
-  .
-
-  .. csv-table::
+.. csv-table::
     :header-rows: 1
     :class: smallerelementwithfullborder, substep
 
@@ -1683,13 +1690,11 @@ Intersect
 
 ----
 
-:class: t2c
+:class: t3c
 
 Except
 ==========
-.. container::
-
-  .. code:: sql
+.. code:: sql
     :class: substep
 
       select pname
@@ -1701,7 +1706,7 @@ Except
       where weight > 14
     ;
 
-  .. code:: sql
+.. code:: sql
     :class: substep
 
     select distinct pname
@@ -1710,19 +1715,26 @@ Except
       weight<=14
     ;
 
-  .. code:: sql
+.. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder, substep
+
+    pname
+    Cam
+
+.. code:: sql
     :class: substep
 
     select pname
       from p
       where city='Paris'
-    except all
+    except all -- sqlite error
       select pname
       from p
       where weight>10
     ;
 
-  .. code:: sql
+.. code:: sql
     :class: substep
 
     select pname
@@ -1731,19 +1743,7 @@ Except
       weight<=14
     ;
 
-.. container::
-
-  .. csv-table::
-    :header-rows: 1
-    :class: smallerelementwithfullborder, substep
-
-
-    pname
-    Cam
-
-  .
-
-  .. csv-table::
+.. csv-table::
     :header-rows: 1
     :class: smallerelementwithfullborder, substep
 
@@ -1783,28 +1783,56 @@ Except
 
   شمارهٔ قطعات و شمارهٔ عرضه‌کنندگانی را بیابید که قطعات یاد شده را آن عرضه کنندگان عرضه نکرده باشند
 
-.. container::
-
-  .. code:: sql
+.. code:: sql
     :class: substep
+    :number-lines:
 
     select pn, sn
     from p, s
     except
     select pn, sn
-    from sp
-    ;
+    from sp;
 
-  .. code:: sql
+.. code:: sql
     :class: substep
+    :number-lines:
 
-      select p.pn, s.sn  -- Wrong
-      from p, s, sp
-      where (s.sn, p.pn) <> (sp.sn, sp.pn)
-      ;
+    select distinct p.pn, s.sn -- Wrong
+    from p, s, sp
+    where (s.sn, p.pn) <> (sp.sn, sp.pn)
+    ; -- s1, p2
 
+.. code:: sql
+    :class: substep
+    :number-lines:
 
-.. list-table::
+    select * from (
+        select pn, sn
+        from p, s
+      except
+        select pn, sn
+        from sp
+    ) order by pn,sn;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select distinct p.pn, s.sn
+    from p, s, sp
+    where (s.sn, p.pn) <> (sp.sn, sp.pn)
+    order by sp.pn,sp.sn
+    ; -- s1, p2
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    select pn,sn
+    from sp order by pn,sn
+    ; s1, p2
+
+.. list-table:
 
     * - .. csv-table::
           :header-rows: 1
@@ -1863,60 +1891,62 @@ Except
           p8, s5
           p8, s6
 
-----
+.. :
 
-:class: n2c
+    ----
 
-.. container::
+    :class: n2c
 
-  .. code:: sql
+    .. container::
 
-    select pn, sn
-    from p, s
-    except
-    select pn, sn
-    from sp
-    ;
+      .. code:: sql
 
-  .. code:: sql
-
-      select p.pn, s.sn  -- Wrong
-      from p, s, sp
-      where (s.sn, p.pn) <> (sp.sn, sp.pn)
-      ;
-
-  .. code:: sql
-    :class: substep
-
-      select p.pn, s.sn from p, s, sp
-      where (s.sn, p.pn) <> (sp.sn, sp.pn)
-    except
-      select pn, sn
-      from (
-        select pn, sn from p, s
+        select pn, sn
+        from p, s
         except
-        select pn, sn from sp
-      )
-    ;
+        select pn, sn
+        from sp
+        ;
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder substep
+      .. code:: sql
 
-  pn, sn
-  p1, s1
-  p1, s2
-  p2, s1
-  p2, s2
-  p2, s3
-  p2, s4
-  p2, s6
-  p3, s1
-  p4, s1
-  p4, s4
-  p5, s1
-  p5, s4
-  p6, s1
+          select p.pn, s.sn  -- Wrong
+          from p, s, sp
+          where (s.sn, p.pn) <> (sp.sn, sp.pn)
+          ;
+
+      .. code:: sql
+        :class: substep
+
+          select p.pn, s.sn -- sp
+          from p, s, sp
+          where (s.sn, p.pn) <> (sp.sn, sp.pn)
+        except
+          select pn, sn
+          from (
+            select pn, sn from p, s
+            except
+            select pn, sn from sp
+          );
+
+    .. csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder substep
+
+      pn, sn
+      p1, s1
+      p1, s2
+      p2, s1
+      p2, s2
+      p2, s3
+      p2, s4
+      p2, s6
+      p3, s1
+      p4, s1
+      p4, s4
+      p5, s1
+      p5, s4
+      p6, s1
 
 ----
 

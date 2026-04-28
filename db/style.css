@@ -136,6 +136,32 @@ div.n2c{
   align-items: center ;
   gap: 10px ;
 }
+div.t3c{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t3c > :first-child{
+  grid-column: 1 / 4;
+  background-color: #E6F4FA;
+}
+
+div.t4c{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t4c > :first-child{
+  grid-column: 1 / 5;
+  background-color: #E6F4FA;
+}
+
 div.yoo-grid-auto-flow-column{
   display: grid;
   gap: 2rem;
