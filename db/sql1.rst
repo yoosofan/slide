@@ -1797,8 +1797,8 @@ Except
     :class: substep
     :number-lines:
 
-    select distinct p.pn, s.sn -- Wrong
-    from p, s, sp
+    select distinct p.pn, s.sn
+    from p, s, sp         -- incorrect
     where (s.sn, p.pn) <> (sp.sn, sp.pn)
     ; -- s1, p2
 
@@ -1819,7 +1819,7 @@ Except
     :number-lines:
 
     select distinct p.pn, s.sn
-    from p, s, sp
+    from p, s, sp -- incorrect
     where (s.sn, p.pn) <> (sp.sn, sp.pn)
     order by sp.pn,sp.sn
     ; -- s1, p2
@@ -1830,92 +1830,13 @@ Except
 
     select pn,sn
     from sp order by pn,sn
-    ; s1, p2
-
-.. list-table:
-
-    * - .. csv-table::
-          :header-rows: 1
-          :class: smallerelementwithfullborder
-
-          pn, sn
-          p1, s3
-          p1, s4
-          p1, s5
-          p1, s6
-          p2, s5
-          p3, s2
-          p3, s3
-          p3, s4
-          p3, s5
-          p3, s6
-          p4, s2
-
-      - |nbsp| |nbsp| |nbsp|
-
-      - .. csv-table::
-          :header-rows: 1
-          :class: smallerelementwithfullborder
-
-          pn, sn
-          p4, s3
-          p4, s5
-          p4, s6
-          p5, s2
-          p5, s3
-          p5, s5
-          p5, s6
-          p6, s2
-          p6, s3
-          p6, s4
-          p6, s5
-          p6, s6
-          p7, s1
-
-      - |nbsp| |nbsp| |nbsp|
-
-      - .. csv-table::
-          :header-rows: 1
-          :class: smallerelementwithfullborder
-
-          pn, sn
-          p7, s2
-          p7, s3
-          p7, s4
-          p7, s5
-          p7, s6
-          p8, s1
-          p8, s2
-          p8, s3
-          p8, s4
-          p8, s5
-          p8, s6
+    ; -- s1, p2
 
 .. :
 
-    ----
+    src/output.of.queries.comparison.txt
 
-    :class: n2c
-
-    .. container::
-
-      .. code:: sql
-
-        select pn, sn
-        from p, s
-        except
-        select pn, sn
-        from sp
-        ;
-
-      .. code:: sql
-
-          select p.pn, s.sn  -- Wrong
-          from p, s, sp
-          where (s.sn, p.pn) <> (sp.sn, sp.pn)
-          ;
-
-      .. code:: sql
+    .. code:: sql
         :class: substep
 
           select p.pn, s.sn -- sp
@@ -1928,25 +1849,6 @@ Except
             except
             select pn, sn from sp
           );
-
-    .. csv-table::
-      :header-rows: 1
-      :class: smallerelementwithfullborder substep
-
-      pn, sn
-      p1, s1
-      p1, s2
-      p2, s1
-      p2, s2
-      p2, s3
-      p2, s4
-      p2, s6
-      p3, s1
-      p4, s1
-      p4, s4
-      p5, s1
-      p5, s4
-      p6, s1
 
 ----
 
@@ -2029,7 +1931,7 @@ Except
 
 .. class:: rtl-h1
 
-  زوج نام عرضه‌کنندگانی را بیابید که در یک شهر باشند
+  زوج نام عرضه‌کنندگانی را بیابید که در یک شهر باشند و پاسخ تکراری نداشته باشید
 
 .. code:: sql
   :class: substep
@@ -2089,196 +1991,88 @@ Except
 
 ----
 
-.. container::
-
-     .. code:: sql
-        :class: substep
-        :number-lines:
-
-        select pname
-        from p
-        where weight is not null;
-
-    .. code:: sql
-        :class: substep
-        :number-lines:
-
-        select pname
-        from p
-        where weight is null;
-
-----
-
-Exists
-===========
-.. class:: rtl-h1
-
-  نام عرضه‌کنندگانی را بیابید که قطعه‌ای در شهر آنها باشد
-
-.. container::
-
-    .. code:: sql
-      :class: substep
-
-      select sname
-      from s
-      where exists (
-          select *
-          from p
-          where p.city = s.city
-        )
-      ;
-
-    .. code:: sql
-      :class: substep
-
-      select distinct sname
-      from s natural join p
-      ; --  may have different result
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  sname
-  Smith
-  Jones
-  Blake
-  Clark
-
-----
-
 :class: t2c
 
-.. class:: rtl-h1
-
-  نام قطعاتی را بیابید که وزن آنها از دست کم یک قطعهٔ دیگر بیشتر باشد
-
-.. container::
-
-    .. code:: sql
-
-      select pname
-      from p as T
-      where exists (
-          select *
-          from p
-          where T.weight > p.weight
-        )
-      ;
-
-    .. code:: sql
-
-      select distinct T.pname
-      from p as T join p on
-        T.pn < p.pn and
-        T.weight > p.weight
-        ; -- wrong
-
-    .. code:: sql
-
-      select distinct T.pname
-      from p as T join p on
-        T.pn <> p.pn and
-        T.weight > p.weight
-        ; -- May have different result
-
-
-.. container::
-
-	.. code:: sql
-
-		  select distinct T.pname
-		  from p as T join p on
-			T.weight > p.weight
-			; -- May have different result
-
-	.. csv-table::
-	  :header-rows: 1
-	  :class: smallerelementwithfullborder
-
-	  pname
-	  Bolt
-	  Screw
-	  Screw
-	  Cog
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعاتی را بیابید که وزن آنها دست کم از یک قطعهٔ دیگر در شهر پاریس بیشتر باشد
-
+LIMIT
+=========
 .. code:: sql
-  :class: substep
 
-  select pname
-  from p as T
-  where exists (
-      select *
-      from p
-      where city = 'Paris' and
-        T.weight > p.weight
-    )
+  select distinct city
+  from p
+  order by weight, city
   ;
 
-.. csv-table::
+..  csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder
 
-  pname
-  Bolt
-  Screw
-  Screw
-  Cog
+  city
+  London
+  Oslo
+  Paris
+
+.. code:: sql
+
+  select distinct city
+  from p
+  order by weight, city
+  limit 2
+  ;
+
+..  csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  city
+  London
+  Oslo
 
 ----
 
-
 :class: t2c
 
-.. class:: rtl-h1
+Scalar value(I)
+======================
+.. class:: rtl-h2
 
-  نام قطعاتی را بیابید که وزن آنها از همهٔ قطعات دیگر کمتر باشد
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
 
-.. class:: rtl-h1 substep
-
-    نام قطعاتی را بیابید که وزن آنها از هیچ قطعهٔ دیگری بیشتر نباشد
+.
 
 .. code:: sql
+  :number-lines:
   :class: substep
 
-  select pname
-  from p as T
-  where not exists (
-      select *
-      from p
-      where T.weight > p.weight
-    )
+  select pn, weight -- wrong
+  from p
+  order by weight asc
+  limit 1
   ;
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-  pname
-  Nut
-  Cam
-  Nut
-  Bolt
 
 .. csv-table::
   :header-rows: 1
   :class: smallerelementwithfullborder substep
 
-  pname, weight
-  Nut,  12
-  Cam,  12
-  Nut,
-  Bolt,
+  pn, weight
+  NULL, NULL
 
+.. code:: sql
+  :number-lines:
+  :class: substep
+
+  select pn, weight -- wrong
+  from p
+  where weight is not null
+  order by weight asc
+  limit 1
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  pn, weight
+  p1, 12
 
 ----
 
@@ -2286,424 +2080,135 @@ Exists
 
 .. class:: rtl-h1
 
-  نام شهرهای عرضه کنندگانی را بیابید که در آن شهرها هیچ قطعه‌ای وجود ندارد
+شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
 
-.. container::
+.. code:: sql
+  :class: substep
 
-    .. code:: sql
-      :class: substep
-
-      select city
-      from   s
-      where not exists(
-          select *
-          from p
-          where p.city = s.city
-        )
-      ;
-
-    .. code:: sql
-      :class: substep
-
-      select city
-      from s
-      except all
-      select city
+  select pn, weight
+  from p  -- Wrong
+  where weight = (
+      select weight
       from p
-      ;
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-    city
-    Athens
-    کاشان
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    نام قطعه‌هایی را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند یا اصلاً عرضه نشده باشند.
-
-.. class:: rtl-h1 substep
-
-    نام قطعه‌هایی را بیابید که عرضه‌کننده‌ای خارج از شهر آن قطعه‌ها، آنها را عرضه نکرده باشند
+      order by weight asc
+      limit 1
+  );
 
 .. code:: sql
   :class: substep
 
-  select pname
-  from   p
-  where not exists(
-      select *
-      from s natural join sp
-      where sp.pn = p.pn and
-        p.city <> s.city
-    )
-  ;
-  -- or
-  select pname
-  from   p
-  where not exists(
-      select *
-      from s
-      where s.city <> p.city and
-        exists(
-          select *
-          from sp
-          where  sp.pn = p.pn and
-            sp.sn = s.sn
-        )
-    )
-  ;
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-    pname
-    Screw
-    Cog
-    Nut
-    Bolt
-
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    نام قطعه‌های عرضه شده‌ای را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند.
-
-
-.. code:: sql
-  :class: substep
-
-  select pname
-  from   p natural join sp as T
-  where not exists(
-      select *
-      from s natural join sp
-      where sp.pn = p.pn and
-        p.city <> s.city
-    );
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-    pname
-    Screw
-    Cog
-    Screw
-
-.. code:: sql
-  :class: substep
-
-  select pname
-  from   p natural join sp
-  where not exists(
-      select *
-      from s
-      where s.city <> p.city and
-        exists(
-          select *
-          from sp
-          where  sp.pn = p.pn and
-            sp.sn = s.sn
-        )
-    );
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-      نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
-
-.. code:: sql
-  :class: substep
-
-  select distinct pname
-  from p natural join sp
-  where not exists(
-      select *
-      from sp,s
-      where sp.sn = s.sn and
-        sp.pn = p.pn and
-        p.city <> s.city
-    )
-  ;
-
-
-.. code:: sql
-    :class: substep
-
-      select pname -- ریحانه زمانیان
-      from p natural join sp
-    except
-      select pname
+  select pn, weight
+  from p
+  where weight = (
+      select weight
       from p
-      where exist(
-        select *
-        from s natural join sp
-        where sp.pn=p.pn and
-            p.city <> s.city
-      ) ;
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
-
-    pname
-    Screw
-    Cog
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-      نام قطعه‌های عرضه شده‌ای را بیابید که شماره‌های متفاوتی داشته باشند هر چند شاید نام یکسانی داشته باشند که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
+      where weight is not null
+      order by weight asc
+      limit 1
+  );
 
 .. code:: sql
   :class: substep
   :number-lines:
 
-    select pname
-    from p natural join(
-          select distinct pn
-          from p natural join sp
-          where not exists(
-              select *
-              from sp,s
-              where sp.sn = s.sn and
-                sp.pn = p.pn and
-                p.city <> s.city
-            )
-      )
-
-  ;
-
-
-.. code:: sql
-    :class: substep
-    :number-lines:
-
-    select pname
-    from p
-    where exists(
-        select *
-        from sp
-        where sp.pn = p.pn and
-          not exists (
-                select *
-                from sp natural join s
-                where sp.pn = p.pn and
-                p.city <> s.city
-           )
-     );
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-  نام قطعاتی را بیابید که همهٔ عرضه کنندگان آنها را عرضه کرده باشند
-
-.. class:: substep rtl-h1
-
-    نام قطعاتی را بیابید که عرضه‌کننده‌ای وجود نداشته باشد که این قطعات را عرضه نکرده باشد.
-
-    نام قطعاتی را می‌خواهیم که وجود نداشته باشد عرضه‌کننده‌ای که برایش وجود نداشته باشد عرضه‌ای که آن عرضه از آن عرضه کننده و آن قطعه باشد.
-
-
-.. code:: sql
-  :class: substep
-
-  select pname
+  select pn, 1 as qt
   from p
-  where not exists(
-      select *
-      from s
-      where not exists(
-          select *
-          from sp
-          where s.sn = sp.sn
-            and p.pn = sp.pn
-        )
-    )
+  where city = 'Paris'
   ;
-
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder
+  :class: substep smallerelementwithfullborder
 
-    pname
-    " "
-
-.. :
-
-    select pname
-    from p
-    where not exists(
-       select pn
-       from s, sp
-       where sp.sn=s.sn and
-                  p.pn=sp.pn
-    );
-
-    -- شمارهٔ قطعاتی را می‌دهد که آن قطعه‌ها عرضه شده باشند
-    --  نام قطعاتی را می‌دهد که برای آن قطعات عرضه‌ای وجود ندارد
-
+  pn, qt
+  P2, 1
+  P5, 1
+  P8, 1
 
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+Update(I)
+===========
+.. code:: sql
 
-  نام قطعات متفاوتی را بیابید که همهٔ عرضه کنندگان با وضعیت بالای ۱۰۰ آنها را عرضه کرده باشند
+    update P
+    set weight = null
+    where pn='P6';
+
+
+.. code:: sql
+
+    update s
+    set status = status * 2
+    where city = 'London';
+
+.. code:: sql
+
+    update employees
+    set email = LOWER(
+        firstname || "." || lastname || "@chinookcorp.com"
+    );
+
+.. code:: sql
+
+    update employees
+    set lastname = 'Smith'
+    where employeeid = 3;
+
+----
+
+:class: t2c
+
+Update(II)
+===========
+.. code:: sql
+
+  update tableA
+  set B = 'abcd',
+    C = case
+      when C = 'abc' then 'abcd'
+      else C
+    end
+  where column = 1;
+
+  -- https://stackoverflow.com/a/17081004/886607
+  update s
+  set
+    status = case
+      when city = 'london' then status * 2
+      else status
+    end
 
 .. code:: sql
   :class: substep
 
-  select distinct pname
-  from p join sp
-  where not exists(
-      select *
-      from s
-      where status > 100 and
-        not exists(
-          select *
-          from sp
-          where s.sn = sp.sn and
-            p.pn = sp.pn
-        )
-    ) and exists (
-       select *
-       from s
-       where s.status > 100 and
-        s.sn = sp. sn
-    )
-  ;
+  update s
+  set
+    status = case
+    when city = 'London' then status * 2
+    when city = 'Paris'  then status * 3
+    else status
+  end
 
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder
+.. code:: sql
+  :class: substep
 
-    pname
-    Nut
-    Bolt
-    Screw
-    Cam
-    Cog
-
-.. :
-
-    select distinct pname
-    from p
-    where not exists(
-      select pn
-      from sp, s
-      where sp.sn = s.sn and
-          sp.pn = p.pn and
-          status > 100
-    );
-    -- نام قطعاتی را بیابید که عرضه‌ای از آن قطعات باشد که عرضهٔ کنندهٔ آن عرضه وضعیت بیشتر از ۱۰۰ داشته باشد.
-
-
-
-    select distinct pname
-    from p
-    where not exists(
-      select *
-      from sp, s
-      where s.sn=sp.sn and p.pn = sp.pn and exists(
-          select *
-          from s
-          where status > 100
-       )
-    );
-
-    select distinct pname
-    from p
-    where not exists(
-      select *
-      from sp, s
-      where s.sn=sp.sn and p.pn = sp.pn and exists(
-          select *
-          from s as T
-          where T.sn = sp.sn and status > 100
-       )
-    );
-
-.. :
-
-
-      select distinct pname -- ریحانه زمانیان
-      from p  -- پاسخ نزدیک به پاسخ اصلی
-    except all
-      select distinct pname
-      from p
-      where exists(
-        select *
-        from s
-        where status > 100 and not exists(
-          select *
-          from sp
-          where s.sn=sp.sn and
-          p.pn=sp.pn
-        )
-      )
-    ;
-
-----
-
-:class: t2c
-
-DELETE / DROP TABLE
-=================================
-.. container::
-
-    DELETE
-
-    DML
-
-    .. code:: sql
-
-      delete from s
-      where sn = 's5'
-      ;
-
-      delete from p;
-
-.. container::
-
-    DROP TABLE
-
-    DDL
-
-    .. code:: sql
-
-      drop table sp;
-      drop table s;
-      drop table p;
+  update s
+  set
+    status = case
+      when city = 'London' then status / 4
+      when city = 'Paris'  then status / 3
+      else status
+    end
 
 ----
 
 Alter Table
 ============
 DDL
-----
+-----
 .. code:: sql
 
   alter table sp add "comment" varchar(50);

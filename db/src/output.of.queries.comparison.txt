@@ -1,0 +1,124 @@
+src/output.of.queries.comparison.txt
+
+select * from (
+    select pn, sn
+    from p, s
+  except
+    select pn, sn
+    from sp
+) order by pn,sn;
+╭────┬────╮
+│ pn │ sn │
+╞════╪════╡
+│ p1 │ s3 │
+│ p1 │ s4 │
+│ p1 │ s5 │
+│ p1 │ s6 │
+│ p2 │ s5 │
+│ p3 │ s2 │
+│ p3 │ s3 │
+│ p3 │ s4 │
+│ p3 │ s5 │
+│ p3 │ s6 │
+│ p4 │ s2 │
+│ p4 │ s3 │
+│ p4 │ s5 │
+│ p4 │ s6 │
+│ p5 │ s2 │
+│ p5 │ s3 │
+│ p5 │ s5 │
+│ p5 │ s6 │
+│ p6 │ s2 │
+│ p6 │ s3 │
+│ p6 │ s4 │
+│ p6 │ s5 │
+│ p6 │ s6 │
+│ p7 │ s1 │
+│ p7 │ s2 │
+│ p7 │ s3 │
+│ p7 │ s4 │
+│ p7 │ s5 │
+│ p7 │ s6 │
+│ p8 │ s1 │
+│ p8 │ s2 │
+│ p8 │ s3 │
+│ p8 │ s4 │
+│ p8 │ s5 │
+│ p8 │ s6 │
+╰────┴────╯
+select distinct p.pn, s.sn
+from p, s, sp
+where (s.sn, p.pn) <> (sp.sn, sp.pn)
+order by sp.pn,sp.sn;
+╭────┬────╮
+│ pn │ sn │
+╞════╪════╡
+│ p1 │ s2 │
+│ p1 │ s3 │
+│ p1 │ s4 │
+│ p1 │ s5 │
+│ p1 │ s6 │
+│ p2 │ s1 │
+│ p2 │ s2 │
+│ p2 │ s3 │
+│ p2 │ s4 │
+│ p2 │ s5 │
+│ p2 │ s6 │
+│ p3 │ s1 │
+│ p3 │ s2 │
+│ p3 │ s3 │
+│ p3 │ s4 │
+│ p3 │ s5 │
+│ p3 │ s6 │
+│ p4 │ s1 │
+│ p4 │ s2 │
+│ p4 │ s3 │
+│ p4 │ s4 │
+│ p4 │ s5 │
+│ p4 │ s6 │
+│ p5 │ s1 │
+│ p5 │ s2 │
+│ p5 │ s3 │
+│ p5 │ s4 │
+│ p5 │ s5 │
+│ p5 │ s6 │
+│ p6 │ s1 │
+│ p6 │ s2 │
+│ p6 │ s3 │
+│ p6 │ s4 │
+│ p6 │ s5 │
+│ p6 │ s6 │
+│ p7 │ s1 │
+│ p7 │ s2 │
+│ p7 │ s3 │
+│ p7 │ s4 │
+│ p7 │ s5 │
+│ p7 │ s6 │
+│ p8 │ s1 │
+│ p8 │ s2 │
+│ p8 │ s3 │
+│ p8 │ s4 │
+│ p8 │ s5 │
+│ p8 │ s6 │
+│ p1 │ s1 │
+╰────┴────╯
+select pn,sn
+from sp
+order by pn,sn;
+╭────┬────╮
+│ pn │ sn │
+╞════╪════╡
+│ p1 │ s1 │
+│ p1 │ s2 │
+│ p2 │ s1 │
+│ p2 │ s2 │
+│ p2 │ s3 │
+│ p2 │ s4 │
+│ p2 │ s6 │
+│ p3 │ s1 │
+│ p4 │ s1 │
+│ p4 │ s4 │
+│ p5 │ s1 │
+│ p5 │ s4 │
+│ p6 │ s1 │
+╰────┴────╯
