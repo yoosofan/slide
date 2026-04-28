@@ -861,7 +861,7 @@ SQLite (I)
 .. class:: substep
 
 #. sqlite3
-#. sqlite3 sp.sqlte
+#. sqlite3 sp.sqlite
 #. .exit or .quit
 #. .help
 #. .read sp.sql
@@ -871,7 +871,7 @@ SQLite (I)
 
 .. class:: substep
 
-#. .open database.db
+#. .open sp.sqlite
 #. .databases
 #. .backup  FILE
 #. .restore FILE
