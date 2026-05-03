@@ -1,7 +1,3 @@
-; Developed with assistance from DeepSeek, Grok, Gemini and Grok AI for educational purposes in OS course slides
-; Program with Procedure Vector Table (like interrupt vectors)
-; Uses polling I/O with indirect BSA calls  //////     incorrect
-
         ORG     0
 START,  BSA     READ_COUNT
         STA     BYTE_COUNT
@@ -17,13 +13,12 @@ RD_CNT, SKI
         INP
         BUN     READ_COUNT I
 
-INIT_LOAD, HEX 0
+INIT_LOAD,HEX 0
         LDA     ZERO
-        STA     LOAD_PTR
         STA     CURRENT_IDX
         BUN     INIT_LOAD I
 
-LOAD_LOOP, HEX 0
+LOAD_LOOP,HEX 0
         LDA     CURRENT_IDX
         SUB     BYTE_COUNT
         SPA
@@ -35,13 +30,10 @@ LOAD_BYTE,
         STA     TEMP_BYTE
 
         LDA     LOAD_PTR
+        ADD     CURRENT_IDX
         STA     STORE_PTR
         LDA     TEMP_BYTE
         STA     STORE_PTR I
-
-        LDA     LOAD_PTR
-        INC
-        STA     LOAD_PTR
         LDA     CURRENT_IDX
         INC
         STA     CURRENT_IDX
@@ -54,7 +46,7 @@ RD_BYT, SKI
         BUN     READ_BYTE I
 
         ORG     128
-EXECUTE, HEX 0
+EXECUTE,HEX 0
 
         LDA     ZERO
         STA     RESULT
@@ -69,3 +61,9 @@ TEMP_BYTE,  DEC     0
 STORE_PTR,  HEX     0
 RESULT,     DEC     0
         END
+
+
+; Developed with assistance from DeepSeek, Grok, Gemini and Grok AI for educational purposes in OS course slides
+; Program with Procedure Vector Table (like interrupt vectors)
+; Uses polling I/O with indirect BSA calls
+

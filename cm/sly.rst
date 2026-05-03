@@ -413,6 +413,10 @@ Adding Match Actions
   type='ID', value='t'
   type='RPAREN', value=')'
 
+.. :
+
+    src/sly/577.adding.match.actions.input.py
+
 ----
 
 :class: t2c

@@ -1,0 +1,5 @@
+x = 0.1;
+while (x < 10) {
+  print x: # Counting
+  x = x + 1;
+}

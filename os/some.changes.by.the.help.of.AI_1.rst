@@ -1634,6 +1634,7 @@ MAILBOX, DEC 0
 3.  **The RTI Trick:** In the loader's `L_RUN` section, we manually set `M[0] = 0`. When `RTI` executes, it pulls that `0` into the `PC` and flips the `MODE` to 1. This is the standard way a Kernel "drops" into User Space.
 4.  **Hardware Alignment:** This fits the physical setup you described (Hexpad entry, then CPU power-on).
 
+
 ChatGpt
 ^^^^^^^
 https://chatgpt.com/c/69e495d5-5a88-832d-a195-5fc6ee47bca4

@@ -673,25 +673,20 @@ Array
 
 -----
 
-:class: grid-3col
+:class: n2c
 
-.. include:: src/in/loader1.asm
+.. include:: src/yic/yic70.loader.asm
     :code: asm
     :number-lines:
-    :start-line: 4
-    :end-line: 25
+    :end-line: 31
 
 
-.. include:: src/in/loader1.asm
+.. include:: src/yic/yic70.loader.asm
     :code: asm
-    :number-lines: 21
-    :start-line: 25
-    :end-line: 49
+    :number-lines: 32
+    :start-line: 31
+    :end-line: 62
 
-.. include:: src/in/loader1.asm
-    :code: asm
-    :number-lines: 44
-    :start-line: 49
 
 ----
 
@@ -829,13 +824,13 @@ Input, Add and Output
 .. include:: src/yic/inp.add.out.asm
     :code: asm
     :number-lines:
-    :end-line: 28
+    :end-line: 27
 
 .. include:: src/yic/inp.add.out.asm
     :code: asm
-    :number-lines: 29
-    :start-line: 28
-    :end-line: 56
+    :number-lines: 28
+    :start-line: 27
+    :end-line: 55
 
 ----
 
@@ -845,7 +840,7 @@ Input, Add and Output
     :class: yoo-memory center
 
      , |nbsp| |nbsp| Loader  |nbsp| |nbsp| , READ , WRITE, ISR |nbsp| , DATA, user process,
-    0,4                                    , 100  , 150  , 200 , 250,  300         , 1024
+    0,2                                    , 100  , 150  , 200 , 250,  300         , 1024
 
 .. include:: src/yic/loader1.asm
     :code: asm
@@ -903,19 +898,47 @@ Other Loader Samples
 
 Review YICs
 ===========
-.. class: substep
+**Before Loader**
+
+**After Loader**
+
+.. class:: substep
 
 #. Connect memory to power
 #. Connect HEX Pad keyboard to memory.
-#. Enter machine code of user
-#. Enter machine code of OS Routines
-#. Connect cpu to memory
-#. Connect output device to cpu
-#. Connect input device to cpu
-#. Turn on CPU (start runnig codes)
-#. HLT at the end of user code
-#. Give output(s) to user
-#. Back to step 1
+#. Enter machine code of OS Routines to memory
+#. Connect output device(printer) to CPU
+#. Connect input device(card reader) to CPU
+#. Enter machine code of next customer to memory
+#. Disconnect HEX Pad keyboard and memory.
+#. Connect CPU to memory
+#. Turn on CPU
+#. Runnig customer code
+#. HLT at the end of customer code (Turn off CPU)
+#. Give output(s) to Customer
+#. Disconnect CPU and memory
+#. Connect HEX Pad keyboard to memory.
+#. Back to step 6
+
+.. class:: substep
+
+#. Connect memory to power
+#. Connect HEX Pad keyboard to memory.
+#. Enter machine code of OS Routines to memory
+#. Connect output device(printer) to CPU
+#. Connect input device(card reader) to CPU
+#. Disconnect HEX Pad keyboard and memory.
+#. Connect CPU to memory
+#. Turn on CPU
+#. Runnig loader of OS
+#. Read size of customer code from input
+#. Read a custmer code from input
+#. Write the customer code to memory
+#. Go 11 to until the size of customer code
+#. Jump or BSA to customer code
+#. Runnig customer code
+#. BUN to loader at the end of customer code
+#. Give output(s) to Customer
 
 ----
 
@@ -940,30 +963,7 @@ Relative Address Problem
     * KMD: change CPU mode to kernel
     * mode = 0
 
-----
-
-There is a flaw in your code. In YIC 80 and 90, the kernel (loader, ISR and other system routines) put in the memory (RAM, random access memory) directly by a device like HEX Pad(Hexadecimal) keyboard without CPU involvement.
-
-   1.  Turn on memory by connecting to power supply (battery or anything like that) and will not turn off afterwards
-   2.  Connect HEX Pad keyboard (or any similar device) to memory.
-   3.  Enter kernel machine code by the Hexpad keyboard
-   4.  Disconnect  HEX Pad keyboard from memory after kernel entered to the memory
-   5.  Connect cpu to memory
-   6.  Connect printer or another simple output device to cpu
-   7.  Connect card reader or another simple input device to cpu
-   8.  Turn on cpu by connecting it to a power supply (battery or anything like that)
-   9.  Mano's cpu starts at 0 address
-   10. Read user program from input device by loader (part of kernel)
-   11. RTI to user program
-   12. RTK to loader after the user program finished
-   13. Load another user program from input
-
-----
-
-Your code put a `hex 0` in address zero of memory while it should be a `BUN`
-Please fix this problem and any other problems in your suggested code and rewrite the whole code.
-
-.. code::
+.. code:: asm
    :number-lines:
    :class: substep
 
@@ -991,7 +991,6 @@ Please fix this problem and any other problems in your suggested code and rewrit
     TEN,    DEC 10
     END
 
-
 ----
 
 .. image:: img/in/Mano_flowchart4instruction_cycle_1.png
@@ -1000,15 +999,81 @@ Please fix this problem and any other problems in your suggested code and rewrit
 
 ----
 
-YIC90 Interrupt and Relative Address
-====================================
-RTI instruction
----------------
-When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware performs the following sequence during the execution phase:
+:class: t2c
 
-1. **$t_3$: $AR \leftarrow 0$** *(Put absolute address 0 into the Address Register)*
-2. **$t_4$: $DR \leftarrow M[AR]$** *(Read the saved return address from memory into the Data Register)*
-3. **$t_5$: $PC \leftarrow DR$, $MODE \leftarrow 1$, $IEN \leftarrow 1$, $SC \leftarrow 0$** *(Simultaneously restore the Program Counter, switch the Mode flip-flop to User, re-enable hardware interrupts, and clear the Sequence Counter to end the instruction)*
+YIC90 Requirements
+==================
+.. class:: substep
+
+#. Adding Base Register
+#. Adding CPU mode flag
+#. interrupt micro-operations
+	#. M[0] ← PC
+	#. PC   ← 1
+	#. IEN  ← 0
+	#. MODE ← 0
+#. Physical Address = AR + (MODE * Base)
+#. ATB (AC to Base)
+#. Return from Interrupt (RTI)
+    #. t3: AR ← 0
+    #. t4: DR ← M[AR]
+    #. t5:
+        #. PC   ← DR
+        #. MODE ← 1
+        #. IEN  ← 1
+        #. SC   ← 0
+#. Return to Kernel
+	#. M[30] ← PC
+	#. PC     ← 31
+	#. MODE   ← 0
+	#. IEN    ← 0
+#. System Call using RTK
+	a. AC = 0: exit program
+	b. AC = 1: Read
+	c. AC = 2: Write
+#.  Mailbox: Shared Memory.
+
+.. container:: substep
+
+    .. code:: asm
+       :number-lines:
+
+        BUN BOOT
+        BUN ISR
+
+        ORG 030
+        HEX 0
+        BUN SYSCALL
+        BOOT,CLA
+        ; Load loop
+        ; jump to user
+        L_RUN,  LDA PROG_BASE
+                ATB
+                CLA
+                STA 0
+                RTI
+        SYSCALL,SZA
+                BUN SC_CHECK
+                BUN BOOT
+
+    .. code:: asm
+       :number-lines:
+
+        ORG     300
+        LDA     C_RD
+        RTK
+        LDA     MAILBOX
+        ADD     FIVE
+        STA     MAILBOX
+        LDA     C_WR
+        RTK
+        CLA
+        RTK ;src/yic/yic90...
+        C_RD,    DEC 1
+        C_WR,    DEC 2
+        FIVE,    DEC 5
+                 ORG 700
+        MAILBOX, DEC 0
 
 .. :
 
@@ -1088,14 +1153,45 @@ When the CPU executes `RTI` (while still safely in Kernel Mode), the hardware pe
     yic90.int.base.kernel_Gemini_AI.asm
 
 
+    Simple Parameters
+    =========================
+    .. image:: img/in/systemcallpaprameter.png
+       :align: center
+       :height: 350px
+       :width: 800px
+
 ----
 
-Simple Parameters
-=========================
-.. image:: img/in/systemcallpaprameter.png
-   :align: center
-   :height: 350px
-   :width: 800px
+:class: t5c
+
+.. csv-table::
+    :class: yoo-memory center
+
+     , BOOT, LOADER, RUN, SYSCALL , ISR, DATA, user process,MAIL,
+    0, 32,   60    , 94 , 104     , 172,  220, 300         ,1000, 1024
+
+.. include:: src/yic/yic90.asm
+    :code: asm
+    :number-lines:
+    :end-line: 32
+
+.. include:: src/yic/yic90.asm
+    :code: asm
+    :number-lines: 33
+    :start-line: 32
+    :end-line: 64
+
+.. include:: src/yic/yic90.asm
+    :code: asm
+    :number-lines: 65
+    :start-line: 64
+    :end-line: 96
+
+.. include:: src/yic/yic90.asm
+    :code: asm
+    :number-lines: 97
+    :start-line: 96
+    :end-line: 124
 
 ----
 
