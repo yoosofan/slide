@@ -4,6 +4,7 @@
 :substep: true
 :slide-numbers: true
 :data-width: 1024
+:data-height: 768
 
 ----
 
@@ -114,7 +115,7 @@ Simple Grammars
 * I
     #. S → aSb
     #. S → b
-    #. abb, aabbb, aaabbbb, 
+    #. abb, aabbb, aaabbbb,
 * II
     * S → (S)
     * S → a
@@ -253,6 +254,7 @@ Derivation Tree(II)
     #. ( i[32] * i[5] )
 
 .. yographviz::
+    :class: substep
 
     digraph {
       node [shape=plaintext];
@@ -311,6 +313,7 @@ Derivation Tree(III)
     #. i[3] * ( i[32] + i[5] )
 
 .. yographviz::
+    :class: substep
 
     digraph {
       node [shape=plaintext];

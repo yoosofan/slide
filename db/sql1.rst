@@ -2043,7 +2043,7 @@ Scalar value(I)
   :number-lines:
   :class: substep
 
-  select pn, weight -- wrong
+  select pn, weight  -- incorrect
   from p
   order by weight asc
   limit 1
@@ -2054,13 +2054,13 @@ Scalar value(I)
   :class: smallerelementwithfullborder substep
 
   pn, weight
-  NULL, NULL
+  P7, NULL
 
 .. code:: sql
   :number-lines:
   :class: substep
 
-  select pn, weight -- wrong
+  select pn, weight
   from p
   where weight is not null
   order by weight asc
@@ -2074,6 +2074,24 @@ Scalar value(I)
   pn, weight
   p1, 12
 
+.. code:: sql
+  :number-lines:
+  :class: substep
+
+  select weight
+  from p
+  where weight is not null
+  order by weight asc
+  limit 1
+  ;
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder substep
+
+  weight
+  12
+
 ----
 
 :class: t2c
@@ -2086,7 +2104,7 @@ Scalar value(I)
   :class: substep
 
   select pn, weight
-  from p  -- Wrong
+  from p   -- incorrect
   where weight = (
       select weight
       from p
@@ -2116,14 +2134,47 @@ Scalar value(I)
   where city = 'Paris'
   ;
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder
+.. container:: substep
 
-  pn, qt
-  P2, 1
-  P5, 1
-  P8, 1
+    .. raw:: html
+
+        <pre>
+            ╭────┬────╮
+            │ pn │ qt │
+            ╞════╪════╡
+            │ p2 │  1 │
+            │ p5 │  1 │
+            │ p8 │  1 │
+            ╰────┴────╯
+        </pre>
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pn,  (
+      select weight
+      from p
+      where weight is not null
+      order by weight asc
+      limit 1
+    ) as qt
+  from p
+  where city = 'Paris' ;
+
+.. container:: substep
+
+    .. raw:: html
+
+        <pre>
+            ╭────┬────╮
+            │ pn │ qt │
+            ╞════╪════╡
+            │ p2 │ 12 │
+            │ p5 │ 12 │
+            │ p8 │ 12 │
+            ╰────┴────╯
+        </pre>
 
 ----
 
@@ -2133,29 +2184,36 @@ Update(I)
 ===========
 .. code:: sql
 
-    update P
-    set weight = null
-    where pn='P6';
-
+    update p
+    set weight = weight + 15
+    where city = 'Oslo'
+    ;
 
 .. code:: sql
+    :class: substep
 
     update s
-    set status = status * 2
-    where city = 'London';
+    set status = status * 2,
+        city = 'kashan'
+    where city = 'London'
+    ;
 
 .. code:: sql
+    :class: substep
 
     update employees
     set email = LOWER(
-        firstname || "." || lastname || "@chinookcorp.com"
+        firstname || "." ||
+        lastname || "@chinookcorp.com"
     );
 
 .. code:: sql
+    :class: substep
 
-    update employees
-    set lastname = 'Smith'
-    where employeeid = 3;
+    update P
+    set weight = null
+    where pn='P6'
+    ;
 
 ----
 
@@ -2165,21 +2223,12 @@ Update(II)
 ===========
 .. code:: sql
 
-  update tableA
-  set B = 'abcd',
-    C = case
-      when C = 'abc' then 'abcd'
-      else C
-    end
-  where column = 1;
-
-  -- https://stackoverflow.com/a/17081004/886607
   update s
   set
     status = case
       when city = 'london' then status * 2
       else status
-    end
+    end;
 
 .. code:: sql
   :class: substep
@@ -2190,7 +2239,7 @@ Update(II)
     when city = 'London' then status * 2
     when city = 'Paris'  then status * 3
     else status
-  end
+  end;
 
 .. code:: sql
   :class: substep
@@ -2201,7 +2250,99 @@ Update(II)
       when city = 'London' then status / 4
       when city = 'Paris'  then status / 3
       else status
-    end
+    end;
+
+.. code:: sql
+    :class: substep
+
+    update s
+    set city = 'kashan',
+        status = case
+          when status > 20 then 53
+          else status
+        end
+    where sname = 'Smith'
+    returning sn, sname;
+
+.. :
+
+
+    Technically, WHERE is optional. Practically, leaving it off is how junior engineers ruin their afternoon:
+
+    https://stackoverflow.com/a/17081004/886607
+    https://coddy.tech/docs/sqlite/update
+
+----
+
+:class: t2c
+
+Update or Replace
+=================
+.. code:: sql
+    :number-lines:
+
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY,
+        email char(20) UNIQUE,
+        name char(15)
+    );
+
+.. code:: sql
+    :number-lines:
+
+
+    INSERT INTO users VALUES
+        (1, 'ada@x.com', 'Ada'),
+        (2, 'boris@x.com', 'Boris');
+
+.. code:: sql
+    :number-lines:
+
+    -- This would fail with a UNIQUE
+    -- constraint violation:
+
+    UPDATE users SET email = 'boris@x.com'
+    WHERE id = 1;
+
+.. code:: sql
+    :number-lines:
+
+
+    -- OR REPLACE deletes the conflicting row,
+    -- then performs the update.
+    UPDATE OR REPLACE users
+    SET email = 'boris@x.com'
+    WHERE id = 1;
+
+.. code:: sql
+    :number-lines:
+
+    SELECT * FROM users;-
+
+.. raw:: html
+
+    <pre>
+        ╭────┬─────────────┬──────╮
+        │ id │    email    │ name │
+        ╞════╪═════════════╪══════╡
+        │  1 │ boris@x.com │ Ada  │
+        ╰────┴─────────────┴──────╯
+    </pre>
+
+.. :
+
+    https://coddy.tech/docs/sqlite/update
+
+----
+
+Transaction
+===========
+
+
+----
+
+Data Types
+==========
 
 ----
 

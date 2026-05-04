@@ -1,4 +1,4 @@
-// Main bildumilo js file
+// Main prezentprogramo js file
 ( function( document ) {
     "use strict";
 
