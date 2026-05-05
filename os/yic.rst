@@ -1195,6 +1195,75 @@ YIC90 Requirements
 
 ----
 
+:class: t2c
+
+RTK vs Software Interrupt
+=========================
+    .. code:: asm
+       :number-lines:
+
+        ; user program
+
+        ORG     300
+
+        LDA     C_RD
+        RTK
+
+        LDA     MAILBOX
+        ADD     FIVE
+
+        STA     MAILBOX
+        LDA     C_WR
+        RTK
+
+        CLA
+        RTK     ;src/yic/yic90...
+
+        C_RD,    DEC 1
+        C_WR,    DEC 2
+        FIVE,    DEC 5
+
+                 ORG 700
+
+        MAILBOX, DEC 0
+
+.. code:: asm
+    :number-lines:
+    :class: substep
+
+    mov ah, 0x0e
+
+    ; function number = 0Eh
+    ; : Display Character
+
+    mov al, '!'
+
+    ; AL = code of character
+    ; to display
+
+    int 0x10
+
+    ; call INT 10h,
+    ; BIOS video service
+
+----
+
+System Call
+=====================
+.. image:: img/in/system_call.png
+   :align: center
+   :height: 350px
+   :width: 800px
+
+----
+
+C System Call
+=====================
+.. image:: img/in/system_call_c.png
+   :align: center
+
+----
+
 YIC 100 Memory Protection
 ==================================
 .. image:: img/memory/hardware_address_protection.png
@@ -1212,7 +1281,6 @@ CPU protection
 ====================
 Timer interrupt
 -------------------
-
 .. image:: img/memory/timer_interrupt.jpg
     :align: center
     :width: 700px
@@ -1232,6 +1300,12 @@ YIC 110 cpu protection
     #. ARM: Different processor modes (IRQ, SVC, User)
     #. Pentium 4 (ESCR)
 
+----
+
+.. image:: img/in/interrupt_types.png
+   :align: center
+   :height: 400px
+   :width: 500px
 
 ----
 
@@ -1285,59 +1359,6 @@ Call,  Ret
   https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.electronics-lab.com%2Ftop-10-popular-microcontrollers-among-makers%2F&psig=AOvVaw2EXDnrr7QYg4MMA4wzxdcW&ust=1645436126602000&source=images&cd=vfe&ved=2ahUKEwiei_Gv_Y32AhXFQcAKHclhAKQQ3YkBegQIABAL
   http://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.electronics-lab.com%2Ftop-10-popular-microcontrollers-among-makers%2F&psig=AOvVaw2EXDnrr7QYg4MMA4wzxdcW&ust=1645436126602000&source=images&cd=vfe&ved=2ahUKEwiei_Gv_Y32AhXFQcAKHclhAKQQ3YkBegQIABAL
   https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeepbluembedded.com%2Fstm32-lcd-16x2-tutorial-library-alphanumeric-lcd-16x2-interfacing%2F&psig=AOvVaw0WO3faTRa5sedGIgDKGhNt&ust=1645436135855000&source=images&cd=vfe&ved=2ahUKEwip7aW0_Y32AhVjm1wKHfMUB4oQ3YkBegQIABAL
-
-----
-
-:class: t2c
-
-Software Interrupt
-======================
-.. code:: asm
-    :number-lines:
-
-    ISR,    STA     SAVE
-            BSA     IO
-            LDA     SAVE
-            ION
-            BUN     0  I
-
-    IO,     HEX     0
-            SKI
-            BUN     OUTPUT
-            INP
-            STA     BUFFER
-            BUN     IO  I
-    OUTPUT, SKO
-            BUN     TRAP
-            OUT
-    TRAP,   SKT
-            BUN     IO  I
-            BUN     100
-
-.. code:: asm
-    :number-lines:
-
-    mov ah, 0x0e
-
-    ; function number = 0Eh
-    ; : Display Character
-
-    mov al, '!'
-
-    ; AL = code of character
-    ; to display
-
-    int 0x10
-
-    ; call INT 10h,
-    ; BIOS video service
-
-----
-
-.. image:: img/in/interrupt_types.png
-   :align: center
-   :height: 400px
-   :width: 500px
 
 ----
 
@@ -1414,23 +1435,6 @@ Boot sequence
 * https://openfirmware.info/Welcome_to_OpenBIOS
 * https://github.com/openbios
 * https://github.com/openbios/openbios
-
-----
-
-
-System Call
-=====================
-.. image:: img/in/system_call.png
-   :align: center
-   :height: 350px
-   :width: 800px
-
-----
-
-C System Call
-=====================
-.. image:: img/in/system_call_c.png
-   :align: center
 
 ----
 

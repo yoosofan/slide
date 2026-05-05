@@ -2212,7 +2212,7 @@ Update(I)
 
     update P
     set weight = null
-    where pn='P6'
+    where pn='p6'
     ;
 
 ----
@@ -2266,6 +2266,15 @@ Update(II)
 
 .. :
 
+    update s
+    set city = 'kashan',
+        status = case
+          when status > 20 then 53
+          else status
+        end
+    where sname = 'Smith'
+    returning *;
+
 
     Technically, WHERE is optional. Practically, leaving it off is how junior engineers ruin their afternoon:
 
@@ -2283,13 +2292,13 @@ Update or Replace
 
     CREATE TABLE users (
         id INTEGER PRIMARY KEY,
-        email char(20) UNIQUE,
-        name char(15)
+        email CHAR(20) UNIQUE,
+        name CHAR(15)
     );
 
 .. code:: sql
     :number-lines:
-
+    :class: substep
 
     INSERT INTO users VALUES
         (1, 'ada@x.com', 'Ada'),
@@ -2297,6 +2306,7 @@ Update or Replace
 
 .. code:: sql
     :number-lines:
+    :class: substep
 
     -- This would fail with a UNIQUE
     -- constraint violation:
@@ -2306,7 +2316,7 @@ Update or Replace
 
 .. code:: sql
     :number-lines:
-
+    :class: substep
 
     -- OR REPLACE deletes the conflicting row,
     -- then performs the update.
@@ -2316,18 +2326,21 @@ Update or Replace
 
 .. code:: sql
     :number-lines:
+    :class: substep
 
     SELECT * FROM users;-
 
-.. raw:: html
+.. container:: substep
 
-    <pre>
-        ╭────┬─────────────┬──────╮
-        │ id │    email    │ name │
-        ╞════╪═════════════╪══════╡
-        │  1 │ boris@x.com │ Ada  │
-        ╰────┴─────────────┴──────╯
-    </pre>
+    .. raw:: html
+
+        <pre>
+            ╭────┬─────────────┬──────╮
+            │ id │    email    │ name │
+            ╞════╪═════════════╪══════╡
+            │  1 │ boris@x.com │ ada  │
+            ╰────┴─────────────┴──────╯
+        </pre>
 
 .. :
 
