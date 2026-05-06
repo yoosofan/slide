@@ -1634,6 +1634,121 @@ MAILBOX, DEC 0
 3.  **The RTI Trick:** In the loader's `L_RUN` section, we manually set `M[0] = 0`. When `RTI` executes, it pulls that `0` into the `PC` and flips the `MODE` to 1. This is the standard way a Kernel "drops" into User Space.
 4.  **Hardware Alignment:** This fits the physical setup you described (Hexpad entry, then CPU power-on).
 
+YIC 100 Execution Time Limit Protection
+```````````````````````````````````````
+Thanks, There are flaws in your code. I fixed some of them and you can find updated version in the following links
+https://github.com/yoosofan/slide/blob/main/os/src/yic/yic90.asm
+https://github.com/yoosofan/slide/blob/main/os/src/yic/yic90.user.asm
+
+Some of them are
+1. There is no variable (memory data place) by the name ``PROG_BASE`` in line 53 of your kernel code
+2. ``ION`` instruction is not necessary in the line 124 of your kernel because ``RTI`` will enable interrupt
+3. We don’t need ``MAIL_OFF`` which is confusing and unnecessary. We just need ``MAILBOX`` in both program but with the same physical address, let say 1000. But in the user program it would be 700 because it will be added to 300 (the start of user program and the content of Base register
+
+The start address of the user program is fixed to 300 (or other address) therefore we don’t need to set it every time before loading another user program. It can be set once in the boot section of the kernel before the code of the loader.
+
+I fixed them and changed a bit of both codes. Hope there are no more issues on them. Please be more careful about your following coding answers.
+
+The next yic (yoosoofan imaginary computer) can be cpu time protection (or choose a better phrase for this situation and suggest it). In yic 100 there is a timer in cpu that its integer value can be set by an instruction like ``ATT`` (Accumulator to timer).  Let's assume that the first card of the user program contains this integer value which represents the estimated upper bound number of clock pulses for the user program to be executed. The second card in the card reader will be the size of the program and the rest is the use code like before. It is obvious that after the cards of the first user (or customer) there are cards of programs of other users in the card reader.
+
+When the loader part of the kernel loads the current user code then it will jump to it (by RTI after setting the base register). The value of the timer will decrease by every clock pulse. It decreases only in user mode and it will not change in kernel mode. After the value inside the timer reaches zero then a new kind of interrupt will appear by the name of, let’s say, ``TRAP``. This trap situation can be detected by the interrupt service routine by an instruction, let’s say, ``SKT`` which is similar to ``SKO`` and ``SKI`` in this sense. Therefore, there is a cpu  flag for this trap situation. If the interrupt routine detects this situation then it should end the current user program and jump back to loader.
+
+Is this scenario complete for adding this feature to cpu and kernel?
+Do we need to consider more things about it?
+Can our needs for change be easily fit with the extended Mano’s computer architecture that we developed so far?
+Please explain details of each part in terms of extending Mano’s computer.
+
+Answer 2026/05/05 10:23:02
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+I appreciate the corrections on the YIC 90 code. Unifying the `MAILBOX` address to a single physical location (logical 700 resolving to physical 1000) is a much cleaner approach to shared memory, and you are spot-on about `RTI` handling the `ION` internally. I have noted these adjustments.
+
+Moving on to YIC 100: Your scenario for adding an execution time limit is excellent. In Operating Systems terminology, this feature is typically called **Preemption**, a **Timer Interrupt**, or **Execution Time Limit Protection** (for batch systems).
+
+Here is a breakdown of how your scenario fits into the architecture, what needs to be considered, and the specific hardware modifications required for Mano's computer.
+
+### 1. Is the scenario complete? (Considerations & Flaws)
+
+Your scenario is nearly complete and introduces a very elegant rule: *“It decreases only in user mode.”* This is a brilliant design choice because it naturally prevents the timer from running out while the OS is busy loading the next program.
+
+However, we need to consider two hardware/logic details to make it flawless:
+
+*   **Instruction Cycles vs. Clock Pulses:** Mano’s CPU uses multiple clock pulses ($t_0, t_1, \dots, t_6$) to execute a single instruction. If the timer decreases on *every* clock pulse, the hardware design becomes unnecessarily complex because different instructions use a different number of clock pulses.
+    *   *Suggestion:* Have the timer decrease by 1 at the start of every **Instruction Fetch Cycle** (specifically at $t_0$). This makes the hardware logic much simpler to draw and teach, and "number of instructions" is easier for students to calculate than "number of micro-operations."
+*   **Clearing the Trap Flag:** When the timer hits zero and sets the Trap Flag, the interrupt triggers. The ISR uses `SKT` to detect it. But how does the Trap Flag get reset to 0? In Mano’s original design, `SKI` and `SKO` do not clear their flags; `INP` and `OUT` do.
+    *   *Suggestion:* We must specify that `SKT` clears the Trap Flag at the same time it increments the PC, or the CPU will get stuck in an infinite interrupt loop.
+
+### 2. Does it easily fit into Mano’s extended architecture?
+
+**Yes, perfectly.** It requires very few modifications to the existing datapath and control unit. Because Mano’s architecture is so modular, adding a new register and a new interrupt source fits directly into the existing logic gates.
+
+### 3. Hardware Extensions for YIC 100
+
+Here are the exact details of how to wire this into Mano’s CPU design for your slides.
+
+#### A. New Hardware Components
+*   **Timer Register (TR):** A 16-bit register to hold the countdown value.
+*   **Timer Flag (FT):** A 1-bit flip-flop. $FT = 1$ means the timer has expired.
+
+#### B. The Interrupt Trigger Logic (The $R$ Flip-Flop)
+In Mano’s original CPU, the hardware checks for interrupts during $t_0, t_1, t_2$ using the $R$ flip-flop. The original boolean logic to trigger an interrupt cycle was:
+$T_0^\prime T_1^\prime T_2^\prime (IEN)(FGI + FGO) : R \leftarrow 1$
+
+For YIC 100, we simply add the Timer Flag ($FT$) to the OR gate:
+$T_0^\prime T_1^\prime T_2^\prime (IEN)(FGI + FGO + FT) : R \leftarrow 1$
+
+#### C. New Micro-operations (The Countdown)
+At the very beginning of every instruction fetch, the hardware checks if it is in User Mode. If so, it decrements the Timer. If the Timer hits zero, it sets the flag.
+
+*   **At $t_0$:**
+    $\text{If } (MODE = 1) \text{ then } TR \leftarrow TR - 1$
+    $\text{If } (TR = 0) \text{ then } FT \leftarrow 1$
+
+#### D. New Instructions
+We have plenty of room in the Register-Reference (`7xxx`) and I/O (`Fxxx`) opcode spaces to add these.
+
+**1. `ATT` (AC to Timer)**
+Transfers the 16-bit content of the Accumulator to the Timer Register.
+*   **Opcode:** `7001` (Bit 0 of Register-Reference space is free).
+*   **Micro-operation:** $TR \leftarrow AC$
+
+**2. `SKT` (Skip on Timer Trap)**
+Checks if the Timer Flag is set. If it is, it skips the next instruction and **clears the flag**.
+*   **Opcode:** `F020` (Bit 5 of I/O space is free).
+*   **Micro-operation:** $\text{If } (FT = 1) \text{ then } (PC \leftarrow PC + 1, FT \leftarrow 0)$
+
+### 4. How the Kernel Code Changes
+
+With these hardware features, your Kernel's ISR and Loader loop will look something like this:
+
+**In the Loader (Boot section):**
+```assembly
+        / ... (After reading the Timer value from Card 1 into AC)
+        ATT                   / Set the hardware timer
+
+        / ... (Read Program Size from Card 2, load program bytes)
+        / ... (Jump to user program via RTI)
+```
+
+**In the Interrupt Service Routine (ISR):**
+```assembly
+ISR,    STA     SAVE_AC
+        / ... (Save E flag)
+
+        SKT                   / Did the timer run out?
+        BUN     CHK_KBD       / No, check keyboard
+        BUN     TRAP_ABORT    / Yes! Timer expired.
+
+CHK_KBD, ... / Handle normal I/O
+
+TRAP_ABORT:
+        / The user program took too long. We do NOT return to it.
+        / SKT already cleared the FT flag.
+        / We just jump straight back to the Loader to read the next user's cards.
+        BUN     BOOT
+```
+
+By defining these specific micro-operations and boolean logic changes, you give your computer engineering students a complete, rigorous view of exactly how OS preemption is implemented in the silicon.
+
 
 ChatGpt
 ^^^^^^^

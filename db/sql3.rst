@@ -581,7 +581,6 @@ The final result of an uknown condition is False
     from p join sp using(pn) join s using(sn)
     where weight > 17 and ;
 
-
 ----
 
 .. class:: rtl-h1
@@ -615,58 +614,6 @@ Pr : is a large combinations of conditions
     select *
     from List_of_tables
     where (conditions) is not unknown;
-
-----
-
-Check
-=======
-.. code:: sql
-
-  CREATE TABLE t (
-    a NUMERIC CHECK (a >= 0),
-    b NUMERIC CHECK (b >= 0),
-    CHECK ( a + b <= 10 )
-  );
-
-.. :
-
-  https://modern-sql.com/concept/three-valued-logic
-
-----
-
-.. code:: sql
-  :number-lines:
-
-  create database sp2;
-
-  create table s (
-    sn      char(10) primary key,
-    sname   char(30) not null,
-    status  int default 10  check(status >= 10),
-    city    char(20) default 'Shiraz'
-  );
-
-  create table p (
-    pn     char(10) primary key,
-    pname  char(30) not null,
-    color  char(20),
-    weight numeric(9, 2) check(weight > 2 and weight < 90000),
-    city   char(20)
-  );
-
-  create table sp (
-     sn    char(10) references s on update cascade on delete cascade,
-     pn    char(10) references p on update cascade on delete cascade,
-     qty   int default 1 check(qty > 0),
-     primary key (sn, pn)
-  );
-
-.. :
-
-    The follwing links has also schema and data of database
-
-    https://github.com/vrajmohan/pgsql-sample-data/blob/master/date_spj.sql
-    https://github.com/vrajmohan/pgsql-sample-data
 
 ----
 
@@ -948,18 +895,6 @@ SQLite uses the following terminology
     that are constrained by the foreign key constraint and which hold the references clause.
 
     https://sqlite.org/foreignkeys.html
-
-----
-
-Alter table Foreign key
-================================
-MySQL / SQL Server / Oracle / MS Access
------------------------------------------------
-.. code:: sql
-
-    alter table Orders
-    add constraint FK_PersonOrder
-    foreign key (PersonID) references Persons(PersonID);
 
 ----
 
@@ -1501,142 +1436,7 @@ order by ..... desc
 
 :class: t2c
 
-Unique(I)
-==========
-.. code:: sql
-
-    CREATE TABLE Persons (
-        ID int NOT NULL UNIQUE,
-        LastName varchar(255) NOT NULL,
-        FirstName varchar(255),
-        Age int
-    );
-
-.. code:: sql
-    :class: substep
-
-    CREATE TABLE Persons (
-        ID int NOT NULL,
-        LastName varchar(255) NOT NULL,
-        FirstName varchar(255),
-        Age int,
-        UNIQUE (ID)
-    );
-
-.. code:: sql
-    :class: substep
-
-    CREATE TABLE Persons (
-        ID int NOT NULL,
-        LastName varchar(255) NOT NULL,
-        FirstName varchar(255),
-        Age int,
-        CONSTRAINT UC_Person UNIQUE (ID,LastName)
-    );
-
-.. code:: sql
-    :class: substep
-
-    create table "student"(
-      "SSN" varchar(20) unique not null,
-      "name" varchar(40) not null,
-      "student_number" bigint Primary key
-      );
-
-    insert into
-      "student"("SSN", "name", "student_number")
-    values
-    ("38947389", "کامران خداپرستی", 973433),
-    ("38472389", "کوروش پارسایی", 9632847),
-    ("38947389", ")احمد یوسفان", 93802932);
-
-----
-
-:class: t2c
-
-Unique(II)
-===========
-.. code:: sql
-
-    create table contacts(
-        contact_id integer primary key,
-        first_name text,
-        last_name text,
-        email text not null UNIQUE
-    );
-
-.. code:: sql
-
-    create table shapes(
-      shape_id integer primary key,
-      background_color text,
-      foreground_color text,
-      UNIQUE(background_color,foreground_color)
-    );
-
-.. :
-
-  https://www.sqlitetutorial.net/sqlite-unique-constraint/
-
-.. code:: sql
-
-    ALTER TABLE Persons
-    ADD UNIQUE (ID);
-
-.. code:: sql
-
-    ALTER TABLE Persons
-    ADD CONSTRAINT UC_Person
-      UNIQUE (ID,LastName);
-
-.. code:: sql
-
-    ALTER TABLE Persons
-    DROP CONSTRAINT UC_Person;
-
-----
-
-:class: t2c
-
-Unique(III)
-=======================
-.. code:: sql
-
-    create table contacts (
-      contact_id integer primary key,
-      first_name text    not null,
-      last_name  text    not null,
-      email      text,
-      phone      text    not null
-        check (length(phone) >= 10)
-    );
-
-.. code:: sql
-    :class: substep
-
-    create table products (
-      product_id   integer         primary key,
-      product_name text            not null,
-      list_price   DECIMAL (10, 2) not null,
-      discount     DECIMAL (10, 2) not null
-                                  default 0,
-      check (list_price >= discount and
-          discount >= 0 and
-          list_price >= 0)
-    );
-
-
-.. :
-
-  https://www.sqlitetutorial.net/sqlite-unique-constraint/
-  https://www.w3schools.com/sql/sql_check.asp
-
-
-----
-
-:class: t2c
-
-Unique condition
+UNIQUE predicate
 =================
 .. code:: sql
 
@@ -1691,7 +1491,6 @@ Unique condition
 
 ----
 
-
 :class: t2c
 
 .. class:: rtl-h1
@@ -1735,10 +1534,11 @@ ENUM TYPE
       primary key (menu_type, name)
     )
 
+
 ----
 
 Check constraint
-===================
+-------------------
 .. code:: sql
 
   create type valid_colors as enum ('red', 'green', 'blue');
@@ -1825,36 +1625,6 @@ lateral
     , (select city, sn, jn, status from s NATURAL join j) as jsk
   where weight < (select avg(weight) from psk) and
     jsk.city = psk.city;
-
-----
-
-Vacuum
-===========
-.. code:: sql
-
-    vacuum;
-
-    vacuum full;
-
-auto_vaccum
----------------
-.. code:: sql
-
-    pragma auto_vacuum = full;
-    pragma auto_vacuum = incremental;
-    pragma auto_vacuum = none;
-
-vacuum with an into clause
--------------------------------
-.. code::sql
-
-    vacuum schema-name into filename;
-
-    vacuum main into '/home/ahmad/course/db/sqlite/spj_backup.db';
-
-.. :
-
-  https://www.sqlitetutorial.net/sqlite-vacuum/
 
 ----
 

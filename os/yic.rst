@@ -1264,23 +1264,10 @@ C System Call
 
 ----
 
-YIC 100 Memory Protection
-==================================
-.. image:: img/memory/hardware_address_protection.png
-   :align: center
-
-.. class:: substep
-
-#. SKT like SKI and SKO
-#. System Call ?
-#. Change registers by the running process
-
-----
-
-CPU protection
-====================
 Timer interrupt
--------------------
+===============
+The timer decrease by 1 at the start of every **Instruction Fetch Cycle**
+
 .. image:: img/memory/timer_interrupt.jpg
     :align: center
     :width: 700px
@@ -1288,24 +1275,90 @@ Timer interrupt
 
 ----
 
-YIC 110 cpu protection
-======================
-.. image:: img/in/control_register.png
-   :width: 450px
+:class: t2c
+
+Execution Time Limit Protection
+===============================
+.. class:: substep
+
+* New Hardware Components
+    *   Timer Register (TR)
+    *   Timer Flag (FT)
+* In user mode(MODE = 1)
+    * TR-- for every instruction
+    * If TR == 0, then  FT ← 1
+* `ATT` (AC to Timer), TR ← AC
+* `SKT` (Skip on Timer Trap)
+    *  If FT == 1, then  PC++, FT ← 0
+* Boot section
+    .. code:: asm
+
+        ; ...
+        ; Read Card 1 into AC
+
+        ATT
+
+        ; Read Card 2, program size
+        ; Read program cards
+        ; RTI to user program
+
+.. class:: substep
+
+- Interrupt Service Routine (ISR)
+    .. code:: asm
+
+        ISR,      STA     SAVE_AC
+                  ; ... Save other things
+
+                  SKT
+                  BUN     CHECK_IO
+                  BUN     TRAP_ABORT
+
+        CHECK_IO, SKI
+                  BUN  I_OUT
+
+                  ; ...
+
+
+        TRAP_ABORT,
+                  ; took too long
+                  ; end the program
+                  BUN     BOOT
+
+----
+
+:class: t2c
+
+YIC 100
+=======
+.. container::
+
+    .. image:: img/in/interrupt_types.png
+       :align: center
+       :height: 350px
+       :width: 450px
+
+    .. image:: img/in/control_register.png
+       :width: 660px
+       :class: substep
 
 .. image:: img/in/protection_ring.png
+    :class: substep
 
 .. :
 
     #. ARM: Different processor modes (IRQ, SVC, User)
     #. Pentium 4 (ESCR)
 
+
 ----
 
-.. image:: img/in/interrupt_types.png
+YIC 120 Memory Protection
+==================================
+.. image:: img/memory/hardware_address_protection.png
    :align: center
-   :height: 400px
-   :width: 500px
+
+.. class:: substep
 
 ----
 
