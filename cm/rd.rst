@@ -6,7 +6,6 @@
 :data-width: 1024
 :data-height: 768
 
-
 ----
 
 Recursive Descendant Parser
@@ -38,11 +37,11 @@ Grammar
 
 .. class:: substep
 
-*  E → a + E | a 
+*  E → a + E | a
 
 .. yographviz::
   :class: substep
-  
+
   digraph {
     rankdir = "LR";
     node     [shape=circle];
@@ -488,7 +487,7 @@ Parse for + * ( ) no priority
   #. 9 * ((4 + 5) * 3)
   #. 9 * ((4 + 5) + 3)
   #. (9 + (4 + 5)) * 3
-  
+
   .. class:: substep
 
   #. S → A + A
@@ -530,14 +529,14 @@ Parse for + * ( ) no priority
 
 .. :
 
-  
+
   #. 9 + 4 + 5 * 3 == 54
 
   #. E → E + T | E * T | T
   #. T → (E) | a
 
   E --> E + T | E - T | E * T | T
-  
+
   Add another grammer that does not produce (a)
 
   #. S → A
@@ -813,7 +812,6 @@ Lexical
 
 Error Recovery (panic mode)
 ===========================
-
 .. :
 
     .. include:: src/rd/A_S_plus_mul_pranathesis_panic_recover.py
@@ -873,7 +871,7 @@ A Simple Calculator (, ), ``+``, ``*``
     #. S -> a
     #. S -> (S)
 
-    Wrong Grammar (Why?)
+    Incorrect Grammar (Why?)
 
 .. container:: substep
 
@@ -891,13 +889,106 @@ A Simple Calculator (, ), ``+``, ``*``
     * T -> T * F | F
     * F -> (E) | a
 
-    **Left Recursion**
+----
 
-    #. E -> T L
-    #. L -> + T L | λ
-    #. T -> F M
-    #. M -> * F M | λ
-    #. F -> (E) | a
+:class: t3c
+
+Left Recursion Elimination, A → A α | β, βαα
+============================================
+.. yographviz::
+    :class: substep
+
+    digraph ParseTree {
+        rankdir=TB;
+        node [shape=circle];
+
+        // Root
+        A0 [label="A"];
+
+        // First production: A → A α
+        A1 [label="A"];
+        alpha1 [label="α"];
+
+        A0 -> A1;
+        A0 -> alpha1;
+
+        // Second production: A → A α
+        A2 [label="A"];
+        alpha2 [label="α"];
+
+        A1 -> A2;
+        A1 -> alpha2;
+
+        // Third production: A → β
+        beta [label="β"];
+
+        A2 -> beta;
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph ParseTree {
+        rankdir=TB;
+        node [shape=circle];
+
+        // Root
+        A [label="A"];
+
+        // A → β A'
+        beta [label="β"];
+        Aprime1 [label="A'"];
+
+        A -> beta;
+        A -> Aprime1;
+
+        // A' → α A'
+        alpha1 [label="α"];
+        Aprime2 [label="A'"];
+
+        Aprime1 -> alpha1;
+        Aprime1 -> Aprime2;
+
+        // A' → α A'
+        alpha2 [label="α"];
+        Aprime3 [label="A'"];
+
+        Aprime2 -> alpha2;
+        Aprime2 -> Aprime3;
+
+        // A' → λ
+        lambda [label="λ"];
+
+        Aprime3 -> lambda;
+    }
+
+.. class:: substep
+
+    * A ⇒ A α ⇒ A α α ⇒ β α α
+    * A ⇒ β A′ ⇒ β α A′ ⇒ β α α A′ ⇒ β α α
+    * **A → A α | β**
+        #. **A  → β A'**
+        #. **A' → α A' | λ**
+    * E → E + T | T
+        #. E → T L
+        #. L → + T L | λ
+    * T → T * F | F
+        #. T → F M
+        #. M → * F M | λ
+    * F → (E) | a
+
+.. :
+
+    ----
+
+    .. table::
+
+        +-------------------------------------------+-----------------------------------------------+
+        | .. image:: img/rd/with_left_recursion.png |  .. image:: img/rd/without_left_recursion.png |
+        |    :align: center                         |     :align: center                            |
+        |    :class: substep                        |     :class: substep                           |
+        |    :height: 350px                         |     :height: 350px                            |
+        +-------------------------------------------+-----------------------------------------------+
 
 ----
 
@@ -905,9 +996,15 @@ A Simple Calculator (, ), ``+``, ``*``
 
 State Diagram(II)
 =========================
+#. E → T L
+#. L → + T L | λ
+#. T → F M
+#. M → * F M | λ
+#. F → (E) | a
+
 .. container:: substep
 
-  E -> T L
+  E → T L
 
   .. yographviz::
     :class: substep
@@ -922,7 +1019,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  L -> + T L | λ
+  L → + T L | λ
 
   .. yographviz::
     :class: substep
@@ -939,7 +1036,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  T -> F M
+  T → F M
 
   .. yographviz::
     :class: substep
@@ -954,7 +1051,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  M -> * F M | λ
+  M → * F M | λ
 
   .. yographviz::
     :class: substep
@@ -971,7 +1068,7 @@ State Diagram(II)
 
 .. container:: substep
 
-  F -> (E) | a
+  F → (E) | a
 
   .. yographviz::
     :class: substep
@@ -986,11 +1083,6 @@ State Diagram(II)
       0  -> END [label="a"]
     }
 
-#. E -> T L
-#. L -> + E | λ
-#. T -> F M
-#. M -> * T | λ
-#. F -> (E) | a
 
 ----
 
@@ -1000,147 +1092,115 @@ Simplify Diagram(II) - Combine E, L
 ========================================
 .. container::
 
-  E -> T L
+    E → T L
 
-  .. yographviz::
+    .. yographviz::
 
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> END [label="L"];
-    }
-
-.. container::
-
-  L -> + E | λ
-
-  .. yographviz::
-
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="+"];
-      1  -> END [label="E"];
-      0  -> END [label="λ"]
-    }
-
-.. yographviz::
-  :class: substep
-
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="T"];
-    1  -> 2 [label="+"];
-    2  -> END [label="E"];
-    1  -> END [label="λ"]
-  }
-
-
-.. yographviz::
-  :class: substep
-
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="T"];
-    1  -> 2 [label="+"];
-    2  -> 0 [label="λ"];
-    1  -> END [label="λ"]
-  }
-
-.. yographviz::
-  :class: substep
-
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="T"];
-    1  -> 0 [label="+"];
-    1  -> END [label="λ"]
-  }
-
-----
-
-:class: t2c
-
-Simplify Diagram(III) - Combine T, M
-========================================
-.. container::
-
-  T -> F M
-
-  .. yographviz::
-
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> END [label="M"];
-    }
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> END [label="L"];
+        }
 
 .. container::
 
-  M -> * T | λ
+    L → + T L | λ
 
-  .. yographviz::
+    .. yographviz::
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="+"];
+            1  -> 2 [label="T"];
+            2  -> END [label="L"];
+            0  -> END [label="λ"]
+        }
+
+.. container::  substep
+
+    incorrect combination
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 2 [label="+"];
+            2  -> END [label="E"];
+            1  -> END [label="λ"]
+        }
+
+.. yographviz::
+    :class: substep
 
     digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="*"];
-      1  -> END [label="T"];
-      0  -> END [label="λ"]
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="+"];
+        1  -> 2 [label="T"];
+        2  -> 0 [label="λ"];
+        0  -> END [label="λ"]
     }
 
 .. yographviz::
-  :class: substep
+    :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="F"];
-    1  -> 2 [label="*"];
-    2  -> END [label="T"];
-    1  -> END [label="λ"]
-  }
+    digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="+"];
+        1  -> 0 [label="T"];
+        0  -> END [label="λ"]
+    }
 
+.. container::  substep
 
-.. yographviz::
-  :class: substep
+    Combine ``E → T L`` and simplified chart of ``L → + T L | λ``
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="F"];
-    1  -> 2 [label="*"];
-    2  -> 0 [label="λ"];
-    1  -> END [label="λ"]
-  }
+    .. yographviz::
+        :class: substep
 
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 2 [label="+"];
+            2  -> 1 [label="T"];
+            1  -> END [label="λ"]
+        }
 
-.. yographviz::
-  :class: substep
+.. list-table::
+    :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="F"];
-    1  -> 0 [label="*"];
-    1  -> END [label="λ"]
-  }
+    * - E
+      - .. yographviz::
+            :class: substep
 
+            digraph {
+                rankdir = "LR"
+                END [shape=doublecircle, label="3"];
+                node [shape=circle];
+                0  -> 1 [label="T"];
+                1  -> 0 [label="+"];
+                1  -> END [label="λ"]
+            }
+
+.. container:: substep
+
+    * Do the same for the following grammar rules
+
+    #. T → F M
+    #. M → * F M | λ
 
 ----
 
@@ -1217,129 +1277,131 @@ Diagrams of the Second Calculator
   #. 3 * ( 2 + 4 )
   #. ( 3 * 2 ) + 4
 
-----
+.. :
 
-:class: t2c
+    ----
 
-State Diagram
-=========================
-.. container::
+    :class: t2c
 
-  * E -> T + E | T
+    State Diagram
+    =========================
+    .. container::
 
-  .. yographviz::
+      * E -> T + E | T
 
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="T"];
-      1  -> 2 [label="+"];
-      2  -> END [label="E"]
-      0  -> END [label="T"]
-    }
+      .. yographviz::
 
-.. container::
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="T"];
+          1  -> 2 [label="+"];
+          2  -> END [label="E"]
+          0  -> END [label="T"]
+        }
 
-  * T -> F * T | F
+    .. container::
 
-  .. yographviz::
+      * T -> F * T | F
 
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="F"];
-      1  -> 2 [label="*"];
-      2  -> END [label="T"]
-      0  -> END [label="F"]
-    }
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> 2 [label="*"];
+          2  -> END [label="T"]
+          0  -> END [label="F"]
+        }
 
 
-.. container::
+    .. container::
 
-  * F -> (E) | a
+      * F -> (E) | a
 
-  .. yographviz::
+      .. yographviz::
 
-    digraph {
-      rankdir = "LR"
-      END [shape=doublecircle, label="3"];
-      node [shape=circle];
-      0  -> 1 [label="("];
-      1  -> 2 [label="E"];
-      2  -> END [label=")"]
-      0  -> END [label="a"]
-    }
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="("];
+          1  -> 2 [label="E"];
+          2  -> END [label=")"]
+          0  -> END [label="a"]
+        }
 
-----
+    ----
 
-:class: t2c
+    :class: t2c
 
-Simplify Diagram(IV) - Fewer steps
-===================================
-.. yographviz::
-  :class: substep
+    Simplify Diagram(IV) - Fewer steps
+    ===================================
+    .. yographviz::
+      :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="T"];
-    1  -> 2 [label="+"];
-    2  -> END [label="E"]
-    0  -> END [label="T"]
-  }
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="T"];
+        1  -> 2 [label="+"];
+        2  -> END [label="E"]
+        0  -> END [label="T"]
+      }
 
-.. yographviz::
-  :class: substep
+    .. yographviz::
+      :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="T"];
-    1  -> 0 [label="+"];
-    1  -> END [label="λ"]
-  }
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="T"];
+        1  -> 0 [label="+"];
+        1  -> END [label="λ"]
+      }
 
-.. yographviz::
-  :class: substep
+    .. yographviz::
+      :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="F"];
-    0  -> END [label="F"];
-    1  -> 2 [label="*"];
-    2  -> END [label="E"]
-  }
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="F"];
+        0  -> END [label="F"];
+        1  -> 2 [label="*"];
+        2  -> END [label="E"]
+      }
 
-.. yographviz::
-  :class: substep
+    .. yographviz::
+      :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="F"];
-    1  -> 0 [label="*"];
-    1  -> END [label="λ"]
-  }
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="F"];
+        1  -> 0 [label="*"];
+        1  -> END [label="λ"]
+      }
 
-.. yographviz::
-  :class: substep
+    .. yographviz::
+      :class: substep
 
-  digraph {
-    rankdir = "LR"
-    END [shape=doublecircle, label="3"];
-    node [shape=circle];
-    0  -> 1 [label="("];
-    1  -> 2 [label="E"];
-    2  -> END [label=")"]
-    0  -> END [label="a"]
-  }
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="3"];
+        node [shape=circle];
+        0  -> 1 [label="("];
+        1  -> 2 [label="E"];
+        2  -> END [label=")"]
+        0  -> END [label="a"]
+      }
 
 ----
 
@@ -1396,7 +1458,7 @@ Parser Code for Add and Multiply
   :number-lines:
   :class: substep
   :start-line: 1
-  :end-line: 34
+  :end-line: 31
 
 ----
 
@@ -1431,7 +1493,7 @@ Another Language for simple expression  + - * / ( )
 
   .. class:: substep
 
-  It was a wrong grammar
+  It was a incorrect grammar
 
 .. container:: substep
 
@@ -1458,44 +1520,45 @@ Another Language for simple expression  + - * / ( )
 
 ----
 
-Left Recursion Elimination
-=============================================
-A → A α | β
------------------
-
-.. table::
-
-    +-------------------------------------------+-----------------------------------------------+
-    | .. image:: img/rd/with_left_recursion.png |  .. image:: img/rd/without_left_recursion.png |
-    |    :align: center                         |     :align: center                            |
-    |    :class: substep                        |     :class: substep                           |
-    |    :height: 350px                         |     :height: 350px                            |
-    +-------------------------------------------+-----------------------------------------------+
-
-.. class:: substep
-
-    * A  → β A'
-    * A' → α A' | λ
-
-----
+:class: ts2c
 
 General Form of Direct Left Recursion Elimination
 ====================================================
 A → A :math:`α_1` | A :math:`α_2` | :math:`...` | A :math:`α_m` |  :math:`β_1` |  :math:`β_2` | :math:`...` |  :math:`β_n`
-------------------------------------------------------------------------------------------------------------------------------------
-.. :
+--------------------------------------------------------------------------------------------------------------------------
+.. container::
 
-  .. math::
-    :class: rtl-h1
+    * **A → A α | β**
+        #. **A  → β A'**
+        #. **A' → α A' | λ**
 
-    A → A α_1 | A α_2 | \dots | A α_m | β_1 |  β_2 | \dots |  β_n
 
-.. class:: substep
+    .. class:: substep
+
+        Convert to
+
+        * A  → :math:`β_1` A' |  :math:`β_2` A' | :math:`...`  |  :math:`β_n` A'
+        * A' → :math:`α_1` A' | :math:`α_2` A' | :math:`...`  |  :math:`α_m` A' | λ
+
+.. container:: substep
+
+    Calculator Grammar
+
+    * E → E + T | E - T | T
+    * T → T * F | T / F | F
+    * F → a | (E)
+
+    .. class:: substep
 
     Convert to
 
-    * A  → :math:`β_1` A' |  :math:`β_2` A' | :math:`...`  |  :math:`β_n` A'
-    * A' → :math:`α_1` A' | :math:`α_2` A' | :math:`...`  |  :math:`α_m` A' | λ
+    .. class:: substep
+
+    * E  → T E'
+    * E' → + T E' | - T E' | λ
+    * T  → F T'
+    * T'  → * F T' | / F T' | λ
+    * F → a | (E)
 
 ----
 
@@ -1505,46 +1568,27 @@ Calculator Grammar
 =====================
 .. container::
 
-  .. math::
-
-      A → A α_1 | A α_2 | \dots | A α_m | β_1 |  β_2 | \dots |  β_n
-
-  Convert to
-
-  * A  → :math:`β_1` A' |  :math:`β_2` A' | :math:`...`  |  :math:`β_n` A'
-  * A' → :math:`α_1` A' | :math:`α_2` A' | :math:`...`  |  :math:`α_m` A' | λ
-
-  .. class:: substep
-
-    * E → E + T | E - T | T
-    * T → T * F | T / F | F
-    * F → a | (E)
-
-    Convert to
-
     * E  → T E'
     * E' → + T E' | - T E' | λ
     * T  → F T'
     * T'  → * F T' | / F T' | λ
     * F → a | (E)
 
-.. container:: substep
+.. yographviz::
+    :class: substep
 
-  .. class:: substep
-
-    .. yographviz::
-
-      digraph {
+    digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="2"];
         node [shape=circle];
         0  -> 1 [label="T"];
         1  -> END [label="E'"];
-      }
+    }
 
-    .. yographviz::
+.. yographviz::
+    :class: substep
 
-      digraph {
+    digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="3"];
         node [shape=circle];
@@ -1552,21 +1596,23 @@ Calculator Grammar
         1  -> 2 [label="T"];
         2  -> END [label="E'"];
         0  -> END [label="λ"]
-      }
+    }
 
-    .. yographviz::
+.. yographviz::
+    :class: substep
 
-      digraph {
+    digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="2"];
         node [shape=circle];
         0  -> 1 [label="F"];
         1  -> END [label="T'"];
-      }
+    }
 
-    .. yographviz::
+.. yographviz::
+    :class: substep
 
-      digraph {
+    digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="3"];
         node [shape=circle];
@@ -1574,11 +1620,12 @@ Calculator Grammar
         1  -> 2 [label="F"];
         2  -> END [label="T'"];
         0  -> END [label="λ"]
-      }
+    }
 
-    .. yographviz::
+.. yographviz::
+    :class: substep
 
-      digraph {
+    digraph {
         rankdir = "LR"
         END [shape=doublecircle, label="3"];
         node [shape=circle];
@@ -1586,7 +1633,7 @@ Calculator Grammar
         1  -> 2 [label="E"];
         2  -> END [label=")"]
         0  -> END [label="a"]
-      }
+    }
 
 ----
 
@@ -1660,7 +1707,6 @@ Simplify Diagram(V) - Combine E and E'
         1  -> 0 [label="+|-"];
         1  -> END [label="λ"];
       }
-
 
 ----
 
@@ -1783,11 +1829,11 @@ Parser Code for Last Calculator
     }
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_parser.py
+  :class: substep
   :code: python
   :number-lines:
-  :class: substep
   :start-line: 1
-  :end-line: 34
+  :end-line: 31
 
 ----
 
@@ -1802,7 +1848,7 @@ Parser Tree
   :end-line: 40
 
 .. code:: console
-  :number-lines: 
+  :number-lines:
 
   python3 t.py '1+4*(3-1)'
   E:  1+4*(3-1)
@@ -1916,7 +1962,7 @@ Parser Tree
   }
 
 .. code:: console
-  :number-lines: 
+  :number-lines:
 
   python3 t.py '1+4*(3-1)'
   E:  1+4*(3-1)
@@ -1967,16 +2013,16 @@ Calculator(IV)(lexical)
 ====================================================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 0 
+  :number-lines: 0
   :start-line: 0
-  :end-line: 25 
+  :end-line: 25
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 25 
-  :start-line: 25 
+  :number-lines: 25
+  :start-line: 25
   :end-line: 47
-  
+
 
 ----
 
@@ -1986,8 +2032,8 @@ Calculator(V)
 ====================================================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 47 
-  :start-line: 47 
+  :number-lines: 47
+  :start-line: 47
   :end-line: 70
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
@@ -2018,7 +2064,7 @@ Calculator(VI) - lexical
 
 :class: t2c
 
-Calculator(VII) 
+Calculator(VII)
 ====================================================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
   :code: python

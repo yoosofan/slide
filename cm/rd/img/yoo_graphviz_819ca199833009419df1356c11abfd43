@@ -1,0 +1,31 @@
+digraph {
+    rankdir = "LR"
+    END [shape=doublecircle, label="2"];
+    node [shape=circle];
+    0  -> 1 [label="F"];
+    1  -> END [label="T'"];
+}
+
+.. yographviz::
+
+  digraph {
+    rankdir = "LR"
+    END [shape=doublecircle, label="3"];
+    node [shape=circle];
+    0  -> 1 [label="*|/"];
+    1  -> 2 [label="F"];
+    2  -> END [label="T'"];
+    0  -> END [label="λ"]
+  }
+
+.. yographviz::
+
+  digraph {
+    rankdir = "LR"
+    END [shape=doublecircle, label="3"];
+    node [shape=circle];
+    0  -> 1 [label="("];
+    1  -> 2 [label="E"];
+    2  -> END [label=")"]
+    0  -> END [label="a"]
+  }
