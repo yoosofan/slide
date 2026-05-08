@@ -999,7 +999,7 @@ Relative Address Problem
 
 ----
 
-:class: t2c
+:class: t3c
 
 YIC90 Requirements
 ==================
@@ -1033,47 +1033,45 @@ YIC90 Requirements
 	c. AC = 2: Write
 #.  Mailbox: Shared Memory.
 
-.. container:: substep
+.. code:: asm
+   :number-lines:
 
-    .. code:: asm
-       :number-lines:
+    BUN BOOT
+    BUN ISR
 
-        BUN BOOT
-        BUN ISR
+    ORG 030
+    HEX 0
+    BUN SYSCALL
+    BOOT,CLA
+    ; Load loop
+    ; jump to user
+    L_RUN,  LDA PROG_BASE
+            ATB
+            CLA
+            STA 0
+            RTI
+    SYSCALL,SZA
+            BUN SC_CHECK
+            BUN BOOT
 
-        ORG 030
-        HEX 0
-        BUN SYSCALL
-        BOOT,CLA
-        ; Load loop
-        ; jump to user
-        L_RUN,  LDA PROG_BASE
-                ATB
-                CLA
-                STA 0
-                RTI
-        SYSCALL,SZA
-                BUN SC_CHECK
-                BUN BOOT
+.. code:: asm
+   :number-lines:
 
-    .. code:: asm
-       :number-lines:
-
-        ORG     300
-        LDA     C_RD
-        RTK
-        LDA     MAILBOX
-        ADD     FIVE
-        STA     MAILBOX
-        LDA     C_WR
-        RTK
-        CLA
-        RTK ;src/yic/yic90...
-        C_RD,    DEC 1
-        C_WR,    DEC 2
-        FIVE,    DEC 5
-                 ORG 700
-        MAILBOX, DEC 0
+    ORG     300
+    LDA     C_RD
+    RTK
+    LDA     MAILBOX
+    ADD     FIVE
+    STA     MAILBOX
+    LDA     C_WR
+    RTK
+    CLA
+    RTK ;src/yic/yic90...
+    C_RD,    DEC 1
+    C_WR,    DEC 2
+    FIVE,    DEC 5
+             ORG 700
+    MAILBOX, DEC 0
 
 .. :
 
@@ -1350,6 +1348,82 @@ YIC 100
     #. ARM: Different processor modes (IRQ, SVC, User)
     #. Pentium 4 (ESCR)
 
+
+----
+
+:class: t2c
+
+Card Reader Deck
+================
+.. raw:: html
+
+    <div style="width:700px; height:600px;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 600" width="100%" height="100%">
+      <defs>
+        <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+          <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3"/>
+        </filter>
+
+        <style>
+          .card { fill: #fdfaf6; stroke: #2c3e50; stroke-width: 2px; filter: url(#shadow); }
+          .sep-card { fill: #fff3cd; stroke: #d35400; stroke-width: 3px; stroke-dasharray: 8,4; filter: url(#shadow); }
+          .text-bold { font-family: 'Courier New', monospace; font-weight: bold; font-size: 20px; fill: #2c3e50; }
+          .text-code { font-family: 'Courier New', monospace; font-size: 16px; fill: #34495e; }
+          .text-alert { font-family: 'Courier New', monospace; font-weight: bold; font-size: 22px; fill: #d35400; }
+          .annotation { font-family: Arial, sans-serif; font-size: 14px; fill: #7f8c8d; font-style: italic; }
+        </style>
+      </defs>
+
+      <g id="punched-card">
+        <path d="M 0 0 L 340 0 L 380 40 L 380 160 L 0 160 Z" />
+      </g>
+
+      <g transform="translate(200, 350)">
+        <use href="#punched-card" class="card" />
+        <text x="20" y="35" class="text-bold">USER 2: Timer Limit</text>
+        <text x="20" y="70" class="text-code">0250  (Max Clock Pulses)</text>
+        <text x="20" y="110" class="text-code">...</text>
+      </g>
+
+      <g transform="translate(150, 270)">
+        <use href="#punched-card" class="sep-card" />
+        <text x="20" y="35" class="text-alert">/// SYSTEM SEPARATOR</text>
+        <text x="20" y="70" class="text-code">FFFF</text>
+        <text x="20" y="140" class="annotation">Signals the OS to load the next job</text>
+      </g>
+
+      <g transform="translate(100, 190)">
+        <use href="#punched-card" class="card" />
+        <text x="20" y="35" class="text-bold">USER 1: Program Code</text>
+        <text x="20" y="70" class="text-code">LDA MAILBOX</text>
+        <text x="20" y="95" class="text-code">ADD TEN</text>
+        <text x="20" y="120" class="text-code">STA MAILBOX</text>
+        <text x="20" y="145" class="text-code">...</text>
+      </g>
+
+      <g transform="translate(50, 110)">
+        <use href="#punched-card" class="card" />
+        <text x="20" y="35" class="text-bold">USER 1: Program Size</text>
+        <text x="20" y="70" class="text-code">0042</text>
+        <text x="240" y="140" class="annotation">Used to set LIMIT</text>
+      </g>
+
+      <g transform="translate(0, 30)">
+        <use href="#punched-card" class="card" />
+        <text x="20" y="35" class="text-bold">USER 1: Timer Limit</text>
+        <text x="20" y="70" class="text-code">0500</text>
+        <text x="240" y="140" class="annotation">Used to set TR via ATT</text>
+      </g>
+
+      <path d="M -20 110 L -20 310" stroke="#3498db" stroke-width="4" fill="none" />
+      <path d="M -20 110 L -10 110" stroke="#3498db" stroke-width="4" fill="none" />
+      <path d="M -20 310 L -10 310" stroke="#3498db" stroke-width="4" fill="none" />
+      <text x="-40" y="215" font-family="Arial" font-weight="bold" font-size="16" fill="#3498db" transform="rotate(-90, -40, 215)">User 1 Job Stream</text>
+
+    </svg>
+    </div>
+
+test
 
 ----
 

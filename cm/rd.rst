@@ -981,6 +981,8 @@ Left Recursion Elimination, A → A α | β, βαα
 
     ----
 
+    The two previous DOT charts for left recursion elimination created by the help of chatgpt.com AI
+
     .. table::
 
         +-------------------------------------------+-----------------------------------------------+

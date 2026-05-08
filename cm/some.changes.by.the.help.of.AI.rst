@@ -60,3 +60,57 @@ Consider the following grammar and the same sentence(βαα) and make parse a tr
 A  → β A'
 A' → α A'
 A' → λ
+
+Answer 2026/05/07 11:55:24
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+```dot id="lr_elimination_parse_tree"
+digraph ParseTree {
+    rankdir=TB;
+    node [shape=circle];
+
+    // Root
+    A [label="A"];
+
+    // A → β A'
+    beta [label="β"];
+    Aprime1 [label="A'"];
+
+    A -> beta;
+    A -> Aprime1;
+
+    // A' → α A'
+    alpha1 [label="α"];
+    Aprime2 [label="A'"];
+
+    Aprime1 -> alpha1;
+    Aprime1 -> Aprime2;
+
+    // A' → α A'
+    alpha2 [label="α"];
+    Aprime3 [label="A'"];
+
+    Aprime2 -> alpha2;
+    Aprime2 -> Aprime3;
+
+    // A' → λ
+    lambda [label="λ"];
+
+    Aprime3 -> lambda;
+}
+```
+
+This parse tree derives:
+
+[
+A \Rightarrow \beta A'
+\Rightarrow \beta \alpha A'
+\Rightarrow \beta \alpha \alpha A'
+\Rightarrow \beta \alpha \alpha
+]
+
+So the generated sentence is again:
+
+[
+\beta \alpha \alpha
+]
+

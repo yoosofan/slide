@@ -1749,6 +1749,513 @@ TRAP_ABORT:
 
 By defining these specific micro-operations and boolean logic changes, you give your computer engineering students a complete, rigorous view of exactly how OS preemption is implemented in the silicon.
 
+YIC 100 details
+```````````````
+Thanks for your detailed response. However, there are some flaws in YIC 100:
+
+1. ``ATT`` (AC to Timer) instruction should be prevented from being executed in user mode because if the user process can change the ``TR`` , then the whole design for preventing the user process from exceeding its time limit will be useless.
+
+2. In your suggested partial code change for ISR (interrupt service routine), you put the following instruction:
+
+ ```assembly
+
+BUN     CHK_KBD       / No, check keyboard
+
+```
+Which is incorrect naming because we can only add one input, namely card reader, and one output, namely printer, to the cpu because of the CPU architecture. We need to stick to the main design of Mano’s computer architecture unless it is really necessary for our purpose and can be implemented in the current design without breaking anything else.
+
+It seems for the first flaw, we just need to change internal CPU implementation such that if ``ATT`` instruction runs in user mode then a trap interrupt occurs like when exceeding the time limit. It seems we don't need to differentiate between two kinds of trap situations and the previous solution is enough for this case two.
+
+For the second flaw, we just need to use a label like ``CHEK_IO`` that I have already changed but unfortunately I didn't put it on its GitHub repository. Currently, I don't have access to it but it's a small change.
+
+Based on my explanation about your answer, what do you think about my critics and solutions?
+
+Do you have any more suggestions or advice?
+
+Answer 2026/05/07 22:56:20
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Your critiques are absolutely correct, and your solutions show a rigorous approach to computer architecture. Designing a CPU with unambiguous rules requires exactly this kind of strict hardware boundary.
+
+Here is an analysis of your solutions, along with a few additional suggestions to make YIC 100 foolproof.
+
+### 1. Feedback on Your Solutions
+
+**Flaw 1: The Privileged `ATT` Instruction**
+You are 100% correct. If a user program can execute `ATT`, it can reset its own timer in a loop and run forever, completely defeating the preemption mechanism.
+
+Your solution to trigger the exact same trap for an illegal instruction as for a time-out is an elegant hardware design. In early batch-processing systems, the OS didn't necessarily care *why* a user program failed (whether it ran out of time, divided by zero, or tried a restricted command); the OS response was always the same: abort the user program and load the next one. Using a single trap flag keeps the CPU logic gates simple and teaches the concept perfectly.
+
+At the hardware level, the micro-operation for `ATT` would simply include a condition. During the execution phase (e.g., at clock cycle $t_3$), the hardware evaluates:
+$\text{If } (MODE = 1) \text{ then } (FT \leftarrow 1, SC \leftarrow 0) \text{ else } (TR \leftarrow AC, SC \leftarrow 0)$
+
+**Flaw 2: Sticking to Mano’s I/O Constraints**
+Your correction regarding the `CHK_KBD` label is spot-on. Mano’s architecture uses a very specific, single-stream I/O model. Introducing "keyboards" implies an interactive terminal, which clashes with the batch-processing card reader model you are building for this course. Sticking strictly to the single input (card reader) and single output (printer) prevents student confusion. `CHK_IO` is the perfect, accurate label.
+
+---
+
+### 2. Further Suggestions and Advice for YIC 100
+
+If we are implementing a trap mechanism to stop malicious or buggy user code, we need to close a few other hardware loopholes to ensure the system is completely secure.
+
+**A. Expand the "Privileged Instruction" Trap**
+If `ATT` causes a trap in user mode, there are several other instructions that must also be restricted. If a user program is allowed to execute them, the OS loses control:
+* **`ATB` (AC to Base):** If a user can change the base register, they can access kernel memory.
+* **`RTI` (Return from Interrupt):** Only the kernel should dictate mode switches.
+* **`INP` and `OUT`:** Users must be forced to use your `RTK` system calls so the kernel can manage the card reader and printer safely.
+* **`ION` and `IOF`:** This is the most critical one. If a user program executes `IOF` (Interrupts Off), the hardware will ignore the timer expiration completely!
+
+**Hardware Rule to Add:** *Any* attempt to execute `ATT`, `ATB`, `RTI`, `INP`, `OUT`, `ION`, or `IOF` while $MODE = 1$ must immediately set the trap flag ($FT \leftarrow 1$) and abort the instruction cycle ($SC \leftarrow 0$).
+
+**B. Handling Leftover Cards in the Card Reader**
+When a user program is aborted via a Trap (either because it ran out of time or executed a privileged instruction), it might not have finished reading all its intended input data from the card reader.
+
+If the Kernel simply jumps back to the Boot Loader, the very next card the loader reads might be leftover data from the aborted program, rather than the "Timer Value" card of the *next* user's program.
+
+How do you plan to separate the card decks for different users so the loader knows exactly where the next valid user program begins after a trap aborts the current one?
+
+No JCL alike for YIC 100, printer
+`````````````````````````````````
+Thanks, you are right about leftover cards of the aborted user program in the card reader. Historically, IBM created fully documented solutions for these problems and alike. IBM even created its own JCL language. Special sequence in cards for start cards for each user program considered at that time. But changing the CPU and computer for these changes will erupt the whole Mano’s visions for architecture simplicity. However, I think there are some shortcuts to bypass this problem more easily.
+The CPU can issue some kind of signal to the card reader after encountering a trap. This signal forces the card reader to pass cards until it reaches a special card that means the start of a new program. By this solution the printer handles most of this situation on its own.
+
+What do you think about this solution?
+Do you have other ideas?
+
+Answer 2026/05/07 22:58:15
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is a highly authentic and elegant solution. You are essentially shifting the complexity from the CPU's software into the peripheral's hardware controller, which is exactly how early mainframe engineers handled electro-mechanical bottlenecks!
+
+*(Just a quick note: I assume you meant "the card reader handles most of this situation on its own" rather than the printer, but your logic is perfectly clear!)*
+
+### Analysis of Your Hardware Solution
+
+Your idea aligns beautifully with historical batch-processing machines. Card readers often had internal hardware logic (like a "feed to stacker" or "skip" command) that didn't require constant CPU supervision.
+
+To implement this without ruining Mano’s architectural simplicity, you just need a single new control wire going from the CPU to the Card Reader.
+* **How it works:** When the CPU encounters a trap (either timer expiration or illegal instruction), the hardware sets the Trap Flag ($FT \leftarrow 1$) and initiates the interrupt cycle. During that exact micro-operation ($t_0$ or $t_1$ of the interrupt cycle), the CPU pulses a new output wire called **`FLUSH`**.
+* **The Card Reader's job:** When the Card Reader receives the `FLUSH` signal, its internal motors continuously feed and discard cards. Its internal logic gates check each card for your "special sequence" (like a punched card representing `FFFF` or a specific IBM-style `//` JCL character). Once it sees that card, it stops the motor and raises the standard Input Flag ($FGI \leftarrow 1$) to tell the OS it is ready.
+
+This keeps the CPU datapath completely untouched and preserves your vision for YIC 100.
+
+### Alternative Idea: The "Software Flush" (Zero Hardware Changes)
+
+If you want to bypass adding a new control wire to the CPU, you can actually solve this entirely in the OS Kernel software using the hardware you already built for YIC 90. This teaches students how the OS manages a "Job Stream."
+
+Instead of the card reader hardware searching for the special start card, the OS does it in the `TRAP_ABORT` routine.
+
+Let's assume the special separator card between users is a unique hexadecimal value, like `FFFF`. If a user program traps, the OS simply jumps to a loop that reads and throws away cards until it hits `FFFF`.
+
+**How it looks in the OS Kernel:**
+```assembly
+TRAP_ABORT,
+        ION                   / Re-enable interrupts so we can read the leftover cards
+FLUSH_L,LDA     IN_READY      / Wait for a card to be read by the ISR
+        SZA
+        BUN     CHK_CRD
+        BUN     FLUSH_L
+
+CHK_CRD,LDA     IN_BUFFER     / Get the discarded card's value
+        SUB     SEPARATOR     / Subtract the special "Start Card" value (e.g., FFFF)
+        SZA                   / Is the result zero? (Did we find the separator?)
+        BUN     NEXT_C        / No: Go discard the next card
+        BUN     BOOT          / Yes! Found the next user. Jump to the Loader.
+
+NEXT_C, CLA
+        STA     IN_READY      / Acknowledge the read, throw away data
+        BUN     FLUSH_L       / Wait for the next card
+
+/ --- Kernel Data ---
+SEPARATOR, HEX FFFF           / The special JCL/Start card value
+```
+
+### Which is better for the course?
+* **Your Hardware Solution:** Better if you want to emphasize peripheral autonomy and keep the OS code incredibly short.
+* **The Software Solution:** Better if you want to teach students the historical concept of a "Job Control Language" (JCL) parser. It shows how the OS is responsible for cleaning up the mess left by a terminated user process using standard I/O instructions.
+
+Both are completely valid. Which approach do you think will resonate better with your computer engineering students?
+
+Memory Limit
+````````````
+Thanks for mentioning my mistake. Yes, I accidentally used the printer instead of the card reader in my messages. Software solutions are more practical in real situations like this but in the operating systems course in the BS of computer engineering, I haven't heard other facilities choose this method of deep teaching concepts of this course by assembly language. My students are already frustrated enough about my comprehensive assembly code in the course while I stick to Mano’s computer architecture as much as possible which they learned in the computer hardware architecture course in the previous semester.
+And for the sake of this course, I should add more features to Mano's computer architecture to vigorously teach this course.
+
+The next step could be adding memory protection by introducing a Limit register. Any memory address accessed by the user program must be greater than base register and less than limit register. An instruction by the name ``ATL`` (Accumulator to Limit register) can be used to represent this action only in kernel mode. Therefore, shared memory for passing data between user programs and the kernel should be put in the user program space. One solution ( a protocol) could be a bunch of memory addresses after the end of the user program. In this case, Limit register should always be a little more than program size. Let's assume we want to just maximum of 100 address after the end of the user program therefore the content of limit register should calculated by the following formula:
+Limit = PROGRAM_SIZE + 100
+
+In this case, the operating system and user program know where to put the shared memory or MAILBOX.
+
+There is another solution. We can ask users (programmers of user programs) to always add some extra memory variables at the end of their codes. This also can be used by the user process and operating system. In this case, Limit register will be equal to PROGRAM_SIZE  .
+
+What do you think about this computer evolution to take another step toward teaching concepts of the operating systems course. We could name it YIC 110. After this we just need to have stacks, call and return instructions to fully be able to have multiprogramming in the next generation of YIC that we can call YIC 120.
+Please tell your opinions and suggestions about all of these, especially YIC 110 improvement
+
+Answer 2026/05/07 22:59:58
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+I completely understand your students' frustration. Learning operating systems through the lens of bare-metal assembly is rigorous and challenging. However, you are building an incredibly rare and valuable mental model for them. By taking Mano’s architecture—which they already understand at the logic-gate level—and incrementally evolving it, you are removing the "magic" from the OS. They aren't just learning *what* an OS does; they are seeing *exactly how* the silicon forces the software to behave.
+
+Your roadmap to YIC 110 (Memory Protection) and YIC 120 (Multiprogramming) is a phenomenal way to structure the remaining weeks of the course.
+
+Here are my thoughts and suggestions on how to implement YIC 110 to keep it as simple as possible for your students while remaining architecturally accurate.
+
+### 1. The Limit Register Hardware Logic (A Gentle Correction)
+You mentioned: *"Any memory address accessed by the user program must be greater than base register and less than limit register."*
+
+Since YIC 90 already introduced relative addressing ($Physical = AR + Base$), the user program never actually sees the Base register. It outputs logical addresses starting at $0$.
+
+To keep the hardware design simple and fast, you don't want to wait for the memory adder to finish before checking the limit. Instead, the Limit Register should store the **Logical Program Size**, not the absolute physical end address.
+
+**The Hardware Rule for YIC 110:**
+During any memory access in User Mode ($MODE = 1$), the CPU performs a simple comparison:
+* If $AR \geq Limit$, trigger a Trap (Memory Violation), $FT \leftarrow 1$, $SC \leftarrow 0$.
+* If $AR < Limit$, proceed normally: $Physical = AR + Base$.
+
+This requires only a simple binary comparator between the Address Register ($AR$) and the Limit Register, keeping Mano's datapath clean.
+
+### 2. The `ATL` Instruction
+Your addition of the `ATL` (Accumulator to Limit) instruction is perfect.
+* **Suggested Opcode:** `7002` (Bit 1 is free in the Register-Reference space, sitting right next to your `ATB` instruction at `7004`).
+* **Privilege:** Just like `ATB` and `ATT`, `ATL` must be a privileged instruction that immediately traps if executed in User Mode.
+
+### 3. The "Mailbox" Problem: Which Protocol is Better?
+
+You proposed two solutions for where to put the shared memory:
+1.  **OS Appends Buffer:** Limit = $PROGRAM\_SIZE + 100$
+2.  **User Defines Variables:** Limit = $PROGRAM\_SIZE$
+
+**I strongly recommend Solution 2 (User Defines Variables) for your course.** Here is why:
+
+* **Pedagogical Value:** Solution 2 introduces your students to the concept of the **Data Segment** (or `.bss` section in modern executable formats like ELF/PE). It teaches them that a program's memory footprint is not just its instructions, but also the space it reserves for variables and OS communication.
+* **Hardware Simplicity:** The OS loader doesn't need to do any math or hardcode a "magic number" like $100$. The card reader simply reads the total size of the deck (Instructions + Mailbox Variables) and sets that exact number into the Limit Register.
+* **Student Accountability:** It forces the student to intentionally reserve memory with `DEC 0` or `HEX 0` at the bottom of their assembly code. If they forget to define their mailbox and try to read from an address outside their code, the hardware trap catches them immediately. It is a fantastic debugging lesson!
+
+### 4. Looking Ahead to YIC 120 (Multiprogramming & Stacks)
+
+You mentioned that YIC 120 will introduce stacks, along with `CALL` and `RETURN`, to achieve multiprogramming. This is the perfect grand finale for your architecture.
+
+Right now, Mano's `BSA` instruction is fundamentally hostile to multiprogramming and recursion because it writes the return address directly into the code segment. If multiple processes share a kernel routine, or if an interrupt happens during a kernel routine, `BSA` overwrites its own return addresses!
+
+**How YIC 120 will tie it all together:**
+* **The Stack Pointer (SP):** By adding an $SP$ register, you can introduce `PUSH` and `POP` micro-operations.
+* **Process Control Blocks (PCB):** To achieve multiprogramming, the Kernel must be able to pause User A and start User B. When the Timer Trap fires, the OS will push User A's $AC$, $E$, $Base$, $Limit$, $TR$, and $PC$ onto a Kernel Stack (creating a PCB). It will then pop User B's state off the stack, and execute `RTI`.
+
+By the time you reach YIC 120, your students will have built a fully functional, preemptive, memory-protected, multiprogramming operating system from literal logic gates. It is a brilliant teaching strategy!
+
+Card reader deck
+````````````````
+Thanks, one thing that can explain better the status of card reader would be good to have a photo imaginary card reader deck only with cards of different user programs. Can you make an image for it? if you can what is the best format to create it by language like dot, svg or tikz package of latex?
+
+Answer 2026/05/07 23:01:01
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Visualizing the job stream is a brilliant way to ground this abstract concept in physical reality for your students.
+
+To answer your first question honestly: Yes, I can absolutely generate a conceptual image for you. I have a built-in image generator (powered by Google's Nano Banana 2 model) that can create raster images (like PNGs or JPEGs) based on a text prompt.
+
+However, for creating technical diagrams for academic course materials, relying on AI-generated raster images is usually not the best path. The text is often garbled, and the images cannot be easily edited if you change your curriculum.
+
+When evaluating the code-based formats you mentioned:
+
+* **Graphviz (`dot`):** Not recommended for this. Graphviz is exceptional for flowcharts, state machines, and parser trees, but it is terrible at rendering overlapping physical objects like a deck of cards.
+* **LaTeX (`TikZ`):** Extremely precise and the gold standard for academic PDFs. However, if your slides are hosted on the web, compiling TikZ into web-friendly formats can be a tedious extra step.
+* **SVG (Scalable Vector Graphics):** **This is the definitive winner.** For lightweight, web-standard presentation tools like `b6plus` or `hovercraft`, SVG is undeniably the best format. It renders natively in the browser without needing a compilation step, scales perfectly on any screen, and most importantly, the text inside the SVG remains selectable and searchable for your students.
+
+Here is a clean, scalable SVG you can embed directly into your slides. It uses a classic "clipped corner" punched-card aesthetic and staggers the deck to clearly show the sequence: Timer -> Size -> Code -> Separator -> Next User.
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 600" width="100%" height="100%">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+
+    <style>
+      .card { fill: #fdfaf6; stroke: #2c3e50; stroke-width: 2px; filter: url(#shadow); }
+      .sep-card { fill: #fff3cd; stroke: #d35400; stroke-width: 3px; stroke-dasharray: 8,4; filter: url(#shadow); }
+      .text-bold { font-family: 'Courier New', monospace; font-weight: bold; font-size: 20px; fill: #2c3e50; }
+      .text-code { font-family: 'Courier New', monospace; font-size: 16px; fill: #34495e; }
+      .text-alert { font-family: 'Courier New', monospace; font-weight: bold; font-size: 22px; fill: #d35400; }
+      .annotation { font-family: Arial, sans-serif; font-size: 14px; fill: #7f8c8d; font-style: italic; }
+    </style>
+  </defs>
+
+  <g id="punched-card">
+    <path d="M 0 0 L 340 0 L 380 40 L 380 160 L 0 160 Z" />
+  </g>
+
+  <g transform="translate(200, 350)">
+    <use href="#punched-card" class="card" />
+    <text x="20" y="35" class="text-bold">USER 2: Timer Limit</text>
+    <text x="20" y="70" class="text-code">0250  (Max Clock Pulses)</text>
+    <text x="20" y="110" class="text-code">...</text>
+  </g>
+
+  <g transform="translate(150, 270)">
+    <use href="#punched-card" class="sep-card" />
+    <text x="20" y="35" class="text-alert">/// SYSTEM SEPARATOR</text>
+    <text x="20" y="70" class="text-code">FFFF</text>
+    <text x="20" y="140" class="annotation">Signals the OS to load the next job</text>
+  </g>
+
+  <g transform="translate(100, 190)">
+    <use href="#punched-card" class="card" />
+    <text x="20" y="35" class="text-bold">USER 1: Program Code</text>
+    <text x="20" y="70" class="text-code">LDA MAILBOX</text>
+    <text x="20" y="95" class="text-code">ADD TEN</text>
+    <text x="20" y="120" class="text-code">STA MAILBOX</text>
+    <text x="20" y="145" class="text-code">...</text>
+  </g>
+
+  <g transform="translate(50, 110)">
+    <use href="#punched-card" class="card" />
+    <text x="20" y="35" class="text-bold">USER 1: Program Size</text>
+    <text x="20" y="70" class="text-code">0042</text>
+    <text x="240" y="140" class="annotation">Used to set LIMIT</text>
+  </g>
+
+  <g transform="translate(0, 30)">
+    <use href="#punched-card" class="card" />
+    <text x="20" y="35" class="text-bold">USER 1: Timer Limit</text>
+    <text x="20" y="70" class="text-code">0500</text>
+    <text x="240" y="140" class="annotation">Used to set TR via ATT</text>
+  </g>
+
+  <path d="M -20 110 L -20 310" stroke="#3498db" stroke-width="4" fill="none" />
+  <path d="M -20 110 L -10 110" stroke="#3498db" stroke-width="4" fill="none" />
+  <path d="M -20 310 L -10 310" stroke="#3498db" stroke-width="4" fill="none" />
+  <text x="-40" y="215" font-family="Arial" font-weight="bold" font-size="16" fill="#3498db" transform="rotate(-90, -40, 215)">User 1 Job Stream</text>
+
+</svg>
+```
+
+You can save this directly as an `.svg` file in your `slide/os/img/` directory and embed it into your repository. Because it is code, if you ever decide to change the "Separator" from `FFFF` to another value, you only have to change four letters in the text editor rather than regenerating an entirely new image!
+
+YIC 110 codes
+`````````````
+Thanks, please create kernel (boot, loader, input routine, output routine) code for YIC 100 after all of these discussion based on our latest decision for this version of yic. Also  a user program code for user program for yic 100 separately.
+
+Answer 2026/05/07 23:22:17
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+Here is the complete, consolidated assembly code for both the **YIC 100 Kernel** and the **YIC 100 User Program**, incorporating all the architectural decisions we have finalized.
+
+To keep the OS code clean and stick to the "peripheral autonomy" hardware design, I have introduced one new I/O instruction for the Kernel: `FSH` (Flush).
+* When a program **traps** (timeout or privilege violation), the CPU hardware automatically pulses the `FLUSH` wire during the interrupt cycle.
+* When a program **exits normally** via an OS system call, the OS executes the `FSH` instruction to manually pulse the wire, ensuring any leftover unread data cards are discarded until the `FFFF` separator is reached.
+
+---
+
+### Part 1: YIC 100 Kernel (Boot, Loader, I/O, and Trap Handling)
+**Location:** Physical Addresses `000` to `0FF`.
+**Hardware Assumptions:** Base Register = 300. Shared Mailbox Physical Address = 1000.
+
+```assembly
+/ ====================================================================
+/ YIC 100 KERNEL (Firmware)
+/ Features: Preemption (TR/FT), HW Card Flush, Single I/O Stream
+/ Base = 300, Mailbox Physical = 1000
+/ ====================================================================
+        ORG     0
+        BUN     BOOT          / CPU starts here at power-on
+        BUN     ISR           / Hardware Interrupts jump here (Addr 1)
+
+/ --- System Call Entry Point (Entered via RTK) ---
+        ORG     030
+        HEX     0             / RTK saves User's logical PC here
+        BUN     SYSCALL       / Hardware jumps here after RTK
+
+/ --- OS Boot and Loader ---
+BOOT,   CLA
+        STA     IN_READY
+        STA     OUT_READY
+        ION                   / Enable Interrupts to read cards
+
+        / Step 1: Read Timer Limit (Card 1)
+L_TMR,  LDA     IN_READY
+        SZA
+        BUN     HAVE_TMR
+        BUN     L_TMR
+HAVE_TMR,LDA    IN_BUFFER
+        ATT                   / HW: TR <- AC (Set Timer Register)
+        CLA
+        STA     IN_READY      / Clear flag for next card
+
+        / Step 2: Read Program Size (Card 2)
+L_SZ,   LDA     IN_READY
+        SZA
+        BUN     HAVE_SZ
+        BUN     L_SZ
+HAVE_SZ,LDA     IN_BUFFER
+        STA     PROG_SIZE
+        CLA
+        STA     IN_READY
+
+        LDA     PROG_BASE     / Start loading at physical 300
+        STA     PTR
+
+        / Step 3: Load User Program Code (Cards 3 to N)
+L_LOOP, LDA     PROG_SIZE
+        SZA                   / If Size == 0, loading is finished
+        BUN     L_READ
+        BUN     L_RUN
+L_READ, LDA     IN_READY
+        SZA
+        BUN     L_STORE
+        BUN     L_READ
+L_STORE,LDA     IN_BUFFER
+        STA     PTR I         / Store in physical RAM
+        ISZ     PTR
+        CLA
+        STA     IN_READY
+        LDA     PROG_SIZE
+        ADD     M_ONE         / PROG_SIZE--
+        STA     PROG_SIZE
+        BUN     L_LOOP
+
+        / Step 4: Context Switch to User Space
+L_RUN,  LDA     PROG_BASE
+        ATB                   / Set Base Register = 300
+        CLA
+        STA     0             / Put "0" in M[0] to fake return address
+        RTI                   / Atomic: PC=M[0], MODE=1, IEN=1, TR starts!
+
+/ --- Syscall Handler ---
+SYSCALL,SZA                   / Check AC for command
+        BUN     SC_CHECK
+
+        / Syscall 0: Normal Exit
+SC_EXIT,FSH                   / HW: Tell CR to flush leftover cards to FFFF
+        BUN     BOOT          / Load next user program
+
+SC_CHECK,ADD    M_ONE
+        SZA                   / If result 0, AC was 1
+        BUN     SC_WRITE
+
+        / Syscall 1: Read (Input from CR to Mailbox)
+        ION
+W_IN,   LDA     IN_READY
+        SZA
+        BUN     RD_DONE
+        BUN     W_IN
+RD_DONE,LDA     MAIL_PHYS     / Point directly to Physical 1000
+        STA     PTR
+        LDA     IN_BUFFER
+        STA     PTR I         / Move data to Mailbox
+        CLA
+        STA     IN_READY
+        BUN     SC_RET
+
+SC_WRITE, / Syscall 2: Write (Output from Mailbox to Printer)
+        LDA     MAIL_PHYS
+        STA     PTR
+        LDA     PTR I         / Get data from Mailbox
+        STA     OUT_BUFFER
+        LDA     ONE
+        STA     OUT_READY
+        ION                   / Let ISR handle actual OUT
+W_OUT,  LDA     OUT_READY
+        SZA
+        BUN     W_OUT         / Wait for ISR to print it
+
+SC_RET, IOF
+        LDA     030           / Get User's logical return address
+        STA     0             / Move to M[0]
+        RTI                   / Return to User Space (Timer resumes)
+
+/ --- Interrupt Service Routine ---
+ISR,    STA     SAVE_AC
+        CIL
+        STA     SAVE_E
+
+        / 1. Check for Preemption / Security Trap
+        SKT                   / HW: If FT==1, skip next & clear FT
+        BUN     CHK_IO
+        / TRAP OCCURRED: HW already pulsed FLUSH to card reader.
+        BUN     BOOT          / Abandon user, load next job.
+
+        / 2. Normal I/O Handling
+CHK_IO, SKI
+        BUN     CHK_OUT
+        INP
+        STA     IN_BUFFER
+        LDA     ONE
+        STA     IN_READY
+
+CHK_OUT,SKO
+        BUN     ISR_END
+        LDA     OUT_READY
+        SZA
+        BUN     DO_OUT
+        BUN     ISR_END
+DO_OUT, LDA     OUT_BUFFER
+        OUT
+        CLA
+        STA     OUT_READY
+
+ISR_END,LDA     SAVE_E
+        CIR
+        LDA     SAVE_AC
+        ION
+        RTI
+
+/ --- Kernel Data ---
+ONE,       DEC 1
+M_ONE,     DEC -1
+PROG_BASE, HEX 300
+MAIL_PHYS, HEX 1000
+PROG_SIZE, DEC 0
+PTR,       HEX 0
+IN_READY,  DEC 0
+IN_BUFFER, DEC 0
+OUT_READY, DEC 0
+OUT_BUFFER,DEC 0
+SAVE_AC,   DEC 0
+SAVE_E,    DEC 0
+        END
+```
+
+---
+
+### Part 2: YIC 100 User Program
+**Location:** Loaded into Physical `300`.
+**Addressing:** User sees this as Logical `000`. Mailbox is at Logical `700`.
+
+```assembly
+/ ====================================================================
+/ YIC 100 USER PROGRAM
+/ Base = 300. Mailbox Logical = 700 (Resolves to Physical 1000)
+/ ====================================================================
+        ORG     0
+
+        / 1. Request Input via OS
+        LDA     C_RD          / AC = 1 (Syscall: Read)
+        RTK                   / OS puts CR data into Mailbox
+
+        / 2. Process Data
+        LDA     MAILBOX       / Logical 700 -> Physical 1000
+        ADD     TEN
+        STA     MAILBOX
+
+        / 3. Display Result via OS
+        LDA     C_WR          / AC = 2 (Syscall: Write)
+        RTK                   / OS prints data from Mailbox
+
+        / 4. Exit gracefully
+        CLA                   / AC = 0 (Syscall: Exit)
+        RTK                   / OS will FSH remaining cards and reboot
+
+/ --- User Data (Code Segment) ---
+C_RD,    DEC 1
+C_WR,    DEC 2
+TEN,     DEC 10
+
+/ --- User Shared Memory (Data Segment) ---
+        ORG 700
+MAILBOX, DEC 0                / Hardware maps this to Physical 1000
+        END
+```
+
+### Key Pedagogical Points for Your Students:
+1.  **The Invisible Trap:** Notice that the User Program has absolutely no awareness of the Timer. It doesn't configure it, and it doesn't handle the timeout. If it gets stuck in an infinite loop (e.g., `BUN 0`), the `SKT` hardware interrupt will ruthlessly terminate it.
+2.  **The Memory Map:** By organizing the `ORG 700` in the user program, you are laying the exact groundwork needed for **YIC 110 (Memory Protection)**. When you introduce the Limit Register next week, your students will already understand that a program is divided into a Code segment and a Data segment, and the Limit must encompass both!
+
 
 ChatGpt
 ^^^^^^^

@@ -2496,30 +2496,118 @@ SQLite Types
 
 ----
 
-:class: t2c
+:class: t3c
 
-Some Functions
-==============
-* math
-    * acos(X)
-    * acosh(X)
-    * asin(X)
-    * atanh(X)
-    * ceil(X)ceiling(X)
-    * cos(X)
-    * exp(X)
-    * floor(X)
-    * ln(X)
-    * log(X) log10(X)
-    * log(B,X)
-    * log2(X)
-    * mod(X,Y)
-    * pi()
-    * pow(X,Y) power(X,Y)
-    * sin(X)
-    * sqrt(X)
-    * tan(X)
-    * trunc(X)
+String Functions
+================
+.. class:: substep
+
+* ltrim('  abc ')
+    * 'abc '
+* rtrim('  abc ')
+    * '  abc'
+* trim('  abc ')
+    * 'abc'
+* upper('sql')
+    * SQL
+* lower('SQL')
+    * sql
+* concate('SQL', 'ite')
+    * SQLite
+* 'SQL' || 'ite'
+    * SQLite
+* concate('SQL', NULL, 'ite')
+    * SQLite
+
+.. class:: substep
+
+* .. list-table::
+        :class: smallerelementwithfullborder
+
+        * - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        * - S
+          - Q
+          - L
+          - i
+          - t
+          - e
+        * - -6
+          - -5
+          - -4
+          - -3
+          - -2
+          - -1
+* substr('SQLite', 2, 4)
+    * QLit
+* substr('SQLite', 4)
+    * ite
+* substr('SQLite', -4)
+    * Lite
+* substr(NULL, 4)
+    * NULL
+* substr('SQLite')
+    * Parse error:
+* substring
+* instr('yo@a.com', '@')
+    * 3
+* PostgreSQl position
+* position('om' in 'Thomas')
+    * 3
+
+.. class:: substep
+
+* format('%s is %d', 'Ada', 30)
+    * Ada is 30
+    * printf
+* length('abc')
+    * 3
+* length(NULL)
+    * NULL
+* PostgreSQl
+    * char_length
+* PostgreSQl String Functions
+* substring('Thomas' from 2 for 3)
+    * hom
+* substring('Thomas' from 3)
+    * omas
+* substring('Thomas' for 2)
+    * Th
+* replace('acdefcdb', 'cd', 'YY')
+    * aYYefYYb
+
+.. :
+
+    https://www.sqlitetutorial.net/sqlite-string-functions/
+    https://sqlite.org/lang_corefunc.html
+    https://www.slingacademy.com/article/advanced-string-manipulation-in-sqlite-with-built-in-functions/
+    https://coddy.tech/docs/sqlite/string-functions
+    https://www.postgresql.org/docs/current/functions-string.html
+
+----
+
+* acosh(X)
+* asin(X)
+* atanh(X)
+* ceil(X)ceiling(X)
+* cos(X)
+* exp(X)
+* floor(X)
+* ln(X)
+* log(X) log10(X)
+* log(B,X)
+* log2(X)
+* mod(X,Y)
+* pi()
+* pow(X,Y) power(X,Y)
+* sin(X)
+* sqrt(X)
+* tan(X)
+* trunc(X)
 
 ----
 
