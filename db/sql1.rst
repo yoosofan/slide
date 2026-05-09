@@ -2377,8 +2377,8 @@ Data Types
 
 * **Date and Time**
     * DATE     , YYYY-MM-DD
-    * TIME     , HH:MI:SS
-    * DATETIME , YYYY-MM-DD HH:MI:SS
+    * TIME     , HH:mm:ss
+    * DATETIME , YYYY-MM-DD HH:mm:ss
     * TIMESTAMP, 1970-01-01 00:00:00
     * INTERVAL
 * **Binary**
@@ -2590,31 +2590,13 @@ String Functions
 
 ----
 
-* acosh(X)
-* asin(X)
-* atanh(X)
-* ceil(X)ceiling(X)
-* cos(X)
-* exp(X)
-* floor(X)
-* ln(X)
-* log(X) log10(X)
-* log(B,X)
-* log2(X)
-* mod(X,Y)
-* pi()
-* pow(X,Y) power(X,Y)
-* sin(X)
-* sqrt(X)
-* tan(X)
-* trunc(X)
-
-----
 
 :class: t2c
 
 Date and Time I
 ===============
+.. class:: substep
+
 * DATE(): YYYY-MM-DD
 * TIME(): HH:MM:SS
 * DATETIME(): YYYY-MM-DD HH:MM:SS
@@ -2624,16 +2606,44 @@ Date and Time I
 
 .. code:: sql
     :number-lines:
+    :class: substep
 
-    CREATE TABLE events (
-        id INTEGER PRIMARY KEY,
-        event_name TEXT NOT NULL,
-        event_date TEXT NOT NULL
-    );
+    SELECT date('2024-06-01', '+1 day')
+      AS next_day,
+      date('2024-06-01', '+1 month')
+      AS next_month,
+      date('2024-06-01', '-1 month')
+      AS last_month;
 
-    INSERT INTO events VALUES
-      (1, 'Meeting', '2024-06-01 14:00:00'),
-      (2, 'Conference', '2024-06-15 09:30:00');
+.. container::
+
+    .. code:: sql
+        :number-lines:
+        :class: substep
+
+        SELECT
+          (julianday('2024-06-15') -
+            julianday('2024-06-01')
+          ) AS days_difference;
+
+    .. code:: sql
+        :number-lines:
+        :class: substep
+
+        SELECT * FROM events
+        WHERE event_date >= '2024-06-01'
+          AND event_date < '2024-07-01';
+
+    .. code:: sql
+        :number-lines:
+        :class: substep
+
+        SELECT datetime(1717231200, 'unixepoch')
+          AS human_readable_date,
+          strftime('%s', '2024-06-01 14:00:00')
+          AS unix_epoch;
+
+
 
 .. code:: sql
     :number-lines:
@@ -2644,53 +2654,129 @@ Date and Time I
         event_name TEXT NOT NULL,
         event_timestamp INTEGER NOT NULL
     );
-
     INSERT INTO events VALUES
       (1, 'Meeting',
         strftime('%s', '2024-06-01 14:00:00')),
       (2, 'Conference',
         strftime('%s', '2024-06-15 09:30:00'));
-
-.. code:: sql
-    :number-lines:
-    :class: substep
-
     SELECT event_name,
-    datetime(event_timestamp,
-      'unixepoch') AS event_date
+      datetime(event_timestamp, 'unixepoch') AS event_date
     FROM events;
 
 ----
+
+:class: t2c
 
 Date and Time II
 ================
 .. code:: sql
     :number-lines:
-    :class: substep
 
-    SELECT date('2024-06-01', '+1 day') AS next_day,
-           date('2024-06-01', '+1 month') AS next_month,
-           date('2024-06-01', '-1 month') AS last_month;
+    CREATE TABLE book (
+        bn INT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        author VARCHAR(255) NOT NULL,
+        ofpd DECIMAL(5, 2) NOT NULL DEFAULT 0.50
+    );
+    CREATE TABLE member (
+        mn INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        bn INT, -- Favorite book
+        fines DECIMAL(10, 2) DEFAULT 0.00,
+        FOREIGN KEY (bn) REFERENCES book(bn)
+    );
+    CREATE TABLE borrow (
+        bn INT,
+        mn INT,
+        ddt DATE, -- Due date
+        dtr DATE, -- Date returned
+        -- (NULL means still borrowed)
+        PRIMARY KEY (bn, mn, ddt),
+        FOREIGN KEY (bn) REFERENCES book(bn)
+        FOREIGN KEY (mn) REFERENCES member(mn)
+    );
 
 .. code:: sql
     :number-lines:
     :class: substep
 
-    SELECT (julianday('2024-06-15') - julianday('2024-06-01')) AS days_difference;
+    INSERT INTO book (bn, title, author, ofpd) VALUES
+    (101, 'Dune', 'Frank Herbert', 0.50),
+    (102, 'Ghazal of Hafez', 'Hafez Shirazi', 1.25),
+    (103, 'Foundation', 'Isaac Asimov', 0.50),
+    (104, 'The Hobbit', 'J.R.R. Tolkien', 0.25),
+    (105, 'We', 'Yevgeny Zamyatin', 1.00);
 
-.. code:: sql
-    :number-lines:
-    :class: substep
+    INSERT INTO member (mn, name, bn, fines) VALUES
+    -- Alice's favorite is Dune
+    (1, 'Alice Smith', 101, 0.00),
+    -- Bob's favorite is The Hobbit
+    (2, 'Bob Johnson', 104, 2.50),
+    -- Charlie hasn't picked a favorite yet
+    (3, 'Charlie Davis', NULL, 0.00);
 
-    SELECT * FROM events
-    WHERE event_date >= '2024-06-01' AND event_date < '2024-07-01';
+    INSERT INTO borrow (bn, mn, ddt, dtr) VALUES
+    -- Alice borrowed Dune and returned it early
+    (101, 1, '2023-10-01', '2023-09-28'),
+    -- Bob borrowed The Hobbit and returned it 5 days late
+    (104, 2, '2023-10-15', '2023-10-20'),
+    -- Alice borrowed We and hasn't returned it yet (NULL)
+    (105, 1, '2023-11-01', NULL),
+    -- Charlie borrowed Hafez and hasn't returned it yet
+    (102, 3, '2023-11-05', NULL);
 
-.. code:: sql
-    :number-lines:
-    :class: substep
+.. :
 
-    SELECT datetime(1717231200, 'unixepoch') AS human_readable_date,
-           strftime('%s', '2024-06-01 14:00:00') AS unix_epoch;
+    The library SQL commands are created by the help of Gemini AI
+
+    INSERT INTO book (bn, title, author, ofpd) VALUES
+    (101, 'Dune', 'Frank Herbert', 0.50),
+    (102, 'Ghazal of Hafez Shirazi', 'Hafez Shirazi', 1.25),
+    (103, 'Foundation', 'Isaac Asimov', 0.50),
+    (104, 'The Hobbit', 'J.R.R. Tolkien', 0.25),
+    (105, 'We', 'Yevgeny Zamyatin', 1.00);
+
+    INSERT INTO member (mn, name, bn, fines) VALUES
+    (1, 'Alice Smith', 101, 0.00),  -- Alice's favorite is Dune
+    (2, 'Bob Johnson', 104, 2.50),  -- Bob's favorite is The Hobbit
+    (3, 'Charlie Davis', NULL, 0.00); -- Charlie hasn't picked a favorite yet
+
+    INSERT INTO borrow (bn, mn, ddt, dtr) VALUES
+    -- Alice borrowed Dune and returned it early
+    (101, 1, '2023-10-01', '2023-09-28'),
+
+    -- Bob borrowed The Hobbit and returned it 5 days late
+    (104, 2, '2023-10-15', '2023-10-20'),
+
+    -- Alice borrowed We and hasn't returned it yet (NULL)
+    (105, 1, '2023-11-01', NULL),
+
+    -- Charlie borrowed Hafez and hasn't returned it yet
+    (102, 3, '2023-11-05', NULL);
+
+----
+
+.. class:: substep
+
+    * **Math Functions**
+        * acosh(X)
+        * asin(X)
+        * atanh(X)
+        * ceil(X)ceiling(X)
+        * cos(X)
+        * exp(X)
+        * floor(X)
+        * ln(X)
+        * log(X) log10(X)
+        * log(B,X)
+        * log2(X)
+        * mod(X,Y)
+        * pi()
+        * pow(X,Y) power(X,Y)
+        * sin(X)
+        * sqrt(X)
+        * tan(X)
+        * trunc(X)
 
 .. :
 
@@ -2769,48 +2855,55 @@ Check I
 
 Check II
 ========
+.. container::
+
+    .. code:: sql
+        :number-lines:
+
+        CREATE TABLE people (
+          id  INTEGER PRIMARY KEY,
+          age INTEGER CHECK (age >= 0)
+        );
+        INSERT INTO people (age) VALUES
+          (1,25), (2,NULL), (3,-5);
+
+    .. code:: sql
+        :class: substep
+        :number-lines:
+
+        CREATE TABLE employees (
+          id     INTEGER PRIMARY KEY,
+          name   CHAR(20) NOT NULL,
+          salary REAL NOT NULL,
+          bonus  REAL NOT NULL DEFAULT 0,
+          CONSTRAINT salary_positive
+            CHECK (salary > 0),
+          CONSTRAINT bonus_not_negative
+            CHECK (bonus >= 0),
+          CONSTRAINT bonus_not_huge
+            CHECK (bonus <= salary)
+        );
+        INSERT INTO employees VALUES
+        (1, 'Ada', 60000, 70000);
+
 .. code:: sql
-
-    CREATE TABLE people (
-        id  INTEGER PRIMARY KEY,
-        age INTEGER CHECK (age >= 0)
-    );
-
-    INSERT INTO people (age) VALUES
-        (1,25), (2,NULL), (3,-5);
-
-.. code:: sql
-
-    CREATE TABLE employees (
-        id       INTEGER PRIMARY KEY,
-        name     CHAR(20) NOT NULL,
-        salary   REAL NOT NULL,
-        bonus    REAL NOT NULL DEFAULT 0,
-        CONSTRAINT salary_positive CHECK (salary > 0),
-        CONSTRAINT bonus_not_negative CHECK (bonus >= 0),
-        CONSTRAINT bonus_not_huge CHECK (bonus <= salary)
-    );
-
-    INSERT INTO employees VALUES (1, 'Ada', 60000, 70000);
-
-
-.. code:: sql
+    :number-lines:
+    :class: substep
 
     CREATE TABLE users (
-        id       INTEGER PRIMARY KEY,
-        email    CHAR(20)
-          CHECK(email LIKE '%_@_%.__%'),
-        username CHAR(20)
-          CHECK(length(username) BETWEEN 3 AND 20),
-        country  CHAR(20)
-          CHECK(country = upper(country))
+      id       INTEGER PRIMARY KEY,
+      email    CHAR(20)
+        CHECK(email LIKE '%_@_%.__%'),
+      username CHAR(20)
+        CHECK(length(username) BETWEEN 3 AND 20),
+      country  CHAR(20)
+        CHECK(country = upper(country))
     );
-
     INSERT INTO users VALUES
-        (1, 'ada@example.com', 'ada', 'US'),
-        (2, 'not-an-email', 'ada2', 'US'),
-        (3, 'boris@x.io', 'b', 'US'),
-        (4, 'cara@x.io', 'cara', 'us');
+      (1, 'ada@example.com', 'ada', 'US'),
+      (2, 'not-an-email', 'ada2', 'US'),
+      (3, 'boris@x.io', 'b', 'US'),
+      (4, 'cara@x.io', 'cara', 'us');
 
 .. :
 
