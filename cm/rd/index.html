@@ -381,20 +381,20 @@ Synatx Error: number expected
 </span><span class="ln">29 </span><span class="w"></span>  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span><span class="w">
 </span><span class="ln">30 </span><span class="w"></span>  <span class="k">return</span> <span class="kc">True</span></pre></div><div class="step step-level-1 t2c" step="30" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="48000" data-y="0" data-z="0"><h1 id="parser-tree">Parser Tree</h1><pre class="highlight code python"><span class="ln"> 9 </span><span class="k">def</span><span class="w"> </span><span class="nf">E</span><span class="p">(</span><span class="n">lex1</span><span class="p">):</span><span class="w">
 </span><span class="ln">10 </span><span class="w"></span>  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span><span class="w">
-</span><span class="ln">11 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'E: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span> <span class="w">
+</span><span class="ln">11 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'E: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
 </span><span class="ln">12 </span><span class="w"></span>    <span class="k">if</span> <span class="n">T</span><span class="p">(</span><span class="n">lex1</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span><span class="w">
-</span><span class="ln">13 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">]:</span> <span class="w">
+</span><span class="ln">13 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">]:</span><span class="w">
 </span><span class="ln">14 </span><span class="w"></span>      <span class="k">break</span><span class="w">
-</span><span class="ln">15 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Op: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
+</span><span class="ln">15 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'+-: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
 </span><span class="ln">16 </span><span class="w"></span>    <span class="n">lex1</span><span class="o">.</span><span class="n">getToken</span><span class="p">()</span><span class="w">
 </span><span class="ln">17 </span><span class="w"></span>  <span class="k">return</span> <span class="kc">True</span><span class="w">
 </span><span class="ln">18 </span><span class="w"></span><span class="k">def</span><span class="w"> </span><span class="nf">T</span><span class="p">(</span><span class="n">lex1</span><span class="p">):</span><span class="w">
 </span><span class="ln">19 </span><span class="w"></span>  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span><span class="w">
 </span><span class="ln">20 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'T: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
 </span><span class="ln">21 </span><span class="w"></span>    <span class="k">if</span> <span class="n">F</span><span class="p">(</span><span class="n">lex1</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span><span class="w">
-</span><span class="ln">22 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'*'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">]:</span> <span class="w">
+</span><span class="ln">22 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'*'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">]:</span><span class="w">
 </span><span class="ln">23 </span><span class="w"></span>      <span class="k">break</span><span class="w">
-</span><span class="ln">24 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Op: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
+</span><span class="ln">24 </span><span class="w"></span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'*/: '</span><span class="p">,</span> <span class="n">lex1</span><span class="o">.</span><span class="n">s</span><span class="p">[</span><span class="n">lex1</span><span class="o">.</span><span class="n">begin</span><span class="p">:])</span><span class="w">
 </span><span class="ln">25 </span><span class="w"></span>    <span class="n">lex1</span><span class="o">.</span><span class="n">getToken</span><span class="p">()</span><span class="w">
 </span><span class="ln">26 </span><span class="w"></span>  <span class="k">return</span> <span class="kc">True</span><span class="p">;</span><span class="w">
 </span><span class="ln">27 </span><span class="w"></span><span class="k">def</span><span class="w"> </span><span class="nf">F</span><span class="p">(</span><span class="n">lex1</span><span class="p">):</span><span class="w">
@@ -405,30 +405,37 @@ Synatx Error: number expected
 </span><span class="ln">32 </span><span class="w"></span>  <span class="k">elif</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'('</span><span class="p">:</span><span class="w">
 </span><span class="ln">33 </span><span class="w"></span>    <span class="n">lex1</span><span class="o">.</span><span class="n">getToken</span><span class="p">()</span><span class="w">
 </span><span class="ln">34 </span><span class="w"></span>    <span class="k">if</span> <span class="n">E</span><span class="p">(</span><span class="n">lex1</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span><span class="w">
-</span><span class="ln">35 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">')'</span> <span class="p">:</span> <span class="w">
+</span><span class="ln">35 </span><span class="w"></span>    <span class="k">if</span> <span class="n">lex1</span><span class="o">.</span><span class="n">ct</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s1">')'</span> <span class="p">:</span><span class="w">
 </span><span class="ln">36 </span><span class="w"></span>      <span class="k">return</span> <span class="kc">False</span><span class="w">
 </span><span class="ln">37 </span><span class="w"></span>    <span class="n">lex1</span><span class="o">.</span><span class="n">getToken</span><span class="p">()</span><span class="w">
 </span><span class="ln">38 </span><span class="w"></span>  <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="kc">False</span><span class="w">
-</span><span class="ln">39 </span><span class="w"></span>  <span class="k">return</span> <span class="kc">True</span></pre><pre class="highlight code console"><span class="ln"> 1 </span><span class="go">python3 t.py '1+4*(3-1)'
-</span><span class="ln"> 2 </span><span class="go">E:  1+4*(3-1)
-</span><span class="ln"> 3 </span><span class="go">T:  1+4*(3-1)
-</span><span class="ln"> 4 </span><span class="go">F:  1+4*(3-1)
-</span><span class="ln"> 5 </span><span class="go">Number:  1.0
-</span><span class="ln"> 6 </span><span class="go">Op:  +4*(3-1)
-</span><span class="ln"> 7 </span><span class="go">T:  4*(3-1)
-</span><span class="ln"> 8 </span><span class="go">F:  4*(3-1)
-</span><span class="ln"> 9 </span><span class="go">Number:  4.0
-</span><span class="ln">10 </span><span class="go">Op:  *(3-1)
-</span><span class="ln">11 </span><span class="go">F:  (3-1)
-</span><span class="ln">12 </span><span class="go">E:  3-1)
-</span><span class="ln">13 </span><span class="go">T:  3-1)
-</span><span class="ln">14 </span><span class="go">F:  3-1)
-</span><span class="ln">15 </span><span class="go">Number:  3.0
-</span><span class="ln">16 </span><span class="go">Op:  -1)
-</span><span class="ln">17 </span><span class="go">T:  1)
-</span><span class="ln">18 </span><span class="go">F:  1)
-</span><span class="ln">19 </span><span class="go">Number:  1.0
-</span><span class="ln">20 </span><span class="go">True</span></pre></div><div class="step step-level-1" step="31" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="49600" data-y="0" data-z="0"><img src="img/yoo_graphviz_9889e575cc4b8e20e41a9e8e98fa26d0.png" height="500"><ol><li>E &#8594; E + T | E - T | T  ,  2.  T &#8594; T * F | T / F | F , 3. F &#8594; (E) | a</li></ol></div><div class="step step-level-1 grid-2col-class" step="32" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="51200" data-y="0" data-z="0"><img src="img/yoo_graphviz_ac40160be1d251c8a54a4afc38222eeb.png" height="500"><pre class="highlight code console"><span class="ln"> 1 </span><span class="go">python3 t.py '1+4*(3-1)'
+</span><span class="ln">39 </span><span class="w"></span>  <span class="k">return</span> <span class="kc">True</span></pre><pre class="highlight code console"><span class="ln"> 1 </span><span class="go">  rd$python3 e_t_f_plus_minus_mul_divide_parser_tree.py
+</span><span class="ln"> 2 </span><span class="go">  Enter an expression like 1+4*(3-1)
+</span><span class="ln"> 3 </span><span class="go">  &gt; 1+4*(3-1)
+</span><span class="ln"> 4 </span><span class="go">  E:  1+4*(3-1)
+</span><span class="ln"> 5 </span><span class="go">  T:  1+4*(3-1)
+</span><span class="ln"> 6 </span><span class="go">  F:  1+4*(3-1)
+</span><span class="ln"> 7 </span><span class="go">  Number:  1.0
+</span><span class="ln"> 8 </span><span class="go">  +-:  +4*(3-1)
+</span><span class="ln"> 9 </span><span class="go">  E:  4*(3-1)
+</span><span class="ln">10 </span><span class="go">  T:  4*(3-1)
+</span><span class="ln">11 </span><span class="go">  F:  4*(3-1)
+</span><span class="ln">12 </span><span class="go">  Number:  4.0
+</span><span class="ln">13 </span><span class="go">  */:  *(3-1)
+</span><span class="ln">14 </span><span class="go">  T:  (3-1)
+</span><span class="ln">15 </span><span class="go">  F:  (3-1)
+</span><span class="ln">16 </span><span class="go">  E:  3-1)
+</span><span class="ln">17 </span><span class="go">  T:  3-1)
+</span><span class="ln">18 </span><span class="go">  F:  3-1)
+</span><span class="ln">19 </span><span class="go">  Number:  3.0
+</span><span class="ln">20 </span><span class="go">  +-:  -1)
+</span><span class="ln">21 </span><span class="go">  E:  1)
+</span><span class="ln">22 </span><span class="go">  T:  1)
+</span><span class="ln">23 </span><span class="go">  F:  1)
+</span><span class="ln">24 </span><span class="go">  Number:  1.0
+</span><span class="ln">25 </span><span class="go">  True
+</span><span class="ln">26 </span><span class="go">  Enter an expression like 1+4*(3-1)
+</span><span class="ln">27 </span><span class="go">  &gt;</span></pre></div><div class="step step-level-1" step="31" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="49600" data-y="0" data-z="0"><img src="img/yoo_graphviz_9889e575cc4b8e20e41a9e8e98fa26d0.png" height="500"><ol><li>E &#8594; E + T | E - T | T  ,  2.  T &#8594; T * F | T / F | F , 3. F &#8594; (E) | a</li></ol></div><div class="step step-level-1 grid-2col-class" step="32" style="width: 1024px;" data-rotate-x="0" data-rotate-y="0" data-rotate-z="90" data-scale="1" data-x="51200" data-y="0" data-z="0"><img src="img/yoo_graphviz_ac40160be1d251c8a54a4afc38222eeb.png" height="500"><pre class="highlight code console"><span class="ln"> 1 </span><span class="go">python3 t.py '1+4*(3-1)'
 </span><span class="ln"> 2 </span><span class="go">E:  1+4*(3-1)
 </span><span class="ln"> 3 </span><span class="go">T:  1+4*(3-1)
 </span><span class="ln"> 4 </span><span class="go">F:  1+4*(3-1)

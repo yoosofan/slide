@@ -1329,6 +1329,170 @@ Execution Time Limit Protection
 
 YIC 100
 =======
+.. class:: substep
+
+* User program can run ATT
+* Privileged Instructions
+* If MODE == 1
+    * FT ← 1
+    * SC ← 0
+* else
+    * TR ← AC
+    * SC ← 0
+* Other Privileged Instructions
+* ATB
+* RTI
+* ION
+* IOF
+* INP
+* OUT
+* HLT
+* Other Considerations
+* trap for illegal instruction
+    * Privileged
+    * Non existance code
+* CPU trap
+    * timer expiration
+    * illegal instruction
+
+.. container:: substep
+
+    * Handling Leftover Cards
+
+    .. raw:: html
+
+        <div style="width:500px; height:300px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 600" width="100%" height="100%">
+          <defs>
+            <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+              <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3"/>
+            </filter>
+
+            <style>
+              .card { fill: #fdfaf6; stroke: #2c3e50; stroke-width: 2px; filter: url(#shadow); }
+              .sep-card { fill: #fff3cd; stroke: #d35400; stroke-width: 3px; stroke-dasharray: 8,4; filter: url(#shadow); }
+              .text-bold { font-family: 'Courier New', monospace; font-weight: bold; font-size: 20px; fill: #2c3e50; }
+              .text-code { font-family: 'Courier New', monospace; font-size: 16px; fill: #34495e; }
+              .text-alert { font-family: 'Courier New', monospace; font-weight: bold; font-size: 22px; fill: #d35400; }
+              .annotation { font-family: Arial, sans-serif; font-size: 14px; fill: #7f8c8d; font-style: italic; }
+            </style>
+          </defs>
+
+          <g id="punched-card">
+            <path d="M 0 0 L 340 0 L 380 40 L 380 160 L 0 160 Z" />
+          </g>
+
+          <g transform="translate(200, 350)">
+            <use href="#punched-card" class="card" />
+            <text x="20" y="35" class="text-bold">USER 2: Timer Limit</text>
+            <text x="20" y="70" class="text-code">0250  (Max Clock Pulses)</text>
+            <text x="20" y="110" class="text-code">...</text>
+          </g>
+
+          <g transform="translate(150, 270)">
+            <use href="#punched-card" class="sep-card" />
+            <text x="20" y="35" class="text-alert">/// SYSTEM SEPARATOR</text>
+            <text x="20" y="70" class="text-code">FFFF</text>
+            <text x="20" y="140" class="annotation">Signals the OS to load the next job</text>
+          </g>
+
+          <g transform="translate(100, 190)">
+            <use href="#punched-card" class="card" />
+            <text x="20" y="35" class="text-bold">USER 1: Program Code</text>
+            <text x="20" y="70" class="text-code">LDA MAILBOX</text>
+            <text x="20" y="95" class="text-code">ADD TEN</text>
+            <text x="20" y="120" class="text-code">STA MAILBOX</text>
+            <text x="20" y="145" class="text-code">...</text>
+          </g>
+
+          <g transform="translate(50, 110)">
+            <use href="#punched-card" class="card" />
+            <text x="20" y="35" class="text-bold">USER 1: Program Size</text>
+            <text x="20" y="70" class="text-code">0042</text>
+            <text x="240" y="140" class="annotation">Used to set LIMIT</text>
+          </g>
+
+          <g transform="translate(0, 30)">
+            <use href="#punched-card" class="card" />
+            <text x="20" y="35" class="text-bold">USER 1: Timer Limit</text>
+            <text x="20" y="70" class="text-code">0500</text>
+            <text x="240" y="140" class="annotation">Used to set TR via ATT</text>
+          </g>
+
+          <path d="M -20 110 L -20 310" stroke="#3498db" stroke-width="4" fill="none" />
+          <path d="M -20 110 L -10 110" stroke="#3498db" stroke-width="4" fill="none" />
+          <path d="M -20 310 L -10 310" stroke="#3498db" stroke-width="4" fill="none" />
+          <text x="-40" y="215" font-family="Arial" font-weight="bold" font-size="16" fill="#3498db" transform="rotate(-90, -40, 215)">User 1 Job Stream</text>
+
+        </svg>
+        </div>
+
+
+    .. class:: substep
+
+    * Software solution (like old IBM JCL)
+    * Hardware Solution
+        * CPU pulses a new output wire called ``FLUSH``
+        * Card Reader receives the FLUSH signal
+        * Continuously feed and discard cards
+        * Special sequence in a card
+        * Raises the standard Input Flag FGI ← 1
+        * ``FSH`` instruction to flush cards to next
+
+
+.. :
+
+    Thanks to Gemini AI
+
+    Tell the OS it is ready
+
+----
+
+
+:class: t5c
+
+YIC 100 Kernel code
+===================
+.. include:: src/yic/yic100.kernel.asm
+    :code: asm
+    :number-lines:
+    :start-line: 1
+    :end-line: 34
+
+.. include:: src/yic/yic100.kernel.asm
+    :code: asm
+    :number-lines: 35
+    :start-line: 34
+    :end-line: 66
+
+.. include:: src/yic/yic100.kernel.asm
+    :code: asm
+    :number-lines: 67
+    :start-line: 66
+    :end-line: 98
+
+.. container::
+
+    .. include:: src/yic/yic100.kernel.asm
+        :code: asm
+        :number-lines: 99
+        :start-line: 98
+        :end-line: 115
+
+    .. include:: src/yic/yic100.user.asm
+        :class: substep
+        :code: asm
+        :number-lines:
+        :start-line: 1
+        :end-line: 15
+
+
+----
+
+:class: t2c
+
+Ordinary CPUs
+=============
 .. container::
 
     .. image:: img/in/interrupt_types.png
@@ -1351,83 +1515,7 @@ YIC 100
 
 ----
 
-:class: t2c
-
-Card Reader Deck
-================
-.. raw:: html
-
-    <div style="width:700px; height:600px;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 600" width="100%" height="100%">
-      <defs>
-        <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
-          <feDropShadow dx="2" dy="5" stdDeviation="4" flood-opacity="0.3"/>
-        </filter>
-
-        <style>
-          .card { fill: #fdfaf6; stroke: #2c3e50; stroke-width: 2px; filter: url(#shadow); }
-          .sep-card { fill: #fff3cd; stroke: #d35400; stroke-width: 3px; stroke-dasharray: 8,4; filter: url(#shadow); }
-          .text-bold { font-family: 'Courier New', monospace; font-weight: bold; font-size: 20px; fill: #2c3e50; }
-          .text-code { font-family: 'Courier New', monospace; font-size: 16px; fill: #34495e; }
-          .text-alert { font-family: 'Courier New', monospace; font-weight: bold; font-size: 22px; fill: #d35400; }
-          .annotation { font-family: Arial, sans-serif; font-size: 14px; fill: #7f8c8d; font-style: italic; }
-        </style>
-      </defs>
-
-      <g id="punched-card">
-        <path d="M 0 0 L 340 0 L 380 40 L 380 160 L 0 160 Z" />
-      </g>
-
-      <g transform="translate(200, 350)">
-        <use href="#punched-card" class="card" />
-        <text x="20" y="35" class="text-bold">USER 2: Timer Limit</text>
-        <text x="20" y="70" class="text-code">0250  (Max Clock Pulses)</text>
-        <text x="20" y="110" class="text-code">...</text>
-      </g>
-
-      <g transform="translate(150, 270)">
-        <use href="#punched-card" class="sep-card" />
-        <text x="20" y="35" class="text-alert">/// SYSTEM SEPARATOR</text>
-        <text x="20" y="70" class="text-code">FFFF</text>
-        <text x="20" y="140" class="annotation">Signals the OS to load the next job</text>
-      </g>
-
-      <g transform="translate(100, 190)">
-        <use href="#punched-card" class="card" />
-        <text x="20" y="35" class="text-bold">USER 1: Program Code</text>
-        <text x="20" y="70" class="text-code">LDA MAILBOX</text>
-        <text x="20" y="95" class="text-code">ADD TEN</text>
-        <text x="20" y="120" class="text-code">STA MAILBOX</text>
-        <text x="20" y="145" class="text-code">...</text>
-      </g>
-
-      <g transform="translate(50, 110)">
-        <use href="#punched-card" class="card" />
-        <text x="20" y="35" class="text-bold">USER 1: Program Size</text>
-        <text x="20" y="70" class="text-code">0042</text>
-        <text x="240" y="140" class="annotation">Used to set LIMIT</text>
-      </g>
-
-      <g transform="translate(0, 30)">
-        <use href="#punched-card" class="card" />
-        <text x="20" y="35" class="text-bold">USER 1: Timer Limit</text>
-        <text x="20" y="70" class="text-code">0500</text>
-        <text x="240" y="140" class="annotation">Used to set TR via ATT</text>
-      </g>
-
-      <path d="M -20 110 L -20 310" stroke="#3498db" stroke-width="4" fill="none" />
-      <path d="M -20 110 L -10 110" stroke="#3498db" stroke-width="4" fill="none" />
-      <path d="M -20 310 L -10 310" stroke="#3498db" stroke-width="4" fill="none" />
-      <text x="-40" y="215" font-family="Arial" font-weight="bold" font-size="16" fill="#3498db" transform="rotate(-90, -40, 215)">User 1 Job Stream</text>
-
-    </svg>
-    </div>
-
-test
-
-----
-
-YIC 120 Memory Protection
+YIC 110 Memory Protection
 ==================================
 .. image:: img/memory/hardware_address_protection.png
    :align: center
@@ -1436,16 +1524,30 @@ YIC 120 Memory Protection
 
 ----
 
-Function call
------------------------
-* cons of BSA
+:class: t2c
 
-    * No recursion
-    * No explicit data transfer
+BSA problem for multiprogramming
+================================
+.. container::
 
-.. :
+    .. class:: substep
 
-    .. image::  img/in/call_stack_layout.png
+    * General cons of BSA
+
+        * No recursion
+        * No explicit data transfer
+    * Function call
+        * Stack register
+        * CALL
+        * RET
+        * PUSH
+        * POP
+    * Stacks
+        * System stack
+        * Each process has its own stack
+
+.. image::  img/in/call_stack_layout.png
+    :class: substep
 
 ----
 

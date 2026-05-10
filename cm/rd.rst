@@ -1852,6 +1852,36 @@ Parser Tree
 .. code:: console
   :number-lines:
 
+    rd$python3 e_t_f_plus_minus_mul_divide_parser_tree.py
+    Enter an expression like 1+4*(3-1)
+    > 1+4*(3-1)
+    E:  1+4*(3-1)
+    T:  1+4*(3-1)
+    F:  1+4*(3-1)
+    Number:  1.0
+    +-:  +4*(3-1)
+    E:  4*(3-1)
+    T:  4*(3-1)
+    F:  4*(3-1)
+    Number:  4.0
+    */:  *(3-1)
+    T:  (3-1)
+    F:  (3-1)
+    E:  3-1)
+    T:  3-1)
+    F:  3-1)
+    Number:  3.0
+    +-:  -1)
+    E:  1)
+    T:  1)
+    F:  1)
+    Number:  1.0
+    True
+    Enter an expression like 1+4*(3-1)
+    >
+
+.. :
+
   python3 t.py '1+4*(3-1)'
   E:  1+4*(3-1)
   T:  1+4*(3-1)
