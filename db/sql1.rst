@@ -2674,13 +2674,13 @@ Date and Time II
 
     CREATE TABLE book (
         bn INT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        author VARCHAR(255) NOT NULL,
+        title VARCHAR(50) NOT NULL,
+        author VARCHAR(50) NOT NULL,
         ofpd DECIMAL(5, 2) NOT NULL DEFAULT 0.50
     );
     CREATE TABLE member (
         mn INT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        name VARCHAR(50) NOT NULL,
         bn INT, -- Favorite book
         fines DECIMAL(10, 2) DEFAULT 0.00,
         FOREIGN KEY (bn) REFERENCES book(bn)
@@ -2864,8 +2864,12 @@ Check II
           id  INTEGER PRIMARY KEY,
           age INTEGER CHECK (age >= 0)
         );
-        INSERT INTO people (age) VALUES
-          (1,25), (2,NULL), (3,-5);
+        INSERT INTO people (id, age) VALUES
+        (1,25);
+        INSERT INTO people (id, age) VALUES
+        (2,NULL);
+        INSERT INTO people (id, age) VALUES
+        (3,-5);
 
     .. code:: sql
         :class: substep
@@ -2900,9 +2904,12 @@ Check II
         CHECK(country = upper(country))
     );
     INSERT INTO users VALUES
-      (1, 'ada@example.com', 'ada', 'US'),
-      (2, 'not-an-email', 'ada2', 'US'),
-      (3, 'boris@x.io', 'b', 'US'),
+      (1, 'ada@example.com', 'ada', 'US');
+    INSERT INTO users VALUES
+      (2, 'not-an-email', 'ada2', 'US');
+    INSERT INTO users VALUES
+      (3, 'boris@x.io', 'b', 'US');
+    INSERT INTO users VALUES
       (4, 'cara@x.io', 'cara', 'us');
 
 .. :
@@ -3003,47 +3010,62 @@ Transaction(I)
 
 Transaction(II)
 ====================
-.. code:: sql
+.. container::
 
-  CREATE TABLE accounts (
-    account_no INTEGER NOT NULL,
-    balance DECIMAL NOT NULL DEFAULT 0,
-    PRIMARY KEY(account_no),
-               CHECK(balance >= 0)
-  );
+    .. code:: sql
 
-  CREATE TABLE account_changes (
-    change_no INT NOT NULL PRIMARY KEY,
-    account_no INTEGER NOT NULL,
-    flag TEXT NOT NULL,
-    amount DECIMAL NOT NULL,
-    changed_at TEXT NOT NULL,
-    foreign key (account_no)
-        references accounts(account_no)
-  );
+      CREATE TABLE accounts (
+        account_no INTEGER NOT NULL,
+        balance DECIMAL NOT NULL DEFAULT 0,
+        PRIMARY KEY(account_no),
+                   CHECK(balance >= 0)
+      );
 
-.. code:: sql
+    .. code:: sql
 
-  BEGIN TRANSACTION;
+        INSERT INTO accounts values
+          (100, 5000),
+          (200, 2000),
+          (300, 4000);
 
-  UPDATE accounts
-     SET balance = balance - 1000
-  WHERE account_no = 100;
+    .. code:: sql
 
-  UPDATE accounts
-     SET balance = balance + 1000
-  WHERE account_no = 200;
+      CREATE TABLE account_changes (
+        change_no INT NOT NULL PRIMARY KEY,
+        account_no INTEGER NOT NULL,
+        flag TEXT NOT NULL,
+        amount DECIMAL NOT NULL,
+        changed_at DATETIME NOT NULL,
+        foreign key (account_no)
+            references accounts(account_no)
+      );
 
-  INSERT INTO account_changes
-  VALUES(10, 100,'-',1000,datetime('now'));
+.. container::
 
-  INSERT INTO account_changes
-  VALUES(11, 200,'+',1000,datetime('now'));
+    .. code:: sql
+        :class: substep
 
-  COMMIT;
+        BEGIN TRANSACTION;
 
-Auto commit
------------
+        UPDATE accounts
+         SET balance = balance - 1000
+        WHERE account_no = 100;
+
+        UPDATE accounts
+         SET balance = balance + 1000
+        WHERE account_no = 200;
+
+        INSERT INTO account_changes
+        VALUES(10, 100,'-',1000,datetime('now'));
+
+        INSERT INTO account_changes
+        VALUES(11, 200,'+',1000,datetime('now'));
+
+        COMMIT;
+
+    .. class:: substep
+
+    **Auto commit**
 
 ----
 

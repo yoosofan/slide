@@ -132,7 +132,7 @@ First-Order Logic (Predicates and Quantifiers)
 .. code:: sql
   :class: substep
 
-  3. px.pname
+  2. px.pname
 
 .. code:: sql
   :class: substep
@@ -220,84 +220,209 @@ First-Order Logic (Predicates and Quantifiers)
 
 ----
 
+:class: t2c
+
 .. class:: rtl-h1
 
 نام و شمارهٔ قطعاتی را بیابید که وزن بیشتر از ۲۰ داشته باشند.
 
-.. class:: substep
+.. container::
 
-    #. px.pname
-    #. px.pname, px.pn
-    #. px.pname, px.pn where px.weight > 20
-    #. {px.pname, px.pn} where px.weight > 20
+    .. code:: sql
+        :class: substep
+
+        1. px.pname
+
+    .. code:: sql
+        :class: substep
+
+        2. px.pname, px.pn
+
+.. container::
+
+    .. code:: sql
+        :class: substep
+
+        3. px.pname, px.pn where px.weight > 20
+
+    .. code:: sql
+        :class: substep
+
+        4. {px.pname, px.pn} where px.weight > 20
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
-نام عرضه‌کنندگانی را بیابید که وضعیت بیشتر از ۱۰ داشته باشند.
+نام عرضه‌کنندگانی را بیابید که وضعیت آنها بیشتر از ۱۰ باشد.
 
-.. class:: substep
+.. code:: sql
+    :class: substep
 
-    #. sx.sname
-    #. sx.sname where
-    #. sx.sname where sx.status > 10
+    1. sx.sname
+
+.. code:: sql
+    :class: substep
+
+    2. sx.sname where
+
+.. code:: sql
+    :class: substep
+
+    3. sx.sname where sx.status > 10
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
 زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند.
 
-.. class:: substep
+.. container::
 
-    #. sx.sn
-    #. sx.sn, sy.sn
-    #. {sx.sn, sy.sn}
-    #. {sx.sn, sy.sn as sn1}
-    #. {sx.sn, sy.sn as sn1} where
-    #. {sx.sn, sy.sn as sn1} where sx.city = sy.city
-    #. {sx.sn, sy.sn as sn1} where sx.city = sy.city and
-    #. {sx.sn, sy.sn as sn1} where sx.city = sy.city and sx.sn < sy.sn
+    .. code:: sql
+        :class: substep
+
+        1. sx.sn
+
+    .. code:: sql
+        :class: substep
+
+        2. sx.sn, sy.sn
+
+    .. code:: sql
+        :class: substep
+
+        3. {sx.sn, sy.sn}
+
+    .. code:: sql
+        :class: substep
+
+        4. {sx.sn, sy.sn as sn1}
+
+.. container::
+
+    .. code:: sql
+        :class: substep
+
+        5. {sx.sn, sy.sn as sn1} where
+
+    .. code:: sql
+        :class: substep
+
+        6. {sx.sn, sy.sn as sn1} where sx.city = sy.city
+
+    .. code:: sql
+        :class: substep
+
+        7. {sx.sn, sy.sn as sn1} where sx.city = sy.city
+             and
+
+    .. code:: sql
+        :class: substep
+
+        8. {sx.sn, sy.sn as sn1} where sx.city = sy.city
+             and sx.sn <> sy.sn
+
+    .. code:: sql
+        :class: substep
+
+        9. {sx.sn, sy.sn as sn1} where sx.city = sy.city
+             and sx.sn < sy.sn
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
 نام شهر قطعاتی را بیابید که عرضه شده باشند.
 
-.. class:: substep
+.. container::
 
-  * px
-  * px.city
-  * px.city where
-  * px.city where exists spx
-  * px.city where exists spx(px.pn = spx.pn)
+    .. code:: sql
+        :class: substep
+
+        1. px
+
+    .. code:: sql
+        :class: substep
+
+        2. px.city
+
+    .. code:: sql
+        :class: substep
+
+        3. px.city where
+
+.. container::
+
+    .. code:: sql
+        :class: substep
+
+        4. px.city where exists spx
+
+    .. code:: sql
+        :class: substep
+
+        5. px.city where exists spx(px.pn = spx.pn)
+
+    .. code:: sql
+        :class: substep
+
+        5. px.city where px.pn = spx.pn
+        -- incorrect
 
 ----
+
+:class: t2c
 
 .. class:: rtl-h1
 
 نام قطعات عرضه شده را بیابید
 
-.. class:: substep
+.. container::
 
-  #. px.pname
-  #. px.pname where
-  #. px.pname where exists spx
-  #. px.pname where exists spx (spx.pn = px.pn)
+    .. code:: sql
+        :class: substep
 
-.. class:: substep
+        1. px.pname
 
-  #. px.pname where spx.pn = px.pn
+    .. code:: sql
+        :class: substep
 
-  #.  Error
+        2. px.pname where
 
-  #. px.pname where forall spx (spx.pn = px.pn)
+    .. code:: sql
+        :class: substep
 
-.. class:: rtl-h2 substep
+        3. px.pname where exists spx
 
-نام قطعه‌ای را بیابید که همهٔ عرضه‌ها فقط از آن قطعه باشد.
+    .. code:: sql
+        :class: substep
+
+        4. px.pname where exists spx (spx.pn = px.pn)
+
+.. container::
+
+    .. code:: sql
+        :class: substep
+
+        px.pname where spx.pn = px.pn --incorrect
+
+    .. code:: sql
+        :class: substep
+
+        px.pname where forall spx (spx.pn = px.pn)
+
+        -- incorrect
+
+    .. class:: rtl-h2 substep
+
+        نام قطعه‌ای را بیابید که همهٔ عرضه‌ها فقط از آن قطعه باشد.
 
 ----
 
@@ -307,42 +432,73 @@ First-Order Logic (Predicates and Quantifiers)
 
 نام شهرهای عرضه‌کنندگانی را بیابید که قطعهٔ با شمارهٔ p2 را عرضه کرده باشند.
 
-.. class:: substep
-
-  * sx.city
-  * sx.city where
-  * sx.city where exists spx (
-      * spx.sn = sx.sn
-      * and
-      * spx.pn = 'p2'
-      * )
-
-  * sx.city where exists spx(
-      spx.sn = sx.sn and
-          spx.pn = 'p2')
-
-  * Problem?
-
-.. container:: substep
+.. container::
 
     .. code:: sql
+        :class: substep
+
+        1. sx.city
+
+    .. code:: sql
+        :class: substep
+
+        2. sx.city where
+
+    .. code:: sql
+        :class: substep
+
+        3. sx.city where exists spx (
+
+    .. code:: sql
+        :class: substep
+
+        4. sx.city where exists spx (
+             spx.sn = sx.sn
+
+    .. code:: sql
+        :class: substep
+
+        5. sx.city where exists spx (
+             spx.sn = sx.sn and
+             spx.pn = 'p2'
+           )
+
+    .. class:: substep
+
+    * Can you find any mistake?
+
+.. container::
+
+    .. code:: sql
+        :class: substep
 
         sx.city where exists spx (
           spx.sn = sx.sn
         ) and exists px (px.pn = 'P2')
 
     .. code:: sql
+        :class: substep
 
-      sx.city where exists spx (
-        spx.sn = sx.sn
-      )  and exists spy (spy.pn = 'P2')
-
+        sx.city where exists spx (
+          spx.sn = sx.sn
+        ) and exists spy (spy.pn = 'p2')
 
     .. code:: sql
+        :class: substep
 
-       sx.city where exists spx (
-         spx.sn = sx.sn and
-         spx.pn = 'p2'
+        sx.city where exists spx (
+          spx.sn = sx.sn
+        ) and exists spy (
+          spy.pn = 'p2' and spx.sn = spy.sn
+        )
+
+    .. code:: sql
+        :class: substep
+
+        sx.city where exists spx (
+          spx.sn = sx.sn
+        ) and exists spy (
+          spy.pn = 'p2' and sx.sn = spy.sn
         )
 
 ----
@@ -357,70 +513,79 @@ First-Order Logic (Predicates and Quantifiers)
 .. code:: sql
    :class: substep
 
-      {sx.sn, sy.sn as sn2}
+      {sx.sn, sy.sn as sn2} where sx.city = sy.city
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city
+      sx.city = sy.city and sx.sn < sy.sn
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn
+      sx.city = sy.city and sx.sn < sy.sn and
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn and
-
-.. code:: sql
-   :class: substep
-
-      {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn and
+      sx.city = sy.city and sx.sn < sy.sn and
       exists spx(sx.sn = spx.sn)
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn and
-      exists spx(sx.sn = spx.sn)
-      and
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn) and
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn and
-      exists spx(sx.sn = spx.sn)
-      and exists spy
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn) and exists spy
 
 .. code:: sql
    :class: substep
 
       {sx.sn, sy.sn as sn2} where
-      sx.city = sy.city and
-      sx.sn < sy.sn and
+      sx.city = sy.city and sx.sn < sy.sn and
       exists spx(sx.sn = spx.sn)
-      and exists spy(
-      sy.sn = spy.sn
-      )
+      and exists spy(sy.sn = spy.sn)
 
-.. :
+.. code:: sql
+   :class: substep
 
-    wrong answers
+      {sx.sn, sy.sn as sn2} where -- incorrect
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
 
-    {sx.sn, sy.sn as sn2} where sx.city = sy.city and sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn)
+      and exists spx(sy.sn = spx.sn)
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where  -- incorrect
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn
+      and exists spx(sy.sn = spx.sn))
+
+.. code:: sql
+   :class: substep
+
+      {sx.sn, sy.sn as sn2} where
+      sx.city = sy.city and sx.sn < sy.sn and
+      exists spx(sx.sn = spx.sn
+      and exists spy(sy.sn = spy.sn))
 
 ----
 
@@ -487,6 +652,23 @@ First-Order Logic (Predicates and Quantifiers)
     )
    )
 
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists spx(
+    sx.sn=spx.sn) and exists px(
+      px.pn=spx.pn and
+        px.color = "red"
+    ) -- incorrect
+
+.. code:: sql
+   :class: substep
+
+   sx.sname where exists px(
+    px.color = "red") and
+    exists spx(px.pn=spx.pn
+      and sx.sn=spx.sn
+    ) -- incorrect
 
 .. class: rtl substep
 
@@ -563,7 +745,16 @@ First-Order Logic (Predicates and Quantifiers)
   :class: substep
 
   {sx.sn, sy.sn as sn2} where sx.city = sy.city and
-   sx.sn < sy.sn and exists spx(sx.sn = spx.sn or sy.sn = spx.sn)
+   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) or
+   exists spx(sy.sn = spx.sn))
+
+.. code:: sql
+  :class: substep
+
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city
+    and sx.sn < sy.sn and exists spx(
+    sx.sn = spx.sn or sy.sn = spx.sn)
 
 ----
 
@@ -725,37 +916,65 @@ First-Order Logic (Predicates and Quantifiers)
 .. code:: sql
   :class: substep
 
-  px.pn where not exists spx (spx.pn = px.pn)
+  px.pn where not exists spx(
+    spx.pn = px.pn
+  )
 
 .. code:: sql
   :class: substep
 
-  px.pn where forall spx(spx.pn<>px.pn)
+  px.pn where forall spx(
+    spx.pn<>px.pn
+  )
 
-.. class:: rtl substep
+.. container:: substep
 
-دستورهای اضافی
+     ∀x p(x) ≡ ~∃x ~p(x)
+
+
+    .. class:: rtl substep
+
+    دستورهای اضافی
 
 .. code:: sql
   :class: substep
 
   px.pn where not exists sx(
-    exists spx(spx.sn=sx.sn and spx.pn=px.pn)
+    exists spx(spx.sn=sx.sn
+      and spx.pn=px.pn)
   )
-
-
 
 .. code:: sql
   :class: substep
 
   --     نادرست
-  px.pn where exists spx(spx.pn<>px.pn)
+  px.pn where exists spx(
+    spx.pn<>px.pn
+  )
 
-  spx.pn where not exists spx(spx.pn<>spx.pn)
+.. code:: sql
+  :class: substep
 
-  spx.pn where not exists spy(spx.pn<>spy.pn)
+  --     نادرست
+  spx.pn where not exists spx(
+    spx.pn<>spx.pn
+  )
 
-  px.pn where not exists sx(exists spx(sx.sn=spx.sn))
+.. code:: sql
+  :class: substep
+
+  --     نادرست
+  spx.pn where not exists spy(
+    spx.pn<>spy.pn
+  )
+
+.. code:: sql
+  :class: substep
+
+  --     نادرست
+  px.pn where not exists sx(
+    exists spx(sx.sn=spx.sn)
+  )
 
 ----
 
