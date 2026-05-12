@@ -1515,12 +1515,20 @@ Ordinary CPUs
 
 ----
 
+:class: t2c
+
 YIC 110 Memory Protection
 ==================================
 .. image:: img/memory/hardware_address_protection.png
    :align: center
 
 .. class:: substep
+
+* ATL
+* Trap
+* Shared Memory?
+    * Variables
+    * Other Methods
 
 ----
 
@@ -1542,22 +1550,15 @@ BSA problem for multiprogramming
         * RET
         * PUSH
         * POP
-    * Stacks
-        * System stack
-        * Each process has its own stack
+    * System stack
+    * User process has its own stack
+    * Program Statue Word(PSW)
+        * E
+        * C
+        * T
 
 .. image::  img/in/call_stack_layout.png
     :class: substep
-
-----
-
-Stack From end
-===============
-Call,  Ret
-
-.. image::  img/in/simple_cpu02.png
-
-* `Assembly Slides <https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/15AssemblyFunctions.pdf>`_
 
 .. :
 
@@ -1589,125 +1590,165 @@ Call,  Ret
   http://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.electronics-lab.com%2Ftop-10-popular-microcontrollers-among-makers%2F&psig=AOvVaw2EXDnrr7QYg4MMA4wzxdcW&ust=1645436126602000&source=images&cd=vfe&ved=2ahUKEwiei_Gv_Y32AhXFQcAKHclhAKQQ3YkBegQIABAL
   https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeepbluembedded.com%2Fstm32-lcd-16x2-tutorial-library-alphanumeric-lcd-16x2-interfacing%2F&psig=AOvVaw0WO3faTRa5sedGIgDKGhNt&ust=1645436135855000&source=images&cd=vfe&ved=2ahUKEwip7aW0_Y32AhVjm1wKHfMUB4oQ3YkBegQIABAL
 
-----
+    ----
 
-Adding PSW
-===========
-Flags:
+    Stack From end
+    ===============
+    Call,  Ret
 
-* Carry
-* E
-* Mode
+    .. image::  img/in/simple_cpu02.png
 
-----
-
-YIC 150 - Multiprogramming
-===========================
+    * `Assembly Slides <https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/15AssemblyFunctions.pdf>`_
 
 ----
 
-Process along Printer Function
-========================================
-.. image:: img/in/process_along_printer_function.png
+.. yographviz::
+
+    digraph YIC120_Internal_Memory {
+        rankdir=LR;
+        node [shape=none, fontname="Courier New"];
+
+        // The Physical RAM Layout
+        RAM [label=<
+            <table border="0" cellborder="1" cellspacing="0" cellpadding="10">
+
+                <tr><td bgcolor="#e1f5fe" port="kstack"><b>KERNEL STACK</b></td></tr>
+                <tr><td bgcolor="#f5f5f5"><i>Empty / High Memory</i></td></tr>
+
+                // USER SEGMENT (Protected by Base/Limit)
+                <tr><td bgcolor="#e8f5e9" port="ustack"><b>USER STACK AREA</b><br/>(Logical: End of Memory)</td></tr>
+                <tr><td bgcolor="#fff3e0" port="mailbox"><b>MAILBOX / SHARED VARIABLES</b><br/>(Logical: End of Code)</td></tr>
+                <tr><td bgcolor="#e8f5e9" port="ucode"><b>USER CODE</b><br/>(Logical: 0x000)</td></tr>
+
+                // BOUNDARY
+                <tr><td bgcolor="#d84315" height="2" border="0"><font color="white"><b>BASE REGISTER (0x300)</b></font></td></tr>
+
+                // KERNEL SEGMENT
+                <tr><td bgcolor="#f5f5f5"><i>Free Kernel Memory</i></td></tr>
+                <tr><td bgcolor="#e1f5fe" port="kernel"><b>KERNEL FIRMWARE</b><br/>(0x000 - 0x2FF)</td></tr>
+            </table>
+        >];
+
+        // Hardware Registers
+        Registers [label=<
+            <table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="#fafafa">
+                <tr><td><b>CPU REGISTER</b></td><td><b>FUNCTION</b></td></tr>
+                <tr><td>LIMIT</td><td port="limit_ptr">Top of User Stack</td></tr>
+                <tr><td>U-SP</td><td port="usp_ptr">Current Stack Top</td></tr>
+                <tr><td>BASE</td><td port="base_ptr">Physical 0x300</td></tr>
+                <tr><td>K-SP</td><td port="ksp_ptr">Kernel Stack Top</td></tr>
+            </table>
+        >];
+
+        // Connections to show relationships
+        Registers:limit_ptr -> RAM:ustack [style=dashed, color="#2e7d32", label=" Violation Check"];
+        Registers:usp_ptr   -> RAM:ustack [color="#2e7d32", label=" Call/Ret"];
+        Registers:base_ptr  -> RAM:ucode  [color="#1b5e20", label=" Offset"];
+        Registers:ksp_ptr   -> RAM:kstack [color="#01579b"];
+
+        label = "YIC 120: Unified Memory Protection (Mailbox In-Bounds)";
+        labelloc = "t";
+    }
+
+.. :
+
+    Thanks to Gemini AI for the above image
+
 
 ----
 
-Jump to Printer Procedure
-========================================
-.. image:: img/in/call_printer_function.png
+:class: t2c
 
-----
-
-Return from Printer Procedure
-========================================
-.. image:: img/in/return_from_printer_funtion_with_stack.png
-
-----
-
-Display and Printer Procedure
-===================================================
-.. image:: img/in/printer_old_display_function.png
-
-----
-
-BIOS
-==========
-.. image:: img/in/Award_BIOS_setup_utility.png
+Multiprogramming
+================
+.. image:: img/memory/memory_of_CTSS.png
    :align: center
 
-----
+.. class:: substep
 
-.. image:: img/in/bios.gif
-   :align: center
-
-----
-
-Boot sequence
-==================
-.. image:: img/in/boot_sequence.png
-   :align: center
-   :height: 450px
-
-----
-
-.. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
-   :align: center
-
-----
-
-.. image:: img/in/simple_poweron_computer.png
-   :align: center
-
-----
-
-* `IEEE Std 1275 1994 Standard for boot initialization <https://archive.org/details/ieee_std_1275_1994_standard_for_boot_initialization_configur/page/n7/mode/2up>`_
-* https://openfirmware.info/Welcome_to_OpenBIOS
-* https://github.com/openbios
-* https://github.com/openbios/openbios
-
-----
-
-YIC120 - Adding Keyboard & Disk
-==================================
+* Memory Management
+* CPU Scheduling
+    * context switch
+* Keyboard
+* Refreshing outputs like monitor
+* Other I/O devices
 * terminal (command prompt)
 * batch system
 * interactive system
-
-----
-
-.. image:: img/in/kernel1process.png
-   :align: center
-
-----
-
-When a controller rapidly turns on LEDs in one row at a time
-===============================================================
-.. image:: img/in/5x7led_B_refresh.jpg
-  :width: 750px
-
-https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+* Motherboard
 
 .. :
 
-  8x8 dot matrix display
-  https://www.circuitstoday.com/interfacing-dot-matrix-led-display-to-8051
-  https://pic-microcontroller.com/interfacing-dot-matrix-led-display-pic-microcontroller/
-  https://www.best-microcontroller-projects.com/led-dot-matrix-display.html
-  5x7 dot matrix LED display character patterns
-  http://www.farnell.com/datasheets/37926.pdf
-  http://elektro.fs.cvut.cz/dokument/LCD/LCD_Manual_ShortVersion.pdf
-  https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
-  https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
-  https://handsontec.com/index.php/modular-dot-matrix-display/
-  dot matrix display character set
+    .. image:: img/in/kernel1process.png
+       :align: center
+       :width: 500px
+
+    ----
+
+    Processes in CTSS Computer
+    ==========================
+    https://www.computerhistory.org/timeline/1961/
+    https://en.wikipedia.org/wiki/Compatible_Time-Sharing_System
 
 ----
 
-Context Switch
-=================
 END
 
 .. :
+
+    Choosing a new hardware architecture instead of Mano
+    ========================================================
+    computer architecture for educational purpose for bachelor course of computer engineering
+    ---------------------------------------------------------------------------------------------
+
+    https://ocw.ece.cornell.edu/courses/ece-4750-computer-architecture/ece-4750-lecture-notes-and-handouts/
+
+
+    https://bpb-us-w2.wpmucdn.com/sites.coecis.cornell.edu/dist/4/81/files/2017/03/ece4750_syllabus-sub3jz.pdf
+    https://coursebrowser.dce.harvard.edu/course/computer-architecture/
+    https://coursebrowser.dce.harvard.edu/course/computer-architecture/
+    https://learn.mit.edu/search
+
+    the simplest cpu architecture
+    -----------------------------
+    https://simplecpudesign.com
+    https://www.simple-cpu.com/cpu-instruction-set-architecture-en.php
+
+    https://milen-patel.github.io/cpu_tutorial/
+
+    https://www.instructables.com/Simplest-4-Bit-TTL-CPU/
+    https://machaddr.substack.com/p/a-fundamental-exploration-of-simple
+
+
+    https://cs.wellesley.edu/~cs240/s20/slides/arch.pdf
+
+
+    Older References and materials
+    ===============================
+
+    * `IEEE Std 1275 1994 Standard for boot initialization <https://archive.org/details/ieee_std_1275_1994_standard_for_boot_initialization_configur/page/n7/mode/2up>`_
+    * https://openfirmware.info/Welcome_to_OpenBIOS
+    * https://github.com/openbios
+    * https://github.com/openbios/openbios
+
+    When a controller rapidly turns on LEDs in one row at a time
+    ===============================================================
+    .. image:: img/in/5x7led_B_refresh.jpg
+      :width: 750px
+
+    https://www.nutsvolts.com/magazine/article/create-an-led-sign-controller
+
+    8x8 dot matrix display
+    https://www.circuitstoday.com/interfacing-dot-matrix-led-display-to-8051
+    https://pic-microcontroller.com/interfacing-dot-matrix-led-display-pic-microcontroller/
+    https://www.best-microcontroller-projects.com/led-dot-matrix-display.html
+    5x7 dot matrix LED display character patterns
+    http://www.farnell.com/datasheets/37926.pdf
+    http://elektro.fs.cvut.cz/dokument/LCD/LCD_Manual_ShortVersion.pdf
+    https://www.deviceplus.com/arduino/display-characters-with-leds-how-to-use-a-matrix-led/
+    https://www.jameco.com/Jameco/workshop/learning-center/electronic-fundamentals-working-with-led-dot-matrix-displays.html
+    https://handsontec.com/index.php/modular-dot-matrix-display/
+    dot matrix display character set
 
     .. image:: img/in/windows_system_idle_process.jpg
       :align: center
@@ -1717,3 +1758,26 @@ END
     rst2html.py disk.rst disk.html --stylesheet=../../tools/farsi.css,html4css1.css
     https://www.geeksforgeeks.org/disk-scheduling-algorithms/
     http://www.csl.mtu.edu/cs4411.choi/www/Resource/chap11.pdf
+
+    Process along Printer Function
+    ========================================
+    .. image:: img/in/process_along_printer_function.png
+
+    ----
+
+    Jump to Printer Procedure
+    ========================================
+    .. image:: img/in/call_printer_function.png
+
+    ----
+
+    Return from Printer Procedure
+    ========================================
+    .. image:: img/in/return_from_printer_funtion_with_stack.png
+
+    ----
+
+    Display and Printer Procedure
+    ===================================================
+    .. image:: img/in/printer_old_display_function.png
+

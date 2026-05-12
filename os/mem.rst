@@ -101,15 +101,6 @@ https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmenta
 
 .. class:: rtl-h1
 
-    حافظهٔ فرآیندها در سیستم عامل CTSS
-
-.. image:: img/memory/memory_of_CTSS.png
-   :align: center
-
-----
-
-.. class:: rtl-h1
-
     اثر به کارگیری حافظهٔ پویا
 
 .. image:: img/memory/memory_effect_of_dynamic_partitioning.png
@@ -408,7 +399,6 @@ Effective Access Time (EAT)
    :align: center
    :scale: 90%
 
-
 ----
 
 address binding, loader
@@ -424,13 +414,6 @@ address binding, linker
 .. image:: img/memory/memory_address_binding_linker.png
    :align: center
    :scale: 90%
-
-----
-
-Stack
-===========
-#. Process stack
-#. System stack
 
 ----
 
@@ -454,16 +437,53 @@ Multi Layer
 
 ----
 
-DMA
-=====
+:class: t2c
+
+Motherboard
+==============
+.. image:: img/in/Parts-of-Motherboard-and-their-functions-latest.jpg
+
+.. image:: img/memory/GigabyteZ77-HD4-Top.jpg
+    :align: center
+    :height: 650px
+
+----
+
+Direct Memory Access(DMA)
+=========================
 .. image:: img/memory/system-configuration-with-dmac.png
 
 ----
 
-.. image:: img/memory/GigabyteZ77-HD4-Top.jpg
+:class: t2c
+
+BIOS
+==========
+.. image:: img/in/simple_poweron_computer.png
+   :align: center
+
+.. image:: img/in/Award_BIOS_setup_utility.png
+   :align: center
+   :class: substep
+
+.. :
+
+    .. image:: img/in/bios.gif
+       :align: center
+
+----
+
+:class: t2c
+
+Boot sequence
+==================
+.. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
     :align: center
-    :width: 500px
-    :height: 750px
+    :width: 600px
+
+.. image:: img/in/boot_sequence.png
+    :align: center
+    :class: substep
 
 ----
 
