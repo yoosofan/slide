@@ -37,75 +37,265 @@ University of Kashan
 
 ----
 
+:class: t2c
+
+Fixed Partitioining or Static Partitioning
+==========================================
 .. image:: img/memory/memory_fixed_partitioning.png
    :align: center
    :height: 600px
 
-.. note:
+.. class:: substep
 
-    Fixed Partitioining
-
-----
-
-.. class:: rtl-h1
-
-    تخصیص حافظه به فرآیندها در حالت بخش‌بندی ثابت حافظه
-
-.. image:: img/memory/memory_fixed_allocation.png
-   :align: center
-
-----
-
-.. class:: rtl-h1
-
-    مشکلات بخش‌بندی ثابت
-
-.. class:: rtl
-
-    #. انعطاف بسیار پایین
-    #. محدودیت زیاد برای اندازهٔ فرایند در حالی که فضای حافظه خالی است.
-    #. تکه تکه شدن یا پراکندی داخلی internal fragmentation
-    #. هدر رفت حافظه
-        * بخشی از حافظه که به فرایند داده شده است فقط برای آن فرایند است.
-        * یعنی اگر بخشی از آن را فرایند به کار نبرد هدر رفته است.
-
-----
-
-.. class:: rtl-h1
-
-    تکه تکه شدن (پراکندگی) داخلی حافظه
-
-Internal Memory Fragmentation
-
-.. image:: img/memory/memory_fixed_partitioning_internal_fragmentation.png
-   :align: center
-
-https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/
+* Equal-Size Partitions
+* Unequal-Size Partitions
+* Pros:
+    * Minimal Hardware Complexity
+    * Simple OS Logic
+    * Low Overhead
+* Cons:
+    * Internal Fragmentation
+    * Fixed Process Limit
+    * Maximum Size Limit
+* .. image:: img/memory/memory_fixed_partitioning_internal_fragmentation.png
+    :align: center
+    :width: 300px
 
 .. :
 
-  operating system internal memory fragmentation fixed size partitioning
-  Multi Programming
+    operating system internal memory fragmentation fixed size partitioning
+    Multi Programming
+
+    https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/
+
+        مشکلات بخش‌بندی ثابت
+
+    .. class:: rtl
+
+        #. انعطاف بسیار پایین
+        #. محدودیت زیاد برای اندازهٔ فرایند در حالی که فضای حافظه خالی است.
+        #. تکه تکه شدن یا پراکندی داخلی internal fragmentation
+        #. هدر رفت حافظه
+            * بخشی از حافظه که به فرایند داده شده است فقط برای آن فرایند است.
+            * یعنی اگر بخشی از آن را فرایند به کار نبرد هدر رفته است.
+
+    ----
+
+    .. class:: rtl-h1
+
+        تخصیص حافظه به فرآیندها در حالت بخش‌بندی ثابت حافظه
+
+    .. image:: img/memory/memory_fixed_allocation.png
+       :align: center
+
+    ----
+
+
+    .. class:: rtl-h1
+
+        بخش‌بندی پویای حافظه
+
+    .. image:: img/memory/memory_management_pc.png
+       :align: center
+       :height: 470px
 
 ----
 
-.. class:: rtl-h1
+:class: t2c
 
-    بخش‌بندی پویای حافظه
-
-.. image:: img/memory/memory_management_pc.png
-   :align: center
-   :height: 470px
-
-----
-
-.. class:: rtl-h1
-
-    اثر به کارگیری حافظهٔ پویا
-
+Dynamic Partitioning
+====================
 .. image:: img/memory/memory_effect_of_dynamic_partitioning.png
    :align: center
-   :height: 500px
+
+.. class:: substep
+
+* Hole Tracking or free space tracking
+    * Bitmaps
+    * Linked Lists
+* External fragmentation
+*  .. csv-table::
+        :class: substep
+
+        Feature,Fixed,Dynamic
+        Partition Size,Static ,Dynamic
+        Fragmentation,Internal,External
+        Efficiency,Low ,High
+* Coalescing (The "Neighborly" Cleanup)
+    * Merge free space
+* compaction
+
+.. csv-table:
+    :class: substep
+
+    Feature,Fixed Partitioning,Dynamic Partitioning
+    Partition Size,Static (set at boot),Dynamic (set at load-time)
+    Fragmentation,Internal (Space wasted inside),External (Space wasted between)
+    Compaction,Not needed,Essential
+    Efficiency,Low (Wasteful of RAM),High (Better RAM utilization)
+
+.. :
+
+    Thanks Gemini AI for the above table
+
+----
+
+:class: t2c
+
+Placement algorithms
+====================
+.. image:: img/memory/memory_select_part_for_allocation.png
+   :align: center
+
+.. class:: substep
+
+* First Fit
+    * pros: fast
+    * cons: clog
+* Best Fit
+    * pros:
+    * cons: Slow, Small holes
+* Worst Fit
+    * pros: large leftover
+    * cons: slow, use largest
+* Next Fit
+    * pros: Prevents clogging
+    * cons:
+* Quick Fit or Segregated Fit (different lists)
+    * pros: instant allocation
+    * cons: overhead of OS
+
+.. :
+
+    Algorithm,Search Effort,Leftover Fragment,Primary Weakness
+    First Fit,Low (Partial Scan),Variable,Fragments the start of RAM
+    Next Fit,Low (Partial Scan),Variable,Fragments the end of RAM
+    Best Fit,High (Full Scan),Smallest,"Creates tiny, useless ""slivers"""
+    Worst Fit,High (Full Scan),Largest,Eliminates large contiguous blocks
+
+    5. Quick Fit (or Segregated Fit)
+
+    Commonly used in real-world modern kernels and memory allocators (like malloc).
+
+        The Strategy: The OS maintains separate linked lists for common requested sizes (e.g., a list for 4KB holes, a list for 16KB holes, etc.).
+
+        Pros: Near-instant allocation for standard sizes.
+
+        Cons: High overhead for the OS to maintain and "bin" these holes.----
+
+----
+
+:class: t2c
+
+Compaction or Defragmentation
+=============================
+.. yographviz::
+
+    digraph Compaction {
+        rankdir=LR;
+        node [shape=none, fontname="Courier New"];
+
+        // Before Compaction
+        Before [label=<
+            <table border="0" cellborder="1" cellspacing="0" cellpadding="10">
+                <tr><td bgcolor="#D1D1D1">Process A (10KB)</td></tr>
+                <tr><td bgcolor="#FFFFFF"><b>Hole 1 (5KB)</b></td></tr>
+                <tr><td bgcolor="#D1D1D1">Process B (15KB)</td></tr>
+                <tr><td bgcolor="#FFFFFF"><b>Hole 2 (10KB)</b></td></tr>
+                <tr><td bgcolor="#D1D1D1">Process C (10KB)</td></tr>
+                <tr><td bgcolor="#FFFFFF"><b>Hole 3 (20KB)</b></td></tr>
+            </table>
+        >];
+
+        // After Compaction
+        After [label=<
+            <table border="0" cellborder="1" cellspacing="0" cellpadding="10">
+                <tr><td bgcolor="#D1D1D1">Process A (10KB)</td></tr>
+                <tr><td bgcolor="#D1D1D1">Process B (15KB)</td></tr>
+                <tr><td bgcolor="#D1D1D1">Process C (10KB)</td></tr>
+                <tr><td bgcolor="#FFFFFF" height="80"><b>Total Free Space (35KB)</b></td></tr>
+            </table>
+        >];
+
+        // Arrow indicating the process
+        Before -> After [label=" COMPACTION ", fontcolor="red", fontsize=12];
+
+        label = "Memory Compaction: Merging External Fragments";
+        labelloc = "t";
+    }
+
+.. class:: substep
+
+* cost
+    * CPU Cycles
+    * Bus Saturation
+    * System Freeze
+* Strategies
+    * Move to One End
+    * Minimal Movement
+* Trigger
+    * Allocation Failure
+    * Idle Time
+    * Threshold
+* Pros
+    * Maximizes RAM Utilization
+    * Enables Large Processes
+    * Simplifies Placement
+* Cons
+    * Extreme Overhead
+    * Requires Special Hardware
+    * Interrupts Execution
+
+.. :
+
+    .. image:: img/memory/compaction.svg
+       :align: center
+
+    Pros,Cons
+    Maximizes RAM Utilization: Prevents jobs from waiting when there is theoretically enough space.,Extreme Overhead: Copying megabytes or gigabytes of RAM is slow.
+    Enables Large Processes: Allows the system to accommodate programs that otherwise couldn't fit.,Requires Special HW: Needs an MMU/Base-Limit registers to work.
+    "Simplifies Placement: After compaction, ""First Fit"" becomes trivial because there is only one hole.","Interrupts Execution: Can cause ""stuttering"" in real-time or interactive systems."
+
+    https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
+
+    Memory-Compaction-in-contiguous-memory-allocation-1.jpg
+    https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html
+
+    compaction.png
+    https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing
+    https://github.com/mor1/ia-operating-systems
+
+    https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/
+
+    https://slideplayer.com/slide/7084682/
+
+----
+
+:class: t2c
+
+Buddy System
+============
+.. image:: img/memory/memory_buddy_system2.png
+   :align: center
+
+.. :
+
+    5. The Buddy System (The Hybrid Approach)This is a sophisticated middle ground that many students find fascinating.Instead of arbitrary sizes, memory is split into powers of 2 ($2^n$).If a process needs 10KB, you split a 32KB block into two 16KB "buddies."It reduces external fragmentation and makes coalescing extremely fast because you only ever merge a block with its specific "buddy."
+
+    .. image:: img/memory/memory_buddy_system1.png
+       :align: center
+       :height: 500px
+
+
+----
+
+.. class:: rtl-h1
+
+    الگوریتم اجرا
+
+.. image:: img/memory/memory_buddy_system3.png
+   :align: center
+
 
 ----
 
@@ -144,82 +334,6 @@ Process Control Block (PCB)
 Queue
 =========
 .. image:: img/in/queues01.png
-   :align: center
-
-----
-
-.. class:: rtl-h1
-
-    برگزیدن فضای آزاد برای فرآیند تازه وارد
-
-
-.. class:: substep rtl
-
-    *  اولین برازش(First Fit)
-    *  بهترین برازش(Best Fit)
-    *  بدترین برازش(Worst Fit)
-    *  درپی برازش (برازش بعدی Next Fit)
-
-----
-
-.. image:: img/memory/memory_select_part_for_allocation.png
-   :align: center
-   :height: 500px
-
-----
-
-.. class:: rtl-h1
-
-    تکه تکه شدن (پراکندگی یا پارگی) خارجی
-
-External Fragmentation
-------------------------
-
-----
-
-Compaction
-============
-.. image:: img/memory/compaction.svg
-   :align: center
-
-.. ::
-
-    https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
-
-    Memory-Compaction-in-contiguous-memory-allocation-1.jpg
-    https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html
-
-    compaction.png
-    https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing
-    https://github.com/mor1/ia-operating-systems
-
-    https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/
-
-    https://slideplayer.com/slide/7084682/
-
-----
-
-.. class:: rtl-h1
-
-    حافظهٔ پویای رفاقتی Buddy system
-
-.. image:: img/memory/memory_buddy_system1.png
-   :align: center
-   :height: 500px
-
-----
-
-.. image:: img/memory/memory_buddy_system2.png
-   :align: center
-   :scale: 90%
-
-----
-
-.. class:: rtl-h1
-
-    الگوریتم اجرا
-
-.. image:: img/memory/memory_buddy_system3.png
    :align: center
 
 ----
