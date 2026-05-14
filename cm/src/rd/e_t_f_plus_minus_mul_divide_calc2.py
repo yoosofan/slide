@@ -1,13 +1,14 @@
-import re, traceback
+import re, traceback as tb
 class Lexical:
+
   def getToken(self):
-    res = ['$',0];
-    c=self.s[self.index]
-    self.pi = self.index
     i=self.index
-    if len(self.s) == i:
+    res = ['$', i];
+    if len(self.s) <= i:
       return res
-    if c == '*':   res[0]='*'
+    self.pi = self.index
+    c=self.s[self.index]
+    if   c == '*': res[0]='*'
     elif c == '/': res[0]='/'
     elif c == '+': res[0]='+'
     elif c == '-': res[0]='-'
@@ -39,10 +40,11 @@ def F(lex):
   elif lex.ct[0] == '(':
     lex.getToken()
     x = E(lex);
-    if lex.ct[0] != ')'
+    print(lex.ct)
+    if lex.ct[0] != ')':
       raise Exception(')')
   else:
-    raise Exception('F()')
+    raise Exception('F()', lex.ct[0])
   lex.getToken()
   return x;
 
@@ -50,31 +52,35 @@ def T(lex):
   x = F(lex);
   p = lex.ct[0]
   while p in ['*', '/']:
-    p = lex.ct[0]
     lex.getToken()
     y = F(lex);
     if p == '*': x *= y
     else:        x /= y;
+    p = lex.ct[0]
   return x;
 
 def E(lex):
   x = T(lex);
   p = lex.ct[0]
   while p in ['+', '-']:
-    p = lex.ct[0]
     lex.getToken()
     y = T(lex);
     if p == '+': x += y
     else: x -= y;
+    p = lex.ct[0]
   return x;
 
-s = input('Enter >> ');
+def getInput():
+  s = input('Enter>> ')
+  return s.strip()
+
+s = getInput()
 while s != '':
   try:
     lex = Lexical(s)
     lex.getToken();
     print(E(lex));
   except Exception as e:
-    print('Syntax Error')
-    traceback.print_tb(e)
-    s = input('Enter >> ')
+    d=tb.format_exception(e)
+    print("".join(d))
+  s=getInput()

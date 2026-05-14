@@ -2144,7 +2144,7 @@ Calculator
 
 :class: t3c
 
-Lexical of calculator(IV)
+Calculator(IV)
 ============================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
@@ -2154,7 +2154,7 @@ Lexical of calculator(IV)
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
   :number-lines: 30
-  :start-line: 31
+  :start-line: 29
   :end-line: 59
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
@@ -2166,36 +2166,18 @@ Lexical of calculator(IV)
 
 :class: t2c
 
-Parser of calculator(IV)
-============================
-.. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
-  :code: python
-  :number-lines: 42
-  :start-line: 41
-  :end-line: 63
-
-.. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
-  :code: python
-  :number-lines: 64
-  :start-line: 63
-
-----
-
-:class: t2c
-
 Lexial of Calc80 in Python
 ============================
 .. include:: src/rd/calc80.py
   :code: python
-  :number-lines: 3
-  :start-line: 2
+  :number-lines:
   :end-line: 29
 
 .. include:: src/rd/calc80.py
   :code: python
   :number-lines: 30
   :start-line: 29
-  :end-line:  56
+  :end-line:  57
 
 .. :
 
@@ -2220,7 +2202,7 @@ Parser of Calc80 in Python
 .. include:: src/rd/calc80.py
   :code: python
   :number-lines: 57
-  :start-line: 56
+  :start-line: 57
   :end-line: 83
 
 .. include:: src/rd/calc80.py
