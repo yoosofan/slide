@@ -1,0 +1,8 @@
+digraph{
+Start [label="E[1+4*(3-1)]"]
+A12 [label="E[1]"]
+A54 [label="T[1]"]
+A56 [label="F[1]"]
+Start -> A12
+A12   -> A54
+A54   -> A56

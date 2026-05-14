@@ -1841,8 +1841,8 @@ Parser Code for Last Calculator
 
 :class: t2c
 
-Parser Tree
-============
+Output Parser Tree
+==================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_parser_tree.py
   :code: python
   :number-lines: 9
@@ -1880,35 +1880,162 @@ Parser Tree
     Enter an expression like 1+4*(3-1)
     >
 
-.. :
-
-  python3 t.py '1+4*(3-1)'
-  E:  1+4*(3-1)
-  T:  1+4*(3-1)
-  F:  1+4*(3-1)
-  Number:  1.0
-  Op:  +4*(3-1)
-  T:  4*(3-1)
-  F:  4*(3-1)
-  Number:  4.0
-  Op:  *(3-1)
-  F:  (3-1)
-  E:  3-1)
-  T:  3-1)
-  F:  3-1)
-  Number:  3.0
-  Op:  -1)
-  T:  1)
-  F:  1)
-  Number:  1.0
-  True
-
 ----
 
-:class: t2c
+:class: t4c
 
 Representations of Parse Tree
 =============================
+.. code:: sh
+
+    > 1+4*(3-1)
+    E:  1+4*(3-1)
+    T:  1+4*(3-1)
+    F:  1+4*(3-1)
+    Number:  1.0
+    +-:  +4*(3-1)
+    E:  4*(3-1)
+    T:  4*(3-1)
+    F:  4*(3-1)
+    Number:  4.0
+    */:  *(3-1)
+    T:  (3-1)
+    F:  (3-1)
+    E:  3-1)
+    T:  3-1)
+    F:  3-1)
+    Number:  3.0
+    +-:  -1)
+    E:  1)
+    T:  1)
+    F:  1)
+    Number:  1.0
+    True
+
+.. container:: substep
+
+    #. E → E + T
+    #. E → E - T
+    #. E → T
+    #. T → T
+    #. T → T * F
+    #. T → T / F
+    #. T → F
+    #. F → a
+    #. F → (E)
+
+    .. code:: sh
+        :class: substep
+
+         > 1
+        E:  1
+        T:  1
+        F:  1
+        Number:  1.0
+
+    .. yographviz::
+        :class: substep
+
+        digraph{
+            A12 [label="E[1]"]
+            A54 [label="T[1]"]
+            A56 [label="F[1]"]
+            A12   -> A54
+            A54   -> A56
+        }
+
+.. container::
+
+    .. code:: sh
+        :class: substep
+
+        > 1
+        E:  1
+        T:  1
+        F:  1
+        Number:  1.0
+        +-:  +4*(3-1)
+        E:  4*(3-1)
+        T:  4*(3-1)
+        F:  4*(3-1)
+        Number:  4.0
+
+    .. yographviz::
+        :class: substep
+
+        digraph{
+            Start [label="E[1+4]"]
+            A12 [label="E[1]"]
+            A54 [label="T[1]"]
+            A56 [label="F[1]"]
+            Aplus1 [label = "+"]
+            A3545 [label="T[4]"]
+            A35452 [label="F[4]"]
+            Start -> A12
+            Start -> Aplus1
+            Start -> A3545
+            A3545 -> A35452
+            A12   -> A54
+            A54   -> A56
+        }
+
+.. yographviz::
+    :class: substep
+
+    digraph{
+        Start [label="E[1+4*(3-1)]"]
+        A12 [label="E[1]"]
+        A54 [label="T[1]"]
+        A56 [label="F[1]"]
+        Aplus1 [label = "+"]
+        A35r [label="T[4*(3-1)]"]
+        A3545 [label="T[4]"]
+        A35452 [label="F[4]"]
+        Aplus2 [label="*"]
+        A2 [label="F[(3-1)]"]
+        A23 [label="("]
+        A24 [label="E[3-1]"]
+        A25 [label=")"]
+        A1  [label="E[3]"]
+        A13 [label="-"]
+        A16 [label="T[1]"]
+        A04 [label="T[3]"]
+        A07 [label="F[1]"]
+        A08 [label="F[3]"]
+        Start -> A12
+        Start -> Aplus1
+        Start -> A35r
+        A35r  -> A3545
+        A3545 -> A35452
+        A35r  -> Aplus2
+        A35r  -> A2
+        A2    -> A23
+        A2    -> A24
+        A2    -> A25
+        A24   -> A1
+        A24   -> A13
+        A24   -> A16
+        A1    -> A04
+        A16   -> A07
+        A04   -> A08
+        A12   -> A54
+    A54   -> A56
+    }
+
+----
+
+:class: n4c
+
+#. E → E + T
+#. E → E - T
+#. E → T
+#. T → T
+#. T → T * F
+#. T → T / F
+#. T → F
+#. F → a
+#. F → (E)
+
 .. code:: sh
 
     > 1+4*(3-1)
@@ -1978,9 +2105,22 @@ Representations of Parse Tree
     A54   -> A56
   }
 
-.
+.. class:: substep
 
-E → E + T | E - T | T  ,  2.  T → T * F | T / F | F , 3. F → (E) | a
+#. E → E + T
+#. T[1] + T
+#. F[1] + T
+#. a[1] + T
+#. a[1] + T * F
+#. a[1] + F * F
+#. a[1] + a[4] * F
+#. a[1] + a[4] * (E)
+#. a[1] + a[4] * (E-T)
+#. a[1] + a[4] * (T-T)
+#. a[1] + a[4] * (F-T)
+#. a[1] + a[4] * (a[3]-T)
+#. a[1] + a[4] * (a[3]-F)
+#. a[1] + a[4] * (a[3]-a[1])
 
 ----
 
@@ -2002,54 +2142,106 @@ Calculator
 
 ----
 
-:class: t2c
+:class: t3c
 
-Calculator(IV)(lexical)
+Lexical of calculator(IV)
 ============================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 0
-  :start-line: 0
-  :end-line: 25
+  :number-lines:
+  :end-line: 29
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 25
-  :start-line: 25
-  :end-line: 47
+  :number-lines: 30
+  :start-line: 31
+  :end-line: 59
+
+.. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
+  :code: python
+  :number-lines: 61
+  :start-line: 59
 
 ----
 
 :class: t2c
 
-Calculator(V)
-==============
+Parser of calculator(IV)
+============================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 47
-  :start-line: 47
-  :end-line: 70
+  :number-lines: 42
+  :start-line: 41
+  :end-line: 63
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc2.py
   :code: python
-  :number-lines: 70
-  :start-line: 70
-  :end-line: 100
+  :number-lines: 64
+  :start-line: 63
 
 ----
 
 :class: t2c
 
-Calculator(VI) - lexical
+Lexial of Calc80 in Python
+============================
+.. include:: src/rd/calc80.py
+  :code: python
+  :number-lines: 3
+  :start-line: 2
+  :end-line: 29
+
+.. include:: src/rd/calc80.py
+  :code: python
+  :number-lines: 30
+  :start-line: 29
+  :end-line:  56
+
+.. :
+
+    Thanks to Stacoverflow and Gemini AI for the following class
+    class RegexMatch:
+      def __init__(self, pattern):
+        self.pattern = re.compile(pattern)
+        self.match = None
+      def __eq__(self, other):
+        self.match = self.pattern.match(str(other))
+        return self.match is not None
+    class Patterns:
+        NUM = RegexMatch(r"[0-9]")
+
+
+----
+
+:class: t2c
+
+Parser of Calc80 in Python
+============================
+.. include:: src/rd/calc80.py
+  :code: python
+  :number-lines: 57
+  :start-line: 56
+  :end-line: 83
+
+.. include:: src/rd/calc80.py
+  :code: python
+  :number-lines: 84
+  :start-line: 83
+
+----
+
+:class: t2c
+
+Lexical C++
 ===============================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
-  :code: python
+  :code: cpp
   :number-lines: 0
   :start-line: 0
   :end-line: 31
 
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
-  :code: python
+  :code: cpp
   :number-lines: 31
   :start-line: 31
   :end-line: 63
@@ -2058,7 +2250,7 @@ Calculator(VI) - lexical
 
 :class: t2c
 
-Calculator(VII)
+Calculator C++
 =================
 .. include:: src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
   :code: python

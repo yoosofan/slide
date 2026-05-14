@@ -1,6 +1,6 @@
 import re
 class tokenCls:
-  def __init__(self, type1='EOF',  
+  def __init__(self, type1='EOF',
       v1='', l1=0, b1=0, e1=0):
     self.type = type1
     self.begin = b1
@@ -20,10 +20,10 @@ class lexical:
     self.end = 0
     self.lineno = 0
     self.length = len(self.s)
-    self.ct = tokenCls(b1=self.begin, 
+    self.ct = tokenCls(b1=self.begin,
       e1=self.end)
   def getToken(self):
-    self.ct = tokenCls(b1=self.begin, 
+    self.ct = tokenCls(b1=self.begin,
       e1=self.end)
     self.begin = self.end
     while self.end < self.length:
@@ -33,7 +33,7 @@ class lexical:
         if self.end >= self.length:
           break
 
-      a = re.match('\d+(\.\d+)?', 
+      a = re.match('\\d+(\\.\\d+)?',
         self.s[self.end:])
       if a is None:
         self.end += 1
@@ -80,7 +80,7 @@ except Exception as e1:
 
 def E(s):
   print('a + E\t\t::\t\t',s)
-  a = re.match('[0-9]+(\.[0-9]+)?', s)
+  a = re.match('[0-9]+(\\.[0-9]+)?', s)
   if a is None:
     print('Error: need a number ', s)
     return False

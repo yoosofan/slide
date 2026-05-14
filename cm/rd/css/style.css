@@ -119,6 +119,22 @@ div.n2c{
   align-items: center ;
   gap: 10px ;
 }
+div.n3c{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
+div.n4c{
+  display: grid;
+  grid-template-columns: auto auto auto auto ;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
 
 div.t2c{
   display: grid;
