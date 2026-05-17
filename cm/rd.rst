@@ -2183,15 +2183,17 @@ Lexial of Calc80 in Python
 
     Thanks to Stacoverflow and Gemini AI for the following class
     class RegexMatch:
+
       def __init__(self, pattern):
         self.pattern = re.compile(pattern)
         self.match = None
+
       def __eq__(self, other):
         self.match = self.pattern.match(str(other))
         return self.match is not None
+
     class Patterns:
         NUM = RegexMatch(r"[0-9]")
-
 
 ----
 
@@ -2209,6 +2211,229 @@ Parser of Calc80 in Python
   :code: python
   :number-lines: 84
   :start-line: 83
+
+----
+
+:class: t2c
+
+Another Grammar(I)
+==================
+#. S → AB | SB | B
+#. A → aA
+#. B → bB | BaB | ab
+
+.. container:: substep
+
+    Eliminate Left Recursion
+
+    .. class:: substep
+
+
+    #. S → AB | SB | B
+        * S​ → ABS′ ∣ BS′
+        * S′ → BS′ ∣ λ​
+    #. B → bB | BaB | ab
+        * B ​→ bBB′ ∣ abB′
+        * B′ → aBB′ ∣ λ​
+
+.. yographviz::
+    :class: substep
+
+    digraph Sprime {
+        label="S′";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="B"];
+        1 -> END [label="S′"];
+        0 -> END [label="λ"];
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph Bprime {
+        label="B′";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="a"];
+        1 -> 2 [label="B"];
+        2 -> END [label="B′"];
+        0 -> END [label="λ"];
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph Sprime {
+        label="S(S + Simplified S′ + Simplified A)";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="a"];
+        1 -> 1 [label="a"];
+        0 -> 2 [label="B"];
+        1 -> 2 [label="B"];
+        2 -> 2 [label="B"];
+        2 -> END [label="λ"];
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph Bprime {
+        label="B + Simplified B′";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="b"];
+        0 -> 2 [label="a"];
+        2 -> 3 [label="b"];
+        1 -> 3 [label="B"];
+        3 -> 4 [label="a"];
+        4 -> 3 [label="B"];
+        3 -> END [label="λ"];
+    }
+
+.. :
+
+    https://wwwlehre.dhbw-stuttgart.de/~sschulz/TEACHING/FLA2025/FLA_ho.pdf
+
+    Thanks to Chatgpt.com for verifying and simple corrections of the charts
+
+----
+
+:class: t2c
+
+Another Grammar(II)
+===================
+.. yographviz::
+
+    digraph Sprime {
+        label="S";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="a"];
+        1 -> 1 [label="a"];
+        0 -> 2 [label="B"];
+        1 -> 2 [label="B"];
+        2 -> 2 [label="B"];
+        2 -> END [label="λ"];
+    }
+
+.. yographviz::
+
+    digraph Bprime {
+        label="B";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 1 [label="b"];
+        0 -> 2 [label="a"];
+        2 -> 3 [label="b"];
+        1 -> 3 [label="B"];
+        3 -> 4 [label="a"];
+        4 -> 3 [label="B"];
+        3 -> END [label="λ"];
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph S{
+        label="S";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 0 [label="a"];
+        0 -> 1 [label="B"];
+        1 -> 1 [label="B"];
+        1 -> END [label="λ"];
+    }
+
+.. yographviz::
+    :class: substep
+
+    digraph B {
+        label="B";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 0 [label="b"];
+        0 -> 1 [label="ab"];
+        1 -> 0 [label="a"];
+        1 -> END [label="λ"];
+    }
+
+.. :
+
+    https://wwwlehre.dhbw-s
+
+    Thanks to Chatgpt.com for verifying and simple corrections of the charts
+
+----
+
+:class: n2c
+
+
+.. yographviz::
+
+    digraph S{
+        label="S";
+        labelloc = "t";
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 0 [label="a"];
+        0 -> 1 [label="B"];
+        1 -> 1 [label="B"];
+        1 -> END [label="λ"];
+    }
+
+.. yographviz::
+
+    digraph B {
+        rankdir = "LR"
+        node [shape=circle];
+        END [shape=doublecircle, label=""];
+        0 -> 0 [label="b"];
+        0 -> 1 [label="ab"];
+        1 -> 0 [label="a"];
+        1 -> END [label="λ"];
+    }
+
+.. include:: src/rd/sp_grammar.py
+  :code: python
+  :number-lines: 0
+  :start-line: 0
+  :end-line: 19
+
+.. include:: src/rd/sp_grammar.py
+  :code: python
+  :number-lines: 20
+  :start-line: 19
+  :end-line: 38
+
+.. class:: substep
+
+#. S → AB | SB | B { S​ → ABS′ ∣ BS′, S′ → BS′ ∣ λ​ }
+#. B → bB | BaB | ab {B ​→ bBB′ ∣ abB′, B′ → aBB′ ∣ λ​ }
+
+.. class:: substep
+
+* first(S) = {a} ∪ first(B)
+* first(B) = {a, first(ab)} = {a, b}
+* first(S) = {a, b}
 
 ----
 
