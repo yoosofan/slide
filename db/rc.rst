@@ -764,37 +764,59 @@ First-Order Logic (Predicates and Quantifiers)
 
 زوج شمارهٔ عرضه‌کنندگانی را بیابید که در یک شهر باشند و هر دو عرضه کننده، قطعه یا قطعه‌هایی را عرضه کرده باشند.
 
-هر دو عرضه کرده باشند (راه حل اشتباه)
+.. code:: sql
+  :class: substep
 
-`.`
+  -- راه حل نادرست
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city and
+    sx.sn < sy.sn and
+    exists spx(sx.sn = spx.sn
+      and sy.sn = spx.sn
+    )
+
+.. code:: sql
+  :class: substep
+
+  -- راه حل درست
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city and
+    sx.sn < sy.sn and (
+      exists spx(sx.sn = spx.sn) and
+      exists spy(sy.sn = spy.sn)
+    )
+
+.. code:: sql
+  :class: substep
+
+  -- راه حل درست
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city and
+    sx.sn < sy.sn and (
+      exists spx(sx.sn = spx.sn) and
+      exists spx(sy.sn = spx.sn)
+    )
 
 .. code:: sql
   :class: substep
 
   -- راه حل نادرست
-  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
-   sx.sn < sy.sn and exists spx(sx.sn = spx.sn and sy.sn = spx.sn)
-
-`.`
-
-.. code:: sql
-  :class: substep
-
-  -- راه حل درست
-  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
-   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) and
-   exists spy(sy.sn = spy.sn))
-
-
-`.`
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city and
+    sx.sn < sy.sn and exists spx(
+      sx.sn = spx.sn and
+      exists spx (sy.sn = spx.sn)
+    )
 
 .. code:: sql
   :class: substep
 
-  -- راه حل درست
-  {sx.sn, sy.sn as sn2} where sx.city = sy.city and
-   sx.sn < sy.sn and (exists spx(sx.sn = spx.sn) and
-   exists spx(sy.sn = spx.sn))
+  {sx.sn, sy.sn as sn2} where
+    sx.city = sy.city and
+    sx.sn < sy.sn and exists spx(
+      sx.sn = spx.sn and
+      exists spy (sy.sn = spy.sn)
+    )
 
 ----
 
@@ -828,16 +850,7 @@ First-Order Logic (Predicates and Quantifiers)
   -- نادرست
   sx.sname where forall px(
     px.pn=spx.pn
-  )  sx.sn=spx.sn
-
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-نام عرضه‌کنندگانی را بیابید که همهٔ قطعه‌ها را عرضه کرده باشند(II).
+  ) and sx.sn=spx.sn
 
 .. code:: sql
   :class: substep
@@ -860,6 +873,18 @@ First-Order Logic (Predicates and Quantifiers)
     exists spx(
       spx.pn=px.pn and sx.sn=spx.sn
     )
+
+.. class:: substep
+
+∀x p(x) ≡ ~∃x ~p(x)
+
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+نام عرضه‌کنندگانی را بیابید که همهٔ قطعه‌ها را عرضه کرده باشند(II).
 
 .. code:: sql
   :class: substep
@@ -905,13 +930,31 @@ First-Order Logic (Predicates and Quantifiers)
       spx.pn=px.pn and sx.sn=spx.sn
     )
 
+.. code:: sql
+  :class: substep
+
+  -- نادرست
+  sx.sname where forall px(
+    exists spx(sx.sn=spx.sn) and
+    exists spx(spx.pn=px.pn)
+  )
+
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+.. container:: rtl-h1
 
-شماره قطعاتی را بیابید که هیچ عرضه کننده‌ای آنها را عرضه نکرده باشد.
+    شماره قطعاتی را بیابید که هیچ عرضه کننده‌ای آنها را عرضه نکرده باشد.
+
+    .. class:: substep
+
+    شماره قطعاتی را بیابید که عرضه کننده‌ای وجود نداشته باشد که آنها را عرضه کرده باشد.
+
+    .. class:: substep
+
+    شماره قطعاتی را بیابید که عرضه‌ای برای آنها وجود نداشته باشد.
+
 
 .. code:: sql
   :class: substep
@@ -980,12 +1023,17 @@ First-Order Logic (Predicates and Quantifiers)
 
 :class: t2c
 
-.. class:: rtl-h1
+.. container:: rtl-h1
 
-نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند.
+    نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده است آن قطعه را نیز عرضه کرده باشد.
+
+    .. class:: substep
+
+    نام قطعات عرضه شده‌ای را بیابید که همهٔ عرضه‌کنندگانِ آن قطعات قطعهٔ p3 را هم عرضه کرده‌اند و اگر هیچ عرضه‌ای از p3 نبود جواب باید خالی باشد.
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
      px.pname where not exists spx(
        spx.pn = 'p3' and not exists spy(
@@ -993,8 +1041,15 @@ First-Order Logic (Predicates and Quantifiers)
        )
     )
 
+.. class:: substep
+
+* ∀x p(x) ≡ ~∃x ~p(x)
+
+* P(x) ⇒ Q(x) ≡ ~P(x) ∨ Q(x)
+
 .. code:: sql
     :class: substep
+    :number-lines:
 
     px.pname where forall spx(
       spx.pn <> 'p3' or exists spy(
@@ -1006,15 +1061,23 @@ First-Order Logic (Predicates and Quantifiers)
 
 نام قطعاتی که برای‌شان وجود نداشته باشد عرضه‌ای که آن عرضه برای قطعهٔ p3 باشد و وجود نداشته باشد عرضهٔ دیگری از همان عرضه کننده که قطعهٔ آن همین قطعهٔ مورد نظر ما نباشد.
 
-`.`
-
 .. code:: sql
     :class: substep
+    :number-lines:
 
-    -- نادرست
-    px.pname where forall spx(
+    px.pname where forall spx(    -- نادرست
       spx.pn = 'p3' or not exists spy(
         spy.sn = spx.sn and spy.pn = px.pn
+      )
+    )
+
+.. code:: sql
+    :number-lines:
+    :class: substep
+
+    px.pname where forall spx(    -- نادرست
+      spx.pn = 'p3' or exists spy(
+        spy.pn = spx.pn and spy.sn = spx.sn
       )
     )
 
@@ -1024,28 +1087,11 @@ First-Order Logic (Predicates and Quantifiers)
 
 .. class:: rtl-h1
 
-نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده باشد آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(I)
-
-..  :
-
-    نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده باشد فقط آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(I)
-
-
-    نام قطعات عرضه شده‌ای را بیابید که همهٔ عرضه‌کنندگانِ آن قطعات قطعهٔ p3 را هم حتماً عرضه کرده‌اند و اگر هیچ عرضه‌ای از p3 نبود جواب باید خالی باشد. پاسخ‌های نادرست(I)
-
+نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده است آن قطعه را نیز عرضه کرده باشد(پاسخ‌های نادرست).
 
 .. code:: sql
-  :number-lines:
-
-    px.pname where exists spx(
-      spx.pn = 'p3' and
-      exists spy( spy.pn = px.pn
-        and spy.sn = spx.sn
-      )
-    )
-
-.. code:: sql
-  :number-lines:
+    :number-lines:
+    :class: substep
 
     px.pname where forall spx(
       spx.pn='p3' and forall Spy(
@@ -1057,7 +1103,8 @@ First-Order Logic (Predicates and Quantifiers)
     )
 
 .. code:: sql
-  :number-lines:
+    :number-lines:
+    :class: substep
 
     px.pname where exists spx(
       Spx.pn='p3' and exists spy(
@@ -1068,16 +1115,9 @@ First-Order Logic (Predicates and Quantifiers)
       )
     )
 
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند. پاسخ‌های نادرست(II)
-
 .. code:: sql
-  :number-lines:
+    :number-lines:
+    :class: substep
 
     px.pname where forall spx(
       spx.pn = 'p3' or exists spy(
@@ -1087,7 +1127,8 @@ First-Order Logic (Predicates and Quantifiers)
     )
 
 .. code:: sql
-  :number-lines:
+    :number-lines:
+    :class: substep
 
     px.pname where forall spx(
       spx.pn = 'p3' and exists spy(
@@ -1096,15 +1137,6 @@ First-Order Logic (Predicates and Quantifiers)
       )
     )
 
-.. code:: sql
-  :number-lines:
-
-    px.pname where forall spx(
-      spx.pn = 'p3' or exists spy(
-        spy.pn = spx.pn and
-        spy.sn = spx.sn
-      )
-    )
 
 .. :
 
@@ -1122,6 +1154,28 @@ First-Order Logic (Predicates and Quantifiers)
 
 
         نام قطعاتی را بیابید که فقط عرضه‌کنندگانی که قطعهٔ p3 را عرضه کرده‌اند آن قطعه را نیز عرضه کرده باشند.
+
+----
+
+:class: t2c
+
+.. container:: rtl-h1
+
+    نام قطعاتی را بیابید که اگر عرضه‌کننده‌ای قطعهٔ p3 را عرضه کرده است آن قطعه را عرضه نکرده باشد.
+
+    .. class:: substep
+
+    نام قطعاتی را بیابید که عرضه‌کنندگان قطعهٔ p3 عرضه‌ای از آن قطعه نداشته باشند.
+
+.. code:: sql
+    :class: substep
+
+    px.pname where forall spx(
+      spx.pn = 'p3' and not exists spy(
+        spy.sn = spx.sn and
+        spy.pn = px.pn
+      )
+    )
 
 ----
 
@@ -1272,61 +1326,14 @@ First-Order Logic (Predicates and Quantifiers)
 
     نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.۱
 
+* book(bn_, title, author, ofpd)
+* member(mn_, name, bn, fines)
+* borrow(bn_, mn_, ddt_, dtr)
 
-* book( bn_ , title, category, fpd, author )
-* member( mn_ , name , category, bn)
-* borrow( bn_ , mn_ , nd , rdt, ret)
-
-.. class:: rtl substep
-
-      پاسخ‌های نادرست
-
-.. code:: sql
-    :class: substep
-    :number-lines:
-
-    bookx.author where forall bookx(
-      exists borrowx(
-        bookx.bn = borrowx.bn
-      )
-    )
-
-
-.. code:: sql
-    :class: substep
-    :number-lines:
-
-    bookx.author where not exists
-    memberx(
-      memberx.bn=bookx.bn and
-      not exists borrowx(
-        borrowx.bn=memberx.bn and
-        borrowx.bn=bookx.bn
-      )
-    )
-
-----
-
-:class: t2c
-
-.. class:: rtl-h1
-
-    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.۲
-
-.. code:: sql
-    :class: substep
-
-      -- پاسخ‌های نادرست
-    bookx.author where forall booky(
-      bookx.author=booky.author and
-      exists borrowx(
-        borrowx.bn=bookx.bn
-      )
-    )
-
-.. class:: rtl-h2 substep
-
-    پاسخ‌های درست
+#. "ofpd" overdue fine per day
+#. "fines" Outstanding Balance or debt of a member
+#. "ddt" due date
+#. "dtr" date returned
 
 .. code:: sql
     :class: substep
@@ -1334,9 +1341,7 @@ First-Order Logic (Predicates and Quantifiers)
 
     bookx.author where not exists booky(
       booky.author = bookx.author and
-      not exists borrowx(
-        borrowx.bn = booky.bn
-      )
+      not exists borrowx(borrowx.bn = booky.bn)
     )
 
 .. code:: sql
@@ -1345,10 +1350,63 @@ First-Order Logic (Predicates and Quantifiers)
 
     bookx.author where forall booky(
       bookx.author <> booky.author or
-      exists borrowx(
-        borrowx.bn = booky.bn
-      )
+      exists borrowx(borrowx.bn = booky.bn)
     )
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    bookx.author where forall bookx(
+      exists borrowx(bookx.bn = borrowx.bn)
+    ) -- incorrect
+
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    bookx.author where not exists memberx(
+      memberx.bn=bookx.bn and not exists borrowx(
+        borrowx.bn=memberx.bn and
+        borrowx.bn=bookx.bn
+      )
+    ) -- incorrect
+
+.. code:: sql
+    :class: substep
+
+    bookx.author where forall booky(
+      bookx.author=booky.author and
+      exists borrowx(borrowx.bn=bookx.bn)
+    ) -- incorrect
+
+----
+
+:class: t2c
+
+Company Database
+================
+
+* Employee(SSN_, name, salary, Dn)
+* Department(DN_, DeptName, MgrSSN)
+* Project(JN_, ProjName, location)
+* HourLog(SSN_, JN_, hours)
+
+.. class:: rtl
+
+یک کارمند دارای SSN و نام و میزان حقوق و شمارهٔ بخش است. SSN برای هر کارمند یکتا است. هر کارمند تنها در یک بخش کار می‌کند. هر بخش (Department) دارای شمارهٔ بخش و نام و شمارهٔ SSN مدیر آن است. هر بخش شمارهٔ یکتایی دارد. همچنین هر بخش تنها یک مدیر دارد. هر پروژه دارای شمارهٔ یکتا و مکان انجام پروژه و نام پروژه است. در هر پروژه دستِ کم یک کارمند کار می‌کند. در hourLog مشخص می‌شود که یک کارمند در یک پروژه چه تعداد ساعت کار کرده است.
+
+
+* e(ssn_, name,  salary, dn)
+* d(dn_,  dname, ssn)
+* j(jn_,  jname, location)
+* h(ssn_, jn_,   hours)
+
+.. class:: rtl
+
+یک کارمند(e) دارای ssn و نام و میزان حقوق(salary) و شمارهٔ بخش(dn) است. ssn برای هر کارمند یکتا است. هر کارمند تنها در یک بخش کار می‌کند. هر بخش (d) دارای شمارهٔ بخش، نام و شمارهٔ ssn مدیر آن بخش است. dn برای هر بخش یکتا است. هر بخش تنها یک مدیر دارد. هر پروژه(j) دارای شمارهٔ یکتا(jn)، نام پروژه(jname) و مکان انجام پروژه(location) است. در جدول h مشخص می‌شود که یک کارمند(ssn) در یک پروژه(jn) چه تعداد ساعت کار کرده است.
+
 
 ----
 
