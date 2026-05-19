@@ -271,12 +271,411 @@ Compaction or Defragmentation
 
 ----
 
-:class: t2c
-
-Buddy System
-============
+Buddy System Memory Management(I)
+=================================
 .. image:: img/memory/memory_buddy_system2.png
    :align: center
+
+----
+
+:class: t4c
+
+Buddy System Memory Management(II)
+==================================
+.. yographviz::
+    :width: 220
+
+    digraph Buddy1 {
+        label="A 100";
+        labelloc = "t";
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512 K"];
+        2 [label="512 K"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256 K"];
+        4 [label="256 K"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="A(100)"];
+        6 [label="128 K"];
+
+        3 -> 5;
+        3 -> 6;
+
+    }
+
+.. yographviz::
+    :width: 200
+
+    digraph Buddy2 {
+        label="B 240";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="B"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="A"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+    }
+
+.. yographviz::
+    :width: 200
+
+    digraph Buddy3 {
+        label="C 64";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="B"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="A"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+        7 [label="C(64)"];
+        8 [label="64"];
+
+        6 -> 7;
+        6 -> 8;
+
+    }
+
+.. yographviz::
+    :width: 300
+
+    digraph Buddy4 {
+        label="D 256";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="B"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="A"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+        7 [label="C(64)"];
+        8 [label="64"];
+
+        6 -> 7;
+        6 -> 8;
+
+        21 [label="D"];
+        22 [label="256"];
+
+        2 -> 21;
+        2 -> 22;
+
+    }
+
+
+.. yographviz::
+    :width: 300
+
+    digraph Buddy5 {
+        label="Release A and B";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="256"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="128"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+        7 [label="C(64)"];
+        8 [label="64"];
+
+        6 -> 7;
+        6 -> 8;
+
+        21 [label="D"];
+        22 [label="256"];
+
+        2 -> 21;
+        2 -> 22;
+
+    }
+
+.. yographviz::
+    :width: 300
+
+    digraph Buddy6 {
+        label="E 74";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="256"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="E"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+        7 [label="C(64)"];
+        8 [label="64"];
+
+        6 -> 7;
+        6 -> 8;
+
+        21 [label="D"];
+        22 [label="256"];
+
+        2 -> 21;
+        2 -> 22;
+
+    }
+
+.. yographviz::
+    :width: 300
+
+    digraph Buddy7 {
+        label="Release C";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        3 [label="256"];
+        4 [label="256"];
+
+        1 -> 3;
+        1 -> 4;
+
+        5 [label="E"];
+        6 [label="128"];
+
+        3 -> 5;
+        3 -> 6;
+
+        21 [label="D"];
+        22 [label="256"];
+
+        2 -> 21;
+        2 -> 22;
+
+    }
+
+.. yographviz::
+    :width: 160
+
+    digraph Buddy8 {
+        label="Release E";
+        labelloc = "t";
+
+        rankdir=TB;
+        node [shape=rectangle];
+        0 [label="1 M"];
+        1 [label="512"];
+        2 [label="512"];
+
+        0 -> 1;
+        0 -> 2;
+
+        21 [label="D"];
+        22 [label="256"];
+
+        2 -> 21;
+        2 -> 22;
+    }
+
+----
+
+Buddy System Memory Management(II)
+==================================
+.. class:: substep
+
+#. **A hybrid memory allocator** balances fixed and dynamic partitioning
+    * dividing memory into partitions of base-2 sizes (powers of 2).
+#. **The Allocation Process (Splitting)**
+    * Memory blocks are sized as :math:`2^k` (e.g., 4KB, 8KB, 16KB).
+    * If a process requests a size that is not a power of 2, the OS rounds up to the next highest power.
+    * If only a larger block (e.g., 64KB) is available, the OS recursively splits it in half until the target size is reached:
+        * 64KB splits into two 32KB buddies.
+        * One 32KB splits into two 16KB buddies (one is allocated, one remains free).
+#. **The Deallocation Process (Coalescing)**
+    * When a block is freed, the OS checks the status of its specific "buddy".
+    * If the buddy is also free, they immediately merge back into their parent size.
+    * This process cascades upward automatically to form the largest possible free blocks.
+#. **The Mathematical Advantage (Speed)**
+    * The system is incredibly fast because finding a buddy requires no list searching.
+    * The buddy of a block of size :math:`S` at address :math:`A` is located at exactly :math:`A \oplus S` (Bitwise XOR).
+    * The OS calculates this directly in hardware.
+#. **Pros:**
+    * Extremely fast allocation
+    * Coalescing
+    * highly predictable performance.
+#. **Cons:**
+    * **Internal Fragmentation**
+    * **External Fragmentation**
+#. Usage
+    #. The Linux Kernel
+    #. Early UNIX Systems
+    #. Modern Memory Allocators (`jemalloc`)
+        * Used by FreeBSD and Facebook
+
+.. note::
+    Thanks to Gemini AI for helping to create this slide
+
+    * Lecture tip: Draw a tree on the board starting with a 1024KB block and split it down the left side to show how the "buddies" wait for their partner to return.
+    * Real-world connection: Mention that the Linux kernel still relies on a variation of the Buddy System for managing its physical memory pages today because the bitwise XOR speed is unbeatable.
+    * The main takeaway for students is the engineering trade-off: We are purposely wasting memory (Internal Fragmentation) to gain CPU speed (O(1) coalescing).
+
+    A hybrid memory allocator that balances fixed and dynamic partitioning by dividing memory into partitions of base-2 sizes (powers of 2).
+
+    Yes, absolutely! The Buddy System is not just a theoretical academic concept; it is one of the most famous and widely implemented memory management algorithms in computing history.
+
+    Here is where it has been used in the real world:
+
+    **1. The Linux Kernel**
+    This is the most prominent and important modern example. The Linux operating system relies on a binary buddy allocator as its primary **physical memory manager** (specifically, the "page allocator").
+
+    * When the kernel needs a block of contiguous memory pages to give to a process or use for itself, it queries the buddy system.
+    * To solve the problem of internal fragmentation for very small memory requests, Linux layers a second system called a **Slab Allocator** on top of the buddy system. The buddy system handles the big chunks, and the slab allocator carves those chunks into exact sizes for the kernel to use.
+
+    **2. Early UNIX Systems**
+    Various forms of the buddy system were used in early UNIX distributions and other historical operating systems to manage dynamic memory efficiently before modern paging hardware became universally standard.
+
+    **3. Modern Memory Allocators (`jemalloc`)**
+    While user-space programming functions (like calling `malloc()` in a C program) don't typically use a pure buddy system today, modern high-performance allocators like `jemalloc` (used by FreeBSD and Facebook) use concepts directly derived from it. They group memory into distinct "size classes" and split large blocks into smaller runs, mimicking the buddy system's efficiency.
+
+    **Why it survived in the real world:**
+    It survived the jump from textbooks to production kernels precisely because of the bitwise XOR math trick. When an operating system kernel is managing raw hardware memory, it has to be lightning fast. The ability to find, split, and merge free memory in $O(1)$ time—meaning it takes the exact same amount of time regardless of how much memory is installed—makes the wasted space (internal fragmentation) a completely acceptable trade-off.
+
+
+    #. **Summary of Trade-offs**
+        * **Pros:**
+            * Extremely fast allocation
+            * Coalescing
+            * highly predictable performance.
+        * **Cons:**
+            * **Internal Fragmentation**
+            * **External Fragmentation**
+
+.. :
+
+    * **Concept**
+        * Memory split in powers of 2.
+        * Requested size rounded up.
+        * Recursive splitting of blocks.
+    * **The Buddy Logic**
+        * Block :math:`2^k` split into two buddies.
+        * Freeing: Check if buddy is free.
+        * Coalesce buddies into parent.
+    * **Pros**
+        * Fast allocation/deallocation.
+        * Efficient coalescing.
+    * **Cons**
+        * Internal fragmentation.
+        * Limited by power-of-2 sizing.
+
+.. note::
+    - The Buddy System bridges the gap between fixed and dynamic partitioning.
+    - An address X of size 2^k has a unique buddy at X XOR 2^k.
+    - XOR-based buddy addressing allows O(1) identification of the neighbor.
+    - Trade-off: We sacrifice up to 50% of block space (Internal Fragmentation)
+      to gain high-speed allocation/coalescing.
+
+    * **Core Idea**:
+     * Memory is allocated in sizes of **powers of 2** (e.g., 2, 4, 8, 16... KB).
+     * If a request doesn't match a power of 2, the next larger size is used.
+    * **The "Buddy" Logic**:
+     * If a block of size :math:`2^k` is needed and only a :math:`2^{k+1}` block is available, the OS **splits** it into two equal "buddies".
+     * When a block is freed, the OS checks if its buddy is also free.
+     * If both are free, they **coalesce** back into the larger parent block.
+    * **Pros & Cons**:
+     * **Pros**: Very fast coalescing (merging) compared to standard dynamic partitioning.
+     * **Cons**: Suffers from **Internal Fragmentation** (up to 50% per block).
+
+.. note:
+  The buddy system is an elegant way to avoid the heavy overhead of
+  full memory compaction while still maintaining flexibility.
+
+    A compromise between fixed and dynamic partitioning.
 
 .. :
 
@@ -286,16 +685,16 @@ Buddy System
        :align: center
        :height: 500px
 
+.. :
 
-----
+    ----
 
-.. class:: rtl-h1
+    .. class:: rtl-h1
 
-    الگوریتم اجرا
+        الگوریتم اجرا
 
-.. image:: img/memory/memory_buddy_system3.png
-   :align: center
-
+    .. image:: img/memory/memory_buddy_system3.png
+       :align: center
 
 ----
 
