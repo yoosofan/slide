@@ -313,6 +313,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 200
+    :class: substep
 
     digraph Buddy2 {
         label="B 240";
@@ -343,6 +344,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 200
+    :class: substep
 
     digraph Buddy3 {
         label="C 64";
@@ -379,6 +381,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 300
+    :class: substep
 
     digraph Buddy4 {
         label="D 256";
@@ -422,6 +425,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 300
+    :class: substep
 
     digraph Buddy5 {
         label="Release A and B";
@@ -464,6 +468,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 300
+    :class: substep
 
     digraph Buddy6 {
         label="E 74";
@@ -506,6 +511,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 300
+    :class: substep
 
     digraph Buddy7 {
         label="Release C";
@@ -542,6 +548,7 @@ Buddy System Memory Management(II)
 
 .. yographviz::
     :width: 160
+    :class: substep
 
     digraph Buddy8 {
         label="Release E";
@@ -565,8 +572,8 @@ Buddy System Memory Management(II)
 
 ----
 
-Buddy System Memory Management(II)
-==================================
+Buddy System Memory Management(III)
+===================================
 .. class:: substep
 
 #. **A hybrid memory allocator** balances fixed and dynamic partitioning
@@ -698,51 +705,114 @@ Buddy System Memory Management(II)
 
 ----
 
-.. image:: img/in/process_state_chart.png
-   :align: center
+:class: t2c
+
+Process
+=======
+.. container::
+
+    .. class:: substep
+
+    * Program
+        * Place: Cards in card reader, file in disk, flash, etc.
+        * passive
+    * Process
+        * Place: Main Memory (RAM)
+        * Active
+
+    .. class:: substep
+
+    **Process Status**
+
+    .. image:: img/in/process_state_chart.png
+       :align: center
+       :class: substep
+
+.. container:: substep
+
+    **Process Control Block (PCB)**
+
+    .. image:: img/in/pcb01.png
+       :align: center
 
 ----
 
-Process Control Block (PCB)
-=================================
-.. image:: img/in/pcb01.png
-   :align: center
-
-----
+:class: n2c
 
 .. image:: img/in/simple_multiple_process.png
    :align: center
-   :height: 500px
+
+.. image:: img/in/system_overview01.png
+   :align: center
+   :class: substep
 
 ----
 
-.. class:: rtl-h1
+:class: n3c
 
-    چگونگی کارکرد پیوند زدن تابع‌ها از پرونده‌های گوناگون
+.. image:: img/memory/base_limit_register.png
+   :align: center
+   :height: 400px
+
+.. image:: img/in/process_parts.png
+   :align: center
+   :class: substep
+   :height: 400px
+
+.. image:: img/memory/memory_precess_addressing_parts.png
+   :align: center
+   :class: substep
+
+----
 
 .. image:: img/memory/memory_linking_function.png
    :align: center
 
 ----
 
+:class: n2c
+
+.. image:: img/memory/memory_program_address_binding.png
+   :align: center
+
+.. image:: img/memory/memory_linking_loading_scenario.png
+   :align: center
+   :class: substep
+
+----
+
+address binding, loader
+
+.. image:: img/memory/memory_address_binding_loader.png
+   :align: center
+
+address binding, linker
+
+.. image:: img/memory/memory_address_binding_linker.png
+   :align: center
+   :class: substep
+
+----
+
+:class: t2c
+
+Blocked or Waiting
+==================
 .. image:: img/in/system_call02.png
    :align: center
 
-----
-
-Queue
-=========
 .. image:: img/in/queues01.png
    :align: center
+   :class: substep
 
 ----
+
+:class: t2c
 
 Process Suspension
 ==================
 .. image:: img/memory/swapping_processes.png
    :align: center
-
-----
 
 .. image:: img/memory/suspend_state.png
    :align: center
@@ -751,12 +821,206 @@ Process Suspension
 
 ----
 
-overlay
-=============
+
+Process Suspension (Swapping)
+=============================
+**Summary**
+Process suspension is the OS strategy of moving a process from main memory (RAM) to a secondary storage (backing store/disk). This transition creates the "7-state process model," allowing the OS to manage memory over-commitment and prioritize active processes.
+
+#. **The 7-State Model Transitions**
+    * **Blocked → Blocked/Suspend**: A process waiting for an I/O event is moved to disk to free RAM.
+    * **Ready → Ready/Suspend**: A ready process is moved to disk (usually low priority).
+    * **Blocked/Suspend → Ready/Suspend**: An event occurs for a swapped-out process; it remains on disk but is now ready for execution.
+#. **Reasons for Suspension**
+    * **Swapping**: To free up RAM when memory pressure is high (main reason).
+    * **User Request**: Manually pausing a program (e.g., using `Ctrl+Z` in a terminal).
+    * **Parent Request**: A parent process suspending a child for synchronization.
+    * **Timing**: A periodic process that runs only at specific intervals.
+#. **Trade-offs**
+    * **Pros**:
+        * Increases the degree of multiprogramming.
+        * Allows the system to handle processes larger than total physical RAM.
+        * Frees space for higher-priority or "Ready" processes.
+    * **Cons**:
+        * **High Latency**: Disk I/O is thousands of times slower than RAM access.
+        * **Thrashing**: If used excessively, the system spends more time swapping than executing.
+
+.. :
+
+    Thanks to Gemini AI for this slide
+
+    **Visualization of State Transitions**
+
+    .. yographviz::
+
+        digraph Suspension {
+            rankdir=LR;
+            node [shape=ellipse, fontname="Courier New", style=filled, fillcolor="#e1f5fe"];
+
+            "Ready" -> "Running" [label="dispatch"];
+            "Running" -> "Ready" [label="timeout"];
+            "Running" -> "Blocked" [label="I/O wait"];
+            "Blocked" -> "Ready" [label="I/O occurs"];
+
+            subgraph cluster_disk {
+                label = "Disk (Backing Store)";
+                color = blue;
+                node [fillcolor="#fff3e0"];
+                "Blocked/Suspend";
+                "Ready/Suspend";
+            }
+
+            "Blocked" -> "Blocked/Suspend" [label="Swap Out"];
+            "Ready" -> "Ready/Suspend" [label="Swap Out"];
+            "Blocked/Suspend" -> "Ready/Suspend" [label="I/O occurs"];
+            "Ready/Suspend" -> "Ready" [label="Swap In"];
+        }
+
+.. note::
+    * Suspension is the bridge between Memory Management and Process Management.
+    * Emphasize the difference between "Blocked" (waiting in RAM) and "Blocked/Suspend" (waiting on disk).
+    * Compaction often requires suspension: all processes are "frozen" and moved, which is why it feels like the computer has "locked up."
+    * Thrashing: Explain that if the OS swaps too aggressively, the disk light stays on constantly and CPU utilization drops to near zero.
+
+----
+
+:class: t2c
+
+Memory Overlays
+===============
 .. image:: img/memory/memory_ovelay_turbo_c.jpg
    :align: center
    :width: 500px
    :height: 600px
+
+.. class:: substep
+
+#. **Architectural Components**
+#. **The Execution Process**
+#. **Pros**:
+    * **zero hardware or MMU support**
+    * Work on small memory
+#. **Cons**:
+    * **Massive Programmer Burden**
+    * Difficult to debug
+    * Hard to modularize
+    * Hard to upgrade.
+#. The Mainframe Era (1960s – 1970s)
+    * 16KB to 64KB
+    * IBM was the undisputed king
+    * 1964, 16KB, Transients
+    * UNIVAC & Sperry Rand
+    * NASA & The Aerospace
+    * Virtual Memory by Paging
+#. The Microcomputer/PC Era, 1980s, early 1990s
+    * Intel 8086/8088
+    * MS-DOS / PC DOS/ Dr Dos
+    * Borland, Turbo Pascal/Turbo C
+    * Lotus 1-2-3
+#. The Extinction of Overlays
+    * Virtual Memory by Paging
+    * Intel Protected Mode
+    * Windows 95 and Linux
+    * OS tracking memory entirely
+
+.. :
+
+    **1. Architectural Components**
+    * **Root (Driver)**: The core section of the program (containing the main loop, essential variables, and the overlay manager) that remains permanently resident in RAM.
+    * **Overlay Area (Buffer)**: A dedicated, fixed section of physical memory allocated by the system to host temporary modules.
+    * **Overlay Modules**: Self-contained subprograms or execution phases that are mutually exclusive (they never need to run at the same exact time).
+
+    **2. The Execution Process**
+    * The program starts with only the Root loaded into memory.
+    * When a specific functionality is needed, the Root manually loads **Module A** into the Overlay Area from disk.
+    * Once Module A completes its task, the Root loads **Module B** into the *exact same physical memory address space*, completely overwriting Module A.
+
+    **3. Trade-offs**
+    * **Pros**:
+        * Requires **zero hardware or MMU support**; can run on the most primitive microprocessors.
+        * Enables massive, multi-phase applications to function on heavily memory-constrained systems.
+    * **Cons**:
+        * **Massive Programmer Burden**: The developer must explicitly design, map, and track the overlay structures and memory footprints.
+        * Software becomes incredibly brittle, difficult to debug, and hard to modularize or upgrade.
+
+
+    Thanks to Gemini AI for this slide
+
+    **Visualization of Overlay Architecture**
+
+    The overlay method is a software-driven memory management technique that allows a program to execute even if its total size exceeds the physical memory available. Instead of relying on automatic operating system or hardware mapping, the programmer manually splits the program into mutually exclusive components that take turns occupying a shared block of RAM.
+
+    ----
+
+    .. yographviz::
+
+        digraph Overlays {
+            rankdir=LR;
+            node [shape=none, fontname="Courier New"];
+
+            Memory [label=<
+                <table border="0" cellborder="1" cellspacing="0" cellpadding="10">
+                    <tr><td bgcolor="#e1f5fe" height="40"><b>ROOT DRIVER</b><br/>(Permanently in RAM)</td></tr>
+                    <tr><td bgcolor="#fff3e0" port="buffer" height="60"><b>OVERLAY BUFFER</b><br/>(Shared Address Space)</td></tr>
+                </table>
+            >];
+
+            Modules [label=<
+                <table border="0" cellborder="1" cellspacing="0" cellpadding="10">
+                    <tr><td bgcolor="#f5f5f5" port="m1"><b>Module Phase 1</b><br/>(e.g., File Parser)</td></tr>
+                    <tr><td bgcolor="#d1d1d1" port="m2"><b>Module Phase 2</b><br/>(e.g., Report Generator)</td></tr>
+                </table>
+            >];
+
+            Modules:m1 -> Memory:buffer [label=" Time T1 ", color=blue, style=dashed];
+            Modules:m2 -> Memory:buffer [label=" Time T2 (Overwrite) ", color=red];
+
+            label = "Overlay Memory Mapping Concept";
+            labelloc = "t";
+        }
+
+.. note::
+    * Historical Context: Overlays were widely used in the DOS era (dealing with the infamous 640KB RAM barrier) and early mainframes before Virtual Memory (Paging) became universal.
+    * The Key Distinction for Exams: Unlike Swapping or Virtual Memory—which are 100% transparent to the programmer and handled by the OS/Hardware—Overlays are entirely driven by the *user-space software design*.
+    * Classic Example: A two-pass compiler. Pass 1 handles lexical analysis and syntax trees. Pass 2 handles optimization and code generation. They never need to coexist in RAM simultaneously, making them perfect candidates for overlays.
+
+    To give your students a rich historical perspective, you can explain that **Overlays** emerged in the **late 1950s and 1960s**, an era when hardware memory was built using primitive "magnetic cores" (literally tiny metal donuts strung on wires). Because core memory was incredibly expensive—costing upwards of $1 to $2 per *byte*—computers had microscopic amounts of RAM compared to their massive physical size.
+
+    The method was championed by the most dominant tech titans of the 20th century across two distinct eras: the **Mainframe Era** and the **Personal Computer (PC) Era**.
+
+    ---
+
+    ### 1. The Mainframe Era (1960s – 1970s)
+
+    In this era, computers filled entire rooms, cost millions of dollars, yet frequently had only **16KB to 64KB** of main memory.
+
+    * **IBM (International Business Machines):** IBM was the undisputed king of computing at the time. When they released the landmark **System/360** mainframes in 1964, the low-end models had a tiny 16KB memory limit. To make their operating system (**DOS/360**) fit, IBM’s own engineers designed the OS kernel using overlays, which they called **Transients**. Essential hardware error routines ($A$-Transients) and file services ($B$-Transients) were manually swapped in and out of a tiny 556-byte buffer in RAM as needed.
+    * **UNIVAC & Sperry Rand:** One of IBM's primary competitors, UNIVAC, utilized sophisticated overlay systems in their **EXEC I** and **EXEC II** operating systems for the UNIVAC 1107/1108 mainframes.
+    * **NASA & The Aerospace Industry:**
+    NASA's early flight computers had strict weight and power limits, meaning very little memory. The **Space Shuttle Primary Avionics System Software (PASS)** famously relied heavily on meticulously programmed overlays to manage navigation, liftoff, and landing sequences within strict hardware constraints.
+
+    ---
+
+    ### 2. The Microcomputer/PC Era (1980s – early 1990s)
+
+    History repeated itself two decades later when personal computers emerged. Although microprocessor memory was cheaper, early PC architectures introduced a new artificial bottleneck: **The 640KB Barrier**.
+
+    * **Microsoft and IBM (MS-DOS / PC DOS):**
+    When the IBM PC was released in 1981 running Microsoft's MS-DOS, it used the Intel 8086/8088 processor. Because of how the system architecture was designed, standard user applications were strictly limited to **640KB of "Conventional Memory"**. As software grew more complex, companies hit a brick wall.
+    * **Lotus Development Corporation (Lotus 1-2-3):**
+    The killer app of the 1980s was *Lotus 1-2-3*, a massive spreadsheet program that businesses ran on IBM PCs. To allow users to build large spreadsheets without running out of the 640KB RAM, Lotus developers manually chopped their software into overlays. The core math engine stayed in memory, while graph drawing modules, printing tools, and file import functions were kept on floppy disks and loaded dynamically into an overlay buffer.
+    * **Borland (Turbo Pascal / Turbo C):**
+    Borland was famous for its programming tools. Because compilers require multiple distinct steps (Lexical Analysis $\rightarrow$ Parsing $\rightarrow$ Optimization $\rightarrow$ Code Generation), Borland integrated **Overlay Managers** directly into their compilers. A programmer writing a massive program in Turbo Pascal could simply check a box, and the Borland compiler would automatically generate the overlay tree structure for them.
+
+    ---
+
+    ### The Extinction of Overlays
+
+    The decline of overlays is directly tied to an engineering debate at IBM in the late 1960s. An IBM researcher named **David Sayre** argued that automated **Virtual Memory (Paging)** handled by hardware and the OS could perform just as well as, or better than, a human programmer designing complex overlay structures.
+
+    By the mid-1970s for mainframes, and the mid-1990s for PCs (with the release of Windows 95 and Linux running in Intel "Protected Mode"), **Virtual Memory** became standard. The OS took over memory tracking entirely, relieving programmers of the massive burden of designing overlays.
+
+    > **An Anecdote for Class:** > You can tell your students that in the 1980s, being an "Overlay Architect" was a highly praised, highly paid specialty skill. A single mistake in tracking your code dependencies could cause a program to overwrite its own active loop, resulting in spectacular system crashes!
 
 ----
 
@@ -853,13 +1117,14 @@ Effective Access Time (EAT)
 
 ----
 
+:class: n2c
+
 .. image:: img/memory/memory_effect_of_cache.png
    :align: center
 
-----
-
 .. raw:: html
 
+    <div>
     <table border="1px" class="center"><tr >
     <td>ms</td><td>μs</td><td>ns</td><td>action</td><tr >
     <td></td><td></td><td>0.5</td><td>CPU L1 dCACHE reference</td></tr><tr >
@@ -877,69 +1142,118 @@ Effective Access Time (EAT)
     <td>150</td><td>000</td><td>000</td><td>Send a NETWORK packet CA -> Netherlands</td><tr >
     </tr></table>
     <a href="https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory#4087315">[link]</a>
+    </div>
 
 ----
 
-.. image:: img/memory/base_limit_register.png
-   :align: center
+:class: t2c
 
-----
-
-.. image:: img/in/process_parts.png
-   :align: center
-
-----
-
-.. class:: rtl-h1
-
-    بخش‌های درونی یک فرآیند در حالت کلی
-
-.. image:: img/memory/memory_precess_addressing_parts.png
-   :align: center
-
-----
-
-.. class:: rtl-h1
-
-    مشخص شدن آدرس‌های حافظهٔ فرآیند
-
-.. image:: img/memory/memory_program_address_binding.png
-   :align: center
-
-----
-
-.. image:: img/memory/memory_linking_loading_scenario.png
-   :align: center
-   :scale: 90%
-
-----
-
-address binding, loader
-
-.. image:: img/memory/memory_address_binding_loader.png
-   :align: center
-   :scale: 90%
-
-----
-
-address binding, linker
-
-.. image:: img/memory/memory_address_binding_linker.png
-   :align: center
-   :scale: 90%
-
-----
-
-.. image:: img/in/system_overview01.png
-   :align: center
-
-----
-
-Micro Kernel
-===============
+Microkernel Architecture
+========================
 .. image:: img/in/micro_kernel01.png
    :align: center
-   :width: 850px
+   :width: 550px
+
+.. class:: substep
+
+#. Core Responsibilities (Inside Kernel Space)
+    * **Low-Level Memory Management**
+    * **Thread Scheduling**
+    * **Inter-Process Communication (IPC)**
+#. **Architecture Mechanics**
+    * Services run as isolated user processes
+    * Application cannot make a direct system call
+    * Send an IPC message *through* the microkernel
+    * Forwards it to the File Server
+#. **Pros**:
+    * **High Reliability & Isolation**
+    * **Security**
+    * **Portability & Extensibility**
+#. **Cons**:
+    * **Performance Overhead**
+#. History
+    * The Mach kernel
+    * core macOS/iOS XNU hybrid
+    * QNX
+    * seL4
+    * The Tanenbaum-Torvalds Debate
+        * MINIX
+    * safety and stability.
+
+
+.. :
+
+    ----
+
+    Microkernel Architecture
+    ========================
+
+    **Summary**
+    A microkernel strips the operating system down to its absolute bare essentials. Instead of running all OS services inside the highly privileged kernel space (like a traditional Monolithic kernel), a microkernel pushes non-essential components—such as file systems, device drivers, and networking protocols—into the less privileged user space as independent servers.
+
+    **1. Core Responsibilities (Inside Kernel Space)**
+    * **Low-Level Memory Management**: Mapping virtual addresses to physical memory.
+    * **Thread Scheduling**: Managing CPU execution timelines.
+    * **Inter-Process Communication (IPC)**: Acting as the vital mailbox or router that allows user-space servers to safely talk to one another.
+
+    **2. Architecture Mechanics**
+    * Services run as isolated user processes (e.g., a "File Server" process, a "Network Server" process).
+    * If an application wants to read a file, it cannot make a direct system call. It must send an IPC message *through* the microkernel, which forwards it to the File Server.
+
+    **3. Trade-offs**
+    * **Pros**:
+        * **High Reliability & Isolation**: If the File Server crashes or has a bug, it simply restarts like a normal app. The entire OS does not panic or crash.
+        * **Security**: Minimizes the "attack surface" running with root hardware privileges.
+        * **Portability & Extensibility**: Adding a new feature just means starting a new user-space server; the kernel code remains untouched.
+    * **Cons**:
+        * **Performance Overhead**: Moving data between user space and kernel space requires frequent "context switches" and message-passing overhead, which slows down execution compared to monolithic systems.
+
+    **Visualization of Microkernel vs. Monolithic**
+
+    .. code-block:: dot
+
+        digraph MicrokernelLayout {
+            rankdir=TB;
+            node [shape=box, fontname="Courier New", style=filled];
+
+            subgraph cluster_monolithic {
+                label = "Monolithic Design (All in Kernel)";
+                color = red;
+                mono_app [label="Application", fillcolor="#fff3e0"];
+
+                subgraph cluster_mono_kernel {
+                    label = "Kernel Space (Privileged)";
+                    fillcolor = "#f5f5f5";
+                    style = filled;
+                    mono_fs [label="File System", fillcolor="#e1f5fe"];
+                    mono_drv [label="Drivers", fillcolor="#e1f5fe"];
+                    mono_ipc [label="IPC / IPC Core", fillcolor="#e1f5fe"];
+                }
+                mono_app -> mono_fs [label="Syscall"];
+            }
+
+            subgraph cluster_micro {
+                label = "Microkernel Design (Isolated)";
+                color = green;
+                micro_app [label="Application", fillcolor="#fff3e0"];
+                micro_fs [label="File Server\n(User Space)", fillcolor="#fff3e0"];
+                micro_drv [label="Driver Server\n(User Space)", fillcolor="#fff3e0"];
+
+                subgraph cluster_micro_kernel {
+                    label = "Microkernel Space (Privileged)";
+                    fillcolor = "#e8f5e9";
+                    style = filled;
+                    micro_core [label="IPC & Scheduling Core", fillcolor="#c8e6c9"];
+                }
+                micro_app -> micro_core [label="1. IPC Request", color=blue];
+                micro_core -> micro_fs [label="2. Forward Request", color=blue];
+            }
+        }
+
+.. note::
+    * Real-World Examples: The Mach kernel (which forms the core of Apple's macOS/iOS XNU hybrid), QNX (used heavily in critical automotive and medical systems due to high reliability), and seL4 (mathematically proven secure microkernel).
+    * The Tanenbaum-Torvalds Debate: In 1992, Andrew Tanenbaum (creator of MINIX) and Linus Torvalds had a famous debate. Tanenbaum argued Linux was obsolete because it was monolithic; Torvalds argued microkernels were impractical due to performance costs.
+    * Teaching Concept: Highlight that a microkernel trades sheer CPU velocity (performance) for bulletproof architectural safety and stability.
 
 ----
 
@@ -947,6 +1261,72 @@ Multi Layer
 ===============
 .. image:: img/in/multilayer_os01.png
    :align: center
+
+----
+
+Effects on current situations
+
+.. :
+
+    The connection between microkernel philosophy and modern deployment tools (Kubernetes, Virtual Machines, Snap, Flatpak, Electron) is one of the most exciting shifts in computer science.
+
+    While the consumer desktop market is still dominated by *Monolithic* kernels (Linux, Windows, macOS), the **entire cloud and application delivery ecosystem has fundamentally copied the Microkernel philosophy** at the software layer.
+
+    We call this **"Microkernelization through Virtualization and Sandboxing."**
+
+    Here is how a microkernel's DNA directly shapes these modern technologies, broken down for your course curriculum:
+
+    ---
+
+    ### 1. Virtual Machines (Micro-VMs) & Unikernels
+
+    Traditional VMs (like VMware or VirtualBox) run a massive, heavy monolithic guest OS on top of a host OS. The modern cloud has moved toward **Micro-VMs** (like AWS Firecracker) and **Unikernels**.
+
+    * **The Microkernel Link:** A Unikernel strips away everything from the guest operating system except the exact device drivers and kernel logic needed to run *one specific application*.
+    * **The Result:** Instead of booting a 500MB monolithic Linux kernel to run a simple Python script inside a VM, a Unikernel acts like a microkernel—providing only memory allocation and a thin scheduling layer, bootable in milliseconds with a footprint of just a few megabytes.
+
+    ### 2. Kubernetes & Microservices
+
+    In a monolithic OS, if the file system crashes, the whole system panics. In a microkernel, the "File Server" is just an isolated process; if it dies, the kernel restarts it.
+
+    * **The Microkernel Link:** **Kubernetes does exactly this, but at the cluster level.** * Instead of deploying a single, massive "Monolithic Application," developers build **Microservices** (isolated containers).
+    * **Pod Isolation:** Each pod runs in its own isolated user-space namespace. If the "Payment Microservice" container crashes due to a memory leak, Kubernetes detects it and restarts it immediately. The rest of the "cluster operating system" keeps running flawlessly, mirroring a microkernel's structural fault isolation.
+
+    ### 3. Desktop Application Sandboxing (Snap, Flatpak/Flathub)
+
+    On traditional Linux, desktop applications share a common, massive pool of monolithic libraries (`/usr/lib`). If a rogue app runs `sudo`, it can corrupt the entire system. Tools like Ubuntu's **Snap** and Flathub's **Flatpak** fundamentally rewrite this interaction.
+
+    * **The Microkernel Link:** They force applications to live in strict, unprivileged user-space **sandboxes** (using kernel features like AppArmor and Seccomp filters).
+    * **The "Server" Concept:** If a Flatpak app wants to access your webcam or open a file on your hard drive, it cannot make a direct monolithic system call. It must send a message to a **"Portal"** (a background user-space desktop daemon). The Portal asks the user for permission via a pop-up and hands the file back to the app. This is conceptually identical to a microkernel application sending an **IPC message** to a File Server rather than accessing the disk directly.
+
+    ### 4. Electron Apps (VS Code, Discord, Slack)
+
+    Electron apps bundle a full Chromium browser instance with a Node.js runtime to execute web code as a desktop application.
+
+    * **The Microkernel Link:** Chromium’s architecture is modeled explicitly on microkernel process separation.
+    * **Process Split:** Electron splits software into a highly privileged **Main Process** (the browser kernel) and heavily restricted **Renderer Processes** (the tabs/windows).
+    * **Safety:** The Renderer process has absolutely zero hardware or file-system permissions. If it wants to save a file, it must pass an IPC message to the Main Process. If a malicious website exploits a rendering vulnerability in a Discord chat window, the sandbox traps it in user space, protecting the host operating system from exploitation.
+
+    ---
+
+    ### Conceptual Alignment Table for Your Students
+
+    To tie this all together in a lecture, you can show them that whether we are talking about OS design or modern DevOps, the architectural battle remains exactly the same:
+
+    | Microkernel Concept | Modern Software Equivalent | The Shared Engineering Goal |
+    | --- | --- | --- |
+    | **User-Space Server** | A Docker Container / Microservice | Isolation of responsibilities. |
+    | **Inter-Process Communication (IPC)** | REST APIs / gRPC / Kubernetes Service Mesh | Safe communication between isolated components. |
+    | **Fault Isolation** | Kubernetes Pod Restart / Electron Tab Crash | A failure in one module cannot crash the entire system. |
+    | **The Performance Cost** | Network latency / Context-switching overhead | We willingly sacrifice raw speed to achieve security, stability, and scale. |
+
+    By presenting it this way, students realize that learning about microkernels isn't just historical theory—it is a foundational blueprint for how modern cloud architecture, containerization, and sandboxed apps are built today.
+
+
+----
+
+Monolithic
+==========
 
 ----
 
