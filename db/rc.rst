@@ -1217,7 +1217,7 @@ First-Order Logic (Predicates and Quantifiers)
         spjx.jn = jx.jn and
         px.pn = spjx.pn
       )
-    )
+    ) -- ∀x p(x) ≡ ~∃x ~p(x)
 
 .. code:: sql
     :class: substep
@@ -1229,6 +1229,19 @@ First-Order Logic (Predicates and Quantifiers)
         px.pn = spjx.pn
       )
     ) and exists spjx(
+        spjx.px = px.pn
+    )
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    px.pname where not exists jx(
+      not exists spjx(
+        spjx.jn = jx.jn and
+        px.pn = spjx.pn
+      )
+    ) or not exists spjx(
         spjx.px = px.pn
     )
 
@@ -1314,6 +1327,17 @@ First-Order Logic (Predicates and Quantifiers)
     :class: substep
     :number-lines:
 
+    px.pname where forall spjx(
+      spjx.pn <> px.pn or exists
+      spjy( spjy.pn=spjx.pn and
+        spjy.pn=px.pn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
     px.pname where forall px(
       exists spj(spj.pn = px.pn)
     )
@@ -1324,7 +1348,7 @@ First-Order Logic (Predicates and Quantifiers)
 
 .. class:: rtl-h1
 
-    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند.۱
+    نام نویسندگانی را بیابید که همهٔ کتاب‌های‌شان را در این کتابخانه به امانت گرفته باشند
 
 * book(bn_, title, author, ofpd)
 * member(mn_, name, bn, fines)
@@ -1385,9 +1409,96 @@ First-Order Logic (Predicates and Quantifiers)
 
 :class: t2c
 
+Find the names of members with the lowest fines
+===============================================
+.. code:: sql
+    :class: substep
+
+    memberx.name where forall membery(
+      memberx.fines <= membery.fines
+    )
+
+.. code:: sql
+    :class: substep
+
+    memberx.name where not exists membery(
+      memberx.fines > membery.fines
+    )
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+:class: t2c
+
+Find the names of members who have borrowed at least one book written by 'Isaac Asimov'
+=======================================================================================
+.. code:: sql
+    :class: substep
+
+    memberx.name where exists borrowx(
+      memberx.mn = borrowx.mn and
+      exists bookx(
+        borrowx.bn = bookx.bn and
+        bookx.author = 'Isaac Asimov'
+      )
+    )
+
+.. code:: sql
+    :class: substep
+
+    memberx.name where exists borrowx(
+      exists bookx(
+        memberx.mn = borrowx.mn and
+        borrowx.bn = bookx.bn and
+        bookx.author = 'Isaac Asimov'
+      )
+    )
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+:class: t2c
+
+Find the names of members who have borrowed all books written by 'Isaac Asimov'
+===============================================================================
+.. code:: sql
+    :class: substep
+
+    memberx.name where forall bookx(
+      bookx.author <> 'Isaac Asimov' or
+      exists borrowx(
+        bookx.bn = borrowx.bn and
+        memberx.mn = borrowx.mn
+      )
+    ) -- * P(x) ⇒ Q(x) ≡ ~P(x) ∨ Q(x)
+
+.. code:: sql
+    :class: substep
+
+    memberx.name where not exists bookx(
+      bookx.author = 'Isaac Asimov' and
+      not exists borrowx(
+        bookx.bn = borrowx.bn and
+        memberx.mn = borrowx.mn
+      )
+    )
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+:class: t2c
+
 Company Database
 ================
-
 * Employee(SSN_, name, salary, Dn)
 * Department(DN_, DeptName, MgrSSN)
 * Project(JN_, ProjName, location)
@@ -1407,8 +1518,139 @@ Company Database
 
 یک کارمند(e) دارای ssn و نام و میزان حقوق(salary) و شمارهٔ بخش(dn) است. ssn برای هر کارمند یکتا است. هر کارمند تنها در یک بخش کار می‌کند. هر بخش (d) دارای شمارهٔ بخش، نام و شمارهٔ ssn مدیر آن بخش است. dn برای هر بخش یکتا است. هر بخش تنها یک مدیر دارد. هر پروژه(j) دارای شمارهٔ یکتا(jn)، نام پروژه(jname) و مکان انجام پروژه(location) است. در جدول h مشخص می‌شود که یک کارمند(ssn) در یک پروژه(jn) چه تعداد ساعت کار کرده است.
 
+.. :
+
+    However, I mostly use abbrivated names for tables names and some fields because students focus on solving problems instead of wasting time for writing answers.
+    C.J.Dates in his famous book used this method which preferable in education, but not in real database design.
 
 ----
+
+:class: t2c
+
+Find the names of employees who work on project 'J1'
+====================================================
+.. code:: sql
+    :class: substep
+
+    ex.name where exists hx(
+      ex.ssn = hx.ssn and hx.jn = 'J1'
+    )
+
+.. math::
+    :class: substep
+
+    e_x.name \mid e(e_x) \land \exists h_x (h(h_x) \land e_x.ssn = h_x.ssn \land h_x.jn = 'J1')
+
+.. math::
+    :class: substep
+
+    e_x.name \mid \exists h_x (e_x.ssn = h_x.ssn \land h_x.jn = 'J1')
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+Find the names of employees who work on at least one project located in 'Kashan'
+================================================================================
+.. code:: sql
+    :class: substep
+
+    ex.name where exists hx(
+      ex.ssn = hx.ssn and exists jx(
+        hx.jn = jx.jn and jx.location = 'Kashan'
+      )
+    )
+
+.. math::
+    :class: substep
+
+    e_x.name \mid e(e_x) \land \exists h_x (h(h_x) \land e_x.ssn = h_x.ssn \land \exists j_x (j(j_x) \land h_x.jn = j_x.jn \land j_x.location = 'Kashan'))
+
+.. math::
+    :class: substep
+
+    e_x.name \mid \exists h_x (e_x.ssn = h_x.ssn \land \exists j_x (h_x.jn = j_x.jn \land j_x.location = 'Kashan'))
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+Find the names of employees who work on **all** projects
+========================================================
+.. code:: sql
+    :class: substep
+
+    ex.name where forall jx(
+      exists hx(
+        ex.ssn = hx.ssn and hx.jn = jx.jn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+
+    ex.name where not exists jx(
+      not exists hx(
+        ex.ssn = hx.ssn and hx.jn = jx.jn
+      )
+    )
+
+.. math::
+    :class: substep
+
+    e_x.name \mid e(e_x) \land \neg \exists j_x (j(j_x) \land \neg \exists h_x (h(h_x) \land e_x.ssn = h_x.ssn \land h_x.jn = j_x.jn))
+
+.. math::
+    :class: substep
+
+    e_x.name \mid \neg \exists j_x (\neg \exists h_x (e_x.ssn = h_x.ssn \land h_x.jn = j_x.jn))
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
+Find the names of employees who work on **all** projects located in 'Tabriz'.
+=============================================================================
+.. code:: sql
+    :class: substep
+
+    ex.name where forall jx(
+      jx.location <> 'Tabriz' or exists hx(
+        ex.ssn = hx.ssn and hx.jn = jx.jn
+      )
+    )
+
+.. code:: sql
+    :class: substep
+
+    ex.name where not exists jx(
+      jx.location = 'Tabriz' and not exists hx(
+        ex.ssn = hx.ssn and hx.jn = jx.jn
+      )
+    )
+
+.. math::
+    :class: substep
+
+    e_x.name \mid e(e_x) \land \neg \exists j_x (j(j_x) \land j_x.location = 'Tabriz' \land \neg \exists h_x (h(h_x) \land e_x.ssn = h_x.ssn \land h_x.jn = j_x.jn))
+
+.. math::
+    :class: substep
+
+    e_x.name \mid \neg \exists j_x (j_x.location = 'Tabriz' \land \neg \exists h_x (e_x.ssn = h_x.ssn \land h_x.jn = j_x.jn))
+
+.. :
+
+    Thanks Gemini AI for helping some content of this slide
+
+----
+
 
 References
 ==============
