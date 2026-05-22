@@ -2507,7 +2507,8 @@ Simple Programming Language
 .. class:: substep
 
     #. A → B 'EOF'
-    #. B → 'BEGIN' '\\n' L 'END' '\\n'
+    #. B → 'BEGIN' '\\n' M 'END'
+    #. M → L '\\n' M | λ
     #. L → 'LET' 'ID' = E
     #. L → 'PRINT' E
     #. L → 'WHILE' E '\\n' B
@@ -2541,6 +2542,154 @@ Simple Programming Language
         F  → 'NUMBER'
         F  → 'ID'
         F  → ( E )
+
+----
+
+:class: t2c
+
+Chart for simple programming Languaguge
+========================================
+#. A → B 'EOF'
+#. B → 'BEGIN' '\\n' L 'END' '\\n'
+#. L → 'LET' 'ID' = E
+#. L → 'PRINT' E
+#. L → 'WHILE' E '\\n' B
+#. E → T E'
+#. E' → + T E' | -T E' | λ
+#. T  → F T'
+#. T' → * F T' | / F T' | λ
+#. F  → 'NUMBER'
+#. F  → 'ID'
+#. F  → ( E )
+
+
+.. yographviz::
+
+    digraph L {
+      rankdir="LR";
+      node [shape=circle];
+      END [shape=doublecircle,label=""];
+
+      0 -> 1 [label="LET"];
+      1 -> 2 [label="ID"];
+      2 -> 3 [label="="];
+      3 -> END [label="E"];
+
+      0 -> 4 [label="PRINT"];
+      4 -> END [label="E"];
+
+      0 -> 5 [label="WHILE"];
+      5 -> 6 [label="E"];
+      6 -> 7 [label="\\n"];
+      7 -> END [label="B"];
+    }
+
+.. :
+
+    ----
+
+
+    .. code:: python
+
+        A() -> B(); match(EOF)
+
+        B() -> match(BEGIN)
+               match(\n)
+               L()
+               match(END)
+               match(\n)
+
+        L() -> choose among
+               LET ID = E
+               PRINT E
+               WHILE E \n B
+
+        E() -> T()
+               while next token in {+, -}
+                 consume operator
+                 T()
+
+        T() -> F()
+               while next token in {*, /}
+                 consume operator
+                 F()
+
+        F() -> NUMBER
+             | ID
+             | ( E )
+
+----
+
+:class: n2c
+
+.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
+  :code: cpp
+  :number-lines: 0
+  :start-line: 0
+  :end-line: 31
+
+.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
+  :code: cpp
+  :number-lines: 31
+  :start-line: 31
+  :end-line: 63
+  :class: substep
+
+----
+
+:class: n2c
+
+.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
+  :code: python
+  :number-lines: 63
+  :start-line: 63
+  :end-line: 95
+
+.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
+  :code: python
+  :number-lines: 96
+  :start-line: 95
+  :end-line: 127
+  :class: substep
+
+----
+
+Creating Syntax Tree
+====================
+
+----
+
+:class: n2c
+
+.. include:: src/rd/simple_language_1/simple_language30.py
+  :code: python
+  :number-lines: 0
+  :start-line: 0
+  :end-line: 31
+
+.. include:: src/rd/simple_language_1/simple_language30.py
+  :code: python
+  :number-lines: 31
+  :start-line: 31
+  :end-line: 63
+  :class: substep
+
+----
+
+:class: n2c
+
+.. include:: src/rd/simple_language_1/simple_language30.py
+  :code: python
+  :number-lines: 63
+  :start-line: 63
+  :end-line: 95
+
+.. include:: src/rd/simple_language_1/simple_language30.py
+  :code: python
+  :number-lines: 96
+  :start-line: 95
+  :end-line: 127
+  :class: substep
 
 ----
 
