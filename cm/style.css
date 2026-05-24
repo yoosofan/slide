@@ -85,6 +85,13 @@ ol.trace-code li::before {
 table.have-border, table.have-border tr,
 table.have-border td, table.have-border th{
   border: 1px solid black;
+  margin: 8px;
+  padding: 8px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  white-space: nowrap;
 }
 table.have-border th, table.have-border th p
 {font-weight: bold;}

@@ -3,7 +3,13 @@
 #include <cstdlib>
 #include <cctype>
 using namespace std;
-enum TokenType {IDENTIFIER, INT_NUMBER, REAL_NUMBER, CONSTANT_STRING, WHILE_KEYWORD, PLUS_OPERATOR , MINUS_OPERATOR, MUL_OPERATOR , DIV_OPERATOR , LPAR_OPERATOR , RPAR_OPERATOR , END_INPUT_FILE, UNKNOWN_TOKEN, LET_INSTRUCTION, PRINT_INSTRUCTION, BEGIN_KEYWORD , END_KEYWORD, EOL_DELIMETER, ASSIGN_OPERATOR };
+enum TokenType {IDENTIFIER, INT_NUMBER, REAL_NUMBER,
+  CONSTANT_STRING, WHILE_KEYWORD, PLUS_OPERATOR,
+  MINUS_OPERATOR, MUL_OPERATOR , DIV_OPERATOR ,
+  LPAR_OPERATOR , RPAR_OPERATOR , END_INPUT_FILE,
+  UNKNOWN_TOKEN, LET_INSTRUCTION, PRINT_INSTRUCTION,
+  BEGIN_KEYWORD , END_KEYWORD, EOL_DELIMETER,
+  ASSIGN_OPERATOR };
 const char*nameOfTokenTypes[]={"IDENTIFIER", "INT_NUMBER", "REAL_NUMBER", "CONSTANT_STRING", "WHILE_KEYWORD", "PLUS_OPERATOR" , "MINUS_OPERATOR", "MUL_OPERATOR" , "DIV_OPERATOR" , "LPAR_OPERATOR" , "RPAR_OPERATOR" , "END_INPUT_FILE", "UNKNOWN_TOKEN", "LET_INSTRUCTION", "PRINT_INSTRUCTION", "BEGIN_KEYWORD" , "END_KEYWORD", "EOL_DELIMETER", "ASSIGN_OPERATOR" };
 struct Token {TokenType type; int n; double r; string s;} t ;
 bool run_mode=true;bool debug_mod = false;const int MAX_NUMBER_OF_CHARACTER = 10000;
@@ -51,7 +57,7 @@ Token getToken(void){while(buffer[tindex]==' '||buffer[tindex]=='\t')tindex++;
         tindex --;
       }else if(buffer[tindex]>='A' && buffer[tindex]<='z'){t.type=IDENTIFIER; t.s="";
          for(;isalnum(buffer[tindex]);tindex++)t.s += buffer[tindex];
-         tindex --;  t.type = sm1.search(t.s); 
+         tindex --;  t.type = sm1.search(t.s);
          if(t.type==UNKNOWN_TOKEN)t.type=sm1.insert(t.s);
       }else if(buffer[tindex]=='\0')  t.type = END_INPUT_FILE;
       else               error("unknown character");
@@ -71,7 +77,7 @@ Token getToken(void){while(buffer[tindex]==' '||buffer[tindex]=='\t')tindex++;
   if(t.type !=END_KEYWORD) error("Your block must be terminated by END_KEYWORD");
   t=getToken();
   if(t.type != EOL_DELIMETER )error("\\n after END is missing");
-}void L(void){ 
+}void L(void){
   switch(t.type){
     case LET_INSTRUCTION:   do_assign();        break;
     case PRINT_INSTRUCTION: do_print();         break;
@@ -80,7 +86,7 @@ Token getToken(void){while(buffer[tindex]==' '||buffer[tindex]=='\t')tindex++;
   }
 }void do_assign(void){t = getToken();
   if(t.type != IDENTIFIER) error("Left assignment needs IDENTIFIER");
-  Token var1 = t;  t = getToken(); 
+  Token var1 = t;  t = getToken();
   if(t.type != ASSIGN_OPERATOR) error("Let statement must have = ");
   t=getToken(); double val=E();if(run_mode)sm1.assign(var1.s , val);
 }void do_print(void){t=getToken();double val=E(); if(run_mode) cout<<val<<endl;}
@@ -92,7 +98,7 @@ void do_while(void){ int val,prun=run_mode,prev = tindex; t = getToken();
   }
 }double E(void){double x,y; TokenType prev;  x=T();
   while(t.type == PLUS_OPERATOR || t.type == MINUS_OPERATOR ){
-    prev =  t.type;   t=getToken();y= T(); 
+    prev =  t.type;   t=getToken();y= T();
     if(prev == PLUS_OPERATOR) x+= y;
     else             x-=y;
   }return x;
@@ -105,10 +111,10 @@ void do_while(void){ int val,prun=run_mode,prev = tindex; t = getToken();
 }double F(void){double x;
   if(t.type == LPAR_OPERATOR){t=getToken(); x=E();
     if(t.type != RPAR_OPERATOR) error(" ) is missing");
-  }else if(t.type == INT_NUMBER ) x= t.n ; 
-  else if(t.type == IDENTIFIER )  x= sm1.readVal(t.s); 
+  }else if(t.type == INT_NUMBER ) x= t.n ;
+  else if(t.type == IDENTIFIER )  x= sm1.readVal(t.s);
   else    error("Wrong token in F");
-  t=getToken(); return x; 
+  t=getToken(); return x;
 }int main(){read();A();return 0;}
 void debug(void){  static int number_of_call = 0;  number_of_call ++;
   cout << "t.type"<<'\t'<<"tindex"<<'\t'<<"number_of_call"<<'\t'<<"t.n"<<endl;

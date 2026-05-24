@@ -1,4 +1,4 @@
-from sly import Lexer
+from sly import Lexer; import argparse
 class BasicLexer(Lexer):
   tokens = {
     BEGIN,END,LET,PRINT,WHILE,ID,NUMBER,NEWLINE,
@@ -120,22 +120,15 @@ class Interpreter:
       self.advance(); n = self.E(); self.expect(")")
       return n
     raise SyntaxError("Err")
-source = """BEGIN
-LET X = 5
-PRINT X
-
-WHILE X
-BEGIN
-PRINT X
-LET X = X - 1
-END
-
-PRINT 999
-END"""
-
-interp = Interpreter(source)
-program_ast = interp.parse()
-program_ast.eval(interp.vars)
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser()
+  parser.add_argument('filename'); source = ""
+  with open(parser.parse_args().filename, "r",
+      encoding="utf-8") as f1:
+    source = f1.read()
+  interp = Interpreter(source)
+  program_ast = interp.parse()
+  program_ast.eval(interp.vars)
 
 
 # Thanks to Chatgpt.com, Grok.com(X.Ai) and Gemini AI for writing most of this code

@@ -1,6 +1,6 @@
 :data-transition-duration: 1000
 :data-max-scale: 5
-:data-width: 1024 
+:data-width: 1024
 :data-height: 768
 :skip-help: true
 :css: ./style.css
@@ -152,7 +152,7 @@ Parsing(I)
 
   .. csv-table::
     :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+    :class: have-border
 
     "  ",   a  , b     , $
     A   ,  a B ,       ,
@@ -192,7 +192,7 @@ Parsing(II)
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: have-border
 
   "  ",   a  , b     , $
   A   ,  a B ,       ,
@@ -230,9 +230,9 @@ Parsing(II)
   B →  b A
   B →  a
   B →  b
-  
-  
-  
+
+
+
   Left factoring
   A →  a B
   B →  a
@@ -246,14 +246,14 @@ Parsing(II)
 
   B →  b L
   L →  A
-  L →  λ 
+  L →  λ
 
   Left factoring
   A →  a B
   B →  a
   B →  b L
   L →  A
-  L →  λ 
+  L →  λ
 
   first(A) = {a}
   first(B) = {a, b}
@@ -276,7 +276,7 @@ Parsing(III)
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: have-border
 
   "  ",   a  , b     , $
   A   ,  a B ,       ,
@@ -293,15 +293,15 @@ Parsing(III)
   :class: smallerelementwithfullborder equal-col
 
   Stack  ,  input        , action
-   $ A   ,   a b a a $   , A → a B
-   $ B a ,   a b a a $   , Remove a
-   $ B   ,   b a a $     , B → b A
-   $ A b ,   b a a $     , Remove b
-   $ A   ,     a a $     , A → a B
-   $ B a ,     a a $     , Remove a
-   $ B   ,     a $       , B → a
-   $ a   ,     a $       , Remove a
-   $     ,       $       , accept
+   A   $ ,   a b a a $   , A → a B
+   a B $ ,   a b a a $   , Remove a
+   B $   ,   b a a $     , B → b A
+   b A $ ,   b a a $     , Remove b
+   A   $ ,     a a $     , A → a B
+   a B $ ,     a a $     , Remove a
+   B   $ ,     a $       , B → a
+   a   $ ,     a $       , Remove a
+       $ ,       $       , accept
 
 ----
 
@@ -317,16 +317,25 @@ Parsing(IV)
   A   ,  a B ,       ,
   B   ,  a   ,  b A  ,
 
+.. container:: substep
+
+    b
+
+    .. csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder equal-col substep
+
+      Stack ,  input        , action
+       A  $ ,   b $   , Reject
+
+    .. class:: substep
+
+    #. a b a b
+    #. a b b b
+
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
-
-  Stack ,  input        , action
-   A  $ ,   b $   , Reject
-
-.. csv-table::
-  :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: smallerelementwithfullborder equal-col substep
 
   Stack  ,  input        , action
    A $   ,  a b a b $    ,  A → a B
@@ -341,7 +350,7 @@ Parsing(IV)
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: smallerelementwithfullborder equal-col substep
 
   Stack  ,  input        , action
    A $   ,  a b b b $    ,  A → a B
@@ -369,13 +378,20 @@ Parsing(V)
     * first( A ) = {a}
     * first( B ) = {b , λ}
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+.. container:: substep
 
-  "  ",   a  , b     , $
-  A   ,  a B ,       ,
-  B   ,      ,  b A  ,
+    .. csv-table::
+      :header-rows: 1
+      :class: smallerelementwithfullborder equal-col
+
+      "  ",   a  , b     , $
+      A   ,  a B ,       ,
+      B   ,      ,  b A  ,
+
+    .. class:: substep
+
+    input = a b a $
+
 
 .. csv-table::
   :header-rows: 1
@@ -414,13 +430,19 @@ Parsing(VI)
   * first( A ) = {a}
   * first( B ) = {b , λ}
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+.. container::
 
-  "  ",   a  , b     , $
-  A   ,  a B ,       ,
-  B   ,   λ  ,  b A  , λ
+    .. csv-table::
+      :header-rows: 1
+      :class: substep smallerelementwithfullborder equal-col
+
+      "  ",   a  , b     , $
+      A   ,  a B ,       ,
+      B   ,   λ  ,  b A  , λ
+
+    .. class:: substep
+
+    input = a a $
 
 .. csv-table::
   :header-rows: 1
@@ -434,7 +456,7 @@ Parsing(VI)
 
 .. class:: substep
 
-* B → λ was wrong
+* Putting B → λ on that cell was incorrect
 * Removing B → λ from a is better
 * Finding more rules in future (follow set)
 
@@ -459,7 +481,7 @@ Parsing(VI)
 
 :class: t2c
 
-Parsing(VII)
+Follow Set(I)
 ==========================================
 .. container::
 
@@ -470,25 +492,58 @@ Parsing(VII)
   * first( A ) = {a}
   * first( B ) = {b , λ}
 
+.. container::
+
+  .. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder equal-col
+
+    "  ",   a  , b     , $
+    A   ,  a B ,       ,
+    B   ,      ,  b A  , λ
+
+  .. class:: substep
+
+  input = a b a $
+
+.. yographviz::
+    :class: substep
+
+    digraph aba{
+        rankdir=TB;
+        node [shape=circle];
+        A  [label="A"];
+        A0 [label="a"];
+        B  [label="B"];
+        B0 [label="b"];
+        A1 [label="A"];
+        a1 [label="a"];
+        B1 [label="B", color=red];
+
+        A  -> A0
+        B  -> B0
+        A  -> B
+        B  -> A1
+        A1 -> a1
+        A1 -> B1
+    }
+
+
+.. container::
+
+  .. class:: substep
+
   #. follow( A ) = {$}
   #. follow( B ) = {$}
 
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+  .. csv-table::
+    :header-rows: 1
+    :class: substep smallerelementwithfullborder equal-col
 
-  "  ",   a  , b     , $
-  A   ,  a B ,       ,
-  B   ,      ,  b A  , λ
-
-.. csv-table::
-  :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
-
-  Stack , input   , action
-  A   $ , a a $ , A → a B
-  a B $ , a a $ , Remove a
-  B   $ , a   $ , Reject
+    Stack , input   , action
+    A   $ , a a $ , A → a B
+    a B $ , a a $ , Remove a
+    B   $ , a   $ , Reject
 
 ----
 
@@ -582,7 +637,7 @@ Wrong Calculator Grammar(II)
 .. container::
 
   #. E  → T E'
-  #. E' → + E 
+  #. E' → + E
   #. E' → λ
   #. T  → F T'
   #. T' → * T
@@ -626,9 +681,9 @@ Wrong Calculator Grammar(II)
   T E'        $ , a * a     $ , T → F T'
   F T' E'     $ , a * a     $ , F → a
   a T' E'     $ , a * a     $ , Remove a
-  T' E'       $ , `*` a       $ , T' → * T 
-  `*` T E'      $ , `*` a       $ , Remove * 
-  T  E'       $ , a         $ , T → F T' 
+  T' E'       $ , `*` a       $ , T' → * T
+  `*` T E'      $ , `*` a       $ , Remove *
+  T  E'       $ , a         $ , T → F T'
   F T'  E'    $ , a         $ , F → a
   a T' E'     $ , a         $ , Remove a
   T' E'       $ ,           $ , T' → λ
@@ -644,14 +699,14 @@ First set
 #. If X → λ is a production rule then λ ∈ first(X)
 #. If :math:`X → Y_1 Y_2 .... Y_n` is a production rule then
     #. first(:math:`Y_1`) ⊂ first(X)
-    #. first(:math:`Y_2`) ⊂ first(X) if λ ∈ first(:math:`Y_1`) or :math:`Y_1 ⇒^* λ` 
-    #. first(:math:`Y_3`) ⊂ first(X) if λ ∈ first(:math:`Y_1`) and λ ∈ first(:math:`Y_2`) 
-    #. first(:math:`Y_i`) ⊂ first(X) if λ ∈ first(:math:`Y_j`) for j = 1, 2, 3, i-1 
-    #. λ ∈ first(X) if λ ∈ first(:math:`Y_i`) for i = 1, 2, 3, n or :math:`X ⇒^* λ` 
+    #. first(:math:`Y_2`) ⊂ first(X) if λ ∈ first(:math:`Y_1`) or :math:`Y_1 ⇒^* λ`
+    #. first(:math:`Y_3`) ⊂ first(X) if λ ∈ first(:math:`Y_1`) and λ ∈ first(:math:`Y_2`)
+    #. first(:math:`Y_i`) ⊂ first(X) if λ ∈ first(:math:`Y_j`) for j = 1, 2, 3, i-1
+    #. λ ∈ first(X) if λ ∈ first(:math:`Y_i`) for i = 1, 2, 3, n or :math:`X ⇒^* λ`
 
 ----
 
-Follow set
+Follow Set(II)
 ===============
 .. class:: substep
 
@@ -659,7 +714,7 @@ Follow set
 #. If X → α Y then follow(X) ⊂ follow(Y)
 #. If X → :math:`Y_1 Y_2 Y_3 Y_4 ..... Y_n` is a production rule then
     #. (first(:math:`Y_3`) - {λ} ) ⊂ follow(:math:`Y_2`)
-        * if M → α A a β is a production rule then a ∈ follow(A)   
+        * if M → α A a β is a production rule then a ∈ follow(A)
     #. If λ ∈ first(:math:`Y_3`) then (first(:math:`Y_4`) - {λ} ) ⊂ follow(:math:`Y_2`)
         * or (first(:math:`Y_3`) ∪ first(:math:`Y_4`) - {λ} ) ⊂ follow(:math:`Y_2`)
     #. If λ ∈ first(:math:`Y_j`) for j = 3,4, ....., i-1  then (first(:math:`Y_i`) - {λ} ) ⊂ follow(:math:`Y_2`)
@@ -692,12 +747,12 @@ Wrong Calculator Grammar(I)
     #. = { a, ( }
     #. first(E') = { + ,  λ}
     #. first(T') = { * ,  λ}
-    
+
 ----
 
 :class: t2c
 
-Follow set(II)
+Follow Set(III)
 ===============
 #. If [ S ] is start symbol then [ $ ∈ follow(S) ]
 #. If [ X → α Y ] then [ follow(X) ⊂ follow(Y) ]
@@ -715,7 +770,7 @@ Follow set(II)
   #. E' → + E
   #. E' → λ
   #. T  → F T'
-  #. T' → * T 
+  #. T' → * T
   #. T' → λ
   #. F  → ( E )
   #. F  → a
@@ -791,14 +846,14 @@ Simple Calculator(I)
 #. E → E - T
 #. E → T
 #. T → T * F
-#. T → T / F 
+#. T → T / F
 #. T → F
 #. F → a
 #. F → (E)
 
 .. class:: substep
 
-  #. first(E) 
+  #. first(E)
   #. = First(T)
   #. = first(F)
   #. = { a , ( }
@@ -807,12 +862,12 @@ Simple Calculator(I)
 .. class:: substep
 
   #. follow(E) = { $ , + , - , ) }
-  #. follow(T) = { $ , + , - , ) , * , / } 
-  #. follow(F) = { $ , + , - , ) , * , / } 
+  #. follow(T) = { $ , + , - , ) , * , / }
+  #. follow(F) = { $ , + , - , ) , * , / }
 
 .. csv-table::
   :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+  :class: substep have-border
 
   "  ", a                  , `+` , `-` , `*` , `/` ,      (              , ) , $
   E   , E + T | E - T | T  ,     ,     ,     ,     ,   E + T | E - T | T ,   ,
@@ -823,7 +878,7 @@ Simple Calculator(I)
 
 :class: t2c
 
-Simple Calculator(I)
+Simple Calculator(II)
 ==========================================
 .. container::
 
@@ -874,21 +929,19 @@ From First Sets to a Table
 #. T'  → * F T' | / F T' | λ
 #. F → a | (E)
 
-#. First(E) = First(T) = First(F) = {a, ( }
-#. First(E') = {`+`, `-`, λ}
-#. First(T') = {`*`, `/`, λ}
-
--
+* First(E) = First(T) = First(F) = {a, ( }
+* First(E') = {`+`, `-`, λ}
+* First(T') = {`*`, `/`, λ}
 
 .. csv-table::
   :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+  :class: substep have-border
 
-  "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
+  "  ", a     , `+`       , `-` , `*` , `/` , (  , ) , $
   E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
-  E'  ,       ,  `+` T E'   , `-` T E' ,        ,         ,        ,       ,
+  E'  ,       , "`+` T E'", `-` T E' ,        ,         ,        ,       ,
   T   ,  F T' ,           ,        ,        ,         , F T'   ,        ,
-  T'  ,       ,         ,      , `*` F T' ,  `/` F T' ,        ,       ,
+  T'  ,       ,           ,      , `*` F T' ,  `/` F T' ,        ,       ,
   F   , a     ,           ,        ,        ,         , ( E )  ,        ,
 
 ----
@@ -905,7 +958,7 @@ Parsing(I)
 
   .. csv-table::
     :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+    :class: have-border
 
     "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
     E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
@@ -936,7 +989,7 @@ Parsing(II)
 
   .. csv-table::
     :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+    :class: have-border
 
     "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
     E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
@@ -970,7 +1023,7 @@ Parsing(III)
 
   .. csv-table::
     :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+    :class: have-border
 
     "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
     E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
@@ -1006,7 +1059,7 @@ Use LL Table for Parsing
 
   .. csv-table::
     :header-rows: 1
-    :class: smallerelementwithfullborder equal-col
+    :class: have-border
 
     "  ", a , `+` , `-` , `*` , `/` , (  , ) , $
     E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
@@ -1055,7 +1108,7 @@ Use LL Table for Parsing
   F T' E'     $ , . a / a    $ , F → a
   a T' E'     $ , . a / a    $ , Remove a
   T' E'       $ , . / a      $ , T' → / F T'
-  / F T' E'   $ , . / a      $ , Remove / 
+  / F T' E'   $ , . / a      $ , Remove /
   F T' E'     $ , . a        $ ,  F → a
   a T' E'     $ , . a        $ ,  Remove a
   T' E'       $ , .          $ ,  T' → λ
@@ -1069,7 +1122,7 @@ Use LL Table for Parsing
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: have-border
 
   "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
   E   ,  TE' ,           ,          ,          ,           ,  TE'  ,     ,
@@ -1087,15 +1140,15 @@ Use LL Table for Parsing
   T E'           $, .( a + a ) a$ , T → F T'
   F T' E'        $, .( a + a ) a$ , F → ( E )
   ( E ) T' E'    $, .( a + a ) a$ , Remove (
-  E ) T' E'      $, .  a + a ) a$ , E → T E' 
-  T E' ) T' E'   $, .  a + a ) a$ , T → F T' 
-  F T' E' ) T' E'$, .  a + a ) a$ , F → a 
+  E ) T' E'      $, .  a + a ) a$ , E → T E'
+  T E' ) T' E'   $, .  a + a ) a$ , T → F T'
+  F T' E' ) T' E'$, .  a + a ) a$ , F → a
   a T' E' ) T' E'$, .  a + a ) a$ , Remove a
   T' E' ) T' E'  $, .  + a ) a  $ , T' → λ
-  E' ) T' E'     $, .  + a ) a  $ , E' → + T E' 
-  `+` T E' ) T' E'$, .  + a ) a  $ , Remove + 
-  T E' ) T' E'   $, .  a ) a    $ , T → F T' 
-  F T' E' ) T' E'$, .  a ) a    $ , F → a 
+  E' ) T' E'     $, .  + a ) a  $ , E' → + T E'
+  `+` T E' ) T' E'$, .  + a ) a  $ , Remove +
+  T E' ) T' E'   $, .  a ) a    $ , T → F T'
+  F T' E' ) T' E'$, .  a ) a    $ , F → a
   a T' E' ) T' E'$, .  a ) a    $ , Remove a
   T' E' ) T' E'  $, .  ) a      $ , T' → λ
   E' ) T' E'     $, .  ) a      $ , E' → λ
@@ -1112,11 +1165,11 @@ Use LL Table for Parsing
 
 #. E  → T E'
 #. E' → + T E'
-#. E' → - T E' 
+#. E' → - T E'
 #. E' →  λ
 #. T  → F T'
-#. T' → * F T' 
-#. T' → / F T' 
+#. T' → * F T'
+#. T' → / F T'
 #. T' →  λ
 #. F  → a
 #. F  → ( E )
@@ -1139,7 +1192,7 @@ Use LL Table for Parsing
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: have-border
 
   "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
   E   ,  TE'  ,           ,          ,          ,           ,  TE'  ,     ,
@@ -1154,7 +1207,7 @@ Use LL Table for Parsing
 
 S → i(r) S  | i(r) S e S | o
 ==============================
-.. container:: 
+.. container::
 
   * Eliminate Left Factor
 
@@ -1166,11 +1219,11 @@ S → i(r) S  | i(r) S e S | o
 
 .. csv-table::
   :header-rows: 1
-  :class: substep smallerelementwithfullborder equal-col
+  :class: have-border:w
 
   "  ",   i          , r ,   e       ,   o  ,  (    ,   ) ,  $
   S   ,  `i(r)SA` ,   ,           ,  o   ,       ,     ,
-  A   ,              ,   , `eS/λ`   ,      ,       ,     ,  λ  
+  A   ,              ,   , `eS/λ`   ,      ,       ,     ,  λ
 
 ----
 

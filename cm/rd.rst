@@ -2452,6 +2452,7 @@ Lexical C++
   :number-lines: 31
   :start-line: 31
   :end-line: 63
+  :class: substep
 
 ----
 
@@ -2470,6 +2471,7 @@ Calculator C++
   :number-lines: 90
   :start-line: 90
   :end-line: 113
+  :class: substep
 
 ----
 
@@ -2478,6 +2480,7 @@ Calculator C++
 Simple Programming Language
 ===========================
 .. code:: basic
+    :number-lines:
 
     BEGIN
         LET I = 12
@@ -2550,7 +2553,8 @@ Simple Programming Language
 Chart for simple programming Languaguge
 ========================================
 #. A → B 'EOF'
-#. B → 'BEGIN' '\\n' L 'END' '\\n'
+#. B → 'BEGIN' '\\n' M 'END'
+#. M → L '\\n' M | λ
 #. L → 'LET' 'ID' = E
 #. L → 'PRINT' E
 #. L → 'WHILE' E '\\n' B
@@ -2562,26 +2566,75 @@ Chart for simple programming Languaguge
 #. F  → 'ID'
 #. F  → ( E )
 
+.. container:: substep
+
+    .. yographviz::
+
+        digraph L {
+          label="L";
+          labelloc = "t";
+          rankdir="LR";
+          node [shape=circle];
+          END [shape=doublecircle,label=""];
+
+          0 -> 1 [label="LET"];
+          1 -> 2 [label="ID"];
+          2 -> 3 [label="="];
+          3 -> END [label="E"];
+
+          0 -> 4 [label="PRINT"];
+          4 -> END [label="E"];
+
+          0 -> 5 [label="WHILE"];
+          5 -> 6 [label="E"];
+          6 -> 7 [label="\\n"];
+          7 -> END [label="B"];
+        }
+
+    .. yographviz::
+
+        digraph M {
+          label="M";
+          labelloc = "t";
+          rankdir="LR";
+          node [shape=circle];
+          END [shape=doublecircle,label=""];
+
+          0 -> 1 [label="L"];
+          1 -> 2 [label="\\n"];
+          2 -> END [label="M"];
+          0 -> END [label="λ"];
+        }
 
 .. yographviz::
+    :class: substep
 
-    digraph L {
+    digraph SM {
+      label="M";
+      labelloc = "t";
       rankdir="LR";
       node [shape=circle];
       END [shape=doublecircle,label=""];
 
-      0 -> 1 [label="LET"];
-      1 -> 2 [label="ID"];
-      2 -> 3 [label="="];
-      3 -> END [label="E"];
+      0 -> 1 [label="L"];
+      1 -> 0 [label="\\n"];
+      0 -> END [label="λ"];
+    }
 
-      0 -> 4 [label="PRINT"];
-      4 -> END [label="E"];
+.. yographviz::
+    :class: substep
 
-      0 -> 5 [label="WHILE"];
-      5 -> 6 [label="E"];
-      6 -> 7 [label="\\n"];
-      7 -> END [label="B"];
+    digraph B {
+      label="B";
+      labelloc = "t";
+      rankdir="LR";
+      node [shape=circle];
+      END [shape=doublecircle,label=""];
+
+      0 -> 1 [label="BEGIN"];
+      1 -> 2 [label="\\n"];
+      2 -> 1 [label="L"];
+      2 -> END [label="END"];
     }
 
 .. :
@@ -2620,42 +2673,110 @@ Chart for simple programming Languaguge
 
 ----
 
-:class: n2c
+:class: t2c
 
-.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
-  :code: cpp
-  :number-lines: 0
-  :start-line: 0
-  :end-line: 31
+Creating Syntax Tree (Top Down)
+===============================
+.. code:: pascal
 
-.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
-  :code: cpp
-  :number-lines: 31
-  :start-line: 31
-  :end-line: 63
-  :class: substep
+    BEGIN
+      LET X = 5
+      PRINT X
+      WHILE X
+      BEGIN
+        PRINT X
+        LET X = X - 1
+      END
+      PRINT x
+    END
 
-----
+.. yographviz::
+    :class: substep
+    :width: 900
 
-:class: n2c
+    digraph AST {
+      node [fontname="Courier", shape=box, style=filled, fillcolor="#f9f9f9"];
+      edge [fontname="Courier", arrowhead=vee];
 
-.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
-  :code: python
-  :number-lines: 63
-  :start-line: 63
-  :end-line: 95
+      // Root Level
+      root [label="BlockNode\n(Root Block)", fillcolor="#dee2e6"];
 
-.. include:: src/rd/simple_language_1/cpp/simple_language30.cpp
-  :code: python
-  :number-lines: 96
-  :start-line: 95
-  :end-line: 127
-  :class: substep
+      // Root Statements
+      let1 [label="LetNode\n(LET X = 5)"];
+      print1 [label="PrintNode\n(PRINT X)"];
+      while1 [label="WhileNode\n(WHILE X)", fillcolor="#e8f0fe"];
+      print3 [label="PrintNode\n(PRINT x)"];
 
-----
+      root -> let1;
+      root -> print1;
+      root -> while1;
+      root -> print3;
 
-Creating Syntax Tree
-====================
+      // Let 1 Details
+      let1_id [label="Var: \"X\"", shape=ellipse, fillcolor="#fff3cd"];
+      let1_val [label="NumNode\n(5)", shape=ellipse, fillcolor="#d1e7dd"];
+      let1 -> let1_id;
+      let1 -> let1_val;
+
+      // Print 1 Details
+      print1_var [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+      print1 -> print1_var;
+
+      // While Details
+      while_cond [label="Cond:\nVarNode(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+      while_body [label="BlockNode\n(Loop Body)", fillcolor="#dee2e6"];
+      while1 -> while_cond;
+      while1 -> while_body;
+
+      // Inside While Body
+      print2 [label="PrintNode\n(PRINT X)"];
+      let2 [label="LetNode\n(LET X = X - 1)"];
+      while_body -> print2;
+      while_body -> let2;
+
+      // Loop Print Details
+      print2_var [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+      print2 -> print2_var;
+
+      // Loop Let Details
+      let2_id [label="Var: \"X\"", shape=ellipse, fillcolor="#fff3cd"];
+      let2_op [label="BinOpNode\n(-)", fillcolor="#f8d7da"];
+      let2 -> let2_id;
+      let2 -> let2_op;
+
+      // Binary Operation Elements
+      op_left [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+      op_right [label="NumNode\n(1)", shape=ellipse, fillcolor="#d1e7dd"];
+      let2_op -> op_left;
+      let2_op -> op_right;
+
+      // Final Print Details (Lowercase x)
+      print3_var [label="VarNode\n(\"x\")\n[Evaluates to 0]", shape=ellipse, fillcolor="#f8d7da"];
+      print3 -> print3_var;
+    }
+
+.. raw: html
+
+    <pre>
+        BlockNode (Root Block)
+        ├── LetNode (X = 5)
+        │   ├── Target: "X"
+        │   └── Value: NumNode(5)
+        ├── PrintNode (PRINT X)
+        │   └── Expression: VarNode("X")
+        ├── WhileNode (WHILE X)
+        │   ├── Condition: VarNode("X")
+        │   └── Body: BlockNode (Loop Block)
+        │       ├── PrintNode (PRINT X)
+        │       │   └── Expression: VarNode("X")
+        │       └── LetNode (X = X - 1)
+        │           ├── Target: "X"
+        │           └── Value: BinOpNode (-)
+        │               ├── Left: VarNode("X")
+        │               └── Right: NumNode(1)
+        └── PrintNode (PRINT x)
+            └── Expression: VarNode("x")
+    </pre>
 
 ----
 
@@ -2690,6 +2811,68 @@ Creating Syntax Tree
   :start-line: 95
   :end-line: 127
   :class: substep
+
+----
+
+:class: t2c
+
+List of Related Files
+=====================
+.. class:: substep
+
+* src/rd/simple_language_1/
+    #. simple_language_1.py
+        * created by chatgpt.com
+    #. simple_language20.py
+        * Edited by Grok AI and Gemeni AI
+    #. simple_language30.py
+        * reformat by Gemini AI
+    #. simple_language50.py
+        * Add argparse added by me
+    #. sly folder of sly tool
+
+.. class:: substep
+
+* src/rd/simple_language_1/cpp/
+
+    #. simple_language20.cpp
+        * Gemini Ai created (Flawed)
+    #. simple_language30.cpp
+        * Gemini Ai reformated (Flawed)
+    #. simple_language50.cpp
+        * Change by hand to support arguments (Flawed)
+    #. simple_language_1.cpp
+        * My old code for interpreted
+        * Compiles and works fine after decades
+    #. simple_language_2.cpp
+        * Reformated of my old code by hand
+        * I like to update it more but I will not able to.
+
+
+.. container: substep
+
+    ::
+
+        * src/rd/simple_language_1/
+            #. simple_language_1.py
+                * created by chatgpt.com
+            #. simple_language20.py
+                * Edited by Grok AI and Gemeni AI
+            #. simple_language30.py
+                * reformat by Gemini AI
+            #. sly folder of sly tool
+
+        * src/rd/simple_language_1/cpp/
+            #. simple_language20.cpp
+                * Gemini Ai created (Flawed)
+            #. simple_language30.cpp
+                * Gemini Ai reformated (Flawed)
+            #. simple_language_1.cpp
+                * My old code for interpreted
+                * Compiles and works fine after decades
+            #. simple_language_2.cpp
+                * Reformated of my old code by hand
+                * I like to update it more but I will not able to.
 
 ----
 

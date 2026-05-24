@@ -668,15 +668,15 @@ Buddy System Memory Management(III)
       to gain high-speed allocation/coalescing.
 
     * **Core Idea**:
-     * Memory is allocated in sizes of **powers of 2** (e.g., 2, 4, 8, 16... KB).
-     * If a request doesn't match a power of 2, the next larger size is used.
+      * Memory is allocated in sizes of **powers of 2** (e.g., 2, 4, 8, 16... KB).
+      * If a request doesn't match a power of 2, the next larger size is used.
     * **The "Buddy" Logic**:
-     * If a block of size :math:`2^k` is needed and only a :math:`2^{k+1}` block is available, the OS **splits** it into two equal "buddies".
-     * When a block is freed, the OS checks if its buddy is also free.
-     * If both are free, they **coalesce** back into the larger parent block.
+      * If a block of size :math:`2^k` is needed and only a :math:`2^{k+1}` block is available, the OS **splits** it into two equal "buddies".
+      * When a block is freed, the OS checks if its buddy is also free.
+      * If both are free, they **coalesce** back into the larger parent block.
     * **Pros & Cons**:
-     * **Pros**: Very fast coalescing (merging) compared to standard dynamic partitioning.
-     * **Cons**: Suffers from **Internal Fragmentation** (up to 50% per block).
+      * **Pros**: Very fast coalescing (merging) compared to standard dynamic partitioning.
+      * **Cons**: Suffers from **Internal Fragmentation** (up to 50% per block).
 
 .. note:
   The buddy system is an elegant way to avoid the heavy overhead of
@@ -821,60 +821,84 @@ Process Suspension
 
 ----
 
+:class: t2c
 
 Process Suspension (Swapping)
 =============================
-**Summary**
-Process suspension is the OS strategy of moving a process from main memory (RAM) to a secondary storage (backing store/disk). This transition creates the "7-state process model," allowing the OS to manage memory over-commitment and prioritize active processes.
+.. class:: substep
 
 #. **The 7-State Model Transitions**
-    * **Blocked → Blocked/Suspend**: A process waiting for an I/O event is moved to disk to free RAM.
-    * **Ready → Ready/Suspend**: A ready process is moved to disk (usually low priority).
-    * **Blocked/Suspend → Ready/Suspend**: An event occurs for a swapped-out process; it remains on disk but is now ready for execution.
+    * **Blocked → Blocked/Suspend**
+    * **Ready → Ready/Suspend**
+    * **Blocked/Suspend → Ready/Suspend**
 #. **Reasons for Suspension**
-    * **Swapping**: To free up RAM when memory pressure is high (main reason).
-    * **User Request**: Manually pausing a program (e.g., using `Ctrl+Z` in a terminal).
-    * **Parent Request**: A parent process suspending a child for synchronization.
-    * **Timing**: A periodic process that runs only at specific intervals.
-#. **Trade-offs**
-    * **Pros**:
-        * Increases the degree of multiprogramming.
-        * Allows the system to handle processes larger than total physical RAM.
-        * Frees space for higher-priority or "Ready" processes.
-    * **Cons**:
-        * **High Latency**: Disk I/O is thousands of times slower than RAM access.
-        * **Thrashing**: If used excessively, the system spends more time swapping than executing.
+    * **Swapping**
+    * **User Request**
+    * **Parent Request**
+    * **Timing**
+#. **Pros**
+    * Increases the degree of multiprogramming.
+    * Frees space for higher-priority or "Ready" processes.
+#. **Cons**
+    * **High Latency**
+    * **Thrashing**
+
+.. yographviz::
+    :width: 600
+
+    digraph Suspension {
+        rankdir=TB;
+        node [shape=ellipse, fontname="Courier New", style=filled, fillcolor="#e1f5fe"];
+
+        "New" -> "Ready" [label="accept"];
+        "Ready" -> "Running" [label="dispatch"];
+        "Running" -> "Ready" [label="timeout"];
+        "Running" -> "Exit" [label="Release"];
+        "Running" -> "Blocked" [label="I/O wait"];
+        "Blocked" -> "Ready" [label="I/O occurs"];
+
+
+        subgraph cluster_disk {
+            label = "Disk (Backing Store)";
+            color = blue;
+            node [fillcolor="#fff3e0"];
+            "Blocked/Suspend";
+            "Ready/Suspend";
+        }
+
+        "Blocked" -> "Blocked/Suspend" [label="Swap Out"];
+        "Ready" -> "Ready/Suspend" [label="Swap Out"];
+        "Blocked/Suspend" -> "Ready/Suspend" [label="I/O occurs"];
+        "Ready/Suspend" -> "Ready" [label="Swap In"];
+    }
 
 .. :
+
+    **Summary**
+    Process suspension is the OS strategy of moving a process from main memory (RAM) to a secondary storage (backing store/disk). This transition creates the "7-state process model," allowing the OS to manage memory over-commitment and prioritize active processes.
+
+    #. **The 7-State Model Transitions**
+        * **Blocked → Blocked/Suspend**: A process waiting for an I/O event is moved to disk to free RAM.
+        * **Ready → Ready/Suspend**: A ready process is moved to disk (usually low priority).
+        * **Blocked/Suspend → Ready/Suspend**: An event occurs for a swapped-out process; it remains on disk but is now ready for execution.
+    #. **Reasons for Suspension**
+        * **Swapping**: To free up RAM when memory pressure is high (main reason).
+        * **User Request**: Manually pausing a program (e.g., using `Ctrl+Z` in a terminal).
+        * **Parent Request**: A parent process suspending a child for synchronization.
+        * **Timing**: A periodic process that runs only at specific intervals.
+    #. **Trade-offs**
+        * **Pros**:
+            * Increases the degree of multiprogramming.
+            * Allows the system to handle processes larger than total physical RAM.
+            * Frees space for higher-priority or "Ready" processes.
+        * **Cons**:
+            * **High Latency**: Disk I/O is thousands of times slower than RAM access.
+            * **Thrashing**: If used excessively, the system spends more time swapping than executing.
 
     Thanks to Gemini AI for this slide
 
     **Visualization of State Transitions**
 
-    .. yographviz::
-
-        digraph Suspension {
-            rankdir=LR;
-            node [shape=ellipse, fontname="Courier New", style=filled, fillcolor="#e1f5fe"];
-
-            "Ready" -> "Running" [label="dispatch"];
-            "Running" -> "Ready" [label="timeout"];
-            "Running" -> "Blocked" [label="I/O wait"];
-            "Blocked" -> "Ready" [label="I/O occurs"];
-
-            subgraph cluster_disk {
-                label = "Disk (Backing Store)";
-                color = blue;
-                node [fillcolor="#fff3e0"];
-                "Blocked/Suspend";
-                "Ready/Suspend";
-            }
-
-            "Blocked" -> "Blocked/Suspend" [label="Swap Out"];
-            "Ready" -> "Ready/Suspend" [label="Swap Out"];
-            "Blocked/Suspend" -> "Ready/Suspend" [label="I/O occurs"];
-            "Ready/Suspend" -> "Ready" [label="Swap In"];
-        }
 
 .. note::
     * Suspension is the bridge between Memory Management and Process Management.
@@ -997,6 +1021,7 @@ Memory Overlays
     * **IBM (International Business Machines):** IBM was the undisputed king of computing at the time. When they released the landmark **System/360** mainframes in 1964, the low-end models had a tiny 16KB memory limit. To make their operating system (**DOS/360**) fit, IBM’s own engineers designed the OS kernel using overlays, which they called **Transients**. Essential hardware error routines ($A$-Transients) and file services ($B$-Transients) were manually swapped in and out of a tiny 556-byte buffer in RAM as needed.
     * **UNIVAC & Sperry Rand:** One of IBM's primary competitors, UNIVAC, utilized sophisticated overlay systems in their **EXEC I** and **EXEC II** operating systems for the UNIVAC 1107/1108 mainframes.
     * **NASA & The Aerospace Industry:**
+
     NASA's early flight computers had strict weight and power limits, meaning very little memory. The **Space Shuttle Primary Avionics System Software (PASS)** famously relied heavily on meticulously programmed overlays to manage navigation, liftoff, and landing sequences within strict hardware constraints.
 
     ---
@@ -1006,10 +1031,15 @@ Memory Overlays
     History repeated itself two decades later when personal computers emerged. Although microprocessor memory was cheaper, early PC architectures introduced a new artificial bottleneck: **The 640KB Barrier**.
 
     * **Microsoft and IBM (MS-DOS / PC DOS):**
+
     When the IBM PC was released in 1981 running Microsoft's MS-DOS, it used the Intel 8086/8088 processor. Because of how the system architecture was designed, standard user applications were strictly limited to **640KB of "Conventional Memory"**. As software grew more complex, companies hit a brick wall.
+
     * **Lotus Development Corporation (Lotus 1-2-3):**
+
     The killer app of the 1980s was *Lotus 1-2-3*, a massive spreadsheet program that businesses ran on IBM PCs. To allow users to build large spreadsheets without running out of the 640KB RAM, Lotus developers manually chopped their software into overlays. The core math engine stayed in memory, while graph drawing modules, printing tools, and file import functions were kept on floppy disks and loaded dynamically into an overlay buffer.
+
     * **Borland (Turbo Pascal / Turbo C):**
+
     Borland was famous for its programming tools. Because compilers require multiple distinct steps (Lexical Analysis $\rightarrow$ Parsing $\rightarrow$ Optimization $\rightarrow$ Code Generation), Borland integrated **Overlay Managers** directly into their compilers. A programmer writing a massive program in Turbo Pascal could simply check a box, and the Borland compiler would automatically generate the overlay tree structure for them.
 
     ---
