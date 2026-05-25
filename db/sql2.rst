@@ -24,17 +24,23 @@ Ahmad Yoosofan
 
 SQL 2
 
-University of Kashan
+https://yoosofan.github.io/slide/db/sql2/
+
+https://yoosofan.github.io/course/db.html
 
 ----
 
-Exists
-===========
-.. class:: rtl-h1
+:class: t2c
 
-  نام عرضه‌کنندگانی را بیابید که قطعه‌ای در شهر آنها باشد
-
+Find the names of suppliers who are located in a city where at least one part is stored
+=======================================================================================
 .. container::
+
+    .. code:: sql
+      :class: substep
+
+      select distinct sname
+      from s natural join p;
 
     .. code:: sql
       :class: substep
@@ -45,15 +51,7 @@ Exists
           select *
           from p
           where p.city = s.city
-        )
-      ;
-
-    .. code:: sql
-      :class: substep
-
-      select distinct sname
-      from s natural join p
-      ; --  may have different result
+        );
 
 .. csv-table::
   :header-rows: 1
@@ -65,83 +63,62 @@ Exists
   Blake
   Clark
 
-----
+.. :
 
-:class: t2c
+    Gemini AI
+    estion:
 
-.. class:: rtl-h1
+    Option 1 (Clean & Natural - Recommended): > "Find the names of suppliers who are located in a city where at least one part is stored."
 
-  نام قطعاتی را بیابید که وزن آنها از دست کم یک قطعهٔ دیگر بیشتر باشد
+    Option 2 (Concise): > "Find the names of suppliers whose city matches the city of any part."
 
-.. container::
-
-    .. code:: sql
-
-      select pname
-      from p as T
-      where exists (
-          select *
-          from p
-          where T.weight > p.weight
-        )
-      ;
-
-    .. code:: sql
-
-      select distinct T.pname
-      from p as T join p on
-        T.pn < p.pn and
-        T.weight > p.weight
-        ; -- wrong
-
-    .. code:: sql
-
-      select distinct T.pname
-      from p as T join p on
-        T.pn <> p.pn and
-        T.weight > p.weight
-        ; -- May have different result
-
-
-.. container::
-
-	.. code:: sql
-
-		  select distinct T.pname
-		  from p as T join p on
-			T.weight > p.weight
-			; -- May have different result
-
-	.. csv-table::
-	  :header-rows: 1
-	  :class: smallerelementwithfullborder
-
-	  pname
-	  Bolt
-	  Screw
-	  Screw
-	  Cog
+    Option 3 (Formal/Mathematical): > "Retrieve the names of suppliers such that there exists a part in the same city."
 
 ----
 
+
 :class: t2c
 
-.. class:: rtl-h1
+Find the names of parts that weigh more than at least one other part
+====================================================================
+.. class: rtl-h1
 
-  نام قطعاتی را بیابید که وزن آنها دست کم از یک قطعهٔ دیگر در شهر پاریس بیشتر باشد
+      نام قطعاتی را بیابید که وزن آنها از دست کم یک قطعهٔ دیگر بیشتر باشد
 
 .. code:: sql
   :class: substep
 
-  select pname
+  select distinct T.pname
+  from p as T join p on
+    T.pn <> p.pn and
+    T.weight > p.weight;
+
+.. code:: sql
+  :class: substep
+
+  select distinct T.pname
+  from p as T join p on
+  T.weight > p.weight;
+
+.. code:: sql
+  :class: substep
+
+  select distinct pname
   from p as T
   where exists (
       select *
       from p
-      where city = 'Paris' and
-        T.weight > p.weight
-    )
-  ;
+      where T.weight > p.weight
+    );
+
+.. code:: sql
+  :class: substep
+
+  select distinct T.pname
+  from p as T join p on
+    T.pn < p.pn and
+    T.weight > p.weight
+    ; -- incorrect
 
 .. csv-table::
   :header-rows: 1
@@ -150,21 +127,86 @@ Exists
   pname
   Bolt
   Screw
-  Screw
-  Cog
+
+.. :
+
+    Gemini AI
+
+    Option 1 (Clean & Natural - Recommended): > "Find the names of parts that weigh more than at least one other part."
+
+    Option 2 (Direct & Formal): > "Find the names of parts for which there exists another part with a lower weight."
+
+    Option 3 (Comparative): > "List the names of parts that are not the absolute lightest part in the database
 
 ----
 
 
 :class: t2c
 
-.. class:: rtl-h1
+Find the names of parts that weigh more than at least one part in Paris
+=======================================================================
+.. class: rtl-h1
 
-  نام قطعاتی را بیابید که وزن آنها از همهٔ قطعات دیگر کمتر باشد
+      نام قطعاتی را بیابید که وزن آنها دست کم از یک قطعهٔ دیگر در شهر پاریس بیشتر باشد
 
-.. class:: rtl-h1 substep
+.. code:: sql
+  :class: substep
 
-    نام قطعاتی را بیابید که وزن آنها از هیچ قطعهٔ دیگری بیشتر نباشد
+  select distinct pname
+  from p as T
+  where exists (
+      select *
+      from p
+      where city = 'Paris' and
+        T.weight > p.weight
+    );
+
+.. code:: sql
+  :class: substep
+
+  select distinct pname
+  from p as T
+  where exists (
+      select *
+      from p
+      where city = 'Paris' and
+        T.weight > weight
+    );
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  pname
+  Bolt
+  Screw
+  Cog
+
+----
+
+:class: t2c
+
+Find the names of the lightest parts
+====================================
+
+.. class: rtl-h1
+
+      نام قطعاتی را بیابید که وزن آنها از همهٔ قطعات دیگر کمتر باشد
+
+Find the names of the parts such that no other part weighs more than them
+-------------------------------------------------------------------------
+
+.. class: rtl-h1 substep
+
+      نام قطعاتی را بیابید که وزن آنها از هیچ قطعهٔ دیگری بیشتر نباشد
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder
+
+  pname
+  Nut
+  Cam
 
 .. code:: sql
   :class: substep
@@ -175,18 +217,28 @@ Exists
       select *
       from p
       where T.weight > p.weight
-    )
-  ;
+    );
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder
+  :class: smallerelementwithfullborder substep
 
   pname
   Nut
   Cam
   Nut
   Bolt
+
+.. code:: sql
+  :class: substep
+
+  select pname
+  from p as T
+  where not exists (
+      select *
+      from p
+      where T.weight > p.weight
+    ) and T.weight is not null;
 
 .. csv-table::
   :header-rows: 1
@@ -195,9 +247,6 @@ Exists
   pname, weight
   Nut,  12
   Cam,  12
-  Nut,
-  Bolt,
-
 
 ----
 

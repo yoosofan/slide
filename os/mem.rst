@@ -21,19 +21,9 @@ Memory Management
 ---------------------------
 Ahmad Yoosofan
 
-University of Kashan
+https://yoosofan.github.io/slide/os/mem/
 
-.. :
-
-  ----
-
-  .. class:: rtl-h1
-
-      تخصیص حافظهٔ پیوسته به فرآیندها
-
-  .. class:: rtl-h2
-
-      به فرآیندها حافظهٔ پیوسته‌ای داده شود.
+https://yoosofan.github.io/course/os.html
 
 ----
 

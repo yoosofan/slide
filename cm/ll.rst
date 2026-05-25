@@ -21,8 +21,6 @@ Ahmad Yoosofan
 
 Compiler course
 
-University of Kashan
-
 https://yoosofan.github.io/course/compiler.html
 
 ----
