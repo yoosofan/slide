@@ -193,7 +193,7 @@ Find the names of the lightest parts
 
       نام قطعاتی را بیابید که وزن آنها از همهٔ قطعات دیگر کمتر باشد
 
-Find the names of the parts such that no other part weighs more than them
+Find the names of the parts such that no other part weighs less than them
 -------------------------------------------------------------------------
 
 .. class: rtl-h1 substep
@@ -252,33 +252,55 @@ Find the names of the parts such that no other part weighs more than them
 
 :class: t2c
 
-.. class:: rtl-h1
+Find the cities of suppliers that contain no parts
+==================================================
+.. class: rtl-h1
 
-  نام شهرهای عرضه کنندگانی را بیابید که در آن شهرها هیچ قطعه‌ای وجود ندارد
+      نام شهرهای عرضه کنندگانی را بیابید که در آن شهرها هیچ قطعه‌ای وجود ندارد
 
-.. container::
+.. code:: sql
+  :class: substep
+  :number-lines:
 
-    .. code:: sql
-      :class: substep
-
-      select city
-      from   s
-      where not exists(
-          select *
-          from p
-          where p.city = s.city
-        )
-      ;
-
-    .. code:: sql
-      :class: substep
-
-      select city
-      from s
-      except all
-      select city
+  select distinct city
+  from   s
+  where not exists(
+      select *
       from p
-      ;
+      where p.city = s.city
+    );
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select city
+  from s
+  except
+  select city
+  from p;
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select city
+  from   s
+  where not exists(
+      select *
+      from p
+      where p.city = s.city
+    );
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select city
+  from s
+  except all
+  select city
+  from p;
 
 .. csv-table::
   :header-rows: 1
@@ -292,16 +314,23 @@ Find the names of the parts such that no other part weighs more than them
 
 :class: t2c
 
-.. class:: rtl-h1
+Find the names of parts that are supplied exclusively by suppliers located in the same city, or are not supplied at all
+=======================================================================================================================
+.. class: rtl-h1
 
-    نام قطعه‌هایی را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند یا اصلاً عرضه نشده باشند.
+        نام قطعه‌هایی را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند یا اصلاً عرضه نشده باشند.
 
-.. class:: rtl-h1 substep
+.. class: rtl-h1 substep
 
-    نام قطعه‌هایی را بیابید که عرضه‌کننده‌ای خارج از شهر آن قطعه‌ها، آنها را عرضه نکرده باشند
+        نام قطعه‌هایی را بیابید که عرضه‌کننده‌ای خارج از شهر آن قطعه‌ها، آنها را عرضه نکرده باشند
+
+.. class:: substep
+
+**Find the names of parts that have not been supplied by any supplier located in a different city**
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   select pname
   from   p
@@ -310,9 +339,13 @@ Find the names of the parts such that no other part weighs more than them
       from s natural join sp
       where sp.pn = p.pn and
         p.city <> s.city
-    )
-  ;
-  -- or
+    );
+
+
+.. code:: sql
+  :class: substep
+  :number-lines:
+
   select pname
   from   p
   where not exists(
@@ -325,8 +358,7 @@ Find the names of the parts such that no other part weighs more than them
           where  sp.pn = p.pn and
             sp.sn = s.sn
         )
-    )
-  ;
+    );
 
 .. csv-table::
   :header-rows: 1
@@ -338,18 +370,19 @@ Find the names of the parts such that no other part weighs more than them
     Nut
     Bolt
 
-
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+Find the names of supplied parts that are provided only by suppliers located in the same city
+=============================================================================================
+.. class: rtl-h1
 
-    نام قطعه‌های عرضه شده‌ای را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند.
-
+        نام قطعه‌های عرضه شده‌ای را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند.
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   select pname
   from   p natural join sp as T
@@ -371,6 +404,7 @@ Find the names of the parts such that no other part weighs more than them
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   select pname
   from   p natural join sp
@@ -386,16 +420,38 @@ Find the names of the parts such that no other part weighs more than them
         )
     );
 
+.. code:: sql
+  :class: substep
+  :number-lines:
+
+  select pname
+  from   p
+  where exists(select * from sp where sp.pn=p.pn)
+      and not exists( -- Run to see the differnce
+      select *  -- Add distinct to previous SQLs
+      from s
+      where s.city <> p.city and
+        exists(
+          select *
+          from sp
+          where  sp.pn = p.pn and
+            sp.sn = s.sn
+        )
+    );
+
 ----
 
 :class: t2c
 
-.. class:: rtl-h1
+List the distinct names of parts that are supplied, such that all of their suppliers reside in the part's city
+==============================================================================================================
+.. class: rtl-h1
 
-      نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
+          نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
 
 .. code:: sql
   :class: substep
+  :number-lines:
 
   select distinct pname
   from p natural join sp
@@ -405,24 +461,41 @@ Find the names of the parts such that no other part weighs more than them
       where sp.sn = s.sn and
         sp.pn = p.pn and
         p.city <> s.city
-    )
-  ;
-
+    );
 
 .. code:: sql
     :class: substep
+    :number-lines:
 
       select pname -- ریحانه زمانیان
       from p natural join sp
     except
       select pname
       from p
-      where exist(
+      where exists(
         select *
         from s natural join sp
         where sp.pn=p.pn and
             p.city <> s.city
       ) ;
+
+.. code:: sql
+    :class: substep
+    :number-lines:
+
+    SELECT DISTINCT p1.pname
+    FROM p p1   --- Gemini AI
+    WHERE EXISTS (
+        SELECT 1
+        FROM sp sp_test
+        WHERE sp_test.pn = p1.pn
+    ) AND NOT EXISTS (
+        SELECT 1
+        FROM sp sp1
+        JOIN s s1 ON sp1.sn = s1.sn
+        WHERE sp1.pn = p1.pn
+        AND s1.city <> p1.city
+    );
 
 .. csv-table::
   :header-rows: 1

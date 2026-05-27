@@ -1044,36 +1044,99 @@ Memory Overlays
 
 ----
 
-.. class:: rtl-h1
+:class: t2c
 
-    سلسله مراتب حافظه
-
+Cache Memory & Locality
+=======================
 .. image:: img/memory/memory_hierarchy_1_4_StorageDeviceHierarchy.jpg
    :align: center
+   :width: 500px
 
 .. :
 
     `cs.uic.edu <https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg>`_
 
+    ----
+
+    .. class:: rtl-h1
+
+        سلسله مراتب حافظه جزئی‌تر
+
+    .. image:: img/memory/memory_hierarchy_hei.png
+       :align: center
+
+    .. :
+
+      https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg
+      http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
+
+.. class:: substep
+
+* **The Principle of Locality**
+* Programs do not access memory completely at random
+* They cluster around specific addresses.
+* **Temporal Locality**
+    * loop variables
+    * function parameters
+    * variable sum
+* **Spatial Locality**
+    * sequential array traversal
+    * a[i+1] after a[i]
+    * streaming instructions
+* **The Cache Mechanics**
+* **Cache Hit**
+* **Cache Miss**
+* **Line Size**
+    * fixed-size blocks
+    * Cache Lines
+
 ----
 
-.. class:: rtl-h1
+:class: t2c
 
-    سلسله مراتب حافظه جزئی‌تر
+Cache Management & OS Implications
+==================================
+.. class:: substep
 
-.. image:: img/memory/memory_hierarchy_hei.png
-   :align: center
+* Cache
+    * Smaller
+    * faster storage device
+    * subset of the data
+* Memory hierarchy
+    * level k for level k+1
+    * Registers as cache
+    * Main memory for the disk
+    * Disk from remote storage
+* Locality of access is the key
+    * Most accesses by faster levels
+    * Few accesses by slower levels
+* **Write Policies (Coherency)**
+    * Write-Through(Safe but slower).
+    * Write-Back, modify (dirty) bit
+* Similar to other Levels
+    * rsync (unix, Linux, FreeBSD)
+    * Don't exactly similar to backup
+* **The Hidden Cost of Context Switching**
+    * Process P0 to Process P1
+    * CPU cache P0's data
+    * P1 suffers Cache Misses
+    * **Cache Pollution** or "Warm-up"
+
+.. class: rtl-h1
+
+      حافظهٔ نهان دو سطحی در یک پردازندهٔ واقعی
+
+    .. image:: img/memory/memory_cache_image025.jpg
+       :align: center
 
 .. :
 
-  https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg
-  http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
+    `link <https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg>`_
 
-----
-
-.. class:: rtl-h1
-
-    حافظهٔ نهان
+.. note::
+    - Lecture Insight: Connect this to the Microkernel vs. Monolithic debate. Microkernels require frequent IPC and context switching, meaning they suffer heavily from cache pollution because the cache is constantly cleared of relevant server data.
+    - Multicore Cache Coherency: Briefly mention the challenge of multiple CPU cores having different values for the same RAM address in their local L1 caches, which requires hardware snooping protocols.
+    - Key Takeaway: The OS designer must write code that minimizes context switches and structure data alignment to keep the CPU cache "hot".
 
 .. image:: img/memory/memory_cache_Cache_hierarchy-example.svg
    :align: center
@@ -1085,28 +1148,31 @@ Memory Overlays
 
 ----
 
-.. class:: rtl-h1
-
-    حافظهٔ نهان دو سطحی در یک پردازندهٔ واقعی
-
-.. image:: img/memory/memory_cache_image025.jpg
-   :align: center
-
-.. :
-
-    `link <https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg>`_
-
-----
-
-.. class:: rtl-h1
+.. class: rtl-h1
 
     الگوریتم خواندن و نوشتن از حافظهٔ نهان
 
 .. image:: img/memory/memory_cache_read_write_algorithm_Write-back_with_write-allocation.svg
    :align: center
-   :width: 500px
-   :height: 650px
+   :height: 750px
 
+----
+
+:class: t2c
+
+.. class:: rtl-h1
+
+  اثر نوع برنامه‌نویسی و کامپایلر بر حافظهٔ مجازی
+
+.. include:: src/memory_virtual_effect_of_array_programming_row.cpp
+  :code: cpp
+  :number-lines:
+  :class: ltr
+
+.. include:: src/memory_virtual_effect_of_array_programming_column.cpp
+  :code: cpp
+  :number-lines:
+  :class: ltr
 
 ----
 
@@ -1163,6 +1229,56 @@ Effective Access Time (EAT)
     </tr></table>
     <a href="https://stackoverflow.com/questions/4087280/approximate-cost-to-access-various-caches-and-main-memory#4087315">[link]</a>
     </div>
+
+----
+
+:class: t2c
+
+Motherboard
+==============
+.. image:: img/in/Parts-of-Motherboard-and-their-functions-latest.jpg
+
+.. image:: img/memory/GigabyteZ77-HD4-Top.jpg
+    :align: center
+    :height: 650px
+
+----
+
+Direct Memory Access(DMA)
+=========================
+.. image:: img/memory/system-configuration-with-dmac.png
+
+----
+
+:class: t2c
+
+BIOS
+==========
+.. image:: img/in/simple_poweron_computer.png
+   :align: center
+
+.. image:: img/in/Award_BIOS_setup_utility.png
+   :align: center
+   :class: substep
+
+.. :
+
+    .. image:: img/in/bios.gif
+       :align: center
+
+----
+
+:class: t2c
+
+Boot sequence
+==================
+.. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
+    :align: center
+    :width: 600px
+
+.. image:: img/in/boot_sequence.png
+    :align: center
+    :class: substep
 
 ----
 
@@ -1347,56 +1463,6 @@ Effects on current situations
 
 Monolithic
 ==========
-
-----
-
-:class: t2c
-
-Motherboard
-==============
-.. image:: img/in/Parts-of-Motherboard-and-their-functions-latest.jpg
-
-.. image:: img/memory/GigabyteZ77-HD4-Top.jpg
-    :align: center
-    :height: 650px
-
-----
-
-Direct Memory Access(DMA)
-=========================
-.. image:: img/memory/system-configuration-with-dmac.png
-
-----
-
-:class: t2c
-
-BIOS
-==========
-.. image:: img/in/simple_poweron_computer.png
-   :align: center
-
-.. image:: img/in/Award_BIOS_setup_utility.png
-   :align: center
-   :class: substep
-
-.. :
-
-    .. image:: img/in/bios.gif
-       :align: center
-
-----
-
-:class: t2c
-
-Boot sequence
-==================
-.. image:: img/in/GRUB_with_ubuntu_and_windows_vista.png
-    :align: center
-    :width: 600px
-
-.. image:: img/in/boot_sequence.png
-    :align: center
-    :class: substep
 
 ----
 

@@ -249,10 +249,16 @@ PTBR
 
 ----
 
-TLB
-======
+TLB (Translation Lookaside Buffer)
+==================================
 .. image:: img/memory/paging_hardware_with_TLB.png
    :align: center
+
+.. :
+
+    * A specialized hardware cache used exclusively for memory management.
+    * It caches recent virtual-to-physical address translations from the page tables.
+    * A TLB miss forces a slow "page table walk" through physical RAM.
 
 ----
 

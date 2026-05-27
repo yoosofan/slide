@@ -564,18 +564,19 @@ Wrong Calculator Grammar(I)
   .. class:: substep
 
   #. E  → T E'
-  #. E' → + E' | λ
+  #. E' → + E | λ
   #. T  → F T'
-  #. T' → * T' |  λ
+  #. T' → * T |  λ
   #. F  → ( E ) |  a
 
 .. class:: substep
 
-#. first(E)
-#. = first(T)=first(F)
-#. = { a, ( }
-#. first(E') = { + ,  λ}
-#. first(T') = { * ,  λ}
+#. first(T) ⊂ first(E) [ E → T  E' ]
+#. first(F) ⊂ first(T) [ T → F T' ]
+#. first(F) = { a, ( } [ F → ( E ) | a ]
+#. first(E) = first(T) = first(F)
+#. first(E') = { + , λ} [ E' → + E' | λ ]
+#. first(T') = { * , λ} [ T' → * T' | λ ]
 
 .. csv-table::
   :header-rows: 1
@@ -617,7 +618,7 @@ Adding λ to table
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: smallerelementwithfullborder equal-col substep
 
   " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
   E  , T E' ,          ,         , T E'   ,        ,
@@ -630,8 +631,8 @@ Adding λ to table
 
 :class: t2c
 
-Wrong Calculator Grammar(II)
-==========================================
+Parsing `a+a*a$` for right place of λ in LL(1) Table
+====================================================
 .. container::
 
   #. E  → T E'
@@ -658,14 +659,14 @@ Wrong Calculator Grammar(II)
 
     " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    , $
     E  , T E' ,          ,         ,  T E'  ,        ,
-    E' ,      ,  `+` E   ,         ,        ,    λ   , λ
+    E' ,      ,  `+` E   ,         ,        ,        , λ
     T  , F T' ,          ,         ,  F T'  ,        ,
-    T' ,      ,    λ     , `*` T   ,        ,    λ   , λ
+    T' ,      ,    λ     , `*` T   ,        ,        , λ
     F  ,   a  ,          ,         , ( E )  ,        ,
 
 .. csv-table::
   :header-rows: 1
-  :class: smallerelementwithfullborder equal-col
+  :class: smallerelementwithfullborder equal-col substep
 
   Stack       ,  input      , action
   E           $ , a + a * a $ , E → T E'
@@ -679,14 +680,72 @@ Wrong Calculator Grammar(II)
   T E'        $ , a * a     $ , T → F T'
   F T' E'     $ , a * a     $ , F → a
   a T' E'     $ , a * a     $ , Remove a
-  T' E'       $ , `*` a       $ , T' → * T
-  `*` T E'      $ , `*` a       $ , Remove *
+  T' E'       $ , `*` a     $ , T' → * T
+  `*` T E'    $ , `*` a    $ , Remove *
   T  E'       $ , a         $ , T → F T'
   F T'  E'    $ , a         $ , F → a
   a T' E'     $ , a         $ , Remove a
   T' E'       $ ,           $ , T' → λ
   E'          $ ,           $ , E' → λ
               $ ,           $ , accept
+
+----
+
+:class: t2c
+
+Parsing `(a+a)$` for right place of λ in LL(1) Table
+====================================================
+.. container::
+
+  #. E  → T E'
+  #. E' → + E | λ
+  #. T  → F T'
+  #. T' → * T | λ
+  #. F  → ( E ) | a
+
+  .. csv-table::
+    :header-rows: 1
+    :class: substep smallerelementwithfullborder equal-col
+
+    " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    , $
+    E  , T E' ,          ,         ,  T E'  ,        ,
+    E' ,  λ   ,  `+` E   ,         ,        ,   λ    , λ
+    T  , F T' ,          ,         ,  F T'  ,        ,
+    T' ,   λ  ,    λ     , `*` T   ,        ,   λ    , λ
+    F  ,   a  ,          ,         , ( E )  ,        ,
+
+  .. csv-table::
+    :header-rows: 1
+    :class: smallerelementwithfullborder equal-col substep
+
+    Stack            ,  input      , action
+    E               $, ( a + a ) $ , E → T E'
+    T E'            $, ( a + a ) $ , T → F T'
+    F T' E'         $, ( a + a ) $ , F → ( E )
+    ( E ) T' E'     $, ( a + a ) $ , Remove (
+    E ) T' E'       $,   a + a ) $ , E → T E'
+
+.. csv-table::
+  :header-rows: 1
+  :class: smallerelementwithfullborder equal-col substep
+
+  Stack            ,  input      , action
+  T E' ) T' E'    $,   a + a ) $ , T → F T'
+  F T' E' ) T' E' $,   a + a ) $ , F → a
+  a T' E' ) T' E' $,   a + a ) $ , Remove a
+  T' E' ) T' E'   $,   `+` a ) $ , T' → λ
+  E' ) T' E'      $,   `+` a ) $ , T' → λ
+  `+` E ) T' E'   $, `+` a )   $ , Remove +
+  E ) T' E'       $,       a ) $ , E → T E'
+  T E' ) T' E'    $,       a ) $ , T → F T'
+  F T' E' ) T' E' $,       a ) $ , F → a
+  a T' E' ) T' E' $,       a ) $ , Remove a
+  T' E' ) T' E'   $,         ) $ , T' → λ
+  E' ) T' E'      $,         ) $ , E' → λ
+  ) T' E'         $,         ) $ , Remove )
+  T' E'           $,           $ , T' → λ
+  E'              $,           $ , E' → λ
+                  $,           $ , Accept
 
 ----
 
