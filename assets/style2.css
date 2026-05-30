@@ -6,19 +6,22 @@
 
    TODO: Styles for tables? blockquotes?
 
+   TODO: Styles for '@media (prefers-color-scheme: dark)' and for
+   class=darkmode on the BODY or on slides.
+
    Layout of a slide:
 
-   +---------------------------------------+-------+
-   |                   1em                 | logo  |
-   |   +-------------------------------+   |       |
-   |   |                               |   |       |  ^
-   |   |                               |   |       |  |
-   |1em|                               |1em| 5.5em | 23em
-   |   |                               |   |       |  |
-   |   |                               |   |       |  v
-   |   +-------------------------------+   |       |
-   |                   1em                 |       |
-   +---------------------------------------+-------+
+   +-------+---------------------------------------+
+   |       |                   1em                 |
+   |       |   +-------------------------------+   |
+   | LOGO  |   |                ^              |   |
+   |       |   |                |              |   |
+   | 5.5em |1em|              21em             |1em|
+   |       |   |                |              |   |
+   |       |   |                v              |   |
+   |       |   +-------------------------------+   |
+   |   #   |                   1em                 |
+   +-------+---------------------------------------+
 
    A = 16/9  = aspect ratio
    N = 23    = height in rem (i.e., 21 lines + 2 x 1 rem padding)
@@ -26,7 +29,7 @@
    C = 1.6   = font size (and logo size) multiplier for cover pages
    w = N*A   = width of slide in rem
 
-   Created: 13 December 2019
+   Created: 19 December 2019
    Author: Bert Bos <bert@w3.org>
 */
 
@@ -34,39 +37,38 @@
 html {font: 1em/1.3 Lato, Carlito, Calibri, Open Sans, Helvetica Neue,
     Helvetica, Arial, Liberation Sans, sans-serif;
   font-size-adjust: 0.506; font-variant-numeric: oldstyle-nums tabular-nums}
-body {background: url(linen.png) #595b60; counter-reset: slide; margin: 2em;
-  color: white}
+body {background: url(linen.png) #595b60; counter-reset: slide;
+  margin: 2em 2em 5em; color: white}
 address {/*font-family: serif*/}
-h1, h2 {font-size: 2em; line-height: 1.1; margin: 0 0 0.3em 0;
-  color: hsl(270,85%,25%)}
-.full {width: 40.889rem; /*= w */ height: 23rem; /*= N */}
+h1, h2 {font-size: 2em; line-height: 1.1; margin: 0 0 0.3em 0}
+.full, .comment {width: 40.889rem; /*= w */ height: 23rem; /*= N */}
 .slide {width: 40.889rem; /*= w */ min-height: 23rem; /*= N */
   color: black; box-shadow: 0 0.4rem 0.6rem #000; line-height: 1.6;
-  padding: 1rem 6.5rem /*= L + 1 */ 1rem 1rem; position: relative;
+  padding: 1rem 1rem 1rem 6.5rem /*= L + 1 */; position: relative;
   box-sizing: border-box; z-index: 0; display: inline-block;
   margin: 4rem 2rem 0 0; vertical-align: bottom; counter-increment: slide;
-  scroll-behavior: smooth;
-  border-radius: 0.5rem; text-shadow: 0 0 1px white, 0 0 1px white,
-    0 0 1px white, 0 0 1px white, 0 0 1px white;
-  background: 36.389rem /*= w - L + 1 */ 18.5rem /*= N - L + 1 */
-    / 3.5rem /*= L - 2 */ auto url(b6plus-logo.svg) no-repeat,
-    bottom right / 5.5em /*= L */ 100%
-    linear-gradient(hsl(270,45%,25%), hsl(270,42%,92%)) no-repeat, white}
-.slide.textfit, .textfit .slide {height: 23rem /*= L */}
-.full .slide {height: 23rem /*= N */}
+  scroll-behavior: smooth; border-radius: 0.5rem;
+  background: 1rem 50% / 3.5rem /*= L-2 */ auto url(b6plus-logo.svg) no-repeat,
+    top left / 5.5rem /*= L */ 100% url(banner2.svg) no-repeat,
+    bottom right / 12% auto url(swirl.svg) no-repeat, white}
+.full .slide {height: 23rem; /*= N */}
+.slide h1::after, slide h2::after {content: ""; display: block;
+  margin-left: -3.5rem /* = -1 - L/2 */; height: 0.2rem;
+  background: linear-gradient(to right,#CB6628,#FFF,#CB6628,#CB6628,#CB6628)}
+.slide.cover h1::after, slide.cover h2::after {content: none}
 .slide:target {outline: lime solid 0.5rem; outline-offset: 1rem}
-.slide.side {padding-left: 11.717rem /*= (w - 1 - (L + 1) - 1) * 30% + 2 */}
-.slide.side.right, .slide.side.r {padding-left: 1rem;
-  padding-right: 17.217rem; /*= (w - 1 - (L + 1) - 1) * 30% + (L + 1) + 1 */}
+.slide.side {padding-left: 17.217rem /*= L + 2 + (w - L - 3) * 30% */}
+.slide.side.right, .slide.side.r {padding-left: 6.5rem /*= L + 1 */;
+  padding-right: 11.717rem; /*= (w - L - 3) * 30% + 2 */}
 .side .side {position: absolute; top: 4.3478% /*= 1/N */;
-  left: 2.4457%; /*= 1/w */
-  width: 23.764%; /*= (w - 1 - (L + 1) - 1) * 30%  / w */}
-.side.right .side, .side.r .side {left: 59.606% /*= ((w - L) * 70% - 40%)/w */}
+  left: 6.5rem; /*= L + 1 */
+  width: 23.764%; /*= (w - L - 3) * 30% / w */}
+.side.right .side, .side.r .side {left: 73.791% /*= (L + 2 + (w - L - 3) * 70%) / w */}
 @supports (transform: translate(-50%,-50%)) {
   .side .side {top: 50%; transform: translate(-50%,-50%);
-    left: 14.327%; /*= ((w - 1 - (L + 1) - 1) * 30% / 2 + 1 ) / w */}
+    left: 27.779%; /*= (L + 1 + (w - L - 3) * 30% / 2) / w */}
   .side.right .side, .side.r .side {
-    left: 72.221% /*= ((w - L - 1) * 85% + 30%) / w */}
+    left: 85.673% /*= (L + 2 + (w - L - 3) * 85%) / w */}
 }
 .note {font-size: 80%}
 .cover .note {font-size: 40%}
@@ -83,47 +85,52 @@ h1, h2 {font-size: 2em; line-height: 1.1; margin: 0 0 0.3em 0;
 }
 
 /* Notes between the slides */
-.comment {background: black; color: white; padding: 1rem 1rem;
-  columns: 25em; font-family: Times New Roman, Times, serif;
-  margin: 4rem 0 0; widows: 2; orphans: 2;
-  column-rule: thin solid; column-gap: 2rem}
-.comment h2 {color: inherit}
+.comment {background: hsl(270,20%,90%); color: black; padding: 1rem 1rem;
+  font-family: Times New Roman, Times, serif; box-sizing: border-box;
+  display: inline-block; border-radius: 0.5em; margin: 4em 2em 0 0;
+  box-shadow: 0 0.4em 0.6em #000; vertical-align: bottom; overflow: auto}
 .comment :link, .comment :visited {color: inherit; text-decoration: underline}
-.comment code {background: #333}
 .comment pre {margin-left: 1em; font-family: Helvetica, sans-serif}
 .comment :first-child {margin-top: 0}
-.comment dd {margin-left: 1em}
-.comment ul > li::before {color: inherit}
+.comment dd, .comment ul, .comment ol {padding-left: 1em; margin-left: 0}
+.comment dd {margin-bottom: 1em}
+.comment h1, .comment h2, .comment h3, .comment h4, .comment h5, .comment h6 {
+  break-after: avoid}
+.comment:before {content: "notes"; display: block;
+  text-align: center; font-size: small; font-variant: small-caps;
+  border-bottom: thin solid; padding-bottom: 0.3em; margin-bottom: 1rem}
 
-dt {font-weight: bold}
+/* Long comments */
+.comment.long {columns: 25em; column-rule: thin solid; column-gap: 2rem;
+  widows: 2; orphans: 2; width: auto; height: auto; display: block;
+  border-radius: 0; overflow: auto}
+.comment.long:before {content: none}
+
 img {max-width: 100%}
 .num {font-variant-numeric: oldstyle-nums tabular-nums diagonal-fractions}
 code, pre {font-family: Andale Mono, Courier, monospace}
-.slide code {background: #eee; padding: 0.1em 0.3em; border-radius: 0.3em;
-  text-shadow: none}
+code {background: #eee; padding: 0.1em 0.3em; border-radius: 0.3em}
 sub, sup {line-height: 0.5}
-.slide pre {padding: 0 0.2em; background: black; color: hsl(120,100%,70%);
-  text-shadow: none}
+.slide pre {padding: 0 0.2em; background: black; color: hsl(120,100%,70%)}
 ol {padding-left: 2.5em}
 ul {padding-left: 1em}
 ol, ul {margin: 1em 0}
 li ul, li ol {margin: 0}
 ul > li {list-style: none}
-ul > li::before {content: "\25A0"; content: "\25A0" / "bullet";
-  display: inline-block; width: 1em;
+ul > li::before {content: "\25A0"; display: inline-block; width: 1em;
   margin-left: -1em; color: hsl(270,85%,25%)}
 
 /* Explicit placement on a 3x3 grid */
 .place {position: absolute; box-sizing: border-box;
-  max-width: 25.589%; /*= (w - 1 - (L + 1) - 2) / 3 / w */
-  top: 50%; left: 43.274%; /*= ((w - 1 - (L + 1)) / 2 + 1) / w */
+  max-width: 25.589%; /*= (w - L - 4) / 3 / w */
+  top: 50%; left: 56.726%; /*= (L + 1 + (w - L - 2) / 2) / w */
   transform: translate(-50%, -50%); text-align: center}
 .place.t, .place.top {top: 4.3478%; /*= 1/N */ transform: translate(-50%,0)}
 .place.b, .place.bottom {top: auto; bottom: 4.3478% /*= 1/N */;
   transform: translate(-50%,0)}
-.place.l, .place.left {left: 2.4457%; /*= 1/w*/ transform: translate(0,-50%);
-  text-align: left}
-.place.r, .place.right {left: auto; right: 15.897%; /*= (L + 1)/w */
+.place.l, .place.left {left: 15.897%; /*= (L + 1) / w */
+  transform: translate(0,-50%); text-align: left}
+.place.r, .place.right {left: auto; right: 2.4457%; /*= 1 / w */
   transform: translate(0,-50%); text-align: right}
 .place.t.l, .place.top.left, .place.t.r, .place.top.right, .place.b.l,
 .place.bottom.left, .place.b.r, .place.bottom.right {transform: none}
@@ -136,24 +143,25 @@ pre.numbered::before {color: white; text-align: right; white-space: pre-line;
   border-right: thin solid; padding-right: 0.2em; /*background: white*/}
 
 /* Cover pages */
-.slide.cover {font-size: 160% /*= C */; text-align: right;
-  padding-right: 9.8rem /*= C * L + 1 */}
+.slide.cover {font-size: 160% /*= C */; text-align: right}
 .slide.cover address {position: absolute; bottom: 4.3478% /*= 1/N */;
-  left: 2.4457% /*= 1/w */; right: 23.967% /*= (C * L + 1)/w */;
+  left: 15.897% /*= (L + 1)/w */; right: 2.4457% /*= 1 / w */;
   line-height: 1.3}
 
 /* Full-size image overlays */
-img.cover, img.fit {position: absolute; z-index: -1; top: 0; left: 0;
+img.cover, img.fit {position: absolute; z-index: -1; top: 0;
+  left: 5.5rem; /*= L */
   width: 86.549%; /*= (w - L) / w */ height: 100%; object-fit: cover; padding: 0}
 img.fit {object-fit: contain}
 .cover img.cover, .cover img.fit {width: 73.098%; /*= (w - 11) / w */}
 
-/* Slide numbers in upper right corner */
+/* Slide numbers in lower left corner */
 .slide::after {content: counter(slide);
-  content: counter(slide) / "slide " counter(slide); /* draft syntax */
-  color: white; position: absolute;
-  top: 1rem; line-height: 1; font-weight: bold; right: 0; width: 5.5em /*= L */;
-  text-align: center; text-shadow: none}
+  content: counter(slide) / "slide number " counter(slide); /* draft syntax */
+  color: hsl(270,85%,25%);
+  position: absolute; bottom: 1rem; line-height: 1; font-weight: bold; left: 0;
+  width: 5.5em /*= L */;
+  text-align: center}
 .slide.clear::after {content: none}
 
 /* Layout in slide mode (when body has class=full) */
@@ -170,12 +178,11 @@ img.fit {object-fit: contain}
 /* Progress bar. A data-timing attribute on body indicates the slide
    show is automatic and the class "manual" says it is currently
    paused. */
-.full .progress {position: absolute; top: 0; left: 0; height: 1px;
+.full .progress {position: absolute; bottom: 0; left: 0; height: 1px;
   background: linear-gradient(to right, hsla(0,100%,50%,0),hsla(0,100%,50%,1));
   margin: 0; padding: 0; z-index: 1}
-[data-timing].manual::before {content: url(pause.svg); position: absolute;
-  top: calc(50% - 2em); left: calc(50% - 2em); width: 4em; height: 4em;
-  z-index: 1}
+[data-timing].manual .progress {background:
+   linear-gradient(to right, hsla(240,80%,60%,0),hsla(240,80%,60%,1))}
 @media not screen and (prefers-reduced-motion: reduce) {
   /* Experimental media query, see
      https://www.w3.org/TR/2020/WD-mediaqueries-5-20200731/ */
@@ -199,6 +206,12 @@ img.fit {object-fit: contain}
 .full .incremental.in-place > .visited:not(.active):not(:last-child),
 .full .overlay.in-place > .visited:not(.active):not(:last-child) {
   visibility: hidden}
+
+/* Outline elements on the second window that are incrementally
+   displayed on the first window. */
+.secondwindow .slide.active .incremental > *,
+.secondwindow .slide.active .overlay > *,
+.secondwindow .slide.active .next {outline: solid 1px red}
 
 /* A list as a tree structure with box-drawing characters */
 .tree {list-style: none; font: 1em/1 monospace;
@@ -403,15 +416,17 @@ body {--time-factor: 0} /* Make sure it is defined, will be set by b6+ */
 .fullclock, .clock {position: fixed; z-index: 1; top: 0.5em; right: 0.5em;
   background: linear-gradient(hsl(120,90%,15%),
     hsl(120,80%,20%), hsl(120,90%,14%)); color: #fff; border-radius: 0.5em;
-  box-shadow: 0 0.4rem 0.6rem #000; text-align: center; width: fit-content}
+  box-shadow: 1px 2px 3px #000; text-align: center; width: fit-content}
 /* Make the clock blue when it is paused. */
 body.paused .fullclock {background: linear-gradient(hsl(240,85%,55%),
   hsl(240,80%,60%), hsl(240,85%,54%))}
+body:not(.paused) .timepause :nth-child(1) {display: none}
+body.paused .timepause :nth-child(2) {display: none}
 .fullclock {padding: 0.3em; display: grid; justify-items: center; gap: 0.1em;
   grid: "x   y   z" auto
   	"a   b   d" auto
-        "c   f   e" auto
-	"c   h   g" auto
+        "f   c   e" auto
+	"h   c   g" auto
 	/ 1fr 1fr 1fr}
 .fullclock time:nth-of-type(1) {grid-area: a; color: #9F9}
 .fullclock time:nth-of-type(2) {grid-area: b}
@@ -423,16 +438,16 @@ body.paused .fullclock {background: linear-gradient(hsl(240,85%,55%),
 .fullclock i:nth-of-type(1) {grid-area: x}
 .fullclock i:nth-of-type(2) {grid-area: y}
 .fullclock i:nth-of-type(3) {grid-area: z}
-.fullclock > span {grid-area: c; align-self: center}
+.fullclock > span {grid-area: c}
 .fullclock time {padding: 0 0.3em}
-.fullclock time b, .clock time b {font-family: OCR A Std, Orator Std, monospace;
+.fullclock time b {font-family: OCR A Std, Orator Std, monospace;
   font-size: 1.2em}
 .fullclock i {font-size: 70%; font-style: normal; color: #9F9}
-.fullclock button, .clock button {width: 100%; cursor: pointer;
+.fullclock button {width: 100%;
   font-family: Noto Sans Symbols, Symbola, Noto Emoji, sans-serif}
 /* The span is made into a pie chart that shows the fraction of time used. */
 .fullclock > span, .clock > span {display: inline-block;
-  width: 3em; height: 3em; border-radius: 50%; background: #FFF;
+  width: 3.5em; height: 3.5em; border-radius: 50%; background: #FFF;
   background: conic-gradient(
       #000 calc(var(--time-factor) * 360deg),
       #FFF calc(var(--time-factor) * 360deg),
@@ -451,8 +466,6 @@ body.paused .fullclock {background: linear-gradient(hsl(240,85%,55%),
 /* Make the clock blue when it is paused. */
 body.paused .clock {background: linear-gradient(hsl(240,85%,55%),
   hsl(240,80%,60%), hsl(240,85%,54%))}
-body:not(.paused) .timepause :nth-child(1) {display: none}
-body.paused .timepause :nth-child(2) {display: none}
 .clock {padding: 0.3em; display: grid; justify-items: center; gap: 0.1em;
   grid: "a   a   a   a" auto
         "c   c   e   f" auto
@@ -464,8 +477,9 @@ body.paused .timepause :nth-child(2) {display: none}
 .clock .timeinc {grid-area: f}
 .clock .timereset {grid-area: h}
 .clock > span {grid-area: c}
-.clock button {color: white; background:
-    linear-gradient(160deg, hsl(270,45%,28%), hsl(270,42%,72%))}
+.clock time b {font-family: OCR A Std, Orator Std, monospace; font-size: 1.2em}
+.clock button {width: 100%;
+  font-family: Noto Sans Symbols, Symbola, Noto Emoji, sans-serif}
 
 /* When time is nearly up, make the clock orange. */
 body.time-warning .fullclock, body.time-warning .clock {background:
@@ -476,103 +490,25 @@ body[data-time-factor="100"] .clock {background:
   linear-gradient(hsl(0,100%,47%), hsl(0,90%,55%), hsl(0,100%,46%))}
 
 /* The buttons added by b6+ at the start of the slides in index mode. */
-.b6-ui {text-align: center; position: sticky; top: 0.5em; z-index: 1;
-  margin-right: 13em /* room for full clock */}
-@media (max-width: 44.889em /*= w + 4 */) { .b6-ui {text-align: left} }
-.b6-ui button {width: 7em; height: 7em; border-radius: 50%;
-  padding: 0.2em 0.4em; color: white; margin: 0 1rem; align-items: center;
-  display: inline-flex; flex-direction: column; line-height: 1.2;
-  box-shadow: 0 0.4rem 0.6rem #000; vertical-align: top;
-  background: linear-gradient(160deg, hsl(270,45%,20%), hsl(270,42%,78%))}
-.b6-ui button span {display: block; margin: 0.1em}
-.b6-ui button span:first-child {font-size: 200%}
+.b6-ui {text-align: center; z-index: 1; position: fixed; bottom: 0; left: 0;
+  right: 0; box-shadow: 0 -2px 3px #3f235d; background: #3f235d;
+  padding: 0.5em}
+.b6-ui button {margin: 0 0.3em; font: inherit; font-size: smaller}
 
 /* Style for the popup with the table of contents. */
 .toc {width: 95%; max-width: none; max-height: 95%; box-sizing: border-box;
-  overflow: auto; border-radius: 1em; background: hsl(0,0%,98%); color: black}
+  overflow: auto; background: hsl(0,0%,98%); color: black;
+  font-size: 2vmax; border-radius: 2em / 50%; padding: 0.2em 1.6em 1em}
 .toc ol {margin: 0; columns: 18em; column-rule: thin solid; padding: 0}
 .toc li {break-inside: avoid; margin-left: 2em}
 .toc li::marker {color: hsl(270,85%,25%); font-weight: bold}
 .toc a {text-decoration: none; color: inherit}
 .toc br {display: none}
-.toc button {position: absolute; top: 0.35em; right: 0.35em}
+.toc button {display: block; margin: 0 0 0 auto}
 .toc::backdrop {background:  hsl(270,85%,25%,0.3)}
 
 /* Overlay canvas for drawing on a slide with the mouse. */
 .b6-canvas {color: hsla(0,100%,45%,0.8); cursor: alias}
-
-/* When the slides are displayed on a system that is in dark mode,
-   give the slides a dark background. */
-@media (prefers-color-scheme: dark) {
-  .slide {color: hsl(0,0%,92%);
-    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black,
-      0 0 1px black, 0 0 1px black;
-    background: 36.389rem /*= w - L + 1 */ 18.5rem /*= N - L + 1 */
-      / 3.5rem /*= L - 2 */ auto url(b6plus-logo.svg) no-repeat,
-      bottom right / 5.5em /*= L */ 100%
-      linear-gradient(hsl(270,45%,12%), hsl(270,42%,46%)) no-repeat, black}
-  .slide h1, .slide h2 {color: hsl(270,85%,87%)}
-  .slide em {color: white;
-    background: 0 0 / 100% 100% url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAAfCAMAAABEWnZLAAAAdVBMVEUAAAAAbR5lZWUAbR5lZWUAbR4AbR5lZWUAbR5CaFNlZWUAbR4AbR4AbDgAbR5lZWUAbR4AbR4Abh4AbCoAbR5lZWUAbR4AbShlZWUAbR4AbR4AbSNlZWUAbR4AbCYAbDgAbR4Abh4AbiAsa0o7aU9QZ1tlZWVNeRfUAAAAHnRSTlMADw8fHy8/P09PT19vf39/j5+fr6+vv7+/z9/f3+8+0OWXAAAB+klEQVQYGc3Bi1bTQBQF0BvH3A5OOCQ6HpzB0UtV/v8TTfqiLQG66CPdW97gVBtELkUAjarK9XDaIDLZqwpbBK1lQi60tIMVRgSVi6vbbB+RI1ROr9ItlWz4bEdL3NJhl9dXNFiJXMi2L6OScZUiZrsKhahljFN0LDY5koDXSl6oNCDSppTYAV611gWPQcse5JnTgG1dtivBxsk+pxqw0NImlkkCvpYxDe0oXOowrtH3yOEQk51I4VLEite1WkY5DUAkky2VLjjZVmlAR9o0MiNQiYhDxy0tAK/yzMVsp5bJYmaFayXzha/3325vZ6+72/gin2cLN7f3D/NHW5nPE2nn9Th/9uv3yp+/g39PTz9/DL7f9Waz2SfZ+DTbuHmYP9r0MskIwGslYyoUuw6JjIBXJ6MaQBc8WOw8EskYSWKf14VaDlWHlnYZJCMAr+rkAJUOAnqR2U4nsddhreO2bHtS2zh5TY2Y7IwKyRZA0F4tH6WRtLVMJrsIvoQ9QZ1Irepln2oAbVqFjEBQrUQqJBskdo0s1AFMNo3MHnqq6mSHRg4ArUWkaqJdVmEPQFCVN9TaQy0bGtByB/Zwpdg5ZZLZdrBx8iG+TXYh7BqVoyi6ZOdTGNGokxNx2iAy22lkki3gVSs5l9pjENkr9q7EQcSg0YFMx+koOdJ/ndqZMcKZGYsAAAAASUVORK5CYII=)}
-  .slide code {background: #444}
-  .slide ul > li::before {color: hsl(270,85%,87%)}
-  .slide :link {color: hsl(270,85%,87%)}
-  .slide :visited {color: hsl(240,85%,87%)}
-  .full .slide :visited {color: hsl(270,85%,87%)}
-  .b6-canvas {color: hsla(130,100%,60%,0.8)}
-}
-
-/* To tell the b6plus.js script that this style sheet has rules that
-   react to the class darkmode on BODY, set the --has-darkmode property on
-   BODY to "1" */
-body {--has-darkmode: 1}
-
-/* When class "darkmode" is set on the BODY (which is set, e.g., by
-   b6+ when the user presses the "D" key), or when class "darkmode" is
-   set on a slide, use the same colors as in dark mode. */
-.darkmode.slide, .darkmode .slide {color: hsl(0,0%,92%);
-  text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black,
-    0 0 1px black, 0 0 1px black;
-  background: 36.389rem /*= w - L + 1 */ 18.5rem /*= N - L + 1 */
-    / 3.5rem /*= L - 2 */ auto url(b6plus-logo.svg) no-repeat,
-    bottom right / 5.5em /*= L */ 100%
-    linear-gradient(hsl(270,45%,12%), hsl(270,42%,46%)) no-repeat, black}
-.darkmode.slide h1, .darkmode.slide h2,
-.darkmode .slide h1, .darkmode .slide h2 {color: hsl(270,85%,87%)}
-.darkmode.slide em, .darkmode .slide em {color: white;
-    background: 0 0 / 100% 100% url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAAfCAMAAABEWnZLAAAAdVBMVEUAAAAAbR5lZWUAbR5lZWUAbR4AbR5lZWUAbR5CaFNlZWUAbR4AbR4AbDgAbR5lZWUAbR4AbR4Abh4AbCoAbR5lZWUAbR4AbShlZWUAbR4AbR4AbSNlZWUAbR4AbCYAbDgAbR4Abh4AbiAsa0o7aU9QZ1tlZWVNeRfUAAAAHnRSTlMADw8fHy8/P09PT19vf39/j5+fr6+vv7+/z9/f3+8+0OWXAAAB+klEQVQYGc3Bi1bTQBQF0BvH3A5OOCQ6HpzB0UtV/v8TTfqiLQG66CPdW97gVBtELkUAjarK9XDaIDLZqwpbBK1lQi60tIMVRgSVi6vbbB+RI1ROr9ItlWz4bEdL3NJhl9dXNFiJXMi2L6OScZUiZrsKhahljFN0LDY5koDXSl6oNCDSppTYAV611gWPQcse5JnTgG1dtivBxsk+pxqw0NImlkkCvpYxDe0oXOowrtH3yOEQk51I4VLEite1WkY5DUAkky2VLjjZVmlAR9o0MiNQiYhDxy0tAK/yzMVsp5bJYmaFayXzha/3325vZ6+72/gin2cLN7f3D/NHW5nPE2nn9Th/9uv3yp+/g39PTz9/DL7f9Waz2SfZ+DTbuHmYP9r0MskIwGslYyoUuw6JjIBXJ6MaQBc8WOw8EskYSWKf14VaDlWHlnYZJCMAr+rkAJUOAnqR2U4nsddhreO2bHtS2zh5TY2Y7IwKyRZA0F4tH6WRtLVMJrsIvoQ9QZ1Irepln2oAbVqFjEBQrUQqJBskdo0s1AFMNo3MHnqq6mSHRg4ArUWkaqJdVmEPQFCVN9TaQy0bGtByB/Zwpdg5ZZLZdrBx8iG+TXYh7BqVoyi6ZOdTGNGokxNx2iAy22lkki3gVSs5l9pjENkr9q7EQcSg0YFMx+koOdJ/ndqZMcKZGYsAAAAASUVORK5CYII=)}
-.darkmode.slide code, .darkmode .slide code {background: #444}
-.darkmode.slide ul > li::before, .darkmode .slide ul > li::before {
-  color: hsl(270,85%,87%)}
-.darkmode.slide :link, .darkmode .slide :link {color: hsl(270,85%,87%)}
-.darkmode.slide :visited, .darkmode .slide :visited {color: hsl(240,85%,87%)}
-.full .darkmode.slide :visited, .full.darkmode .slide :visited {
-  color: hsl(270,85%,87%)}}
-.darkmode .b6-canvas {color: hsla(130,100%,60%,0.8)}
-
-/* When class "lightmode" is set on the BODY or when class "lightmode" is
-   set on a slide, force the default colors and ignore dark mode. */
-.lightmode.slide, .lightmode .slide {color: black;
-  text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white,
-    0 0 1px white, 0 0 1px white;
-  background: 36.389rem /*= w - L + 1 */ 18.5rem /*= N - L + 1 */
-    / 3.5rem /*= L - 2 */ auto url(b6plus-logo.svg) no-repeat,
-    bottom right / 5.5em /*= L */ 100%
-    linear-gradient(hsl(270,45%,25%), hsl(270,42%,92%)) no-repeat, white}
-.lightmode.slide h1, .lightmode.slide h2,
-.lightmode .slide h1, .lightmode .slide h2 {color: hsl(270,85%,25%)}
-.lightmode.slide em, .lightmode .slide em {color: inherit;
-  background: 0 0 / 100% 100% url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAAfCAYAAABzhIZ5AAAABGdBTUEAANbY1E9YMgAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAL4SURBVHja7Vw7rpwwFJ0dsASWMEtAygZcp6KKUkVWujRPVprXsgSyA5ZAkTYSUqT8XpRQRa8cKUqR7gYkT+Q4Bq7B/IZj6UwF2IyPr8/9mNNpwfaOnsQNEg3ZQDUoGpQ9KPR1V0jjGckJDc2TfDbxqga0EC66z0yPIdVjOmOGjkfGVBOhXJCAoQhcmATGjN4GKc+akPWOCOmD2iAuSBuWO5Epy5iIuA8XN0zKMagGNLMLuaWjfSFGTLAvJGMcff5CHdBQKDZBJ66Y60uB4MCQ7FKz+AqGc6S0pSh1p/jzAbKsrL0jRKEtYmqZekzAcSVO3iFBzj0yQnRIh8whGdQYK5mO1FA5tnmAaW1bLRyHDrr3ETeDtQW0gera7mfRnvLgxJvTax+CXMCrH8Se4lxXXVrBUrC9Vm5qd0rY6TzjnLtknxmGqhj/Q67vj0M4RrnROYh2+1uxuVAiBzltTnCRuRab78pA7HIe7XXxtKbmffUIMjjxkZ7n3+h1+Z3uix/0RrUgomRBKCbEqfmJux70i76IdvDtyzzQq/ozvaT39HRwUtrrWnyiFxWs7vr4QM/+zgkHX+mOmnnvxYXe0k+q/sNveiSj1Q1KBwoHGU3u8eKj7YXcVdGS2YfEwKE9+KJDU0dzpTUVskeARw1D4SBnPJc3ZxYZDGUQkAZdvpilcBR5hAh1iTWiB6HL8/ZYM3r0mG7RQ8R4ayTrquNLe0qx4P1PL9/jBvrzkZ58HWjcWbDUJNPiIeC+nQC+HS9Md7mVBiBmYmkUX68MZN5nOtYXUzVrassEq/JJhCKzucVDW8Lqu7Rr6jq6YUR8KkYpnxxybhQs5CFjlC5rmYRwlBy7tavPf6WLZrXUN2LCbqsIxalhV4ro2PqZf8TD2razFXUKJycNMq5vZeuJulhuLmQVcDUKvYggPfbhpOXX+tWjnrk2D+yBtOt+CENuMqC/o8/wIIngt5VnHRmlCCxbRrgLjw8UbEn/Vp7V+HLXRzbQgh4gPOa5n5naH6O0itHwx3iJAAAAAElFTkSuQmCC)}
-.lightmode.slide code, .lightmode .slide code {background: #eee}
-.lightmode.slide ul > li::before, .lightmode .slide ul > li::before {
-  color: hsl(270,85%,25%)}
-.lightmode.slide :link, .lightmode .slide :link {color: purple;
-  color: linktext}
-.lightmode.slide :visited, .lightmode .slide :visited {color: blue;
-  color: visitedtext}
-.full .lightmode.slide :visited, .full.lightmode .slide :visited {
-  color: purple; color: linktext}
-.lightmode .b6-canvas {color: hsla(0,100%,45%,0.8)}
 
 /* Printing. */
 @page {
@@ -580,15 +516,16 @@ body {--has-darkmode: 1}
 }
 @media print {
   html {font-size: 10pt}
-  body {background: none; margin: 0; columns: 41em; column-gap: 4em;
-    column-rule: 0.5pt solid black}
+  body {background: none; margin: 0; columns: 41em}
   .slide {border: 0.5pt solid black; margin: 1rem 1rem 1rem 0; display: block;
-    margin: 2.3rem auto;
-    overflow: hidden; page-break-inside: avoid}
-  ul {margin: 0.9em 0} /* Compensate slight differences in fonts & margins */
+    overflow: hidden}
   .comment {background: none; color: black; padding: 0;
-    margin: 1rem 1rem 1rem 0}
-  .comment code {background: #eee}
+    columns: 25em; column-rule: thin solid; column-gap: 2rem;
+    widows: 2; orphans: 2; width: auto; height: auto; display: block;
+    border-radius: 0; overflow: auto;
+    margin: 1rem 1rem 2rem 0; box-shadow: none}
+  .comment:before {content: none}
+  ul {margin: 0.9em 0} /* Compensate slight differences in fonts & margins */
   .incremental.in-place, .overlay.in-place {overflow: visible} /* TODO... */
 }
 

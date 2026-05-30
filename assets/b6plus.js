@@ -1,4 +1,4 @@
-/* b6plus.js $Revision: 1.172 $
+/* b6plus.js $Revision: 1.169 $
  *
  * Script to simulate projection mode on browsers that don't support
  * media=projection or 'overflow-block: paged' (or ‘overflow-block:
@@ -564,16 +564,15 @@ function setStyle(elt, ...decls)
 /* generateID -- make sure elt has a unique ID */
 function generateID(elt, slide)
 {
-  var base, nextid = 0;			// For generating unique IDs
+  var nextid = 0;			// For generating unique IDs
 
   /* This doesn't guarantee that elt has a unique ID, but only that it
    * is the first element in the document that has this ID. Which
    * should be enough to make this element scroll into view when it is
    * the target... */
   if (!elt.id) elt.id = "s" + slide.b6slidenum
-  base = elt.id;
   while (document.getElementById(elt.id) !== elt)
-    elt.id = base + "-" + ++nextid
+    elt.id = "s" + slide.b6slidenum + "-" + ++nextid
 }
 
 
@@ -2279,10 +2278,8 @@ function toggleMode()
        key for ourselves. (Chrome will still capture the Escape key
        and exit fullscreen mode if the key is held, but that is fine.)
        navigator.keyboard.lock() returns a Promise, but we don't
-       bother waiting for it to resolve. We also ignore failures,
-       which may happen if the window is not a top-level window. */
-    if (navigator?.keyboard?.lock)
-      navigator.keyboard.lock(["Escape"]).catch(() => {});
+       bother waiting for it to resolve. */
+    if (navigator?.keyboard?.lock) navigator.keyboard.lock(["Escape"]);
 
     /* Wait 100ms before calling a function to do the rest of the
        initialization of slide mode. That function will wait for the
@@ -2834,77 +2831,7 @@ function message(e)
 {
   var newEvent, h;
 
-  if (e.source == firstwindow)	// Message from 1st window to 2nd
-
-    switch (e.data.event) {
-    case "startTime":		// 1st window tells us of new start time
-      startTime = e.data.v;
-      forceClocks = true;
-      requestClocksUpdate();	// Queue an update to the clocks
-      break;
-    case "duration":		// 1st window tells us of new duration
-      duration = e.data.v;
-      forceClocks = true;
-      requestClocksUpdate();	// Queue an update to the clocks
-      break;
-    case "pauseStartTime":	// 1st window got a pause/resume event
-      pauseStartTime = e.data.v;
-      if (pauseStartTime) document.body.classList.add("paused");
-      else document.body.classList.remove("paused");
-      forceClocks = true;
-      requestClocksUpdate();	// Queue an update to the clocks
-      break;
-    case "click":
-      newEvent = new MouseEvent("click", {detail: 1, bubbles: true});
-      document.body.dispatchEvent(newEvent);
-      break;
-    case "slide":		// First window tells us to go to a slide
-      if ((h = findSlide(e.data.v))) makeCurrent(h);
-      break;
-    case "keydown":
-      newEvent = new KeyboardEvent("keydown", {key: e.data.v, bubbles: true});
-      document.body.dispatchEvent(newEvent);
-      break;
-    case "darkmodeOn":		// First window tells us it entered dark mode
-      toggleDarkMode("on");
-      break;
-    case "darkmodeOff":		// First window tells us it left dark mode
-      toggleDarkMode("off");
-      break;
-    case "sync-on":
-      syncmode = true;
-      break;
-    case "sync-off":
-      syncmode = false;
-      break;
-    case "sync":		// Navigate ("+", "-", etc, or a slide ID)
-      syncSlide(e.data.v);
-      break;
-    case 'pause':		// First window tells us a video was paused
-      if ((h = document.getElementById(e.data.id))) {
-	h.b6pausing = true;
-	h.pause();
-      }
-      break;
-    case 'play':		// First window tells us a video started
-      if ((h = document.getElementById(e.data.id))) {
-	h.b6playing = true;
-	h.play();
-      }
-      break;
-    case 'seeked':		// First window tells us a video was seeked
-      if ((h = document.getElementById(e.data.id))) {
-	h.b6seeking = true;
-	h.currentTime = e.data.v;
-      }
-      break;
-    case 'volumechange':	// First window tells us a video was (un)muted
-      if ((h = document.getElementById(e.data.id))) h.muted = e.data.v;
-      //console.log(`volume = ${h.volume}`);
-      break;
-    }
-
-  else	 // Message to first window (from 2nd window or other)
+  if (e.source == secondwindow) { // Message from 2nd window to 1st window
 
     switch (e.data.event) {
     case "init":		// Second window has started
@@ -2989,6 +2916,76 @@ function message(e)
       break;
     }
 
+  } else if (e.source == firstwindow) { // Message from 1st window to 2nd
+
+    switch (e.data.event) {
+    case "startTime":		// 1st window tells us of new start time
+      startTime = e.data.v;
+      forceClocks = true;
+      requestClocksUpdate();	// Queue an update to the clocks
+      break;
+    case "duration":		// 1st window tells us of new duration
+      duration = e.data.v;
+      forceClocks = true;
+      requestClocksUpdate();	// Queue an update to the clocks
+      break;
+    case "pauseStartTime":	// 1st window got a pause/resume event
+      pauseStartTime = e.data.v;
+      if (pauseStartTime) document.body.classList.add("paused");
+      else document.body.classList.remove("paused");
+      forceClocks = true;
+      requestClocksUpdate();	// Queue an update to the clocks
+      break;
+    case "click":
+      newEvent = new MouseEvent("click", {detail: 1, bubbles: true});
+      document.body.dispatchEvent(newEvent);
+      break;
+    case "slide":		// First window tells us to go to a slide
+      if ((h = findSlide(e.data.v))) makeCurrent(h);
+      break;
+    case "keydown":
+      newEvent = new KeyboardEvent("keydown", {key: e.data.v, bubbles: true});
+      document.body.dispatchEvent(newEvent);
+      break;
+    case "darkmodeOn":		// First window tells us it entered dark mode
+      toggleDarkMode("on");
+      break;
+    case "darkmodeOff":		// First window tells us it left dark mode
+      toggleDarkMode("off");
+      break;
+    case "sync-on":
+      syncmode = true;
+      break;
+    case "sync-off":
+      syncmode = false;
+      break;
+    case "sync":		// Navigate ("+", "-", etc, or a slide ID)
+      syncSlide(e.data.v);
+      break;
+    case 'pause':		// First window tells us a video was paused
+      if ((h = document.getElementById(e.data.id))) {
+	h.b6pausing = true;
+	h.pause();
+      }
+      break;
+    case 'play':		// First window tells us a video started
+      if ((h = document.getElementById(e.data.id))) {
+	h.b6playing = true;
+	h.play();
+      }
+      break;
+    case 'seeked':		// First window tells us a video was seeked
+      if ((h = document.getElementById(e.data.id))) {
+	h.b6seeking = true;
+	h.currentTime = e.data.v;
+      }
+      break;
+    case 'volumechange':	// First window tells us a video was (un)muted
+      if ((h = document.getElementById(e.data.id))) h.muted = e.data.v;
+      //console.log(`volume = ${h.volume}`);
+      break;
+    }
+  }
 }
 
 
