@@ -26,7 +26,17 @@ pre.code{/*font-size:100%;*/
   border-right-width: thin; border-bottom-width: thin;
   border-color: #95ABD0;
 } /*justify-self: center;*/
-pre.code > .ln {background-color: #DFE5F1;}
+
+pre.code > .ln{
+    background-color: #DFE5F1;
+
+    display: inline-block;
+    width: 1.5em; /* Adjust based on your largest line number */
+    text-align: right;
+    padding-right: 0.4em;
+    user-select: none; /* Prevents selecting numbers during copy-paste */
+
+}
 pre.code { background-color:#f0f0f0; justify-self:center;}
 pre.console{background-color: #F9E0E0;}
 ol.trace-code{
@@ -114,6 +124,14 @@ div.n2c{
   align-items: center ;
   gap: 10px ;
 }
+div.n3c{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* align-items: stretch;  overflow: scroll;*/
+  justify-items: center;
+  align-items: center ;
+  gap: 10px ;
+}
 
 div.t2c{
   display: grid;
@@ -127,6 +145,7 @@ div.t2c > :first-child{
   grid-column: 1 / 3;
   background-color: #E6F4FA;
 }
+
 div.t3c{
   display: grid;
   grid-template-columns: auto auto auto;
@@ -137,6 +156,31 @@ div.t3c{
 /*div.t2c > h1, div.t2c > .rtl-h1{*/
 div.t3c > :first-child{
   grid-column: 1 / 4;
+  background-color: #E6F4FA;
+}
+
+div.t4c{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t4c > :first-child{
+  grid-column: 1 / 5;
+  background-color: #E6F4FA;
+}
+div.t5c{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-items: center;
+  align-items: center ;
+  gap: 5px ;
+}
+/*div.t2c > h1, div.t2c > .rtl-h1{*/
+div.t5c > :first-child{
+  grid-column: 1 / 6;
   background-color: #E6F4FA;
 }
 
