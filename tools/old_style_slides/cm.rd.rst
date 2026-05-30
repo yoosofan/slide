@@ -1,0 +1,2767 @@
+.. prezento:: CM - Rd
+   :skip-help: true
+   :css: ./assets/style.css
+   :substep: true
+   :slide-numbers: true
+   :data-width: 1024
+   :data-height: 768
+
+.. slido::
+   :skip-help: true
+   :css: ./style.css
+   :substep: true
+   :slide-numbers: true
+   .. IGNORED_UNIMPLEMENTED: data-width: 1024
+   .. IGNORED_UNIMPLEMENTED: data-height: 768
+
+
+.. slido:: Recursive Descendant Parser
+
+    Syntax Analysis
+
+.. slido::
+
+    Ahmad Yoosofan
+
+    Compiler course
+
+    University of Kashan
+
+    https://yoosofan.github.io/course/compiler.html
+
+.. slido:: Special State Diagram for Addition
+
+    #. 2
+    #. 2+3
+    #. 86+54+876+432+32
+
+    Grammar
+
+.. slido::
+
+    .. class:: substep
+
+    #. E → a
+    #. E → a + E
+
+    .. class:: substep
+
+    *  E → a + E | a
+
+    .. yographviz::
+      :class: substep
+
+      digraph {
+        rankdir = "LR";
+        node     [shape=circle];
+        END      [shape=doublecircle, label="3"];
+        0 -> END [label="a"];
+        0 -> 1   [label="a"];
+        1 -> 2   [label="+"];
+        2 -> END [label="E"];
+      }
+
+    .. class:: substep
+
+      Which edge must we choose from node 0?
+
+      Node 1
+
+      Node 3
+
+    .. :
+
+      c_{i_{j_k}}
+
+.. slido:: Left Factoring
+   :class: t2c
+
+    * E → a + E
+    * E → a
+
+    .. yographviz::
+      :class: substep
+
+      digraph {
+        rankdir = "LR";
+        node     [shape=circle];
+        END      [shape=doublecircle, label="3"];
+        0 -> END [label="a"];
+        0 -> 1   [label="a"];
+        1 -> 2   [label="+"];
+        2 -> END [label="E"];
+      }
+
+    .. class:: substep
+
+    #. E → a B
+    #. B → + E
+    #. B → λ
+
+    .. yographviz::
+      :class: substep
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          E [shape=plaintext];
+          0 -> 1 [label="a"];
+          1 -> END [label="B"];
+        }
+
+    .. yographviz::
+      :class: substep
+
+      digraph {
+        rankdir = "LR";
+        node [shape=circle];
+        END [shape=doublecircle, label="2"];
+        B [shape=plaintext];
+        0 -> 1 [label="+"];
+        1 -> END [label="E"];
+        0 -> END [label="λ"];
+      }
+
+.. slido:: Parser Code for Add
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1 [label="a"];
+          1 -> END [label="B"];
+        }
+
+      B
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1 [label="+"];
+          1 -> END [label="E"];
+          0 -> END [label="λ"];
+        }
+
+    .. include:: cm/src/rd/aB.plus.E.recursive.parser.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 2
+      :end-line: 24
+
+    .. code:: console
+      :class: substep
+
+      python3 a.py 12.1  + 35.45 + 2
+
+      a B  a:  12.1,  B:  +35.45+2
+      +E, E: 35.45+2
+      a B  a:  35.45, B:  +2
+      +E, E: 2
+      a B  a:  2.0, B:
+      True
+
+    .. code:: console
+      :class: substep
+
+      python3 a.py 12.1  + + 2
+
+      12.1  + + 2
+      a B  a:  12.1,  B:  ++2
+      +E, E: +2
+      Synatx Error: number expected
+      Reminder:  +2
+      False
+
+.. slido:: Parse Tree
+   :class: t2c
+
+    .. container::
+
+      .. include:: cm/src/rd/aB.plus.E.recursive.parser.py
+        :code: python
+        :number-lines:
+        :start-line: 2
+        :end-line: 24
+
+      .. code:: console
+
+        python3 a.py 12.1  + 35.45 + 2
+
+        a B  a:  12.1,  B:  +35.45+2
+        +E, E: 35.45+2
+        a B  a:  35.45, B:  +2
+        +E, E: 2
+        a B  a:  2.0, B:
+        True
+
+    .. container:: substep
+
+      .. yographviz::
+        :class: substep
+
+        digraph{
+          Start [label="12.1+35.45+2"]
+          A12 [label="12.1"]
+          Aplus1 [label = "+"]
+          A35r [label="35.45+2"]
+          A3545 [label="35.45"]
+          Aplus2 [label="+"]
+          A2 [label="2"]
+
+          Start -> A12
+          Start -> Aplus1
+          Start -> A35r
+          A35r  -> A3545
+          A35r  -> Aplus2
+          A35r  -> A2
+        }
+
+      .. class:: substep
+
+        #. E[12.1+35.45+2] ⇒
+        #. a[12.1] + E[35.45+2] ⇒
+        #. a[12.1] + a[35.45] + E[2] ⇒
+        #. a[12.1] + a[35.45] + a[2] ⇒
+        #. Left Most Derivation
+
+.. slido:: Doing Addition
+   :class: t2c
+
+    .. include:: cm/src/rd/aB.plus.E.recursive.parser.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 2
+      :end-line: 24
+
+    .. include:: cm/src/rd/aB.plus.E.recursive.calculator.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 2
+      :end-line: 23
+
+    .. code:: console
+      :class: substep
+
+      python3 a.py 12.1  + 35.45 + 2
+
+      a B  a:  12.1,  B:  +35.45+2
+      +E, E: 35.45+2
+      a B  a:  35.45, B:  +2
+      +E, E: 2
+      a B  a:  2.0, B:
+      (True, 49.550000000000004)
+
+    .. code:: console
+      :class: substep
+
+      python3 a.py 2 +
+
+      a B  a:  2.0, B:  +
+      +E, E:
+      Synatx Error: number expected
+      Reminder:
+      (False, 2.0)
+
+.. slido:: Simplify Diagram
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1 [label="a"];
+          1 -> END [label="B"];
+        }
+
+      B
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1 [label="+"];
+          1 -> END [label="E"];
+          0 -> END [label="λ"];
+        }
+
+
+    .. container:: substep
+
+      Combine them
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="3"];
+          0 -> 1     [label="a"];
+          1 -> 2     [label="+"];
+          1 -> END   [label="λ"];
+          2 -> END   [label="E"];
+        }
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="3"];
+          0 -> 1     [label="a"];
+          1 -> 2     [label="+"];
+          1 -> END   [label="λ"];
+          2 -> 0     [label="λ"];
+        }
+
+    .. class:: substep
+
+      E
+
+    .. yographviz::
+      :class: substep
+
+      digraph {
+        rankdir = "LR";
+        node [shape=circle];
+        END [shape=doublecircle, label="2"];
+        0 -> 1     [label="a"];
+        1 -> 0     [label="+"];
+        1 -> END   [label="λ"];
+      }
+
+.. slido:: Parser Code for add Nonrecursive
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1     [label="a"];
+          1 -> 0     [label="+"];
+          1 -> END   [label="λ"];
+        }
+
+    .. include:: cm/src/rd/a.plus.E.parser.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 2
+      :end-line: 23
+
+    .. code:: console
+      :class: substep
+
+      input: 16+34+0.30
+      output:
+      a:  16.0, :  +34+0.30
+      a:  34.0, :  +0.30
+      a:  0.3,  :
+      True
+
+    .. code:: console
+      :class: substep
+
+      input: 23+ + 34
+      output:
+      a:  23.0, :  ++34
+      Synatx Error: number expected
+         +34
+      False
+
+.. slido:: Calculator Code for add Nonrecursive
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="2"];
+          0 -> 1     [label="a"];
+          1 -> 0     [label="+"];
+          1 -> END   [label="λ"];
+        }
+
+    .. include:: cm/src/rd/a.plus.E.calculator02.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 2
+      :end-line: 21
+
+    .. code:: console
+      :class: substep
+
+      input: 16+34+0.30
+      output:
+      a:  16.0, :  +34+0.30
+      a:  34.0, :  +0.30
+      a:  0.3,  :
+      (True, 50.3)
+
+    .. code:: console
+      :class: substep
+
+      input: 23+ + 34
+      output:
+
+      a:  23.0, :  ++34
+      Synatx Error: number expected
+         +34
+      (False, 23.0)
+
+.. slido:: Classes of Languages
+
+    .. image:: cm/img/sa/languages.png
+      :height: 400px
+
+    https://www.researchgate.net/figure/Human-languages-and-the-classes-of-the-Chomsky-hierarchy-with-parsing-complexity_fig1_257299091
+
+.. slido:: Parse for + * ( ) no priority
+   :class: t2c
+
+    .. container::
+
+      Consider the follwing sentences of a langauge:
+
+      Write down the Grammar
+
+      #. 3
+      #. 9 +3
+      #. 9 * 3
+      #. (9 * 3)
+      #. (9 + 3)
+      #. (9 * 4) + 5
+      #. 9 * (4 + 5)
+      #. (9 * (4 + 5)) * 3
+      #. 9 * ((4 + 5) * 3)
+      #. 9 * ((4 + 5) + 3)
+      #. (9 + (4 + 5)) * 3
+
+      .. class:: substep
+
+      #. S → A + A
+      #. S → A * A
+      #. S → A
+      #. A → (S)
+      #. A → a
+
+    .. container::
+
+      .. yographviz::
+        :class: substep
+
+        graph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="7"];
+          0 -- END [label="A"];
+          0 -- 2 [label="A"];
+          0 -- 3 [label="A"];
+          2 -- 4 [label="+"];
+          4 -- END [label="A"];
+          3 -- 6 [label="*"];
+          6 -- END [label="A"];
+        }
+
+      .. yographviz::
+        :class: substep
+
+        graph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="14"];
+          10 -- END [label="a"];
+          10 -- 12 [label="("];
+          12 -- 13 [label="S"];
+          13 -- END [label=")"];
+        }
+
+    .. :
+
+
+      #. 9 + 4 + 5 * 3 == 54
+
+      #. E → E + T | E * T | T
+      #. T → (E) | a
+
+      E --> E + T | E - T | E * T | T
+
+      Add another grammer that does not produce (a)
+
+      #. S → A
+      #. S → B
+      #. B → A + A
+      #. B → A * A
+      #. A → (B)
+      #. A → a
+
+.. slido:: Left Factoring
+   :class: t2c
+
+    .. container::
+
+      #. S → A + A
+      #. S → A * A
+      #. S → A
+      #. A → (S)
+      #. A → a
+
+      .. class:: substep
+
+      #. S → A B
+      #. B → + A | * A | λ
+      #. A → ( S ) | a
+
+    .. container:: substep
+
+      * S
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR";
+          END [shape=doublecircle, label="2"];
+          node [shape=circle];
+            0 -> 1 [label="A"];
+            1 -> END [label="B"];
+        }
+
+      * B
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="17"];
+          15 -> 16 [label="+|*"];
+          16 -> END [label="A"]
+          15 -> END [label="λ"];
+        }
+
+    .. container:: substep
+
+      * A
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="14"];
+          10 -> END [label="a"];
+          10 -> 12 [label="("];
+          12 -> 13 [label="S"];
+          13 -> END [label=")"];
+        }
+
+.. slido:: Simplify Diagram
+   :class: t2c
+
+    .. container::
+
+      * S
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          END [shape=doublecircle, label="2"];
+          node [shape=circle];
+            0 -> 1 [label="A"];
+            1 -> END [label="B"];
+        }
+
+      * B
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="17"];
+          15 -> 16 [label="+|*"];
+          16 -> END [label="A"]
+          15 -> END [label="λ"];
+        }
+
+      * A
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="14"];
+          10 -> END [label="a"];
+          10 -> 12 [label="("];
+          12 -> 13 [label="S"];
+          13 -> END [label=")"];
+        }
+
+    .. container:: substep
+
+      * Combine S and B
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          END [shape=doublecircle, label="17"];
+          node [shape=circle];
+          0  -> 1 [label="A"];
+          1  -> 16 [label="+|*"];
+          1  -> END [label="λ"]
+          16 -> END [label="A"];
+        }
+
+.. slido:: Remove Some Recursion
+   :class: t2c
+
+    .. container::
+
+      * S
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="17"];
+          node [shape=circle];
+          0  -> 1 [label="A"];
+          1  -> 16 [label="+|*"];
+          1  -> END [label="λ"]
+          16 -> END [label="A"];
+        }
+
+    .. yographviz::
+      :class: substep
+
+      digraph {
+        rankdir = "LR"
+        END [shape=doublecircle, label="17"];
+        node [shape=circle];
+        0  -> 1 [label="A"];
+        1  -> 0 [label="+|*"];
+        1  -> END [label="λ"]
+      }
+
+    .. container:: substep
+
+      * A
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="14"];
+          10 -> END [label="a"];
+          10 -> 12 [label="("];
+          12 -> 13 [label="S"];
+          13 -> END [label=")"];
+        }
+
+.. slido:: Parser Code
+   :class: t2c
+
+    .. container::
+
+      * S
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="17"];
+          node [shape=circle];
+          0  -> 1 [label="A"];
+          1  -> 0 [label="+|*"];
+          1  -> END [label="λ"]
+        }
+
+      * A
+
+      .. yographviz::
+        :width: 300
+
+        digraph {
+          rankdir = "LR";
+          node [shape=circle];
+          END [shape=doublecircle, label="14"];
+          10 -> END [label="a"];
+          10 -> 12 [label="("];
+          12 -> 13 [label="S"];
+          13 -> END [label=")"];
+        }
+
+    .. include:: cm/src/rd/A_S_plus_mul_pranathesis.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 1
+      :end-line: 33
+
+.. slido::
+   :class: t2c
+
+    .. include:: cm/src/rd/A_S_plus_mul_pranathesis.py
+      :code: python
+      :number-lines:
+      :end-line: 22
+
+    .. include:: cm/src/rd/A_S_plus_mul_pranathesis.py
+      :code: python
+      :number-lines: 21
+      :class: substep
+      :start-line: 22
+
+.. slido:: Lexical
+   :class: t2c
+
+    .. include:: cm/src/rd/lexical_number_plus_mul_par.py
+      :code: python
+      :number-lines: 2
+      :class: substep
+      :start-line: 1
+      :end-line: 33
+
+    .. include:: cm/src/rd/lexical_number_plus_mul_par.py
+      :code: python
+      :number-lines: 33
+      :class: substep
+      :start-line: 33
+      :end-line: 65
+
+.. slido:: Error Recovery (panic mode)
+   :class: t2c
+
+    .. :
+
+        .. include:: cm/src/rd/A_S_plus_mul_pranathesis_panic_recover.py
+          :code: python
+          :number-lines: 1
+          :start-line: 1
+          :end-line: 25
+
+        .. include:: cm/src/rd/A_S_plus_mul_pranathesis_panic_recovery.py
+          :code: python
+          :number-lines: 24
+          :start-line: 25
+          :end-line: 50
+
+        ----
+
+        :class: t2c
+
+        **Error Recovery (panic mode)**
+        .. include:: cm/src/rd/lexical_number_plus_mul_par_panic.py
+          :code: python
+          :number-lines: 1
+          :start-line: 1
+          :end-line: 25
+
+        .. include:: cm/src/rd/lexical_number_plus_mul_par_panic.py
+          :code: python
+          :number-lines: 24
+          :start-line: 25
+          :end-line: 50
+
+.. slido:: A Simple Calculator (, ), ``+``, ``*``
+   :class: t2c
+
+    .. container:: substep
+
+      #. 34
+      #. 34 + 2
+      #. 34 + 45 + 98
+      #. 34 + 45+98 * 4 * 554
+      #. (34 * 2) + 3
+      #. 43 * (54+3)
+      #. 2 + (34)
+      #. (34+3) * 2
+      #. 34+3 * 2 * ((4))
+
+      .. class:: substep
+
+        Grammar 1
+
+        #. S -> S + S
+        #. S -> S * S
+        #. S -> a
+        #. S -> (S)
+
+        Incorrect Grammar (Why?)
+
+    .. container:: substep
+
+      .. class:: substep
+
+        Grammar 2
+
+        #. E -> T + E | T
+        #. T -> F * T | F
+        #. F -> (E) | a
+
+        Grammar 3
+
+        * E -> E + T | T
+        * T -> T * F | F
+        * F -> (E) | a
+
+.. slido:: Left Recursion Elimination, A → A α | β, βαα
+   :class: t3c
+
+    .. yographviz::
+        :class: substep
+
+        digraph ParseTree {
+            rankdir=TB;
+            node [shape=circle];
+
+            // Root
+            A0 [label="A"];
+
+            // First production: A → A α
+            A1 [label="A"];
+            alpha1 [label="α"];
+
+            A0 -> A1;
+            A0 -> alpha1;
+
+            // Second production: A → A α
+            A2 [label="A"];
+            alpha2 [label="α"];
+
+            A1 -> A2;
+            A1 -> alpha2;
+
+            // Third production: A → β
+            beta [label="β"];
+
+            A2 -> beta;
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph ParseTree {
+            rankdir=TB;
+            node [shape=circle];
+
+            // Root
+            A [label="A"];
+
+            // A → β A'
+            beta [label="β"];
+            Aprime1 [label="A'"];
+
+            A -> beta;
+            A -> Aprime1;
+
+            // A' → α A'
+            alpha1 [label="α"];
+            Aprime2 [label="A'"];
+
+            Aprime1 -> alpha1;
+            Aprime1 -> Aprime2;
+
+            // A' → α A'
+            alpha2 [label="α"];
+            Aprime3 [label="A'"];
+
+            Aprime2 -> alpha2;
+            Aprime2 -> Aprime3;
+
+            // A' → λ
+            lambda [label="λ"];
+
+            Aprime3 -> lambda;
+        }
+
+    .. class:: substep
+
+        * A ⇒ A α ⇒ A α α ⇒ β α α
+        * A ⇒ β A′ ⇒ β α A′ ⇒ β α α A′ ⇒ β α α
+        * **A → A α | β**
+            #. **A  → β A'**
+            #. **A' → α A' | λ**
+        * E → E + T | T
+            #. E → T L
+            #. L → + T L | λ
+        * T → T * F | F
+            #. T → F M
+            #. M → * F M | λ
+        * F → (E) | a
+
+    .. :
+
+        ----
+
+        The two previous DOT charts for left recursion elimination created by the help of chatgpt.com AI
+
+        .. table::
+
+            +-------------------------------------------+-----------------------------------------------+
+            | .. image:: img/rd/with_left_recursion.png |  .. image:: img/rd/without_left_recursion.png |
+            |    :align: center                         |     :align: center                            |
+            |    :class: substep                        |     :class: substep                           |
+            |    :height: 350px                         |     :height: 350px                            |
+            +-------------------------------------------+-----------------------------------------------+
+
+.. slido:: State Diagram(II)
+   :class: t2c
+
+    #. E → T L
+    #. L → + T L | λ
+    #. T → F M
+    #. M → * F M | λ
+    #. F → (E) | a
+
+    .. container:: substep
+
+      E → T L
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="T"];
+          1  -> END [label="L"];
+        }
+
+    .. container:: substep
+
+      L → + T L | λ
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="+"];
+          1  -> 2 [label="T"];
+          2  -> END [label="L"];
+          0  -> END [label="λ"]
+        }
+
+    .. container:: substep
+
+      T → F M
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> END [label="M"];
+        }
+
+    .. container:: substep
+
+      M → * F M | λ
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="*"];
+          1  -> 2 [label="F"];
+          2  -> END [label="M"];
+          0  -> END [label="λ"]
+        }
+
+    .. container:: substep
+
+      F → (E) | a
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="("];
+          1  -> 2 [label="E"];
+          2  -> END [label=")"]
+          0  -> END [label="a"]
+        }
+
+.. slido:: Simplify Diagram(II) - Combine E, L
+   :class: t2c
+
+    .. container::
+
+        E → T L
+
+        .. yographviz::
+
+            digraph {
+                rankdir = "LR"
+                END [shape=doublecircle, label="3"];
+                node [shape=circle];
+                0  -> 1 [label="T"];
+                1  -> END [label="L"];
+            }
+
+    .. container::
+
+        L → + T L | λ
+
+        .. yographviz::
+
+            digraph {
+                rankdir = "LR"
+                END [shape=doublecircle, label="3"];
+                node [shape=circle];
+                0  -> 1 [label="+"];
+                1  -> 2 [label="T"];
+                2  -> END [label="L"];
+                0  -> END [label="λ"]
+            }
+
+    .. container::  substep
+
+        incorrect combination
+
+        .. yographviz::
+            :class: substep
+
+            digraph {
+                rankdir = "LR"
+                END [shape=doublecircle, label="3"];
+                node [shape=circle];
+                0  -> 1 [label="T"];
+                1  -> 2 [label="+"];
+                2  -> END [label="E"];
+                1  -> END [label="λ"]
+            }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="+"];
+            1  -> 2 [label="T"];
+            2  -> 0 [label="λ"];
+            0  -> END [label="λ"]
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="+"];
+            1  -> 0 [label="T"];
+            0  -> END [label="λ"]
+        }
+
+    .. container::  substep
+
+        Combine ``E → T L`` and simplified chart of ``L → + T L | λ``
+
+        .. yographviz::
+            :class: substep
+
+            digraph {
+                rankdir = "LR"
+                END [shape=doublecircle, label="3"];
+                node [shape=circle];
+                0  -> 1 [label="T"];
+                1  -> 2 [label="+"];
+                2  -> 1 [label="T"];
+                1  -> END [label="λ"]
+            }
+
+    .. list-table::
+        :class: substep
+
+        * - E
+          - .. yographviz::
+                :class: substep
+
+                digraph {
+                    rankdir = "LR"
+                    END [shape=doublecircle, label="3"];
+                    node [shape=circle];
+                    0  -> 1 [label="T"];
+                    1  -> 0 [label="+"];
+                    1  -> END [label="λ"]
+                }
+
+    .. container:: substep
+
+        * Do the same for the following grammar rules
+
+        #. T → F M
+        #. M → * F M | λ
+
+.. slido:: Diagrams of the Second Calculator
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="T"];
+          1  -> 0 [label="+"];
+          1  -> END [label="λ"]
+        }
+
+      T
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> 0 [label="*"];
+          1  -> END [label="λ"]
+        }
+
+      F
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="("];
+          1  -> 2 [label="E"];
+          2  -> END [label=")"]
+          0  -> END [label="a"]
+        }
+
+    .. container:: substep
+
+      *Can E and T be combined?*
+
+      E
+
+      .. yographviz::
+        :class: substep
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="2"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> 0 [label="+|*"];
+          1  -> END [label="λ"]
+        }
+
+      .. class:: substep
+
+      #. 4 + 3 * 2
+      #. ( 4 + 3 ) * 2
+      #. 4 + ( 3 * 2 )
+      #. 3 * 2 + 4
+      #. 3 * ( 2 + 4 )
+      #. ( 3 * 2 ) + 4
+
+    .. :
+
+        ----
+
+        :class: t2c
+
+        **State Diagram**
+        .. container::
+
+          * E -> T + E | T
+
+          .. yographviz::
+
+            digraph {
+              rankdir = "LR"
+              END [shape=doublecircle, label="3"];
+              node [shape=circle];
+              0  -> 1 [label="T"];
+              1  -> 2 [label="+"];
+              2  -> END [label="E"]
+              0  -> END [label="T"]
+            }
+
+        .. container::
+
+          * T -> F * T | F
+
+          .. yographviz::
+
+            digraph {
+              rankdir = "LR"
+              END [shape=doublecircle, label="3"];
+              node [shape=circle];
+              0  -> 1 [label="F"];
+              1  -> 2 [label="*"];
+              2  -> END [label="T"]
+              0  -> END [label="F"]
+            }
+
+
+        .. container::
+
+          * F -> (E) | a
+
+          .. yographviz::
+
+            digraph {
+              rankdir = "LR"
+              END [shape=doublecircle, label="3"];
+              node [shape=circle];
+              0  -> 1 [label="("];
+              1  -> 2 [label="E"];
+              2  -> END [label=")"]
+              0  -> END [label="a"]
+            }
+
+        ----
+
+        :class: t2c
+
+        **Simplify Diagram(IV) - Fewer steps**
+        .. yographviz::
+          :class: substep
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 2 [label="+"];
+            2  -> END [label="E"]
+            0  -> END [label="T"]
+          }
+
+        .. yographviz::
+          :class: substep
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 0 [label="+"];
+            1  -> END [label="λ"]
+          }
+
+        .. yographviz::
+          :class: substep
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            0  -> END [label="F"];
+            1  -> 2 [label="*"];
+            2  -> END [label="E"]
+          }
+
+        .. yographviz::
+          :class: substep
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            1  -> 0 [label="*"];
+            1  -> END [label="λ"]
+          }
+
+        .. yographviz::
+          :class: substep
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="("];
+            1  -> 2 [label="E"];
+            2  -> END [label=")"]
+            0  -> END [label="a"]
+          }
+
+.. slido:: Parser Code for Add and Multiply
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="T"];
+          1  -> 0 [label="+"];
+          1  -> END [label="λ"]
+        }
+
+      T
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> 0 [label="*"];
+          1  -> END [label="λ"]
+        }
+
+      F
+
+      .. yographviz::
+        :width: 300
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="("];
+          1  -> 2 [label="E"];
+          2  -> END [label=")"]
+          0  -> END [label="a"]
+        }
+
+
+    .. include:: cm/src/rd/e_t_f_plus_mul_parser.py
+      :code: python
+      :number-lines:
+      :class: substep
+      :start-line: 1
+      :end-line: 31
+
+.. slido:: Another Language for simple expression  + - * / ( )
+   .. IGNORED_UNIMPLEMENTED: data-rotate: 90
+
+    :class: t2c
+
+    .. container::
+
+      #. 2 + 3 * 4 - 5
+      #. 4 - 5 * 2 / ( 4 - 2 ) + 1
+      #. ( ( 2 * ( 3 - 1) ) / (5 - 3) ) * ( 7 - 8 )
+
+      Grammar ?
+
+      .. class:: substep
+
+      #. E → T + E | T - E | T
+      #. T → F * T | F / T | F
+      #. F → (E) | a
+
+      .. class:: substep
+
+      Is there any problem?
+
+      .. class:: substep
+
+      #. 4 - 3 - 2
+      #. 16 / 4 / 2
+
+      .. class:: substep
+
+      It was a incorrect grammar
+
+    .. container:: substep
+
+
+      .. class:: substep
+
+      #. E → E + T | E - T | T
+      #. T → T * F | T / F | F
+      #. F → (E) | a
+
+      .. class:: substep
+
+      Left Most Derivation
+
+      .. class:: substep
+
+        #. E ⇒ E + T ⇒
+        #. T + T ⇒
+        #. F + T ⇒
+        #. 16 + T ⇒ 16 + T * F ⇒
+        #. 16 + F * F ⇒
+        #. 16 + 3 * F ⇒
+        #. 16 + 3 * 4
+
+.. slido:: General Form of Direct Left Recursion Elimination
+   :class: ts2c
+
+    A → A :math:`α_1` | A :math:`α_2` | :math:`...` | A :math:`α_m` |  :math:`β_1` |  :math:`β_2` | :math:`...` |  :math:`β_n`
+
+.. slido::
+
+    .. container::
+
+        * **A → A α | β**
+            #. **A  → β A'**
+            #. **A' → α A' | λ**
+
+
+        .. class:: substep
+
+            Convert to
+
+            * A  → :math:`β_1` A' |  :math:`β_2` A' | :math:`...`  |  :math:`β_n` A'
+            * A' → :math:`α_1` A' | :math:`α_2` A' | :math:`...`  |  :math:`α_m` A' | λ
+
+    .. container:: substep
+
+        Calculator Grammar
+
+        * E → E + T | E - T | T
+        * T → T * F | T / F | F
+        * F → a | (E)
+
+        .. class:: substep
+
+        Convert to
+
+        .. class:: substep
+
+        * E  → T E'
+        * E' → + T E' | - T E' | λ
+        * T  → F T'
+        * T'  → * F T' | / F T' | λ
+        * F → a | (E)
+
+.. slido:: Calculator Grammar
+   :class: t2c
+
+    .. container::
+
+        * E  → T E'
+        * E' → + T E' | - T E' | λ
+        * T  → F T'
+        * T'  → * F T' | / F T' | λ
+        * F → a | (E)
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> END [label="E'"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="+|-"];
+            1  -> 2 [label="T"];
+            2  -> END [label="E'"];
+            0  -> END [label="λ"]
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            1  -> END [label="T'"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="*|/"];
+            1  -> 2 [label="F"];
+            2  -> END [label="T'"];
+            0  -> END [label="λ"]
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="("];
+            1  -> 2 [label="E"];
+            2  -> END [label=")"]
+            0  -> END [label="a"]
+        }
+
+.. slido:: Simplify Diagram(V) - Combine E and E'
+   :class: t2c
+
+    .. container::
+
+        E
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> END [label="E'"];
+          }
+
+        E'
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="+|-"];
+            1  -> 2 [label="T"];
+            2  -> END [label="E'"];
+            0  -> END [label="λ"]
+          }
+
+
+    .. container::
+
+      .. class:: substep
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="+|-"];
+            1  -> 0 [label="T"];
+            0  -> END [label="λ"];
+          }
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 2 [label="+|-"];
+            2  -> 1 [label="T"];
+            1  -> END [label="λ"];
+          }
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="T"];
+            1  -> 0 [label="+|-"];
+            1  -> END [label="λ"];
+          }
+
+.. slido:: Simplify Diagram(VI) - Combining T and T'
+   :class: t2c
+
+    .. container::
+
+        T
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            1  -> END [label="T'"];
+          }
+
+        T'
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="*|/"];
+            1  -> 2 [label="F"];
+            2  -> END [label="T'"];
+            0  -> END [label="λ"]
+          }
+
+    .. container::
+
+      .. class:: substep
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="*|/"];
+            1  -> 0 [label="F"];
+            0  -> END [label="λ"];
+          }
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="3"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            1  -> 2 [label="*|/"];
+            2  -> 1 [label="F"];
+            1  -> END [label="λ"];
+          }
+
+        .. yographviz::
+
+          digraph {
+            rankdir = "LR"
+            END [shape=doublecircle, label="2"];
+            node [shape=circle];
+            0  -> 1 [label="F"];
+            1  -> 0 [label="*|/"];
+            1  -> END [label="λ"];
+          }
+
+.. slido:: Parser Code for Last Calculator
+   :class: t2c
+
+    .. container::
+
+      E
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="2"];
+          node [shape=circle];
+          0  -> 1 [label="T"];
+          1  -> 0 [label="+|-"];
+          1  -> END [label="λ"];
+        }
+
+      T
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="2"];
+          node [shape=circle];
+          0  -> 1 [label="F"];
+          1  -> 0 [label="*|/"];
+          1  -> END [label="λ"];
+        }
+
+      F
+
+      .. yographviz::
+
+        digraph {
+          rankdir = "LR"
+          END [shape=doublecircle, label="3"];
+          node [shape=circle];
+          0  -> 1 [label="("];
+          1  -> 2 [label="E"];
+          2  -> END [label=")"]
+          0  -> END [label="a"]
+        }
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_parser.py
+      :class: substep
+      :code: python
+      :number-lines:
+      :start-line: 1
+      :end-line: 31
+
+.. slido:: Output Parser Tree
+   :class: t2c
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_parser_tree.py
+      :code: python
+      :number-lines: 9
+      :start-line: 9
+      :end-line: 40
+
+    .. code:: console
+      :number-lines:
+
+        rd$python3 e_t_f_plus_minus_mul_divide_parser_tree.py
+        Enter an expression like 1+4*(3-1)
+        > 1+4*(3-1)
+        E:  1+4*(3-1)
+        T:  1+4*(3-1)
+        F:  1+4*(3-1)
+        Number:  1.0
+        +-:  +4*(3-1)
+        E:  4*(3-1)
+        T:  4*(3-1)
+        F:  4*(3-1)
+        Number:  4.0
+        */:  *(3-1)
+        T:  (3-1)
+        F:  (3-1)
+        E:  3-1)
+        T:  3-1)
+        F:  3-1)
+        Number:  3.0
+        +-:  -1)
+        E:  1)
+        T:  1)
+        F:  1)
+        Number:  1.0
+        True
+        Enter an expression like 1+4*(3-1)
+        >
+
+.. slido:: Representations of Parse Tree
+   :class: t4c
+
+    .. code:: sh
+
+        > 1+4*(3-1)
+        E:  1+4*(3-1)
+        T:  1+4*(3-1)
+        F:  1+4*(3-1)
+        Number:  1.0
+        +-:  +4*(3-1)
+        E:  4*(3-1)
+        T:  4*(3-1)
+        F:  4*(3-1)
+        Number:  4.0
+        */:  *(3-1)
+        T:  (3-1)
+        F:  (3-1)
+        E:  3-1)
+        T:  3-1)
+        F:  3-1)
+        Number:  3.0
+        +-:  -1)
+        E:  1)
+        T:  1)
+        F:  1)
+        Number:  1.0
+        True
+
+    .. container:: substep
+
+        #. E → E + T
+        #. E → E - T
+        #. E → T
+        #. T → T
+        #. T → T * F
+        #. T → T / F
+        #. T → F
+        #. F → a
+        #. F → (E)
+
+        .. code:: sh
+            :class: substep
+
+             > 1
+            E:  1
+            T:  1
+            F:  1
+            Number:  1.0
+
+        .. yographviz::
+            :class: substep
+
+            digraph{
+                A12 [label="E[1]"]
+                A54 [label="T[1]"]
+                A56 [label="F[1]"]
+                A12   -> A54
+                A54   -> A56
+            }
+
+    .. container::
+
+        .. code:: sh
+            :class: substep
+
+            > 1
+            E:  1
+            T:  1
+            F:  1
+            Number:  1.0
+            +-:  +4*(3-1)
+            E:  4*(3-1)
+            T:  4*(3-1)
+            F:  4*(3-1)
+            Number:  4.0
+
+        .. yographviz::
+            :class: substep
+
+            digraph{
+                Start [label="E[1+4]"]
+                A12 [label="E[1]"]
+                A54 [label="T[1]"]
+                A56 [label="F[1]"]
+                Aplus1 [label = "+"]
+                A3545 [label="T[4]"]
+                A35452 [label="F[4]"]
+                Start -> A12
+                Start -> Aplus1
+                Start -> A3545
+                A3545 -> A35452
+                A12   -> A54
+                A54   -> A56
+            }
+
+    .. yographviz::
+        :class: substep
+
+        digraph{
+            Start [label="E[1+4*(3-1)]"]
+            A12 [label="E[1]"]
+            A54 [label="T[1]"]
+            A56 [label="F[1]"]
+            Aplus1 [label = "+"]
+            A35r [label="T[4*(3-1)]"]
+            A3545 [label="T[4]"]
+            A35452 [label="F[4]"]
+            Aplus2 [label="*"]
+            A2 [label="F[(3-1)]"]
+            A23 [label="("]
+            A24 [label="E[3-1]"]
+            A25 [label=")"]
+            A1  [label="E[3]"]
+            A13 [label="-"]
+            A16 [label="T[1]"]
+            A04 [label="T[3]"]
+            A07 [label="F[1]"]
+            A08 [label="F[3]"]
+            Start -> A12
+            Start -> Aplus1
+            Start -> A35r
+            A35r  -> A3545
+            A3545 -> A35452
+            A35r  -> Aplus2
+            A35r  -> A2
+            A2    -> A23
+            A2    -> A24
+            A2    -> A25
+            A24   -> A1
+            A24   -> A13
+            A24   -> A16
+            A1    -> A04
+            A16   -> A07
+            A04   -> A08
+            A12   -> A54
+        A54   -> A56
+        }
+
+.. slido::
+   :class: n4c
+
+    #. E → E + T
+    #. E → E - T
+    #. E → T
+    #. T → T
+    #. T → T * F
+    #. T → T / F
+    #. T → F
+    #. F → a
+    #. F → (E)
+
+    .. code:: sh
+
+        > 1+4*(3-1)
+        E:  1+4*(3-1)
+        T:  1+4*(3-1)
+        F:  1+4*(3-1)
+        Number:  1.0
+        +-:  +4*(3-1)
+        E:  4*(3-1)
+        T:  4*(3-1)
+        F:  4*(3-1)
+        Number:  4.0
+        */:  *(3-1)
+        T:  (3-1)
+        F:  (3-1)
+        E:  3-1)
+        T:  3-1)
+        F:  3-1)
+        Number:  3.0
+        +-:  -1)
+        E:  1)
+        T:  1)
+        F:  1)
+        Number:  1.0
+        True
+
+    .. yographviz::
+      :height: 500
+
+      digraph{
+        Start [label="E[1+4*(3-1)]"]
+        A12 [label="E[1]"]
+        A54 [label="T[1]"]
+        A56 [label="F[1]"]
+        Aplus1 [label = "+"]
+        A35r [label="T[4*(3-1)]"]
+        A3545 [label="T[4]"]
+        A35452 [label="F[4]"]
+        Aplus2 [label="*"]
+        A2 [label="F[(3-1)]"]
+        A23 [label="("]
+        A24 [label="E[3-1]"]
+        A25 [label=")"]
+        A1  [label="E[3]"]
+        A13 [label="-"]
+        A16 [label="T[1]"]
+        A04 [label="T[3]"]
+        A07 [label="F[1]"]
+        A08 [label="F[3]"]
+        Start -> A12
+        Start -> Aplus1
+        Start -> A35r
+        A35r  -> A3545
+        A3545 -> A35452
+        A35r  -> Aplus2
+        A35r  -> A2
+        A2    -> A23
+        A2    -> A24
+        A2    -> A25
+        A24   -> A1
+        A24   -> A13
+        A24   -> A16
+        A1    -> A04
+        A16   -> A07
+        A04   -> A08
+        A12   -> A54
+        A54   -> A56
+      }
+
+    .. class:: substep
+
+    #. E → E + T
+    #. T[1] + T
+    #. F[1] + T
+    #. a[1] + T
+    #. a[1] + T * F
+    #. a[1] + F * F
+    #. a[1] + a[4] * F
+    #. a[1] + a[4] * (E)
+    #. a[1] + a[4] * (E-T)
+    #. a[1] + a[4] * (T-T)
+    #. a[1] + a[4] * (F-T)
+    #. a[1] + a[4] * (a[3]-T)
+    #. a[1] + a[4] * (a[3]-F)
+    #. a[1] + a[4] * (a[3]-a[1])
+
+.. slido:: Calculator
+   :class: t2c
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc.py
+      :code: python
+      :number-lines: 2
+      :start-line: 2
+      :end-line: 31
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc.py
+      :code: python
+      :number-lines: 31
+      :start-line: 31
+      :end-line: 76
+
+.. slido:: Calculator(IV)
+   :class: t3c
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc2.py
+      :code: python
+      :number-lines:
+      :end-line: 29
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc2.py
+      :code: python
+      :number-lines: 30
+      :start-line: 29
+      :end-line: 59
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc2.py
+      :code: python
+      :number-lines: 61
+      :start-line: 59
+
+.. slido:: Lexial of Calc80 in Python
+   :class: t2c
+
+    .. include:: cm/src/rd/calc80.py
+      :code: python
+      :number-lines:
+      :end-line: 29
+
+    .. include:: cm/src/rd/calc80.py
+      :code: python
+      :number-lines: 30
+      :start-line: 29
+      :end-line:  57
+
+    .. :
+
+        Thanks to Stacoverflow and Gemini AI for the following class
+        class RegexMatch:
+
+          def __init__(self, pattern):
+            self.pattern = re.compile(pattern)
+            self.match = None
+
+          def __eq__(self, other):
+            self.match = self.pattern.match(str(other))
+            return self.match is not None
+
+        class Patterns:
+            NUM = RegexMatch(r"[0-9]")
+
+.. slido:: Parser of Calc80 in Python
+   :class: t2c
+
+    .. include:: cm/src/rd/calc80.py
+      :code: python
+      :number-lines: 57
+      :start-line: 57
+      :end-line: 83
+
+    .. include:: cm/src/rd/calc80.py
+      :code: python
+      :number-lines: 84
+      :start-line: 83
+
+.. slido:: Another Grammar(I)
+   :class: t2c
+
+    #. S → AB | SB | B
+    #. A → aA
+    #. B → bB | BaB | ab
+
+    .. container:: substep
+
+        Eliminate Left Recursion
+
+        .. class:: substep
+
+
+        #. S → AB | SB | B
+            * S​ → ABS′ ∣ BS′
+            * S′ → BS′ ∣ λ​
+        #. B → bB | BaB | ab
+            * B ​→ bBB′ ∣ abB′
+            * B′ → aBB′ ∣ λ​
+
+    .. yographviz::
+        :class: substep
+
+        digraph Sprime {
+            label="S′";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="B"];
+            1 -> END [label="S′"];
+            0 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph Bprime {
+            label="B′";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="a"];
+            1 -> 2 [label="B"];
+            2 -> END [label="B′"];
+            0 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph Sprime {
+            label="S(S + Simplified S′ + Simplified A)";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="a"];
+            1 -> 1 [label="a"];
+            0 -> 2 [label="B"];
+            1 -> 2 [label="B"];
+            2 -> 2 [label="B"];
+            2 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph Bprime {
+            label="B + Simplified B′";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="b"];
+            0 -> 2 [label="a"];
+            2 -> 3 [label="b"];
+            1 -> 3 [label="B"];
+            3 -> 4 [label="a"];
+            4 -> 3 [label="B"];
+            3 -> END [label="λ"];
+        }
+
+    .. :
+
+        https://wwwlehre.dhbw-stuttgart.de/~sschulz/TEACHING/FLA2025/FLA_ho.pdf
+
+        Thanks to Chatgpt.com for verifying and simple corrections of the charts
+
+.. slido:: Another Grammar(II)
+   :class: t2c
+
+    .. yographviz::
+
+        digraph Sprime {
+            label="S";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="a"];
+            1 -> 1 [label="a"];
+            0 -> 2 [label="B"];
+            1 -> 2 [label="B"];
+            2 -> 2 [label="B"];
+            2 -> END [label="λ"];
+        }
+
+    .. yographviz::
+
+        digraph Bprime {
+            label="B";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 1 [label="b"];
+            0 -> 2 [label="a"];
+            2 -> 3 [label="b"];
+            1 -> 3 [label="B"];
+            3 -> 4 [label="a"];
+            4 -> 3 [label="B"];
+            3 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph S{
+            label="S";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 0 [label="a"];
+            0 -> 1 [label="B"];
+            1 -> 1 [label="B"];
+            1 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph B {
+            label="B";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 0 [label="b"];
+            0 -> 1 [label="ab"];
+            1 -> 0 [label="a"];
+            1 -> END [label="λ"];
+        }
+
+    .. :
+
+        https://wwwlehre.dhbw-s
+
+        Thanks to Chatgpt.com for verifying and simple corrections of the charts
+
+.. slido::
+   :class: n2c
+
+    .. yographviz::
+
+        digraph S{
+            label="S";
+            labelloc = "t";
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 0 [label="a"];
+            0 -> 1 [label="B"];
+            1 -> 1 [label="B"];
+            1 -> END [label="λ"];
+        }
+
+    .. yographviz::
+
+        digraph B {
+            rankdir = "LR"
+            node [shape=circle];
+            END [shape=doublecircle, label=""];
+            0 -> 0 [label="b"];
+            0 -> 1 [label="ab"];
+            1 -> 0 [label="a"];
+            1 -> END [label="λ"];
+        }
+
+    .. include:: cm/src/rd/sp_grammar.py
+      :code: python
+      :number-lines: 0
+      :start-line: 0
+      :end-line: 19
+
+    .. include:: cm/src/rd/sp_grammar.py
+      :code: python
+      :number-lines: 20
+      :start-line: 19
+      :end-line: 38
+
+    .. class:: substep
+
+    #. S → AB | SB | B { S​ → ABS′ ∣ BS′, S′ → BS′ ∣ λ​ }
+    #. B → bB | BaB | ab {B ​→ bBB′ ∣ abB′, B′ → aBB′ ∣ λ​ }
+
+    .. class:: substep
+
+    * first(S) = {a} ∪ first(B)
+    * first(B) = {a, first(ab)} = {a, b}
+    * first(S) = {a, b}
+
+.. slido:: Lexical C++
+   :class: t2c
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
+      :code: cpp
+      :number-lines: 0
+      :start-line: 0
+      :end-line: 31
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
+      :code: cpp
+      :number-lines: 31
+      :start-line: 31
+      :end-line: 63
+      :class: substep
+
+.. slido:: Calculator C++
+   :class: t2c
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
+      :code: python
+      :number-lines: 63
+      :start-line: 63
+      :end-line: 90
+
+    .. include:: cm/src/rd/e_t_f_plus_minus_mul_divide_calc16.cpp
+      :code: python
+      :number-lines: 90
+      :start-line: 90
+      :end-line: 113
+      :class: substep
+
+.. slido:: Simple Programming Language
+   :class: t2c
+
+    .. code:: basic
+        :number-lines:
+
+        BEGIN
+            LET I = 12
+            PRINT I
+            LET I = I - (2-(3-2)/(3-(2-1)/(5-2*2))-1+2)
+            PRINT I+ 2-(3-2)/(3-(2-1)/(5-2*2))-1+2
+            LET I=19
+            WHILE I-8
+            BEGIN
+               PRINT I
+               LET I=I-1
+            END
+            LET I=3
+            WHILE I
+            BEGIN
+               PRINT I
+               LET J=6
+               WHILE J
+               BEGIN
+                 LET J=J-2
+                 PRINT J
+               END
+               LET I=I-1
+            END
+        END
+
+    .. class:: substep
+
+        #. A → B 'EOF'
+        #. B → 'BEGIN' '\\n' M 'END'
+        #. M → L '\\n' M | λ
+        #. L → 'LET' 'ID' = E
+        #. L → 'PRINT' E
+        #. L → 'WHILE' E '\\n' B
+        #. E → T E'
+        #. E' → + T E' | -T E' | λ
+        #. T  → F T'
+        #. T' → * F T' | / F T' | λ
+        #. F  → 'NUMBER'
+        #. F  → 'ID'
+        #. F  → ( E )
+
+    .. code:: sh
+        :class: substep
+
+        src/rd/simple_language_1/cpp/simple_language_1.cpp
+
+    .. :
+
+        .. code:: peg
+            :class: substep
+
+            A → B 'EOF'
+            B → 'BEGIN' '\n' L 'END' '\n'
+            L → 'LET' 'ID' = E
+            L → 'PRINT' E
+            L → 'WHILE' E '\n' B
+            E → T E'
+            E' → + T E' | -T E' | λ
+            T  → F T'
+            T' → * F T' | / F T' | λ
+            F  → 'NUMBER'
+            F  → 'ID'
+            F  → ( E )
+
+.. slido:: Chart for simple programming Languaguge
+   :class: t2c
+
+    #. A → B 'EOF'
+    #. B → 'BEGIN' '\\n' M 'END'
+    #. M → L '\\n' M | λ
+    #. L → 'LET' 'ID' = E
+    #. L → 'PRINT' E
+    #. L → 'WHILE' E '\\n' B
+    #. E → T E'
+    #. E' → + T E' | -T E' | λ
+    #. T  → F T'
+    #. T' → * F T' | / F T' | λ
+    #. F  → 'NUMBER'
+    #. F  → 'ID'
+    #. F  → ( E )
+
+    .. container:: substep
+
+        .. yographviz::
+
+            digraph L {
+              label="L";
+              labelloc = "t";
+              rankdir="LR";
+              node [shape=circle];
+              END [shape=doublecircle,label=""];
+
+              0 -> 1 [label="LET"];
+              1 -> 2 [label="ID"];
+              2 -> 3 [label="="];
+              3 -> END [label="E"];
+
+              0 -> 4 [label="PRINT"];
+              4 -> END [label="E"];
+
+              0 -> 5 [label="WHILE"];
+              5 -> 6 [label="E"];
+              6 -> 7 [label="\\n"];
+              7 -> END [label="B"];
+            }
+
+        .. yographviz::
+
+            digraph M {
+              label="M";
+              labelloc = "t";
+              rankdir="LR";
+              node [shape=circle];
+              END [shape=doublecircle,label=""];
+
+              0 -> 1 [label="L"];
+              1 -> 2 [label="\\n"];
+              2 -> END [label="M"];
+              0 -> END [label="λ"];
+            }
+
+    .. yographviz::
+        :class: substep
+
+        digraph SM {
+          label="M";
+          labelloc = "t";
+          rankdir="LR";
+          node [shape=circle];
+          END [shape=doublecircle,label=""];
+
+          0 -> 1 [label="L"];
+          1 -> 0 [label="\\n"];
+          0 -> END [label="λ"];
+        }
+
+    .. yographviz::
+        :class: substep
+
+        digraph B {
+          label="B";
+          labelloc = "t";
+          rankdir="LR";
+          node [shape=circle];
+          END [shape=doublecircle,label=""];
+
+          0 -> 1 [label="BEGIN"];
+          1 -> 2 [label="\\n"];
+          2 -> 1 [label="L"];
+          2 -> END [label="END"];
+        }
+
+    .. :
+
+        ----
+
+
+        .. code:: python
+
+            A() -> B(); match(EOF)
+
+            B() -> match(BEGIN)
+                   match(\n)
+                   L()
+                   match(END)
+                   match(\n)
+
+            L() -> choose among
+                   LET ID = E
+                   PRINT E
+                   WHILE E \n B
+
+            E() -> T()
+                   while next token in {+, -}
+                     consume operator
+                     T()
+
+            T() -> F()
+                   while next token in {*, /}
+                     consume operator
+                     F()
+
+            F() -> NUMBER
+                 | ID
+                 | ( E )
+
+.. slido:: Creating Syntax Tree (Top Down)
+   :class: t2c
+
+    .. code:: pascal
+
+        BEGIN
+          LET X = 5
+          PRINT X
+          WHILE X
+          BEGIN
+            PRINT X
+            LET X = X - 1
+          END
+          PRINT x
+        END
+
+    .. yographviz::
+        :class: substep
+        :width: 900
+
+        digraph AST {
+          node [fontname="Courier", shape=box, style=filled, fillcolor="#f9f9f9"];
+          edge [fontname="Courier", arrowhead=vee];
+
+          // Root Level
+          root [label="BlockNode\n(Root Block)", fillcolor="#dee2e6"];
+
+          // Root Statements
+          let1 [label="LetNode\n(LET X = 5)"];
+          print1 [label="PrintNode\n(PRINT X)"];
+          while1 [label="WhileNode\n(WHILE X)", fillcolor="#e8f0fe"];
+          print3 [label="PrintNode\n(PRINT x)"];
+
+          root -> let1;
+          root -> print1;
+          root -> while1;
+          root -> print3;
+
+          // Let 1 Details
+          let1_id [label="Var: \"X\"", shape=ellipse, fillcolor="#fff3cd"];
+          let1_val [label="NumNode\n(5)", shape=ellipse, fillcolor="#d1e7dd"];
+          let1 -> let1_id;
+          let1 -> let1_val;
+
+          // Print 1 Details
+          print1_var [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+          print1 -> print1_var;
+
+          // While Details
+          while_cond [label="Cond:\nVarNode(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+          while_body [label="BlockNode\n(Loop Body)", fillcolor="#dee2e6"];
+          while1 -> while_cond;
+          while1 -> while_body;
+
+          // Inside While Body
+          print2 [label="PrintNode\n(PRINT X)"];
+          let2 [label="LetNode\n(LET X = X - 1)"];
+          while_body -> print2;
+          while_body -> let2;
+
+          // Loop Print Details
+          print2_var [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+          print2 -> print2_var;
+
+          // Loop Let Details
+          let2_id [label="Var: \"X\"", shape=ellipse, fillcolor="#fff3cd"];
+          let2_op [label="BinOpNode\n(-)", fillcolor="#f8d7da"];
+          let2 -> let2_id;
+          let2 -> let2_op;
+
+          // Binary Operation Elements
+          op_left [label="VarNode\n(\"X\")", shape=ellipse, fillcolor="#fff3cd"];
+          op_right [label="NumNode\n(1)", shape=ellipse, fillcolor="#d1e7dd"];
+          let2_op -> op_left;
+          let2_op -> op_right;
+
+          // Final Print Details (Lowercase x)
+          print3_var [label="VarNode\n(\"x\")\n[Evaluates to 0]", shape=ellipse, fillcolor="#f8d7da"];
+          print3 -> print3_var;
+        }
+
+    .. raw: html
+
+        <pre>
+            BlockNode (Root Block)
+            ├── LetNode (X = 5)
+            │   ├── Target: "X"
+            │   └── Value: NumNode(5)
+            ├── PrintNode (PRINT X)
+            │   └── Expression: VarNode("X")
+            ├── WhileNode (WHILE X)
+            │   ├── Condition: VarNode("X")
+            │   └── Body: BlockNode (Loop Block)
+            │       ├── PrintNode (PRINT X)
+            │       │   └── Expression: VarNode("X")
+            │       └── LetNode (X = X - 1)
+            │           ├── Target: "X"
+            │           └── Value: BinOpNode (-)
+            │               ├── Left: VarNode("X")
+            │               └── Right: NumNode(1)
+            └── PrintNode (PRINT x)
+                └── Expression: VarNode("x")
+        </pre>
+
+.. slido::
+   :class: n2c
+
+    .. include:: cm/src/rd/simple_language_1/simple_language30.py
+      :code: python
+      :number-lines: 0
+      :start-line: 0
+      :end-line: 31
+
+    .. include:: cm/src/rd/simple_language_1/simple_language30.py
+      :code: python
+      :number-lines: 31
+      :start-line: 31
+      :end-line: 63
+      :class: substep
+
+.. slido::
+   :class: n2c
+
+    .. include:: cm/src/rd/simple_language_1/simple_language30.py
+      :code: python
+      :number-lines: 63
+      :start-line: 63
+      :end-line: 95
+
+    .. include:: cm/src/rd/simple_language_1/simple_language30.py
+      :code: python
+      :number-lines: 96
+      :start-line: 95
+      :end-line: 127
+      :class: substep
+
+.. slido:: List of Related Files
+   :class: t2c
+
+    .. class:: substep
+
+    * src/rd/simple_language_1/
+        #. simple_language_1.py
+            * created by chatgpt.com
+        #. simple_language20.py
+            * Edited by Grok AI and Gemeni AI
+        #. simple_language30.py
+            * reformat by Gemini AI
+        #. simple_language50.py
+            * Add argparse added by me
+        #. sly folder of sly tool
+
+    .. class:: substep
+
+    * src/rd/simple_language_1/cpp/
+
+        #. simple_language20.cpp
+            * Gemini Ai created (Flawed)
+        #. simple_language30.cpp
+            * Gemini Ai reformated (Flawed)
+        #. simple_language50.cpp
+            * Change by hand to support arguments (Flawed)
+        #. simple_language_1.cpp
+            * My old code for interpreted
+            * Compiles and works fine after decades
+        #. simple_language_2.cpp
+            * Reformated of my old code by hand
+            * I like to update it more but I will not able to.
+
+
+    .. container: substep
+
+        ::
+
+            * src/rd/simple_language_1/
+                #. simple_language_1.py
+                    * created by chatgpt.com
+                #. simple_language20.py
+                    * Edited by Grok AI and Gemeni AI
+                #. simple_language30.py
+                    * reformat by Gemini AI
+                #. sly folder of sly tool
+
+            * src/rd/simple_language_1/cpp/
+                #. simple_language20.cpp
+                    * Gemini Ai created (Flawed)
+                #. simple_language30.cpp
+                    * Gemini Ai reformated (Flawed)
+                #. simple_language_1.cpp
+                    * My old code for interpreted
+                    * Compiles and works fine after decades
+                #. simple_language_2.cpp
+                    * Reformated of my old code by hand
+                    * I like to update it more but I will not able to.
+
+.. slido::
+
+    End
+
+    .. comments:
+
+        rst2html syn.rst syn.html
+        hovercraft syn.rst
+
+        https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+
+        https://www.researchgate.net/publication/2367776_An_Introduction_to_Compilers?enrichId=rgreq-3d6589b36b650b1be61ea0ce1b1b7805-XXX&enrichSource=Y292ZXJQYWdlOzIzNjc3NzY7QVM6OTg4Mjk0MzcyNDMzOTVAMTQwMDU3NDE4MjE5Ng%3D%3D&el=1_x_2&_esc=publicationCoverPdf
+
+        https://www.tutorialspoint.com/compiler_design/compiler_design_syntax_analysis.htm
