@@ -1,0 +1,3568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lt;string&gt;</title>
+<title>CM - Ll</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full .slide-number{display:none}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style><script src="assets/b6plus.js"></script>
+<style type="text/css">
+
+/* Minimal style sheet for the HTML output of Docutils.                    */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: minimal.css 10018 2025-03-06 16:19:15Z milde $                                                               */
+/* :Copyright: © 2015, 2021 Günter Milde.                                  */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+
+/* This CSS3 stylesheet defines rules for Docutils elements without        */
+/* HTML equivalent. It is required to make the document semantics visible. */
+/*                                                                         */
+/* .. _validates: http://jigsaw.w3.org/css-validator/validator$link        */
+
+/* titles */
+p.topic-title,
+p.admonition-title,
+p.system-message-title {
+  font-weight: bold;
+}
+p.sidebar-title,
+p.rubric {
+  font-weight: bold;
+  font-size: larger;
+}
+p.rubric {
+  color: maroon;
+}
+p.subtitle,
+p.section-subtitle,
+p.sidebar-subtitle {
+  font-weight: bold;
+  margin-top: -0.5em;
+}
+h1 + p.subtitle {
+  font-size: 1.6em;
+}
+a.toc-backref {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Warnings, Errors */
+.system-messages h2,
+.system-message-title,
+pre.problematic,
+span.problematic {
+  color: red;
+}
+
+/* Inline Literals */
+.docutils.literal {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+/* do not wrap at hyphens and similar: */
+.literal > span.pre { white-space: nowrap; }
+
+/* keep line-breaks (\n) visible */
+.pre-wrap { white-space: pre-wrap; }
+
+/* Lists */
+
+/* compact and simple lists: no margin between items */
+.simple  li, .simple  ul, .simple  ol, .simple  > li p,
+.compact li, .compact ul, .compact ol, .compact > li p,
+dl.simple  > dd, dl.compact > dd, dl.docinfo > dd {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Nested Paragraphs */
+p:first-child { margin-top: 0; }
+p:last-child { margin-bottom: 0; }
+details > p:last-child { margin-bottom: 1em; }
+
+/* Table of Contents */
+.contents ul.auto-toc { /* section numbers present */
+  list-style-type: none;
+}
+
+/* Enumerated Lists */
+ol.arabic     { list-style: decimal }
+ol.loweralpha { list-style: lower-alpha }
+ol.upperalpha { list-style: upper-alpha }
+ol.lowerroman { list-style: lower-roman }
+ol.upperroman { list-style: upper-roman }
+
+/* Definition Lists and Derivatives */
+dt .classifier { font-style: italic }
+dt .classifier:before {
+  font-style: normal;
+  margin: 0.5em;
+  content: ":";
+}
+/* Field Lists and similar */
+/* bold field name, content starts on the same line */
+dl.field-list,
+dl.option-list,
+dl.docinfo {
+  display: flow-root;
+}
+dl.field-list > dt,
+dl.option-list > dt,
+dl.docinfo > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.25em;
+}
+/* Offset for field content (corresponds to the --field-name-limit option) */
+dl.field-list > dd,
+dl.option-list > dd,
+dl.docinfo > dd {
+  margin-left:  9em; /* ca. 14 chars in the test examples, fit all Docinfo fields */
+}
+/* start nested lists on new line */
+dd > dl:first-child,
+dd > ul:first-child,
+dd > ol:first-child {
+  clear: left;
+}
+/* start field-body on a new line after long field names */
+dl.field-list > dd > *:first-child,
+dl.option-list > dd > *:first-child
+{
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+}
+
+/* Bibliographic Fields (docinfo) */
+dl.docinfo pre.address {
+  font: inherit;
+  margin: 0;
+}
+dl.docinfo > dd.authors > p { margin: 0; }
+
+/* Option Lists */
+dl.option-list > dt { font-weight: normal; }
+span.option { white-space: nowrap; }
+
+/* Footnotes and Citations  */
+
+.footnote, .citation { margin: 1em 0; } /* default paragraph skip (Firefox) */
+/* hanging indent */
+.citation { padding-left: 2em; }
+.footnote { padding-left: 1.7em; }
+.footnote.superscript { padding-left: 1.0em; }
+.citation > .label { margin-left: -2em; }
+.footnote > .label { margin-left: -1.7em; }
+.footnote.superscript > .label { margin-left: -1.0em; }
+
+.footnote > .label + *,
+.citation > .label + * {
+  display: inline-block;
+  margin-top: 0;
+  vertical-align: top;
+}
+.footnote > .backrefs + *,
+.citation > .backrefs + * {
+  margin-top: 0;
+}
+.footnote > .label + p, .footnote > .backrefs + p,
+.citation > .label + p, .citation > .backrefs + p {
+  display: inline;
+  vertical-align: inherit;
+}
+
+.backrefs { user-select: none; }
+.backrefs > a { font-style: italic; }
+
+/* superscript footnotes */
+a[role="doc-noteref"].superscript,
+.footnote.superscript > .label,
+.footnote.superscript > .backrefs {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: 1;
+}
+a[role="doc-noteref"].superscript > .fn-bracket,
+.footnote.superscript > .label > .fn-bracket {
+  /* hide brackets in display but leave for copy/paste */
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+[role="doc-noteref"].superscript + [role="doc-noteref"].superscript {
+  padding-left: 0.15em; /* separate consecutive footnote references */
+  /* TODO: unfortunately, "+" also selects with text between the references. */
+}
+
+/* Alignment */
+.align-left   {
+  text-align: left;
+  margin-right: auto;
+}
+.align-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-right  {
+  text-align: right;
+  margin-left: auto;
+}
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+/* reset inner alignment in figures and tables */
+figure.align-left, figure.align-right,
+table.align-left, table.align-center, table.align-right {
+  text-align: inherit;
+}
+
+/* Text Blocks */
+.topic { margin: 1em 2em; }
+.sidebar,
+.admonition,
+.system-message {
+  margin: 1em 2em;
+  border: thin solid;
+  padding: 0.5em 1em;
+}
+div.line-block { display: block; }
+div.line-block div.line-block, pre { margin-left: 2em; }
+
+/* Code line numbers: don't copy with drag-and-drop */
+pre.code .ln { display: none; }
+pre.code code:before {
+  content: attr(data-lineno);
+  font-size: small;
+  color: gray;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+td, th {
+  border: thin solid silver;
+  padding: 0 1ex;
+}
+.borderless td, .borderless th {
+  border: 0;
+  padding: 0;
+  padding-right: 0.5em /* separate table cells */
+}
+
+table > caption, figcaption {
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+table.captionbelow {
+  caption-side: bottom;
+}
+
+/* MathML (see "math.css" for --math-output=HTML) */
+math .boldsymbol { font-weight: bold; }
+math.boxed, math .boxed {padding: 0.25em; border: thin solid; }
+/* style table similar to AMS "align" or "aligned" environment: */
+mtable.cases > mtr > mtd { text-align: left; }
+mtable.ams-align > mtr > mtd { padding-left: 0; padding-right: 0; }
+mtable.ams-align > mtr > mtd:nth-child(2n) { text-align: left; }
+mtable.ams-align > mtr > mtd:nth-child(2n+1) { text-align: right; }
+mtable.ams-align > mtr > mtd:nth-child(2n+3) { padding-left: 2em; }
+.mathscr mi, mi.mathscr {
+  font-family: STIX, XITSMathJax_Script, rsfs10,
+               "Asana Math", Garamond, cursive;
+}
+
+/* Document Header and Footer */
+header { border-bottom: 1px solid black; }
+footer { border-top: 1px solid black; }
+
+/* Images are block-level by default in Docutils */
+/* New HTML5 block elements: set display for older browsers */
+img, svg, header, footer, main, aside, nav, section, figure, video, details {
+  display: block;
+}
+svg { width: auto; height: auto; }  /* enable scaling of SVG images */
+/* inline images */
+
+p img, p svg, p video,
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img,
+h1 svg, h2 svg, h3 svg, h4 svg, h5 svg, h6 svg {
+  display: inline;
+}
+
+</style>
+<style type="text/css">
+
+/* CSS31_ style sheet for the output of Docutils HTML writers.             */
+/* Rules for easy reading and pre-defined style variants.                  */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: plain.css 10079 2025-04-10 12:01:48Z milde $                                                               */
+/* :Copyright: © 2015 Günter Milde.                                        */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+/* .. _CSS3: https://www.w3.org/Style/CSS/                                 */
+
+
+/* Document Structure */
+/* ****************** */
+
+/* "page layout" */
+body {
+  margin: 0;
+  background-color: #dbdbdb;
+  --field-indent: 9em; /* default indent of fields in field lists */
+}
+main, footer, header {
+  line-height:1.6;
+  /* avoid long lines --> better reading */
+  /* optimum is 45…75 characters/line <http://webtypography.net/2.1.2> */
+  /* OTOH: lines should not be too short because of missing hyphenation, */
+  max-width: 50rem;
+  padding: 1px 2%; /* 1px on top avoids grey bar above title (mozilla) */
+  margin: auto;
+}
+main {
+  counter-reset: table figure;
+  background-color: white;
+}
+footer, header {
+  font-size: smaller;
+  padding: 0.5em 2%;
+  border: none;
+}
+
+/* Table of Contents */
+ul.auto-toc > li > p {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+nav.contents ul {
+  padding-left: 1em;
+}
+main > nav.contents ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B29\ ';
+}
+main > nav.contents ul ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B1D\ ';
+}
+
+/* Transitions */
+hr.docutils {
+  width: 80%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  clear: both;
+}
+
+/* Paragraphs */
+
+/* vertical space (parskip) */
+p, ol, ul, dl, li,
+.footnote, .citation,
+div > math,
+table {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6,
+dd, details > p:last-child {
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+/* ===== */
+
+/* Definition Lists */
+/* Indent lists nested in definition lists */
+dd > ul:only-child, dd > ol:only-child { padding-left: 1em; }
+
+/* Description Lists */
+/* styled like in most dictionaries, encyclopedias etc. */
+dl.description {
+  display: flow-root;
+}
+dl.description > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.3em;
+}
+dl.description > dd:after {
+  display: table;
+  content: "";
+  clear: left; /* clearfix for empty descriptions */
+}
+
+/* Field Lists */
+
+dl.field-list > dd,
+dl.docinfo > dd {
+  margin-left: var(--field-indent); /* adapted in media queries or HTML */
+}
+
+/* example for custom field-name width */
+dl.field-list.narrow > dd {
+  --field-indent: 5em;
+}
+/* run-in: start field-body on same line after long field names */
+dl.field-list.run-in > dd p {
+  display: block;
+}
+
+/* Bibliographic Fields */
+
+/* generally, bibliographic fields use dl.docinfo */
+/* but dedication and abstract are placed into divs */
+div.abstract p.topic-title {
+  text-align: center;
+}
+div.dedication {
+  margin: 2em 5em;
+  text-align: center;
+  font-style: italic;
+}
+div.dedication p.topic-title {
+  font-style: normal;
+}
+
+/* disclosures */
+details { padding-left: 1em; }
+summary { margin-left: -1em; }
+
+/* Text Blocks */
+/* =========== */
+
+/* Literal Blocks */
+pre.literal-block, pre.doctest-block,
+pre.math, pre.code {
+  font-family: monospace;
+}
+
+/* Block Quotes and Topics */
+bockquote { margin: 1em 2em; }
+blockquote p.attribution {
+  text-align: right;
+  margin-left: 20%;
+}
+
+/* Tables */
+/* ====== */
+
+/* th { vertical-align: bottom; } */
+
+table tr { text-align: left; }
+
+/* "booktabs" style (no vertical lines) */
+table.booktabs {
+  border: 0;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.booktabs * {
+  border: 0;
+}
+table.booktabs th {
+  border-bottom: thin solid;
+}
+
+/* numbered tables (counter defined in div.document) */
+table.numbered > caption:before {
+  counter-increment: table;
+  content: "Table " counter(table) ": ";
+  font-weight: bold;
+}
+
+/* Explicit Markup Blocks */
+/* ====================== */
+
+/* Footnotes and Citations */
+/* ----------------------- */
+
+/* line on the left */
+.footnote-list {
+  border-left: solid thin;
+  padding-left: 0.25em;
+}
+
+/* Directives */
+/* ---------- */
+
+/* Body Elements */
+/* ~~~~~~~~~~~~~ */
+
+/* Images and Figures */
+
+/* let content flow to the side of aligned images and figures */
+figure.align-left,
+img.align-left,
+svg.align-left,
+video.align-left,
+div.align-left,
+object.align-left {
+  clear: left;
+  float: left;
+  margin-right: 1em;
+}
+figure.align-right,
+img.align-right,
+svg.align-right,
+video.align-right,
+div.align-right,
+object.align-right {
+  clear: right;
+  float: right;
+  margin-left: 1em;
+}
+/* Stop floating sidebars, images and figures */
+h1, h2, h3, h4, footer, header { clear: both; }
+
+/* Numbered figures */
+figure.numbered > figcaption > p:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  font-weight: bold;
+}
+
+/* Admonitions and System Messages */
+.caution p.admonition-title,
+.attention p.admonition-title,
+.danger p.admonition-title,
+.error p.admonition-title,
+.warning p.admonition-title,
+div.error {
+  color: red;
+}
+
+/* Sidebar */
+/* Move right. In a layout with fixed margins, */
+/* it can be moved into the margin.            */
+aside.sidebar {
+  width: 30%;
+  max-width: 26em;
+  float: right;
+  clear: right;
+  margin-left: 1em;
+  margin-right: -1%;
+  background-color: #fffffa;
+}
+
+
+/* Code */
+pre.code { padding: 0.7ex }
+pre.code, code { background-color: #eeeeee }
+/* basic highlighting: for a complete scheme, see */
+/* https://docutils.sourceforge.io/sandbox/stylesheets/ */
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+
+/* Epigraph           */
+/* Highlights         */
+/* Pull-Quote         */
+/* Compound Paragraph */
+/* Container          */
+
+/* Inline Markup */
+/* ============= */
+
+sup, sub { line-height: 0.8; } /* do not add leading for lines with sup/sub */
+
+/* Inline Literals                                          */
+/* possible values: normal, nowrap, pre, pre-wrap, pre-line */
+/*   span.docutils.literal { white-space: pre-wrap; }       */
+
+/* Hyperlink References */
+a { text-decoration: none; }
+
+/* External Targets       */
+/*   span.target.external */
+/* Internal Targets       */
+/*   span.target.internal */
+/* Footnote References    */
+/*   a[role="doc-noteref"] */
+/* Citation References    */
+/*   a.citation-reference */
+
+</style>
+</head>
+<body>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        if (typeof b6plus !== "undefined" && typeof b6plus.init === "function") {
+            b6plus.init();
+        } else if (typeof b6plus !== "undefined") {
+            console.log("b6plus loaded - auto mode");
+        }
+    }, 10);
+});
+</script>
+<section class="slide">
+<h2>LL</h2>
+<p><strong>Syntax Analysis(LL)</strong></p>
+<p>Ahmad Yoosofan</p>
+<p>Compiler course</p>
+<p><a class="reference external" href="https://yoosofan.github.io/course/compiler.html">https://yoosofan.github.io/course/compiler.html</a></p>
+<div class="slide-number">1</div></section>
+<section class="slide t2c">
+<h2>Reduce Function Calls</h2>
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B → a</p></li>
+</ol>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a a</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A</p></li>
+<li><p>⇒ a B</p></li>
+<li><p>⇒ a a</p></li>
+</ol>
+</div>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a a $</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A $</p></li>
+<li><p>⇒ a B $</p></li>
+<li><p>⇒ a a $</p></li>
+</ol>
+</div>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a b a a $</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A $  ⇒ a B $</p></li>
+<li><p>⇒ a B $ ⇒ a b A $</p></li>
+<li><p>⇒ a b a B $  ⇒ a b a a $</p></li>
+</ol>
+</div>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a a $</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A $ [ a a $]</p></li>
+<li><p>⇒ a B $ [a a $]</p></li>
+<li><p>⇒ B $ [a $]</p></li>
+<li><p>⇒ B $ [a $]</p></li>
+<li><p>⇒ a $ [a $]</p></li>
+<li><p>⇒  $ [ $]</p></li>
+</ol>
+</div>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a b a a $</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A $ [abaa$]</p></li>
+<li><p>a B $,  [abaa$]</p></li>
+<li><p>B $,  [baa$]</p></li>
+<li><p>b A $ , [baa$]</p></li>
+<li><p>A $, [aa$]</p></li>
+<li><p>a B $, [aa$]</p></li>
+<li><p>B $, [a$]</p></li>
+<li><p>a $, [a$]</p></li>
+<li><p>$, [$]</p></li>
+</ol>
+</div>
+<div class="slide-number">2</div></section>
+<section class="slide t2c">
+<h2>First sets</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B → a</p></li>
+</ol>
+<ol class="arabic simple incremental">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {a , b}</p></li>
+</ol>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>A → a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>B → a</p></td>
+<td><p>B → b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>a</p></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>1</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">3</div></section>
+<section class="slide t2c">
+<h2>Parsing(I)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B → a</p></li>
+</ol>
+<ul class="simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {a , b}</p></li>
+</ul>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>a</p></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a a $</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>A $</p></li>
+<li><p>⇒ a B $</p></li>
+<li><p>⇒ a a $</p></li>
+</ol>
+<ol class="arabic simple incremental">
+<li><p>.a a $ [ A $ ]</p></li>
+<li><p>.a a $ [ a B $ ]</p></li>
+<li><p>.a $ [ B $ ]</p></li>
+<li><p>.a $ [ a $ ]</p></li>
+<li><p>.$ [ $ ]</p></li>
+<li><p>accept</p></li>
+</ol>
+</div>
+<div class="slide-number">4</div></section>
+<section class="slide t2c">
+<h2>Parsing(II)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B → a</p></li>
+</ol>
+<ul class="simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {a , b}</p></li>
+</ul>
+</div>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>a</p></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>a b a a $</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>A $</p></li>
+<li><p>⇒ a B $</p></li>
+<li><p>⇒ a B $</p></li>
+<li><p>⇒ a b A $</p></li>
+<li><p>⇒ a b a B $</p></li>
+<li><p>⇒ a b a a $</p></li>
+</ol>
+</div>
+<ol class="arabic simple incremental">
+<li><p>.a b a a $ [ A $ ]</p></li>
+<li><p>.a b a a $ [ a B $ ]</p></li>
+<li><p>.b a a $ [ B $ ]</p></li>
+<li><p>.b a a $ [ b A $ ]</p></li>
+<li><p>.a a $ [ A $ ]</p></li>
+<li><p>.a a $ [ a B $ ]</p></li>
+<li><p>.a $ [ B $ ]</p></li>
+<li><p>.a $ [ a $ ]</p></li>
+<li><p>.$ [ $ ]</p></li>
+<li><p>accept</p></li>
+</ol>
+<!-- :
+
+A →  a B
+B →  b A
+B →  a
+B →  b
+
+
+
+Left factoring
+A →  a B
+B →  a
+
+B →  b A
+B →  b
+
+Left factoring
+A →  a B
+B →  a
+
+B →  b L
+L →  A
+L →  λ
+
+Left factoring
+A →  a B
+B →  a
+B →  b L
+L →  A
+L →  λ
+
+first(A) = {a}
+first(B) = {a, b}
+first(L) = {a, λ} -->
+<div class="slide-number">5</div></section>
+<section class="slide t2c">
+<h2>Parsing(III)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B → a</p></li>
+</ol>
+<ul class="simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {a , b}</p></li>
+</ul>
+</div>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>a</p></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p>A $</p></li>
+<li><p>⇒ a B $</p></li>
+<li><p>⇒ a b A $</p></li>
+<li><p>⇒ a b a B $</p></li>
+<li><p>⇒ a b a a $</p></li>
+</ol>
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A   $</p></td>
+<td><p>a b a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a b a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B $</p></td>
+<td><p>b a a $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>b A $</p></td>
+<td><p>b a a $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A   $</p></td>
+<td><p>a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>a $</p></td>
+<td><p>B → a</p></td>
+</tr>
+<tr><td><p>a   $</p></td>
+<td><p>a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>$</p></td>
+<td><p>accept</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">6</div></section>
+<section class="slide t2c">
+<h2>Parsing(IV)</h2>
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>a</p></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="incremental docutils container">
+<p>b</p>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A  $</p></td>
+<td><p>b $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple incremental">
+<li><p>a b a b</p></li>
+<li><p>a b b b</p></li>
+</ol>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A $</p></td>
+<td><p>a b a b $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a b a b $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B $</p></td>
+<td><p>b a b $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>b A$</p></td>
+<td><p>b a b $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A$</p></td>
+<td><p>a b $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B$</p></td>
+<td><p>a b $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B$</p></td>
+<td><p>b $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>bA$</p></td>
+<td><p>b $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A$</p></td>
+<td><p>$</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A $</p></td>
+<td><p>a b b b $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a b b b $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B $</p></td>
+<td><p>b b b $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>b A$</p></td>
+<td><p>b b b $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A$</p></td>
+<td><p>b b $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">7</div></section>
+<section class="slide t2c">
+<h2>Parsing(V)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B →  λ</p></li>
+</ol>
+<p class="next">first</p>
+<ul class="incremental simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {b , λ}</p></li>
+</ul>
+</div>
+<div class="incremental docutils container">
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td></td>
+<td><p>b A</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p class="next">input = a b a $</p>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A   $</p></td>
+<td><p>a b a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a b a  $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>b a  $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>b A $</p></td>
+<td><p>b a  $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A   $</p></td>
+<td><p>a  $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a  $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>$</p></td>
+<td><p>B → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>$</p></td>
+<td><p>accept</p></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td></td>
+<td><p>b A</p></td>
+<td><p>λ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">8</div></section>
+<section class="slide t2c">
+<h2>Parsing(VI)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B →  λ</p></li>
+</ol>
+<ul class="simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {b , λ}</p></li>
+</ul>
+</div>
+<div class="docutils container">
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td><p>λ</p></td>
+<td><p>b A</p></td>
+<td><p>λ</p></td>
+</tr>
+</tbody>
+</table>
+<p class="next">input = a a $</p>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A   $</p></td>
+<td><p>a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>a   $</p></td>
+<td><p>B → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>a   $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="incremental simple">
+<li><p>Putting B → λ on that cell was incorrect</p></li>
+<li><p>Removing B → λ from a is better</p></li>
+<li><p>Finding more rules in future (follow set)</p></li>
+</ul>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td></td>
+<td><p>b A</p></td>
+<td><p>λ</p></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A   $</p></td>
+<td><p>a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>a   $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">9</div></section>
+<section class="slide t2c">
+<h2>Follow Set(I)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>A → a B</p></li>
+<li><p>B → b A</p></li>
+<li><p>B →  λ</p></li>
+</ol>
+<ul class="simple">
+<li><p>first( A ) = {a}</p></li>
+<li><p>first( B ) = {b , λ}</p></li>
+</ul>
+</div>
+<div class="docutils container">
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p>b</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A</p></td>
+<td><p>a B</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>B</p></td>
+<td></td>
+<td><p>b A</p></td>
+<td><p>λ</p></td>
+</tr>
+</tbody>
+</table>
+<p class="next">input = a b a $</p>
+</div>
+<div class="graphviz-container next" style="margin: 0 auto; text-align: center;">
+<svg width="152pt" height="260pt"
+ viewBox="0.00 0.00 152.00 260.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+<title>aba</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 148,-256 148,4 -4,4"/>
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="black" cx="45" cy="-234" rx="18" ry="18"/>
+<text text-anchor="middle" x="45" y="-230.3" font-family="Times,serif" font-size="14.00">A</text>
+</g>
+<!-- A0 -->
+<g id="node2" class="node">
+<title>A0</title>
+<ellipse fill="none" stroke="black" cx="18" cy="-162" rx="18" ry="18"/>
+<text text-anchor="middle" x="18" y="-158.3" font-family="Times,serif" font-size="14.00">a</text>
+</g>
+<!-- A&#45;&gt;A0 -->
+<g id="edge1" class="edge">
+<title>A&#45;&gt;A0</title>
+<path fill="none" stroke="black" d="M38.74,-216.76C35.5,-208.37 31.47,-197.93 27.83,-188.5"/>
+<polygon fill="black" stroke="black" points="31.09,-187.22 24.23,-179.15 24.56,-189.74 31.09,-187.22"/>
+</g>
+<!-- B -->
+<g id="node3" class="node">
+<title>B</title>
+<ellipse fill="none" stroke="black" cx="72" cy="-162" rx="18" ry="18"/>
+<text text-anchor="middle" x="72" y="-158.3" font-family="Times,serif" font-size="14.00">B</text>
+</g>
+<!-- A&#45;&gt;B -->
+<g id="edge3" class="edge">
+<title>A&#45;&gt;B</title>
+<path fill="none" stroke="black" d="M51.26,-216.76C54.5,-208.37 58.53,-197.93 62.17,-188.5"/>
+<polygon fill="black" stroke="black" points="65.44,-189.74 65.77,-179.15 58.91,-187.22 65.44,-189.74"/>
+</g>
+<!-- B0 -->
+<g id="node4" class="node">
+<title>B0</title>
+<ellipse fill="none" stroke="black" cx="45" cy="-90" rx="18" ry="18"/>
+<text text-anchor="middle" x="45" y="-86.3" font-family="Times,serif" font-size="14.00">b</text>
+</g>
+<!-- B&#45;&gt;B0 -->
+<g id="edge2" class="edge">
+<title>B&#45;&gt;B0</title>
+<path fill="none" stroke="black" d="M65.74,-144.76C62.5,-136.37 58.47,-125.93 54.83,-116.5"/>
+<polygon fill="black" stroke="black" points="58.09,-115.22 51.23,-107.15 51.56,-117.74 58.09,-115.22"/>
+</g>
+<!-- A1 -->
+<g id="node5" class="node">
+<title>A1</title>
+<ellipse fill="none" stroke="black" cx="99" cy="-90" rx="18" ry="18"/>
+<text text-anchor="middle" x="99" y="-86.3" font-family="Times,serif" font-size="14.00">A</text>
+</g>
+<!-- B&#45;&gt;A1 -->
+<g id="edge4" class="edge">
+<title>B&#45;&gt;A1</title>
+<path fill="none" stroke="black" d="M78.26,-144.76C81.5,-136.37 85.53,-125.93 89.17,-116.5"/>
+<polygon fill="black" stroke="black" points="92.44,-117.74 92.77,-107.15 85.91,-115.22 92.44,-117.74"/>
+</g>
+<!-- a1 -->
+<g id="node6" class="node">
+<title>a1</title>
+<ellipse fill="none" stroke="black" cx="72" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="72" y="-14.3" font-family="Times,serif" font-size="14.00">a</text>
+</g>
+<!-- A1&#45;&gt;a1 -->
+<g id="edge5" class="edge">
+<title>A1&#45;&gt;a1</title>
+<path fill="none" stroke="black" d="M92.74,-72.76C89.5,-64.37 85.47,-53.93 81.83,-44.5"/>
+<polygon fill="black" stroke="black" points="85.09,-43.22 78.23,-35.15 78.56,-45.74 85.09,-43.22"/>
+</g>
+<!-- B1 -->
+<g id="node7" class="node">
+<title>B1</title>
+<ellipse fill="none" stroke="red" cx="126" cy="-18" rx="18" ry="18"/>
+<text text-anchor="middle" x="126" y="-14.3" font-family="Times,serif" font-size="14.00">B</text>
+</g>
+<!-- A1&#45;&gt;B1 -->
+<g id="edge6" class="edge">
+<title>A1&#45;&gt;B1</title>
+<path fill="none" stroke="black" d="M105.26,-72.76C108.5,-64.37 112.53,-53.93 116.17,-44.5"/>
+<polygon fill="black" stroke="black" points="119.44,-45.74 119.77,-35.15 112.91,-43.22 119.44,-45.74"/>
+</g>
+</g>
+</svg>
+
+</div>
+<div class="docutils container">
+<ol class="arabic simple incremental">
+<li><p>follow( A ) = {$}</p></li>
+<li><p>follow( B ) = {$}</p></li>
+</ol>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>A   $</p></td>
+<td><p>a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B $</p></td>
+<td><p>a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B   $</p></td>
+<td><p>a   $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="slide-number">10</div></section>
+<section class="slide t2c">
+<h2>Wrong Calculator Grammar(I)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>E → T + E | T</p></li>
+<li><p>T → F * T | F</p></li>
+<li><p>F → ( E ) | a</p></li>
+</ol>
+<p>Some text books use <em>id</em> instead of <em>a</em></p>
+</div>
+<div class="incremental docutils container">
+<p>Remove Left Factor</p>
+<ol class="arabic simple incremental">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T |  λ</p></li>
+<li><p>F  → ( E ) |  a</p></li>
+</ol>
+</div>
+<ol class="arabic simple incremental">
+<li><p>first(T) ⊂ first(E) [ E → T  E' ]</p></li>
+<li><p>first(F) ⊂ first(T) [ T → F T' ]</p></li>
+<li><p>first(F) = { a, ( } [ F → ( E ) | a ]</p></li>
+<li><p>first(E) = first(T) = first(F)</p></li>
+<li><p>first(E') = { + , λ} [ E' → + E' | λ ]</p></li>
+<li><p>first(T') = { * , λ} [ T' → * T' | λ ]</p></li>
+</ol>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> E</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> T</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">11</div></section>
+<section class="slide t2c">
+<h2>Adding λ to table</h2>
+<ol class="arabic simple">
+<li><p>E → T + E | T</p></li>
+<li><p>T → F * T | F</p></li>
+<li><p>F → ( E ) | a</p></li>
+</ol>
+<div class="docutils container">
+<p>Remove Left Factor</p>
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T |  λ</p></li>
+<li><p>F  → ( E ) |  a</p></li>
+</ol>
+</div>
+<ol class="arabic simple">
+<li><p>first(E)</p></li>
+<li><p>= first(T)=first(F)</p></li>
+<li><p>= { a, ( }</p></li>
+<li><p>first(E') = { + ,  λ}</p></li>
+<li><p>first(T') = { * ,  λ}</p></li>
+<li><p>first(F)  = { a , ( }</p></li>
+</ol>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td><p>λ</p></td>
+<td><p><cite>+</cite> E</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> T</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">12</div></section>
+<section class="slide t2c">
+<h2>Parsing `a+a*a$` for right place of λ in LL(1) Table</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E</p></li>
+<li><p>E' → λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T</p></li>
+<li><p>T' → λ</p></li>
+<li><p>F  → ( E )</p></li>
+<li><p>F  →  a</p></li>
+</ol>
+<ul class="simple">
+<li><p>first(E) = first(T) = first(F) = { a, ( }</p></li>
+<li><p>first(E')  = { + ,  λ }</p></li>
+<li><p>first(T')  = { * ,  λ }</p></li>
+<li><p>follow(E)  = { $ , ) }</p></li>
+<li><p>follow(E') = { $ , ) }</p></li>
+<li><p>follow(T)  = { + , $ , ) }</p></li>
+<li><p>follow(T') = { + , $ , ) }</p></li>
+<li><p>follow(F)  = { * , + , $ , ) }</p></li>
+</ul>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> E</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> T</p></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E           $</p></td>
+<td><p>a + a * a $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E'        $</p></td>
+<td><p>a + a * a $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'     $</p></td>
+<td><p>a + a * a $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>a + a * a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p><cite>+</cite> a * a $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'          $</p></td>
+<td><p><cite>+</cite> a * a $</p></td>
+<td><p>E' → + E</p></td>
+</tr>
+<tr><td><p><cite>+</cite> E       $</p></td>
+<td><p><cite>+</cite> a * a $</p></td>
+<td><p>Remove +</p></td>
+</tr>
+<tr><td><p>E           $</p></td>
+<td><p>a * a     $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E'        $</p></td>
+<td><p>a * a     $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'     $</p></td>
+<td><p>a * a     $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>a * a     $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p><cite>*</cite> a     $</p></td>
+<td><p>T' → * T</p></td>
+</tr>
+<tr><td><p><cite>*</cite> T E'    $</p></td>
+<td><p><cite>*</cite> a    $</p></td>
+<td><p>Remove *</p></td>
+</tr>
+<tr><td><p>T  E'       $</p></td>
+<td><p>a         $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T'  E'    $</p></td>
+<td><p>a         $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>a         $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p>$</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'          $</p></td>
+<td><p>$</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>$</p></td>
+<td><p>accept</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">13</div></section>
+<section class="slide t2c">
+<h2>Parsing `(a+a)$` for right place of λ in LL(1) Table</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T | λ</p></li>
+<li><p>F  → ( E ) | a</p></li>
+</ol>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td><p>λ</p></td>
+<td><p><cite>+</cite> E</p></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> T</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E               $</p></td>
+<td><p>( a + a ) $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E'            $</p></td>
+<td><p>( a + a ) $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'         $</p></td>
+<td><p>( a + a ) $</p></td>
+<td><p>F → ( E )</p></td>
+</tr>
+<tr><td><p>( E ) T' E'     $</p></td>
+<td><p>( a + a ) $</p></td>
+<td><p>Remove (</p></td>
+</tr>
+<tr><td><p>E ) T' E'       $</p></td>
+<td><p>a + a ) $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>T E' ) T' E'    $</p></td>
+<td><p>a + a ) $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E' ) T' E' $</p></td>
+<td><p>a + a ) $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E' ) T' E' $</p></td>
+<td><p>a + a ) $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E' ) T' E'   $</p></td>
+<td><p><cite>+</cite> a ) $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E' ) T' E'      $</p></td>
+<td><p><cite>+</cite> a ) $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p><cite>+</cite> E ) T' E'   $</p></td>
+<td><p><cite>+</cite> a )   $</p></td>
+<td><p>Remove +</p></td>
+</tr>
+<tr><td><p>E ) T' E'       $</p></td>
+<td><p>a ) $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E' ) T' E'    $</p></td>
+<td><p>a ) $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E' ) T' E' $</p></td>
+<td><p>a ) $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E' ) T' E' $</p></td>
+<td><p>a ) $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E' ) T' E'   $</p></td>
+<td><p>) $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E' ) T' E'      $</p></td>
+<td><p>) $</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>) T' E'         $</p></td>
+<td><p>) $</p></td>
+<td><p>Remove )</p></td>
+</tr>
+<tr><td><p>T' E'           $</p></td>
+<td><p>$</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'              $</p></td>
+<td><p>$</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>$</p></td>
+<td><p>Accept</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">14</div></section>
+<section class="slide">
+<h2>First set</h2>
+<ol class="arabic simple incremental">
+<li><p>If X → λ is a production rule then λ ∈ first(X)</p></li>
+<li><dl class="simple">
+<dt>If <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>X</mi>
+  <mo>→</mo>
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <msub>
+    <mi>Y</mi>
+    <mi>n</mi>
+  </msub>
+</math> is a production rule then</dt>
+<dd><ol class="arabic simple">
+<li><p>first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+</math>) ⊂ first(X)</p></li>
+<li><p>first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>) ⊂ first(X) if λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+</math>) or <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+  <msup>
+    <mo>⇒</mo>
+    <mo>*</mo>
+  </msup>
+  <mi>λ</mi>
+</math></p></li>
+<li><p>first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) ⊂ first(X) if λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+</math>) and λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</p></li>
+<li><p>first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>i</mi>
+  </msub>
+</math>) ⊂ first(X) if λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>j</mi>
+  </msub>
+</math>) for j = 1, 2, 3, i-1</p></li>
+<li><p>λ ∈ first(X) if λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>i</mi>
+  </msub>
+</math>) for i = 1, 2, 3, n or <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>X</mi>
+  <msup>
+    <mo>⇒</mo>
+    <mo>*</mo>
+  </msup>
+  <mi>λ</mi>
+</math></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="slide-number">15</div></section>
+<section class="slide">
+<h2>Follow Set(II)</h2>
+<ol class="arabic simple incremental">
+<li><p>If S is start symbol then $ ∈ follow(S)</p></li>
+<li><p>If X → α Y then follow(X) ⊂ follow(Y)</p></li>
+<li><dl class="simple">
+<dt>If X → <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>4</mn>
+  </msub>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <msub>
+    <mi>Y</mi>
+    <mi>n</mi>
+  </msub>
+</math> is a production rule then</dt>
+<dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>(first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</dt>
+<dd><ul class="simple">
+<li><p>if M → α A a β is a production rule then a ∈ follow(A)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) then (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>4</mn>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</dt>
+<dd><ul class="simple">
+<li><p>or (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) ∪ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>4</mn>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>If λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>j</mi>
+  </msub>
+</math>) for j = 3,4, ....., i-1  then (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>i</mi>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</p></li>
+<li><p>If λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>j</mi>
+  </msub>
+</math>) for j = 3,4, ....., n then follow(X) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="slide-number">16</div></section>
+<section class="slide t2c">
+<h2>Wrong Calculator Grammar(I)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>E → T + E | T</p></li>
+<li><p>T → F * T | F</p></li>
+<li><p>F → ( E ) | a</p></li>
+</ol>
+<p>Remove Left Factor</p>
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T |  λ</p></li>
+<li><p>F  → ( E ) |  a</p></li>
+</ol>
+</div>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>first(E)</p></li>
+<li><p>= first(T)=first(F)</p></li>
+<li><p>= { a, ( }</p></li>
+<li><p>first(E') = { + ,  λ}</p></li>
+<li><p>first(T') = { * ,  λ}</p></li>
+</ol>
+</div>
+<div class="slide-number">17</div></section>
+<section class="slide t2c">
+<h2>Follow Set(III)</h2>
+<ol class="arabic simple">
+<li><p>If [ S ] is start symbol then [ $ ∈ follow(S) ]</p></li>
+<li><p>If [ X → α Y ] then [ follow(X) ⊂ follow(Y) ]</p></li>
+<li><dl class="simple">
+<dt>If [ X → <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>1</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+  <msub>
+    <mi>Y</mi>
+    <mn>4</mn>
+  </msub>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <mo>.</mo>
+  <msub>
+    <mi>Y</mi>
+    <mi>n</mi>
+  </msub>
+</math> ] is a production rule then</dt>
+<dd><ol class="arabic simple">
+<li><p>[ (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>) ]</p></li>
+<li><p>If [ λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>3</mn>
+  </msub>
+</math>) ] then [ (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>4</mn>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>) ]</p></li>
+<li><p>If [ λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>j</mi>
+  </msub>
+</math>) for j = 3,4, ....., i-1 ] then [ (first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>i</mi>
+  </msub>
+</math>) - {λ} ) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>) ]</p></li>
+<li><p>If [ λ ∈ first(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mi>j</mi>
+  </msub>
+</math>) for j = 3,4, ....., n ] then [ follow(X) ⊂ follow(<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>Y</mi>
+    <mn>2</mn>
+  </msub>
+</math>) ]</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="docutils container">
+<p>Production Rules</p>
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + E</p></li>
+<li><p>E' → λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * T</p></li>
+<li><p>T' → λ</p></li>
+<li><p>F  → ( E )</p></li>
+<li><p>F  → a</p></li>
+</ol>
+</div>
+<div class="incremental docutils container">
+<p>Follow sets</p>
+<ul class="incremental simple">
+<li><p>follow(E) = { $ , ) }</p></li>
+<li><p>follow(E')= { $ , ) }</p></li>
+<li><p>follow(T) = { + , $, ) }</p></li>
+<li><p>follow(T')= { + , $, ) }</p></li>
+<li><p>follow(F) = { * , +, $, ) }</p></li>
+</ul>
+</div>
+<div class="slide-number">18</div></section>
+<section class="slide t2c">
+<h2>Using Follow set(I)</h2>
+<ul class="simple">
+<li><p>follow(E) = { $ , ) }</p></li>
+<li><p>follow(E')= { $ , ) }</p></li>
+<li><p>follow(T) = { + , $, ) }</p></li>
+<li><p>follow(T')= { + , $, ) }</p></li>
+<li><p>follow(F) = { * , +, $, ) }</p></li>
+</ul>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> E</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> T</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> E</p></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> T</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col next">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E      $</p></td>
+<td><p>a + a $</p></td>
+<td><p>E → F T'</p></td>
+</tr>
+<tr><td><p>F T'   $</p></td>
+<td><p>a + a $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T'   $</p></td>
+<td><p>b a a $</p></td>
+<td><p>B → b A</p></td>
+</tr>
+<tr><td><p>b A    $</p></td>
+<td><p>b a a $</p></td>
+<td><p>Remove b</p></td>
+</tr>
+<tr><td><p>A      $</p></td>
+<td><p>a a $</p></td>
+<td><p>A → a B</p></td>
+</tr>
+<tr><td><p>a B    $</p></td>
+<td><p>a a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>B      $</p></td>
+<td><p>a $</p></td>
+<td><p>B → a</p></td>
+</tr>
+<tr><td><p>a     $</p></td>
+<td><p>a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>$</p></td>
+<td><p>accept</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">19</div></section>
+<section class="slide t2c">
+<h2>Simple Calculator(I)</h2>
+<ol class="arabic simple">
+<li><p>E → E + T</p></li>
+<li><p>E → E - T</p></li>
+<li><p>E → T</p></li>
+<li><p>T → T * F</p></li>
+<li><p>T → T / F</p></li>
+<li><p>T → F</p></li>
+<li><p>F → a</p></li>
+<li><p>F → (E)</p></li>
+</ol>
+<ol class="arabic simple incremental">
+<li><p>first(E)</p></li>
+<li><p>= First(T)</p></li>
+<li><p>= first(F)</p></li>
+<li><p>= { a , ( }</p></li>
+</ol>
+<ol class="arabic simple incremental">
+<li><p>follow(E) = { $ , + , - , ) }</p></li>
+<li><p>follow(T) = { $ , + , - , ) , * , / }</p></li>
+<li><p>follow(F) = { $ , + , - , ) , * , / }</p></li>
+</ol>
+<table class="have-border next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>E + T | E - T | T</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>E + T | E - T | T</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>T * F | T / F | F</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T * F | T / F | F</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">20</div></section>
+<section class="slide t2c">
+<h2>Simple Calculator(II)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>E → E + T | E - T | T</p></li>
+<li><p>T → T * F | T / F | F</p></li>
+<li><p>F → a | (E)</p></li>
+</ol>
+<p>Convert to</p>
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + T E' | - T E' | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T'  → * F T' | / F T' | λ</p></li>
+<li><p>F → a | (E)</p></li>
+</ol>
+</div>
+<ol class="arabic simple incremental">
+<li><dl class="simple">
+<dt>First(E)</dt>
+<dd><ol class="arabic simple">
+<li><p>= First( T E' )</p></li>
+<li><p>= First(T)</p></li>
+<li><p>= First(FT')</p></li>
+<li><p>= First(F)</p></li>
+<li><p>= {a, ( }</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>First(E')</dt>
+<dd><ol class="arabic simple">
+<li><p>= First(<cite>+</cite> T E')</p></li>
+<li><p>∪</p></li>
+<li><p>First(<cite>-</cite> T E')</p></li>
+<li><p>∪</p></li>
+<li><p>First( λ )</p></li>
+<li><p>= {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>First(T')</dt>
+<dd><ol class="arabic simple">
+<li><p>= First(<cite>*</cite> F T')</p></li>
+<li><p>∪</p></li>
+<li><p>First(<cite>/</cite> F T')</p></li>
+<li><p>∪</p></li>
+<li><p>First(λ)</p></li>
+<li><p>= {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="slide-number">21</div></section>
+<section class="slide t2c">
+<h2>From First Sets to a Table</h2>
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + T E' | - T E' | λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T'  → * F T' | / F T' | λ</p></li>
+<li><p>F → a | (E)</p></li>
+</ol>
+<ul class="simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ul>
+<table class="have-border next">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">22</div></section>
+<section class="slide t2c">
+<h2>Parsing(I)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ol>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple">
+<li><p>a $ { 435.43 }</p></li>
+<li><p>.a $ [ T E' ]</p></li>
+<li><p>.a $ [ F T' E' ]</p></li>
+<li><p>.a $ [ a T' E' ]</p></li>
+<li><p>.$   [ T' E' ]</p></li>
+<li><p>? ? ?</p></li>
+</ol>
+<div class="slide-number">23</div></section>
+<section class="slide t2c">
+<h2>Parsing(II)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ol>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple incremental">
+<li><p>a $ { 435.43 }</p></li>
+<li><p>.a $ [ T E' ]</p></li>
+<li><p>.a $ [ F T' E' ]</p></li>
+<li><p>.a $ [ a T' E' ]</p></li>
+<li><p>.$   [ T' E' ]</p></li>
+<li><p>.$   [ λ E' ]</p></li>
+<li><p>.$   [ E' ]</p></li>
+<li><p>? ? ?</p></li>
+</ol>
+<div class="slide-number">24</div></section>
+<section class="slide t2c">
+<h2>Parsing(III)</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ol>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple incremental">
+<li><p>a $ { 435.43 }</p></li>
+<li><p>.a $ [ T E' ]</p></li>
+<li><p>.a $ [ F T' E' ]</p></li>
+<li><p>.a $ [ a T' E' ]</p></li>
+<li><p>.$   [ T' E' ]</p></li>
+<li><p>.$   [ λ E' ]</p></li>
+<li><p>.$   [ E' ]</p></li>
+<li><p>.$   [ λ ]</p></li>
+<li><p>.$   [  ]</p></li>
+<li><p>accept</p></li>
+</ol>
+<div class="slide-number">25</div></section>
+<section class="slide t2c">
+<h2>Use LL Table for Parsing</h2>
+<div class="docutils container">
+<ol class="arabic simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+</ol>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="arabic simple incremental">
+<li><p>a + a * a $ [435.43 + 376.1 * 94.2]</p></li>
+<li><p>.a + a * a $ [ T E' ]</p></li>
+<li><p>.a + a * a $ [ F T' E' ]</p></li>
+<li><p>.a + a * a $ [ a T' E' ]</p></li>
+<li><p>.+ a * a $   [ T' E' ]</p></li>
+<li><p>.+ a * a $   [ T' E' ]</p></li>
+</ol>
+<div class="slide-number">26</div></section>
+<section class="slide t2c">
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>T E'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> T E'</p></td>
+<td><p><cite>-</cite> T E'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>F T'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> F T'</p></td>
+<td><p><cite>/</cite> F T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>( E )</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E           $</p></td>
+<td><p>.a - a / a $</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E'        $</p></td>
+<td><p>.a - a / a $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'     $</p></td>
+<td><p>.a - a / a $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>.a - a / a $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p>. -  a / a $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'          $</p></td>
+<td><p>. -  a / a $</p></td>
+<td><p>E' → - T E'</p></td>
+</tr>
+<tr><td><p><cite>-</cite> T E'    $</p></td>
+<td><p>. -  a / a $</p></td>
+<td><p>Remove -</p></td>
+</tr>
+<tr><td><p>T E'        $</p></td>
+<td><p>. a / a    $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'     $</p></td>
+<td><p>. a / a    $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>. a / a    $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p>. / a      $</p></td>
+<td><p>T' → / F T'</p></td>
+</tr>
+<tr><td><p>/ F T' E'   $</p></td>
+<td><p>. / a      $</p></td>
+<td><p>Remove /</p></td>
+</tr>
+<tr><td><p>F T' E'     $</p></td>
+<td><p>. a        $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E'     $</p></td>
+<td><p>. a        $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E'       $</p></td>
+<td><p>.          $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'          $</p></td>
+<td><p>.          $</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>.          $</p></td>
+<td><p>accept</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">27</div></section>
+<section class="slide t2c">
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>TE'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>TE'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+</cite> TE'</p></td>
+<td><p><cite>-</cite> TE'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p>FT'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>FT'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p><cite>*</cite> FT'</p></td>
+<td><p><cite>/</cite> FT'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>(`E</cite>)`</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="smallerelementwithfullborder equal-col">
+<thead>
+<tr><th class="head"><p>Stack</p></th>
+<th class="head"><p>input</p></th>
+<th class="head"><p>action</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E              $</p></td>
+<td><p>.( a + a ) a$</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E'           $</p></td>
+<td><p>.( a + a ) a$</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E'        $</p></td>
+<td><p>.( a + a ) a$</p></td>
+<td><p>F → ( E )</p></td>
+</tr>
+<tr><td><p>( E ) T' E'    $</p></td>
+<td><p>.( a + a ) a$</p></td>
+<td><p>Remove (</p></td>
+</tr>
+<tr><td><p>E ) T' E'      $</p></td>
+<td><p>.  a + a ) a$</p></td>
+<td><p>E → T E'</p></td>
+</tr>
+<tr><td><p>T E' ) T' E'   $</p></td>
+<td><p>.  a + a ) a$</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E' ) T' E'$</p></td>
+<td><p>.  a + a ) a$</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E' ) T' E'$</p></td>
+<td><p>.  a + a ) a$</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E' ) T' E'  $</p></td>
+<td><p>.  + a ) a  $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E' ) T' E'     $</p></td>
+<td><p>.  + a ) a  $</p></td>
+<td><p>E' → + T E'</p></td>
+</tr>
+<tr><td><p><cite>+</cite> T E' ) T' E'$</p></td>
+<td><p>.  + a ) a  $</p></td>
+<td><p>Remove +</p></td>
+</tr>
+<tr><td><p>T E' ) T' E'   $</p></td>
+<td><p>.  a ) a    $</p></td>
+<td><p>T → F T'</p></td>
+</tr>
+<tr><td><p>F T' E' ) T' E'$</p></td>
+<td><p>.  a ) a    $</p></td>
+<td><p>F → a</p></td>
+</tr>
+<tr><td><p>a T' E' ) T' E'$</p></td>
+<td><p>.  a ) a    $</p></td>
+<td><p>Remove a</p></td>
+</tr>
+<tr><td><p>T' E' ) T' E'  $</p></td>
+<td><p>.  ) a      $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E' ) T' E'     $</p></td>
+<td><p>.  ) a      $</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>) T' E'        $</p></td>
+<td><p>.  ) a      $</p></td>
+<td><p>Remove )</p></td>
+</tr>
+<tr><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T' E'          $</p></td>
+<td><p>.  a       $</p></td>
+<td><p>T' → λ</p></td>
+</tr>
+<tr><td><p>E'            $</p></td>
+<td><p>.  a       $</p></td>
+<td><p>E' → λ</p></td>
+</tr>
+<tr><td><p>$</p></td>
+<td><p>.  a       $</p></td>
+<td><p>Reject</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">28</div></section>
+<section class="slide t2c">
+<ol class="arabic simple">
+<li><p>E  → T E'</p></li>
+<li><p>E' → + T E'</p></li>
+<li><p>E' → - T E'</p></li>
+<li><p>E' →  λ</p></li>
+<li><p>T  → F T'</p></li>
+<li><p>T' → * F T'</p></li>
+<li><p>T' → / F T'</p></li>
+<li><p>T' →  λ</p></li>
+<li><p>F  → a</p></li>
+<li><p>F  → ( E )</p></li>
+</ol>
+<ul class="simple">
+<li><p>First(E) = First(T) = First(F) = {a, ( }</p></li>
+<li><p>First(E') = {<cite>+</cite>, <cite>-</cite>, λ}</p></li>
+<li><p>First(T') = {<cite>*</cite>, <cite>/</cite>, λ}</p></li>
+<li><p>Follow(E)  = {) , $ }</p></li>
+<li><p>Follow(E') = Follow(E) = {) , $}</p></li>
+<li><dl class="simple">
+<dt>Follow(T) = {First(E')-{λ}} ∪ Follow(E)</dt>
+<dd><p>∪ follow(E') = {<cite>+</cite>, <cite>-</cite>, ), $}</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Follow(T') = Follow(T) =</dt>
+<dd><p>{ <cite>*</cite>, <cite>/</cite>, <cite>+</cite>, <cite>-</cite>, $}</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Follow(F) = {First(T')-{λ}} ∪ Follow(T')</dt>
+<dd><p>= {<cite>*</cite>, <cite>/</cite>} ∪ { <cite>*</cite>, <cite>/</cite>, <cite>+</cite>, <cite>-</cite>, $}
+= { <cite>*</cite>, <cite>/</cite>, <cite>+</cite>, <cite>-</cite>, $}</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p><cite>.</cite></p>
+<table class="have-border">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>a</p></th>
+<th class="head"><p><cite>+</cite></p></th>
+<th class="head"><p><cite>-</cite></p></th>
+<th class="head"><p><cite>*</cite></p></th>
+<th class="head"><p><cite>/</cite></p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>E</p></td>
+<td><p>TE'</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>TE'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>E'</p></td>
+<td></td>
+<td><p><cite>+TE'</cite></p></td>
+<td><p><cite>-TE'</cite></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>T</p></td>
+<td><p><cite>FT'</cite></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>FT'</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>T'</p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+<td><p><cite>*FT'</cite></p></td>
+<td><p><cite>/FT'</cite></p></td>
+<td></td>
+<td><p>λ</p></td>
+<td><p>λ</p></td>
+</tr>
+<tr><td><p>F</p></td>
+<td><p>a</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p><cite>(E)</cite></p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">29</div></section>
+<section class="slide t2c">
+<h2>S → i(r) S | i(r) S e S | o</h2>
+<div class="docutils container">
+<ul class="simple">
+<li><p>Eliminate Left Factor</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>S → i(r) S A | o</p></li>
+<li><p>A → e S | λ</p></li>
+</ol>
+<ul class="simple">
+<li><p>first(S)  = {i, o} , first(A)  = {e, λ}</p></li>
+<li><p>follow(S) = {$, e} , follow(A) = {$, e}</p></li>
+</ul>
+</div>
+<table class="have-border-w">
+<thead>
+<tr><th class="head"></th>
+<th class="head"><p>i</p></th>
+<th class="head"><p>r</p></th>
+<th class="head"><p>e</p></th>
+<th class="head"><p>o</p></th>
+<th class="head"><p>(</p></th>
+<th class="head"><p>)</p></th>
+<th class="head"><p>$</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>S</p></td>
+<td><p><cite>i(r)SA</cite></p></td>
+<td></td>
+<td></td>
+<td><p>o</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr><td><p>A</p></td>
+<td></td>
+<td></td>
+<td><p><cite>eS/λ</cite></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>λ</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">30</div></section>
+<section class="slide">
+<p>End</p>
+<!-- comments:
+
+https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+https://www.researchgate.net/publication/2367776_An_Introduction_to_Compilers?enrichId=rgreq-3d6589b36b650b1be61ea0ce1b1b7805-XXX&enrichSource=Y292ZXJQYWdlOzIzNjc3NzY7QVM6OTg4Mjk0MzcyNDMzOTVAMTQwMDU3NDE4MjE5Ng%3D%3D&el=1_x_2&_esc=publicationCoverPdf
+
+https://www.tutorialspoint.com/compiler_design/compiler_design_syntax_analysis.htm -->
+<div class="slide-number">31</div></section>
+</body>
+</html>

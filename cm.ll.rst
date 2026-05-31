@@ -1,23 +1,9 @@
 .. prezento:: CM - Ll
-   :data-max-scale: 5
-   :data-width: 1024
-   :data-height: 768
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-
-.. slido::
-
-    .. :
-
-      :js: ./temporary03454-images9877/tex-mml-chtml.js
 
 .. slido:: LL
 
-    Syntax Analysis(LL)
-
-.. slido::
+    **Syntax Analysis(LL)**
 
     Ahmad Yoosofan
 
@@ -1210,11 +1196,7 @@
 
     .. comments:
 
-        rst2html syn.rst syn.html
-        hovercraft syn.rst
-
         https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
-
         https://www.researchgate.net/publication/2367776_An_Introduction_to_Compilers?enrichId=rgreq-3d6589b36b650b1be61ea0ce1b1b7805-XXX&enrichSource=Y292ZXJQYWdlOzIzNjc3NzY7QVM6OTg4Mjk0MzcyNDMzOTVAMTQwMDU3NDE4MjE5Ng%3D%3D&el=1_x_2&_esc=publicationCoverPdf
 
         https://www.tutorialspoint.com/compiler_design/compiler_design_syntax_analysis.htm
