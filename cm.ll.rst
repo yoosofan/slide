@@ -504,7 +504,7 @@
         a B $ , a a $ , Remove a
         B   $ , a   $ , Reject
 
-.. slido:: Wrong Calculator Grammar(I)
+.. slido:: Incorrect Calculator Grammar(I)
    :class: t2c
 
     .. container::
@@ -722,7 +722,7 @@
         #. If λ ∈ first(:math:`Y_j`) for j = 3,4, ....., i-1  then (first(:math:`Y_i`) - {λ} ) ⊂ follow(:math:`Y_2`)
         #. If λ ∈ first(:math:`Y_j`) for j = 3,4, ....., n then follow(X) ⊂ follow(:math:`Y_2`)
 
-.. slido:: Wrong Calculator Grammar(I)
+.. slido:: Incorrect Calculator Grammar(I)
    :class: t2c
 
     .. container::
@@ -760,28 +760,28 @@
 
     .. container::
 
-      Production Rules
+          Production Rules
 
-      #. E  → T E'
-      #. E' → + E
-      #. E' → λ
-      #. T  → F T'
-      #. T' → * T
-      #. T' → λ
-      #. F  → ( E )
-      #. F  → a
+          #. E  → T E'
+          #. E' → + E
+          #. E' → λ
+          #. T  → F T'
+          #. T' → * T
+          #. T' → λ
+          #. F  → ( E )
+          #. F  → a
 
     .. container:: substep
 
-        Follow sets
+          Follow sets
 
-        .. class:: substep
+          .. class:: substep
 
-        * follow(E) = { $ , ) }
-        * follow(E')= { $ , ) }
-        * follow(T) = { + , $, ) }
-        * follow(T')= { + , $, ) }
-        * follow(F) = { * , +, $, ) }
+          * follow(E) = { $ , ) }
+          * follow(E')= { $ , ) }
+          * follow(T) = { + , $, ) }
+          * follow(T')= { + , $, ) }
+          * follow(F) = { * , +, $, ) }
 
 .. slido:: Using Follow set(I)
    :class: t2c
@@ -1050,7 +1050,7 @@
     #. .+ a * a $   [ T' E' ]
 
 .. slido::
-   :class: t2c
+   :class: n2c
 
     .. csv-table::
       :header-rows: 1
@@ -1087,41 +1087,41 @@
                   $ , .          $ ,  accept
 
 .. slido::
-   :class: t2c
+   :class: n2c
 
     .. csv-table::
       :header-rows: 1
       :class: have-border
 
       "  ",   a   ,     `+`   ,   `-`    ,   `*`    ,   `/`     ,   (    ,   ) ,  $
-      E   ,  TE' ,           ,          ,          ,           ,  TE'  ,     ,
-      E'  ,       ,  `+` TE' , `-` TE' ,          ,           ,        ,   λ ,  λ
-      T   ,  FT' ,           ,          ,          ,           , FT'   ,     ,
-      T'  ,       ,     λ     ,    λ     , `*` FT' ,  `/` FT' ,        ,   λ ,  λ
-      F   ,   a   ,           ,          ,          ,           , `(`E`)`  ,     ,
+      E   ,  TE'  ,           ,          ,          ,           ,  TE'   ,     ,
+      E'  ,       ,  `+` TE'  , `-` TE'  ,          ,           ,        ,   λ ,  λ
+      T   ,  FT'  ,           ,          ,          ,           , FT'    ,     ,
+      T'  ,       ,     λ     ,    λ     , `*` FT'  ,  `/` FT'  ,        ,   λ ,  λ
+      F   ,   a   ,           ,          ,          ,           , ( E )  ,     ,
 
     .. csv-table::
       :header-rows: 1
       :class: smallerelementwithfullborder equal-col
 
-      Stack           ,  input       , action
-      E              $, .( a + a ) a$ , E → T E'
-      T E'           $, .( a + a ) a$ , T → F T'
-      F T' E'        $, .( a + a ) a$ , F → ( E )
-      ( E ) T' E'    $, .( a + a ) a$ , Remove (
-      E ) T' E'      $, .  a + a ) a$ , E → T E'
-      T E' ) T' E'   $, .  a + a ) a$ , T → F T'
-      F T' E' ) T' E'$, .  a + a ) a$ , F → a
-      a T' E' ) T' E'$, .  a + a ) a$ , Remove a
-      T' E' ) T' E'  $, .  + a ) a  $ , T' → λ
-      E' ) T' E'     $, .  + a ) a  $ , E' → + T E'
-      `+` T E' ) T' E'$, .  + a ) a  $ , Remove +
-      T E' ) T' E'   $, .  a ) a    $ , T → F T'
-      F T' E' ) T' E'$, .  a ) a    $ , F → a
-      a T' E' ) T' E'$, .  a ) a    $ , Remove a
-      T' E' ) T' E'  $, .  ) a      $ , T' → λ
-      E' ) T' E'     $, .  ) a      $ , E' → λ
-      ) T' E'        $, .  ) a      $ , Remove )
+      Stack             ,  input        , action
+      E                $, .( a + a ) a$ , E → T E'
+      T E'             $, .( a + a ) a$ , T → F T'
+      F T' E'          $, .( a + a ) a$ , F → ( E )
+      ( E ) T' E'      $, .( a + a ) a$ , Remove (
+      E ) T' E'        $, .  a + a ) a$ , E → T E'
+      T E' ) T' E'     $, .  a + a ) a$ , T → F T'
+      F T' E' ) T' E'  $, .  a + a ) a$ , F → a
+      a T' E' ) T' E'  $, .  a + a ) a$ , Remove a
+      T' E' ) T' E'    $, .  + a ) a  $ , T' → λ
+      E' ) T' E'       $, .  + a ) a  $ , E' → + T E'
+      `+` T E' ) T' E' $, .  + a ) a  $ , Remove +
+      T E' ) T' E'     $, .  a ) a    $ , T → F T'
+      F T' E' ) T' E'  $, .  a ) a    $ , F → a
+      a T' E' ) T' E'  $, .  a ) a    $ , Remove a
+      T' E' ) T' E'    $, .  ) a      $ , T' → λ
+      E' ) T' E'       $, .  ) a      $ , E' → λ
+      ) T' E'          $, .  ) a      $ , Remove )
 
 
       T' E'          $, .  a       $ , T' → λ
@@ -1129,7 +1129,7 @@
                      $, .  a       $ , Reject
 
 .. slido::
-   :class: t2c
+   :class: n2c
 
     #. E  → T E'
     #. E' → + T E'
@@ -1170,7 +1170,7 @@
       F   ,   a   ,           ,          ,          ,           , `(E)`  ,     ,
 
 .. slido:: S → i(r) S  | i(r) S e S | o
-   :class: t2c
+   :class: n2c
 
     .. container::
 
@@ -1196,7 +1196,9 @@
 
     .. comments:
 
+
         https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+
         https://www.researchgate.net/publication/2367776_An_Introduction_to_Compilers?enrichId=rgreq-3d6589b36b650b1be61ea0ce1b1b7805-XXX&enrichSource=Y292ZXJQYWdlOzIzNjc3NzY7QVM6OTg4Mjk0MzcyNDMzOTVAMTQwMDU3NDE4MjE5Ng%3D%3D&el=1_x_2&_esc=publicationCoverPdf
 
         https://www.tutorialspoint.com/compiler_design/compiler_design_syntax_analysis.htm

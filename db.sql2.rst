@@ -4,26 +4,19 @@
 .. role:: rtl
     :class: rtl
 
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
 .. prezento:: DB - Sql2
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-   :data-width: 1024
-   :data-height: 768
 
-.. slido::
-
-    .. |nbsp| unicode:: 0xA0
-       :trim:
-
-.. slido:: Database Course
+.. slido::     SQL 2
 
     Ahmad Yoosofan
 
-    SQL 2
+    Database Course
 
-    https://yoosofan.github.io/slide/db/sql2/
+    https://yoosofan.github.io/slide/db.ql2.presentation.html
 
     https://yoosofan.github.io/course/db.html
 
@@ -178,8 +171,6 @@
           نام قطعاتی را بیابید که وزن آنها از همهٔ قطعات دیگر کمتر باشد
 
     Find the names of the parts such that no other part weighs less than them
-
-.. slido::
 
     .. class: rtl-h1 substep
 
@@ -1098,6 +1089,7 @@
       ;
 
 .. slido:: Count
+   :class: t2c
 
     .. class:: rtl-h2
 

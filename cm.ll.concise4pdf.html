@@ -1498,7 +1498,7 @@ first(L) = {a, λ} -->
 </div>
 <div class="slide-number">10</div></section>
 <section class="slide t2c">
-<h2>Wrong Calculator Grammar(I)</h2>
+<h2>Incorrect Calculator Grammar(I)</h2>
 <div class="docutils container">
 <ol class="arabic simple">
 <li><p>E → T + E | T</p></li>
@@ -2218,7 +2218,7 @@ first(L) = {a, λ} -->
 </ol>
 <div class="slide-number">16</div></section>
 <section class="slide t2c">
-<h2>Wrong Calculator Grammar(I)</h2>
+<h2>Incorrect Calculator Grammar(I)</h2>
 <div class="docutils container">
 <ol class="arabic simple">
 <li><p>E → T + E | T</p></li>
@@ -3076,7 +3076,7 @@ first(L) = {a, λ} -->
 <li><p>.+ a * a $   [ T' E' ]</p></li>
 </ol>
 <div class="slide-number">26</div></section>
-<section class="slide t2c">
+<section class="slide n2c">
 <table class="smallerelementwithfullborder equal-col">
 <thead>
 <tr><th class="head"></th>
@@ -3222,7 +3222,7 @@ first(L) = {a, λ} -->
 </tbody>
 </table>
 <div class="slide-number">27</div></section>
-<section class="slide t2c">
+<section class="slide n2c">
 <table class="have-border">
 <thead>
 <tr><th class="head"></th>
@@ -3283,7 +3283,7 @@ first(L) = {a, λ} -->
 <td></td>
 <td></td>
 <td></td>
-<td><p><cite>(`E</cite>)`</p></td>
+<td><p>( E )</p></td>
 <td></td>
 <td></td>
 </tr>
@@ -3297,71 +3297,71 @@ first(L) = {a, λ} -->
 </tr>
 </thead>
 <tbody>
-<tr><td><p>E              $</p></td>
+<tr><td><p>E                $</p></td>
 <td><p>.( a + a ) a$</p></td>
 <td><p>E → T E'</p></td>
 </tr>
-<tr><td><p>T E'           $</p></td>
+<tr><td><p>T E'             $</p></td>
 <td><p>.( a + a ) a$</p></td>
 <td><p>T → F T'</p></td>
 </tr>
-<tr><td><p>F T' E'        $</p></td>
+<tr><td><p>F T' E'          $</p></td>
 <td><p>.( a + a ) a$</p></td>
 <td><p>F → ( E )</p></td>
 </tr>
-<tr><td><p>( E ) T' E'    $</p></td>
+<tr><td><p>( E ) T' E'      $</p></td>
 <td><p>.( a + a ) a$</p></td>
 <td><p>Remove (</p></td>
 </tr>
-<tr><td><p>E ) T' E'      $</p></td>
+<tr><td><p>E ) T' E'        $</p></td>
 <td><p>.  a + a ) a$</p></td>
 <td><p>E → T E'</p></td>
 </tr>
-<tr><td><p>T E' ) T' E'   $</p></td>
+<tr><td><p>T E' ) T' E'     $</p></td>
 <td><p>.  a + a ) a$</p></td>
 <td><p>T → F T'</p></td>
 </tr>
-<tr><td><p>F T' E' ) T' E'$</p></td>
+<tr><td><p>F T' E' ) T' E'  $</p></td>
 <td><p>.  a + a ) a$</p></td>
 <td><p>F → a</p></td>
 </tr>
-<tr><td><p>a T' E' ) T' E'$</p></td>
+<tr><td><p>a T' E' ) T' E'  $</p></td>
 <td><p>.  a + a ) a$</p></td>
 <td><p>Remove a</p></td>
 </tr>
-<tr><td><p>T' E' ) T' E'  $</p></td>
+<tr><td><p>T' E' ) T' E'    $</p></td>
 <td><p>.  + a ) a  $</p></td>
 <td><p>T' → λ</p></td>
 </tr>
-<tr><td><p>E' ) T' E'     $</p></td>
+<tr><td><p>E' ) T' E'       $</p></td>
 <td><p>.  + a ) a  $</p></td>
 <td><p>E' → + T E'</p></td>
 </tr>
-<tr><td><p><cite>+</cite> T E' ) T' E'$</p></td>
+<tr><td><p><cite>+</cite> T E' ) T' E' $</p></td>
 <td><p>.  + a ) a  $</p></td>
 <td><p>Remove +</p></td>
 </tr>
-<tr><td><p>T E' ) T' E'   $</p></td>
+<tr><td><p>T E' ) T' E'     $</p></td>
 <td><p>.  a ) a    $</p></td>
 <td><p>T → F T'</p></td>
 </tr>
-<tr><td><p>F T' E' ) T' E'$</p></td>
+<tr><td><p>F T' E' ) T' E'  $</p></td>
 <td><p>.  a ) a    $</p></td>
 <td><p>F → a</p></td>
 </tr>
-<tr><td><p>a T' E' ) T' E'$</p></td>
+<tr><td><p>a T' E' ) T' E'  $</p></td>
 <td><p>.  a ) a    $</p></td>
 <td><p>Remove a</p></td>
 </tr>
-<tr><td><p>T' E' ) T' E'  $</p></td>
+<tr><td><p>T' E' ) T' E'    $</p></td>
 <td><p>.  ) a      $</p></td>
 <td><p>T' → λ</p></td>
 </tr>
-<tr><td><p>E' ) T' E'     $</p></td>
+<tr><td><p>E' ) T' E'       $</p></td>
 <td><p>.  ) a      $</p></td>
 <td><p>E' → λ</p></td>
 </tr>
-<tr><td><p>) T' E'        $</p></td>
+<tr><td><p>) T' E'          $</p></td>
 <td><p>.  ) a      $</p></td>
 <td><p>Remove )</p></td>
 </tr>
@@ -3388,7 +3388,7 @@ first(L) = {a, λ} -->
 </tbody>
 </table>
 <div class="slide-number">28</div></section>
-<section class="slide t2c">
+<section class="slide n2c">
 <ol class="arabic simple">
 <li><p>E  → T E'</p></li>
 <li><p>E' → + T E'</p></li>
@@ -3495,7 +3495,7 @@ first(L) = {a, λ} -->
 </tbody>
 </table>
 <div class="slide-number">29</div></section>
-<section class="slide t2c">
+<section class="slide n2c">
 <h2>S → i(r) S | i(r) S e S | o</h2>
 <div class="docutils container">
 <ul class="simple">
@@ -3548,7 +3548,9 @@ first(L) = {a, λ} -->
 <p>End</p>
 <!-- comments:
 
+
 https://www.csd.uwo.ca/~mmorenom/CS447/Lectures/Syntax.html/node8.html
+
 https://www.researchgate.net/publication/2367776_An_Introduction_to_Compilers?enrichId=rgreq-3d6589b36b650b1be61ea0ce1b1b7805-XXX&enrichSource=Y292ZXJQYWdlOzIzNjc3NzY7QVM6OTg4Mjk0MzcyNDMzOTVAMTQwMDU3NDE4MjE5Ng%3D%3D&el=1_x_2&_esc=publicationCoverPdf
 
 https://www.tutorialspoint.com/compiler_design/compiler_design_syntax_analysis.htm -->
