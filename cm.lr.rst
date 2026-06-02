@@ -1,21 +1,5 @@
 .. prezento:: CM - Lr
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-   :data-width: 1024
-   :data-height: 800
-
-.. slido::
-   :skip-help: true
-   :css: ./style.css
-   :substep: true
-   :slide-numbers: true
-   .. IGNORED_UNIMPLEMENTED: data-width: 1024
-   .. IGNORED_UNIMPLEMENTED: data-height: 800
-
-
-.. slido:: LR
 
     Syntax Analysis(LR)
 
@@ -265,7 +249,36 @@
           state3 -> state4 [ label = "a" ];
         }
 
-.. slido:: Simple Add(VII)
+        * a[1.4]+a[2.5]+a[3.6]
+        * E(a[1.4])+a[2.5]+a[3.6]
+        * E(E(a[1.4])+a[2.5])+a[3.6]
+        * E(E(E(a[1.4])+a[2.5])+a[3.6])
+
+       .. yographviz::
+          :class: substep
+
+          digraph aba{
+              rankdir=TB;
+              node [shape=circle];
+              E  [label="E[a+a+a]"];
+              A  [label="a[1.4]"];
+              P  [label="+"];
+              E1 [label="E[a+a]"];
+              A1 [label="a[2.5]"];
+              P1 [label="+"];
+              A2 [label="a[3.6]", color=red];
+
+              E  -> A
+              B  -> B0
+              A  -> B
+              B  -> A1
+              A1 -> a1
+              A1 -> B1
+          }
+
+
+
+.. slido:: Simple Add(VIII)
    :class: t2c
 
     #. S → E
@@ -604,7 +617,7 @@
         state5 -> state6 [  label = "S" ];
         state5 -> state3 [  label = "o" ];
         state5 -> state2 [  label = "i" ];
-      } 
+      }
 
 .. slido::
 
@@ -663,7 +676,7 @@
         state5 -> state6 [  label = "S" ];
         state5 -> state3 [  label = "o" ];
         state5 -> state2 [  label = "i" ];
-      } 
+      }
 
     .. list-table::
 
@@ -671,14 +684,14 @@
               :header-rows: 1
               :class: smallerelementwithfullborder equal-col
 
-                , i , e , o ,  $  , S 
-              I0, s2,   , s3,     , 1  
-              I1,   ,   ,   , acc ,   
-              I2, s2,   , s3,     , 4  
-              I3, r3, r3, r3,  r3 ,   
-              I4, r1,s5/r1, r1  ,r1     ,  
+                , i , e , o ,  $  , S
+              I0, s2,   , s3,     , 1
+              I1,   ,   ,   , acc ,
+              I2, s2,   , s3,     , 4
+              I3, r3, r3, r3,  r3 ,
+              I4, r1,s5/r1, r1  ,r1     ,
               I5, s2  ,   , s3  ,     ,   6
-              I6, r2, r2  , r2  ,  r2   ,   
+              I6, r2, r2  , r2  ,  r2   ,
 
         -  .. container::
 
@@ -699,7 +712,7 @@
 
         :class: t2c
 
-        #. S → a L 
+        #. S → a L
         #. S → S b
         #. L → L a
         #. L →  b
@@ -710,7 +723,7 @@
 
           * S' → S
 
-          * S → a L 
+          * S → a L
           * S → S b
           * L → L a
           * L →  b

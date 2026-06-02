@@ -491,9 +491,7 @@
                     sp.pn = p.pn and
                     p.city <> s.city
                 )
-          )
-
-      ;
+          );
 
 
     .. code:: sql
@@ -542,8 +540,7 @@
               where s.sn = sp.sn
                 and p.pn = sp.pn
             )
-        )
-      ;
+        );
 
 
     .. csv-table::
@@ -594,8 +591,7 @@
            from s
            where s.status > 100 and
             s.sn = sp. sn
-        )
-      ;
+        );
 
     .. csv-table::
       :header-rows: 1
@@ -664,8 +660,7 @@
               where s.sn=sp.sn and
               p.pn=sp.pn
             )
-          )
-        ;
+          );
 
 .. slido:: Aggregation Functions
    :class: t2c
@@ -680,8 +675,7 @@
         .. code:: sql
 
           select sum(qty) as sqt
-          from   sp
-          ;
+          from   sp;
 
         ..  csv-table::
           :header-rows: 1
@@ -715,8 +709,7 @@
 
           select sum(qty) as sqt
           from   sp
-          where sp.sn = 'S2'
-          ;
+          where sp.sn = 'S2';
 
         ..  csv-table::
           :header-rows: 1
@@ -747,8 +740,7 @@
         .. code:: sql
 
           select sum(weight) as asw
-          from p
-          ;
+          from p;
 
         ..  csv-table::
           :header-rows: 1
@@ -774,8 +766,7 @@
           select *
           from sp natural join s
           where p.pn = sp.pn and s.city = 'Paris'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -791,8 +782,7 @@
       select sum(weight) as swg
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -847,8 +837,7 @@
           select *
           from sp natural join s
           where p.pn = sp.pn and s.city = 'Paris'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -863,8 +852,7 @@
       select sum(weight) as swg
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -879,8 +867,7 @@
       select pn, weight, sn, s.city
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -908,8 +895,7 @@
           select *
           from sp natural join s
           where p.pn = sp.pn and s.city = 'Paris'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -924,8 +910,7 @@
       select sum(distinct weight) as swg
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -959,8 +944,7 @@
         from (p natural join sp)
           join s using(sn)
         where s.city = 'Paris'
-      )
-      ;
+      );
 
 
     ..  csv-table::
@@ -979,8 +963,7 @@
         from (p natural join sp)
             join s using(sn)
         where s.city = 'Paris'
-      )
-      ;
+      );
 
     ..  csv-table::
       :header-rows: 1
@@ -1002,8 +985,7 @@
       select sum(qty * weight) as swg
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -1018,8 +1000,7 @@
       select pn, qty, weight
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -1039,8 +1020,7 @@
     .. code:: sql
 
       select avg(weight) as awg
-      from p
-      ;
+      from p;
 
     .. class:: rtl-h2
 
@@ -1050,8 +1030,7 @@
       :class: substep
 
       select avg(qty) as sqt
-      from   sp
-      ;
+      from   sp;
 
 .. slido::
    :class: t2c
@@ -1065,8 +1044,7 @@
 
       select avg(weight) as awg
       from p
-      where city='Paris'
-      ;
+      where city='Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -1085,8 +1063,7 @@
 
       select avg(qty) as paqt
       from s natural join sp
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
 .. slido:: Count
    :class: t2c
@@ -1098,8 +1075,7 @@
     .. code:: sql
 
       select count(pn) as awg
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1112,8 +1088,7 @@
     .. code:: sql
 
       select count(weight) as awg
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1131,8 +1106,7 @@
     .. code:: sql
 
       select count(*) as awg
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1144,8 +1118,7 @@
     .. code:: sql
 
       select count(city) as ccy
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1178,8 +1151,7 @@
     .. code:: sql
 
       select count(distinct city) as ccy
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1192,8 +1164,7 @@
       :class: substep
 
       select city
-      from p
-      ;
+      from p;
 
     ..  csv-table::
       :header-rows: 1
@@ -1257,8 +1228,7 @@
       select count(distinct sn) as scc
       from sp natural join p
       where qty > 5 and
-        p.color = 'Red'
-      ;
+        p.color = 'Red';
 
     ..  csv-table::
       :header-rows: 1
@@ -1268,7 +1238,7 @@
       3
 
 .. slido::
-   :class: t2c
+   :class: t2c substep
 
     .. class:: rtl-h1
 
@@ -1301,11 +1271,10 @@
             from s natural join sp
               join p using (pn)
             where p.color = 'Red'
-        )
-      ;
+        );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substeps
 
     .. class:: rtl-h1
 
@@ -1326,8 +1295,7 @@
           from sp natural join p
           where s.sn = sp.sn and
             p.color = 'Red'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -1345,8 +1313,7 @@
     .. code:: sql
 
       select min(weight) as wgt
-      from   p
-      ;
+      from   p;
       --- کمترین
 
 .. slido:: max
@@ -1358,8 +1325,7 @@
     .. code:: sql
 
       select max(weight) as wgt
-      from   p
-      ;
+      from   p;
       --- بیشترین
       --- به اینها تابع تجمعی گفته می‌شود. aggregation function
 
@@ -1376,8 +1342,7 @@
 
         select sn, sum(qty) as sqt
         from   sp
-        group by sn
-        ;
+        group by sn;
 
 
       .. class:: substep rtl-h2
@@ -1410,8 +1375,7 @@
 
       select pn, sum(qty) as sqt
       from   sp
-      group by pn
-      ;
+      group by pn;
 
     .. csv-table::
         :header-rows: 1
@@ -1440,8 +1404,7 @@
         select pn, sum(qty) as sqt
         from sp join p using(pn)
         where weight > 12
-        group by pn
-        ;
+        group by pn;
 
       .. class:: substep rtl-h2
 
@@ -1471,8 +1434,7 @@
       from sp join p using(pn)
       where weight>12
       group by pn
-      having count(sn)>2
-      ;
+      having count(sn)>2;
 
     .. class:: substep rtl-h2
 
@@ -1516,8 +1478,7 @@
 
       select pn, qty as sqt
       from sp join p using(pn)
-      where weight>12
-      ;
+      where weight>12;
 
 
     ..  csv-table::
@@ -1576,7 +1537,7 @@
       p5, s4, 400
 
 .. slido::
-   :class: t2c
+   :class: t2c substep
 
     .. class:: rtl-h1
 
@@ -1622,7 +1583,7 @@
         T2.sn <> T1.sn;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1633,8 +1594,7 @@
       :number-lines:
 
       select city
-      from p
-      ;
+      from p;
 
     .. code:: sql
       :class: substep
@@ -1643,8 +1603,7 @@
       select p.city as pcity
       from p join sp using(pn)
         join s using(sn)
-      where status > 10
-      ;
+      where status > 10;
 
     .. code:: sql
       :class: substep
@@ -1655,8 +1614,7 @@
         join s using(sn)
       where status > 10
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
     .. code:: sql
       :class: substep
@@ -1669,11 +1627,10 @@
         from sp join s using(sn)
         where p.pn = sp.pn and
           status > 10
-      )
-      ;
+      );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1699,8 +1656,7 @@
             where sp.pn = p.pn
             group by p.city
             having sum(qty) > 20
-          )
-          ;
+          );
 
     .. code:: sql
       :class: substep
@@ -1715,11 +1671,10 @@
           status > 10
       )
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1736,8 +1691,7 @@
           where s.sn = sp.sn and status > 10
         )
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
     ..  csv-table::
       :header-rows: 1
@@ -1758,14 +1712,12 @@
         join p using(pn)
       where status > 10
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
       select city -- نادرست
       from sp natural join p
       group by pn
-      having status >10 and sum(qty) > 20
-      ;
+      having status >10 and sum(qty) > 20;
 
     .. code:: sql
       :class: substep
@@ -1779,11 +1731,10 @@
           where T.pn = p.pn and status > 10
         )
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1798,8 +1749,7 @@
         join p using(pn)
       where status > 10
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
     ..  csv-table::
       :header-rows: 1
@@ -1823,11 +1773,10 @@
           where status > 10
         )
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1847,8 +1796,7 @@
             s.status > 20
         )
       group by jn
-      having(sum(weight*qty)>100)
-      ;
+      having(sum(weight*qty)>100);
 
     .. code:: sql
       :class: substep
@@ -1867,11 +1815,29 @@
           )
         group by jn
         having(sum(weight*qty)>100)
-      )
-      ;
+      );
+
+    .. code:: sql
+      :class: substep
+      :number-lines:
+
+      select jname
+      from j natural join (
+        select jn
+        from spj join j using(jn)
+          join p using(pn)
+        where exists (
+            select *
+            from s
+            where s.sn = spj.sn and
+              s.status > 20
+          )
+        group by jn
+        having(sum(weight*qty)>100)
+      );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1897,7 +1863,7 @@
       );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -1911,8 +1877,7 @@
       from sp natural join p
       where p.weight > 12
       group by pn
-      having count(sn)>2
-      ;
+      having count(sn)>2;
 
     .. code:: sql
       :class: substep
@@ -1922,8 +1887,7 @@
       from sp natural join p
       where p.weight > 12
       group by pn
-      having count(distinct sn)>2
-      ;
+      having count(distinct sn)>2;
 
     .. code:: sql
       :class: substep
@@ -1933,8 +1897,7 @@
       from spj natural join p
       where p.weight > 12
       group by pn
-      having count(sn)>2
-      ;
+      having count(sn)>2;
 
     .. code:: sql
       :class: substep
@@ -1944,11 +1907,10 @@
       from spj natural join p
       where p.weight > 12
       group by pn
-      having count(distinct sn)>2
-      ;
+      having count(distinct sn)>2;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: .rtl-h1
 
@@ -1966,8 +1928,7 @@
         where s.status > 10
         group by p.city
         having sum(qty) > 20 and
-          count(distinct pn) > 2
-        ;
+          count(distinct pn) > 2;
 
       .. code:: sql
         :class: substep
@@ -1981,8 +1942,7 @@
             AND s.status > 10
           )
         GROUP by pn
-        HAVING count(pn)>2 and sum(qty)>20
-        ;
+        HAVING count(pn)>2 and sum(qty)>20;
 
     .. code:: sql
       :class: substep
@@ -1998,11 +1958,10 @@
         )
       group by p.city
       having sum(qty) > 20 and
-        count(pn) > 2
-      ;
+        count(pn) > 2;
 
 .. slido:: نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: .rtl-h1
 
@@ -2019,11 +1978,9 @@
           from s
           where status > 10 and
             s.sn = sp.sn
-        )
-      group by p.city
+        ) group by p.city
       having sum(qty) > 20 and
-        count(distinct pn) > 2
-      ;
+        count(distinct pn) > 2;
 
     .. code:: sql
       :class: substep
@@ -2032,19 +1989,13 @@
       select p.city
       from p join sp using(pn)
       where exists(
-          select *
-          from s
-          where status > 10 and
-            s.sn = sp.sn
+          select *  from s
+          where status > 10 and s.sn = sp.sn
         ) and exists(
-          select *
-          from p as p2
-          where p.city = p2.city and
-            p.pn <> p2.pn
-        )
-      group by p.city
-      having sum(qty) > 20
-      ;
+          select * from p as p2
+          where p.city = p2.city and p.pn <> p2.pn
+        ) group by p.city
+      having sum(qty) > 20;
 
     .. :
 
@@ -2059,8 +2010,7 @@
           from p join spj using(pn) join s using(sn)
           where s.status > 10
           group by p.city
-          having sum(qty) > 20 and count(distinct pn) > 2
-          ;
+          having sum(qty) > 20 and count(distinct pn) > 2;
 
         .. code:: sql
           :class: substep
@@ -2076,11 +2026,10 @@
             )
           group p.city
           having sum(qty) > 20 and
-            count(distinct pn) > 2
-          ;
+            count(distinct pn) > 2;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: .rtl-h1
 
@@ -2100,8 +2049,7 @@
         )
       group by p.city
       having sum(qty) > 20 and
-        count(distinct pn) > 2
-      ;
+        count(distinct pn) > 2;
 
 
     .. code:: sql
@@ -2123,11 +2071,10 @@
             and p.pn <> p3.pn and p2.pn <> p3.pn
         )
       group by p.city
-      having sum(qty) > 20
-      ;
+      having sum(qty) > 20;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2152,11 +2099,10 @@
             and s.status > 20
         )
       group by jname
-      having(sum(weight*qty)>100)
-      ;
+      having(sum(weight*qty)>100);
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2177,8 +2123,7 @@
             and s.status > 20
         )
       group by jn
-      having(sum(weight*qty)>100)
-      ;
+      having(sum(weight*qty)>100);
 
     .. code:: sql
       :class: substep
@@ -2198,11 +2143,10 @@
             )
           group by jn
           having(sum(weight*qty)>100)
-        )
-      ;
+        );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2214,22 +2158,20 @@
       -- Totally wrong
       select pn, count(distinct pn)
       from p natural join sp
-      group by pname
-      -- having count(distinct pn) > 1
-      ;
+      group by pname;
+      -- having count(distinct pn) > 1;
 
     .. code:: sql
       :number-lines:
 
       select pname, count(sn)
       from p natural join sp
-      group by pn
+      group by pn;
       -- having count(distinct pn) > 1
-      ;
 
 .. slido::
    :id: query-inside-from-id
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2242,8 +2184,7 @@
       select sum(weight) as swg
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -2259,8 +2200,7 @@
       select pn, weight, sn, s.city
       from (p natural join sp)
         join s using(sn)
-      where s.city = 'Paris'
-      ;
+      where s.city = 'Paris';
 
     ..  csv-table::
       :header-rows: 1
@@ -2281,8 +2221,7 @@
           from (p natural join sp)
             join s using(sn)
           where s.city = 'Paris'
-        )
-      ;
+        );
 
     .. container::
 
@@ -2298,7 +2237,7 @@
         distinct does not help
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2315,8 +2254,7 @@
           from s
           where s.sn = sp.sn and
             s.city = 'Paris'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -2335,8 +2273,7 @@
           from (p natural join sp)
             join s using(sn)
           where s.city = 'Paris'
-        )
-      ;
+        );
 
     ..  csv-table::
       :header-rows: 1
@@ -2354,7 +2291,7 @@
         distinct does not help
 
 .. slido:: Scalar value(II)
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2368,8 +2305,7 @@
       where weight > (
           select avg(weight)
           from p
-        )
-      ;
+        );
 
     .. csv-table::
       :header-rows: 1
@@ -2381,7 +2317,7 @@
       p6, 19
 
 .. slido:: Scalar value(III)
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2392,10 +2328,7 @@
 
       select pn, weight
       from p
-      where weight = (
-          select min(weight)
-          from p
-      );
+      where weight=(select min(weight) from p);
 
     .. csv-table::
       :header-rows: 1
@@ -2409,29 +2342,24 @@
       :class: substep
 
       select pn, weight
-      from p  -- Wrong
+      from p  --incorrect
       where weight = (
-          select weight
-          from p
-          order by weight asc
-          limit 1
+          select weight from p
+          order by weight asc limit 1
       );
 
     .. code:: sql
       :class: substep
 
-      select pn, weight
-      from p
+      select pn, weight from p
       where weight = (
-          select weight
-          from p
+          select weight from p
           where weight is not null
-          order by weight asc
-          limit 1
+          order by weight asc limit 1
       );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2459,7 +2387,7 @@
       p6, 100
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2490,7 +2418,7 @@
       p8,
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2543,7 +2471,7 @@
         p8, 40,   Paris
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2595,7 +2523,7 @@
       p8,
 
 .. slido:: Left Outer Join(I)
-   :class: t2c
+   :class: t2c  substep
 
     .. container::
 
@@ -2628,7 +2556,7 @@
       p8,
 
 .. slido:: Left Outer Join(II)
-   :class: t2c
+   :class: t2c  substep
 
     .. code:: sql
         :class: substep
@@ -2650,7 +2578,7 @@
         from p;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2663,18 +2591,14 @@
       select p.city
       from p left outer join sp using(pn)
       where exists(
-          select *
-          from s
-          where status > 10 and
-            s.sn = sp.sn
+          select *  from s
+          where status > 10 and s.sn = sp.sn
         )
       group by p.city
-      having sum(qty) > 20 and
-        count(distinct pn) > 2
-      ;
+      having sum(qty) > 20 and count(distinct pn) > 2;
 
 .. slido:: Full Outer Join(I)
-   :class: t2c
+   :class: t2c  substep
 
     .. code:: sql
         :class: substep
@@ -2704,7 +2628,7 @@
         from p natural left outecd inr join s;
 
 .. slido:: Full Outer Join(II)
-   :class: t2c
+   :class: t2c  substep
 
     .. code:: sql
 
@@ -2717,7 +2641,7 @@
         from p, s; -- very different result
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2760,7 +2684,7 @@
         from p natural left outer join s;
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2804,7 +2728,7 @@
       کاشان ,
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2845,7 +2769,7 @@
       Bolt,  s3
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2902,7 +2826,7 @@
         having (weight*qty)>100 );
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2941,7 +2865,7 @@
         پاسخ درست
 
 .. slido::
-   :class: t2c
+   :class: t2c  substep
 
     .. class:: rtl-h1
 
@@ -2957,6 +2881,7 @@
         having count(sn)>2;
 
 .. slido::
+   :class:  substep
 
     .. class:: rtl-h1
 
@@ -2970,5 +2895,6 @@
       group by pn
 
 .. slido::
+   :class: substep
 
     END
