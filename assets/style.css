@@ -1,4 +1,21 @@
-body{text-align: center;font-size: 18px;}
+body{text-align: center;font-size: 22px; background-color: white !important; counter-reset: slide;}
+
+.slide {
+  counter-increment: slide-counter;
+}
+
+.slide::after {
+  content: "[ " counter(slide-counter) " ]";
+  color: black;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  text-align: right;
+  font-weight: bold;
+  font-weight: bold;
+}
+
 tr, td, th{border: 1px solid;}
 ul, ol, pre.code{text-align: left;}
 pre.code{/*font-size:100%;*/
@@ -17,6 +34,11 @@ pre.code > .ln{
     user-select: none; /* Prevents selecting numbers during copy-paste */
 }
 pre.code { background-color:#f0f0f0; justify-self:center;}
+pre.code code::before{
+    font-size: 1em !important;
+    background-color: #DFE5F1;
+    color: black !important;
+};
 pre.console{background-color: #F9E0E0;}
 ol.trace-code{
   background-color: #F3F2CD;
@@ -301,7 +323,7 @@ table.borderless > tbody > tr > th
 @page{size: A4 landscape;}
 
 @media print {
-  body { font-size: 18pt; }
+  body { font-size: 16pt; }
   body > section.slide:not(:last-child){
     break-inside: avoid;
     break-after: always;
