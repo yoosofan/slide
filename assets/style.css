@@ -1,4 +1,4 @@
-body{text-align: center;font-size: 22px; background-color: white !important; counter-reset: slide;}
+body{text-align: center;font-size: 24px; background-color: white !important; counter-reset: slide;}
 
 .slide {
   counter-increment: slide-counter;

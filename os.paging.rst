@@ -7,24 +7,98 @@
 .. prezento:: Operating Systems - Paging  (By Ahmad Yoosofan)
    :css: ./assets/style.css
 
-.. slido:: Operating Systems
+.. slido:: Operating Systems - Memory Management - Paging (Ahmad Yoosofan)
+   :class: t2c substep
 
-    Paging
+    .. container::
 
-    Ahmad Yoosofan
+        .. class:: substep
 
-    University of Kashan
+        * https://yoosofan.github.io/
+        * https://yoosofan.github.io/slide/os.paging.presentation.html
+        * https://yoosofan.github.io/slide/os.paging.rst
+        * https://yoosofan.github.io/slide/os.paging.concise4pdf.html
+        * https://yoosofan.github.io/course/os.html
 
-.. slido:: Simple Paging
+        .. image:: os/img/memory/paging_model.png
+           :align: center
+           :scale: 120%
+           :class: substep
 
-    .. image:: os/img/memory/paging_model.png
+    .. image:: os/img/memory/paging_example_32_bytes_memory.png
        :align: center
+       :scale: 150%
+       :class: substep
+
+.. slido:: Free space before and after Memory Allocation for a Process
+
+    .. image:: os/img/memory/paging_free_frames_before_after.png
+       :align: center
+       :scale: 140%
+
+    .. image:: os/img/memory/memory_paging_process_page_tables.png
+       :align: center
+       :scale: 140%
+
+.. slido::
+   :class: n2c
+
+    .. container::
+
+        .. class:: substep
+
+        * ( b ) free space { [ 4 - 14 ] }
+
+            .. class:: substep
+
+                * .. csv-table::
+
+                      A0, A1, A2, A3
+                      0 , 1 , 2 , 3
+
+        * ( c ) free space { [ 7 - 14 ] }
+
+            .. csv-table::
+               :class: substep
+
+                A0, A1, A2, A3
+                0 , 1 , 2 , 3
+
+            .. csv-table::
+               :class: substep
+
+                B0, B1, B2
+                4 , 5 , 6
+
+        * ( e ) free space { [ 4 - 6 ] , [ 11 - 14 ] }
+
+            .. csv-table::
+               :class: substep
+
+                A0, A1, A2, A3
+                0 , 1 , 2 , 3
+
+            .. csv-table::
+               :class: substep
+
+                B0, B1, B2
+                4 , 5 , 6
+
+            .. csv-table::
+               :class: substep
+
+                C0, C1, C2
+                7 , 8 , 9
+
+    .. image:: os/img/memory/memory_paging_process.png
+       :align: center
+       :scale: 95%
 
 .. slido:: Paging Hardware
 
     .. image:: os/img/memory/paging_hardware.png
        :align: center
-       :height: 300px
+       :scale: 130%
 
     .. class:: substep
 
@@ -58,6 +132,7 @@
 
     .. image:: os/img/memory/page_number_offset.png
        :align: center
+       :scale: 130%
 
     * Frame 4k then number_bits(d) == 12
     * Frame 1k then number_bits(d) == 10
@@ -68,99 +143,6 @@
     * 1 MB ==> number_of_bit(Address register) == 20
         * Frame 4k ==> d == 12 and p == 8
         * Frame 1k ==> d == 10 and p == 10 // wrong?
-
-.. slido:: Consider a computer with maximum 16 words
-   :class: t2c
-
-    #. Draw Memory Bytes
-    #. d = 2
-    #. Draw Memory Frames
-    #. some First Frames for os
-    #. Put a process into Memory (not continuous or in order)
-    #. Fill page table
-    #. Convert a Logical Addfress to Physical Address
-    #. Put another process into Memory
-
-    .. container::
-
-      ..  csv-table::
-        :header-rows: 1
-        :class: smallerelementwithfullborder
-
-        "0000","0001 ","0010 ","0011 ","0100 ","0101 ","0110","0111","1000","1001","1010 ","1011","1100","1101","1110 ","1111"
-        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-
-      .
-
-      ..  csv-table::
-        :header-rows: 1
-        :class: smallerelementwithfullborder
-
-        "00 ","01 ","10 ","11 "
-        0,1,2,3
-
-      00
-
-      ..  csv-table::
-        :header-rows: 1
-        :class: smallerelementwithfullborder
-
-        "00 ","01 ","10 ","11 "
-        4,5,6,7
-
-      01
-
-      ..  csv-table::
-        :header-rows: 1
-        :class: smallerelementwithfullborder
-
-        "00 ","01 ","10 ","11 "
-        8,9,10,11
-
-      10
-
-      ..  csv-table::
-        :header-rows: 1
-        :class: smallerelementwithfullborder
-
-        "00 ","01 ","10 ","11 "
-        12,13,14,15
-
-      11
-
-.. slido:: A computer with 32 Bytes of Memory and 8 Bytes Page Size
-
-    d = 3, p = 2
-
-    p0 11 bytes
-
-
-    .. class:: rtl-h1
-
-        یک کامپیوتر با حافظهٔ ۱۲۸ بایتی و صفحه‌های ۸ بایتی
-
-    .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
-       :align: center
-
-.. slido:: 32 Bytes of RAM and 4 Bytes Per Page
-
-    .. image:: os/img/memory/paging_example_32_bytes_memory.png
-       :align: center
-
-.. slido:: Free space before and after Memory Allocation for a Process
-
-    .. image:: os/img/memory/paging_free_frames_before_after.png
-       :align: center
-
-.. slido:: Memory changing for multiple Process
-
-    .. image:: os/img/memory/memory_paging_process.png
-       :align: center
-
-.. slido:: Page Table
-
-    .. image:: os/img/memory/memory_paging_process_page_tables.png
-       :align: center
 
 .. slido:: Logical Address to Physical Address
 
@@ -183,6 +165,75 @@
     .. image:: os/img/memory/page_table_in_a_frame.png
 
     .. image:: os/img/memory/page_table_in_a_frame2.png
+
+.. slido:: Consider a computer with maximum 16 words
+   :class: t2c
+
+    #. Draw Memory Bytes
+    #. d = 2
+    #. Draw Memory Frames
+    #. some First Frames for os
+    #. Put a process into Memory (not continuous or in order)
+    #. Fill page table
+    #. Convert a Logical Addfress to Physical Address
+    #. Put another process into Memory
+
+    .. container::
+
+      ..  csv-table::
+        :header-rows: 1
+
+        "0000","0001 ","0010 ","0011 ","0100 ","0101 ","0110","0111","1000","1001","1010 ","1011","1100","1101","1110 ","1111"
+        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+
+      .
+
+      ..  csv-table::
+        :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        0,1,2,3
+
+      00
+
+      ..  csv-table::
+        :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        4,5,6,7
+
+      01
+
+      ..  csv-table::
+        :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        8,9,10,11
+
+      10
+
+      ..  csv-table::
+        :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        12,13,14,15
+
+      11
+
+.. slido:: A computer with 32 Bytes of Memory and 8 Bytes Page Size
+
+    d = 3, p = 2
+
+    p0 11 bytes
+
+
+    .. class:: rtl-h1
+
+        یک کامپیوتر با حافظهٔ ۱۲۸ بایتی و صفحه‌های ۸ بایتی
+
+    .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
+       :align: center
+
 
 .. slido:: PTBR
 
@@ -320,9 +371,6 @@
     * https://web.fe.up.pt/~arestivo/presentation/os-memory/#15
     * https://github.com/mor1/ia-operating-systems
     * https://slideplayer.com/slide/7084682/
-
-.. slido:: References(II)
-
     * http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
     * https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg
     * https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg
@@ -333,7 +381,6 @@
     * https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf
     * https://www.kernel.org/doc/
     * https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/
-    * https://www.gatevidyalay.com/wp-content/uploads/2018/11/Translating-Logical-Address-into-Physical-Address-Diagram-Paging-using-TLB-1.png
-
+    * `Paging-using-TLB-1.png <https://www.gatevidyalay.com/wp-content/uploads/2018/11/Translating-Logical-Address-into-Physical-Address-Diagram-Paging-using-TLB-1.png>`_
     * https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/
     * https://codex.cs.yale.edu/avi/os-book/

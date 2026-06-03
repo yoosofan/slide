@@ -13,7 +13,11 @@
 
     Ahmad Yoosofan
 
-    https://yoosofan.github.io/slide/os/mem/
+    https://yoosofan.github.io/
+
+    https://yoosofan.github.io/slide/os.mem.presentation.html
+
+    https://yoosofan.github.io/slide/os.mem.rst
 
     https://yoosofan.github.io/course/os.html
 
