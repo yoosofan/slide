@@ -200,40 +200,64 @@
        :scale: 145%
 
 
-.. slido:: Computer with 16 words
-   :class: t2c
+.. slido::
+   :class: n2c
 
-    .. csv-table::
+    .. csv-table:: Memory with only OS before adding a process
        :header-rows: 1
 
-        |nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|, |nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|
-        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-        "0000","0001 ","0010 ","0011 ","0100 ","0101 ","0110","0111","1000","1001","1010 ","1011","1100","1101","1110 ","1111"
+        OS, OS, OS, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+        "0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010 ","1011","1100","1101","1110","1111"
 
-    .. csv-table::
+    .. csv-table:: Process P0
        :header-rows: 1
+       :class: substep
 
-        P0_0,P0_1,P0_2,P0_3
-        0,1,2,3
-        "00 ","01 ","10 ","11 "
+        A     ,    B  ,    C  ,    D  ,    E  , F
+        P0_0  , P0_0  , P0_0  , P0_0  , P0_1  , P0_1
+        0     ,    1  ,    2  ,    3  ,    4  , 5
+        "0000", "0001", "0010", "0011", "0100", "0101"
 
-    .. csv-table::
+    .. csv-table:: Adding Process P0 to Memory
        :header-rows: 1
+       :class: substep
 
-        "00 ","01 ","10 ","11 "
-        0,1,2,3
+        OS    ,    OS,    OS,|nbsp|,     E,     F,|nbsp|,|nbsp|,  T_P0,  T_P0,  T_P0,  T_P0,     A,     B,      C, D
+        OS    ,    OS,    OS,|nbsp|,  P0_1,  P0_1,|nbsp|,|nbsp|,  "11",  "01",|nbsp|,|nbsp|,  P0_0,  P0_0,   P0_0, P0_0
+        "0000","0001","0010","0011","0100","0101","0110","0111","1000","1001","1010","1011","1100","1101","1110","1111"
 
-
-    .. csv-table::
+    .. csv-table:: Page Table of P0
        :header-rows: 1
+       :class: substep
 
-        "00 ","01 ","10 ","11 "
-        4,5,6,7
+        "P0_0", "P0_1", |nbsp|, |nbsp|
+        "11", "01", "00", "00"
+        "00", "01", "10", "11"
+    .. csv-table:: Page Table of P0
+       :header-rows: 1
+       :class: substep
 
+        "11", "01", "00", "00"
+        "00", "01", "10", "11"
+
+    .. class:: substep
+
+    * Logical Address of C = "0010" = "00" "10"
+    * Page Address    = "00"
+    * Page Table Cell Index "00" is "11"
+    * Physical Address= concatenation("00", "10")
+    * Physical Address= "00" "10" = "0010"
+
+    .. class:: substep
+
+    #. Logical Address of F = "0101" = "01" "01"
+    #. Page Address    = "01"
+    #. Page Table Cell Index "01" is "01"
+    #. Physical Address= concatenation("01", "01")
+    #. Physical Address= "01" "01" = "0101"
 
     .. :
-
-       :class: t2c
 
         #. Draw Memory Bytes
         #. d = 2

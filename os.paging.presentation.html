@@ -951,48 +951,29 @@ Grok AI
 </div>
 <img alt="os/img/memory/memory_paging_address_translation.png" class="align-center next" height="774" src="os/img/memory/memory_paging_address_translation.png" width="1214" />
 <div class="slide-number">4</div></section>
-<section class="slide t2c">
-<h2>Consider a computer with maximum 16 words</h2>
+<section class="slide n2c">
 <table>
+<caption>Memory with only OS before adding a process</caption>
 <thead>
-<tr><th class="head"><p>P0_0</p></th>
-<th class="head"><p>P0_1</p></th>
-<th class="head"><p>P0_2</p></th>
-<th class="head"><p>P0_3</p></th>
+<tr><th class="head"><p>OS</p></th>
+<th class="head"><p>OS</p></th>
+<th class="head"><p>OS</p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
 </tr>
 </thead>
 <tbody>
-<tr><td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>2</p></td>
-<td><p>3</p></td>
-</tr>
-<tr><td><p>00</p></td>
-<td><p>01</p></td>
-<td><p>10</p></td>
-<td><p>11</p></td>
-</tr>
-</tbody>
-</table>
-<table>
-<tbody>
-<tr><td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-<td><p> </p></td>
-</tr>
 <tr><td><p>0</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
@@ -1029,50 +1010,162 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table>
+<table class="next">
+<caption>Process P0</caption>
 <thead>
-<tr><th class="head"><p>00</p></th>
-<th class="head"><p>01</p></th>
-<th class="head"><p>10</p></th>
-<th class="head"><p>11</p></th>
+<tr><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>D</p></th>
+<th class="head"><p>E</p></th>
+<th class="head"><p>F</p></th>
 </tr>
 </thead>
 <tbody>
+<tr><td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_1</p></td>
+<td><p>P0_1</p></td>
+</tr>
 <tr><td><p>0</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
 <td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+</tr>
+<tr><td><p>0000</p></td>
+<td><p>0001</p></td>
+<td><p>0010</p></td>
+<td><p>0011</p></td>
+<td><p>0100</p></td>
+<td><p>0101</p></td>
 </tr>
 </tbody>
 </table>
-<table>
+<table class="next">
+<caption>Adding Process P0 to Memory</caption>
 <thead>
-<tr><th class="head"><p>00</p></th>
-<th class="head"><p>01</p></th>
-<th class="head"><p>10</p></th>
-<th class="head"><p>11</p></th>
+<tr><th class="head"><p>OS</p></th>
+<th class="head"><p>OS</p></th>
+<th class="head"><p>OS</p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p>E</p></th>
+<th class="head"><p>F</p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p>T_P0</p></th>
+<th class="head"><p>T_P0</p></th>
+<th class="head"><p>T_P0</p></th>
+<th class="head"><p>T_P0</p></th>
+<th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>C</p></th>
+<th class="head"><p>D</p></th>
 </tr>
 </thead>
 <tbody>
-<tr><td><p>4</p></td>
-<td><p>5</p></td>
-<td><p>6</p></td>
-<td><p>7</p></td>
+<tr><td><p>OS</p></td>
+<td><p>OS</p></td>
+<td><p>OS</p></td>
+<td><p> </p></td>
+<td><p>P0_1</p></td>
+<td><p>P0_1</p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p>11</p></td>
+<td><p>01</p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+<td><p>P0_0</p></td>
+</tr>
+<tr><td><p>0000</p></td>
+<td><p>0001</p></td>
+<td><p>0010</p></td>
+<td><p>0011</p></td>
+<td><p>0100</p></td>
+<td><p>0101</p></td>
+<td><p>0110</p></td>
+<td><p>0111</p></td>
+<td><p>1000</p></td>
+<td><p>1001</p></td>
+<td><p>1010</p></td>
+<td><p>1011</p></td>
+<td><p>1100</p></td>
+<td><p>1101</p></td>
+<td><p>1110</p></td>
+<td><p>1111</p></td>
 </tr>
 </tbody>
 </table>
+<table class="next">
+<caption>Page Table of Process P0</caption>
+<thead>
+<tr><th class="head"><p>P0_0</p></th>
+<th class="head"><p>P0_1</p></th>
+<th class="head"><p> </p></th>
+<th class="head"><p> </p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>11</p></td>
+<td><p>01</p></td>
+<td><p>00</p></td>
+<td><p>00</p></td>
+</tr>
+<tr><td><p>00</p></td>
+<td><p>01</p></td>
+<td><p>10</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+<table class="next">
+<caption>Page Table of Process P0</caption>
+<thead>
+<tr><th class="head"><p>11</p></th>
+<th class="head"><p>01</p></th>
+<th class="head"><p>00</p></th>
+<th class="head"><p>00</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>00</p></td>
+<td><p>01</p></td>
+<td><p>10</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="incremental simple">
+<li><p>Logical Address = &quot;0010&quot; = &quot;00 10&quot;</p></li>
+<li><p>Page Address    = &quot;00&quot;</p></li>
+<li><p>Page Table Cell Index &quot;00&quot; is &quot;11&quot;</p></li>
+<li><p>Physical Address= concatenation(&quot;00&quot;, &quot;10&quot;)</p></li>
+<li><p>Physical Address= &quot;00&quot; &quot;10&quot; = &quot;0010&quot;</p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>Logical Address = &quot;0101&quot; = &quot;01 01&quot;</p></li>
+<li><p>Page Address    = &quot;01&quot;</p></li>
+<li><p>Page Table Cell Index &quot;01&quot; is &quot;01&quot;</p></li>
+<li><p>Physical Address= concatenation(&quot;01&quot;, &quot;01&quot;)</p></li>
+<li><p>Physical Address= &quot;01&quot; &quot;01&quot; = &quot;0101&quot;</p></li>
+</ol>
 <!-- :
 
-:class: t2c
-
- #. Draw Memory Bytes
- #. d = 2
- #. Draw Memory Frames
- #. some First Frames for os
- #. Put a process into Memory (not continuous or in order)
- #. Fill page table
- #. Convert a Logical Addfress to Physical Address
- #. Put another process into Memory -->
+#. Draw Memory Bytes
+#. d = 2
+#. Draw Memory Frames
+#. some First Frames for os
+#. Put a process into Memory (not continuous or in order)
+#. Fill page table
+#. Convert a Logical Addfress to Physical Address
+#. Put another process into Memory -->
 <div class="slide-number">5</div></section>
 <section class="slide t2c">
 <h2>Process and Page Table</h2>
