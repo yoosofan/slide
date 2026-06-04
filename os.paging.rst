@@ -4,17 +4,24 @@
 .. role:: rtl
     :class: rtl
 
+.. |nbsp| unicode:: 0xA0
+
+.. role:: raw-html(raw)
+   :format: html
+
+
 .. prezento:: Operating Systems - Paging  (By Ahmad Yoosofan)
    :css: ./assets/style.css
 
 .. slido:: Operating Systems - Memory Management - Paging (Ahmad Yoosofan)
-   :class: t2c substep
+   :class: t3c substep
 
     .. container::
 
         .. class:: substep
 
         * https://yoosofan.github.io/
+        * https://github.com/yoosofan/slide/blob/main/os.paging.rst
         * https://yoosofan.github.io/slide/os.paging.presentation.html
         * https://yoosofan.github.io/slide/os.paging.rst
         * https://yoosofan.github.io/slide/os.paging.concise4pdf.html
@@ -25,20 +32,47 @@
            :scale: 120%
            :class: substep
 
+    ..  container::
+
+        .. class:: substep
+
+        * **Paging** is a **non-contiguous**
+        * Physical memory into **Frames**.
+        * Logical memory (process) into **Pages**.
+        * Page size = Frame size.
+        * **Page Table**
+        * Track free frames
+        * Process with *N* pages need *N* free frames
+        * No external fragmentation
+        * Better memory utilization
+
     .. image:: os/img/memory/paging_example_32_bytes_memory.png
        :align: center
-       :scale: 150%
-       :class: substep
+       :scale: 170%
 
-.. slido:: Free space before and after Memory Allocation for a Process
 
-    .. image:: os/img/memory/paging_free_frames_before_after.png
-       :align: center
-       :scale: 140%
+    .. :
 
-    .. image:: os/img/memory/memory_paging_process_page_tables.png
-       :align: center
-       :scale: 140%
+
+           Grok AI
+            * **Paging** is a **non-contiguous** memory allocation technique.
+            * Physical memory is divided into fixed-size blocks called **Frames**.
+            * Logical memory (process) is divided into fixed-size blocks called **Pages**.
+            * Page size = Frame size.
+            * Goal: Eliminate **external fragmentation**.
+
+            **Advantage over Fixed/Variable Partitioning:**
+            - No external fragmentation
+            - Better memory utilization
+
+            Gemini Ai
+
+            * Physical memory is divided into fixed-sized blocks called **Frames**.
+            * Logical memory is divided into blocks of the same size called **Pages**.
+            * The Operating System keeps track of all free frames.
+            * To run a program of size *N* pages, the OS must find *N* free frames and load the program.
+            * Paging eliminates **External Fragmentation** entirely.
+            * Requires a **Page Table** to translate logical addresses to physical addresses.
 
 .. slido::
    :class: n2c
@@ -46,15 +80,6 @@
     .. container::
 
         .. class:: substep
-
-        * ( b ) free space { [ 4 - 14 ] }
-
-            .. class:: substep
-
-                * .. csv-table::
-
-                      A0, A1, A2, A3
-                      0 , 1 , 2 , 3
 
         * ( c ) free space { [ 7 - 14 ] }
 
@@ -81,58 +106,153 @@
             .. csv-table::
                :class: substep
 
-                B0, B1, B2
-                4 , 5 , 6
+                C0, C1, C2, C3
+                7 , 8 , 9 , 10
+
+        * ( f ) free space { [ 11 - 14 ] }
 
             .. csv-table::
                :class: substep
 
-                C0, C1, C2
-                7 , 8 , 9
+                A0, A1, A2, A3
+                0 , 1 , 2 , 3
+
+            .. csv-table::
+               :class: substep
+
+                C0, C1, C2, C3
+                7 , 8 , 9 , 10
+
+            .. csv-table::
+               :class: substep
+
+                D0, D1, D2, D3, D4
+                4 , 5 , 6 , 11, 12
 
     .. image:: os/img/memory/memory_paging_process.png
        :align: center
        :scale: 95%
 
 .. slido:: Paging Hardware
-
-    .. image:: os/img/memory/paging_hardware.png
-       :align: center
-       :scale: 130%
+   :class: t2c
 
     .. class:: substep
 
-      #. Number of bits of Addrress  related to Maximum supported memory by this computer(cpu and motherboard)
-      #. Number of bits of Addrress  =  log2(Maximum supported memory)
-      #. If max supported memory = 32 words then number of bits needed for addrress ?
-      #. 32 = 2 ^ 5, :math:`n = log_2(m)` , m is number of bytes or words
-      #. 5 = log2(32)
-      #. if p = 2, d = 3 then the size of each frame or page is ?
-      #. 2 ^ 3 = 8
-      #. Maximum number of Frames?
-      #. 2 ^ 2  = 4
+    #. CPU generates **Logical Address** (virtual address)
+    #. Logical Address is divided into: **Page Number (p)** + **Offset (d)**
+        * **Page Number (p)**: Used as an index into a page table. The page table contains the base address of each page in physical memory.
+        * **Page Offset (d)**: Combined with the base address to define the exact physical memory address.
+    #. Page Table maps **logical page** → **physical frame**
+    #. Final **Physical Address** = Frame Number + Offset
+    #. If the logical address space is :math:`2^m` and page size is :math:`2^n` bytes:
+    #. Page offset (d) = *n* bits
+    #. Page number (p) = *m - n* bits
+    #. Number of bits of Addrress  related to Maximum supported memory by this computer(cpu and motherboard)
+    #. Number of bits of Addrress  =  log2(Maximum supported memory)
+    #. If max supported memory = 32 words then number of bits needed for addrress ?
+    #. 32 = 2 ^ 5, :math:`n = log_2(m)` , m is number of bytes or words
+    #. 5 = log2(32)
+    #. if p = 2, d = 3 then the size of each frame or page is ?
+    #. 2 ^ 3 = 8
+    #. Maximum number of Frames?
+    #. 2 ^ 2  = 4
+
+    .. container::
+
+        .. image:: os/img/memory/page_number_offset.png
+           :align: center
+           :scale: 130%
+
+        .. image:: os/img/memory/paging_hardware.png
+           :align: center
+           :scale: 130%
+
+        .. image:: os/img/memory/memory_paging_logical_address_to_physical_address_detail.png
+           :align: center
+
+.. slido:: Logical Address to Physical Address and PTBR
+
+    .. yographviz::
+      :align: right
+      :width: 1700px
+
+      digraph PagingHW { /* thanks to Gemini AI */
+          rankdir=LR;
+          node [shape=box, fontname="Helvetica", style=filled, fillcolor="#f9f9f9"];
+          edge [fontname="Helvetica", fontsize=11, color="#444444"];
+
+          CPU [shape=ellipse, fillcolor="#dcedc1"];
+          Logical [shape=record, label="Logical Address | { <p> Page (p) | <d> Offset (d) }", fillcolor="#ffcda3"];
+          PageTable [shape=record, label="Page Table | ... | <entry> Frame (f) | ... ", fillcolor="#a8e6cf"];
+          Physical [shape=record, label="Physical Address | { <f> Frame (f) | <d> Offset (d) }", fillcolor="#ffd3b6"];
+          Memory [shape=cylinder, label="Physical\nMemory", fillcolor="#dcedc1"];
+
+          CPU -> Logical [label=" Generates"];
+          Logical:p -> PageTable:entry [label=" Index"];
+          PageTable:entry -> Physical:f [label=" Base Address"];
+          Logical:d -> Physical:d [label=" Exact Copy"];
+          Physical -> Memory [label=" Accesses"];
+      }
+
+    .. image:: os/img/memory/memory_paging_address_translation.png
+       :align: center
+       :class: substep
+       :scale: 145%
+
+
+.. slido:: Computer with 16 words
+   :class: t2c
+
+    .. csv-table::
+       :header-rows: 1
+
+        |nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|, |nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|,|nbsp|
+        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+        "0000","0001 ","0010 ","0011 ","0100 ","0101 ","0110","0111","1000","1001","1010 ","1011","1100","1101","1110 ","1111"
+
+    .. csv-table::
+       :header-rows: 1
+
+        P0_0,P0_1,P0_2,P0_3
+        0,1,2,3
+        "00 ","01 ","10 ","11 "
+
+    .. csv-table::
+       :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        0,1,2,3
+
+
+    .. csv-table::
+       :header-rows: 1
+
+        "00 ","01 ","10 ","11 "
+        4,5,6,7
+
 
     .. :
 
-        ----
+       :class: t2c
 
-        .. image:: os/img/memory/memory_paging_model_address.png
-           :align: center
+        #. Draw Memory Bytes
+        #. d = 2
+        #. Draw Memory Frames
+        #. some First Frames for os
+        #. Put a process into Memory (not continuous or in order)
+        #. Fill page table
+        #. Convert a Logical Addfress to Physical Address
+        #. Put another process into Memory
 
-        ----
+.. slido:: Process and Page Table
+   :class: t2c
 
-        .. image:: os/img/memory/memory_paging_from_disk.png
-           :align: center
-           :scale: 70%
+    .. image:: os/img/memory/page_table_in_a_frame.png
 
-        ----
-
+    .. image:: os/img/memory/page_table_in_a_frame2.png
 
 .. slido:: Parts of Address Register in Paging
 
-    .. image:: os/img/memory/page_number_offset.png
-       :align: center
-       :scale: 130%
 
     * Frame 4k then number_bits(d) == 12
     * Frame 1k then number_bits(d) == 10
@@ -144,81 +264,7 @@
         * Frame 4k ==> d == 12 and p == 8
         * Frame 1k ==> d == 10 and p == 10 // wrong?
 
-.. slido:: Logical Address to Physical Address
 
-    .. image:: os/img/memory/memory_paging_logical_address_to_physical_address.png
-       :align: center
-
-.. slido:: More details on Address conversion
-
-    .. image:: os/img/memory/memory_paging_logical_address_to_physical_address_detail.png
-       :align: center
-
-.. slido:: Address Translation
-
-    .. image:: os/img/memory/memory_paging_address_translation.png
-       :align: center
-
-.. slido:: Process and Page Table
-   :class: t2c
-
-    .. image:: os/img/memory/page_table_in_a_frame.png
-
-    .. image:: os/img/memory/page_table_in_a_frame2.png
-
-.. slido:: Consider a computer with maximum 16 words
-   :class: t2c
-
-    #. Draw Memory Bytes
-    #. d = 2
-    #. Draw Memory Frames
-    #. some First Frames for os
-    #. Put a process into Memory (not continuous or in order)
-    #. Fill page table
-    #. Convert a Logical Addfress to Physical Address
-    #. Put another process into Memory
-
-    .. container::
-
-      ..  csv-table::
-        :header-rows: 1
-
-        "0000","0001 ","0010 ","0011 ","0100 ","0101 ","0110","0111","1000","1001","1010 ","1011","1100","1101","1110 ","1111"
-        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-
-      .
-
-      ..  csv-table::
-        :header-rows: 1
-
-        "00 ","01 ","10 ","11 "
-        0,1,2,3
-
-      00
-
-      ..  csv-table::
-        :header-rows: 1
-
-        "00 ","01 ","10 ","11 "
-        4,5,6,7
-
-      01
-
-      ..  csv-table::
-        :header-rows: 1
-
-        "00 ","01 ","10 ","11 "
-        8,9,10,11
-
-      10
-
-      ..  csv-table::
-        :header-rows: 1
-
-        "00 ","01 ","10 ","11 "
-        12,13,14,15
-
-      11
 
 .. slido:: A computer with 32 Bytes of Memory and 8 Bytes Page Size
 

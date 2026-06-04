@@ -633,11 +633,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 10);
 });
 </script>
-<section class="slide t2c">
+<section class="slide t3c">
 <h2>Operating Systems - Memory Management - Paging (Ahmad Yoosofan)</h2>
 <div class="next docutils container">
 <ul class="incremental simple">
 <li><p><a class="reference external" href="https://yoosofan.github.io/">https://yoosofan.github.io/</a></p></li>
+<li><p><a class="reference external" href="https://github.com/yoosofan/slide/blob/main/os.paging.rst">https://github.com/yoosofan/slide/blob/main/os.paging.rst</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.paging.presentation.html">https://yoosofan.github.io/slide/os.paging.presentation.html</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.paging.rst">https://yoosofan.github.io/slide/os.paging.rst</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.paging.concise4pdf.html">https://yoosofan.github.io/slide/os.paging.concise4pdf.html</a></p></li>
@@ -645,37 +646,46 @@ document.addEventListener("DOMContentLoaded", function() {
 </ul>
 <img alt="os/img/memory/paging_model.png" class="align-center next" height="518" src="os/img/memory/paging_model.png" width="576" />
 </div>
-<img alt="os/img/memory/paging_example_32_bytes_memory.png" class="align-center next" height="742" src="os/img/memory/paging_example_32_bytes_memory.png" width="603" />
+<div class="next docutils container">
+<ul class="incremental simple">
+<li><p><strong>Paging</strong> is a <strong>non-contiguous</strong></p></li>
+<li><p>Physical memory into <strong>Frames</strong>.</p></li>
+<li><p>Logical memory (process) into <strong>Pages</strong>.</p></li>
+<li><p>Page size = Frame size.</p></li>
+<li><p><strong>Page Table</strong></p></li>
+<li><p>Track free frames</p></li>
+<li><p>Process with <em>N</em> pages need <em>N</em> free frames</p></li>
+<li><p>No external fragmentation</p></li>
+<li><p>Better memory utilization</p></li>
+</ul>
+</div>
+<img alt="os/img/memory/paging_example_32_bytes_memory.png" class="align-center next" height="842" src="os/img/memory/paging_example_32_bytes_memory.png" width="683" />
+<!-- :
+
+
+Grok AI
+ * **Paging** is a **non-contiguous** memory allocation technique.
+ * Physical memory is divided into fixed-size blocks called **Frames**.
+ * Logical memory (process) is divided into fixed-size blocks called **Pages**.
+ * Page size = Frame size.
+ * Goal: Eliminate **external fragmentation**.
+
+ **Advantage over Fixed/Variable Partitioning:**
+ - No external fragmentation
+ - Better memory utilization
+
+ Gemini Ai
+
+ * Physical memory is divided into fixed-sized blocks called **Frames**.
+ * Logical memory is divided into blocks of the same size called **Pages**.
+ * The Operating System keeps track of all free frames.
+ * To run a program of size *N* pages, the OS must find *N* free frames and load the program.
+ * Paging eliminates **External Fragmentation** entirely.
+ * Requires a **Page Table** to translate logical addresses to physical addresses. -->
 <div class="slide-number">1</div></section>
-<section class="slide">
-<h2>Free space before and after Memory Allocation for a Process</h2>
-<img alt="os/img/memory/paging_free_frames_before_after.png" class="align-center" height="533" src="os/img/memory/paging_free_frames_before_after.png" width="760" />
-<img alt="os/img/memory/memory_paging_process_page_tables.png" class="align-center" height="263" src="os/img/memory/memory_paging_process_page_tables.png" width="1029" />
-<div class="slide-number">2</div></section>
 <section class="slide n2c">
 <div class="docutils container">
 <ul class="incremental">
-<li><p>( b ) free space { [ 4 - 14 ] }</p>
-<blockquote>
-<ul class="incremental">
-<li><table>
-<tbody>
-<tr><td><p>A0</p></td>
-<td><p>A1</p></td>
-<td><p>A2</p></td>
-<td><p>A3</p></td>
-</tr>
-<tr><td><p>0</p></td>
-<td><p>1</p></td>
-<td><p>2</p></td>
-<td><p>3</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-</blockquote>
-</li>
 <li><p>( c ) free space { [ 7 - 14 ] }</p>
 <blockquote>
 <table class="next">
@@ -724,13 +734,33 @@ document.addEventListener("DOMContentLoaded", function() {
 </table>
 <table class="next">
 <tbody>
-<tr><td><p>B0</p></td>
-<td><p>B1</p></td>
-<td><p>B2</p></td>
+<tr><td><p>C0</p></td>
+<td><p>C1</p></td>
+<td><p>C2</p></td>
+<td><p>C3</p></td>
 </tr>
-<tr><td><p>4</p></td>
-<td><p>5</p></td>
-<td><p>6</p></td>
+<tr><td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</li>
+<li><p>( f ) free space { [ 11 - 14 ] }</p>
+<blockquote>
+<table class="next">
+<tbody>
+<tr><td><p>A0</p></td>
+<td><p>A1</p></td>
+<td><p>A2</p></td>
+<td><p>A3</p></td>
+</tr>
+<tr><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
 </tr>
 </tbody>
 </table>
@@ -739,10 +769,28 @@ document.addEventListener("DOMContentLoaded", function() {
 <tr><td><p>C0</p></td>
 <td><p>C1</p></td>
 <td><p>C2</p></td>
+<td><p>C3</p></td>
 </tr>
 <tr><td><p>7</p></td>
 <td><p>8</p></td>
 <td><p>9</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<table class="next">
+<tbody>
+<tr><td><p>D0</p></td>
+<td><p>D1</p></td>
+<td><p>D2</p></td>
+<td><p>D3</p></td>
+<td><p>D4</p></td>
+</tr>
+<tr><td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
 </tr>
 </tbody>
 </table>
@@ -751,11 +799,35 @@ document.addEventListener("DOMContentLoaded", function() {
 </ul>
 </div>
 <img alt="os/img/memory/memory_paging_process.png" class="align-center" height="825" src="os/img/memory/memory_paging_process.png" width="682" />
-<div class="slide-number">3</div></section>
-<section class="slide">
+<div class="slide-number">2</div></section>
+<section class="slide t2c">
 <h2>Paging Hardware</h2>
-<img alt="os/img/memory/paging_hardware.png" class="align-center" height="497" src="os/img/memory/paging_hardware.png" width="883" />
 <ol class="arabic simple incremental">
+<li><p>CPU generates <strong>Logical Address</strong> (virtual address)</p></li>
+<li><dl class="simple">
+<dt>Logical Address is divided into: <strong>Page Number (p)</strong> + <strong>Offset (d)</strong></dt>
+<dd><ul class="simple">
+<li><p><strong>Page Number (p)</strong>: Used as an index into a page table. The page table contains the base address of each page in physical memory.</p></li>
+<li><p><strong>Page Offset (d)</strong>: Combined with the base address to define the exact physical memory address.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Page Table maps <strong>logical page</strong> → <strong>physical frame</strong></p></li>
+<li><p>Final <strong>Physical Address</strong> = Frame Number + Offset</p></li>
+<li><p>If the logical address space is <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+    <mn>2</mn>
+    <mi>m</mi>
+  </msup>
+</math> and page size is <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+    <mn>2</mn>
+    <mi>n</mi>
+  </msup>
+</math> bytes:</p></li>
+<li><p>Page offset (d) = <em>n</em> bits</p></li>
+<li><p>Page number (p) = <em>m - n</em> bits</p></li>
 <li><p>Number of bits of Addrress  related to Maximum supported memory by this computer(cpu and motherboard)</p></li>
 <li><p>Number of bits of Addrress  =  log2(Maximum supported memory)</p></li>
 <li><p>If max supported memory = 32 words then number of bits needed for addrress ?</p></li>
@@ -778,93 +850,149 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p>Maximum number of Frames?</p></li>
 <li><p>2 ^ 2  = 4</p></li>
 </ol>
-<!-- :
-
-- - - -
-
-.. image:: os/img/memory/memory_paging_model_address.png
-   :align: center
-
-- - - -
-
-.. image:: os/img/memory/memory_paging_from_disk.png
-   :align: center
-   :scale: 70%
-
-- - - - -->
-<div class="slide-number">4</div></section>
-<section class="slide">
-<h2>Parts of Address Register in Paging</h2>
+<div class="docutils container">
 <img alt="os/img/memory/page_number_offset.png" class="align-center" height="109" src="os/img/memory/page_number_offset.png" width="465" />
-<ul class="simple">
-<li><p>Frame 4k then number_bits(d) == 12</p></li>
-<li><p>Frame 1k then number_bits(d) == 10</p></li>
-<li><p>Frame 16k then number_bits(d) == 14</p></li>
-</ul>
-<p>Maximux memory supported by cpu</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>1 MB ==&gt; number_of_bit(Address register) == 20</dt>
-<dd><ul>
-<li><p>Frame 4k ==&gt; d == 12 and p == 8</p></li>
-<li><p>Frame 1k ==&gt; d == 10 and p == 10 // wrong?</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<div class="slide-number">5</div></section>
-<section class="slide">
-<h2>Logical Address to Physical Address</h2>
-<img alt="os/img/memory/memory_paging_logical_address_to_physical_address.png" class="align-center" src="os/img/memory/memory_paging_logical_address_to_physical_address.png" />
-<div class="slide-number">6</div></section>
-<section class="slide">
-<h2>More details on Address conversion</h2>
+<img alt="os/img/memory/paging_hardware.png" class="align-center" height="497" src="os/img/memory/paging_hardware.png" width="883" />
 <img alt="os/img/memory/memory_paging_logical_address_to_physical_address_detail.png" class="align-center" src="os/img/memory/memory_paging_logical_address_to_physical_address_detail.png" />
-<div class="slide-number">7</div></section>
+</div>
+<div class="slide-number">3</div></section>
 <section class="slide">
-<h2>Address Translation</h2>
-<img alt="os/img/memory/memory_paging_address_translation.png" class="align-center" src="os/img/memory/memory_paging_address_translation.png" />
-<div class="slide-number">8</div></section>
-<section class="slide t2c">
-<h2>Process and Page Table</h2>
-<img alt="os/img/memory/page_table_in_a_frame.png" src="os/img/memory/page_table_in_a_frame.png" />
-<img alt="os/img/memory/page_table_in_a_frame2.png" src="os/img/memory/page_table_in_a_frame2.png" />
-<div class="slide-number">9</div></section>
+<h2>Logical Address to Physical Address and PTBR</h2>
+<div class="graphviz-container" style="margin-left: auto; text-align: right;">
+<svg width="1700px"
+ viewBox="0.00 0.00 921.49 155.86" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 151.86)">
+<title>PagingHW</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-151.86 917.49,-151.86 917.49,4 -4,4"/>
+<!-- CPU -->
+<g id="node1" class="node">
+<title>CPU</title>
+<ellipse fill="#dcedc1" stroke="black" cx="29.25" cy="-52.36" rx="29.5" ry="18"/>
+<text text-anchor="middle" x="29.25" y="-48.66" font-family="Helvetica,sans-Serif" font-size="14.00">CPU</text>
+</g>
+<!-- Logical -->
+<g id="node2" class="node">
+<title>Logical</title>
+<polygon fill="#ffcda3" stroke="black" points="155.49,-29.36 155.49,-75.36 312.49,-75.36 312.49,-29.36 155.49,-29.36"/>
+<text text-anchor="middle" x="233.99" y="-60.16" font-family="Helvetica,sans-Serif" font-size="14.00">Logical Address</text>
+<polyline fill="none" stroke="black" points="155.49,-52.36 312.49,-52.36 "/>
+<text text-anchor="middle" x="192.49" y="-37.16" font-family="Helvetica,sans-Serif" font-size="14.00">Page (p)</text>
+<polyline fill="none" stroke="black" points="229.49,-29.36 229.49,-52.36 "/>
+<text text-anchor="middle" x="270.99" y="-37.16" font-family="Helvetica,sans-Serif" font-size="14.00">Offset (d)</text>
+</g>
+<!-- CPU&#45;&gt;Logical -->
+<g id="edge1" class="edge">
+<title>CPU&#45;&gt;Logical</title>
+<path fill="none" stroke="#444444" d="M58.87,-52.36C81.32,-52.36 113.85,-52.36 144.73,-52.36"/>
+<polygon fill="#444444" stroke="#444444" points="145.12,-55.86 155.12,-52.36 145.12,-48.86 145.12,-55.86"/>
+<text text-anchor="middle" x="106.99" y="-55.56" font-family="Helvetica,sans-Serif" font-size="11.00"> Generates</text>
+</g>
+<!-- PageTable -->
+<g id="node3" class="node">
+<title>PageTable</title>
+<polygon fill="#a8e6cf" stroke="black" points="382.49,-55.36 382.49,-147.36 471.49,-147.36 471.49,-55.36 382.49,-55.36"/>
+<text text-anchor="middle" x="426.99" y="-132.16" font-family="Helvetica,sans-Serif" font-size="14.00">Page Table</text>
+<polyline fill="none" stroke="black" points="382.49,-124.36 471.49,-124.36 "/>
+<text text-anchor="middle" x="426.99" y="-109.16" font-family="Helvetica,sans-Serif" font-size="14.00">...</text>
+<polyline fill="none" stroke="black" points="382.49,-101.36 471.49,-101.36 "/>
+<text text-anchor="middle" x="426.99" y="-86.16" font-family="Helvetica,sans-Serif" font-size="14.00">Frame (f)</text>
+<polyline fill="none" stroke="black" points="382.49,-78.36 471.49,-78.36 "/>
+<text text-anchor="middle" x="426.99" y="-63.16" font-family="Helvetica,sans-Serif" font-size="14.00">...</text>
+</g>
+<!-- Logical&#45;&gt;PageTable -->
+<g id="edge2" class="edge">
+<title>Logical:p&#45;&gt;PageTable:entry</title>
+<path fill="none" stroke="#444444" d="M191.99,-28.36C191.99,25.19 262.34,-10.57 312.49,-29.36 347.27,-42.39 342.85,-81.08 372.22,-88.22"/>
+<polygon fill="#444444" stroke="#444444" points="372.17,-91.74 382.49,-89.36 372.94,-84.78 372.17,-91.74"/>
+<text text-anchor="middle" x="347.49" y="-87.56" font-family="Helvetica,sans-Serif" font-size="11.00"> Index</text>
+</g>
+<!-- Physical -->
+<g id="node4" class="node">
+<title>Physical</title>
+<polygon fill="#ffd3b6" stroke="black" points="586.49,-29.36 586.49,-75.36 749.49,-75.36 749.49,-29.36 586.49,-29.36"/>
+<text text-anchor="middle" x="667.99" y="-60.16" font-family="Helvetica,sans-Serif" font-size="14.00">Physical Address</text>
+<polyline fill="none" stroke="black" points="586.49,-52.36 749.49,-52.36 "/>
+<text text-anchor="middle" x="626.49" y="-37.16" font-family="Helvetica,sans-Serif" font-size="14.00">Frame (f)</text>
+<polyline fill="none" stroke="black" points="666.49,-29.36 666.49,-52.36 "/>
+<text text-anchor="middle" x="707.99" y="-37.16" font-family="Helvetica,sans-Serif" font-size="14.00">Offset (d)</text>
+</g>
+<!-- Logical&#45;&gt;Physical -->
+<g id="edge4" class="edge">
+<title>Logical:d&#45;&gt;Physical:d</title>
+<path fill="none" stroke="#444444" d="M312.49,-40.36C320.54,-40.36 322.48,-39.12 330.49,-38.36 353.57,-36.19 359.35,-35.54 382.49,-34.36 473.07,-29.77 495.81,-30.85 586.49,-29.36 636.48,-28.54 698.05,17.9 706.91,-18.06"/>
+<polygon fill="#444444" stroke="#444444" points="703.47,-18.78 707.99,-28.36 710.43,-18.05 703.47,-18.78"/>
+<text text-anchor="middle" x="426.99" y="-37.56" font-family="Helvetica,sans-Serif" font-size="11.00"> Exact Copy</text>
+</g>
+<!-- PageTable&#45;&gt;Physical -->
+<g id="edge3" class="edge">
+<title>PageTable:entry&#45;&gt;Physical:f</title>
+<path fill="none" stroke="#444444" d="M471.49,-89.36C523.47,-89.36 530.22,-46.48 576.37,-40.95"/>
+<polygon fill="#444444" stroke="#444444" points="576.71,-44.43 586.49,-40.36 576.31,-37.45 576.71,-44.43"/>
+<text text-anchor="middle" x="528.99" y="-89.56" font-family="Helvetica,sans-Serif" font-size="11.00"> Base Address</text>
+</g>
+<!-- Memory -->
+<g id="node5" class="node">
+<title>Memory</title>
+<path fill="#dcedc1" stroke="black" d="M913.49,-73.84C913.49,-76.47 897.13,-78.61 876.99,-78.61 856.85,-78.61 840.49,-76.47 840.49,-73.84 840.49,-73.84 840.49,-30.89 840.49,-30.89 840.49,-28.25 856.85,-26.11 876.99,-26.11 897.13,-26.11 913.49,-28.25 913.49,-30.89 913.49,-30.89 913.49,-73.84 913.49,-73.84"/>
+<path fill="none" stroke="black" d="M913.49,-73.84C913.49,-71.21 897.13,-69.07 876.99,-69.07 856.85,-69.07 840.49,-71.21 840.49,-73.84"/>
+<text text-anchor="middle" x="876.99" y="-56.16" font-family="Helvetica,sans-Serif" font-size="14.00">Physical</text>
+<text text-anchor="middle" x="876.99" y="-41.16" font-family="Helvetica,sans-Serif" font-size="14.00">Memory</text>
+</g>
+<!-- Physical&#45;&gt;Memory -->
+<g id="edge5" class="edge">
+<title>Physical&#45;&gt;Memory</title>
+<path fill="none" stroke="#444444" d="M749.62,-52.36C777.01,-52.36 806.65,-52.36 830.34,-52.36"/>
+<polygon fill="#444444" stroke="#444444" points="830.44,-55.86 840.44,-52.36 830.44,-48.86 830.44,-55.86"/>
+<text text-anchor="middle" x="794.99" y="-55.56" font-family="Helvetica,sans-Serif" font-size="11.00"> Accesses</text>
+</g>
+</g>
+</svg>
+
+</div>
+<img alt="os/img/memory/memory_paging_address_translation.png" class="align-center next" height="774" src="os/img/memory/memory_paging_address_translation.png" width="1214" />
+<div class="slide-number">4</div></section>
 <section class="slide t2c">
 <h2>Consider a computer with maximum 16 words</h2>
-<ol class="arabic simple">
-<li><p>Draw Memory Bytes</p></li>
-<li><p>d = 2</p></li>
-<li><p>Draw Memory Frames</p></li>
-<li><p>some First Frames for os</p></li>
-<li><p>Put a process into Memory (not continuous or in order)</p></li>
-<li><p>Fill page table</p></li>
-<li><p>Convert a Logical Addfress to Physical Address</p></li>
-<li><p>Put another process into Memory</p></li>
-</ol>
-<div class="docutils container">
 <table>
 <thead>
-<tr><th class="head"><p>0000</p></th>
-<th class="head"><p>0001</p></th>
-<th class="head"><p>0010</p></th>
-<th class="head"><p>0011</p></th>
-<th class="head"><p>0100</p></th>
-<th class="head"><p>0101</p></th>
-<th class="head"><p>0110</p></th>
-<th class="head"><p>0111</p></th>
-<th class="head"><p>1000</p></th>
-<th class="head"><p>1001</p></th>
-<th class="head"><p>1010</p></th>
-<th class="head"><p>1011</p></th>
-<th class="head"><p>1100</p></th>
-<th class="head"><p>1101</p></th>
-<th class="head"><p>1110</p></th>
-<th class="head"><p>1111</p></th>
+<tr><th class="head"><p>P0_0</p></th>
+<th class="head"><p>P0_1</p></th>
+<th class="head"><p>P0_2</p></th>
+<th class="head"><p>P0_3</p></th>
 </tr>
 </thead>
 <tbody>
+<tr><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr><td><p>00</p></td>
+<td><p>01</p></td>
+<td><p>10</p></td>
+<td><p>11</p></td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr><td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+<td><p> </p></td>
+</tr>
 <tr><td><p>0</p></td>
 <td><p>1</p></td>
 <td><p>2</p></td>
@@ -882,9 +1010,25 @@ document.addEventListener("DOMContentLoaded", function() {
 <td><p>14</p></td>
 <td><p>15</p></td>
 </tr>
+<tr><td><p>0000</p></td>
+<td><p>0001</p></td>
+<td><p>0010</p></td>
+<td><p>0011</p></td>
+<td><p>0100</p></td>
+<td><p>0101</p></td>
+<td><p>0110</p></td>
+<td><p>0111</p></td>
+<td><p>1000</p></td>
+<td><p>1001</p></td>
+<td><p>1010</p></td>
+<td><p>1011</p></td>
+<td><p>1100</p></td>
+<td><p>1101</p></td>
+<td><p>1110</p></td>
+<td><p>1111</p></td>
+</tr>
 </tbody>
 </table>
-<p>.</p>
 <table>
 <thead>
 <tr><th class="head"><p>00</p></th>
@@ -901,7 +1045,6 @@ document.addEventListener("DOMContentLoaded", function() {
 </tr>
 </tbody>
 </table>
-<p>00</p>
 <table>
 <thead>
 <tr><th class="head"><p>00</p></th>
@@ -918,54 +1061,55 @@ document.addEventListener("DOMContentLoaded", function() {
 </tr>
 </tbody>
 </table>
-<p>01</p>
-<table>
-<thead>
-<tr><th class="head"><p>00</p></th>
-<th class="head"><p>01</p></th>
-<th class="head"><p>10</p></th>
-<th class="head"><p>11</p></th>
-</tr>
-</thead>
-<tbody>
-<tr><td><p>8</p></td>
-<td><p>9</p></td>
-<td><p>10</p></td>
-<td><p>11</p></td>
-</tr>
-</tbody>
-</table>
-<p>10</p>
-<table>
-<thead>
-<tr><th class="head"><p>00</p></th>
-<th class="head"><p>01</p></th>
-<th class="head"><p>10</p></th>
-<th class="head"><p>11</p></th>
-</tr>
-</thead>
-<tbody>
-<tr><td><p>12</p></td>
-<td><p>13</p></td>
-<td><p>14</p></td>
-<td><p>15</p></td>
-</tr>
-</tbody>
-</table>
-<p>11</p>
-</div>
-<div class="slide-number">10</div></section>
+<!-- :
+
+:class: t2c
+
+ #. Draw Memory Bytes
+ #. d = 2
+ #. Draw Memory Frames
+ #. some First Frames for os
+ #. Put a process into Memory (not continuous or in order)
+ #. Fill page table
+ #. Convert a Logical Addfress to Physical Address
+ #. Put another process into Memory -->
+<div class="slide-number">5</div></section>
+<section class="slide t2c">
+<h2>Process and Page Table</h2>
+<img alt="os/img/memory/page_table_in_a_frame.png" src="os/img/memory/page_table_in_a_frame.png" />
+<img alt="os/img/memory/page_table_in_a_frame2.png" src="os/img/memory/page_table_in_a_frame2.png" />
+<div class="slide-number">6</div></section>
+<section class="slide">
+<h2>Parts of Address Register in Paging</h2>
+<ul class="simple">
+<li><p>Frame 4k then number_bits(d) == 12</p></li>
+<li><p>Frame 1k then number_bits(d) == 10</p></li>
+<li><p>Frame 16k then number_bits(d) == 14</p></li>
+</ul>
+<p>Maximux memory supported by cpu</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>1 MB ==&gt; number_of_bit(Address register) == 20</dt>
+<dd><ul>
+<li><p>Frame 4k ==&gt; d == 12 and p == 8</p></li>
+<li><p>Frame 1k ==&gt; d == 10 and p == 10 // wrong?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="slide-number">7</div></section>
 <section class="slide">
 <h2>A computer with 32 Bytes of Memory and 8 Bytes Page Size</h2>
 <p>d = 3, p = 2</p>
 <p>p0 11 bytes</p>
 <p class="rtl-h1">یک کامپیوتر با حافظهٔ ۱۲۸ بایتی و صفحه‌های ۸ بایتی</p>
 <img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
-<div class="slide-number">11</div></section>
+<div class="slide-number">8</div></section>
 <section class="slide">
 <h2>PTBR</h2>
 <img alt="os/img/memory/paging_hardware_with_TLB_ptbr.png" class="align-center" src="os/img/memory/paging_hardware_with_TLB_ptbr.png" style="height: 550px;" />
-<div class="slide-number">12</div></section>
+<div class="slide-number">9</div></section>
 <section class="slide">
 <h2>TLB (Translation Lookaside Buffer)</h2>
 <img alt="os/img/memory/paging_hardware_with_TLB.png" class="align-center" src="os/img/memory/paging_hardware_with_TLB.png" />
@@ -974,30 +1118,30 @@ document.addEventListener("DOMContentLoaded", function() {
 * A specialized hardware cache used exclusively for memory management.
 * It caches recent virtual-to-physical address translations from the page tables.
 * A TLB miss forces a slow "page table walk" through physical RAM. -->
-<div class="slide-number">13</div></section>
+<div class="slide-number">10</div></section>
 <section class="slide">
 <h2>Flowchart of TLB miss</h2>
 <img alt="os/img/memory/paging_hardware_TLB_miss.png" class="align-center" src="os/img/memory/paging_hardware_TLB_miss.png" style="height: 550px;" />
-<div class="slide-number">14</div></section>
+<div class="slide-number">11</div></section>
 <section class="slide">
 <h2>Paging Memory Access</h2>
 <img alt="os/img/memory/memory_paging_page_table_and_cache.jpg" class="align-center" src="os/img/memory/memory_paging_page_table_and_cache.jpg" />
-<div class="slide-number">15</div></section>
+<div class="slide-number">12</div></section>
 <section class="slide">
 <h2>Page Sharing</h2>
 <img alt="os/img/memory/memory_paging_share_pages.png" class="align-center" src="os/img/memory/memory_paging_share_pages.png" style="height: 500px;" />
-<div class="slide-number">16</div></section>
+<div class="slide-number">13</div></section>
 <section class="slide">
 <img alt="os/img/memory/paging_sharing_code.png" class="align-center" src="os/img/memory/paging_sharing_code.png" />
-<div class="slide-number">17</div></section>
+<div class="slide-number">14</div></section>
 <section class="slide">
 <h2>Memory Hierarchy</h2>
 <img alt="os/img/memory/memory_hierarchy.png" class="align-center" src="os/img/memory/memory_hierarchy.png" />
-<div class="slide-number">18</div></section>
+<div class="slide-number">15</div></section>
 <section class="slide">
 <h2>Memory Access</h2>
 <img alt="os/img/memory/memory_effect_of_cache.png" class="align-center" src="os/img/memory/memory_effect_of_cache.png" />
-<div class="slide-number">19</div></section>
+<div class="slide-number">16</div></section>
 <section class="slide">
 <h2>Effective Access Time</h2>
 <ul class="simple">
@@ -1202,7 +1346,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <mo stretchy="false">)</mo>
 </math>
 </div>
-<div class="slide-number">20</div></section>
+<div class="slide-number">17</div></section>
 <section class="slide">
 <p class="rtl-h2">زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.</p>
 <ul class="incremental simple">
@@ -1404,7 +1548,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <mi>s</mi>
 </math>
 </div>
-<div class="slide-number">21</div></section>
+<div class="slide-number">18</div></section>
 <section class="slide">
 <p class="rtl-h1">زمان دسترسی مؤثر = <cite>زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه</cite></p>
 <p class="rtl-h2">با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت</p>
@@ -1567,11 +1711,11 @@ document.addEventListener("DOMContentLoaded", function() {
   <mo stretchy="false">)</mo>
 </math>
 </div>
-<div class="slide-number">22</div></section>
+<div class="slide-number">19</div></section>
 <section class="slide">
 <h2>Memory Protection</h2>
 <img alt="os/img/memory/paging_valid_invalid.png" class="align-center" src="os/img/memory/paging_valid_invalid.png" />
-<div class="slide-number">23</div></section>
+<div class="slide-number">20</div></section>
 <section class="slide">
 <h2>References(I)</h2>
 <ul class="simple">
@@ -1602,6 +1746,6 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p><a class="reference external" href="https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/">https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/</a></p></li>
 <li><p><a class="reference external" href="https://codex.cs.yale.edu/avi/os-book/">https://codex.cs.yale.edu/avi/os-book/</a></p></li>
 </ul>
-<div class="slide-number">24</div></section>
+<div class="slide-number">21</div></section>
 </body>
 </html>

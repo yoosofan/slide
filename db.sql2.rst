@@ -23,7 +23,7 @@
 .. slido:: Find the names of suppliers who are located in a city where at least one part is stored
    :class: t2c
 
-    .. container::
+    .. container:: ee
 
         .. code:: sql
           :class: substep

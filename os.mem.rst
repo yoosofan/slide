@@ -21,6 +21,7 @@
 
     https://yoosofan.github.io/course/os.html
 
+
 .. slido:: Fixed Partitioining or Static Partitioning
    :class: t2c
 

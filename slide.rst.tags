@@ -1,0 +1,313 @@
+!_TAG_FILE_FORMAT	2	/extended format/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_ENCODING	utf-8	//
+!_TAG_FILE_AUTHOR	prezento rst2tags.py	/source: /home/ahmad/research/projects/slide/
+0. Definitions.	LICENSE.rst	/^0. Definitions.$/;"	h	line:78
+1. Source Code.	LICENSE.rst	/^1. Source Code.$/;"	h	line:118
+10. Automatic Licensing of Downstream Recipients.	LICENSE.rst	/^10. Automatic Licensing of Downstream Recipients.$/;"	h	line:460
+11. Patents.	LICENSE.rst	/^11. Patents.$/;"	h	line:486
+12. No Surrender of Others' Freedom.	LICENSE.rst	/^12. No Surrender of Others' Freedom.$/;"	h	line:555
+13. Use with the GNU Affero General Public License.	LICENSE.rst	/^13. Use with the GNU Affero General Public License.$/;"	h	line:569
+14. Revised Versions of this License.	LICENSE.rst	/^14. Revised Versions of this License.$/;"	h	line:581
+15. Disclaimer of Warranty.	LICENSE.rst	/^15. Disclaimer of Warranty.$/;"	h	line:607
+16. Limitation of Liability.	LICENSE.rst	/^16. Limitation of Liability.$/;"	h	line:619
+17. Interpretation of Sections 15 and 16.	LICENSE.rst	/^17. Interpretation of Sections 15 and 16.$/;"	h	line:632
+2. Basic Permissions.	LICENSE.rst	/^2. Basic Permissions.$/;"	h	line:160
+3. Protecting Users' Legal Rights From Anti-Circumvention Law.	LICENSE.rst	/^3. Protecting Users' Legal Rights From Anti-Circumvention Law.$/;"	h	line:186
+4. Conveying Verbatim Copies.	LICENSE.rst	/^4. Conveying Verbatim Copies.$/;"	h	line:202
+5. Conveying Modified Source Versions.	LICENSE.rst	/^5. Conveying Modified Source Versions.$/;"	h	line:216
+6. Conveying Non-Source Forms.	LICENSE.rst	/^6. Conveying Non-Source Forms.$/;"	h	line:254
+7. Additional Terms.	LICENSE.rst	/^7. Additional Terms.$/;"	h	line:354
+8. Termination.	LICENSE.rst	/^8. Termination.$/;"	h	line:419
+9. Acceptance Not Required for Having Copies.	LICENSE.rst	/^9. Acceptance Not Required for Having Copies.$/;"	h	line:448
+A computer with 32 Bytes of Memory and 8 Bytes Page Size	os.paging.rst	/^.. slido:: A computer with 32 Bytes of Memory and 8 Bytes Page Size$/;"	s	line:268
+Adding λ to table	cm.ll.rst	/^.. slido:: Adding λ to table$/;"	s	line:550
+Aggregation Functions	db.sql2.rst	/^.. slido:: Aggregation Functions$/;"	s	line:665
+Ahmad Yoosofan Slides for some Computer Courses	readme.rst	/^Ahmad Yoosofan Slides for some Computer Courses$/;"	h	line:5
+Ambiguous Grammar	cm.lr.rst	/^.. slido:: Ambiguous Grammar$/;"	s	line:537
+An Especial Grammar	cm.lr.rst	/^.. slido:: An Especial Grammar$/;"	s	line:709
+Average	db.sql2.rst	/^.. slido:: Average$/;"	s	line:1014
+BIOS	os.mem.rst	/^.. slido:: BIOS$/;"	s	line:1195
+Blocked or Waiting	os.mem.rst	/^.. slido:: Blocked or Waiting$/;"	s	line:756
+Boot sequence	os.mem.rst	/^.. slido:: Boot sequence$/;"	s	line:1210
+Buddy System Memory Management(I)	os.mem.rst	/^.. slido:: Buddy System Memory Management(I)$/;"	s	line:246
+Buddy System Memory Management(II)	os.mem.rst	/^.. slido:: Buddy System Memory Management(II)$/;"	s	line:251
+Buddy System Memory Management(III)	os.mem.rst	/^.. slido:: Buddy System Memory Management(III)$/;"	s	line:542
+Cache Management & OS Implications	os.mem.rst	/^.. slido:: Cache Management & OS Implications$/;"	s	line:1049
+Cache Memory & Locality	os.mem.rst	/^.. slido:: Cache Memory & Locality$/;"	s	line:1004
+CM - Ll	cm.ll.rst	/^.. prezento:: CM - Ll$/;"	p	line:1
+CM - Lr	cm.lr.rst	/^.. prezento:: CM - Lr$/;"	p	line:1
+Compaction or Defragmentation	os.mem.rst	/^.. slido:: Compaction or Defragmentation$/;"	s	line:163
+Computer with 16 words	os.paging.rst	/^.. slido:: Computer with 16 words$/;"	s	line:202
+Convert to pdf	readme.rst	/^Convert to pdf$/;"	h	line:75
+Count	db.sql2.rst	/^.. slido:: Count$/;"	s	line:1068
+Count(*)	db.sql2.rst	/^.. slido:: Count(*)$/;"	s	line:1100
+count(distinct)	db.sql2.rst	/^.. slido:: count(distinct)$/;"	s	line:1144
+DB - Sql2	db.sql2.rst	/^.. prezento:: DB - Sql2$/;"	p	line:10
+Direct Memory Access(DMA)	os.mem.rst	/^.. slido:: Direct Memory Access(DMA)$/;"	s	line:1191
+dot	os.mem.rst	/^        .. code-block:: dot$/;"	f	line:1283
+Dynamic Partitioning	os.mem.rst	/^.. slido:: Dynamic Partitioning$/;"	s	line:85
+Effective Access Time	os.paging.rst	/^.. slido:: Effective Access Time$/;"	s	line:332
+Effective Access Time (EAT)	os.mem.rst	/^.. slido:: Effective Access Time (EAT)$/;"	s	line:1129
+Find the cities of suppliers that contain no parts	db.sql2.rst	/^.. slido:: Find the cities of suppliers that contain no parts$/;"	s	line:227
+Find the names of parts that are supplied exclusively by suppliers located in the same city, or are not supplied at all	db.sql2.rst	/^.. slido:: Find the names of parts that are supplied exclusively by suppliers located in the same city, or are not supplied at all$/;"	s	line:286
+Find the names of parts that weigh more than at least one other part	db.sql2.rst	/^.. slido:: Find the names of parts that weigh more than at least one other part$/;"	s	line:66
+Find the names of parts that weigh more than at least one part in Paris	db.sql2.rst	/^.. slido:: Find the names of parts that weigh more than at least one part in Paris$/;"	s	line:126
+Find the names of supplied parts that are provided only by suppliers located in the same city	db.sql2.rst	/^.. slido:: Find the names of supplied parts that are provided only by suppliers located in the same city$/;"	s	line:343
+Find the names of suppliers who are located in a city where at least one part is stored	db.sql2.rst	/^.. slido:: Find the names of suppliers who are located in a city where at least one part is stored$/;"	s	line:23
+Find the names of the lightest parts	db.sql2.rst	/^.. slido:: Find the names of the lightest parts$/;"	s	line:166
+First set	cm.ll.rst	/^.. slido:: First set$/;"	s	line:699
+First sets	cm.ll.rst	/^.. slido:: First sets$/;"	s	line:80
+Fixed Partitioining or Static Partitioning	os.mem.rst	/^.. slido:: Fixed Partitioining or Static Partitioning$/;"	s	line:24
+Flowchart of TLB miss	os.paging.rst	/^.. slido:: Flowchart of TLB miss$/;"	s	line:300
+Follow Set(I)	cm.ll.rst	/^.. slido:: Follow Set(I)$/;"	s	line:442
+Follow Set(II)	cm.ll.rst	/^.. slido:: Follow Set(II)$/;"	s	line:711
+Follow Set(III)	cm.ll.rst	/^.. slido:: Follow Set(III)$/;"	s	line:750
+fortran	cm.lr.rst	/^    .. code:: fortran$/;"	f	line:540
+From First Sets to a Table	cm.ll.rst	/^.. slido:: From First Sets to a Table$/;"	s	line:907
+Full Outer Join(I)	db.sql2.rst	/^.. slido:: Full Outer Join(I)$/;"	s	line:2600
+Full Outer Join(II)	db.sql2.rst	/^.. slido:: Full Outer Join(II)$/;"	s	line:2630
+GNU GENERAL PUBLIC LICENSE	LICENSE.rst	/^GNU GENERAL PUBLIC LICENSE$/;"	h	line:1
+group by	db.sql2.rst	/^.. slido:: group by$/;"	s	line:1332
+How to Apply These Terms to Your New Programs	LICENSE.rst	/^How to Apply These Terms to Your New Programs$/;"	h	line:644
+Incorrect Calculator Grammar(I)	cm.ll.rst	/^.. slido:: Incorrect Calculator Grammar(I)$/;"	s	line:507
+Incorrect Calculator Grammar(I)	cm.ll.rst	/^.. slido:: Incorrect Calculator Grammar(I)$/;"	s	line:725
+LALR	cm.lr.rst	/^.. slido:: LALR$/;"	s	line:1712
+Left Outer Join(I)	db.sql2.rst	/^.. slido:: Left Outer Join(I)$/;"	s	line:2525
+Left Outer Join(II)	db.sql2.rst	/^.. slido:: Left Outer Join(II)$/;"	s	line:2558
+List of courses and slides	readme.rst	/^List of courses and slides$/;"	h	line:9
+List the distinct names of parts that are supplied, such that all of their suppliers reside in the part's city	db.sql2.rst	/^.. slido:: List the distinct names of parts that are supplied, such that all of their suppliers reside in the part's city$/;"	s	line:409
+LL	cm.ll.rst	/^.. slido:: LL$/;"	s	line:4
+Logical Address to Physical Address and PTBR	os.paging.rst	/^.. slido:: Logical Address to Physical Address and PTBR$/;"	s	line:173
+Look ahead	cm.lr.rst	/^.. slido:: Look ahead$/;"	s	line:1001
+LR Table	cm.lr.rst	/^.. slido:: LR Table$/;"	s	line:520
+max	db.sql2.rst	/^.. slido:: max$/;"	s	line:1319
+Memory Access	os.paging.rst	/^.. slido:: Memory Access$/;"	s	line:327
+Memory Hierarchy	os.paging.rst	/^.. slido:: Memory Hierarchy$/;"	s	line:322
+Memory Overlays	os.mem.rst	/^.. slido:: Memory Overlays$/;"	s	line:861
+Memory Protection	os.paging.rst	/^.. slido:: Memory Protection$/;"	s	line:399
+Microkernel Architecture	os.mem.rst	/^.. slido:: Microkernel Architecture$/;"	s	line:1221
+Min	db.sql2.rst	/^.. slido:: Min$/;"	s	line:1307
+Monolithic	os.mem.rst	/^.. slido:: Monolithic$/;"	s	line:1393
+Motherboard	os.mem.rst	/^.. slido:: Motherboard$/;"	s	line:1182
+Multi Layer	os.mem.rst	/^.. slido:: Multi Layer$/;"	s	line:1328
+Operating Systems	os.mem.rst	/^.. slido:: Operating Systems$/;"	s	line:10
+Operating Systems - Memory  (By Ahmad Yoosofan)	os.mem.rst	/^.. prezento:: Operating Systems - Memory  (By Ahmad Yoosofan)$/;"	p	line:7
+Operating Systems - Memory Management - Paging (Ahmad Yoosofan)	os.paging.rst	/^.. slido:: Operating Systems - Memory Management - Paging (Ahmad Yoosofan)$/;"	s	line:16
+Operating Systems - Paging  (By Ahmad Yoosofan)	os.paging.rst	/^.. prezento:: Operating Systems - Paging  (By Ahmad Yoosofan)$/;"	p	line:13
+Page Sharing	os.paging.rst	/^.. slido:: Page Sharing$/;"	s	line:311
+Paging Hardware	os.paging.rst	/^.. slido:: Paging Hardware$/;"	s	line:136
+Paging Memory Access	os.paging.rst	/^.. slido:: Paging Memory Access$/;"	s	line:306
+Parsing `(a+a)$` for right place of λ in LL(1) Table	cm.ll.rst	/^.. slido:: Parsing `(a+a)$` for right place of λ in LL(1) Table$/;"	s	line:644
+Parsing `a+a*a$` for right place of λ in LL(1) Table	cm.ll.rst	/^.. slido:: Parsing `a+a*a$` for right place of λ in LL(1) Table$/;"	s	line:585
+Parsing(I)	cm.ll.rst	/^.. slido:: Parsing(I)$/;"	s	line:118
+Parsing(I)	cm.ll.rst	/^.. slido:: Parsing(I)$/;"	s	line:931
+Parsing(II)	cm.ll.rst	/^.. slido:: Parsing(II)$/;"	s	line:155
+Parsing(II)	cm.ll.rst	/^.. slido:: Parsing(II)$/;"	s	line:959
+Parsing(III)	cm.ll.rst	/^.. slido:: Parsing(III)$/;"	s	line:236
+Parsing(III)	cm.ll.rst	/^.. slido:: Parsing(III)$/;"	s	line:990
+Parsing(IV)	cm.ll.rst	/^.. slido:: Parsing(IV)$/;"	s	line:277
+Parsing(V)	cm.ll.rst	/^.. slido:: Parsing(V)$/;"	s	line:330
+Parsing(VI)	cm.ll.rst	/^.. slido:: Parsing(VI)$/;"	s	line:383
+Parts of Address Register in Paging	os.paging.rst	/^.. slido:: Parts of Address Register in Paging$/;"	s	line:253
+Placement algorithms	os.mem.rst	/^.. slido:: Placement algorithms$/;"	s	line:121
+Preamble	LICENSE.rst	/^Preamble$/;"	h	line:11
+Process	os.mem.rst	/^.. slido:: Process$/;"	s	line:673
+Process and Page Table	os.paging.rst	/^.. slido:: Process and Page Table$/;"	s	line:246
+Process Suspension	os.mem.rst	/^.. slido:: Process Suspension$/;"	s	line:766
+Process Suspension (Swapping)	os.mem.rst	/^.. slido:: Process Suspension (Swapping)$/;"	s	line:777
+PTBR	os.paging.rst	/^.. slido:: PTBR$/;"	s	line:283
+Reduce Function Calls	cm.ll.rst	/^.. slido:: Reduce Function Calls$/;"	s	line:14
+References(I)	os.mem.rst	/^.. slido:: References(I)$/;"	s	line:1400
+References(I)	os.paging.rst	/^.. slido:: References(I)$/;"	s	line:404
+References(II)	os.mem.rst	/^.. slido:: References(II)$/;"	s	line:1413
+References(III)	os.mem.rst	/^.. slido:: References(III)$/;"	s	line:1424
+References(IV)	os.mem.rst	/^.. slido:: References(IV)$/;"	s	line:1437
+References(V)	os.mem.rst	/^.. slido:: References(V)$/;"	s	line:1448
+Run a simple slide	readme.rst	/^Run a simple slide$/;"	h	line:54
+S → i(r) S  | i(r) S e S | o	cm.ll.rst	/^.. slido:: S → i(r) S  | i(r) S e S | o$/;"	s	line:1172
+Scalar value(II)	db.sql2.rst	/^.. slido:: Scalar value(II)$/;"	s	line:2293
+Scalar value(III)	db.sql2.rst	/^.. slido:: Scalar value(III)$/;"	s	line:2319
+sh	readme.rst	/^.. code:: sh$/;"	f	line:56
+sh	readme.rst	/^.. code:: sh$/;"	f	line:71
+sh	readme.rst	/^.. code:: sh$/;"	f	line:77
+Simple Add(I)	cm.lr.rst	/^.. slido:: Simple Add(I)$/;"	s	line:16
+Simple Add(II)	cm.lr.rst	/^.. slido:: Simple Add(II)$/;"	s	line:36
+Simple Add(III)	cm.lr.rst	/^.. slido:: Simple Add(III)$/;"	s	line:61
+Simple Add(IV)	cm.lr.rst	/^.. slido:: Simple Add(IV)$/;"	s	line:91
+Simple Add(V)	cm.lr.rst	/^.. slido:: Simple Add(V)$/;"	s	line:126
+Simple Add(VI)	cm.lr.rst	/^.. slido:: Simple Add(VI)$/;"	s	line:165
+Simple Add(VII)	cm.lr.rst	/^.. slido:: Simple Add(VII)$/;"	s	line:210
+Simple Add(VIII)	cm.lr.rst	/^.. slido:: Simple Add(VIII)$/;"	s	line:281
+Simple Calculator(I)	cm.ll.rst	/^.. slido:: Simple Calculator(I)$/;"	s	line:832
+Simple Calculator(I)	cm.lr.rst	/^.. slido:: Simple Calculator(I)$/;"	s	line:328
+Simple Calculator(II)	cm.ll.rst	/^.. slido:: Simple Calculator(II)$/;"	s	line:867
+Simple Calculator(II)	cm.lr.rst	/^.. slido:: Simple Calculator(II)$/;"	s	line:360
+Simple Calculator(XX)	cm.lr.rst	/^.. slido:: Simple Calculator(XX)$/;"	s	line:423
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:28
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:34
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:73
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:81
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:88
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:99
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:133
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:145
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:187
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:208
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:234
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:246
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:256
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:268
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:301
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:315
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:350
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:372
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:390
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:416
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:430
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:446
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:479
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:497
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:529
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:574
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:675
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:708
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:740
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:759
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:778
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:801
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:831
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:849
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:864
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:889
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:907
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:938
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:957
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:982
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:997
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1020
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1029
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1042
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1062
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1075
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1088
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1106
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1118
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1130
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1151
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1163
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1188
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1202
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1225
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1247
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1261
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1283
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1313
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1325
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:1341
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1372
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:1401
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1430
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:1452
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1477
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1546
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1565
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1592
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1599
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1608
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1619
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:1642
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1661
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1682
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1706
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1722
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1743
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1764
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1785
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1801
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1820
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1846
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1872
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1882
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1892
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1902
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:1921
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:1933
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1947
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1970
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:1985
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2006
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2015
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2038
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2055
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2087
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2111
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2128
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2155
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2164
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2180
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2196
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2214
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2246
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2266
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2300
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2326
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2341
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2351
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2368
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2396
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2429
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2442
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2450
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2481
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2489
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:2530
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:2537
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2561
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2569
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2587
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2603
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2610
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2617
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2624
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2633
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2638
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2650
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2656
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2662
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2668
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2674
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2680
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2695
+sql	db.sql2.rst	/^        .. code:: sql$/;"	f	line:2701
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:2739
+sql	db.sql2.rst	/^      .. code:: sql$/;"	f	line:2745
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2778
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2788
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2798
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2812
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2835
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2849
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2874
+sql	db.sql2.rst	/^    .. code:: sql$/;"	f	line:2890
+SQL 2	db.sql2.rst	/^.. slido::     SQL 2$/;"	s	line:13
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:21
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:31
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:41
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:51
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:64
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:138
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:175
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:288
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:346
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:518
+substep	cm.ll.rst	/^    .. container:: substep$/;"	c	line:774
+substep	cm.lr.rst	/^        .. container:: substep$/;"	c	line:720
+substep	cm.lr.rst	/^    .. container:: substep$/;"	c	line:806
+substep	os.mem.rst	/^    .. container:: substep$/;"	c	line:695
+TERMS AND CONDITIONS	LICENSE.rst	/^TERMS AND CONDITIONS$/;"	h	line:75
+TLB (Translation Lookaside Buffer)	os.paging.rst	/^.. slido:: TLB (Translation Lookaside Buffer)$/;"	s	line:289
+Use LL Table for Parsing	cm.ll.rst	/^.. slido:: Use LL Table for Parsing$/;"	s	line:1023
+Use Prezentprogramo to view presentations	readme.rst	/^Use Prezentprogramo to view presentations$/;"	h	line:50
+Using Follow set(I)	cm.ll.rst	/^.. slido:: Using Follow set(I)$/;"	s	line:786
+نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.	db.sql2.rst	/^.. slido:: نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.$/;"	s	line:1963
