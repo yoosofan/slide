@@ -828,9 +828,9 @@ Grok AI
 </math> bytes:</p></li>
 <li><p>Page offset (d) = <em>n</em> bits</p></li>
 <li><p>Page number (p) = <em>m - n</em> bits</p></li>
-<li><p>Number of bits of Addrress  related to Maximum supported memory by this computer(cpu and motherboard)</p></li>
-<li><p>Number of bits of Addrress  =  log2(Maximum supported memory)</p></li>
-<li><p>If max supported memory = 32 words then number of bits needed for addrress ?</p></li>
+<li><p>Number of bits of Address  related to Maximum supported memory by this computer(cpu and motherboard)</p></li>
+<li><p>Number of bits of Address  =  log2(Maximum supported memory)</p></li>
+<li><p>If max supported memory = 32 words then number of bits needed for address?</p></li>
 <li><p>32 = 2 ^ 5, <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mi>n</mi>
   <mo>=</mo>
@@ -845,10 +845,10 @@ Grok AI
   <mo stretchy="false">)</mo>
 </math> , m is number of bytes or words</p></li>
 <li><p>5 = log2(32)</p></li>
-<li><p>if p = 2, d = 3 then the size of each frame or page is ?</p></li>
+<li><p>if p = 2, d = 3 then the size of each frame or page is?</p></li>
 <li><p>2 ^ 3 = 8</p></li>
 <li><p>Maximum number of Frames?</p></li>
-<li><p>2 ^ 2  = 4</p></li>
+<li><p>Maximum number of precesses</p></li>
 </ol>
 <div class="docutils container">
 <img alt="os/img/memory/page_number_offset.png" class="align-center" height="109" src="os/img/memory/page_number_offset.png" width="465" />
@@ -856,8 +856,8 @@ Grok AI
 <img alt="os/img/memory/memory_paging_logical_address_to_physical_address_detail.png" class="align-center" src="os/img/memory/memory_paging_logical_address_to_physical_address_detail.png" />
 </div>
 <div class="slide-number">3</div></section>
-<section class="slide">
-<h2>Logical Address to Physical Address and PTBR</h2>
+<section class="slide ts2c">
+<h2>Page-Table Base Register (PTBR)</h2>
 <div class="graphviz-container" style="margin-left: auto; text-align: right;">
 <svg width="1700px"
  viewBox="0.00 0.00 921.49 155.86" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -950,8 +950,14 @@ Grok AI
 
 </div>
 <img alt="os/img/memory/memory_paging_address_translation.png" class="align-center next" height="774" src="os/img/memory/memory_paging_address_translation.png" width="1214" />
+<ul class="incremental simple">
+<li><p><strong>PTBR</strong> holds the <strong>starting address</strong> of the current process's page table.</p></li>
+<li><p>Changed on every context switch.</p></li>
+<li><p>Used by MMU to locate the page table in memory.</p></li>
+</ul>
 <div class="slide-number">4</div></section>
-<section class="slide n2c">
+<section class="slide t2c">
+<h2>Step by Step Sample</h2>
 <table>
 <caption>Memory with only OS before adding a process</caption>
 <thead>
@@ -1104,7 +1110,7 @@ Grok AI
 </tbody>
 </table>
 <table class="next">
-<caption>Page Table of Process P0</caption>
+<caption>Page Table of P0</caption>
 <thead>
 <tr><th class="head"><p>P0_0</p></th>
 <th class="head"><p>P0_1</p></th>
@@ -1126,7 +1132,7 @@ Grok AI
 </tbody>
 </table>
 <table class="next">
-<caption>Page Table of Process P0</caption>
+<caption>Page Table of P0</caption>
 <thead>
 <tr><th class="head"><p>11</p></th>
 <th class="head"><p>01</p></th>
@@ -1143,154 +1149,131 @@ Grok AI
 </tbody>
 </table>
 <ul class="incremental simple">
-<li><p>Logical Address = &quot;0010&quot; = &quot;00 10&quot;</p></li>
+<li><p>Logical Address of C = &quot;0010&quot; = &quot;00&quot; &quot;10&quot;</p></li>
 <li><p>Page Address    = &quot;00&quot;</p></li>
 <li><p>Page Table Cell Index &quot;00&quot; is &quot;11&quot;</p></li>
 <li><p>Physical Address= concatenation(&quot;00&quot;, &quot;10&quot;)</p></li>
 <li><p>Physical Address= &quot;00&quot; &quot;10&quot; = &quot;0010&quot;</p></li>
 </ul>
 <ol class="arabic simple incremental">
-<li><p>Logical Address = &quot;0101&quot; = &quot;01 01&quot;</p></li>
+<li><p>Logical Address of F = &quot;0101&quot; = &quot;01&quot; &quot;01&quot;</p></li>
 <li><p>Page Address    = &quot;01&quot;</p></li>
 <li><p>Page Table Cell Index &quot;01&quot; is &quot;01&quot;</p></li>
 <li><p>Physical Address= concatenation(&quot;01&quot;, &quot;01&quot;)</p></li>
 <li><p>Physical Address= &quot;01&quot; &quot;01&quot; = &quot;0101&quot;</p></li>
 </ol>
-<!-- :
-
-#. Draw Memory Bytes
-#. d = 2
-#. Draw Memory Frames
-#. some First Frames for os
-#. Put a process into Memory (not continuous or in order)
-#. Fill page table
-#. Convert a Logical Addfress to Physical Address
-#. Put another process into Memory -->
+<ul class="incremental simple">
+<li><p>32 words(bytes) memory</p></li>
+<li><p>number of bits in address?</p></li>
+<li><p>number of bits in address=5</p></li>
+<li><p>Draw Memory Frames, First Frames of OS</p></li>
+<li><p>Put a process into Memory, Fill page table</p></li>
+<li><p>Convert a Logical Address to Physical Address</p></li>
+<li><p>Put another process into Memory</p></li>
+</ul>
 <div class="slide-number">5</div></section>
 <section class="slide t2c">
-<h2>Process and Page Table</h2>
-<img alt="os/img/memory/page_table_in_a_frame.png" src="os/img/memory/page_table_in_a_frame.png" />
-<img alt="os/img/memory/page_table_in_a_frame2.png" src="os/img/memory/page_table_in_a_frame2.png" />
-<div class="slide-number">6</div></section>
-<section class="slide">
 <h2>Parts of Address Register in Paging</h2>
-<ul class="simple">
+<ul class="incremental simple">
+<li><p>Page size = 4 KB → <strong>d</strong> uses <strong>12 bits</strong></p></li>
+<li><p>Page size = 8 KB → <strong>d</strong> uses <strong>13 bits</strong></p></li>
 <li><p>Frame 4k then number_bits(d) == 12</p></li>
 <li><p>Frame 1k then number_bits(d) == 10</p></li>
 <li><p>Frame 16k then number_bits(d) == 14</p></li>
-</ul>
-<p>Maximux memory supported by cpu</p>
-<ul class="simple">
-<li><dl class="simple">
-<dt>1 MB ==&gt; number_of_bit(Address register) == 20</dt>
-<dd><ul>
+<li><p>Maximux memory supported by cpu</p></li>
+<li><p>1 MB ==&gt; number_of_bit(Address register) == 20</p></li>
 <li><p>Frame 4k ==&gt; d == 12 and p == 8</p></li>
-<li><p>Frame 1k ==&gt; d == 10 and p == 10 // wrong?</p></li>
 </ul>
+<ol class="arabic simple incremental">
+<li><p>Frame Size and Limitations</p></li>
+<li><p>Page size is defined by the hardware architecture (always a power of 2).</p></li>
+<li><p>Typical sizes range from 4 KB to 8 KB (modern systems also support &quot;Huge Pages&quot; up to 1 GB).</p></li>
+<li><p><strong>The Trade-off: Internal Fragmentation</strong>
+* Process size rarely perfectly aligns with page boundaries.
+* The last page allocated may not be completely full.</p></li>
+<li><p>Page size = 4,096 bytes (4 KB). Process size = 72,766 bytes.</p></li>
+<li><p>Requires: 17 full pages + 3,134 bytes in the 18th page.</p></li>
+<li><p><strong>Waste:</strong> 4,096 - 3,134 = 962 bytes of internal fragmentation.</p></li>
+</ol>
+<ul class="incremental simple">
+<li><p><strong>The Performance Bottleneck:</strong></p></li>
+<li><dl class="simple">
+<dt>Every data or instruction access requires <strong>two memory accesses</strong>:</dt>
+<dd><ol class="arabic simple">
+<li><p>One access for the page table entry.</p></li>
+<li><p>One access for the actual data/instruction.</p></li>
+</ol>
 </dd>
 </dl>
 </li>
+<li><p><em>Solution:</em> A special, fast-lookup hardware cache called a Translation Look-aside Buffer (TLB).</p></li>
 </ul>
-<div class="slide-number">7</div></section>
-<section class="slide">
-<h2>A computer with 32 Bytes of Memory and 8 Bytes Page Size</h2>
-<p>d = 3, p = 2</p>
-<p>p0 11 bytes</p>
-<p class="rtl-h1">یک کامپیوتر با حافظهٔ ۱۲۸ بایتی و صفحه‌های ۸ بایتی</p>
-<img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
-<div class="slide-number">8</div></section>
-<section class="slide">
-<h2>PTBR</h2>
-<img alt="os/img/memory/paging_hardware_with_TLB_ptbr.png" class="align-center" src="os/img/memory/paging_hardware_with_TLB_ptbr.png" style="height: 550px;" />
-<div class="slide-number">9</div></section>
-<section class="slide">
-<h2>TLB (Translation Lookaside Buffer)</h2>
-<img alt="os/img/memory/paging_hardware_with_TLB.png" class="align-center" src="os/img/memory/paging_hardware_with_TLB.png" />
+<div class="slide-number">6</div></section>
+<section class="slide t2c">
+<h2>Translation Look-aside Buffer (TLB)</h2>
+<img alt="os/img/memory/paging_hardware_with_TLB.png" class="align-center" height="619" src="os/img/memory/paging_hardware_with_TLB.png" width="840" />
+<img alt="os/img/memory/paging_hardware_with_TLB_ptbr.png" class="align-center next" height="781" src="os/img/memory/paging_hardware_with_TLB_ptbr.png" width="956" />
+<ul class="simple">
+<li><p>High-speed <strong>hardware cache</strong> for recent page table entries.</p></li>
+<li><p>Contains (Page Number → Frame Number) mappings.</p></li>
+<li><p>Greatly improves performance.</p></li>
+</ul>
+<ul class="incremental simple">
+<li><p><strong>Parallel Search:</strong> All keys (page numbers) are compared simultaneously.</p></li>
+<li><p><strong>TLB Hit</strong>: Fast address translation</p></li>
+<li><p><strong>TLB Miss</strong>: Must walk page table in memory</p></li>
+</ul>
 <!-- :
+
+* **TLB Hit:** If the page number is found in the TLB, the frame number is returned immediately.
+* **TLB Miss:** If not found, the OS must access the page table in main memory, then load the new entry into the TLB for future use.
 
 * A specialized hardware cache used exclusively for memory management.
 * It caches recent virtual-to-physical address translations from the page tables.
 * A TLB miss forces a slow "page table walk" through physical RAM. -->
-<div class="slide-number">10</div></section>
-<section class="slide">
+<div class="slide-number">7</div></section>
+<section class="slide t2c">
 <h2>Flowchart of TLB miss</h2>
-<img alt="os/img/memory/paging_hardware_TLB_miss.png" class="align-center" src="os/img/memory/paging_hardware_TLB_miss.png" style="height: 550px;" />
-<div class="slide-number">11</div></section>
-<section class="slide">
-<h2>Paging Memory Access</h2>
-<img alt="os/img/memory/memory_paging_page_table_and_cache.jpg" class="align-center" src="os/img/memory/memory_paging_page_table_and_cache.jpg" />
-<div class="slide-number">12</div></section>
-<section class="slide">
-<h2>Page Sharing</h2>
-<img alt="os/img/memory/memory_paging_share_pages.png" class="align-center" src="os/img/memory/memory_paging_share_pages.png" style="height: 500px;" />
-<div class="slide-number">13</div></section>
-<section class="slide">
-<img alt="os/img/memory/paging_sharing_code.png" class="align-center" src="os/img/memory/paging_sharing_code.png" />
-<div class="slide-number">14</div></section>
-<section class="slide">
-<h2>Memory Hierarchy</h2>
-<img alt="os/img/memory/memory_hierarchy.png" class="align-center" src="os/img/memory/memory_hierarchy.png" />
-<div class="slide-number">15</div></section>
-<section class="slide">
-<h2>Memory Access</h2>
-<img alt="os/img/memory/memory_effect_of_cache.png" class="align-center" src="os/img/memory/memory_effect_of_cache.png" />
-<div class="slide-number">16</div></section>
-<section class="slide">
-<h2>Effective Access Time</h2>
-<ul class="simple">
+<img alt="os/img/memory/paging_hardware_TLB_miss.png" class="align-center" height="748" src="os/img/memory/paging_hardware_TLB_miss.png" width="287" />
+<img alt="os/img/memory/memory_paging_page_table_and_cache.jpg" class="align-center next" height="853" src="os/img/memory/memory_paging_page_table_and_cache.jpg" width="1075" />
+<div class="slide-number">8</div></section>
+<section class="slide t2c">
+<h2>Effective Access Time (EAT)</h2>
+<ul class="incremental simple">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>t</mi>
     <mi>t</mi>
   </msub>
-</math> (access Time of TLB) : <span class="rtl">زمان دسترسی به حافظه‌ی نهان جدول صفحه</span></p></li>
+</math> : access Time of TLB)</p></li>
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>t</mi>
     <mi>c</mi>
   </msub>
-</math> (access Time of Cache): <span class="rtl">زمان دسترسی به حافظه‌ی نهان</span></p></li>
+</math> : access Time of Cache</p></li>
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>t</mi>
     <mi>m</mi>
   </msub>
-</math> (access Time of Memory): <span class="rtl">زمان دسترسی به حافظه‌ی اصلی</span></p></li>
+</math> : access Time of Memory</p></li>
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>h</mi>
     <mi>t</mi>
   </msub>
-</math> (Hit ratio of TLB): <span class="rtl">ضریب اصابت به حافظه‌ی نهان جدول صفحه</span></p></li>
+</math> : Hit ratio of TLB</p></li>
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>h</mi>
     <mi>c</mi>
   </msub>
-</math> (Hit ratio of Cache): <span class="rtl">ضریب اصابت به حافظه‌ی نهان</span></p></li>
+</math> : Hit ratio of Cache</p></li>
 </ul>
-<div class="substep ltr">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
-  <mi>t</mi>
-  <mi>a</mi>
-  <mi>b</mi>
-  <mi>l</mi>
-  <mi>e</mi>
-  <mo>+</mo>
-  <mi>m</mi>
-  <mi>e</mi>
-  <mi>m</mi>
-  <mi>o</mi>
-  <mi>r</mi>
-  <mi>y</mi>
-</math>
-</div>
-<div class="substep ltr">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+<ol class="arabic simple incremental">
+<li><p>EAT = table +  memory</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <mi>t</mi>
   <mi>a</mi>
   <mi>b</mi>
@@ -1327,10 +1310,8 @@ Grok AI
     <mi>m</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <mi>m</mi>
   <mi>e</mi>
   <mi>m</mi>
@@ -1368,14 +1349,11 @@ Grok AI
     <mi>m</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
+</math></p></li>
+</ol>
+<div class="incremental docutils container">
+<ul class="simple">
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>h</mi>
     <mi>t</mi>
@@ -1437,11 +1415,11 @@ Grok AI
     <mi>m</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
+</math></p></li>
+</ul>
+<p class="rtl-h1 next">زمان دسترسی مؤثر = <cite>زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه</cite></p>
+<p class="rtl-h2 next">زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.</p>
 </div>
-<div class="slide-number">17</div></section>
-<section class="slide">
-<p class="rtl-h2">زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.</p>
 <ul class="incremental simple">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
@@ -1469,35 +1447,8 @@ Grok AI
     <mi>c</mi>
   </msub>
 </math> = 0.90</p></li>
-</ul>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
-  <mi>t</mi>
-  <mi>a</mi>
-  <mi>b</mi>
-  <mi>l</mi>
-  <mi>e</mi>
-  <mo>+</mo>
-  <mi>m</mi>
-  <mi>e</mi>
-  <mi>m</mi>
-  <mi>o</mi>
-  <mi>r</mi>
-  <mi>y</mi>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>t</mi>
-  <mi>a</mi>
-  <mi>b</mi>
-  <mi>l</mi>
-  <mi>e</mi>
-  <mo>=</mo>
+<li><p>EAT = table +  memory</p></li>
+<li><p>table  = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>h</mi>
     <mi>t</mi>
@@ -1528,16 +1479,8 @@ Grok AI
     <mi>m</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>t</mi>
-  <mi>a</mi>
-  <mi>b</mi>
-  <mi>l</mi>
-  <mi>e</mi>
-  <mo>=</mo>
+</math></p></li>
+<li><p>table  = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mn>0.95</mn>
   <mo>*</mo>
   <mn>1</mn>
@@ -1555,17 +1498,8 @@ Grok AI
   <mn>5.05</mn>
   <mo>=</mo>
   <mn>6</mn>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>m</mi>
-  <mi>e</mi>
-  <mi>m</mi>
-  <mi>o</mi>
-  <mi>r</mi>
-  <mi>y</mi>
-  <mo>=</mo>
+</math></p></li>
+<li><p>memory = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>h</mi>
     <mi>c</mi>
@@ -1596,17 +1530,8 @@ Grok AI
     <mi>c</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>m</mi>
-  <mi>e</mi>
-  <mi>m</mi>
-  <mi>o</mi>
-  <mi>r</mi>
-  <mi>y</mi>
-  <mo>=</mo>
+</math></p></li>
+<li><p>memory = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mn>0.90</mn>
   <mo>*</mo>
   <mn>5</mn>
@@ -1624,29 +1549,142 @@ Grok AI
   <mn>10.5</mn>
   <mo>=</mo>
   <mn>15</mn>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
-  <mn>6</mn>
+</math></p></li>
+<li><p>EAT = 6 + 15 = 21ns</p></li>
+</ul>
+<div class="docutils container">
+<p class="rtl-h2 next">با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت</p>
+<ul class="incremental simple">
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mn>2</mn>
+  <mo>*</mo>
+  <mo stretchy="false">(</mo>
+  <mi>h</mi>
+  <mo>*</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
   <mo>+</mo>
-  <mn>15</mn>
+  <mo stretchy="false">(</mo>
+  <mn>1</mn>
+  <mo>−</mo>
+  <mi>h</mi>
+  <mo stretchy="false">)</mo>
+  <mo>*</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>+</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mn>2</mn>
+  <mo>*</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>h</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>*</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>+</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>m</mi>
+  </msub>
+  <mo>+</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>−</mo>
+  <msub>
+    <mi>h</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>*</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>m</mi>
+  </msub>
+  <mo>−</mo>
+  <msub>
+    <mi>h</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>*</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mn>2</mn>
+  <mo>*</mo>
+  <mo stretchy="false">(</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>+</mo>
+  <mo stretchy="false">(</mo>
+  <mn>1</mn>
+  <mo>−</mo>
+  <msub>
+    <mi>h</mi>
+    <mi>c</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+  <mo>*</mo>
+  <msub>
+    <mi>t</mi>
+    <mi>m</mi>
+  </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+</ul>
+</div>
+<ul class="incremental simple">
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>t</mi>
+    <mi>m</mi>
+  </msub>
   <mo>=</mo>
-  <mn>21</mn>
+  <mn>100</mn>
   <mi>n</mi>
   <mi>s</mi>
-</math>
-</div>
-<div class="slide-number">18</div></section>
-<section class="slide">
-<p class="rtl-h1">زمان دسترسی مؤثر = <cite>زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه</cite></p>
-<p class="rtl-h2">با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت</p>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+</math> , <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>t</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>=</mo>
+  <mn>20</mn>
+  <mi>n</mi>
+  <mi>s</mi>
+</math> , <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msub>
+    <mi>h</mi>
+    <mi>c</mi>
+  </msub>
+  <mo>=</mo>
+  <mn>80</mn>
+  <mi>%</mi>
+</math>:</p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <mi>E</mi>
   <mi>A</mi>
   <mi>T</mi>
@@ -1654,61 +1692,24 @@ Grok AI
   <mn>2</mn>
   <mo>*</mo>
   <mo stretchy="false">(</mo>
-  <mi>h</mi>
-  <mo>*</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>c</mi>
-  </msub>
+  <mn>20</mn>
   <mo>+</mo>
-  <mo stretchy="false">(</mo>
-  <mn>1</mn>
-  <mo>−</mo>
-  <mi>h</mi>
-  <mo stretchy="false">)</mo>
+  <mn>0.20</mn>
   <mo>*</mo>
-  <mo stretchy="false">(</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>+</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>m</mi>
-  </msub>
+  <mn>100</mn>
   <mo stretchy="false">)</mo>
-  <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <mi>E</mi>
   <mi>A</mi>
   <mi>T</mi>
   <mo>=</mo>
-  <mn>2</mn>
-  <mo>*</mo>
-  <mo stretchy="false">(</mo>
-  <msub>
-    <mi>h</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>*</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>+</mo>
-  <mo stretchy="false">(</mo>
-  <mn>1</mn>
-  <mo>−</mo>
-  <msub>
-    <mi>h</mi>
-    <mi>c</mi>
-  </msub>
-  <mo stretchy="false">)</mo>
-  <mo>*</mo>
+  <mn>80</mn>
+</math></p></li>
+</ul>
+<ul class="incremental simple">
+<li><p>If we only consider TLB and remove cache</p></li>
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mo stretchy="false">(</mo>
   <msub>
     <mi>t</mi>
@@ -1717,31 +1718,18 @@ Grok AI
   <mo>+</mo>
   <msub>
     <mi>t</mi>
-    <mi>c</mi>
+    <mi>t</mi>
   </msub>
   <mo stretchy="false">)</mo>
-  <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
-  <mn>2</mn>
   <mo>*</mo>
-  <mo stretchy="false">(</mo>
   <msub>
     <mi>h</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>*</mo>
-  <msub>
     <mi>t</mi>
-    <mi>c</mi>
   </msub>
   <mo>+</mo>
+  <mo stretchy="false">(</mo>
+  <mn>2</mn>
+  <mo>*</mo>
   <msub>
     <mi>t</mi>
     <mi>m</mi>
@@ -1749,96 +1737,231 @@ Grok AI
   <mo>+</mo>
   <msub>
     <mi>t</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>−</mo>
-  <msub>
-    <mi>h</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>*</mo>
-  <msub>
     <mi>t</mi>
-    <mi>m</mi>
-  </msub>
-  <mo>−</mo>
-  <msub>
-    <mi>h</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>*</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>c</mi>
   </msub>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="substep ltr next">
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>E</mi>
-  <mi>A</mi>
-  <mi>T</mi>
-  <mo>=</mo>
-  <mn>2</mn>
   <mo>*</mo>
-  <mo stretchy="false">(</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>c</mi>
-  </msub>
-  <mo>+</mo>
   <mo stretchy="false">(</mo>
   <mn>1</mn>
   <mo>−</mo>
   <msub>
     <mi>h</mi>
-    <mi>c</mi>
+    <mi>t</mi>
   </msub>
+  <mo stretchy="false">)</mo>
+</math></p></li>
+<li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mo stretchy="false">(</mo>
+  <mn>100</mn>
+  <mo>+</mo>
+  <mn>20</mn>
   <mo stretchy="false">)</mo>
   <mo>*</mo>
-  <msub>
-    <mi>t</mi>
-    <mi>m</mi>
-  </msub>
+  <mn>0.8</mn>
+  <mo>+</mo>
+  <mo stretchy="false">(</mo>
+  <mn>2</mn>
+  <mo>*</mo>
+  <mn>100</mn>
+  <mo>+</mo>
+  <mn>20</mn>
   <mo stretchy="false">)</mo>
-</math>
-</div>
-<div class="slide-number">19</div></section>
-<section class="slide">
+  <mo>*</mo>
+  <mn>0.2</mn>
+</math></p></li>
+<li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>E</mi>
+  <mi>A</mi>
+  <mi>T</mi>
+  <mo>=</mo>
+  <mn>96</mn>
+  <mo>+</mo>
+  <mn>44</mn>
+  <mo>=</mo>
+  <mn>140</mn>
+  <mi>n</mi>
+  <mi>s</mi>
+</math></p></li>
+<li><p><em>(The system experiences a 40% slowdown compared to direct memory access due to a 20% miss penalty).</em></p></li>
+</ul>
+<div class="slide-number">9</div></section>
+<section class="slide t2c">
 <h2>Memory Protection</h2>
-<img alt="os/img/memory/paging_valid_invalid.png" class="align-center" src="os/img/memory/paging_valid_invalid.png" />
-<div class="slide-number">20</div></section>
-<section class="slide">
-<h2>References(I)</h2>
+<div class="next docutils container">
+<ol class="arabic simple incremental">
+<li><p><strong>PTLR (Page-Table Length Register):</strong> Indicates the size of the page table to prevent out-of-bounds access.</p></li>
+<li><dl class="simple">
+<dt><strong>Valid/Invalid</strong> bit.</dt>
+<dd><ul class="simple">
+<li><p><strong>Valid</strong> = page is in memory and accessible.</p></li>
+<li><p><strong>Invalid</strong> = page not in memory or access violation → Trap to OS.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<ul class="incremental simple">
+<li><p><strong>Access Rights:</strong> Define if a page is Read-only, Read-write, or Execute-only.</p></li>
+<li><p>Any violation causes a hardware trap to the OS.</p></li>
+</ul>
+<table class="next">
+<thead>
+<tr><th class="head"><p>Page</p></th>
+<th class="head"><p>Frame</p></th>
+<th class="head"><p>Status</p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>0</p></td>
+<td><p>4</p></td>
+<td><p>v</p></td>
+</tr>
+<tr><td><p>1</p></td>
+<td><p>7</p></td>
+<td><p>v</p></td>
+</tr>
+<tr><td><p>2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>i</p></td>
+</tr>
+<tr><td><p>3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>i</p></td>
+</tr>
+</tbody>
+</table>
+<img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center next" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
+</div>
+<img alt="os/img/memory/paging_valid_invalid.png" class="align-center next" height="759" src="os/img/memory/paging_valid_invalid.png" width="890" />
+<div class="slide-number">10</div></section>
+<section class="slide t2c">
+<h2>Page Sharing</h2>
+<img alt="os/img/memory/memory_paging_share_pages.png" class="align-center" src="os/img/memory/memory_paging_share_pages.png" />
+<img alt="os/img/memory/paging_sharing_code.png" class="align-center next" height="651" src="os/img/memory/paging_sharing_code.png" width="659" />
+<ul class="incremental simple">
+<li><p><strong>Shared Code:</strong></p></li>
+<li><p>One copy of read-only (reentrant) code can be shared among multiple processes.</p></li>
+<li><p>Examples: Text editors, compilers, standard C libraries (libc).</p></li>
+<li><p>Shared code must appear in the <em>exact same location</em> in the logical address space of all processes utilizing it.</p></li>
+<li><p>Reduces memory usage.</p></li>
+</ul>
+<ul class="incremental simple">
+<li><p><strong>Private Code and Data:</strong></p></li>
+<li><p>Each process keeps a separate, private copy of its specific code and data.</p></li>
+<li><p>The pages for private code and data can appear anywhere in the logical address space.</p></li>
+</ul>
+<!-- :
+
+.. slido:: Process and Page Table
+:class: t2c
+
+    .. image:: os/img/memory/page_table_in_a_frame.png
+
+    .. image:: os/img/memory/page_table_in_a_frame2.png -->
+<div class="slide-number">11</div></section>
+<section class="slide t2c">
+<h2>Frame Size & Single-Level Paging Limitations</h2>
+<ul class="incremental simple">
+<li><p><strong>The Size Problem:</strong> Modern operating systems support large logical address spaces (e.g., 32-bit or 64-bit).</p></li>
+<li><dl class="simple">
+<dt>Consider a 32-bit logical address space with a 4 KB (<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+    <mn>2</mn>
+    <mn>12</mn>
+  </msup>
+</math>) page size:</dt>
+<dd><ul>
+<li><p>Number of entries = <math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+    <mn>2</mn>
+    <mn>32</mn>
+  </msup>
+  <mo stretchy="false">/</mo>
+  <msup>
+    <mn>2</mn>
+    <mn>12</mn>
+  </msup>
+  <mo>=</mo>
+  <msup>
+    <mn>2</mn>
+    <mn>20</mn>
+  </msup>
+</math> (1 Million entries).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>If each page table entry is 4 bytes, the page table size is <strong>4 MB</strong>.</p></li>
+<li><p><em>Every running process</em> needs its own 4 MB page table stored in contiguous physical memory!</p></li>
+<li><p>This massive overhead necessitates advanced page table architectures (which we will explore next).</p></li>
+</ul>
+<ul class="incremental simple">
+<li><p>Frame size is a <strong>power of 2</strong> (typically 4KB, 8KB, ...)</p></li>
+<li><p><strong>Smaller page size</strong> → more pages → <strong>larger page table</strong></p></li>
+<li><p><strong>Larger page size</strong> → more <strong>internal fragmentation</strong></p></li>
+<li><p><strong>Trade-off:</strong></p></li>
+<li><p>Small pages → Low internal fragmentation, High overhead (page table)</p></li>
+<li><p>Large pages → High internal fragmentation, Smaller page table</p></li>
+<li><dl class="simple">
+<dt>1 MB ==&gt; number_of_bit(Address register) == 20</dt>
+<dd><ul>
+<li><p>Frame 4k ==&gt; d == 12 and p == 8</p></li>
+<li><p>Frame 1k ==&gt; d == 10 and p == 10 // wrong?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="slide-number">12</div></section>
+<section class="slide t2c">
+<h2>Advantages & Disadvantages of Paging</h2>
+<ul class="incremental simple">
+<li><p>No <strong>external fragmentation</strong></p></li>
+<li><p>Easy to implement <strong>memory protection</strong></p></li>
+<li><p>Supports <strong>page sharing</strong></p></li>
+<li><p>Simple address translation (with TLB)</p></li>
+</ul>
+<ul class="incremental simple">
+<li><p><strong>Internal fragmentation</strong> (last page of process)</p></li>
+<li><p><strong>Page table overhead</strong> (especially for large processes)</p></li>
+<li><p>Two memory accesses per reference (mitigated by TLB)</p></li>
+</ul>
+<div class="slide-number">13</div></section>
+<section class="slide t2c">
+<h2>References</h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://os-book.com">http://os-book.com</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Paging">https://en.wikipedia.org/wiki/Paging</a></p></li>
-<li><p>Sean K. Barker (<a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/">https://tildesites.bowdoin.edu/~sbarker/</a>)</p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Page_(computer_memory">https://en.wikipedia.org/wiki/Page_(computer_memory</a>)</p></li>
+<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg">https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg">https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg</a></p></li>
+<li><p>Sean K. Barker (<a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/">https://tildesites.bowdoin.edu/~sbarker/</a>)</p></li>
 <li><p><a class="reference external" href="http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/">http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/</a></p></li>
 <li><p><a class="reference external" href="https://www.tldp.org/LDP/tlk/mm/memory.html">https://www.tldp.org/LDP/tlk/mm/memory.html</a></p></li>
 <li><p><a class="reference external" href="https://www.geeksforgeeks.org/operating-system-paging/">https://www.geeksforgeeks.org/operating-system-paging/</a></p></li>
 <li><p><a class="reference external" href="https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/">https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/</a></p></li>
 <li><p><a class="reference external" href="https://www.cse.iitb.ac.in/~mythili/teaching/cs347_autumn2016/notes/07-memory.pdf">https://www.cse.iitb.ac.in/~mythili/teaching/cs347_autumn2016/notes/07-memory.pdf</a></p></li>
-<li><p><a class="reference external" href="https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html">https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html</a></p></li>
+</ul>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kernel.org/doc/">https://www.kernel.org/doc/</a></p></li>
 <li><p><a class="reference external" href="https://web.fe.up.pt/~arestivo/presentation/os-memory/#15">https://web.fe.up.pt/~arestivo/presentation/os-memory/#15</a></p></li>
 <li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems">https://github.com/mor1/ia-operating-systems</a></p></li>
 <li><p><a class="reference external" href="https://slideplayer.com/slide/7084682/">https://slideplayer.com/slide/7084682/</a></p></li>
 <li><p><a class="reference external" href="http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png">http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png</a></p></li>
-<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg">https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg</a></p></li>
 <li><p><a class="reference external" href="https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg">https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg</a></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg">https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg</a></p></li>
 <li><p><a class="reference external" href="https://tutorialspoint.dev/image/Translation.png">https://tutorialspoint.dev/image/Translation.png</a></p></li>
 <li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
 <li><p><a class="reference external" href="http://harmanani.github.io/classes/csc320/Notes/ch05.pdf">http://harmanani.github.io/classes/csc320/Notes/ch05.pdf</a></p></li>
-<li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
-<li><p><a class="reference external" href="https://www.kernel.org/doc/">https://www.kernel.org/doc/</a></p></li>
 <li><p><a class="reference external" href="https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/">https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/</a></p></li>
 <li><p><a class="reference external" href="https://www.gatevidyalay.com/wp-content/uploads/2018/11/Translating-Logical-Address-into-Physical-Address-Diagram-Paging-using-TLB-1.png">Paging-using-TLB-1.png</a></p></li>
 <li><p><a class="reference external" href="https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/">https://www.gatevidyalay.com/translation-lookaside-buffer-tlb-paging/</a></p></li>
-<li><p><a class="reference external" href="https://codex.cs.yale.edu/avi/os-book/">https://codex.cs.yale.edu/avi/os-book/</a></p></li>
 </ul>
-<div class="slide-number">21</div></section>
+<div class="slide-number">14</div></section>
 </body>
 </html>
