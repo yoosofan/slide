@@ -46,13 +46,11 @@ ol.trace-code{
   padding-left: 1.5em;
   padding-right: 1em;
   list-style: none;
-  counter-reset: my-awesome-counter;
   text-align: left;
   justify-self: start;
   /* justify-self: start; background-color: #BEF648;*/
 }
-ol.trace-code li{counter-increment: my-awesome-counter;}
-ol.trace-code li::before {content: counter(my-awesome-counter) ". ";  color: red;}
+ol.trace-code li::marker {color: red;}
 .footer {
     position: absolute;
     top: 95%;

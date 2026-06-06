@@ -1,52 +1,28 @@
 .. role:: raw-html(raw)
    :format: html
 
+.. |nbsp| unicode:: 0xA0
+
 .. prezento:: Operating Systems: Process Synchronization
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-   :skip-help: true
-   :data-width: 1024
-   :data-height: 768
 
-.. slido::
+.. slido:: Process Synchronization, Ahmad Yoosofan
+   :class: t2c
 
-    .. |nbsp| unicode:: 0xA0
+    + https://yoosofan.github.io
+    + Sharing Resources, Critical Section
 
-.. slido:: Operating Systems: Process Synchronization
-
-    Ahmad Yoosofan
-
-.. slido::
-
-    https://yoosofan.github.io
-
-    University of Kashan
-
-.. slido:: Sharing Resources
-
-    Critical Section
-
-.. slido::
-
-    Processes try to use resources simultaneously
-
+    * Processes try to use resources simultaneously
     * Sharing Physical Resources
-
-      * printer
-      * scanner
-      * etc.
-
+        * printer
+        * scanner
+        * etc.
     * Sharing Logical Resources
-
-      * files
-
-        * read
-        * write
-
-      * variables and arrays
-      * lots of queues including Ready Queue
+        * files
+            * read
+            * write
+        * variables and arrays
+        * lots of queues including Ready Queue
 
 .. slido:: Sharing Simple Variables(I)
    :class: ts2c4c
@@ -233,6 +209,7 @@
     #. :math:`P_0` 2: x=4, t1=4
 
 .. slido:: How to solve race condition
+   :class: t2c
 
     .. class:: substep
 
@@ -241,14 +218,14 @@
     * Putting different processes in charge of different resoureces
     * No process in charge, just write codes the way to solve every race.
 
-    General Solutions
-
-.. slido::
+    + Suggested Solutions
 
     .. class:: substep
 
     * *Software solution* : (no need to change anything in current cpu)
     * *Hardware solution* : (need to add some instructions to cpu)
+
+    + General Solutions
 
 .. slido:: Simplifying(I)
    :class: t2c
@@ -444,15 +421,12 @@
 
     .. class:: substep
 
-    .. class:: substep
-
     #. compilers do not put shared variables in registers
     #. MMU of Cpu does not cache the shared section (page)
+        .. class:: substep
+
         * How does it know?
-        * .. image:: img/memory/memory_paging_typical_page_table_entry.jpg
-            :align: center
-            :width: 450px
-            :class: substep
+        * .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
     #. Memory restriction (one request, no parallel respond)
 
 .. slido:: Using one Shared Variable
@@ -635,14 +609,14 @@
 
     .. class:: substep trace-code
 
-    #. :math:`P_0` 1
-    #. :math:`P_0` 3
-    #. :math:`P_0` 5
-    #. :math:`P_1` 1
-    #. :math:`P_1` 1
-    #. :math:`P_0` 7
-    #. :math:`P_1` 3
-    #. :math:`P_1` 5
+    #. :math:`P_0 : 1`
+    #. :math:`P_0 : 3`
+    #. :math:`P_0 : 5`
+    #. :math:`P_1 : 1`
+    #. :math:`P_1 : 1`
+    #. :math:`P_0 : 7`
+    #. :math:`P_1 : 3`
+    #. :math:`P_1 : 5`
 
     .. class:: substep trace-code
 
@@ -711,7 +685,6 @@
       // P0
       while(turn == 1)
         ;
-
       // CS
 
       turn = 1 ;
@@ -722,7 +695,6 @@
       // P1
       while(turn == 0)
         ;
-
       // CS
 
       turn = 0 ;
@@ -739,7 +711,6 @@
       // Pi
       while(turn == j)
         ;
-
       // CS
 
       turn = j ;
@@ -750,7 +721,6 @@
       // Pj
       while(turn == i)
         ;
-
       // CS
 
       turn = i ;
@@ -1044,8 +1014,6 @@
         /* Critical Section */
 
         number[i] = 0;
-
-.. slido::
 
     * operating system process synchronization history dekker peterson
     * https://en.wikipedia.org/wiki/Mutual_exclusion
@@ -1605,21 +1573,14 @@
     #. Weak Semaphore
     #. Priority Semaphore
 
-    C++ Semaphore
-
-.. slido::
-
+    * **C++ Semaphore**
     * https://en.cppreference.com/w/cpp/thread/counting_semaphore
+    * std::counting_semaphore
+    * std::binary_semaphore
 
-    #. std::counting_semaphore
-    #. std::binary_semaphore
-
-    POSIX
-
-.. slido::
-
-    * https://ebrary.net/51306/computer_science/burst_fifo_mode_semaphores
-    * https://cwiki.apache.org/confluence/display/NUTTX/Signaling+Semaphores+and+Priority+Inheritance
+    + **POSIX**
+    + https://ebrary.net/51306/computer_science/burst_fifo_mode_semaphores
+    + https://cwiki.apache.org/confluence/display/NUTTX/Signaling+Semaphores+and+Priority+Inheritance
 
     .. :
 

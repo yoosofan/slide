@@ -1,34 +1,11 @@
 .. prezento:: Operating Systems: Thread
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-   :skip-help: true
-   :data-width: 1024
-   :data-height: 768
 
-.. slido::
-   :skip-help: true
-   :css: ./style.css
-   :substep: true
-   :slide-numbers: true
-   :skip-help: true
-   .. IGNORED_UNIMPLEMENTED: data-width: 1024
-   .. IGNORED_UNIMPLEMENTED: data-height: 768
-
-    .. title: Operating Systems: Thread
-
-.. slido:: Operating Systems: Thread
-
-    Ahmad Yoosofan
-
-.. slido::
+.. slido:: Operating Systems: Thread ,     Ahmad Yoosofan
 
     https://yoosofan.github.io
 
     University of Kashan
-
-.. slido:: Thread
 
     .. image:: os/img/thread/single_threaded.and.multithreaded.processes.png
        :align: center
