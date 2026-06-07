@@ -626,7 +626,7 @@ a { text-decoration: none; }
 <h2>Operating Systems: Thread , Ahmad Yoosofan</h2>
 <p><a class="reference external" href="https://yoosofan.github.io">https://yoosofan.github.io</a></p>
 <p>University of Kashan</p>
-<img alt="os/img/thread/single_threaded.and.multithreaded.processes.png" class="align-center" src="os/img/thread/single_threaded.and.multithreaded.processes.png" />
+<img alt="os/img/thread/single_threaded.and.multithreaded.processes.png" class="align-center" height="570" src="os/img/thread/single_threaded.and.multithreaded.processes.png" width="960" />
 <!-- :
 
 https://www.tutorialspoint.com/operating_system/os_multi_threading.htm -->
@@ -680,6 +680,124 @@ a test</span></code></pre>
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span>  <span class="name">th1</span> <span class="operator">=</span> <span class="name">threading</span><span class="operator">.</span><span class="name">Thread</span><span class="punctuation">(</span><span class="name">target</span><span class="operator">=</span><span class="name">f1</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span>  <span class="name">th1</span><span class="operator">.</span><span class="name">start</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After th1.start()&quot;</span><span class="punctuation">)</span></code></pre>
+<div class="graphviz-container substep" style="margin: 0 auto; text-align: center;">
+<svg width="800px"
+ viewBox="0.00 0.00 371.64 260.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
+<title>g</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 367.64,-256 367.64,4 -4,4"/>
+<!-- Start -->
+<g id="node1" class="node">
+<title>Start</title>
+<ellipse fill="none" stroke="black" cx="162.5" cy="-234" rx="151.37" ry="18"/>
+<text text-anchor="middle" x="162.5" y="-230.3" font-family="Times,serif" font-size="14.00">f2(x) * f3(x) + f4(x, y) / f5(x, y)</text>
+</g>
+<!-- A11 -->
+<g id="node2" class="node">
+<title>A11</title>
+<ellipse fill="none" stroke="black" cx="32.5" cy="-162" rx="32.49" ry="18"/>
+<text text-anchor="middle" x="32.5" y="-158.3" font-family="Times,serif" font-size="14.00">f2(x)</text>
+</g>
+<!-- Start&#45;&gt;A11 -->
+<g id="edge1" class="edge">
+<title>Start&#45;&gt;A11</title>
+<path fill="none" stroke="black" d="M131.36,-216.23C111.04,-205.29 84.58,-191.05 64.16,-180.05"/>
+<polygon fill="black" stroke="black" points="65.7,-176.91 55.24,-175.25 62.38,-183.07 65.7,-176.91"/>
+</g>
+<!-- A12 -->
+<g id="node3" class="node">
+<title>A12</title>
+<ellipse fill="none" stroke="black" cx="115.5" cy="-162" rx="32.49" ry="18"/>
+<text text-anchor="middle" x="115.5" y="-158.3" font-family="Times,serif" font-size="14.00">f3(x)</text>
+</g>
+<!-- Start&#45;&gt;A12 -->
+<g id="edge2" class="edge">
+<title>Start&#45;&gt;A12</title>
+<path fill="none" stroke="black" d="M150.88,-215.7C145.19,-207.23 138.25,-196.89 132.02,-187.61"/>
+<polygon fill="black" stroke="black" points="134.82,-185.5 126.34,-179.14 129.01,-189.4 134.82,-185.5"/>
+</g>
+<!-- A13 -->
+<g id="node4" class="node">
+<title>A13</title>
+<ellipse fill="none" stroke="black" cx="209.5" cy="-162" rx="43.59" ry="18"/>
+<text text-anchor="middle" x="209.5" y="-158.3" font-family="Times,serif" font-size="14.00">f4(x, y)</text>
+</g>
+<!-- Start&#45;&gt;A13 -->
+<g id="edge3" class="edge">
+<title>Start&#45;&gt;A13</title>
+<path fill="none" stroke="black" d="M174.12,-215.7C179.72,-207.35 186.54,-197.18 192.7,-188.02"/>
+<polygon fill="black" stroke="black" points="195.67,-189.88 198.34,-179.62 189.86,-185.97 195.67,-189.88"/>
+</g>
+<!-- A14 -->
+<g id="node5" class="node">
+<title>A14</title>
+<ellipse fill="none" stroke="black" cx="317.5" cy="-162" rx="46.29" ry="18"/>
+<text text-anchor="middle" x="317.5" y="-158.3" font-family="Times,serif" font-size="14.00">F5(x, y)</text>
+</g>
+<!-- Start&#45;&gt;A14 -->
+<g id="edge4" class="edge">
+<title>Start&#45;&gt;A14</title>
+<path fill="none" stroke="black" d="M199.23,-216.41C223.26,-205.56 254.59,-191.41 278.97,-180.4"/>
+<polygon fill="black" stroke="black" points="280.6,-183.5 288.27,-176.2 277.72,-177.12 280.6,-183.5"/>
+</g>
+<!-- A21 -->
+<g id="node6" class="node">
+<title>A21</title>
+<ellipse fill="none" stroke="black" cx="115.5" cy="-90" rx="27" ry="18"/>
+<text text-anchor="middle" x="115.5" y="-86.3" font-family="Times,serif" font-size="14.00">*</text>
+</g>
+<!-- A11&#45;&gt;A21 -->
+<g id="edge5" class="edge">
+<title>A11&#45;&gt;A21</title>
+<path fill="none" stroke="black" d="M49.69,-146.5C61.81,-136.28 78.18,-122.47 91.57,-111.18"/>
+<polygon fill="black" stroke="black" points="94.06,-113.66 99.45,-104.54 89.55,-108.31 94.06,-113.66"/>
+</g>
+<!-- A12&#45;&gt;A21 -->
+<g id="edge6" class="edge">
+<title>A12&#45;&gt;A21</title>
+<path fill="none" stroke="black" d="M115.5,-143.7C115.5,-135.98 115.5,-126.71 115.5,-118.11"/>
+<polygon fill="black" stroke="black" points="119,-118.1 115.5,-108.1 112,-118.1 119,-118.1"/>
+</g>
+<!-- A22 -->
+<g id="node7" class="node">
+<title>A22</title>
+<ellipse fill="none" stroke="black" cx="209.5" cy="-90" rx="27" ry="18"/>
+<text text-anchor="middle" x="209.5" y="-86.3" font-family="Times,serif" font-size="14.00">/</text>
+</g>
+<!-- A13&#45;&gt;A22 -->
+<g id="edge7" class="edge">
+<title>A13&#45;&gt;A22</title>
+<path fill="none" stroke="black" d="M209.5,-143.7C209.5,-135.98 209.5,-126.71 209.5,-118.11"/>
+<polygon fill="black" stroke="black" points="213,-118.1 209.5,-108.1 206,-118.1 213,-118.1"/>
+</g>
+<!-- A14&#45;&gt;A22 -->
+<g id="edge8" class="edge">
+<title>A14&#45;&gt;A22</title>
+<path fill="none" stroke="black" d="M294.59,-146.15C277.83,-135.29 254.99,-120.49 237.2,-108.95"/>
+<polygon fill="black" stroke="black" points="238.7,-105.76 228.41,-103.26 234.9,-111.63 238.7,-105.76"/>
+</g>
+<!-- A3 -->
+<g id="node8" class="node">
+<title>A3</title>
+<ellipse fill="none" stroke="black" cx="162.5" cy="-18" rx="27" ry="18"/>
+<text text-anchor="middle" x="162.5" y="-14.3" font-family="Times,serif" font-size="14.00">+</text>
+</g>
+<!-- A21&#45;&gt;A3 -->
+<g id="edge9" class="edge">
+<title>A21&#45;&gt;A3</title>
+<path fill="none" stroke="black" d="M126.16,-73.12C132.05,-64.34 139.49,-53.26 146.1,-43.42"/>
+<polygon fill="black" stroke="black" points="149.21,-45.07 151.87,-34.82 143.39,-41.17 149.21,-45.07"/>
+</g>
+<!-- A22&#45;&gt;A3 -->
+<g id="edge10" class="edge">
+<title>A22&#45;&gt;A3</title>
+<path fill="none" stroke="black" d="M198.83,-73.12C192.94,-64.34 185.5,-53.26 178.89,-43.42"/>
+<polygon fill="black" stroke="black" points="181.6,-41.17 173.12,-34.82 175.79,-45.07 181.6,-41.17"/>
+</g>
+</g>
+</svg>
+
+</div>
 <div class="slide-number">3</div></section>
 <section class="slide t2c">
 <h2>Python Thread (II)</h2>
@@ -930,124 +1048,6 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 <div class="slide-number">9</div></section>
 <section class="slide">
 <h2>Create Concurrent / Parallel Code</h2>
-<div class="graphviz-container substep" style="margin: 0 auto; text-align: center;">
-<svg width="372pt" height="260pt"
- viewBox="0.00 0.00 371.64 260.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
-<title>g</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-256 367.64,-256 367.64,4 -4,4"/>
-<!-- Start -->
-<g id="node1" class="node">
-<title>Start</title>
-<ellipse fill="none" stroke="black" cx="162.5" cy="-234" rx="151.37" ry="18"/>
-<text text-anchor="middle" x="162.5" y="-230.3" font-family="Times,serif" font-size="14.00">f2(x) * f3(x) + f4(x, y) / f5(x, y)</text>
-</g>
-<!-- A11 -->
-<g id="node2" class="node">
-<title>A11</title>
-<ellipse fill="none" stroke="black" cx="32.5" cy="-162" rx="32.49" ry="18"/>
-<text text-anchor="middle" x="32.5" y="-158.3" font-family="Times,serif" font-size="14.00">f2(x)</text>
-</g>
-<!-- Start&#45;&gt;A11 -->
-<g id="edge1" class="edge">
-<title>Start&#45;&gt;A11</title>
-<path fill="none" stroke="black" d="M131.36,-216.23C111.04,-205.29 84.58,-191.05 64.16,-180.05"/>
-<polygon fill="black" stroke="black" points="65.7,-176.91 55.24,-175.25 62.38,-183.07 65.7,-176.91"/>
-</g>
-<!-- A12 -->
-<g id="node3" class="node">
-<title>A12</title>
-<ellipse fill="none" stroke="black" cx="115.5" cy="-162" rx="32.49" ry="18"/>
-<text text-anchor="middle" x="115.5" y="-158.3" font-family="Times,serif" font-size="14.00">f3(x)</text>
-</g>
-<!-- Start&#45;&gt;A12 -->
-<g id="edge2" class="edge">
-<title>Start&#45;&gt;A12</title>
-<path fill="none" stroke="black" d="M150.88,-215.7C145.19,-207.23 138.25,-196.89 132.02,-187.61"/>
-<polygon fill="black" stroke="black" points="134.82,-185.5 126.34,-179.14 129.01,-189.4 134.82,-185.5"/>
-</g>
-<!-- A13 -->
-<g id="node4" class="node">
-<title>A13</title>
-<ellipse fill="none" stroke="black" cx="209.5" cy="-162" rx="43.59" ry="18"/>
-<text text-anchor="middle" x="209.5" y="-158.3" font-family="Times,serif" font-size="14.00">f4(x, y)</text>
-</g>
-<!-- Start&#45;&gt;A13 -->
-<g id="edge3" class="edge">
-<title>Start&#45;&gt;A13</title>
-<path fill="none" stroke="black" d="M174.12,-215.7C179.72,-207.35 186.54,-197.18 192.7,-188.02"/>
-<polygon fill="black" stroke="black" points="195.67,-189.88 198.34,-179.62 189.86,-185.97 195.67,-189.88"/>
-</g>
-<!-- A14 -->
-<g id="node5" class="node">
-<title>A14</title>
-<ellipse fill="none" stroke="black" cx="317.5" cy="-162" rx="46.29" ry="18"/>
-<text text-anchor="middle" x="317.5" y="-158.3" font-family="Times,serif" font-size="14.00">F5(x, y)</text>
-</g>
-<!-- Start&#45;&gt;A14 -->
-<g id="edge4" class="edge">
-<title>Start&#45;&gt;A14</title>
-<path fill="none" stroke="black" d="M199.23,-216.41C223.26,-205.56 254.59,-191.41 278.97,-180.4"/>
-<polygon fill="black" stroke="black" points="280.6,-183.5 288.27,-176.2 277.72,-177.12 280.6,-183.5"/>
-</g>
-<!-- A21 -->
-<g id="node6" class="node">
-<title>A21</title>
-<ellipse fill="none" stroke="black" cx="115.5" cy="-90" rx="27" ry="18"/>
-<text text-anchor="middle" x="115.5" y="-86.3" font-family="Times,serif" font-size="14.00">*</text>
-</g>
-<!-- A11&#45;&gt;A21 -->
-<g id="edge5" class="edge">
-<title>A11&#45;&gt;A21</title>
-<path fill="none" stroke="black" d="M49.69,-146.5C61.81,-136.28 78.18,-122.47 91.57,-111.18"/>
-<polygon fill="black" stroke="black" points="94.06,-113.66 99.45,-104.54 89.55,-108.31 94.06,-113.66"/>
-</g>
-<!-- A12&#45;&gt;A21 -->
-<g id="edge6" class="edge">
-<title>A12&#45;&gt;A21</title>
-<path fill="none" stroke="black" d="M115.5,-143.7C115.5,-135.98 115.5,-126.71 115.5,-118.11"/>
-<polygon fill="black" stroke="black" points="119,-118.1 115.5,-108.1 112,-118.1 119,-118.1"/>
-</g>
-<!-- A22 -->
-<g id="node7" class="node">
-<title>A22</title>
-<ellipse fill="none" stroke="black" cx="209.5" cy="-90" rx="27" ry="18"/>
-<text text-anchor="middle" x="209.5" y="-86.3" font-family="Times,serif" font-size="14.00">/</text>
-</g>
-<!-- A13&#45;&gt;A22 -->
-<g id="edge7" class="edge">
-<title>A13&#45;&gt;A22</title>
-<path fill="none" stroke="black" d="M209.5,-143.7C209.5,-135.98 209.5,-126.71 209.5,-118.11"/>
-<polygon fill="black" stroke="black" points="213,-118.1 209.5,-108.1 206,-118.1 213,-118.1"/>
-</g>
-<!-- A14&#45;&gt;A22 -->
-<g id="edge8" class="edge">
-<title>A14&#45;&gt;A22</title>
-<path fill="none" stroke="black" d="M294.59,-146.15C277.83,-135.29 254.99,-120.49 237.2,-108.95"/>
-<polygon fill="black" stroke="black" points="238.7,-105.76 228.41,-103.26 234.9,-111.63 238.7,-105.76"/>
-</g>
-<!-- A3 -->
-<g id="node8" class="node">
-<title>A3</title>
-<ellipse fill="none" stroke="black" cx="162.5" cy="-18" rx="27" ry="18"/>
-<text text-anchor="middle" x="162.5" y="-14.3" font-family="Times,serif" font-size="14.00">+</text>
-</g>
-<!-- A21&#45;&gt;A3 -->
-<g id="edge9" class="edge">
-<title>A21&#45;&gt;A3</title>
-<path fill="none" stroke="black" d="M126.16,-73.12C132.05,-64.34 139.49,-53.26 146.1,-43.42"/>
-<polygon fill="black" stroke="black" points="149.21,-45.07 151.87,-34.82 143.39,-41.17 149.21,-45.07"/>
-</g>
-<!-- A22&#45;&gt;A3 -->
-<g id="edge10" class="edge">
-<title>A22&#45;&gt;A3</title>
-<path fill="none" stroke="black" d="M198.83,-73.12C192.94,-64.34 185.5,-53.26 178.89,-43.42"/>
-<polygon fill="black" stroke="black" points="181.6,-41.17 173.12,-34.82 175.79,-45.07 181.6,-41.17"/>
-</g>
-</g>
-</svg>
-
-</div>
 <div class="slide-number">10</div></section>
 <section class="slide t2c">
 <h2>C++ Thread</h2>

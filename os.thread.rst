@@ -9,6 +9,7 @@
 
     .. image:: os/img/thread/single_threaded.and.multithreaded.processes.png
        :align: center
+       :scale: 190%
 
     .. :
 
@@ -66,6 +67,40 @@
       :number-lines:
       :code: python
       :class: substep
+
+    .. yographviz::
+      :class: substep
+      :width: 800px
+
+        digraph g{
+          Start [label="f2(x) * f3(x) + f4(x, y) / f5(x, y)"]
+          A11 [label="f2(x)"]
+          A12 [label="f3(x)"]
+          A13 [label="f4(x, y)"]
+          A14 [label="F5(x, y)"]
+
+          A21 [label="*"]
+          A22 [label="/"]
+
+          A3 [label="+"]
+
+          Start -> A11
+          Start -> A12
+          Start -> A13
+          Start -> A14
+
+          A11 -> A21
+          A12 -> A21
+
+          A13 -> A22
+          A14 -> A22
+
+          A21 -> A3
+          A22 -> A3
+        }
+
+    Create Concurrent / Parallel Code
+
 
 .. slido:: Python Thread (II)
    :class: t2c
@@ -230,37 +265,7 @@
       :code: python
       :class: substep
 
-.. slido:: Create Concurrent / Parallel Code
 
-    .. yographviz::
-      :class: substep
-
-        digraph g{
-          Start [label="f2(x) * f3(x) + f4(x, y) / f5(x, y)"]
-          A11 [label="f2(x)"]
-          A12 [label="f3(x)"]
-          A13 [label="f4(x, y)"]
-          A14 [label="F5(x, y)"]
-
-          A21 [label="*"]
-          A22 [label="/"]
-
-          A3 [label="+"]
-
-          Start -> A11
-          Start -> A12
-          Start -> A13
-          Start -> A14
-
-          A11 -> A21
-          A12 -> A21
-
-          A13 -> A22
-          A14 -> A22
-
-          A21 -> A3
-          A22 -> A3
-        }
 
 .. slido:: C++ Thread
    :class: t2c
