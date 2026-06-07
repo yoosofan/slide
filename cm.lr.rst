@@ -1,213 +1,13 @@
 .. prezento:: CM - Lr
    :css: ./assets/style.css
 
-    Syntax Analysis(LR)
-
-.. slido::
-
-    Ahmad Yoosofan
+.. slido:: Syntax Analysis(LR), Ahmad Yoosofan
 
     Compiler course
-
-    University of Kashan
 
     https://yoosofan.github.io/course/compiler.html
 
 .. slido:: Simple Add(I)
-
-    .. class:: substep
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-      :class: substep
-
-      digraph {
-        graph [splines=true  rankdir = "LR"];
-        ratio = auto;
-
-        "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-          <tr><td align="left" port="r0">E → .E + a</td></tr>
-          <tr><td align="left" port="r1">E → .a </td></tr>
-        </table>>];
-      }
-
-.. slido:: Simple Add(II)
-   :class: t2c
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-      :class: substep
-
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
-
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
-
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
-
-          state0 -> state2 [ label = "a" ];
-        }
-
-.. slido:: Simple Add(III)
-   :class: t2c
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-      :class: substep
-
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
-
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
-
-          "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E. + a </td></tr>
-            </table>>];
-
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
-
-          state0 -> state1 [ label = "E" ];
-          state0 -> state2 [ label = "a" ];
-        }
-
-.. slido:: Simple Add(IV)
-   :class: t2c
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
-
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
-
-          "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E. + a </td></tr>
-            </table>>];
-
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
-
-          "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E +. a </td></tr>
-            </table>>];
-
-
-          state0 -> state1 [ label = "E" ];
-          state0 -> state2 [ label = "a" ];
-          state1 -> state3 [ label = "+" ];
-        }
-
-.. slido:: Simple Add(V)
-   :class: t2c
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
-
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
-
-          "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E. + a </td></tr>
-            </table>>];
-
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
-
-          "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E +. a </td></tr>
-            </table>>];
-
-          "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E + a. </td></tr>
-            </table>>];
-
-          state0 -> state1 [ label = "E" ];
-          state0 -> state2 [ label = "a" ];
-          state1 -> state3 [ label = "+" ];
-          state3 -> state4 [ label = "a" ];
-        }
-
-.. slido:: Simple Add(VI)
-   :class: t2c
-
-    #. E → E + a
-    #. E → a
-
-    .. yographviz::
-
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
-
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
-
-          "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E. + a </td></tr>
-            </table>>];
-
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
-
-          "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E +. a </td></tr>
-            </table>>];
-
-          "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E + a. </td></tr>
-            </table>>];
-
-          state0 -> state1 [ label = "E" ];
-          state0 -> state2 [ label = "a" ];
-          state1 -> state3 [ label = "+" ];
-          state3 -> state4 [ label = "a" ];
-        }
-
-    .. class:: substep
-
-    * input: 3+5+1
-    * a(3)+a(5)+a(1)
-    * a+a+a
-
-.. slido:: Simple Add(VII)
    :class: t2c
 
     #. S → E
@@ -215,70 +15,89 @@
     #. E → a
 
     .. yographviz::
+       :width: 1000px
 
-        digraph {
-          graph [splines=true  rankdir = "LR"];
-          ratio = auto;
+        digraph aaa{
+            graph [splines=true  rankdir = "LR"];
+            ratio = auto;
 
-          "state0" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">S → .E </td></tr>
-            <tr><td align="left" port="r0">E → .E + a</td></tr>
-            <tr><td align="left" port="r1">E → .a </td></tr>
-            </table>>];
+            "state0" [class="incremental" shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td align="left" port="r0">S → .E </td></tr>
+              <tr><td align="left" port="r0">E → .E + a</td></tr>
+              <tr><td align="left" port="r1">E → .a </td></tr>
+              </table>>];
 
-          "state1" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r0">S → E. </td></tr>
-            <tr><td align="left" port="r0">E → E. + a</td></tr>
-            </table>>];
+            "state1" [class="incremental"  shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td align="left" port="r0">S → E. </td></tr>
+              <tr><td align="left" port="r0">E → E. + a</td></tr>
+              </table>>];
 
-          "state2" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → a. </td></tr>
-            </table>>];
+            "state2" [class="incremental"  shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td align="left" port="r1">E → a. </td></tr>
+              </table>>];
 
-          "state3" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E +. a </td></tr>
-            </table>>];
+            "state3" [class="incremental"  shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td align="left" port="r1">E → E +. a </td></tr>
+              </table>>];
 
-          "state4" [ shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
-            <tr><td align="left" port="r1">E → E + a. </td></tr>
-            </table>>];
+            "state4" [class="incremental"  shape = "Mrecord" label =<<table border="0" cellborder="0" cellpadding="0">
+              <tr><td align="left" port="r1">E → E + a. </td></tr>
+              </table>>];
 
-          state0 -> state1 [ label = "E" ];
-          state0 -> state2 [ label = "a" ];
-          state1 -> state3 [ label = "+" ];
-          state3 -> state4 [ label = "a" ];
+            state0 -> state1 [class="incremental"  label = "E" ];
+            state0 -> state2 [class="incremental"  label = "a" ];
+            state1 -> state3 [class="incremental"  label = "+" ];
+            state3 -> state4 [class="incremental"  label = "a" ];
         }
 
-        * a[1.4]+a[2.5]+a[3.6]
-        * E(a[1.4])+a[2.5]+a[3.6]
-        * E(E(a[1.4])+a[2.5])+a[3.6]
-        * E(E(E(a[1.4])+a[2.5])+a[3.6])
+    .. class:: substep
 
-       .. yographviz::
-          :class: substep
-
-          digraph aba{
-              rankdir=TB;
-              node [shape=circle];
-              E  [label="E[a+a+a]"];
-              A  [label="a[1.4]"];
-              P  [label="+"];
-              E1 [label="E[a+a]"];
-              A1 [label="a[2.5]"];
-              P1 [label="+"];
-              A2 [label="a[3.6]", color=red];
-
-              E  -> A
-              B  -> B0
-              A  -> B
-              B  -> A1
-              A1 -> a1
-              A1 -> B1
-          }
+        #. a[1.4]+a[2.5]+a[3.6]
+        #. E(a[1.4])+a[2.5]+a[3.6]
+        #. E(E(a[1.4])+a[2.5])+a[3.6]
+        #. E(E(E(a[1.4])+a[2.5])+a[3.6])
 
 
+        .. yographviz::
+           :class: substep
 
-.. slido:: Simple Add(VIII)
+                digraph ParseTree {
+                  node [fontname="Courier", shape=circle, style=filled, fillcolor="#f9f9f9"];
+                  edge [fontname="Courier", arrowhead=none];
+
+                  // Root Rule: S -> E
+                  S [label="S", fillcolor="#dee2e6", style="filled,bold"];
+
+                  // Top-level reduction node
+                  E3 [label="E"];
+                  S -> E3;
+
+                  // Intermediate elements
+                  E2 [label="E"];
+                  plus2 [label="+"];
+                  a3 [label="a [3.6]", fillcolor="#fff3cd", shape=ellipse];
+
+                  // Connected left-to-right to place '+' in the middle
+                  E3 -> E2;
+                  E3 -> plus2;
+                  E3 -> a3;
+
+                  // Base elements
+                  E1 [label="E"];
+                  plus1 [label="+"];
+                  a2 [label="a [2.5]", fillcolor="#fff3cd", shape=ellipse];
+
+                  // Connected left-to-right to place '+' in the middle
+                  E2 -> E1;
+                  E2 -> plus1;
+                  E2 -> a2;
+
+                  // Terminal base reduction: E -> a
+                  a1 [label="a [1.4]", fillcolor="#fff3cd", shape=ellipse];
+                  E1 -> a1;
+                }
+
+.. slido:: Simple Add(II)
    :class: t2c
 
     #. S → E
