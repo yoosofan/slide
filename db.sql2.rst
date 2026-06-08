@@ -2145,6 +2145,18 @@
           having(sum(weight*qty)>100)
         );
 
+    .. code: sql
+      :class: substep
+      :number-lines:
+
+      select jname -- Alireza Hasanzadeh
+      from spj join j on
+        spj.jn = j.jn join
+        p using(pn)
+     group by jn
+      having(sum(weight*qty)>100) and
+        max(status > 20);
+
 .. slido::
    :class: t2c  substep
 
@@ -2597,35 +2609,123 @@
       group by p.city
       having sum(qty) > 20 and count(distinct pn) > 2;
 
-.. slido:: Full Outer Join(I)
+    .. code:: sql
+       :class: substep
+       :number-lines:
+
+        select p.city -- incorrect
+        from p left outer join sp using(pn)
+        group by p.city
+        having sum(qty) > 20 and
+          count(distinct pn) > 2 and
+          max(status > 10);
+
+    .. code:: sql
+       :class: substep
+       :number-lines:
+
+        select p.city
+        from p left outer join sp using(pn)
+          join s using(sn)
+        group by p.city
+        having sum(qty) > 20 and
+          count(distinct pn) > 2 and
+          max(status > 10);
+
+.. slido::
    :class: t2c  substep
 
-    .. code:: sql
-        :class: substep
+    .. class:: rtl-h1
 
-        select pn, sum(qty) as sqty
-        from p natural full outer join sp
-        group by pn;
+    نام شهرهای همهٔ قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده درون آن شهرها  باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
 
     .. code:: sql
-        :class: substep
+      :class: substep
+      :number-lines:
 
-        select pn, sum(qty) as sqty
-        from p full outer join sp using(pn)
-        group by pn;
+      select p.city
+      from p left outer join sp using(pn)
+      where exists(
+          select *  from s
+          where status > 10 and s.city = p.city
+        )
+      group by p.city
+      having sum(qty) > 20 and count(distinct pn) > 2;
 
     .. code:: sql
-        :class: substep
+       :class: substep
+       :number-lines:
 
-        select p.pn, sum(qty) as sqty
-        from p full outer join sp on p.pn = sp.pn
-        group by p.pn;
+        select p.city
+        from s join p using(city)
+          left outer join sp using(pn)
+        group by p.city
+        having sum(qty) > 20 and
+          count(distinct pn) > 2 and
+          max(status > 10);
 
+.. slido:: Full Outer Join(I)
+   :class: t2c substep
+
+    .. container::
+
+        .. code:: sql
+          :class: substep
+
+            select pn, sum(weight) as sqty
+            from p natural full outer join s
+            group by pn;
+
+        .. code:: sql
+            :class: substep
+
+            select pn, sum(weight) as sqty
+            from p full outer join s using(city)
+            group by pn;
+
+        .. code:: sql
+            :class: substep
+
+            select p.pn, sum(weight) as sqty
+            from p full outer join s on p.city = s.city
+            group by p.pn;
+
+    .. raw:: html
+
+        <pre>
+        ╭──────┬──────╮
+        │  pn  │  pw  │
+        ╞══════╪══════╡
+        │ NULL │ NULL │
+        │ p1   │   24 │
+        │ p2   │   34 │
+        │ p3   │   17 │
+        │ p4   │   28 │
+        │ p5   │   24 │
+        │ p6   │   38 │
+        │ p7   │ NULL │
+        │ p8   │ NULL │
+        ╰──────┴──────╯
+        </pre>
     .. code:: sql
         :class: substep
 
         select distinct p.city, s.city
-        from p natural left outecd inr join s;
+        from p natural left outer join s;
+
+    .. raw:: html
+
+        <pre>
+            ╭────────┬────────╮
+            │  city  │  city  │
+            ╞════════╪════════╡
+            │ London │ London │
+            │ Paris  │ Paris  │
+            │ Oslo   │ NULL   │
+            │ NULL   │ Athens │
+            │ NULL   │ کاشان  │
+            ╰────────┴────────╯
+        </pre>
 
 .. slido:: Full Outer Join(II)
    :class: t2c  substep
@@ -2640,12 +2740,23 @@
         select distinct p.city, s.city
         from p, s; -- very different result
 
+    .. code:: sql
+
+        select distinct p.city, s.city
+        from p, s; -- very different result
+        where p.city = s.city;
+
+    .. code:: sql
+
+        select distinct p.city, s.city
+        from p natural join s;
+
 .. slido::
    :class: t2c  substep
 
     .. class:: rtl-h1
 
-      نام همهٔ شهرهای عرضه کنندگان را در کنار نام شهر قطعاتی که همشهری آنها هستند بنویسید و اگر قطعه‌ای همشهری آن عرضه کننده نبود نام شهر عرضه کننده همراه با null بیاید(I)
+      نام همهٔ شهرهای عرضه کنندگان را در کنار نام شهر قطعاتی که همشهری آنها هستند بنویسید و اگر قطعه‌ای همشهری آن عرضه کننده نبود نام شهر عرضه کننده همراه با null به جای نام شهر قطعه بیاید(I)
 
     .. code:: sql
         :class: substep
@@ -2656,19 +2767,19 @@
     .. code:: sql
         :class: substep
 
-        select  p.city, s.city --wrong
+        select  p.city, s.city -- incorrect
         from p full outer join s on p.city = s.city;
 
     .. code:: sql
         :class: substep
 
-        select  p.city, s.city --wrong
+        select  p.city, s.city -- incorrect
         from p full outer join s using(city);
 
     .. code:: sql
         :class: substep
 
-        select  p.city, s.city --wrong
+        select  p.city, s.city -- incorrect
         from p natural full outer join s;
 
     .. code:: sql
@@ -2680,7 +2791,7 @@
     .. code:: sql
         :class: substep
 
-        select  p.city, s.city --wrong
+        select  p.city, s.city -- incorrect
         from p natural left outer join s;
 
 .. slido::
