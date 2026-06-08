@@ -21,36 +21,36 @@
     .. include:: os/src/thread/142.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
     .. include:: os/src/thread/152.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
     .. code:: console
-      :class: substep
+      :class: step
 
       main
       This is a test
       After f1()
 
     .. code:: console
-      :class: substep
+      :class: step
 
       main
       After th1.start()
       This is a test
 
     .. code:: console
-      :class: substep
+      :class: step
 
       main
       This is a test
       After th1.start()
 
     .. code:: console
-      :class: substep
+      :class: step
 
       main
       This is  After th1.start()
@@ -66,10 +66,10 @@
     .. include:: os/src/thread/172.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
     .. yographviz::
-      :class: substep
+      :class: step
       :width: 800px
 
         digraph g{
@@ -112,7 +112,7 @@
     .. container::
 
         .. code:: console
-          :class: substep
+          :class: step
 
           main
           After f1
@@ -121,7 +121,7 @@
           In f2
 
         .. code:: console
-          :class: substep
+          :class: step
 
           main
           After f1
@@ -130,7 +130,7 @@
           In f2
 
         .. code:: console
-          :class: substep
+          :class: step
 
           main
           After f1
@@ -141,7 +141,7 @@
     .. container::
 
         .. code:: console
-          :class: substep
+          :class: step
 
           main
           After f1
@@ -150,7 +150,7 @@
           In f1
 
         .. code:: console
-          :class: substep
+          :class: step
 
           main
           After In f1
@@ -168,7 +168,7 @@
     .. container::
 
         .. code:: console
-          :class: substep
+          :class: step
 
           python3 240.py > 240output65.txt
           python3 240.py > 240output55.txt
@@ -177,7 +177,7 @@
           python3 240.py > 240output25.txt
 
         .. code:: console
-          :class: substep
+          :class: step
 
           5314 __111
           5315 __111 __main
@@ -187,7 +187,7 @@
           240output55.txt : 9108
 
     .. code:: console
-      :class: substep
+      :class: step
 
       2139 __main
       2140 __main
@@ -198,7 +198,7 @@
       240output55.txt : 9790
 
     .. code:: console
-      :class: substep
+      :class: step
 
       6059 __111
       6060 __111 __main
@@ -208,7 +208,7 @@
       240output55.txt : 11281
 
     .. code:: console
-      :class: substep
+      :class: step
 
       1589 __111
       1590 __1110 __222
@@ -227,7 +227,7 @@
     .. include:: os/src/thread/270.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
 .. slido:: Thread Python join(II)
    :class: t2c
@@ -239,7 +239,7 @@
     .. include:: os/src/thread/290.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
 .. slido:: Thread Python parameter
    :class: t2c
@@ -251,7 +251,7 @@
     .. include:: os/src/thread/330.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
 .. slido:: Thread Python Sharing
    :class: t2c
@@ -263,7 +263,7 @@
     .. include:: os/src/thread/360.py
       :number-lines:
       :code: python
-      :class: substep
+      :class: step
 
 
 
@@ -275,7 +275,7 @@
       :code: cpp
 
     .. code:: console
-      :class: substep
+      :class: step
 
       thread$ ./a.out
       In main
@@ -293,7 +293,7 @@
 
     .. include:: os/src/thread/630_out.txt
       :code: console
-      :class: substep
+      :class: step
 
 .. slido:: Array of Thread
    :class: t2c
@@ -319,11 +319,11 @@
 
     .. include:: os/src/thread/640_out560.txt
       :code: console
-      :class: substep
+      :class: step
 
     .. include:: os/src/thread/640_out50.txt
       :code: console
-      :class: substep
+      :class: step
 
 .. slido:: Array of Thread(III)
    :class: t2c
@@ -331,33 +331,33 @@
     .. include:: os/src/thread/650.cpp
       :number-lines:
       :code: cpp
-      :class: substep
+      :class: step
 
     .. include:: os/src/thread/650_out10.txt
       :code: console
-      :class: substep
+      :class: step
 
 .. slido:: Array of Thread(III)
    :class: t2c
 
     .. include:: os/src/thread/650_out12.txt
       :code: console
-      :class: substep
+      :class: step
 
     .. include:: os/src/thread/650_out14.txt
       :code: console
-      :class: substep
+      :class: step
 
 .. slido:: Array of Thread(III)
    :class: t2c
 
     .. include:: os/src/thread/650_out16.txt
       :code: console
-      :class: substep
+      :class: step
 
     .. include:: os/src/thread/650_out18.txt
       :code: console
-      :class: substep
+      :class: step
 
 .. slido:: Threads and Processes
 

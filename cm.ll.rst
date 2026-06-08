@@ -18,41 +18,41 @@
     #. B → b A
     #. B → a
 
-    .. container:: substep
+    .. container:: step
 
       * a a
 
-      .. class:: substep
+      .. class:: step
 
       #. A
       #. ⇒ a B
       #. ⇒ a a
 
-    .. container:: substep
+    .. container:: step
 
       * a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. A $
       #. ⇒ a B $
       #. ⇒ a a $
 
-    .. container:: substep
+    .. container:: step
 
       * a b a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. A $  ⇒ a B $
       #. ⇒ a B $ ⇒ a b A $
       #. ⇒ a b a B $  ⇒ a b a a $
 
-    .. container:: substep
+    .. container:: step
 
       * a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. A $ [ a a $]
       #. ⇒ a B $ [a a $]
@@ -61,11 +61,11 @@
       #. ⇒ a $ [a $]
       #. ⇒  $ [ $]
 
-    .. container:: substep
+    .. container:: step
 
       * a b a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. A $ [abaa$]
       #. a B $,  [abaa$]
@@ -86,14 +86,14 @@
       #. B → b A
       #. B → a
 
-      .. class:: substep
+      .. class:: step
 
       #. first( A ) = {a}
       #. first( B ) = {a , b}
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       "  ",   a  , b     , $
       A   , A → a B ,       ,
@@ -101,7 +101,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       "  ",   a  , b     , $
       A   , a B ,       ,
@@ -109,7 +109,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       "  ",   a  , b     , $
       A   , 1 ,       ,
@@ -135,7 +135,7 @@
         A   ,  a B ,       ,
         B   ,  a   ,  b A  ,
 
-    .. container:: substep
+    .. container:: step
 
       * a a $
 
@@ -143,7 +143,7 @@
       #. ⇒ a B $
       #. ⇒ a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. .a a $ [ A $ ]
       #. .a a $ [ a B $ ]
@@ -172,11 +172,11 @@
       A   ,  a B ,       ,
       B   ,  a   ,  b A  ,
 
-    .. container:: substep
+    .. container:: step
 
       * a b a a $
 
-      .. class:: substep
+      .. class:: step
 
       #. A $
       #. ⇒ a B $
@@ -185,7 +185,7 @@
       #. ⇒ a b a B $
       #. ⇒ a b a a $
 
-    .. class:: substep
+    .. class:: step
 
     #. .a b a a $ [ A $ ]
     #. .a b a a $ [ a B $ ]
@@ -285,25 +285,25 @@
       A   ,  a B ,       ,
       B   ,  a   ,  b A  ,
 
-    .. container:: substep
+    .. container:: step
 
         b
 
         .. csv-table::
           :header-rows: 1
-          :class: smallerelementwithfullborder equal-col substep
+          :class: smallerelementwithfullborder equal-col step
 
           Stack ,  input        , action
            A  $ ,   b $   , Reject
 
-        .. class:: substep
+        .. class:: step
 
         #. a b a b
         #. a b b b
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder equal-col substep
+      :class: smallerelementwithfullborder equal-col step
 
       Stack  ,  input        , action
        A $   ,  a b a b $    ,  A → a B
@@ -318,7 +318,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder equal-col substep
+      :class: smallerelementwithfullborder equal-col step
 
       Stack  ,  input        , action
        A $   ,  a b b b $    ,  A → a B
@@ -336,14 +336,14 @@
       #. B → b A
       #. B →  λ
 
-      .. class:: substep
+      .. class:: step
 
         first
 
         * first( A ) = {a}
         * first( B ) = {b , λ}
 
-    .. container:: substep
+    .. container:: step
 
         .. csv-table::
           :header-rows: 1
@@ -353,14 +353,14 @@
           A   ,  a B ,       ,
           B   ,      ,  b A  ,
 
-        .. class:: substep
+        .. class:: step
 
         input = a b a $
 
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       Stack ,  input        , action
       A   $ ,   a b a $    , A → a B
@@ -374,7 +374,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       "  ",   a  , b     , $
       A   ,  a B ,       ,
@@ -396,19 +396,19 @@
 
         .. csv-table::
           :header-rows: 1
-          :class: substep smallerelementwithfullborder equal-col
+          :class: step smallerelementwithfullborder equal-col
 
           "  ",   a  , b     , $
           A   ,  a B ,       ,
           B   ,   λ  ,  b A  , λ
 
-        .. class:: substep
+        .. class:: step
 
         input = a a $
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       Stack , input   , action
       A   $ , a a $ , A → a B
@@ -416,7 +416,7 @@
       B   $ , a   $ , B → λ
           $ , a   $ , Reject
 
-    .. class:: substep
+    .. class:: step
 
     * Putting B → λ on that cell was incorrect
     * Removing B → λ from a is better
@@ -424,7 +424,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       "  ",   a  , b     , $
       A   ,  a B ,       ,
@@ -432,7 +432,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       Stack , input   , action
       A   $ , a a $ , A → a B
@@ -461,12 +461,12 @@
         A   ,  a B ,       ,
         B   ,      ,  b A  , λ
 
-      .. class:: substep
+      .. class:: step
 
       input = a b a $
 
     .. yographviz::
-        :class: substep
+        :class: step
 
         digraph aba{
             rankdir=TB;
@@ -490,14 +490,14 @@
 
     .. container::
 
-      .. class:: substep
+      .. class:: step
 
       #. follow( A ) = {$}
       #. follow( B ) = {$}
 
       .. csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder equal-col
+        :class: step smallerelementwithfullborder equal-col
 
         Stack , input   , action
         A   $ , a a $ , A → a B
@@ -515,11 +515,11 @@
 
       Some text books use *id* instead of *a*
 
-    .. container:: substep
+    .. container:: step
 
       Remove Left Factor
 
-      .. class:: substep
+      .. class:: step
 
       #. E  → T E'
       #. E' → + E | λ
@@ -527,7 +527,7 @@
       #. T' → * T |  λ
       #. F  → ( E ) |  a
 
-    .. class:: substep
+    .. class:: step
 
     #. first(T) ⊂ first(E) [ E → T  E' ]
     #. first(F) ⊂ first(T) [ T → F T' ]
@@ -538,7 +538,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
       E  , T E' ,          ,         ,  T E'  ,        ,
@@ -573,7 +573,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder equal-col substep
+      :class: smallerelementwithfullborder equal-col step
 
       " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
       E  , T E' ,          ,         , T E'   ,        ,
@@ -607,7 +607,7 @@
 
       .. csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder equal-col
+        :class: step smallerelementwithfullborder equal-col
 
         " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    , $
         E  , T E' ,          ,         ,  T E'  ,        ,
@@ -618,7 +618,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder equal-col substep
+      :class: smallerelementwithfullborder equal-col step
 
       Stack       ,  input      , action
       E           $ , a + a * a $ , E → T E'
@@ -654,7 +654,7 @@
 
       .. csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder equal-col
+        :class: step smallerelementwithfullborder equal-col
 
         " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    , $
         E  , T E' ,          ,         ,  T E'  ,        ,
@@ -665,7 +665,7 @@
 
       .. csv-table::
         :header-rows: 1
-        :class: smallerelementwithfullborder equal-col substep
+        :class: smallerelementwithfullborder equal-col step
 
         Stack            ,  input      , action
         E               $, ( a + a ) $ , E → T E'
@@ -676,7 +676,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder equal-col substep
+      :class: smallerelementwithfullborder equal-col step
 
       Stack            ,  input      , action
       T E' ) T' E'    $,   a + a ) $ , T → F T'
@@ -698,7 +698,7 @@
 
 .. slido:: First set
 
-    .. class:: substep
+    .. class:: step
 
     #. If X → λ is a production rule then λ ∈ first(X)
     #. If :math:`X → Y_1 Y_2 .... Y_n` is a production rule then
@@ -710,7 +710,7 @@
 
 .. slido:: Follow Set(II)
 
-    .. class:: substep
+    .. class:: step
 
     #. If S is start symbol then $ ∈ follow(S)
     #. If X → α Y then follow(X) ⊂ follow(Y)
@@ -771,11 +771,11 @@
           #. F  → ( E )
           #. F  → a
 
-    .. container:: substep
+    .. container:: step
 
           Follow sets
 
-          .. class:: substep
+          .. class:: step
 
           * follow(E) = { $ , ) }
           * follow(E')= { $ , ) }
@@ -794,7 +794,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
       E  , T E' ,          ,         ,  T E'  ,        ,
@@ -805,7 +805,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       " ",   a  ,  `+`     ,   `*`   ,   (    ,   )    ,   $
       E  , T E' ,          ,         ,  T E'  ,        ,
@@ -816,7 +816,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder equal-col
+      :class: step smallerelementwithfullborder equal-col
 
       Stack   ,  input        , action
       E      $,   a + a $     , E → F T'
@@ -841,7 +841,7 @@
     #. F → a
     #. F → (E)
 
-    .. class:: substep
+    .. class:: step
 
       #. first(E)
       #. = First(T)
@@ -849,7 +849,7 @@
       #. = { a , ( }
 
 
-    .. class:: substep
+    .. class:: step
 
       #. follow(E) = { $ , + , - , ) }
       #. follow(T) = { $ , + , - , ) , * , / }
@@ -857,7 +857,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep have-border
+      :class: step have-border
 
       "  ", a                  , `+` , `-` , `*` , `/` ,      (              , ) , $
       E   , E + T | E - T | T  ,     ,     ,     ,     ,   E + T | E - T | T ,   ,
@@ -881,7 +881,7 @@
       #. T'  → * F T' | / F T' | λ
       #. F → a | (E)
 
-    .. class:: substep
+    .. class:: step
 
     #. First(E)
         #. = First( T E' )
@@ -919,7 +919,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep have-border
+      :class: step have-border
 
       "  ", a     , `+`       , `-` , `*` , `/` , (  , ) , $
       E   ,  T E' ,           ,        ,        ,         ,  T E'  ,        ,
@@ -976,7 +976,7 @@
         T'  ,       ,         ,      , `*` F T' ,  `/` F T' ,        ,       , λ
         F   , a     ,           ,        ,        ,         , ( E )  ,        ,
 
-    .. class:: substep
+    .. class:: step
 
     #. a $ { 435.43 }
     #. .a $ [ T E' ]
@@ -1007,7 +1007,7 @@
         T'  ,       ,         ,      , `*` F T' ,  `/` F T' ,        ,       , λ
         F   , a     ,           ,        ,        ,         , ( E )  ,        ,
 
-    .. class:: substep
+    .. class:: step
 
     #. a $ { 435.43 }
     #. .a $ [ T E' ]
@@ -1040,7 +1040,7 @@
         T'  ,       ,         ,      , `*` F T' ,  `/` F T' ,        ,       ,
         F   , a     ,           ,        ,        ,         , ( E )  ,        ,
 
-    .. class:: substep
+    .. class:: step
 
     #. a + a * a $ [435.43 + 376.1 * 94.2]
     #. .a + a * a $ [ T E' ]

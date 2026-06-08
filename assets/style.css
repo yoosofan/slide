@@ -23,6 +23,12 @@ counter-reset: slide;
   font-weight: bold;
 }
 
+table.full-border{
+  border-collapse: separate;
+  tr, td, th{
+    border: 1px solid;
+  }
+}
 tr, td, th{border: 1px solid;}
 ul, ol, pre.code{text-align: left;}
 pre.code{/*font-size:100%;*/

@@ -14,11 +14,11 @@
    :css: ./assets/style.css
 
 .. slido:: Operating Systems - Memory Management - Paging (Ahmad Yoosofan)
-   :class: t3c substep
+   :class: t3c step
 
     .. container::
 
-        .. class:: substep
+        .. class:: step
 
         * https://yoosofan.github.io/
         * https://github.com/yoosofan/slide/blob/main/os.paging.rst
@@ -30,11 +30,11 @@
         .. image:: os/img/memory/paging_model.png
            :align: center
            :scale: 120%
-           :class: substep
+           :class: step
 
     ..  container::
 
-        .. class:: substep
+        .. class:: step
 
         * **Paging** is a **non-contiguous**
         * Physical memory into **Frames**.
@@ -79,18 +79,16 @@
 
     .. container::
 
-        .. class:: substep
+        .. class:: step
 
         * ( c ) free space { [ 7 - 14 ] }
 
             .. csv-table::
-               :class: substep
 
                 A0, A1, A2, A3
                 0 , 1 , 2 , 3
 
             .. csv-table::
-               :class: substep
 
                 B0, B1, B2
                 4 , 5 , 6
@@ -98,13 +96,11 @@
         * ( e ) free space { [ 4 - 6 ] , [ 11 - 14 ] }
 
             .. csv-table::
-               :class: substep
 
                 A0, A1, A2, A3
                 0 , 1 , 2 , 3
 
             .. csv-table::
-               :class: substep
 
                 C0, C1, C2, C3
                 7 , 8 , 9 , 10
@@ -112,19 +108,16 @@
         * ( f ) free space { [ 11 - 14 ] }
 
             .. csv-table::
-               :class: substep
 
                 A0, A1, A2, A3
                 0 , 1 , 2 , 3
 
             .. csv-table::
-               :class: substep
 
                 C0, C1, C2, C3
                 7 , 8 , 9 , 10
 
             .. csv-table::
-               :class: substep
 
                 D0, D1, D2, D3, D4
                 4 , 5 , 6 , 11, 12
@@ -136,7 +129,7 @@
 .. slido:: Paging Hardware
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     #. CPU generates **Logical Address** (virtual address)
     #. Logical Address is divided into: **Page Number (p)** + **Offset (d)**
@@ -197,10 +190,10 @@
 
     .. image:: os/img/memory/memory_paging_address_translation.png
        :align: center
-       :class: substep
+       :class: step
        :scale: 145%
 
-    .. class:: substep
+    .. class:: step
 
     * **PTBR** holds the **starting address** of the current process's page table.
     * Changed on every context switch.
@@ -211,6 +204,7 @@
 
     .. csv-table:: Memory with only OS before adding a process
        :header-rows: 1
+       :class: step full-border
 
         OS, OS, OS, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|, |nbsp|
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
@@ -218,7 +212,7 @@
 
     .. csv-table:: Process P0
        :header-rows: 1
-       :class: substep
+       :class: step full-border
 
         A     ,    B  ,    C  ,    D  ,    E  , F
         P0_0  , P0_0  , P0_0  , P0_0  , P0_1  , P0_1
@@ -227,7 +221,7 @@
 
     .. csv-table:: Adding Process P0 to Memory
        :header-rows: 1
-       :class: substep
+       :class: step full-border
 
         OS    ,    OS,    OS,|nbsp|,     E,     F,|nbsp|,|nbsp|,  T_P0,  T_P0,  T_P0,  T_P0,     A,     B,      C, D
         OS    ,    OS,    OS,|nbsp|,  P0_1,  P0_1,|nbsp|,|nbsp|,  "11",  "01",|nbsp|,|nbsp|,  P0_0,  P0_0,   P0_0, P0_0
@@ -235,7 +229,7 @@
 
     .. csv-table:: Page Table of P0
        :header-rows: 1
-       :class: substep
+       :class: step full-border
 
         "P0_0", "P0_1", |nbsp|, |nbsp|
         "11", "01", "00", "00"
@@ -243,12 +237,12 @@
 
     .. csv-table:: Page Table of P0
        :header-rows: 1
-       :class: substep
+       :class: step full-border
 
         "11", "01", "00", "00"
         "00", "01", "10", "11"
 
-    .. class:: substep
+    .. class:: step
 
     * Logical Address of C = "0010" = "00" "10"
     * Page Address    = "00"
@@ -256,7 +250,7 @@
     * Physical Address= concatenation("00", "10")
     * Physical Address= "00" "10" = "0010"
 
-    .. class:: substep
+    .. class:: step
 
     #. Logical Address of F = "0101" = "01" "01"
     #. Page Address    = "01"
@@ -264,7 +258,7 @@
     #. Physical Address= concatenation("01", "01")
     #. Physical Address= "01" "01" = "0101"
 
-    .. class:: substep
+    .. class:: step
 
     * 32 words(bytes) memory
     * number of bits in address?
@@ -277,7 +271,7 @@
 .. slido:: Parts of Address Register in Paging
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * Page size = 4 KB → **d** uses **12 bits**
     * Page size = 8 KB → **d** uses **13 bits**
@@ -288,7 +282,7 @@
     * 1 MB ==> number_of_bit(Address register) == 20
     * Frame 4k ==> d == 12 and p == 8
 
-    .. class:: substep
+    .. class:: step
 
     #. Frame Size and Limitations
     #. Page size is defined by the hardware architecture (always a power of 2).
@@ -300,7 +294,7 @@
     #. Requires: 17 full pages + 3,134 bytes in the 18th page.
     #. **Waste:** 4,096 - 3,134 = 962 bytes of internal fragmentation.
 
-    .. class:: substep
+    .. class:: step
 
     * **The Performance Bottleneck:**
     * Every data or instruction access requires **two memory accesses**:
@@ -317,14 +311,14 @@
 
     .. image:: os/img/memory/paging_hardware_with_TLB_ptbr.png
        :align: center
-       :class: substep
+       :class: step
        :scale: 120%
 
     * High-speed **hardware cache** for recent page table entries.
     * Contains (Page Number → Frame Number) mappings.
     * Greatly improves performance.
 
-    .. class:: substep
+    .. class:: step
 
     * **Parallel Search:** All keys (page numbers) are compared simultaneously.
     * **TLB Hit**: Fast address translation
@@ -349,12 +343,12 @@
     .. image:: os/img/memory/memory_paging_page_table_and_cache.jpg
        :align: center
        :scale: 160%
-       :class: substep
+       :class: step
 
 .. slido:: Effective Access Time (EAT)
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * :math:`t_t` : access Time of TLB)
     * :math:`t_c` : access Time of Cache
@@ -362,25 +356,25 @@
     * :math:`h_t` : Hit ratio of TLB
     * :math:`h_c` : Hit ratio of Cache
 
-    .. class:: substep
+    .. class:: step
 
     #. EAT = table +  memory
     #. :math:`table =  h_t * t_t + ( 1 - h_t ) * ( t_t + t_m )`
     #. :math:`memory = h_c * t_c + ( 1 - h_c ) * ( t_c + t_m )`
 
-    .. container:: substep
+    .. container:: step
 
         * EAT = :math:`h_t * t_t + ( 1 - h_t ) * ( t_t + t_m ) + h_c * t_c + ( 1 - h_c ) * ( t_c + t_m )`
 
-        .. class:: rtl-h1 substep
+        .. class:: rtl-h1 step
 
             زمان دسترسی مؤثر = `زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه`
 
-        .. class:: rtl-h2 substep
+        .. class:: rtl-h2 step
 
             زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.
 
-    .. class:: substep
+    .. class:: step
 
     * :math:`t_t` = 1,  :math:`t_c` = 5, :math:`t_m` = 100, :math:`h_t` = 0.95, :math:`h_c` = 0.90
     * EAT = table +  memory
@@ -392,24 +386,24 @@
 
     .. container::
 
-        .. class:: rtl-h2 substep
+        .. class:: rtl-h2 step
 
                 با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت
 
-        .. class:: substep
+        .. class:: step
 
         * EAT = :math:`2 * (h * t_c + ( 1 - h ) * ( t_c + t_m ))`
         * EAT = :math:`2 * (h_c * t_c + t_m + t_c - h_c * t_m - h_c * t_c )`
         * EAT = :math:`2 * (t_c + (1 - h_c) * t_m )`
 
-    .. class:: substep
+    .. class:: step
 
     * :math:`t_m = 100ns` , :math:`t_c = 20ns` , :math:`h_c = 80\%`:
     * :math:`EAT = 2 * (20 + 0.20 * 100)`
     * :math:`EAT = 80`
 
 
-    .. class:: substep
+    .. class:: step
 
     * If we only consider TLB and remove cache
     * EAT = :math:`(t_m + t_t) * h_t + (2 * t_m + t_t) * (1 - h_t)`
@@ -418,25 +412,25 @@
     * *(The system experiences a 40% slowdown compared to direct memory access due to a 20% miss penalty).*
 
 .. slido:: Memory Protection
-   :class: t2c substep
+   :class: t2c step
 
     .. container::
 
-        .. class:: substep
+        .. class:: step
 
         #. **PTLR (Page-Table Length Register):** Indicates the size of the page table to prevent out-of-bounds access.
         #. **Valid/Invalid** bit.
             * **Valid** = page is in memory and accessible.
             * **Invalid** = page not in memory or access violation → Trap to OS.
 
-        .. class:: substep
+        .. class:: step
 
         * **Access Rights:** Define if a page is Read-only, Read-write, or Execute-only.
         * Any violation causes a hardware trap to the OS.
 
         .. csv-table::
             :header: "Page", "Frame", "Status"
-            :class: substep
+            :class: step
 
             "0", "4", "v"
             "1", "7", "v"
@@ -445,7 +439,7 @@
 
         .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
             :align: center
-            :class: substep
+            :class: step
 
     .. image:: os/img/memory/paging_valid_invalid.png
        :align: center
@@ -459,10 +453,10 @@
 
     .. image:: os/img/memory/paging_sharing_code.png
        :align: center
-       :class: substep
+       :class: step
        :scale: 130%
 
-    .. class:: substep
+    .. class:: step
 
         * **Shared Code:**
         * One copy of read-only (reentrant) code can be shared among multiple processes.
@@ -470,7 +464,7 @@
         * Shared code must appear in the *exact same location* in the logical address space of all processes utilizing it.
         * Reduces memory usage.
 
-    .. class:: substep
+    .. class:: step
 
         * **Private Code and Data:**
         * Each process keeps a separate, private copy of its specific code and data.
@@ -489,7 +483,7 @@
 .. slido:: Frame Size & Single-Level Paging Limitations
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * **The Size Problem:** Modern operating systems support large logical address spaces (e.g., 32-bit or 64-bit).
     * Consider a 32-bit logical address space with a 4 KB (:math:`2^{12}`) page size:
@@ -498,7 +492,7 @@
     * *Every running process* needs its own 4 MB page table stored in contiguous physical memory!
     * This massive overhead necessitates advanced page table architectures (which we will explore next).
 
-    .. class:: substep
+    .. class:: step
 
     * Frame size is a **power of 2** (typically 4KB, 8KB, ...)
     * **Smaller page size** → more pages → **larger page table**
@@ -514,14 +508,14 @@
 .. slido:: Advantages & Disadvantages of Paging
     :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * No **external fragmentation**
     * Easy to implement **memory protection**
     * Supports **page sharing**
     * Simple address translation (with TLB)
 
-    .. class:: substep
+    .. class:: step
 
     * **Internal fragmentation** (last page of process)
     * **Page table overhead** (especially for large processes)

@@ -29,7 +29,7 @@
        :align: center
        :height: 600px
 
-    .. class:: substep
+    .. class:: step
 
     * Equal-Size Partitions
     * Unequal-Size Partitions
@@ -41,7 +41,7 @@
         * Internal Fragmentation
         * Fixed Process Limit
         * Maximum Size Limit
-    * .. image:: img/memory/memory_fixed_partitioning_internal_fragmentation.png
+    * .. image:: os/img/memory/memory_fixed_partitioning_internal_fragmentation.png
         :align: center
         :width: 300px
 
@@ -89,14 +89,14 @@
     .. image:: os/img/memory/memory_effect_of_dynamic_partitioning.png
        :align: center
 
-    .. class:: substep
+    .. class:: step
 
     * Hole Tracking or free space tracking
         * Bitmaps
         * Linked Lists
     * External fragmentation
     *  .. csv-table::
-            :class: substep
+            :class: step
 
             Feature,Fixed,Dynamic
             Partition Size,Static ,Dynamic
@@ -107,7 +107,7 @@
     * compaction
 
     .. csv-table:
-        :class: substep
+        :class: step
 
         Feature,Fixed Partitioning,Dynamic Partitioning
         Partition Size,Static (set at boot),Dynamic (set at load-time)
@@ -125,7 +125,7 @@
     .. image:: os/img/memory/memory_select_part_for_allocation.png
        :align: center
 
-    .. class:: substep
+    .. class:: step
 
     * First Fit
         * pros: fast
@@ -199,7 +199,7 @@
             labelloc = "t";
         }
 
-    .. class:: substep
+    .. class:: step
 
     * cost
         * CPU Cycles
@@ -283,7 +283,7 @@
 
     .. yographviz::
         :width: 200
-        :class: substep
+        :class: step
 
         digraph Buddy2 {
             label="B 240";
@@ -314,7 +314,7 @@
 
     .. yographviz::
         :width: 200
-        :class: substep
+        :class: step
 
         digraph Buddy3 {
             label="C 64";
@@ -351,7 +351,7 @@
 
     .. yographviz::
         :width: 300
-        :class: substep
+        :class: step
 
         digraph Buddy4 {
             label="D 256";
@@ -395,7 +395,7 @@
 
     .. yographviz::
         :width: 300
-        :class: substep
+        :class: step
 
         digraph Buddy5 {
             label="Release A and B";
@@ -438,7 +438,7 @@
 
     .. yographviz::
         :width: 300
-        :class: substep
+        :class: step
 
         digraph Buddy6 {
             label="E 74";
@@ -481,7 +481,7 @@
 
     .. yographviz::
         :width: 300
-        :class: substep
+        :class: step
 
         digraph Buddy7 {
             label="Release C";
@@ -518,7 +518,7 @@
 
     .. yographviz::
         :width: 160
-        :class: substep
+        :class: step
 
         digraph Buddy8 {
             label="Release E";
@@ -542,7 +542,7 @@
 
 .. slido:: Buddy System Memory Management(III)
 
-    .. class:: substep
+    .. class:: step
 
     #. **A hybrid memory allocator** balances fixed and dynamic partitioning
         * dividing memory into partitions of base-2 sizes (powers of 2).
@@ -676,7 +676,7 @@
 
     .. container::
 
-        .. class:: substep
+        .. class:: step
 
         * Program
             * Place: Cards in card reader, file in disk, flash, etc.
@@ -685,15 +685,15 @@
             * Place: Main Memory (RAM)
             * Active
 
-        .. class:: substep
+        .. class:: step
 
         **Process Status**
 
         .. image:: os/img/in/process_state_chart.png
            :align: center
-           :class: substep
+           :class: step
 
-    .. container:: substep
+    .. container:: step
 
         **Process Control Block (PCB)**
 
@@ -708,7 +708,7 @@
 
     .. image:: os/img/in/system_overview01.png
        :align: center
-       :class: substep
+       :class: step
 
 .. slido::
    :class: n3c
@@ -719,12 +719,12 @@
 
     .. image:: os/img/in/process_parts.png
        :align: center
-       :class: substep
+       :class: step
        :height: 400px
 
     .. image:: os/img/memory/memory_precess_addressing_parts.png
        :align: center
-       :class: substep
+       :class: step
 
 .. slido::
 
@@ -739,7 +739,7 @@
 
     .. image:: os/img/memory/memory_linking_loading_scenario.png
        :align: center
-       :class: substep
+       :class: step
 
 .. slido::
 
@@ -752,7 +752,7 @@
 
     .. image:: os/img/memory/memory_address_binding_linker.png
        :align: center
-       :class: substep
+       :class: step
 
 .. slido:: Blocked or Waiting
    :class: t2c
@@ -762,7 +762,7 @@
 
     .. image:: os/img/in/queues01.png
        :align: center
-       :class: substep
+       :class: step
 
 .. slido:: Process Suspension
    :class: t2c
@@ -778,7 +778,7 @@
 .. slido:: Process Suspension (Swapping)
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     #. **The 7-State Model Transitions**
         * **Blocked → Blocked/Suspend**
@@ -867,7 +867,7 @@
        :width: 500px
        :height: 600px
 
-    .. class:: substep
+    .. class:: step
 
     #. **Architectural Components**
     #. **The Execution Process**
@@ -1027,7 +1027,7 @@
           https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg
           http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
 
-    .. class:: substep
+    .. class:: step
 
     * **The Principle of Locality**
     * Programs do not access memory completely at random
@@ -1050,7 +1050,7 @@
 .. slido:: Cache Management & OS Implications
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * Cache
         * Smaller
@@ -1129,7 +1129,7 @@
 
 .. slido:: Effective Access Time (EAT)
 
-    .. class:: substep
+    .. class:: step
 
         * :math:`t_m` : :rtl:`زمان دسترسی به حافظه‌ی اصلی`
         * :math:`t_c` : :rtl:`زمان دسترسی به حافظه‌ی نهان`
@@ -1145,7 +1145,7 @@
 
         اگر ضریب اصابت (یا نسبت اصابت) برای پردازنده‌ای 0.95 باشد و سرعت دسترسی به حافظهٔ اصلی 100 میکرو ثانیه باشد و سرعت دسترسی حافظهٔ نهان 1 میکرو ثانیه باشد در این صورت زمان دسترسی مؤثر برابر خواهد بود با
 
-    .. class:: substep
+    .. class:: step
 
         * EAT = 0.95 * 1 + (1 − 0.95) * (100 + 1)
         * EAT = 0.95 + 0.05 * 101
@@ -1201,7 +1201,7 @@
 
     .. image:: os/img/in/Award_BIOS_setup_utility.png
        :align: center
-       :class: substep
+       :class: step
 
     .. :
 
@@ -1217,7 +1217,7 @@
 
     .. image:: os/img/in/boot_sequence.png
         :align: center
-        :class: substep
+        :class: step
 
 .. slido:: Microkernel Architecture
    :class: t2c
@@ -1226,7 +1226,7 @@
        :align: center
        :width: 550px
 
-    .. class:: substep
+    .. class:: step
 
     #. Core Responsibilities (Inside Kernel Space)
         * **Low-Level Memory Management**

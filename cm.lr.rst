@@ -50,7 +50,7 @@
             state3 -> state4 [class="incremental"  label = "a" ];
         }
 
-    .. class:: substep
+    .. class:: step
 
         #. a[1.4]+a[2.5]+a[3.6]
         #. E(a[1.4])+a[2.5]+a[3.6]
@@ -59,7 +59,7 @@
 
 
         .. yographviz::
-           :class: substep
+           :class: step
 
                 digraph ParseTree {
                   node [fontname="Courier", shape=circle, style=filled, fillcolor="#f9f9f9"];
@@ -157,7 +157,7 @@
     #. F → a
 
     .. yographviz::
-      :class: substep
+      :class: step
 
       digraph {
         graph [splines=true  rankdir = "LR"];
@@ -189,7 +189,7 @@
     #. F → a
 
     .. yographviz::
-      :class: substep
+      :class: step
 
       digraph {
         graph [splines=true  rankdir = "LR"];
@@ -252,7 +252,7 @@
     #. F → a
 
     .. yographviz::
-      :class: substep
+      :class: step
 
       digraph {
         graph [splines=true  rankdir = "LR"];
@@ -363,7 +363,7 @@
         ELSE
             x = 4
 
-    .. class:: substep
+    .. class:: step
 
     #. S → i S
     #. S → i S e S
@@ -381,7 +381,7 @@
         #. S → o
 
     .. yographviz::
-      :class: substep
+      :class: step
 
       digraph {
         graph [splines=true  rankdir = "LR"];
@@ -536,7 +536,7 @@
         #. L → L a
         #. L →  b
 
-        .. container:: substep
+        .. container:: step
 
           Augmented Grammer
 
@@ -547,12 +547,12 @@
           * L → L a
           * L →  b
 
-        .. class:: substep
+        .. class:: step
 
             * first(S)  = {a}
             * first(L)  = {b}
 
-        .. class:: substep
+        .. class:: step
 
             * follow(S)  = {$, b}
             * follow(L)  = {$, a}
@@ -607,7 +607,7 @@
                 state4 -> state6 [  label = "a" ];
               }
 
-        .. class:: substep
+        .. class:: step
 
             * follow(S)  = {$, b}
 
@@ -622,7 +622,7 @@
     #. L → a
     #. R → L
 
-    .. container:: substep
+    .. container:: step
 
       Augmented Grammer
 

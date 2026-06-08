@@ -10,7 +10,7 @@
 .. prezento:: DB - Sql2
    :css: ./assets/style.css
 
-.. slido::     SQL 2
+.. slido:: SQL 2
 
     Ahmad Yoosofan
 
@@ -23,16 +23,16 @@
 .. slido:: Find the names of suppliers who are located in a city where at least one part is stored
    :class: t2c
 
-    .. container:: ee
+    .. container::
 
         .. code:: sql
-          :class: substep
+          :class: step
 
           select distinct sname
           from s natural join p;
 
         .. code:: sql
-          :class: substep
+          :class: step
 
           select sname
           from s
@@ -71,7 +71,7 @@
           نام قطعاتی را بیابید که وزن آنها از دست کم یک قطعهٔ دیگر بیشتر باشد
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct T.pname
       from p as T join p on
@@ -79,14 +79,14 @@
         T.weight > p.weight;
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct T.pname
       from p as T join p on
       T.weight > p.weight;
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct pname
       from p as T
@@ -97,7 +97,7 @@
         );
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct T.pname
       from p as T join p on
@@ -131,7 +131,7 @@
           نام قطعاتی را بیابید که وزن آنها دست کم از یک قطعهٔ دیگر در شهر پاریس بیشتر باشد
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct pname
       from p as T
@@ -143,7 +143,7 @@
         );
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct pname
       from p as T
@@ -172,7 +172,7 @@
 
     Find the names of the parts such that no other part weighs less than them
 
-    .. class: rtl-h1 substep
+    .. class: rtl-h1 step
 
           نام قطعاتی را بیابید که وزن آنها از هیچ قطعهٔ دیگری بیشتر نباشد
 
@@ -185,7 +185,7 @@
       Cam
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pname
       from p as T
@@ -197,7 +197,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder substep
+      :class: smallerelementwithfullborder step
 
       pname
       Nut
@@ -206,7 +206,7 @@
       Bolt
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pname
       from p as T
@@ -218,7 +218,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: smallerelementwithfullborder substep
+      :class: smallerelementwithfullborder step
 
       pname, weight
       Nut,  12
@@ -232,7 +232,7 @@
           نام شهرهای عرضه کنندگانی را بیابید که در آن شهرها هیچ قطعه‌ای وجود ندارد
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select distinct city
@@ -244,7 +244,7 @@
         );
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select city
@@ -254,7 +254,7 @@
       from p;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select city
@@ -266,7 +266,7 @@
         );
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select city
@@ -290,16 +290,16 @@
 
             نام قطعه‌هایی را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند یا اصلاً عرضه نشده باشند.
 
-    .. class: rtl-h1 substep
+    .. class: rtl-h1 step
 
             نام قطعه‌هایی را بیابید که عرضه‌کننده‌ای خارج از شهر آن قطعه‌ها، آنها را عرضه نکرده باشند
 
-    .. class:: substep
+    .. class:: step
 
     **Find the names of parts that have not been supplied by any supplier located in a different city**
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pname
@@ -313,7 +313,7 @@
 
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pname
@@ -348,7 +348,7 @@
             نام قطعه‌های عرضه شده‌ای را بیابید که فقط عرضه کنندگان درون آن شهرها آنها را عرضه کرده باشند.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pname
@@ -370,7 +370,7 @@
         Screw
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pname
@@ -388,7 +388,7 @@
         );
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pname
@@ -414,7 +414,7 @@
               نام قطعه‌های عرضه شدهٔ متفاوتی را بیابید که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select distinct pname
@@ -428,7 +428,7 @@
         );
 
     .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
           select pname -- ریحانه زمانیان
@@ -444,7 +444,7 @@
           ) ;
 
     .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         SELECT DISTINCT p1.pname
@@ -477,7 +477,7 @@
           نام قطعه‌های عرضه شده‌ای را بیابید که شماره‌های متفاوتی داشته باشند هر چند شاید نام یکسانی داشته باشند که فقط عرضه کنندگان درون آن شهرها، آنها را عرضه کرده باشند
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
         select pname
@@ -495,7 +495,7 @@
 
 
     .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         select pname
@@ -519,7 +519,7 @@
 
       نام قطعاتی را بیابید که همهٔ عرضه کنندگان آنها را عرضه کرده باشند
 
-    .. class:: substep rtl-h1
+    .. class:: step rtl-h1
 
         نام قطعاتی را بیابید که عرضه‌کننده‌ای وجود نداشته باشد که این قطعات را عرضه نکرده باشد.
 
@@ -527,7 +527,7 @@
 
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pname
       from p
@@ -572,7 +572,7 @@
       نام قطعات متفاوتی را بیابید که همهٔ عرضه کنندگان با وضعیت بالای ۱۰۰ آنها را عرضه کرده باشند
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct pname
       from p join sp
@@ -757,7 +757,7 @@
       جمع وزن قطعات متفاوتی را بیابید که عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده باشد(۱).
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -770,13 +770,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -786,7 +786,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       46
@@ -799,7 +799,7 @@
       جمع وزن قطعات متفاوتی را بیابید که عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده باشد(۲).
 
     .. code:: sql
-      :class: substep
+      :class: step
        :number-lines:
 
       select sum(weight) as swg
@@ -816,7 +816,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
@@ -829,7 +829,7 @@
       جمع وزن قطعات  متفاوتی را بیابید که عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده باشد(۳).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(weight) as swg
       from p
@@ -841,13 +841,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(weight) as swg
       from (p natural join sp)
@@ -856,13 +856,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       46
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, weight, sn, s.city
       from (p natural join sp)
@@ -871,7 +871,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, weight, sn, city
       P1, 12,     S2, Paris
@@ -887,7 +887,7 @@
       جمع وزن قطعات متفاوتی را بیابید که عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده باشد(۴).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(weight) as swg
       from p
@@ -899,13 +899,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(distinct weight) as swg
       from (p natural join sp)
@@ -914,16 +914,16 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
 
-    .. class:: substep rtl
+    .. class:: step rtl
 
       آیا این راه حل آخری با distinct درست است؟
 
-    .. class:: substep
+    .. class:: step
 
       `راه حل دیگر <#/query-inside-from-id>`_
 
@@ -936,7 +936,7 @@
 
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select swg
       from (
@@ -949,13 +949,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       46
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(weight) as swg
       from (
@@ -967,7 +967,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
@@ -980,7 +980,7 @@
       جمع وزنی قطعات عرضه‌شده به تعداد qty را بیابید که عرضه‌کننده‌ای در شهر پاریس آنها را عرضه کرده باشد.
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select sum(qty * weight) as swg
       from (p natural join sp)
@@ -989,13 +989,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       13800
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, qty, weight
       from (p natural join sp)
@@ -1004,7 +1004,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, qty,  weight
       p1, 300,  12
@@ -1027,7 +1027,7 @@
     میانگین مقدار عرضه‌ها(qty) را بیابید
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select avg(qty) as sqt
       from   sp;
@@ -1040,7 +1040,7 @@
       میانگین وزن قطعات را در شهر پاریس بیابید
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select avg(weight) as awg
       from p
@@ -1048,7 +1048,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
         awg
         14.5
@@ -1098,6 +1098,7 @@
       6
 
 .. slido:: Count(*)
+   :class: t2c
 
     .. class:: rtl-h2
 
@@ -1155,20 +1156,20 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       ccy
       3
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select city
       from p;
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       city
       Oslo
@@ -1186,7 +1187,7 @@
     تعداد عرضه‌کنندگانی را بیابید که قطعه‌ای عرضه کرده باشند
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select count(distinct sn) as sqt
       from sp;
@@ -1194,20 +1195,20 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       sqt
       4
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select distinct sn
       from sp;
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       sn
       S1
@@ -1223,7 +1224,7 @@
     تعداد عرضه‌کنندگانی را بیابید که قطعهٔ قرمزی را به تعداد عرضه(qty) بیشتر از ۵ عرضه کرده باشند.
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select count(distinct sn) as scc
       from sp natural join p
@@ -1232,20 +1233,20 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       scc
       3
 
 .. slido::
-   :class: t2c substep
+   :class: t2c step
 
     .. class:: rtl-h1
 
     تعداد عرضه‌کنندگانی را بیابید که دست کم مقدار یکی از عرضه‌های آنها بیشتر از ۵ باشد و عرضه‌ای از قطعه‌ای به رنگ قرمز نیز داشته باشند(۱).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select count(*) as csn
       from (
@@ -1259,7 +1260,7 @@
       );
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select count(*) as csn -- May have error
       from (
@@ -1281,7 +1282,7 @@
     تعداد عرضه‌کنندگانی را بیابید که دست کم مقدار یکی از عرضه‌های آنها بیشتر از ۵ باشد و عرضه‌ای از قطعه‌ای به رنگ قرمز نیز داشته باشند(۲).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select count(sn) as csn
       from s
@@ -1299,7 +1300,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       csn
       3
@@ -1345,7 +1346,7 @@
         group by sn;
 
 
-      .. class:: substep rtl-h2
+      .. class:: step rtl-h2
 
       * بر پایهٔ شمارهٔ عرضه کننده دسته‌بندی می‌کند
       * سپس برای هر دسته
@@ -1370,7 +1371,7 @@
       شماره و مجموع عرضه‌های قطعاتی را بیابید که عرضه شده باشند.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, sum(qty) as sqt
@@ -1379,7 +1380,7 @@
 
     .. csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder
+        :class: step smallerelementwithfullborder
 
         pn,sqt
         p1,600
@@ -1399,20 +1400,20 @@
     .. container::
 
       .. code:: sql
-        :class: substep
+        :class: step
 
         select pn, sum(qty) as sqt
         from sp join p using(pn)
         where weight > 12
         group by pn;
 
-      .. class:: substep rtl-h2
+      .. class:: step rtl-h2
 
       نخست شرط where اعمال می‌شود سپس بر روی رکوردهای باقیمانده دسته‌بندی انجام می‌شود.
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
         pn, sqt
         p2, 1350
@@ -1436,13 +1437,13 @@
       group by pn
       having count(sn)>2;
 
-    .. class:: substep rtl-h2
+    .. class:: step rtl-h2
 
     مانند پیشین با این تفاوت که گروه‌هایی برگردانده می‌شوند که شرط having را نیز داشته باشند.
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
         pn, sqt
         p2, 1350
@@ -1483,7 +1484,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sn, qty
       p1, s1, 300
@@ -1492,7 +1493,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sn, qty
       p2, s1, 200
@@ -1505,7 +1506,7 @@
 
       ..  csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder
+        :class: step smallerelementwithfullborder
 
         pn, sn, qty
         p3, s1, 400
@@ -1514,7 +1515,7 @@
 
       ..  csv-table::
         :header-rows: 1
-        :class: substep smallerelementwithfullborder
+        :class: step smallerelementwithfullborder
 
         pn, sn, qty
         p6, s1, 100
@@ -1522,7 +1523,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sn, qty
       p4, s1, 200
@@ -1530,14 +1531,14 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sn, qty
       p5, s1, 100
       p5, s4, 400
 
 .. slido::
-   :class: t2c substep
+   :class: t2c step
 
     .. class:: rtl-h1
 
@@ -1583,21 +1584,21 @@
         T2.sn <> T1.sn;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۱۰ نیز آنها را عرضه کرده باشد و جمع عرضه‌های هر کدام از آن شهرهای قطعه‌ها بیشتر از ۲۰ باشد(۱)
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select city
       from p;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city as pcity
@@ -1606,7 +1607,7 @@
       where status > 10;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city as pcity --wrong
@@ -1617,7 +1618,7 @@
       having sum(qty) > 20;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city as pcity
@@ -1630,7 +1631,7 @@
       );
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -1640,7 +1641,7 @@
     .. :
 
         .. code:: sql
-          :class: substep
+          :class: step
           :number-lines:
 
           select p.city as pcity
@@ -1659,7 +1660,7 @@
           );
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city as pcity
@@ -1674,13 +1675,13 @@
       having sum(qty) > 20;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۱۰ نیز آنها را عرضه کرده باشد و جمع عرضه‌های هر کدام از آن شهرهای قطعه‌ها بیشتر از ۲۰ باشد
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -1695,7 +1696,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
 
         city
@@ -1704,7 +1705,7 @@
         Paris
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city  --- نادرست
@@ -1720,7 +1721,7 @@
       having status >10 and sum(qty) > 20;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -1734,14 +1735,14 @@
       having sum(qty) > 20;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام شهرهای قطعاتی را بیابید که فقط عرضه‌کنندگان با وضعیت بیشتر از ۱۰  آنها را عرضه کرده باشند و جمع عرضه‌های هر کدام از آن شهرهای قطعه‌ها بیشتر از ۲۰ باشد
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -1753,7 +1754,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
 
         city
@@ -1762,7 +1763,7 @@
         Paris
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -1776,14 +1777,14 @@
       having sum(qty) > 20;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ نیز آنها را عرضه کرده باشند و جمع وزنی عرضه‌های هر کدام از آن پروژه‌ها بیشتر از ۱۰۰ باشد(I)
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -1799,7 +1800,7 @@
       having(sum(weight*qty)>100);
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -1818,7 +1819,7 @@
       );
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -1837,14 +1838,14 @@
       );
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ نیز آنها را عرضه کرده باشند و جمع وزنی عرضه‌های هر کدام از آن پروژه‌ها بیشتر از ۱۰۰ باشد(II)
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -1863,14 +1864,14 @@
       );
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       شمارهٔ قطعات با وزن بیشتر از ۱۲ را همراه با جمع عرضه‌های هر کدام بیابید که بیشتر از دو عرضه کننده آنها را عرضه کرده باشند
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, sum(qty)
@@ -1880,7 +1881,7 @@
       having count(sn)>2;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, sum(qty) -- same result
@@ -1890,7 +1891,7 @@
       having count(distinct sn)>2;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, sum(qty) -- wrong
@@ -1900,7 +1901,7 @@
       having count(sn)>2;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, sum(qty)
@@ -1910,7 +1911,7 @@
       having count(distinct sn)>2;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: .rtl-h1
 
@@ -1919,7 +1920,7 @@
     .. container::
 
       .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         select p.city -- wrong answer
@@ -1931,7 +1932,7 @@
           count(distinct pn) > 2;
 
       .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         SELECT p.city  -- wrong answer
@@ -1945,7 +1946,7 @@
         HAVING count(pn)>2 and sum(qty)>20;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city -- wrong answer
@@ -1961,14 +1962,14 @@
         count(pn) > 2;
 
 .. slido:: نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: .rtl-h1
 
     نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(II).
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -1983,7 +1984,7 @@
         count(distinct pn) > 2;
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -2013,7 +2014,7 @@
           having sum(qty) > 20 and count(distinct pn) > 2;
 
         .. code:: sql
-          :class: substep
+          :class: step
           :number-lines:
 
           select p.city
@@ -2029,14 +2030,14 @@
             count(distinct pn) > 2;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: .rtl-h1
 
     نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد(III).
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -2053,7 +2054,7 @@
 
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -2074,18 +2075,18 @@
       having sum(qty) > 20;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن نام پروژه (یا پروژه‌ها) بیشتر از ۱۰۰ باشد
 
-    .. class:: substep rtl-h2
+    .. class:: step rtl-h2
 
     دقت کنید مجموع وزن قطعات باید تعداد  در وزن ضرب شود
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -2102,14 +2103,14 @@
       having(sum(weight*qty)>100);
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن پروژه (و نه همراه با هم‌نام‌هایش) بیشتر از ۱۰۰ باشد
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -2126,7 +2127,7 @@
       having(sum(weight*qty)>100);
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname
@@ -2146,7 +2147,7 @@
         );
 
     .. code: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select jname -- Alireza Hasanzadeh
@@ -2158,7 +2159,7 @@
         max(status > 20);
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -2183,14 +2184,14 @@
 
 .. slido::
    :id: query-inside-from-id
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     جمع وزن قطعه‌هایی را بیابید که دستِ‌کم عرضه کننده‌ای از پاریس نیز آنها را عرضه کرده باشد.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -2200,13 +2201,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       46
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select pn, weight, sn, s.city
@@ -2216,7 +2217,7 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, weight, sn, city
       P1, 12,     S2, Paris
@@ -2224,7 +2225,7 @@
       P2, 17,     S3, Paris
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -2239,7 +2240,7 @@
 
         ..  csv-table::
           :header-rows: 1
-          :class: substep smallerelementwithfullborder
+          :class: step smallerelementwithfullborder
 
           swg
           29
@@ -2249,14 +2250,14 @@
         distinct does not help
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     جمع وزن قطعه‌هایی را بیابید که دستِ‌کم عرضه کننده‌ای از پاریس نیز آنها را عرضه کرده باشد.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -2270,13 +2271,13 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       46
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select sum(weight) as swg
@@ -2289,12 +2290,12 @@
 
     ..  csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       swg
       29
 
-    .. class:: substep
+    .. class:: step
 
       `بحث اصلی <#/sum-sample-weight-paris-id>`_
 
@@ -2303,14 +2304,14 @@
         distinct does not help
 
 .. slido:: Scalar value(II)
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     شماره و وزن قطعاتی را بیابید که وزن آنها از میانگین وزن همهٔ قطعات بیشتر است.
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, weight
       from p
@@ -2321,7 +2322,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, weight
       p2, 17
@@ -2329,14 +2330,14 @@
       p6, 19
 
 .. slido:: Scalar value(III)
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     شماره و وزن قطعاتی را بیابید که کمترین وزن را داشته باشند.
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, weight
       from p
@@ -2344,14 +2345,14 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, weight
       p1, 12
       p5, 12
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, weight
       from p  --incorrect
@@ -2361,7 +2362,7 @@
       );
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, weight from p
       where weight = (
@@ -2371,14 +2372,14 @@
       );
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     شمارهٔ همهٔ قطعات را همراه با جمع تعداد عرضه‌های (qty) آن قطعات بیابید(۱).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, sum(qty) as sqty
       from sp
@@ -2388,7 +2389,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sqty
       p1, 600
@@ -2399,14 +2400,14 @@
       p6, 100
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     شمارهٔ همهٔ قطعات را همراه با جمع تعداد عرضه‌های (qty) آن قطعات بیابید(۲).
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select pn, (
           select sum(qty)
@@ -2417,7 +2418,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sqty
       p1, 600
@@ -2430,7 +2431,7 @@
       p8,
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -2439,7 +2440,7 @@
     .. container::
 
         .. code:: sql
-            :class: substep
+            :class: step
             :number-lines:
 
             select pn,
@@ -2452,7 +2453,7 @@
             order by weight desc ;
 
         .. code:: sql
-            :class: substep
+            :class: step
             :number-lines:
 
             select pn, sum(status) , p.city
@@ -2460,7 +2461,7 @@
             order by weight desc; -- wrong
 
         .. code:: sql
-            :class: substep
+            :class: step
             :number-lines:
 
             select pn, sum(status) , p.city
@@ -2469,7 +2470,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
 
         pn, sum_status, city
@@ -2483,7 +2484,7 @@
         p8, 40,   Paris
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -2491,7 +2492,7 @@
 
 
     .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         select pn, sum(qty) as sqty
@@ -2499,7 +2500,7 @@
         group by pn; -- wrong
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select pn, (
             select sum(qty)
@@ -2510,7 +2511,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sqty
       p1, 600
@@ -2522,7 +2523,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sqty
       p1, 600
@@ -2535,19 +2536,19 @@
       p8,
 
 .. slido:: Left Outer Join(I)
-   :class: t2c  substep
+   :class: t2c  step
 
     .. container::
 
       .. code:: sql
-          :class: substep
+          :class: step
 
           select pn, sum(qty) as sqty
           from p natural left outer join sp
           group by pn;
 
       .. code:: sql
-          :class: substep
+          :class: step
 
           select pn, sum(qty) as sqty
           from p left outer join sp using(pn)
@@ -2555,7 +2556,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pn, sqty
       p1, 600
@@ -2568,10 +2569,10 @@
       p8,
 
 .. slido:: Left Outer Join(II)
-   :class: t2c  substep
+   :class: t2c  step
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select p.pn, sum(qty) as sqty
         from p left outer join sp on p.pn = sp.pn
@@ -2579,7 +2580,7 @@
 
 
     .. code:: sql
-        :class: substep
+        :class: step
         :number-lines:
 
         select pn, (
@@ -2590,14 +2591,14 @@
         from p;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     نام شهرهای همهٔ قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده ، دست کم یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -2610,7 +2611,7 @@
       having sum(qty) > 20 and count(distinct pn) > 2;
 
     .. code:: sql
-       :class: substep
+       :class: step
        :number-lines:
 
         select p.city -- incorrect
@@ -2621,7 +2622,7 @@
           max(status > 10);
 
     .. code:: sql
-       :class: substep
+       :class: step
        :number-lines:
 
         select p.city
@@ -2633,14 +2634,14 @@
           max(status > 10);
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
     نام شهرهای همهٔ قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده درون آن شهرها  باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
 
     .. code:: sql
-      :class: substep
+      :class: step
       :number-lines:
 
       select p.city
@@ -2653,7 +2654,7 @@
       having sum(qty) > 20 and count(distinct pn) > 2;
 
     .. code:: sql
-       :class: substep
+       :class: step
        :number-lines:
 
         select p.city
@@ -2665,26 +2666,26 @@
           max(status > 10);
 
 .. slido:: Full Outer Join(I)
-   :class: t2c substep
+   :class: t2c step
 
     .. container::
 
         .. code:: sql
-          :class: substep
+          :class: step
 
             select pn, sum(weight) as sqty
             from p natural full outer join s
             group by pn;
 
         .. code:: sql
-            :class: substep
+            :class: step
 
             select pn, sum(weight) as sqty
             from p full outer join s using(city)
             group by pn;
 
         .. code:: sql
-            :class: substep
+            :class: step
 
             select p.pn, sum(weight) as sqty
             from p full outer join s on p.city = s.city
@@ -2707,8 +2708,9 @@
         │ p8   │ NULL │
         ╰──────┴──────╯
         </pre>
+
     .. code:: sql
-        :class: substep
+        :class: step
 
         select distinct p.city, s.city
         from p natural left outer join s;
@@ -2728,7 +2730,7 @@
         </pre>
 
 .. slido:: Full Outer Join(II)
-   :class: t2c  substep
+   :class: t2c  step
 
     .. code:: sql
 
@@ -2752,50 +2754,50 @@
         from p natural join s;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       نام همهٔ شهرهای عرضه کنندگان را در کنار نام شهر قطعاتی که همشهری آنها هستند بنویسید و اگر قطعه‌ای همشهری آن عرضه کننده نبود نام شهر عرضه کننده همراه با null به جای نام شهر قطعه بیاید(I)
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select s.city, p.city
         from s left outer join p using(city);
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select  p.city, s.city -- incorrect
         from p full outer join s on p.city = s.city;
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select  p.city, s.city -- incorrect
         from p full outer join s using(city);
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select  p.city, s.city -- incorrect
         from p natural full outer join s;
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select  p.city, s.city
         from p natural right outer join s;
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select  p.city, s.city -- incorrect
         from p natural left outer join s;
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -2804,13 +2806,13 @@
     .. container::
 
         .. code:: sql
-          :class: substep
+          :class: step
 
           select s.city as scity, p.city as pcity
           from s left outer join p using(city);
 
         .. code:: sql
-          :class: substep
+          :class: step
 
           select s.city as scity, p.city as pcity
           from s, p --  wrong
@@ -2818,7 +2820,7 @@
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       scity ,  pcity
       London, London
@@ -2839,7 +2841,7 @@
       کاشان ,
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
@@ -2848,20 +2850,20 @@
     .. container::
 
       .. code:: sql
-          :class: substep
+          :class: step
 
           select pname, sn
           from p natural join (select city, sn from s);
 
       .. code:: sql
-          :class: substep
+          :class: step
 
           select pname, sn
           from p natural join s;
 
     .. csv-table::
       :header-rows: 1
-      :class: substep smallerelementwithfullborder
+      :class: step smallerelementwithfullborder
 
       pname, sn
       Nut,   s1
@@ -2880,14 +2882,14 @@
       Bolt,  s3
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
         نام پروژه‌هایی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ۲۰ برای آن پروژه‌ها عرضه کرده باشد و مجموع وزن قطعات عرضه شده برای آن پروژه بیشتر از ۱۰۰ باشد. دقت کنید مجموع وزن قطعات باید qty در weight ضرب شود.
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select jname -- نادرست
       from spj join j using(jn) join s
@@ -2897,7 +2899,7 @@
       having(sum(weight * qty) > 100)
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select jname  -- نادرست
       from j join spj using(jn) join s
@@ -2907,7 +2909,7 @@
       having sum(qty * weight) > 100;
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select jname -- درست
       from p join spj using(pn) join
@@ -2921,7 +2923,7 @@
       having (weight*qty)>100
 
     .. code:: sql
-      :class: substep
+      :class: step
 
       select jname -- درست
       from j natural join (
@@ -2937,14 +2939,14 @@
         having (weight*qty)>100 );
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
         نام شهرهای قطعاتی را بیابید که عرضه‌کننده‌ای با وضعیت بیشتر از ده یکی از قطعات درون آن شهرها را عرضه کرده باشد و مجموع عرضه‌های قطعه‌های آن شهرها بیشتر از ۲۰ باشد به شرطی که تعداد قطعات در آن شهر قطعه بیشتر از دو باشد.
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select p.city
         from p join sp using(pn) join s using(sn)
@@ -2952,13 +2954,13 @@
         group by p.city
         having sum(qty) > 20 and count(distinct pn) > 2;
 
-    .. class:: rtl substep
+    .. class:: rtl step
 
         پاسخ نادرست
 
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select p.city
         from p join sp using(pn)
@@ -2971,19 +2973,19 @@
         having sum(qty) > 20 and count(distinct pn) > 2;
 
 
-    .. class:: rtl substep
+    .. class:: rtl step
 
         پاسخ درست
 
 .. slido::
-   :class: t2c  substep
+   :class: t2c  step
 
     .. class:: rtl-h1
 
       شمارهٔ قطعات با وزن بیشتر از ۱۲ را همراه با جمع عرضه‌های هر کدام بیابید که بیشتر از دو عرضه کننده آنها را عرضه کرده باشند.
 
     .. code:: sql
-        :class: substep
+        :class: step
 
         select pn, sum(qty)
         from sp natural join p
@@ -2992,7 +2994,7 @@
         having count(sn)>2;
 
 .. slido::
-   :class:  substep
+   :class:  step
 
     .. class:: rtl-h1
 
@@ -3006,6 +3008,5 @@
       group by pn
 
 .. slido::
-   :class: substep
 
     END

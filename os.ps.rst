@@ -55,28 +55,28 @@
           x = y + 4 ;
           y = x - 2 ;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=5, y=1
     #. :math:`P_0` 2: x=5, y=3
     #. :math:`P_1` 1: x=7, y=3
     #. :math:`P_1` 2: x=7, y=5
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=5, y=1
     #. :math:`P_1` 2: x=5, y=3
     #. :math:`P_0` 1: x=7, y=3
     #. :math:`P_0` 2: x=7, y=5
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=5, y=1
     #. :math:`P_1` 1: x=5, y=1
     #. :math:`P_0` 2: x=5, y=3
     #. :math:`P_1` 2: x=5, y=3
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=5, y=1
     #. :math:`P_0` 1: x=5, y=1
@@ -114,28 +114,28 @@
           x = y + 3 ;
           y = x + 5 ;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=2, y=1
     #. :math:`P_0` 2: x=2, y=4
     #. :math:`P_1` 1: x=7, y=4
     #. :math:`P_1` 2: x=7, y=12
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=4,  y=1
     #. :math:`P_1` 2: x=4,  y=9
     #. :math:`P_0` 1: x=10, y=9
     #. :math:`P_0` 2: x=10, y=12
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=2, y=1
     #. :math:`P_1` 1: x=4, y=1
     #. :math:`P_0` 2: x=4, y=6
     #. :math:`P_1` 2: x=4, y=9
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=4, y=1
     #. :math:`P_0` 1: x=2, y=1
@@ -180,28 +180,28 @@
       t2 = x - 2 ;
       x = t2
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=2, t1=4
     #. :math:`P_0` 2: x=4, t1=4
     #. :math:`P_1` 1: x=4, t2=2
     #. :math:`P_1` 2: x=2, t2=2
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=2, t2=0
     #. :math:`P_1` 2: x=0, t2=0
     #. :math:`P_0` 1: x=0, t1=2
     #. :math:`P_0` 2: x=2, t1=2
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1: x=2, t1=2
     #. :math:`P_1` 1: x=2, t2=0
     #. :math:`P_0` 2: x=2, t1=2
     #. :math:`P_1` 2: x=0, t2=0
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 1: x=2, t2=0
     #. :math:`P_0` 1: x=2, t1=4
@@ -211,7 +211,7 @@
 .. slido:: How to solve race condition
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
     * Putting Operating System in charge
     * Putting a process of Operating System in charge
@@ -220,7 +220,7 @@
 
     + Suggested Solutions
 
-    .. class:: substep
+    .. class:: step
 
     * *Software solution* : (no need to change anything in current cpu)
     * *Hardware solution* : (need to add some instructions to cpu)
@@ -394,16 +394,16 @@
 
         - |nbsp|
 
-    .. container:: substep
+    .. container:: step
 
-      .. class:: substep
+      .. class:: step
 
       1. Just for two processes
       2. Just one critical section in code
 
       .. code:: cpp
         :number-lines:
-        :class: substep
+        :class: step
 
         do{
 
@@ -419,11 +419,11 @@
 
 .. slido:: Requirements for Software Based Solution
 
-    .. class:: substep
+    .. class:: step
 
     #. compilers do not put shared variables in registers
     #. MMU of Cpu does not cache the shared section (page)
-        .. class:: substep
+        .. class:: step
 
         * How does it know?
         * .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
@@ -607,7 +607,7 @@
 
           busy = false ;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0 : 1`
     #. :math:`P_0 : 3`
@@ -618,7 +618,7 @@
     #. :math:`P_1 : 3`
     #. :math:`P_1 : 5`
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_0` 1
     #. :math:`P_1` 1
@@ -758,11 +758,11 @@
 
       need[j] = false ;
 
-    .. class:: substep
+    .. class:: step
 
       Problem ?
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_i` 2
     #. :math:`P_j` 2
@@ -846,7 +846,7 @@
         /* Critical Section */
         number[i] = 0;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. :math:`P_1` 2: Before assignment
     #. :math:`P_2` 2: Get the same number as P1
@@ -879,7 +879,7 @@
             /* Critical Section */
             number[i] = 0;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
 
     #. :math:`P_1` 2: Before assignment
@@ -902,7 +902,7 @@
             // Share section
             int number[n]={0};
 
-        .. class:: substep trace-code
+        .. class:: step trace-code
 
         #. Test
 
@@ -976,7 +976,7 @@
           /* Critical Section */
           number[1] = 0;
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. P0-2 (number[0]== 0)
     #. P1-2 (number[1]== 0)
@@ -1025,7 +1025,7 @@
    :class: t2c
 
     .. code:: cpp
-      :class: substep
+      :class: step
       :number-lines:
 
       bool testAndSet(bool& lock){
@@ -1035,14 +1035,14 @@
       }
 
     .. code:: cpp
-      :class: substep
+      :class: step
       :number-lines:
 
         // Share section
         bool lock=false;
 
     .. code:: cpp
-      :class: substep
+      :class: step
       :number-lines:
 
 
@@ -1174,7 +1174,7 @@
               // RS
             }while(1);
 
-    .. class:: substep trace-code
+    .. class:: step trace-code
 
     #. P0-3 , P1-3 , P2-3
     #. P0-3 , P1-5 , P2-3
@@ -1309,7 +1309,7 @@
 
 .. slido:: Requirements for Solution
 
-    .. class:: substep
+    .. class:: step
 
     * Mutual exclusion
     * Progress
@@ -2702,7 +2702,7 @@
     .. include:: os/src/ps/dining_philosopher_monitor_10.cpp
         :code: cpp
         :number-lines:
-        :class: substep
+        :class: step
 
 .. slido:: Monitor(V) Dininig Philosophers
    :class: t2c

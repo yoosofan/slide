@@ -4,8 +4,11 @@
 <meta charset="utf-8" />
 <meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lt;string&gt;</title>
-<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems - Paging (By Ahmad Yoosofan)</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><title>Operating Systems - Paging (By Ahmad Yoosofan)</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style><script src="assets/b6plus.js"></script>
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems - Paging (By Ahmad Yoosofan)</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style>
+<script src="assets/b6plus.js"></script>
 <style type="text/css">
 
 /* Minimal style sheet for the HTML output of Docutils.                    */
@@ -635,7 +638,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <section class="slide t3c">
 <h2>Operating Systems - Memory Management - Paging (Ahmad Yoosofan)</h2>
-<div class="next docutils container">
+<div class="incremental docutils container">
 <ul class="incremental simple">
 <li><p><a class="reference external" href="https://yoosofan.github.io/">https://yoosofan.github.io/</a></p></li>
 <li><p><a class="reference external" href="https://github.com/yoosofan/slide/blob/main/os.paging.rst">https://github.com/yoosofan/slide/blob/main/os.paging.rst</a></p></li>
@@ -644,9 +647,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.paging.concise4pdf.html">https://yoosofan.github.io/slide/os.paging.concise4pdf.html</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/course/os.html">https://yoosofan.github.io/course/os.html</a></p></li>
 </ul>
-<img alt="os/img/memory/paging_model.png" class="align-center next" height="518" src="os/img/memory/paging_model.png" width="576" />
+<img alt="os/img/memory/paging_model.png" class="align-center incremental" height="518" src="os/img/memory/paging_model.png" width="576" />
 </div>
-<div class="next docutils container">
+<div class="incremental docutils container">
 <ul class="incremental simple">
 <li><p><strong>Paging</strong> is a <strong>non-contiguous</strong></p></li>
 <li><p>Physical memory into <strong>Frames</strong>.</p></li>
@@ -659,7 +662,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p>Better memory utilization</p></li>
 </ul>
 </div>
-<img alt="os/img/memory/paging_example_32_bytes_memory.png" class="align-center next" height="842" src="os/img/memory/paging_example_32_bytes_memory.png" width="683" />
+<img alt="os/img/memory/paging_example_32_bytes_memory.png" class="align-center incremental" height="842" src="os/img/memory/paging_example_32_bytes_memory.png" width="683" />
 <!-- :
 
 
@@ -688,7 +691,7 @@ Grok AI
 <ul class="incremental">
 <li><p>( c ) free space { [ 7 - 14 ] }</p>
 <blockquote>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>A0</p></td>
 <td><p>A1</p></td>
@@ -702,7 +705,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>B0</p></td>
 <td><p>B1</p></td>
@@ -718,7 +721,7 @@ Grok AI
 </li>
 <li><p>( e ) free space { [ 4 - 6 ] , [ 11 - 14 ] }</p>
 <blockquote>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>A0</p></td>
 <td><p>A1</p></td>
@@ -732,7 +735,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>C0</p></td>
 <td><p>C1</p></td>
@@ -750,7 +753,7 @@ Grok AI
 </li>
 <li><p>( f ) free space { [ 11 - 14 ] }</p>
 <blockquote>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>A0</p></td>
 <td><p>A1</p></td>
@@ -764,7 +767,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>C0</p></td>
 <td><p>C1</p></td>
@@ -778,7 +781,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table>
 <tbody>
 <tr><td><p>D0</p></td>
 <td><p>D1</p></td>
@@ -949,7 +952,7 @@ Grok AI
 </svg>
 
 </div>
-<img alt="os/img/memory/memory_paging_address_translation.png" class="align-center next" height="774" src="os/img/memory/memory_paging_address_translation.png" width="1214" />
+<img alt="os/img/memory/memory_paging_address_translation.png" class="align-center incremental" height="774" src="os/img/memory/memory_paging_address_translation.png" width="1214" />
 <ul class="incremental simple">
 <li><p><strong>PTBR</strong> holds the <strong>starting address</strong> of the current process's page table.</p></li>
 <li><p>Changed on every context switch.</p></li>
@@ -958,7 +961,7 @@ Grok AI
 <div class="slide-number">4</div></section>
 <section class="slide t2c">
 <h2>Step by Step Sample</h2>
-<table>
+<table class="full-border incremental">
 <caption>Memory with only OS before adding a process</caption>
 <thead>
 <tr><th class="head"><p>OS</p></th>
@@ -1016,7 +1019,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table class="full-border incremental">
 <caption>Process P0</caption>
 <thead>
 <tr><th class="head"><p>A</p></th>
@@ -1051,7 +1054,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table class="full-border incremental">
 <caption>Adding Process P0 to Memory</caption>
 <thead>
 <tr><th class="head"><p>OS</p></th>
@@ -1109,7 +1112,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table class="full-border incremental">
 <caption>Page Table of P0</caption>
 <thead>
 <tr><th class="head"><p>P0_0</p></th>
@@ -1131,7 +1134,7 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<table class="next">
+<table class="full-border incremental">
 <caption>Page Table of P0</caption>
 <thead>
 <tr><th class="head"><p>11</p></th>
@@ -1212,7 +1215,7 @@ Grok AI
 <section class="slide t2c">
 <h2>Translation Look-aside Buffer (TLB)</h2>
 <img alt="os/img/memory/paging_hardware_with_TLB.png" class="align-center" height="619" src="os/img/memory/paging_hardware_with_TLB.png" width="840" />
-<img alt="os/img/memory/paging_hardware_with_TLB_ptbr.png" class="align-center next" height="781" src="os/img/memory/paging_hardware_with_TLB_ptbr.png" width="956" />
+<img alt="os/img/memory/paging_hardware_with_TLB_ptbr.png" class="align-center incremental" height="781" src="os/img/memory/paging_hardware_with_TLB_ptbr.png" width="956" />
 <ul class="simple">
 <li><p>High-speed <strong>hardware cache</strong> for recent page table entries.</p></li>
 <li><p>Contains (Page Number → Frame Number) mappings.</p></li>
@@ -1235,7 +1238,7 @@ Grok AI
 <section class="slide t2c">
 <h2>Flowchart of TLB miss</h2>
 <img alt="os/img/memory/paging_hardware_TLB_miss.png" class="align-center" height="748" src="os/img/memory/paging_hardware_TLB_miss.png" width="287" />
-<img alt="os/img/memory/memory_paging_page_table_and_cache.jpg" class="align-center next" height="853" src="os/img/memory/memory_paging_page_table_and_cache.jpg" width="1075" />
+<img alt="os/img/memory/memory_paging_page_table_and_cache.jpg" class="align-center incremental" height="853" src="os/img/memory/memory_paging_page_table_and_cache.jpg" width="1075" />
 <div class="slide-number">8</div></section>
 <section class="slide t2c">
 <h2>Effective Access Time (EAT)</h2>
@@ -1417,8 +1420,8 @@ Grok AI
   <mo stretchy="false">)</mo>
 </math></p></li>
 </ul>
-<p class="rtl-h1 next">زمان دسترسی مؤثر = <cite>زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه</cite></p>
-<p class="rtl-h2 next">زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.</p>
+<p class="rtl-h1 incremental">زمان دسترسی مؤثر = <cite>زمان دسترسی به جدول صفحه + زمان دسترسی به حافظه</cite></p>
+<p class="rtl-h2 incremental">زمان دسترسی مؤثر را برای پردازنده‌ای با حافظهٔ صفحه‌بندی شده حساب کنید اگر زمان دسترسی به حافظهٔ نهان جدول صفحه برابر ۱ نانو ثانیه باشد و زمان دسترسی به حافظهٔ نهان ۵ نانوثانیه باشد و زمان دسترسی به حافظه برابر ۱۰۰ نانوثانیه باشد و ضریب اصابت حافظهٔ نهان جدول صفحه برابر با ۹۵ درصد و ضریب اصابت به حافظهٔ نهان ۹۰ درصد باشد.</p>
 </div>
 <ul class="incremental simple">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
@@ -1553,7 +1556,7 @@ Grok AI
 <li><p>EAT = 6 + 15 = 21ns</p></li>
 </ul>
 <div class="docutils container">
-<p class="rtl-h2 next">با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت</p>
+<p class="rtl-h2 incremental">با فرض برابر بودن نسبت‌های اصابت و زمان‌های یکسان برای دسترسی به حافظهٔ نهان  و حافظهٔ TLB خواهیم داشت</p>
 <ul class="incremental simple">
 <li><p>EAT = <math xmlns="http://www.w3.org/1998/Math/MathML">
   <mn>2</mn>
@@ -1787,7 +1790,7 @@ Grok AI
 <div class="slide-number">9</div></section>
 <section class="slide t2c">
 <h2>Memory Protection</h2>
-<div class="next docutils container">
+<div class="incremental docutils container">
 <ol class="arabic simple incremental">
 <li><p><strong>PTLR (Page-Table Length Register):</strong> Indicates the size of the page table to prevent out-of-bounds access.</p></li>
 <li><dl class="simple">
@@ -1804,7 +1807,7 @@ Grok AI
 <li><p><strong>Access Rights:</strong> Define if a page is Read-only, Read-write, or Execute-only.</p></li>
 <li><p>Any violation causes a hardware trap to the OS.</p></li>
 </ul>
-<table class="next">
+<table class="incremental">
 <thead>
 <tr><th class="head"><p>Page</p></th>
 <th class="head"><p>Frame</p></th>
@@ -1836,14 +1839,14 @@ Grok AI
 </tr>
 </tbody>
 </table>
-<img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center next" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
+<img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center incremental" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
 </div>
-<img alt="os/img/memory/paging_valid_invalid.png" class="align-center next" height="759" src="os/img/memory/paging_valid_invalid.png" width="890" />
+<img alt="os/img/memory/paging_valid_invalid.png" class="align-center incremental" height="759" src="os/img/memory/paging_valid_invalid.png" width="890" />
 <div class="slide-number">10</div></section>
 <section class="slide t2c">
 <h2>Page Sharing</h2>
 <img alt="os/img/memory/memory_paging_share_pages.png" class="align-center" src="os/img/memory/memory_paging_share_pages.png" />
-<img alt="os/img/memory/paging_sharing_code.png" class="align-center next" height="651" src="os/img/memory/paging_sharing_code.png" width="659" />
+<img alt="os/img/memory/paging_sharing_code.png" class="align-center incremental" height="651" src="os/img/memory/paging_sharing_code.png" width="659" />
 <ul class="incremental simple">
 <li><p><strong>Shared Code:</strong></p></li>
 <li><p>One copy of read-only (reentrant) code can be shared among multiple processes.</p></li>
