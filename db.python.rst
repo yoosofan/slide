@@ -11,18 +11,12 @@
     University of Kashan
 
 .. slido:: Simple Application(I)
+   :class: t2c
 
     .. include:: db/src/python-sqlite/sp220.py
         :code: python
         :number-lines:
         :class: step
-
-    .. :
-
-        :start-line: 3
-        :end-line: 18
-
-.. slido:: Cursor(I)
 
     .. :
 
@@ -32,12 +26,6 @@
         :code: python
         :number-lines:
         :class: step
-
-
-    .. :
-
-        :start-line: 3
-        :end-line: 18
 
 .. slido:: Cursor(II)
    :class: t3c

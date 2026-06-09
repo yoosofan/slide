@@ -5,9 +5,29 @@
 Ahmad Yoosofan Slides for some Computer Courses
 ===============================================
 
+About This Repository
+=====================
 
-List of courses and slides
-==========================
+This repository contains lecture slides for various Computer Science courses.
+
+`**prezento** <https://github.com/yoosofan/prezento>`_ is the modern reStructuredText-based slide generator used in this repository.
+
+All slides follow the new **prezento** format. New slides are added to the root of the repository using the following naming convention:
+
+``<course_abbr>.<topic>.rst``
+
+**Examples:**
+- ``os.paging.rst`` — Operating Systems: Paging
+- ``db.sql2.rst`` — Database Systems: SQL (Part 2)
+- ``arch.cpu.rst`` — Computer Architecture: CPU Design
+
+Each slide file generates three output versions:
+- Interactive presentation (`.presentation.html`)
+- Concise printable version (`.concise4pdf.html`)
+- Step-by-step handout (`.substep4pdf.html`)
+
+List of courses and slides of old format
+========================================
 .. csv-table::
     :header-rows: 1
 
