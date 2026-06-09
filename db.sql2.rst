@@ -2949,21 +2949,16 @@
     .. code:: sql
         :class: step
 
-        select p.city
+        select p.city -- incorrect
         from p join sp using(pn) join s using(sn)
         where s.status > 10
         group by p.city
         having sum(qty) > 20 and count(distinct pn) > 2;
 
-    .. class:: rtl step
-
-        پاسخ نادرست
-
-
     .. code:: sql
         :class: step
 
-        select p.city
+        select p.city -- incorrect
         from p join sp using(pn)
         where exists(
           select *
@@ -2973,10 +2968,29 @@
         group by p.city
         having sum(qty) > 20 and count(distinct pn) > 2;
 
+    .. code:: sql
+        :class: step
 
-    .. class:: rtl step
+        select p.city -- correct
+        from p left outer join sp using(pn)
+        where exists(
+          select *
+          from s
+          where s.status > 10 and s.sn = sp.sn
+        )
+        group by p.city
+        having sum(qty) > 20 and count(distinct pn) > 2;
 
-        پاسخ درست
+    .. code:: sql
+        :class: step
+
+        select p.city -- correct ?
+        from p left outer join sp using(pn)
+          join s using(city)
+        group by p.city
+        having sum(qty) > 20 and
+          count(distinct pn) > 2 and
+          max(status > 10);
 
 .. slido::
    :class: t2c  step
@@ -2994,8 +3008,17 @@
         group by pn
         having count(sn)>2;
 
+    .. code:: sql
+        :class: step
+
+        select pn, sum(qty)
+        from spj natural join p
+        where p.weight > 12
+        group by pn
+        having count(distinct sn)>2;
+
 .. slido::
-   :class:  step
+   :class:  step t2c
 
     .. class:: rtl-h1
 

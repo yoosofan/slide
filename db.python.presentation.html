@@ -686,7 +686,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 :start-line: 3
 :end-line: 18 -->
 <div class="slide-number">3</div></section>
-<section class="slide">
+<section class="slide t3c">
 <h2>Cursor(II)</h2>
 <pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span><span class="whitespace">
@@ -706,13 +706,6 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace">
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<!-- :
-
-:start-line: 3
-:end-line: 18 -->
-<div class="slide-number">4</div></section>
-<section class="slide t2c">
-<h2>Cursor(III)</h2>
 <pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">sqlite3</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="literal string single">'sp.sqlite'</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span><span class="name">c</span> <span class="operator">=</span> <span class="name">conn</span><span class="operator">.</span><span class="name">cursor</span><span class="punctuation">()</span><span class="whitespace">
@@ -756,7 +749,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 
 :start-line: 3
 :end-line: 18 -->
-<div class="slide-number">5</div></section>
+<div class="slide-number">4</div></section>
 <section class="slide t2c">
 <h2>Traverse Fields</h2>
 <pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -798,7 +791,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </code><small class="ln">15 </small><code data-lineno="15 "><span class="generic output"></span><span class="generic prompt virtualenv">('P5', 'Cam', 'Blue', 12, 'Paris')</span>
 </code><small class="ln">16 </small><code data-lineno="16 "><span class="generic output"></span><span class="generic prompt virtualenv">('P6', 'Cog', 'Red', 19, 'London')</span>
 </code><small class="ln">17 </small><code data-lineno="17 "></code></pre>
-<div class="slide-number">6</div></section>
+<div class="slide-number">5</div></section>
 <section class="slide t2c">
 <h2>Fetch</h2>
 <pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -835,7 +828,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </code><small class="ln">12 </small><code data-lineno="12 "><span class="generic output"></span><span class="generic prompt virtualenv">('P2', 'Bolt', 'Green', 17, 'Paris')</span>
 </code><small class="ln">13 </small><code data-lineno="13 "><span class="generic output"></span><span class="generic prompt virtualenv">('P3', 'Screw', 'Blue', 17, 'Oslo')</span>
 </code><small class="ln">14 </small><code data-lineno="14 "></code></pre>
-<div class="slide-number">7</div></section>
+<div class="slide-number">6</div></section>
 <section class="slide t2c">
 <h2>Manipulate Tables(I)</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -857,7 +850,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">8</div></section>
+<div class="slide-number">7</div></section>
 <section class="slide t2c">
 <h2>Manipulate Tables(II)</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -881,7 +874,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">c1</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">c2</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">21 </small><code data-lineno="21 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">9</div></section>
+<div class="slide-number">8</div></section>
 <section class="slide t2c">
 <h2>Two Connection</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -910,7 +903,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 
 :start-line: 3
 :end-line: 18 -->
-<div class="slide-number">10</div></section>
+<div class="slide-number">9</div></section>
 <section class="slide t2c">
 <h2>DELETE</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">sqlite3</span><span class="whitespace">
@@ -923,7 +916,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">m1</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span><span class="name">c</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">11</div></section>
+<div class="slide-number">10</div></section>
 <section class="slide t2c">
 <h2>A program(I)</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">createTable</span><span class="punctuation">(</span><span class="name">c</span><span class="punctuation">):</span>  <span class="whitespace">
@@ -951,7 +944,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">23 </small><code data-lineno="23 "><span class="literal string single">    FROM stocks 
 </span></code><small class="ln">24 </small><code data-lineno="24 "><span class="literal string single">    WHERE symbol=?
 </span></code><small class="ln">25 </small><code data-lineno="25 "><span class="literal string single">  '''</span><span class="punctuation">,</span> <span class="name">t</span><span class="punctuation">)</span></code></pre>
-<div class="slide-number">12</div></section>
+<div class="slide-number">11</div></section>
 <section class="slide t2c">
 <h2>A program(II)</h2>
 <pre class="code python ltr literal-block"><small class="ln">26 </small><code data-lineno="26 ">  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">c</span><span class="operator">.</span><span class="name">fetchone</span><span class="punctuation">())</span><span class="whitespace">
@@ -986,8 +979,9 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 
 :start-line:
 :end-line: 18 -->
-<div class="slide-number">13</div></section>
+<div class="slide-number">12</div></section>
 <section class="slide">
+<h2>PostgreSQL and Python</h2>
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span>        <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span> <span class="name">host</span> <span class="operator">=</span> <span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -997,7 +991,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">14</div></section>
+<div class="slide-number">13</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1014,7 +1008,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string single">']'</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">15</div></section>
+<div class="slide-number">14</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1029,7 +1023,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">11 </small><code data-lineno="11 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span><span class="whitespace">
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">16</div></section>
+<div class="slide-number">15</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1044,7 +1038,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">11 </small><code data-lineno="11 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">();</span><span class="whitespace">
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">17</div></section>
+<div class="slide-number">16</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1056,7 +1050,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">execute</span><span class="punctuation">(</span><span class="literal string double">&quot;&quot;&quot;SELECT * FROM &quot;a1&quot;;&quot;&quot;&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">18</div></section>
+<div class="slide-number">17</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;ali&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1068,7 +1062,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">19</div></section>
+<div class="slide-number">18</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1092,7 +1086,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="literal string doc">    SELECT DISTINCT &quot;p&quot;.&quot;city&quot; 
 </span></code><small class="ln">21 </small><code data-lineno="21 "><span class="literal string doc">    FROM &quot;s&quot; JOIN &quot;p&quot; ON &quot;s&quot;.&quot;city&quot; = &quot;p&quot;.&quot;city&quot; ;
 </span></code><small class="ln">22 </small><code data-lineno="22 "><span class="literal string doc">&quot;&quot;&quot;</span></code></pre>
-<div class="slide-number">20</div></section>
+<div class="slide-number">19</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1114,7 +1108,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">21</div></section>
+<div class="slide-number">20</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment single">#Error</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
@@ -1133,7 +1127,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">22</div></section>
+<div class="slide-number">21</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -1164,7 +1158,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">27 </small><code data-lineno="27 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">28 </small><code data-lineno="28 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">29 </small><code data-lineno="29 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">23</div></section>
+<div class="slide-number">22</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -1180,7 +1174,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">24</div></section>
+<div class="slide-number">23</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -1197,7 +1191,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">25</div></section>
+<div class="slide-number">24</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -1219,7 +1213,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">26</div></section>
+<div class="slide-number">25</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="name">password</span><span class="operator">=</span><span class="literal string double">&quot;12&quot;</span><span class="punctuation">,</span><span class="name">host</span><span class="operator">=</span><span class="literal string single">'127.0.0.1'</span><span class="punctuation">)</span><span class="whitespace">
@@ -1250,7 +1244,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">27 </small><code data-lineno="27 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">a</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">28 </small><code data-lineno="28 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">29 </small><code data-lineno="29 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">27</div></section>
+<div class="slide-number">26</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">conn</span> <span class="operator">=</span> <span class="name">psycopg</span><span class="operator">.</span><span class="name">connect</span><span class="punctuation">(</span><span class="name">dbname</span><span class="operator">=</span><span class="literal string double">&quot;sp&quot;</span><span class="punctuation">,</span> <span class="name">user</span><span class="operator">=</span><span class="literal string double">&quot;postgres&quot;</span><span class="punctuation">,</span> <span class="whitespace">
@@ -1272,7 +1266,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span>    <span class="name">prev</span><span class="operator">=</span><span class="name">a</span><span class="punctuation">[</span><span class="literal number integer">0</span><span class="punctuation">]</span><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">28</div></section>
+<div class="slide-number">27</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="comment single">#conn = psycopg.connect(dbname=&quot;sp&quot;, user=&quot;postgres&quot;, password=&quot;12&quot;,host='localhost')</span><span class="whitespace">
@@ -1317,7 +1311,7 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">41 </small><code data-lineno="41 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">42 </small><code data-lineno="42 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">43 </small><code data-lineno="43 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">29</div></section>
+<div class="slide-number">28</div></section>
 <section class="slide">
 <pre class="code python ltr literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment single">#https://www.psycopg.org/docs/usage.html</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">psycopg</span><span class="whitespace">
@@ -1339,6 +1333,6 @@ https://docs.python.org/3/library/sqlite3.html#sqlite-and-python-types -->
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">commit</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="name">cur</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">conn</span><span class="operator">.</span><span class="name">close</span><span class="punctuation">()</span></code></pre>
-<div class="slide-number">30</div></section>
+<div class="slide-number">29</div></section>
 </body>
 </html>

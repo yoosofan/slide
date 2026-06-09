@@ -40,20 +40,12 @@
         :end-line: 18
 
 .. slido:: Cursor(II)
+   :class: t3c
 
     .. include:: db/src/python-sqlite/sp250.py
         :code: python
         :number-lines:
         :class: step
-
-
-    .. :
-
-        :start-line: 3
-        :end-line: 18
-
-.. slido:: Cursor(III)
-   :class: t2c
 
     .. include:: db/src/python-sqlite/sp260.py
         :code: python
@@ -201,7 +193,7 @@
         :start-line: 
         :end-line: 18
 
-.. slido::
+.. slido:: PostgreSQL and Python
 
     .. include:: db/src/python-postgresql/110.py
         :code: python
