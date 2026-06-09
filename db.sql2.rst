@@ -2920,7 +2920,7 @@
         where T.jn=j.jn and status > 20
       )
       group by jn
-      having (weight*qty)>100
+      having (weight*qty)>100;
 
     .. code:: sql
       :class: step
@@ -2936,7 +2936,8 @@
           where T.jn=j.jn and status > 20
         )
         group by jn
-        having (weight*qty)>100 );
+        having (weight*qty)>100)
+      );
 
 .. slido::
    :class: t2c  step

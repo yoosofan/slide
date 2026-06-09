@@ -2,7 +2,7 @@
    :format: html
 
 .. prezento:: SQLite and python
-   :css: assets/style.css python.css
+   :css: ./assets/style.css
 
 .. slido:: Database - Application - python
 
