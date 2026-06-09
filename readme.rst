@@ -17,6 +17,7 @@ All slides follow the new **prezento** format. New slides are added to the root 
 ``<course_abbr>.<topic>.rst``
 
 **Examples:**
+
 - ``os.paging.rst`` — Operating Systems: Paging
 - ``db.sql2.rst`` — Database Systems: SQL (Part 2)
 - ``arch.cpu.rst`` — Computer Architecture: CPU Design
