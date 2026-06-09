@@ -166,7 +166,7 @@
 .. slido:: Page-Table Base Register (PTBR)
    :class: ts2c
 
-    .. yographviz::
+    .. grafo::
       :align: right
       :width: 1700px
 
@@ -247,8 +247,8 @@
     * Logical Address of C = "0010" = "00" "10"
     * Page Address    = "00"
     * Page Table Cell Index "00" is "11"
-    * Physical Address= concatenation("00", "10")
-    * Physical Address= "00" "10" = "0010"
+    * Physical Address= concatenation("11", "10")
+    * Physical Address= "11" "10" = "1110"
 
     .. class:: step
 

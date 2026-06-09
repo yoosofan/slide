@@ -68,7 +68,7 @@
       :code: python
       :class: step
 
-    .. yographviz::
+    .. grafo::
       :class: step
       :width: 800px
 

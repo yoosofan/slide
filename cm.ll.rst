@@ -465,7 +465,7 @@
 
       input = a b a $
 
-    .. yographviz::
+    .. grafo::
         :class: step
 
         digraph aba{

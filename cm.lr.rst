@@ -14,7 +14,7 @@
     #. E → E + a
     #. E → a
 
-    .. yographviz::
+    .. grafo::
        :width: 1000px
 
         digraph aaa{
@@ -58,7 +58,7 @@
         #. E(E(E(a[1.4])+a[2.5])+a[3.6])
 
 
-        .. yographviz::
+        .. grafo::
            :class: step
 
                 digraph ParseTree {
@@ -104,7 +104,7 @@
     #. E → E + a
     #. E → a
 
-    .. yographviz::
+    .. grafo::
 
         digraph {
           graph [splines=true  rankdir = "LR"];
@@ -156,7 +156,7 @@
     #. F → (E)
     #. F → a
 
-    .. yographviz::
+    .. grafo::
       :class: step
 
       digraph {
@@ -188,7 +188,7 @@
     #. F → (E)
     #. F → a
 
-    .. yographviz::
+    .. grafo::
       :class: step
 
       digraph {
@@ -251,7 +251,7 @@
     #. F → (E)
     #. F → a
 
-    .. yographviz::
+    .. grafo::
       :class: step
 
       digraph {
@@ -380,7 +380,7 @@
         #. S → i S e S
         #. S → o
 
-    .. yographviz::
+    .. grafo::
       :class: step
 
       digraph {
@@ -440,7 +440,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
       digraph {
         graph [splines=true  rankdir = "LR"];
@@ -559,7 +559,7 @@
 
         ----
 
-        .. yographviz::
+        .. grafo::
 
               digraph g {
                 graph [splines=true  rankdir = "LR"];
@@ -636,7 +636,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -740,7 +740,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -819,7 +819,7 @@
 
 .. slido:: Look ahead
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -898,7 +898,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -977,7 +977,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1056,7 +1056,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1135,7 +1135,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1214,7 +1214,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1293,7 +1293,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1372,7 +1372,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
@@ -1451,7 +1451,7 @@
 
 .. slido::
 
-    .. yographviz::
+    .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];

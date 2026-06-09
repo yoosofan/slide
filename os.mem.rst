@@ -164,7 +164,7 @@
 .. slido:: Compaction or Defragmentation
    :class: t2c
 
-    .. yographviz::
+    .. grafo::
 
         digraph Compaction {
             rankdir=LR;
@@ -252,7 +252,7 @@
 .. slido:: Buddy System Memory Management(II)
    :class: t4c
 
-    .. yographviz::
+    .. grafo::
         :width: 220
 
         digraph Buddy1 {
@@ -281,7 +281,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 200
         :class: step
 
@@ -312,7 +312,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 200
         :class: step
 
@@ -349,7 +349,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 300
         :class: step
 
@@ -393,7 +393,7 @@
         }
 
 
-    .. yographviz::
+    .. grafo::
         :width: 300
         :class: step
 
@@ -436,7 +436,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 300
         :class: step
 
@@ -479,7 +479,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 300
         :class: step
 
@@ -516,7 +516,7 @@
 
         }
 
-    .. yographviz::
+    .. grafo::
         :width: 160
         :class: step
 
@@ -796,7 +796,7 @@
         * **High Latency**
         * **Thrashing**
 
-    .. yographviz::
+    .. grafo::
         :width: 600
 
         digraph Suspension {
@@ -926,7 +926,7 @@
 
         ----
 
-        .. yographviz::
+        .. grafo::
 
             digraph Overlays {
                 rankdir=LR;
