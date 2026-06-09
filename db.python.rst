@@ -1,14 +1,8 @@
 .. role:: raw-html(raw)
    :format: html
 
-.. prezento:: Database
-   :skip-help: true
+.. prezento:: SQLite and python
    :css: assets/style.css python.css
-   :substep: true
-   :slide-numbers: true
-   :skip-help: true
-   :data-width: 1024
-   :data-height: 768
 
 .. slido:: Database - Application - python
 
@@ -21,7 +15,7 @@
     .. include:: db/src/python-sqlite/sp220.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
 
     .. :
 
@@ -37,7 +31,8 @@
     .. include:: db/src/python-sqlite/sp240.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
+
 
     .. :
 
@@ -49,7 +44,8 @@
     .. include:: db/src/python-sqlite/sp250.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
+
 
     .. :
 
@@ -62,7 +58,7 @@
     .. include:: db/src/python-sqlite/sp260.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
 
     .. code:: console
       :number-lines:
@@ -93,10 +89,11 @@
     .. include:: db/src/python-sqlite/sp280.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
 
     .. code:: console
       :number-lines:
+      :class: step
 
       python3 sp280.py 
 
@@ -121,10 +118,11 @@
     .. include:: db/src/python-sqlite/sp290.py
         :code: python
         :number-lines:
-        :class: ltr
+        :class: step
 
     .. code:: console
       :number-lines:
+      :class: step
 
       python3 sp280.py 
 
