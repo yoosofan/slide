@@ -4,8 +4,8 @@
 <meta charset="utf-8" />
 <meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lt;string&gt;</title>
-<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Process Synchronization</title><link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Process Synchronization</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
 <style type="text/css">
 
 /* Minimal style sheet for the HTML output of Docutils.                    */
@@ -686,7 +686,7 @@ a { text-decoration: none; }
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">x</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">y</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="literal number integer">4</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">y</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">x</span><span class="whitespace"> </span><span class="operator">-</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
 </div>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -712,7 +712,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=7, y=5</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -738,7 +738,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=7, y=5</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -764,7 +764,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=5, y=3</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -817,7 +817,7 @@ a { text-decoration: none; }
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">x</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">y</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="literal number integer">3</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">y</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">x</span><span class="whitespace"> </span><span class="operator">+</span><span class="whitespace"> </span><span class="literal number integer">5</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
 </div>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -843,7 +843,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=7, y=12</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -869,7 +869,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=10, y=12</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -895,7 +895,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=4, y=9</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -946,7 +946,7 @@ a { text-decoration: none; }
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">x</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">x</span><span class="whitespace"> </span><span class="operator">-</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">t2</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">x</span><span class="whitespace"> </span><span class="operator">-</span><span class="whitespace"> </span><span class="literal number integer">2</span><span class="whitespace"> </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="name">x</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">t2</span></code></pre>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -972,7 +972,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=2, t2=2</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -998,7 +998,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=2, t1=2</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1024,7 +1024,7 @@ a { text-decoration: none; }
   </msub>
 </math> 2: x=0, t2=0</p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1053,7 +1053,7 @@ a { text-decoration: none; }
 <div class="slide-number">4</div></section>
 <section class="slide t2c">
 <h2>How to solve race condition</h2>
-<ul class="substep simple">
+<ul class="step simple">
 <li><p>Putting Operating System in charge</p></li>
 <li><p>Putting a process of Operating System in charge</p></li>
 <li><p>Putting different processes in charge of different resoureces</p></li>
@@ -1062,7 +1062,7 @@ a { text-decoration: none; }
 <ul class="simple">
 <li><p>Suggested Solutions</p></li>
 </ul>
-<ul class="substep simple">
+<ul class="step simple">
 <li><p><em>Software solution</em> : (no need to change anything in current cpu)</p></li>
 <li><p><em>Hardware solution</em> : (need to add some instructions to cpu)</p></li>
 </ul>
@@ -1257,12 +1257,12 @@ a { text-decoration: none; }
 </tr>
 </tbody>
 </table>
-<div class="substep docutils container">
-<ol class="arabic simple substep">
+<div class="step docutils container">
+<ol class="arabic simple step">
 <li><p>Just for two processes</p></li>
 <li><p>Just one critical section in code</p></li>
 </ol>
-<pre class="code cpp substep literal-block"><small class="ln"> 1 </small><code data-lineno=" 1 "><span class="keyword">do</span><span class="punctuation">{</span><span class="whitespace">
+<pre class="code cpp step literal-block"><small class="ln"> 1 </small><code data-lineno=" 1 "><span class="keyword">do</span><span class="punctuation">{</span><span class="whitespace">
 </span></code><small class="ln"> 2 </small><code data-lineno=" 2 "><span class="whitespace">
 </span></code><small class="ln"> 3 </small><code data-lineno=" 3 "><span class="whitespace">  </span><span class="name">Entry</span><span class="whitespace">
 </span></code><small class="ln"> 4 </small><code data-lineno=" 4 "><span class="whitespace">
@@ -1277,11 +1277,11 @@ a { text-decoration: none; }
 <div class="slide-number">7</div></section>
 <section class="slide">
 <h2>Requirements for Software Based Solution</h2>
-<ol class="arabic substep">
+<ol class="arabic step">
 <li><p>compilers do not put shared variables in registers</p></li>
 <li><dl>
 <dt>MMU of Cpu does not cache the shared section (page)</dt>
-<dd><ul class="substep">
+<dd><ul class="step">
 <li><p>How does it know?</p></li>
 <li><img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" />
 </li>
@@ -1442,7 +1442,7 @@ a { text-decoration: none; }
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace">    </span><span class="comment single">// Critical Section : CS
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="comment single"></span><span class="whitespace">
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace">    </span><span class="name">busy</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name builtin">false</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1508,7 +1508,7 @@ a { text-decoration: none; }
   <mn>5</mn>
 </math></p></li>
 </ol>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1623,8 +1623,8 @@ a { text-decoration: none; }
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"></span><span class="comment single">// CS
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="comment single"></span><span class="whitespace">
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span><span class="name">need</span><span class="punctuation">[</span><span class="name">j</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name builtin">false</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
-<p class="substep">Problem ?</p>
-<ol class="arabic simple substep trace-code">
+<p class="step">Problem ?</p>
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1718,7 +1718,7 @@ a { text-decoration: none; }
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace">       </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"> </span><span class="comment multiline">/* Critical Section */</span><span class="whitespace">
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"> </span><span class="name">number</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span></code></pre>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1782,7 +1782,7 @@ a { text-decoration: none; }
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"> </span><span class="comment multiline">/* Critical Section */</span><span class="whitespace">
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"> </span><span class="name">number</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span></code></pre>
 </div>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
     <mi>P</mi>
@@ -1833,7 +1833,7 @@ a { text-decoration: none; }
 <div class="docutils container">
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace"> </span><span class="comment single">// Share section
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment single"></span><span class="whitespace"> </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">number</span><span class="punctuation">[</span><span class="name">n</span><span class="punctuation">]</span><span class="operator">=</span><span class="punctuation">{</span><span class="literal number integer">0</span><span class="punctuation">};</span></code></pre>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p>Test</p></li>
 </ol>
 </div>
@@ -1883,7 +1883,7 @@ a { text-decoration: none; }
 </span></code><small class="ln"> 8 </small><code data-lineno=" 8 "><span class="whitespace"> </span><span class="comment multiline">/* Critical Section */</span><span class="whitespace">
 </span></code><small class="ln"> 9 </small><code data-lineno=" 9 "><span class="whitespace"> </span><span class="name">number</span><span class="punctuation">[</span><span class="literal number integer">1</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span></code></pre>
 </div>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p>P0-2 (number[0]== 0)</p></li>
 <li><p>P1-2 (number[1]== 0)</p></li>
 <li><p>P0-3 (number[0]== 1)</p></li>
@@ -1923,14 +1923,14 @@ a { text-decoration: none; }
 <div class="slide-number">23</div></section>
 <section class="slide t2c">
 <h2>Hardware Soloution(I)</h2>
-<pre class="code cpp substep literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name function">testAndSet</span><span class="punctuation">(</span><span class="keyword type">bool</span><span class="operator">&amp;</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">){</span><span class="whitespace">
+<pre class="code cpp step literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name function">testAndSet</span><span class="punctuation">(</span><span class="keyword type">bool</span><span class="operator">&amp;</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">){</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name">temp</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">  </span><span class="name">lock</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name builtin">true</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">temp</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
-<pre class="code cpp substep literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Share section
+<pre class="code cpp step literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Share section
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment single"></span><span class="whitespace">  </span><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name">lock</span><span class="operator">=</span><span class="name builtin">false</span><span class="punctuation">;</span></code></pre>
-<pre class="code cpp substep literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Each process
+<pre class="code cpp step literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Each process
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment single"></span><span class="whitespace">  </span><span class="keyword">while</span><span class="punctuation">(</span><span class="name">testAndSet</span><span class="punctuation">(</span><span class="name">lock</span><span class="punctuation">))</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">        </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">
@@ -2028,7 +2028,7 @@ exit_region:
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace">    </span><span class="comment single">// RS
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="comment single"></span><span class="whitespace">  </span><span class="punctuation">}</span><span class="keyword">while</span><span class="punctuation">(</span><span class="literal number integer">1</span><span class="punctuation">);</span></code></pre>
 </div>
-<ol class="arabic simple substep trace-code">
+<ol class="arabic simple step trace-code">
 <li><p>P0-3 , P1-3 , P2-3</p></li>
 <li><p>P0-3 , P1-5 , P2-3</p></li>
 <li><p>P0-3 , P1-6 , P2-3</p></li>
@@ -2127,7 +2127,7 @@ Why don't they use this feature of interrupt? -->
 <div class="slide-number">30</div></section>
 <section class="slide">
 <h2>Requirements for Solution</h2>
-<ul class="substep simple">
+<ul class="step simple">
 <li><p>Mutual exclusion</p></li>
 <li><p>Progress</p></li>
 <li><p>Bounded waiting</p></li>
@@ -3165,7 +3165,7 @@ Use python for the answers for this problem -->
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace">    </span><span class="name">philosopher</span><span class="punctuation">(</span><span class="literal number integer">4</span><span class="punctuation">);</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace">  </span><span class="punctuation">}</span><span class="whitespace">
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span><span class="punctuation">}</span><span class="whitespace"> </span></code></pre>
-<pre class="code cpp substep literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">monitor</span><span class="whitespace"> </span><span class="name">dP</span><span class="punctuation">{</span><span class="whitespace">
+<pre class="code cpp step literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">monitor</span><span class="whitespace"> </span><span class="name">dP</span><span class="punctuation">{</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword">enum</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="name">thinking</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">hungry</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">eating</span><span class="punctuation">}</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">      </span><span class="name">state</span><span class="punctuation">[</span><span class="literal number integer">5</span><span class="punctuation">];</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="name">condition</span><span class="whitespace"> </span><span class="name">self</span><span class="punctuation">[</span><span class="literal number integer">5</span><span class="punctuation">];</span><span class="whitespace">

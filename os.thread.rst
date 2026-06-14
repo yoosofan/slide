@@ -70,7 +70,7 @@
 
     .. grafo::
       :class: step
-      :width: 800px
+      :width: 700px
 
         digraph g{
           Start [label="f2(x) * f3(x) + f4(x, y) / f5(x, y)"]

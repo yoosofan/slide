@@ -4,8 +4,11 @@
 <meta charset="utf-8" />
 <meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lt;string&gt;</title>
-<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Thread</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><title>Operating Systems: Thread</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full .slide-number{display:none}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style><script src="assets/b6plus.js"></script>
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Thread</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style>
+<script src="assets/b6plus.js"></script>
 <style type="text/css">
 
 /* Minimal style sheet for the HTML output of Docutils.                    */
@@ -644,13 +647,13 @@ https://www.tutorialspoint.com/operating_system/os_multi_threading.htm -->
 <div class="slide-number">1</div></section>
 <section class="slide t2c4c">
 <h2>Python Thread (I)</h2>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;This is a test&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;main&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace"></span><span class="name">f1</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"></span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After f1()&quot;</span><span class="punctuation">)</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;This is a test&quot;</span><span class="punctuation">)</span><span class="whitespace">
@@ -659,16 +662,16 @@ https://www.tutorialspoint.com/operating_system/os_multi_threading.htm -->
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"></span><span class="name">th1</span> <span class="operator">=</span> <span class="name">threading</span><span class="operator">.</span><span class="name">Thread</span><span class="punctuation">(</span><span class="name">target</span><span class="operator">=</span><span class="name">f1</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span><span class="name">th1</span><span class="operator">.</span><span class="name">start</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span><span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After th1.start()&quot;</span><span class="punctuation">)</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 This is a test
 After f1()</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After th1.start()
 This is a test</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 This is a test
 After th1.start()</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 This is  After th1.start()
 a test</span></code></pre>
 <div class="slide-number">2</div></section>
@@ -681,7 +684,7 @@ a test</span></code></pre>
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;main&quot;</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"></span>  <span class="name">f1</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After f1()&quot;</span><span class="punctuation">)</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;This is a test&quot;</span><span class="punctuation">)</span><span class="whitespace">
@@ -691,8 +694,8 @@ a test</span></code></pre>
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span>  <span class="name">th1</span> <span class="operator">=</span> <span class="name">threading</span><span class="operator">.</span><span class="name">Thread</span><span class="punctuation">(</span><span class="name">target</span><span class="operator">=</span><span class="name">f1</span><span class="punctuation">)</span><span class="whitespace">
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span>  <span class="name">th1</span><span class="operator">.</span><span class="name">start</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After th1.start()&quot;</span><span class="punctuation">)</span></code></pre>
-<div class="graphviz-container next" style="margin: 0 auto; text-align: center;">
-<svg width="800px"
+<div class="graphviz-container incremental" style="margin: 0 auto; text-align: center;">
+<svg width="700px"
  viewBox="0.00 0.00 371.64 260.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)">
 <title>g</title>
@@ -809,6 +812,7 @@ a test</span></code></pre>
 </svg>
 
 </div>
+<p>Create Concurrent / Parallel Code</p>
 <div class="slide-number">3</div></section>
 <section class="slide t2c">
 <h2>Python Thread (II)</h2>
@@ -829,29 +833,29 @@ a test</span></code></pre>
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace"></span>  <span class="name">th2</span><span class="operator">.</span><span class="name">start</span><span class="punctuation">();</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="literal string double">&quot;After f2&quot;</span><span class="punctuation">)</span></code></pre>
 <div class="docutils container">
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After f1
 After f2
 In f1
 In f2</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After f1
 In f1
 After f2
 In f2</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After f1
 In f1
 After f2
 In f2</span></code></pre>
 </div>
 <div class="docutils container">
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After f1
 After f2
 In f2
 In f1</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">main
+<pre class="code console incremental literal-block"><code><span class="generic output">main
 After In f1
 After f2
 In f2
@@ -877,32 +881,32 @@ f1</span></code></pre>
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">1000000</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">,</span> <span class="literal string double">&quot;__main&quot;</span><span class="punctuation">)</span></code></pre>
 <div class="docutils container">
-<pre class="code console next literal-block"><code><span class="generic output">python3 240.py &gt; 240output65.txt
+<pre class="code console incremental literal-block"><code><span class="generic output">python3 240.py &gt; 240output65.txt
 python3 240.py &gt; 240output55.txt
 python3 240.py &gt; 240output45.txt
 python3 240.py &gt; 240output35.txt
 python3 240.py &gt; 240output25.txt</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">5314 __111
+<pre class="code console incremental literal-block"><code><span class="generic output">5314 __111
 5315 __111 __main
 1459 __main
 1460 __main
 
 240output55.txt : 9108</span></code></pre>
 </div>
-<pre class="code console next literal-block"><code><span class="generic output">2139 __main
+<pre class="code console incremental literal-block"><code><span class="generic output">2139 __main
 2140 __main
 2141
 2336 __222
 2337 __222
 
 240output55.txt : 9790</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">6059 __111
+<pre class="code console incremental literal-block"><code><span class="generic output">6059 __111
 6060 __111 __main
 2142 __main
 2143 __main
 
 240output55.txt : 11281</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">1589 __111
+<pre class="code console incremental literal-block"><code><span class="generic output">1589 __111
 1590 __1110 __222
 1 __222
 2 __222
@@ -922,7 +926,7 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">9 </small><code data-lineno="9 "><span class="whitespace"></span>  <span class="name">th1</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">10 </small><code data-lineno="10 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">10000</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">11 </small><code data-lineno="11 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">,</span> <span class="literal string double">&quot;__main&quot;</span><span class="punctuation">)</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">10000</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">,</span><span class="literal string double">&quot;__111&quot;</span><span class="punctuation">)</span><span class="whitespace">
@@ -956,7 +960,7 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span>  <span class="name">th2</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">1</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">,</span> <span class="literal string double">&quot;__In main BBB&quot;</span><span class="punctuation">);</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">():</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">51</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">i</span><span class="punctuation">,</span><span class="literal string double">&quot;This is a test&quot;</span><span class="punctuation">)</span><span class="whitespace">
@@ -990,7 +994,7 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">11 </small><code data-lineno="11 "><span class="whitespace"></span>  <span class="name">th2</span><span class="operator">.</span><span class="name">start</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace"></span>  <span class="name">th1</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace"></span>  <span class="name">th2</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">Thread</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">from</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="whitespace"> </span><span class="keyword namespace">import</span> <span class="name">Thread</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">(</span><span class="name">j</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span>  <span class="keyword">for</span> <span class="name">i</span> <span class="operator word">in</span> <span class="name builtin">range</span><span class="punctuation">(</span><span class="literal number integer">500</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span>    <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">j</span><span class="punctuation">,</span><span class="literal string double">&quot;_&quot;</span><span class="punctuation">,</span><span class="name">i</span><span class="punctuation">,</span><span class="literal string double">&quot;_ test&quot;</span><span class="punctuation">)</span><span class="whitespace">
@@ -1031,7 +1035,7 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">20 </small><code data-lineno="20 "><span class="whitespace"></span><span class="name">th1</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">21 </small><code data-lineno="21 "><span class="whitespace"></span><span class="name">th2</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln">22 </small><code data-lineno="22 "><span class="whitespace"></span><span class="name">th3</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">()</span></code></pre>
-<pre class="code python next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="operator">,</span><span class="whitespace"> </span><span class="name namespace">time</span><span class="whitespace">
+<pre class="code python incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword namespace">import</span><span class="whitespace"> </span><span class="name namespace">threading</span><span class="operator">,</span><span class="whitespace"> </span><span class="name namespace">time</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace"></span><span class="keyword">class</span><span class="whitespace"> </span><span class="name class">MyShare</span><span class="punctuation">:</span>  <span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace"></span>  <span class="name">counter</span> <span class="operator">=</span> <span class="literal number integer">0</span><span class="punctuation">;</span> <span class="name">end</span> <span class="operator">=</span> <span class="literal number integer">120</span><span class="punctuation">;</span>  <span class="name">array</span> <span class="operator">=</span> <span class="punctuation">[</span><span class="literal number integer">0</span><span class="punctuation">]</span> <span class="operator">*</span> <span class="name">end</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace"></span><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">f1</span><span class="punctuation">(</span><span class="name">sh1</span><span class="punctuation">):</span><span class="whitespace">
@@ -1057,9 +1061,6 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">24 </small><code data-lineno="24 "><span class="whitespace"></span>  <span class="name builtin">print</span><span class="punctuation">(</span><span class="name">myShare</span><span class="operator">.</span><span class="name">array</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">])</span><span class="whitespace">
 </span></code><small class="ln">25 </small><code data-lineno="25 "><span class="whitespace"></span><span class="name">th1</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">();</span> <span class="name">th2</span><span class="operator">.</span><span class="name">join</span><span class="punctuation">();</span></code></pre>
 <div class="slide-number">9</div></section>
-<section class="slide">
-<h2>Create Concurrent / Parallel Code</h2>
-<div class="slide-number">10</div></section>
 <section class="slide t2c">
 <h2>C++ Thread</h2>
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;iostream&gt;</span><span class="comment preproc">
@@ -1078,13 +1079,13 @@ python3 240.py &gt; 240output25.txt</span></code></pre>
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="whitespace">  </span><span class="name">cout</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="literal string">&quot;second in main&quot;</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="name">endl</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace">  </span><span class="name">t</span><span class="punctuation">.</span><span class="name">join</span><span class="punctuation">();</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In main
 second in main
 In thread
 the next output in thread
 thread$ ./a.out</span></code></pre>
-<div class="slide-number">11</div></section>
+<div class="slide-number">10</div></section>
 <section class="slide t2c">
 <h2>C++ Thread join</h2>
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;iostream&gt;</span><span class="comment preproc">
@@ -1101,14 +1102,14 @@ thread$ ./a.out</span></code></pre>
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace">  </span><span class="name">cout</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="literal string">&quot;In main&quot;</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="name">endl</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="whitespace">  </span><span class="name">cout</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="literal string">&quot;second in main&quot;</span><span class="whitespace"> </span><span class="operator">&lt;&lt;</span><span class="whitespace"> </span><span class="name">endl</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ g++ -std=c++17 -pthread 630.cpp 
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ g++ -std=c++17 -pthread 630.cpp 
 thread$ ./a.out
 In main
 second in main
 terminate called without an active exception
 Aborted (core dumped)
 thread$ </span></code></pre>
-<div class="slide-number">12</div></section>
+<div class="slide-number">11</div></section>
 <section class="slide t2c">
 <h2>Array of Thread</h2>
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;iostream&gt;</span><span class="comment preproc">
@@ -1140,7 +1141,7 @@ the next output
 the next output
 
 thread$</span></code></pre>
-<div class="slide-number">13</div></section>
+<div class="slide-number">12</div></section>
 <section class="slide t2c">
 <h2>Array of Thread output</h2>
 <pre class="code console literal-block"><code><span class="generic output">thread$ ./a.out
@@ -1167,10 +1168,10 @@ second in main
 the next output
 
 thread$ </span></code></pre>
-<div class="slide-number">14</div></section>
+<div class="slide-number">13</div></section>
 <section class="slide t2c">
 <h2>Array of Thread output(II)</h2>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread In main
 
 second in main
@@ -1182,7 +1183,7 @@ the next output
 In thread 
 the next output
 thread$ </span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread In main
 
 second in main
@@ -1194,10 +1195,10 @@ the next output
 In thread 
 the next output
 thread$ </span></code></pre>
-<div class="slide-number">15</div></section>
+<div class="slide-number">14</div></section>
 <section class="slide t2c">
 <h2>Array of Thread(III)</h2>
-<pre class="code cpp next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;iostream&gt;</span><span class="comment preproc">
+<pre class="code cpp incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;iostream&gt;</span><span class="comment preproc">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment preproc">#include</span><span class="comment preprocfile">&lt;thread&gt;</span><span class="comment preproc">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="comment preproc"></span><span class="keyword">using</span><span class="whitespace"> </span><span class="keyword">namespace</span><span class="whitespace"> </span><span class="name namespace">std</span><span class="punctuation">;</span><span class="whitespace"> </span><span class="comment single">// g++ -std=c++17 -pthread 650.cpp 
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="comment single"></span><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">f</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">){</span><span class="whitespace">
@@ -1215,7 +1216,7 @@ thread$ </span></code></pre>
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace">    </span><span class="name">t</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">].</span><span class="name">join</span><span class="punctuation">();</span><span class="whitespace">
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace">  </span><span class="keyword">return</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread In main
 
 second in main
@@ -1227,10 +1228,10 @@ the next output
 In thread 
 the next output
 thread$ </span></code></pre>
-<div class="slide-number">16</div></section>
+<div class="slide-number">15</div></section>
 <section class="slide t2c">
 <h2>Array of Thread(III)</h2>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread : In thread : 02In main
 the next output
 
@@ -1242,7 +1243,7 @@ the next output
 
 second in main
 thread$ </span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread : In thread : 0In thread : 2In main
 the next output
 
@@ -1254,10 +1255,10 @@ the next output
 1
 the next output
 thread$ </span></code></pre>
-<div class="slide-number">17</div></section>
+<div class="slide-number">16</div></section>
 <section class="slide t2c">
 <h2>Array of Thread(III)</h2>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread : In mainIn thread : In thread : 23
 0
 the next output
@@ -1269,7 +1270,7 @@ the next output
 
 the next output
 thread$ </span></code></pre>
-<pre class="code console next literal-block"><code><span class="generic output">thread$ ./a.out
+<pre class="code console incremental literal-block"><code><span class="generic output">thread$ ./a.out
 In thread : In main0
 In thread : 1
 the next outputIn thread : 
@@ -1281,19 +1282,19 @@ the next output
 
 second in main
 thread$ </span></code></pre>
-<div class="slide-number">18</div></section>
+<div class="slide-number">17</div></section>
 <section class="slide">
 <h2>Threads and Processes</h2>
 <img alt="os/img/thread/a3processes.vs.b1process3thread.png" class="align-center" src="os/img/thread/a3processes.vs.b1process3thread.png" />
-<div class="slide-number">19</div></section>
+<div class="slide-number">18</div></section>
 <section class="slide">
 <h2>Many to One Thread</h2>
 <img alt="os/img/thread/many2one.svg" class="align-center" src="os/img/thread/many2one.svg" style="width: 300px; height: 400px;" />
-<div class="slide-number">20</div></section>
+<div class="slide-number">19</div></section>
 <section class="slide">
 <h2>Different Types of Threads</h2>
 <img alt="os/img/thread/thread.user_level.kernel.level.png" class="align-center" src="os/img/thread/thread.user_level.kernel.level.png" style="width: 500px; height: 350px;" />
-<div class="slide-number">21</div></section>
+<div class="slide-number">20</div></section>
 <section class="slide">
 <h2>User and Kernel Thread</h2>
 <ul class="simple">
@@ -1311,7 +1312,7 @@ thread$ </span></code></pre>
 
 .. image:: os/img/thread/thread_many_to_many_model.png
    :align: center -->
-<div class="slide-number">22</div></section>
+<div class="slide-number">21</div></section>
 <section class="slide">
 <img alt="os/img/thread/thread.A.user_level.threads.package.b.A.threads.package.managed.by.the.kernel.png" class="align-center" src="os/img/thread/thread.A.user_level.threads.package.b.A.threads.package.managed.by.the.kernel.png" style="width: 500px; height: 350px;" />
 <!-- :
@@ -1332,19 +1333,19 @@ thread$ </span></code></pre>
 
 *  Data parallelism
 *  Task parallelism -->
-<div class="slide-number">23</div></section>
+<div class="slide-number">22</div></section>
 <section class="slide">
 <h2>Relations Between Threads</h2>
 <img alt="os/img/thread/thread.Examples.of.the.Relationships.between.User_Level.Thread.States.and.Process.States.png" class="align-center" src="os/img/thread/thread.Examples.of.the.Relationships.between.User_Level.Thread.States.and.Process.States.png" style="width: 700px; height: 550px;" />
-<div class="slide-number">24</div></section>
+<div class="slide-number">23</div></section>
 <section class="slide">
 <h2>Multithreaded Web Server</h2>
 <img alt="os/img/thread/thread.A.multithreaded.Web.server.png" class="align-center" src="os/img/thread/thread.A.multithreaded.Web.server.png" style="width: 500px; height: 350px;" />
-<div class="slide-number">25</div></section>
+<div class="slide-number">24</div></section>
 <section class="slide">
 <h2>Threads in Webserver</h2>
 <img alt="os/img/thread/thread_Multithreaded_server_architecture.png" class="align-center" src="os/img/thread/thread_Multithreaded_server_architecture.png" style="width: 500px;" />
-<div class="slide-number">26</div></section>
+<div class="slide-number">25</div></section>
 <section class="slide">
 <p>End</p>
 <!-- comments:
@@ -1362,6 +1363,6 @@ https://www.codeproject.com/Articles/1267757/Concurrency-vs-Parallelism?msg=5573
 https://medium.com/@sanju.skm/parallel-programming-vs-concurrent-programming-f993d3f9ceea
 https://medium.com/@sanju.skm/parallel-programming-vs-concurrent-programming-f993d3f9ceea
 https://www.eclipse.org/lists/platform-ui-dev/msg07521.html -->
-<div class="slide-number">27</div></section>
+<div class="slide-number">26</div></section>
 </body>
 </html>

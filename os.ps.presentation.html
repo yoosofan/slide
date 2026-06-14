@@ -4,8 +4,11 @@
 <meta charset="utf-8" />
 <meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lt;string&gt;</title>
-<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Process Synchronization</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><title>Operating Systems: Process Synchronization</title><link rel="stylesheet" href="./assets/style.css" type="text/css" /><style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full .slide-number{display:none}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style><script src="assets/b6plus.js"></script>
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems: Process Synchronization</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><style>body.full .next:not(.active):not(.visited),body.full .incremental>*:not(.active):not(.visited),body.full .overlay>*:not(.active):not(.visited){visibility:hidden}body.full section.slide{padding-bottom:1rem;break-after:auto;background-color:#ffffff;}</style>
+<script src="assets/b6plus.js"></script>
 <style type="text/css">
 
 /* Minimal style sheet for the HTML output of Docutils.                    */
@@ -1273,7 +1276,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p>Just for two processes</p></li>
 <li><p>Just one critical section in code</p></li>
 </ol>
-<pre class="code cpp next literal-block"><small class="ln"> 1 </small><code data-lineno=" 1 "><span class="keyword">do</span><span class="punctuation">{</span><span class="whitespace">
+<pre class="code cpp incremental literal-block"><small class="ln"> 1 </small><code data-lineno=" 1 "><span class="keyword">do</span><span class="punctuation">{</span><span class="whitespace">
 </span></code><small class="ln"> 2 </small><code data-lineno=" 2 "><span class="whitespace">
 </span></code><small class="ln"> 3 </small><code data-lineno=" 3 "><span class="whitespace">  </span><span class="name">Entry</span><span class="whitespace">
 </span></code><small class="ln"> 4 </small><code data-lineno=" 4 "><span class="whitespace">
@@ -1634,7 +1637,7 @@ document.addEventListener("DOMContentLoaded", function() {
 </span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace"></span><span class="comment single">// CS
 </span></code><small class="ln">7 </small><code data-lineno="7 "><span class="comment single"></span><span class="whitespace">
 </span></code><small class="ln">8 </small><code data-lineno="8 "><span class="whitespace"></span><span class="name">need</span><span class="punctuation">[</span><span class="name">j</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name builtin">false</span><span class="whitespace"> </span><span class="punctuation">;</span></code></pre>
-<p class="next">Problem ?</p>
+<p class="incremental">Problem ?</p>
 <ol class="arabic simple trace-code incremental">
 <li><p><math xmlns="http://www.w3.org/1998/Math/MathML">
   <msub>
@@ -1934,14 +1937,14 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="slide-number">23</div></section>
 <section class="slide t2c">
 <h2>Hardware Soloution(I)</h2>
-<pre class="code cpp next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name function">testAndSet</span><span class="punctuation">(</span><span class="keyword type">bool</span><span class="operator">&amp;</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">){</span><span class="whitespace">
+<pre class="code cpp incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name function">testAndSet</span><span class="punctuation">(</span><span class="keyword type">bool</span><span class="operator">&amp;</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">){</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name">temp</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name">lock</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">  </span><span class="name">lock</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="name builtin">true</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="keyword">return</span><span class="whitespace"> </span><span class="name">temp</span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
-<pre class="code cpp next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Share section
+<pre class="code cpp incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Share section
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment single"></span><span class="whitespace">  </span><span class="keyword type">bool</span><span class="whitespace"> </span><span class="name">lock</span><span class="operator">=</span><span class="name builtin">false</span><span class="punctuation">;</span></code></pre>
-<pre class="code cpp next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Each process
+<pre class="code cpp incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="whitespace">  </span><span class="comment single">// Each process
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="comment single"></span><span class="whitespace">  </span><span class="keyword">while</span><span class="punctuation">(</span><span class="name">testAndSet</span><span class="punctuation">(</span><span class="name">lock</span><span class="punctuation">))</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">        </span><span class="punctuation">;</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">
@@ -3176,7 +3179,7 @@ Use python for the answers for this problem -->
 </span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace">    </span><span class="name">philosopher</span><span class="punctuation">(</span><span class="literal number integer">4</span><span class="punctuation">);</span><span class="whitespace">
 </span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace">  </span><span class="punctuation">}</span><span class="whitespace">
 </span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span><span class="punctuation">}</span><span class="whitespace"> </span></code></pre>
-<pre class="code cpp next literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">monitor</span><span class="whitespace"> </span><span class="name">dP</span><span class="punctuation">{</span><span class="whitespace">
+<pre class="code cpp incremental literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">monitor</span><span class="whitespace"> </span><span class="name">dP</span><span class="punctuation">{</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword">enum</span><span class="whitespace"> </span><span class="punctuation">{</span><span class="name">thinking</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">hungry</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name">eating</span><span class="punctuation">}</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">      </span><span class="name">state</span><span class="punctuation">[</span><span class="literal number integer">5</span><span class="punctuation">];</span><span class="whitespace">
 </span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="name">condition</span><span class="whitespace"> </span><span class="name">self</span><span class="punctuation">[</span><span class="literal number integer">5</span><span class="punctuation">];</span><span class="whitespace">
