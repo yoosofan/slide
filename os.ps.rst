@@ -7,7 +7,7 @@
    :css: ./assets/style.css
 
 .. slido:: Process Synchronization, Ahmad Yoosofan
-   :class: t2c
+   :class: t2c  step
 
     + https://yoosofan.github.io
     + Sharing Resources, Critical Section
@@ -25,7 +25,7 @@
         * lots of queues including Ready Queue
 
 .. slido:: Sharing Simple Variables(I)
-   :class: ts2c4c
+   :class: ts2c4c  step
 
     .. container::
 
@@ -84,7 +84,7 @@
     #. :math:`P_1` 2: x=5, y=3
 
 .. slido:: Sharing Simple Variables(II)
-   :class: ts2c4c
+   :class: ts2c4c  step
 
     .. container::
 
@@ -143,7 +143,7 @@
     #. :math:`P_1` 2: x=2, y=7
 
 .. slido:: Machine code
-   :class: ts2c4c
+   :class: ts2c4c  step
 
     .. container::
 
@@ -209,7 +209,7 @@
     #. :math:`P_0` 2: x=4, t1=4
 
 .. slido:: How to solve race condition
-   :class: t2c
+   :class: t2c  step
 
     .. class:: step
 
@@ -228,7 +228,7 @@
     + General Solutions
 
 .. slido:: Simplifying(I)
-   :class: t2c
+   :class: t2c  step
 
     .. list-table::
       :class: borderless
@@ -335,7 +335,7 @@
       +--------+--------+--------+--------+
 
 .. slido:: Simplifying(II)
-   :class: t2c
+   :class: t2c  step
 
     .. list-table::
       :class: borderless
@@ -430,7 +430,7 @@
     #. Memory restriction (one request, no parallel respond)
 
 .. slido:: Using one Shared Variable
-   :class: ts2c
+   :class: ts2c  step
 
     .. container::
 
@@ -484,7 +484,7 @@
           }while(1);
 
 .. slido:: Using one Shared Variable(busy)
-   :class: ts2c
+   :class: ts2c  step
 
     .. container::
 
@@ -536,7 +536,7 @@
           }  while(1);
 
 .. slido:: Mutual Exclusion Violation
-   :class: ts2c
+   :class: ts2c  step
 
     .. container::
 
@@ -578,7 +578,7 @@
           busy = false ; // Exit
 
 .. slido:: Trace Second Try
-   :class: ts2c
+   :class: ts2c  step
 
     .. code:: cpp
       :number-lines:
@@ -627,7 +627,7 @@
     #. *Mutual Exclusion Violation*
 
 .. slido:: Sharing turn
-   :class: ts2c
+   :class: ts2c  step
 
     .. container::
 
@@ -671,7 +671,7 @@
     Problem ?
 
 .. slido:: turn i, j
-   :class: ts2c1c2c
+   :class: ts2c1c2c  step
 
     .. code:: cpp
       :number-lines:
@@ -726,7 +726,7 @@
       turn = i ;
 
 .. slido:: need CS
-   :class: ts2c
+   :class: ts2c  step
 
     .. code:: cpp
       :number-lines:
@@ -771,7 +771,7 @@
     #. ∞
 
 .. slido:: Software Soloution 2 processes
-   :class: ts2c
+   :class: ts2c  step
 
     .. code:: cpp
       :number-lines:
@@ -818,25 +818,31 @@
       need[i] = false ;
 
 .. slido:: Python Code
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/software_soloution2processes.py
       :number-lines:
       :code: python
-      :start-line: 49
-      :end-line: 71
+      :end-line: 24
+
+    .. include:: os/src/ps/software_soloution2processes.py
+      :number-lines: 25
+      :code: python
+      :start-line: 24
 
 .. slido:: Software Soloution n processes(I)
-   :class: ts2c
+   :class: ts2c  step
 
     .. code:: cpp
        :number-lines:
+       :class: step
 
         // Share section
         int number[n] = {0};
 
     .. code:: cpp
        :number-lines:
+       :class: step
 
         // Each process
         number[i] = max(number, n)+1;
@@ -858,18 +864,20 @@
     #. :math:`P_1` 6: in cs then mutual exclusion violation
 
 .. slido:: Software Soloution n processes(II)
-   :class: t2c
+   :class: t2c  step
 
     .. container::
 
         .. code:: cpp
            :number-lines:
+           :class: step
 
             // Share section
             int number[n] = {0};
 
         .. code:: cpp
            :number-lines:
+           :class: step
 
             // Each process
             number[i] = max(number, n)+1;
@@ -898,6 +906,7 @@
 
         .. code:: cpp
            :number-lines:
+           :class: step
 
             // Share section
             int number[n]={0};
@@ -908,6 +917,7 @@
 
     .. code:: cpp
        :number-lines:
+       :class: step
 
         // Each process
         number[i] = max(number, n)+1;
@@ -919,7 +929,7 @@
         number[i] = 0;
 
 .. slido:: Software Soloution n processes(IV)
-   :class: t2c
+   :class: t2c  step
 
     .. code:: cpp
        :number-lines:
@@ -940,7 +950,7 @@
         number[i] = 0;
 
 .. slido:: Software Soloution n processes(V)
-   :class: t2c
+   :class: t2c  step
 
     .. container::
 
@@ -991,7 +1001,7 @@
     #. **Mutual exclusion violation**
 
 .. slido:: Lamport's Bakery Algorithm
-   :class: ts2c
+   :class: ts2c  step
 
     .. code:: cpp
        :number-lines:
@@ -1001,6 +1011,7 @@
 
     .. code:: cpp
        :number-lines:
+       :class: step
 
         choose[i]=true;
         number[i]=max(number,n)+1;
@@ -1022,11 +1033,11 @@
     * https://en.wikipedia.org/wiki/Lamport%27s_bakery_algorithm
 
 .. slido:: Hardware Soloution(I)
-   :class: t2c
+   :class: t2c  step
 
     .. code:: cpp
-      :class: step
       :number-lines:
+      :class: step
 
       bool testAndSet(bool& lock){
         bool temp = lock;
@@ -1055,7 +1066,7 @@
         lock=false;
 
 .. slido:: Assembly implementation
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -1135,8 +1146,8 @@
         move lock, #0      ; store 0 in flag
         ret                ; return to caller
 
-.. slido::
-   :class: n2c
+.. slido:: Starvation in Simple Hardware solution
+   :class: n2c  step
 
     .. container::
 
@@ -1190,8 +1201,8 @@
     #. `....` , `....`  , `....`
     #. **P0 : starve**
 
-.. slido:: Hardware Soloution( without Starvation)
-   :class: t2c
+.. slido:: Hardware Soloution(without Starvation)
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1221,7 +1232,7 @@
       }while(1); // busy waiting
 
 .. slido:: Is it possible to use Queue?
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1248,7 +1259,7 @@
         // Reminder Section
 
 .. slido:: Hardware Soloution swap
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1288,7 +1299,7 @@
       The memory read and write are guaranteed to be atomic.
 
 .. slido:: Disable / Enable Interrupt ?
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1316,7 +1327,7 @@
     * Bounded waiting
 
 .. slido:: Semaphore(I)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1359,7 +1370,7 @@
           }
 
 .. slido:: Semaphore(II - no busy waiting)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1405,7 +1416,7 @@
           }
 
 .. slido:: Sempahore(III) extra functions
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1462,7 +1473,7 @@
         };
 
 .. slido:: Semaphore(IV) Simple Usage
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -1513,7 +1524,7 @@
         sem_sanner.V();
 
 .. slido:: Another Forms of Semaphore
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -1568,6 +1579,7 @@
           }
 
 .. slido:: Other Types of Semaphore
+   :class: step
 
     #. Binary Semaphore
     #. Weak Semaphore
@@ -1664,7 +1676,7 @@
       https://coliru.stacked-crooked.com/
 
 .. slido:: Simple Deadlock
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -1705,7 +1717,7 @@
       sem_printer.V();
 
 .. slido:: Python Semaphore
-   :class: t2c
+   :class: t2c step
 
     .. code:: python
       :number-lines:
@@ -1747,6 +1759,7 @@
 .. slido:: Producer consumer(I)
 
     .. image:: os/img/ps/bounded-buffer-problem.webp
+       :align: center
 
     .. :
 
@@ -1754,7 +1767,7 @@
       http://www.tutorialsspace.com/Operating-System/20-Interprocess-Communication-Producer-Consumer-Problem.aspx
 
 .. slido:: Producer consumer(II)
-   :class: t2c
+   :class: t2c step
 
     .. code:: python
         :number-lines:
@@ -1809,8 +1822,8 @@
             consume(x)
             sh1.buf[out-1] = -1
 
-.. slido:: Unbounded Buffer(Wrong Answer)
-   :class: ts2c
+.. slido:: Unbounded Buffer(Incorrect Answer)
+   :class: ts2c step
 
     .. code:: python
 
@@ -1844,7 +1857,7 @@
           mutex.release()
 
 .. slido:: Unbounded Buffer(II)
-   :class: ts2c
+   :class: ts2c step
 
     .. code:: python
 
@@ -1876,7 +1889,7 @@
           consume(x)
 
 .. slido:: Unbounded Buffer(III - better)
-   :class: ts2c
+   :class: ts2c step
 
     .. code:: python
 
@@ -1908,7 +1921,7 @@
           consume(x)
 
 .. slido:: Bounded Buffer(I)
-   :class: ts2c
+   :class: ts2c step
 
     .. code:: python
 
@@ -1940,7 +1953,7 @@
           consume(x)
 
 .. slido:: Bounded Buffer(II)
-   :class: t2c
+   :class: t2c step
 
     .. code:: python
       :number-lines:
@@ -1985,7 +1998,7 @@
           consume(x)
 
 .. slido:: Using any kind of Queue
-   :class: t2c
+   :class: t2c step
 
     .. code:: python
       :number-lines:
@@ -2024,7 +2037,7 @@
           consume(x)
 
 .. slido:: Bounded Buffer(Percent Empty)
-   :class: t2c
+   :class: t2c step
 
     .. code:: python
       :number-lines:
@@ -2069,7 +2082,7 @@
           consume(x,out)
 
 .. slido:: Readers and Writers(I)
-   :class: t2c
+   :class: t2c step
 
     .. image:: os/img/ps/readers.writers.png
        :width: 70%
@@ -2109,7 +2122,7 @@
         https://www.prepbytes.com/blog/operating-system/reader-writer-problem-in-os/
 
 .. slido:: Readers and Writers(II)
-   :class: ts2c
+   :class: ts2c step
 
     .. code:: cpp
       :number-lines:
@@ -2141,7 +2154,7 @@
       }
 
 .. slido:: Readers and Writers(III)
-   :class: ts2c
+   :class: ts2c step
 
     .. code:: cpp
       :number-lines:
@@ -2178,7 +2191,7 @@
       }
 
 .. slido:: Readers and Writers(IV)
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -2215,11 +2228,13 @@
       }
 
 .. slido:: Dininig Philosophers(I)
+   :class: step
 
     .. image:: os/img/ps/An_illustration_of_the_dining_philosophers_problem_small_wikipedia.png
+       :align: center
 
 .. slido:: Dininig Philosophers(II)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -2253,7 +2268,7 @@
       }
 
 .. slido:: Dininig Philosophers(III)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -2289,7 +2304,7 @@
       }
 
 .. slido:: Dininig Philosophers(IV)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -2339,7 +2354,7 @@
       }
 
 .. slido:: Dininig Philosophers(IV - method 2)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -2380,7 +2395,7 @@
       }
 
 .. slido:: Dininig Philosophers(V - Error 1)
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -2443,7 +2458,7 @@
           }
 
 .. slido:: Dininig Philosophers(Error 2)
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -2507,7 +2522,7 @@
           }
 
 .. slido:: Dininig Philosophers(V)
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -2575,7 +2590,7 @@
           }
 
 .. slido:: Dininig Philosophers(VI)
-   :class: t2c
+   :class: t2c step
 
     .. code:: cpp
       :number-lines:
@@ -2618,7 +2633,7 @@
         Use python for the answers for this problem
 
 .. slido:: Monitor(I)
-   :class: t2c
+   :class: t2c step
 
     .. image:: os/img/ps/simple.monitor.jpg
         :width: 140%
@@ -2647,7 +2662,7 @@
         };
 
 .. slido:: Monitor(II)
-   :class: t2c
+   :class: t2c step
 
     .. include:: os/src/ps/simple.monitor.cpp
       :code: cpp
@@ -2662,7 +2677,7 @@
       :end-line: 50
 
 .. slido:: Monitor(III)
-   :class: t2c
+   :class: t2c step
 
     .. image:: os/img/ps/monitor.png
        :width: 70%
@@ -2693,7 +2708,7 @@
       };
 
 .. slido:: Monitor(IV) Dininig Philosophers
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/dining_philosopher_monitor_7.cpp
         :code: cpp
@@ -2705,7 +2720,7 @@
         :class: step
 
 .. slido:: Monitor(V) Dininig Philosophers
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/dining_philosopher_monitor_13.cpp
         :code: cpp
@@ -2718,7 +2733,7 @@
         :start-line: 22
 
 .. slido:: Monitor(VI) Dininig Philosophers
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/dining_philosopher_monitor_20.cpp
         :code: cpp
@@ -2731,7 +2746,7 @@
         :start-line: 19
 
 .. slido:: Monitor(VII) Other Form
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/dining_philosopher_monitor_original.cpp
         :code: cpp
@@ -2744,7 +2759,7 @@
         :start-line: 20
 
 .. slido:: Monitor(VIII) Bounded Buffer
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/bounded_buffer_monitor.cpp
         :code: cpp
@@ -2757,7 +2772,7 @@
         :start-line: 19
 
 .. slido:: Monitor(IX) better Bounded Buffer
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/bounded_buffer_monitor_better.cpp
         :code: cpp
@@ -2770,7 +2785,7 @@
         :start-line: 12
 
 .. slido:: Monitor(XII) Priority
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/dining_philosopher_monitor_20_priority.cpp
         :code: cpp
@@ -2783,7 +2798,7 @@
         :start-line: 19
 
 .. slido:: Monitor(XIII) notify
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/bounded_buffer_by_notify_monitor.cpp
         :code: cpp
@@ -2796,7 +2811,7 @@
         :start-line: 19
 
 .. slido:: Monitor(XIII) notify
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/bounded_buffer_by_notify_monitor.cpp
         :code: cpp
@@ -2809,7 +2824,7 @@
         :start-line: 19
 
 .. slido:: Monitor implementation by Semaphore
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/monitor_implementation_by_semaphore.cpp
         :code: cpp
@@ -2822,7 +2837,7 @@
         :start-line: 18
 
 .. slido:: Inter-process Communication (IPC) I
-   :class: t2c
+   :class: t2c  step
 
     #. Message Passing
         #. send
@@ -2843,7 +2858,7 @@
         #. asymmetric
 
 .. slido:: Inter-process Communication (IPC) II
-   :class: t2c
+   :class: t2c  step
 
     * buffering
         #. Automatic
@@ -2868,7 +2883,7 @@
         https://sriindu.ac.in/wp-content/uploads/2023/10/R20CSE2202-OPERATING-SYSTEMS.pdf
 
 .. slido:: Send and Receive(I)
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/mutual_exclusion_by_message.cpp
         :code: cpp
@@ -2881,7 +2896,7 @@
         :start-line: 14
 
 .. slido:: Send and Receive(II)
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/mutual_exclusion_by_message2.cpp
         :code: cpp
@@ -2894,7 +2909,7 @@
         :start-line: 14
 
 .. slido:: Producer consumer (Send and Receive)
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/pcbmessage_limited_message.cpp
         :code: cpp
@@ -2936,7 +2951,7 @@
           https://www.modernescpp.com/index.php/multithreading-in-c-17-and-c-20
 
 .. slido:: C++20 Synchronized
-   :class: t2c
+   :class: t2c  step
 
     .. include:: os/src/ps/cpp20synchronized.cpp
       :number-lines:
