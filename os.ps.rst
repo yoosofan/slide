@@ -2129,6 +2129,45 @@
 
       semaphore wx = 1;
 
+    * `C-- <https://en.wikipedia.org/wiki/C-->`_
+    * `jbaci source <https://code.google.com/archive/p/jbaci/downloads>`_
+    * `qc-- <https://github.com/nrnrnr/qc-->`_
+
+
+    .. :
+
+        + `Norman Ramsey C-- <https://www.cs.tufts.edu/~nr/c--/code.html>_
+        +
+        * `jbaci github <https://github.com/motib/jbaci>`_
+
+        + `tufts page <https://www.cs.tufts.edu/~nr/c--/code.html>`_
+
+        * `jbaci <https://code.google.com/archive/p/jbaci/>`_
+        * `jbaci downloads <https://code.google.com/archive/p/jbaci/downloads>`_
+
+        * `C-- archive <https://web.archive.org/web/20080822062234/http://www.cminusminus.org/>`_
+
+
+        https://h3turing.vmhost.psu.edu/~null/baci/
+
+        https://cs.mines.edu/project/camp-tracy/
+
+        https://www.cs.ucf.edu/courses/cop4020/spr2014/BACI/
+
+        https://www.cs.ucf.edu/courses/cop4020/spr2014/COP4020.Lecture3b.Concurrency.Summer2014.pdf
+
+        https://dl.acm.org/doi/abs/10.5555/774288.774310
+
+        https://scholar.google.com/citations?user=8TyIlFgAAAAJ&hl=en
+
+        https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8TyIlFgAAAAJ&cstart=20&pagesize=80&citation_for_view=8TyIlFgAAAAJ:9ZlFYXVOiuMC
+
+        https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8TyIlFgAAAAJ&cstart=100&pagesize=100&citation_for_view=8TyIlFgAAAAJ:HE397vMXCloC
+
+        https://mhanckow.students.wmi.amu.edu.pl/sop121/baci.htm
+
+        https://www.cs.ucf.edu/courses/cop4020/spr2014/BACI/BACISimpleGuide.pdf
+
     .. code:: cpp
       :number-lines:
 
@@ -2655,8 +2694,6 @@
           // Initialization code
           // Constructor
           count = 0;
-          //for(int &m1:buffer)
-          //  m1 = -1;
           for(int i=0;i<n;i++)
             buffer[i] = -1
         };

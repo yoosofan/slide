@@ -2649,7 +2649,7 @@ http://www.tutorialsspace.com/Operating-System/20-Interprocess-Communication-Pro
 </span></code><small class="ln"> 5 </small><code data-lineno=" 5 "><span class="whitespace"></span>    <span class="name">x</span> <span class="operator">=</span> <span class="name">produce</span><span class="punctuation">()</span><span class="whitespace">
 </span></code><small class="ln"> 6 </small><code data-lineno=" 6 "><span class="whitespace"></span>    <span class="name">empty</span><span class="operator">.</span><span class="name">acquire</span><span class="punctuation">()</span> <span class="comment single"># empty.P()</span><span class="whitespace">
 </span></code><small class="ln"> 7 </small><code data-lineno=" 7 "><span class="whitespace"></span>    <span class="name">sh1</span><span class="operator">.</span><span class="name">buf</span><span class="punctuation">[</span><span class="name">in1</span><span class="punctuation">]</span> <span class="operator">=</span> <span class="name">x</span><span class="whitespace">
-</span></code><small class="ln"> 8 </small><code data-lineno=" 8 "><span class="whitespace"></span>    <span class="name">full</span><span class="operator">.</span><span class="name">release</span><span class="punctuation">();</span> <span class="comment single"># empty.V()</span><span class="whitespace">
+</span></code><small class="ln"> 8 </small><code data-lineno=" 8 "><span class="whitespace"></span>    <span class="name">full</span><span class="operator">.</span><span class="name">release</span><span class="punctuation">();</span> <span class="comment single"># full.V()</span><span class="whitespace">
 </span></code><small class="ln"> 9 </small><code data-lineno=" 9 "><span class="whitespace"></span>    <span class="name">in1</span> <span class="operator">=</span> <span class="punctuation">(</span><span class="name">in1</span> <span class="operator">+</span> <span class="literal number integer">1</span><span class="punctuation">)</span> <span class="operator">%</span> <span class="name">sh1</span><span class="operator">.</span><span class="name">n</span></code></pre>
 <pre class="code python literal-block"><small class="ln"> 1 </small><code data-lineno=" 1 "><span class="keyword">def</span><span class="whitespace"> </span><span class="name function">consumer</span><span class="punctuation">(</span><span class="name">sh1</span><span class="punctuation">):</span><span class="whitespace">
 </span></code><small class="ln"> 2 </small><code data-lineno=" 2 "><span class="whitespace"></span>  <span class="name">out</span> <span class="operator">=</span> <span class="literal number integer">0</span><span class="whitespace">
@@ -2743,6 +2743,44 @@ https://www.prepbytes.com/blog/operating-system/reader-writer-problem-in-os/ -->
 <section class="slide ts2c">
 <h2>Readers and Writers(II)</h2>
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="name">semaphore</span><span class="whitespace"> </span><span class="name">wx</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">1</span><span class="punctuation">;</span></code></pre>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/C--">C--</a></p></li>
+<li><p><a class="reference external" href="https://code.google.com/archive/p/jbaci/downloads">jbaci source</a></p></li>
+<li><p><a class="reference external" href="https://github.com/nrnrnr/qc--">qc--</a></p></li>
+</ul>
+<!-- :
+
++ `Norman Ramsey C- - <https://www.cs.tufts.edu/~nr/c- -/code.html>_
++
+* `jbaci github <https://github.com/motib/jbaci>`_
+
++ `tufts page <https://www.cs.tufts.edu/~nr/c- -/code.html>`_
+
+* `jbaci <https://code.google.com/archive/p/jbaci/>`_
+* `jbaci downloads <https://code.google.com/archive/p/jbaci/downloads>`_
+
+* `C- - archive <https://web.archive.org/web/20080822062234/http://www.cminusminus.org/>`_
+
+
+https://h3turing.vmhost.psu.edu/~null/baci/
+
+https://cs.mines.edu/project/camp-tracy/
+
+https://www.cs.ucf.edu/courses/cop4020/spr2014/BACI/
+
+https://www.cs.ucf.edu/courses/cop4020/spr2014/COP4020.Lecture3b.Concurrency.Summer2014.pdf
+
+https://dl.acm.org/doi/abs/10.5555/774288.774310
+
+https://scholar.google.com/citations?user=8TyIlFgAAAAJ&hl=en
+
+https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8TyIlFgAAAAJ&cstart=20&pagesize=80&citation_for_view=8TyIlFgAAAAJ:9ZlFYXVOiuMC
+
+https://scholar.google.com/citations?view_op=view_citation&hl=en&user=8TyIlFgAAAAJ&cstart=100&pagesize=100&citation_for_view=8TyIlFgAAAAJ:HE397vMXCloC
+
+https://mhanckow.students.wmi.amu.edu.pl/sop121/baci.htm
+
+https://www.cs.ucf.edu/courses/cop4020/spr2014/BACI/BACISimpleGuide.pdf -->
 <pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">writer</span><span class="punctuation">(){</span><span class="whitespace">
 </span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword">do</span><span class="punctuation">{</span><span class="whitespace">
 </span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">    </span><span class="name">wx</span><span class="punctuation">.</span><span class="name">P</span><span class="punctuation">();</span><span class="whitespace">
@@ -3109,11 +3147,9 @@ Use python for the answers for this problem -->
 </span></code><small class="ln">12 </small><code data-lineno="12 "><span class="whitespace">  </span><span class="comment single">// Initialization code
 </span></code><small class="ln">13 </small><code data-lineno="13 "><span class="comment single"></span><span class="whitespace">  </span><span class="comment single">// Constructor
 </span></code><small class="ln">14 </small><code data-lineno="14 "><span class="comment single"></span><span class="whitespace">  </span><span class="name">count</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="whitespace">
-</span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace">  </span><span class="comment single">//for(int &amp;m1:buffer)
-</span></code><small class="ln">16 </small><code data-lineno="16 "><span class="comment single"></span><span class="whitespace">  </span><span class="comment single">//  m1 = -1;
-</span></code><small class="ln">17 </small><code data-lineno="17 "><span class="comment single"></span><span class="whitespace">  </span><span class="keyword">for</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">&lt;</span><span class="name">n</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
-</span></code><small class="ln">18 </small><code data-lineno="18 "><span class="whitespace">    </span><span class="name">buffer</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">-1</span><span class="whitespace">
-</span></code><small class="ln">19 </small><code data-lineno="19 "><span class="whitespace"></span><span class="punctuation">};</span></code></pre>
+</span></code><small class="ln">15 </small><code data-lineno="15 "><span class="whitespace">  </span><span class="keyword">for</span><span class="punctuation">(</span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">&lt;</span><span class="name">n</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
+</span></code><small class="ln">16 </small><code data-lineno="16 "><span class="whitespace">    </span><span class="name">buffer</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">]</span><span class="whitespace"> </span><span class="operator">=</span><span class="whitespace"> </span><span class="literal number integer">-1</span><span class="whitespace">
+</span></code><small class="ln">17 </small><code data-lineno="17 "><span class="whitespace"></span><span class="punctuation">};</span></code></pre>
 <div class="slide-number">62</div></section>
 <section class="slide t2c">
 <h2>Monitor(II)</h2>
