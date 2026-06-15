@@ -1980,7 +1980,7 @@
           x = produce()
           empty.acquire() # empty.P()
           sh1.buf[in1] = x
-          full.release(); # empty.V()
+          full.release(); # full.V()
           in1 = (in1 + 1) % sh1.n
 
 

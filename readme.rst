@@ -10,7 +10,7 @@ About This Repository
 
 This repository contains lecture slides for various Computer Science courses.
 
-`**prezento** <https://github.com/yoosofan/prezento>`_ is the modern reStructuredText-based slide generator used in this repository.
+`prezento <https://github.com/yoosofan/prezento>`_ is the modern reStructuredText-based slide generator used in this repository.
 
 All slides follow the new **prezento** format. New slides are added to the root of the repository using the following naming convention:
 
