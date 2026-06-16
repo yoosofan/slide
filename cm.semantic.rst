@@ -489,21 +489,21 @@
 .. slido::
    :class: n2c
 
-    .. csv-table::
-      :header-rows: 1
-      :class: smallerelementwithfullborder equal-col
+   .. csv-table::
+     :header-rows: 1
+     :class: smallerelementwithfullborder equal-col
 
-      t , 0 , 1 , $ , A , B 
-      I0, s3, s4,   , 1 , 2
-      I1,   ,   ,acc,   ,
-      I2,   ,   , r1,   ,   
-      I3, s3, s4, r4,   , 5  
-      I4, s3, s4, r4,   , 6 
-      I5,   ,   , r2,   ,  
-      I6,   ,   , r3,   ,  
+     t , 0 , 1 , $ , A , B
+     I0, s3, s4,   , 1 , 2
+     I1,   ,   ,acc,   ,
+     I2,   ,   , r1,   ,
+     I3, s3, s4, r4,   , 5
+     I4, s3, s4, r4,   , 6
+     I5,   ,   , r2,   ,
+     I6,   ,   , r3,   ,
 
 
-    .. grafo::
+   .. grafo::
 
           digraph g {
             graph [splines=true  rankdir = "LR"];
