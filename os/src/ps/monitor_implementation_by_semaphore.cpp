@@ -14,12 +14,12 @@
 /* For each condition
  *  variable x, we  have:*/
 semaphore x_sem=0;  
-int x-_ount = 0;
+int x_ount = 0;
 
 /* The operation x.wait 
  * can be implemented as:*/
-  x-count++;
-  if (next-count > 0)     
+  x_count++;
+  if (next_count > 0)
     next.V();
   else
     mutex.V();

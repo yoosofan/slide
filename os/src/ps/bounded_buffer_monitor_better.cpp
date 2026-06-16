@@ -16,7 +16,7 @@ void producer(){
     x = produce();
     mp.beforeAppend();
     buffer[nextin] = x;
-    afterAppend()
+    mp.afterAppend()
     nextin=(nextin+1)%N;
   }while(1);
 }
