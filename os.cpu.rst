@@ -1,33 +1,25 @@
 .. role:: raw-html(raw)
    :format: html
 
-.. prezento:: CPU Scheduling
-   :skip-help: true
+.. |nbsp| unicode:: 0xA0
+
+.. prezento:: CPU Scheduling - yoosofan
    :css: ./assets/style.css
-   :substep: true
-   :slide-numbers: true
-   :skip-help: true
-   :data-width: 1024
-   :data-height: 768
-
-.. slido::
-
-    .. |nbsp| unicode:: 0xA0
 
 .. slido:: CPU Scheduling
 
     Ahmad Yoosofan
 
-.. slido::
-
     https://yoosofan.github.io
 
     University of Kashan
 
-    https://github.com/yoosofan/slide/blob/main/os/cpu.rst
+    https://yoosofan.github.io/slide/os.cpu.presentation.html
+
+    https://github.com/yoosofan/slide/blob/main/os.cpu.rst
 
 .. slido:: CPU Burst / Service Time
-   :class: t2c
+   :class: t2c step
 
     .. container::
 
@@ -42,34 +34,34 @@
         #. I/O bound
 
     .. image:: os/img/cpu/burst.png
-      :scale: 80%
 
 .. slido:: CPU Schedular
+   :class: t2c step
 
-    Short Term Schedular
-
-.. slido::
-
-    * ready queue
-    * Dispatcher
 
     .. image:: os/img/in/process_state_chart.png
+       :scale: 130%
 
-.. slido:: Time Unit Concept
+    .. container:: step
 
-    * Millisecond
-    * Nanosecond
-    * ?
+        Short Term Schedular
 
-    Scheduling type
+        * ready queue
+        * Dispatcher
 
-.. slido::
+        Time Unit Concept
 
-    * nonpreemptive
-    * preemptive
+        * Millisecond
+        * Nanosecond
+        * ?
+
+        Scheduling type
+
+        * nonpreemptive
+        * preemptive
 
 .. slido:: Processes Table
-   :class: t2c
+   :class: t2c step
 
     .. csv-table::
       :header: process, service(Burst) time
@@ -82,7 +74,7 @@
 
     .. csv-table::
       :header: process, service time, arrival time
-      :class: substep center
+      :class: step center
 
       :math:`P_0`, 3, 0
       :math:`P_1`, 2, 0
@@ -91,7 +83,7 @@
 
     .. csv-table::
       :header: prs, st
-      :class: substep center
+      :class: step center
 
       :math:`P_0`, 3
       :math:`P_1`, 2
@@ -100,7 +92,7 @@
 
     .. csv-table::
       :header: pcs, st, at
-      :class: substep center
+      :class: step center
 
       :math:`P_0`, 3, 0
       :math:`P_1`, 2, 0
@@ -120,10 +112,11 @@
       :math:`P_3`, 1, 4
 
     .. csv-table::
-        :class: yoo-gantt-chart
+        :class: yoo-gantt-chart2
+        :widths: 20 10 20 10 4
+        :header: P0, P1, P2, P3
 
-        |nbsp| P0 |nbsp| |nbsp|, , |nbsp| P1 |nbsp| , , |nbsp| P2 |nbsp| |nbsp|, , |nbsp| P3 |nbsp|
-        0, ,                              2, ,                 3, ,                        5, ,     6
+        0,  2 , 3 , 5 ,6
 
 
     *  Gantt Chart
@@ -145,30 +138,30 @@
       :math:`P_3`, 1, 4
 
     .. csv-table::
-        :class: yoo-gantt-chart substep
+        :class: yoo-gantt-chart2
+        :widths: 20 10 20 10 4
+        :header: P0, P1, P2, P3
 
-        |nbsp| P0 |nbsp| |nbsp|, , |nbsp| P1 |nbsp| , , |nbsp| P2 |nbsp| |nbsp|, , |nbsp| P3 |nbsp|
-        0, ,                              2, ,                 3, ,                        5, ,     6
+        0,  2 , 3 , 5 ,6
 
-    .. class:: substep
+    .. class:: step
 
     *  :math:`P_0` waiting time: 0
     *  :math:`P_1` waiting time: 2
     *  :math:`P_2` waiting time: (3-3) = 0
     *  :math:`P_3` waiting time: (5-4) = 1
 
-    .. class:: substep
+    .. class:: step
 
     *  Average Waiting Time
     * :math:`\frac{0 + 2 + 0 + 1}{4} = \frac{3}{4} = 0.75`
 
 .. slido:: FCFS - Convoy effect
+    :class: t2c
 
     .. :
 
       short process behind long process
-
-    :class: t2c
 
     .. csv-table::
       :header: process, service time, arrival time
@@ -179,41 +172,39 @@
       :math:`P_2`, 1, 3
       :math:`P_3`, 3, 4
 
-    .. container:: substep
+    .. container:: step
 
         .. csv-table::
-            :class: yoo-gantt-chart substep
+            :class: yoo-gantt-chart2
+            :widths: 20 30 5 15 2
+            :header: P0, P1, P2, P3
 
-            |nbsp| P0 |nbsp| |nbsp|, , |nbsp| |nbsp| P1 |nbsp| |nbsp| |nbsp| , , P2 , , |nbsp| P3 |nbsp|
-            0, ,                                     4, ,                        10, ,         11, ,     14
+            0, 4, 10, 11, 14
 
         * Average Waiting Time
         * :math:`\frac{0 + (4-0) + (10-3) + (11-4)}{4} = \frac{18}{4} = 4\frac{2}{4} = 4.5`
 
-    .. container:: substep
+    .. container:: step
 
         Rearange
 
         .. csv-table::
-            :class: yoo-gantt-chart substep
+            :class: yoo-gantt-chart2
+            :widths: 20 5 15 30 2
+            :header: P0, P2, P3, P1
 
-            |nbsp| P0 |nbsp| |nbsp|, , P2, , |nbsp| P3 |nbsp|, , |nbsp| |nbsp| P1 |nbsp| |nbsp| |nbsp|
-            0, ,                       4, ,          5, ,               8, ,     14
+            0, 4, 5, 8, 14
 
         * Average Waiting Time
         * :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
 
-    .. class:: substep
+    .. class:: step
 
     * Average Waiting Time 1: 4.5
     * Average Waiting Time 2: 2.5
 
-.. slido::
+.. slido:: SJF or SPN ( 1 / (service time) )
    :class: t2c
-
-    SJF or SPN :math:`\frac{1}{s}`
-
-.. slido::
 
     .. csv-table::
       :header: process, service time, arrival time
@@ -224,27 +215,28 @@
       :math:`P_2`, 1, 3
       :math:`P_3`, 3, 4
 
-    .. container:: substep
+    .. container:: step
 
         * Shortest Job First (SJF)
         * Shortest Process Next (SPN)
 
         .. csv-table::
-            :class: yoo-gantt-chart substep
+            :class: yoo-gantt-chart2
+            :widths: 20 5 15 30 2
+            :header: P1, P2, P3, P0
 
-            |nbsp| P1 |nbsp| |nbsp|, , P2, , |nbsp| P3 |nbsp|, , |nbsp| |nbsp| P0 |nbsp| |nbsp| |nbsp|
-            0, ,                       4, ,          5, ,                       8, ,     14
+            0, 4, 5, 8, 14
 
-    .. class:: substep
+    .. class:: step
 
     * *Average Waiting Time*
     * :math:`\frac{0 + (4-3) + (5-4) + 8}{4} = \frac{10}{4} = 2\frac{2}{4} = 2.5`
 
-    .. class:: substep
+    .. class:: step
 
     * Starvation
     * Nonpreemptive
-    * formula : 1 / (service time)
+    * formula : :math:`\frac{1}{s}` or :math:`\frac{1}{service time}`
 
 .. slido:: Shortest Remaining Time(SRT), preemptive SJF
    :class: t2c
@@ -258,34 +250,36 @@
       :math:`P_2`, 1, 1
       :math:`P_3`, 3, 2
 
-    .. container:: substep
+    .. container:: step
 
         .. csv-table::
-            :class: yoo-gantt-chart substep
+            :class: yoo-gantt-chart2 step
+            :widths: 20 30 5 15 2
+            :header: P0, P1, P2, P3
 
-            |nbsp| P0 |nbsp| |nbsp|, ,|nbsp| |nbsp| P1 |nbsp| |nbsp| |nbsp|, , P2, , |nbsp| P3 |nbsp|
-            0, ,                       4, ,          10, ,                      11, ,     14
+            0, 4, 10, 11, 14
 
-        .. class:: substep
+        .. class:: step
 
             * Average Waiting Time
             * :math:`\frac{0 + (4-0) + (10-1) + (11-2)}{4} = \frac{22}{4} = 5\frac{2}{4} = 5.5`
 
-    .. container:: substep
+    .. container:: step
 
         .. csv-table::
-            :class: yoo-gantt-chart substep
+            :class: yoo-gantt-chart2 step
+            :widths: 5 5 15 15 30 2
+            :header: P0, P2, P0, P3, P1
 
-            P0, , P2 , ,  |nbsp| P0 |nbsp|, , |nbsp| P3 |nbsp|, ,  |nbsp|  |nbsp| P1 |nbsp|  |nbsp|  |nbsp|
-            0, ,  1, ,           2, ,                5, ,         8, , 14
+            0, 1, 2, 5, 8, 14
 
-        .. class:: substep
+        .. class:: step
 
         * Average Waiting Time
         * :math:`\frac{(0+(2-1)) + (8-0) + (1-1) + (5-2)}{4} = \frac{12}{4} = 3`
 
 .. slido:: Hieghest Response Ratio Rate Next (HRRN) :math:`\frac{w + s}{s}`
-   :class: t2c
+   :class: t2c step
 
     .. csv-table::
       :header: process, service time, arrival time
@@ -303,10 +297,11 @@
 
             * - t = 0 |nbsp|
               - .. csv-table::
-                  :class: yoo-gantt-chart
+                  :class: yoo-gantt-chart2
+                  :widths: 25 2
+                  :header: P0
 
-                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|
-                  0, , 5
+                  0, 5
 
               - |nbsp| queue : P1, P2, P3
 
@@ -367,7 +362,7 @@
 
 .. slido:: Estimating Service Time(I)
 
-    .. class:: substep
+    .. class:: step
 
     #. .. math::
             :class: ltr
@@ -401,7 +396,7 @@
 
 .. slido:: Estimating Service Time(II)
 
-    .. class:: substep
+    .. class:: step
 
     #. .. math::
           :class: ltr
@@ -432,7 +427,7 @@
 
 .. slido:: Estimating Service Time(III)
 
-    .. class:: substep
+    .. class:: step
 
     #. .. math::
         :class: ltr
@@ -585,7 +580,7 @@
         = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
 
 .. slido:: Priority
-   :class: t2c
+   :class: t2c step
 
     #. Internal
     #. External
@@ -741,7 +736,7 @@
       P3, 2, 5, 1
 
     .. list-table::
-        :class: borderless substep
+        :class: borderless step
 
         * - t=0, Q: P0(2)
 
@@ -768,7 +763,7 @@
               0, , 1, , 2, , 3
 
     .. list-table::
-        :class: borderless substep
+        :class: borderless step
 
         * - t=3, Q: P0(1,4), P1(2,3)
 
@@ -787,7 +782,7 @@
               0, , 1, , 2, , 3, , 5, , 7
 
     .. list-table::
-        :class: borderless substep
+        :class: borderless step
 
         * - t=7, Q: P0(1,4)
 
@@ -876,7 +871,7 @@
 .. slido:: Scheduling Criteria
    :class: t2c
 
-    .. class:: substep
+    .. class:: step
 
         #. *Waiting time*: Min
         #. *CPU utilization*: Max
@@ -886,7 +881,7 @@
             #. Optimainzation
             #. Operationg Systems
 
-    .. class:: substep
+    .. class:: step
 
     * *Fairness*
     * *No starvation*

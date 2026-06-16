@@ -307,6 +307,18 @@ table.yoo-gantt-chart tr:nth-of-type(2) td{
   border: 0;
   text-align: left;
 }
+
+table.yoo-gantt-chart2 {
+    border-collapse: unset;
+    th {border: 1px solid;}
+    th:last-of-type {display: none;}
+    tbody * {
+        border: 0;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+}
 table.yoo-memory {width: 98%;}
 table.yoo-memory tr td { border: solid 1px;}
 table.yoo-memory tr:nth-of-type(1) td{
