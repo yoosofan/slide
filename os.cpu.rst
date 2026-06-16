@@ -113,7 +113,7 @@
 
     .. csv-table::
         :class: yoo-gantt-chart2
-        :widths: 20 10 20 10 4
+        :widths: 20 10 20 10 2
         :header: P0, P1, P2, P3
 
         0,  2 , 3 , 5 ,6
@@ -139,7 +139,7 @@
 
     .. csv-table::
         :class: yoo-gantt-chart2
-        :widths: 20 10 20 10 4
+        :widths: 20 10 20 10 2
         :header: P0, P1, P2, P3
 
         0,  2 , 3 , 5 ,6
@@ -278,17 +278,17 @@
         * Average Waiting Time
         * :math:`\frac{(0+(2-1)) + (8-0) + (1-1) + (5-2)}{4} = \frac{12}{4} = 3`
 
-.. slido:: Hieghest Response Ratio Rate Next (HRRN) :math:`\frac{w + s}{s}`
+.. slido:: Hieghest Response Ratio Rate Next (HRRN) (w + s)/s
    :class: t2c step
 
     .. csv-table::
       :header: process, service time, arrival time
       :class: center
 
-      :math:`p_0`, 5, 0
-      :math:`p_1`, 3, 1
-      :math:`p_2`, 4, 2
-      :math:`p_3`, 2, 6
+      :math:`P_0`, 5, 0
+      :math:`P_1`, 3, 1
+      :math:`P_2`, 4, 2
+      :math:`P_3`, 2, 6
 
     .. container::
 
@@ -308,10 +308,11 @@
             * - t = 5 |nbsp|
 
               - .. csv-table::
-                  :class: yoo-gantt-chart
+                   :class: yoo-gantt-chart2
+                   :widths: 25 10 2
+                   :header: :math:`P_0`, :math:`P_1`
 
-                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp|
-                  0, , 5, , 8
+                   0, 5, 8
 
               - queue : P2 P3
 
@@ -326,10 +327,11 @@
             * - t = 8 |nbsp|
 
               - .. csv-table::
-                  :class: yoo-gantt-chart
+                  :class: yoo-gantt-chart2
+                  :widths: 25 15 20 2
+                  :header: :math:`P_0`, :math:`P_1`, :math:`P_2`
 
-                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp|, , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp|
-                  0, , 5, , 8, ,12
+                  0, 5, 8, 12
 
               - queue : P3
 
@@ -341,18 +343,20 @@
             * - HRRN |nbsp|
 
               - .. csv-table::
-                  :class: yoo-gantt-chart
+                  :class: yoo-gantt-chart2
+                  :widths: 25 15 20 10 2
+                  :header: :math:`P_0` , :math:`P_1`, :math:`P_2`, :math:`P_3`
 
-                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp|  |nbsp| :math:`P_2` |nbsp| , , :math:`P_3` |nbsp|
-                  0, , 5, , 8, ,12, , 14
+                  0, 5, 8, 12, 14
 
             * - SJF |nbsp|
 
               - .. csv-table::
-                  :class: yoo-gantt-chart
+                  :class: yoo-gantt-chart2
+                  :widths: 25 15 10 20 2
+                  :header: :math:`P_0` , :math:`P_1`, :math:`P_3`, :math:`P_2`
 
-                  |nbsp| |nbsp| :math:`P_0`  |nbsp| |nbsp| , , |nbsp| :math:`P_1`  |nbsp| , , |nbsp| :math:`P_3` |nbsp| , , |nbsp| :math:`P_2` |nbsp|
-                  0, , 5, , 8, ,10, , 14
+                  0, 5, 8, 10, 14
 
     Average Waiting Time
 
@@ -361,8 +365,19 @@
     SJF: :math:`\frac{0+(5-1)+(8-6)+(10-2)}{4}=\frac{14}{4}=\frac{7}{2}=3.5`
 
 .. slido:: Estimating Service Time(I)
+   :class: t2c
 
     .. class:: step
+
+    #. .. math::
+        :class: ltr
+
+        t_n = actual\ length\ of\ n^{th}\ service\ time
+
+    #. .. math::
+        :class: ltr
+
+        \tau_{n+1} = predicted\ value\ for\ the\ next\ service\ time
 
     #. .. math::
             :class: ltr
@@ -394,16 +409,9 @@
 
           \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
 
-.. slido:: Estimating Service Time(II)
-
     .. class:: step
 
-    #. .. math::
-          :class: ltr
-
-          \tau_{n+1} = \frac{n}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
-
-    #. .. math::
+    7. .. math::
           :class: ltr
 
           \tau_{n+1} = \frac{n + 1 - 1}{n + 1} * \tau_n + \frac{1}{n+1} * t_n
@@ -425,24 +433,10 @@
 
           \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
 
-.. slido:: Estimating Service Time(III)
-
-    .. class:: step
-
     #. .. math::
         :class: ltr
 
         \alpha = \frac{1}{n+1}\ , \  \tau_{n+1} =  ( 1 - \alpha ) * \tau_n + \alpha * t_n
-
-    #. .. math::
-        :class: ltr
-
-        t_n = actual\ length\ of\ n^{th}\ service\ time
-
-    #. .. math::
-        :class: ltr
-
-        \tau_{n+1} = predicted\ value\ for\ the\ next\ service\ time
 
     #. .. math::
         :class: ltr
@@ -452,94 +446,72 @@
     #. .. math::
         :class: ltr
 
-        \alpha → 0
+        \alpha → 1
 
 .. slido:: Round Robin (RR , quantum) I
-   :class: t2c
+   :class: t2c step
 
     .. csv-table::
-      :header: process, service time, arrival time
-      :class: center
+        :header: process, service time, arrival time
+        :class: center
 
-      :math:`p_0`, 5, 0
-      :math:`p_1`, 3, 1
-      :math:`p_2`, 4, 2
-      :math:`p_3`, 2, 6
+        :math:`p_0`, 5, 0
+        :math:`p_1`, 3, 1
+        :math:`p_2`, 4, 2
+        :math:`p_3`, 2, 6
 
-    .. list-table::
-        :class: borderless
-
-        * - time quantum or q = 2 ,
-          - Queue (Q): Empty
-
-        * - t = 0 , Q: P0 |nbsp|
-          - .. csv-table::
-              :class: yoo-gantt-chart
-
-              :math:`P_0` |nbsp|
-              0, , 2
-
-        * - t=2, Q: P1(3), P2(4), P0(3)
-
-          - .. csv-table::
-              :class: yoo-gantt-chart
-
-              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp|
-              0, , 2, , 4
-
-        * - t=4, Q:P2(4), P0(3), P1(1)
-
-          - .. csv-table::
-              :class: yoo-gantt-chart
-
-              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp|
-              0, , 2, , 4 , ,6
 
     .. container::
 
-            t=6, Q: P0(3), P1(1), P3(2), P2(2)
+        - time quantum or q = 2, Queue (Q)
 
-            .. csv-table::
-              :class: yoo-gantt-chart
+        .. csv-table:: t = 0 , Q: P0
+           :class: yoo-gantt-chart2
+           :width: 30%
+           :widths: 10 2
+           :header: :math:`P_0`
 
-              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|
-              0, , 2, , 4 , ,6 , , 8
+           0, 2
 
-            t=8, Q: P1(1), P3(2), P2(2), P0(1)
+        .. csv-table:: t=2, Q: P1(3), P2(4), P0(3)
+           :class: yoo-gantt-chart2 step
+           :width: 70%
+           :widths: 10 10 2
+           :header: P0 , P1
 
-            .. csv-table::
-              :class: yoo-gantt-chart
+           0, 2, 4
 
-              :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`
-              0, , 2, , 4 , ,6 , , 8, , 9
+    .. csv-table:: t=4, Q:P2(4), P0(3), P1(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 2
+      :header: P0, P1, P2
 
-    .. container::
+      0, 2, 4, 6
 
-        t=9, Q: P3(2), P2(2), P0(1)
+    .. csv-table:: t=6, Q: P0(3), P1(1), P3(2), P2(2)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 2
+      :header: P0, P1, P2, P0
 
-        .. csv-table::
-          :class: yoo-gantt-chart
+      0, 2, 4, 6, 8
 
-          :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`P_3` |nbsp|
-          0, , 2, , 4 , ,6 , , 8, , 9, ,11
+    .. csv-table:: t=8, Q: P1(1), P3(2), P2(2), P0(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 5 2
+      :header: P0, P1, P2, P0, P1
 
-        t=11, Q: P2(2), P0(1)
+      0, 2, 4, 6, 8, 9
 
-        .. csv-table::
-          :class: yoo-gantt-chart
+    .. csv-table:: t=9, Q: P3(2), P2(2), P0(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 5 10 2
+      :header: P0, P1, P2, P0, P1, P3
 
-          :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|
-          0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
-
-    .. container::
-
-        t=13, Q: P0(1)
-
-        .. csv-table::
-          :class: yoo-gantt-chart
-
-          :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0`
-          0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
+      0, 2, 4, 6, 8, 9, 11
 
 .. slido:: Round Robin (RR) II
    :class: t2c
@@ -553,23 +525,30 @@
       :math:`p_2`, 4, 2
       :math:`p_3`, 2, 6
 
-    .. container::
+    .. csv-table:: t=9, Q: P3(2), P2(2), P0(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 5 10 2
+      :header: P0, P1, P2, P0, P1, P3
 
-        t=11, Q: P2(2), P0(1)
+      0, 2, 4, 6, 8, 9, 11
 
-        - .. csv-table::
-            :class: yoo-gantt-chart
+    .. csv-table:: t=11, Q: P2(2), P0(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 5 10 10 2
+      :header: P0, P1, P2, P0, P1, P3, P2
 
-            :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|
-            0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13
+      0, 2, 4, 6, 8, 9, 11, 13
 
-        t=13, Q: P0(1)
+    .. csv-table:: t=13, Q: P0(1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 10 10 10 10 5 10 10 5 2
+      :header: P0, P1, P2, P0, P1, P3, P2, P0
 
-        - .. csv-table::
-            :class: yoo-gantt-chart
+      0, 2, 4, 6, 8, 9, 11, 13, 14
 
-            :math:`P_0` |nbsp| , , :math:`P_1` |nbsp| , , :math:`P_2` |nbsp| , , :math:`P_0` |nbsp|  , , :math:`P_1`, ,  :math:`p_3` |nbsp| , ,  :math:`p_2` |nbsp|  , ,  :math:`p_0`
-            0, , 2, , 4 , ,6 , , 8, , 9, ,11, , 13, , 14
 
     Average Waiting Time
 
@@ -616,52 +595,48 @@
         https://www.scaler.com/topics/linux-nice/
 
 .. slido:: Relative Priority
-   :class: t2c
+   :class: t2c step
 
     .. csv-table::
-      :header: process, service time, arrival time, Priority
-      :class: center
+       :header: process, service time, arrival time, Priority
+       :class: center
 
-      P0, 2, 0, 4
-      P1, 3, 1, 3
-      P2, 1, 2, 3
-      P3, 2, 5, 1
+       P0, 2, 0, 4
+       P1, 3, 1, 3
+       P2, 1, 2, 3
+       P3, 2, 5, 1
 
-    .. list-table::
-        :class: borderless
+    .. csv-table:: t=0, Q: P0(2,4)
+       :class: yoo-gantt-chart2 step
+       :width: 40%
+       :widths: 10 2
+       :header: P0
 
-        * - t=0, Q: P0(2,4)
-          - .. csv-table::
-              :class: yoo-gantt-chart
+       0, 2
 
-              P0 |nbsp| , ,
-              0, , 2
-        *  - t=2, Q: P1(3,3), P2(1,3)
-           - .. csv-table::
-              :class: yoo-gantt-chart
+    .. csv-table:: t=2, Q: P1(3, 3), P2(1, 3)
+       :class: yoo-gantt-chart2 step
+       :width: 60%
+       :widths: 10 15 2
+       :header: P0, P1
 
-              P0 |nbsp| , ,  |nbsp| P1  |nbsp|
-              0, , 2, , 5
+       0, 2, 5
 
-    .. container::
+    .. csv-table:: t=5, Q: P2(1, 3), P3(2, 1)
+       :class: yoo-gantt-chart2 step
+       :width: 70%
+       :widths: 10 15 10 2
+       :header: P0, P1, P3
 
-        t=5, Q: P2(1,3), P3(2,1)
+       0, 2, 5, 7
 
-        .. csv-table::
-          :class: yoo-gantt-chart
+    .. csv-table:: t=6, Q: P2(1, 3)
+       :class: yoo-gantt-chart2 step
+       :width: 80%
+       :widths: 10 15 10 5 2
+       :header: P0, P1, P3, P2
 
-          P0 |nbsp| , ,  |nbsp| P1  |nbsp| , , P3
-          0, , 2, , 5, , 7
-
-    .. container::
-
-        t=6, Q: P2(1,3)
-
-        .. csv-table::
-          :class: yoo-gantt-chart
-
-          P0 |nbsp| , ,  |nbsp| P1  |nbsp| , , P3, , P2 |nbsp|
-          0, , 2, , 5, , 7, , 8
+       0, 2, 5, 7, 8
 
     .. :
 
@@ -674,10 +649,10 @@
             = :math:`\frac{9+5+7+3}{4} = \frac{24}{4} = 6`
 
 .. slido:: Absolute Priority
-   :class: t2c
+   :class: t2c step
 
     .. csv-table::
-      :header: process, service time, arrival time, Priority
+      :header: process, start time, arrival time, Priority
       :class: center
 
       P0, 2, 0, 4
@@ -685,43 +660,45 @@
       P2, 1, 2, 3
       P3, 2, 5, 1
 
-    .. list-table::
-        :class: borderless
+    .. csv-table:: t=0, Q: P0(2,4)
+      :class: yoo-gantt-chart2 step
+      :width: 40%
+      :widths: 5 2
+      :header: P0
 
-        * - t=0, Q: P0(2,4)
-          - .. csv-table::
-              :class: yoo-gantt-chart
+      0, 1
 
-              P0
-              0, , 2
-        *  - t=1, Q: P1(3,3), P0(1,4)
-           - .. csv-table::
-              :class: yoo-gantt-chart
+    .. csv-table:: t=1, Q: P0(1, 4), P1(3, 3)
+      :class: yoo-gantt-chart2 step
+      :width: 60%
+      :widths: 5 15 2
+      :header: P0, P1
 
-              P0  , , |nbsp| P1  |nbsp|
-              0, , 1, , 4
-        *  - t=4, Q: P0(1,4), P2(1,3)
-           - .. csv-table::
-              :class: yoo-gantt-chart
+          0, 1, 4
 
-              P0 , ,  |nbsp| P1  |nbsp|, , P2
-              0, , 1, , 4, , 5
+    .. csv-table:: t=4, Q: P0(1, 4), P2(1, 3)
+      :class: yoo-gantt-chart2 step
+      :width: 70%
+      :widths: 5 20 5 2
+      :header: P0, P1, P2
 
-    .. list-table::
-        :class: borderless
+      0, 1, 4, 5
 
-        *  - t=5, Q: P0(1,4), P3(2,1)
-           - .. csv-table::
-              :class: yoo-gantt-chart
+    .. csv-table:: t=5, Q: P0(1, 4), P3(2, 1)
+      :class: yoo-gantt-chart2 step
+      :width: 80%
+      :widths: 5 20 5 10 2
+      :header: P0, P1, P2, P3
 
-              P0 , ,  |nbsp| P1  |nbsp|, , P2, , P3 |nbsp|
-              0, , 1, , 4, , 5, , 7
-        *  - t=7, Q: P0(1,4)
-           - .. csv-table::
-              :class: yoo-gantt-chart
+      0, 1, 4, 5, 7
 
-              P0 , ,  |nbsp| P1  |nbsp|, , P2, , P3 |nbsp|, , P0
-              0, , 1, , 4, , 5, , 7, , 8
+    .. csv-table:: t=7, Q: P0(1, 4)
+      :class: yoo-gantt-chart2 step
+      :width: 90%
+      :widths: 5 20 5 10 5 2
+      :header: P0, P1, P2, P3, P0
+
+      0, 1, 4, 5, 7, 8
 
 .. slido:: Priority Round Robin
    :class: t2c
