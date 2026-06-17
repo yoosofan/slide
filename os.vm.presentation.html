@@ -636,9 +636,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 10);
 });
 </script>
-<section class="slide t3c">
+<section class="slide t2c">
 <h2>Operating Systems - Virtual Memory - Ahmad Yoosofan</h2>
-<p> </p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://yoosofan.github.io/">https://yoosofan.github.io/</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.vm.presentation.html">https://yoosofan.github.io/slide/os.vm.presentation.html</a></p></li>
@@ -647,42 +646,40 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p><a class="reference external" href="https://yoosofan.github.io/course/os.html">https://yoosofan.github.io/course/os.html</a></p></li>
 <li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.vm.concise4pdf.html">https://yoosofan.github.io/slide/os.vm.concise4pdf.html</a></p></li>
 </ul>
-<p> </p>
+<img alt="os/img/memory/memory_virtual_memory_general.png" class="align-center" src="os/img/memory/memory_virtual_memory_general.png" />
+<!-- image: os/img/memory/virtual_memory_concept.png
+:align: center
+:class: step -->
 <div class="slide-number">1</div></section>
-<section class="slide t2c">
-<h2>Virtual Memory</h2>
-<img alt="os/img/memory/memory_virtual_memory_general.png" class="align-center incremental" src="os/img/memory/memory_virtual_memory_general.png" />
-<img alt="os/img/memory/virtual_memory_concept.png" class="align-center incremental" src="os/img/memory/virtual_memory_concept.png" />
-<div class="slide-number">2</div></section>
-<section class="slide t2c">
+<section class="slide">
 <h2>Virtual Memory Addressing</h2>
-<img alt="os/img/memory/memory_virtual_with_TLB.png" class="align-center incremental" height="599" src="os/img/memory/memory_virtual_with_TLB.png" width="889" />
 <img alt="os/img/memory/memory_virtual_valid_invalid.png" class="align-center incremental" src="os/img/memory/memory_virtual_valid_invalid.png" />
+<div class="slide-number">2</div></section>
+<section class="slide">
+<h2>Page Fault</h2>
+<img alt="os/img/memory/memory_virtual_handling_page_fault.png" class="align-center" src="os/img/memory/memory_virtual_handling_page_fault.png" />
+<!-- image: os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
+:align: center
+:class: step -->
 <div class="slide-number">3</div></section>
 <section class="slide t2c">
-<h2>Page Fault</h2>
-<img alt="os/img/memory/memory_virtual_handling_page_fault.png" class="align-center incremental" src="os/img/memory/memory_virtual_handling_page_fault.png" />
-<img alt="os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png" class="align-center incremental" src="os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png" />
-<div class="slide-number">4</div></section>
-<section class="slide">
 <h2>Effective Access Time of Virtual Memory</h2>
 <ul class="incremental simple">
-<li><p>effective access time = (1 − p) × ma + p × page fault time.</p></li>
-<li><p>effective access time = (1 − p) × (200) + p (8 milliseconds) = (1 − p) × 200 + p × 8,000,000 = 200 + 7,999,800 × p</p></li>
+<li><p>effective access time =</p></li>
+<li><p>(1 − p) × ma + p × page fault time.</p></li>
+<li><p>EAT RAM = 200 nanosecond</p></li>
+<li><p>Page fault time = 8 milliseconds</p></li>
+<li><p>(1 − p) × (200) + p (8 )</p></li>
+<li><p>(1 − p) × 200 + p × 8,000,000</p></li>
+<li><p>200 + 7,999,800 × p</p></li>
 <li><p>220 &gt; 200 + 7,999,800 × p,</p></li>
 <li><p>20 &gt; 7,999,800 × p,</p></li>
 <li><p>p &lt; 0.0000025</p></li>
 </ul>
-<div class="incremental docutils container">
-<p class="h2">Allocation of frames</p>
-<ul class="incremental simple">
-<li><p>On demand</p></li>
-<li><p>prepaging</p></li>
-</ul>
-</div>
-<div class="slide-number">5</div></section>
+<img alt="os/img/memory/memory_virtual_with_TLB.png" class="align-center" height="599" src="os/img/memory/memory_virtual_with_TLB.png" width="889" />
+<div class="slide-number">4</div></section>
 <section class="slide t2c">
-<h2>روش‌های تخصیص تعداد قاب به هر فرآیند</h2>
+<h2>Allocation of frames</h2>
 <ul class="rtl incremental">
 <li><p>مجموعهٔ مقیم برای هر فرآیند.</p>
 <blockquote>
@@ -709,28 +706,39 @@ document.addEventListener("DOMContentLoaded", function() {
 </blockquote>
 </li>
 </ul>
-<div class="incremental docutils container">
-<p class="rtl-h1">سیاست‌های پاک کردن</p>
-<ul class="rtl-h3 incremental simple">
-<li><p>پاک کردن درخواستی demand cleaning</p></li>
-<li><p>پیش پاک کردن precleaning</p></li>
+<ul class="incremental">
+<li><p><strong>Allocation Policies</strong></p>
+<blockquote>
+<ul class="simple">
+<li><p>On demand</p></li>
+<li><p>prepaging</p></li>
 </ul>
-</div>
+</blockquote>
+</li>
+<li><dl class="simple">
+<dt><strong>Cleaning Policies</strong></dt>
+<dd><ul class="simple">
+<li><p>demand cleaning</p></li>
+<li><p>precleaning</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="slide-number">5</div></section>
+<section class="slide">
+<h2>Page Replacement</h2>
+<!-- image: os/img/memory/memory_virtual_need4replacement.png
+:align: center -->
+<img alt="os/img/memory/memory_virtual_page_replacement.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement.png" />
 <div class="slide-number">6</div></section>
 <section class="slide t2c">
-<h2>Page Replacement</h2>
-<img alt="os/img/memory/memory_virtual_need4replacement.png" class="align-center incremental" src="os/img/memory/memory_virtual_need4replacement.png" />
-<img alt="os/img/memory/memory_virtual_page_replacement.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement.png" />
-<div class="slide-number">7</div></section>
-<section class="slide t2c">
 <h2>Frame Allocation</h2>
-<div class="incremental docutils container">
+<div class="docutils container">
 <ul class="incremental simple">
-<li><p>frame-allocation algorithm and a page-replacement algorithm.</p></li>
-<li><p>reference string.</p></li>
-<li><p>0100, 0432, 0101, 0612, 0102, 0103, 0104, 0101, 0611, 0102, 0103, 0104, 0101, 0610, 0102, 0103, 0104, 0101, 0609, 0102, 0105</p></li>
-<li><p>At 100 bytes per page, this sequence is reduced to the following reference</p></li>
-<li><p>string:</p></li>
+<li><p>frame allocation algorithm</p></li>
+<li><p>page replacement algorithm</p></li>
+<li><p>reference string of pages</p></li>
 <li><p>1, 4, 1, 6, 1, 6, 1, 6, 1, 6, 1</p></li>
 </ul>
 <ul class="rtl-h3 incremental simple">
@@ -738,147 +746,361 @@ document.addEventListener("DOMContentLoaded", function() {
 </ul>
 </div>
 <img alt="os/img/memory/memory_virtual_page_fault_per_frame_allocated.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_fault_per_frame_allocated.png" />
-<div class="slide-number">8</div></section>
+<div class="slide-number">7</div></section>
 <section class="slide">
 <h2>FIFO</h2>
-<img alt="os/img/memory/memory_virtual_page_replacement_FIFO.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement_FIFO.png" style="width: 700px;" />
-<p class="h2 incremental">Belady’s anomaly</p>
+<img alt="os/img/memory/memory_virtual_page_replacement_FIFO.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_FIFO.png" />
+<div class="incremental docutils container">
+<p class="h2">Belady’s anomaly</p>
 <img alt="os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png" />
-<div class="slide-number">9</div></section>
-<section class="slide">
+</div>
+<div class="slide-number">8</div></section>
+<section class="slide t2c">
 <h2>Optimal</h2>
-<img alt="os/img/memory/memory_virtual_page_replacement_Optimal.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement_Optimal.png" />
-<p class="h2 incremental">Not Recently Used Page(NRU)</p>
-<img alt="os/img/memory/memory_virtual_page_replacement_LRU.png" class="align-center incremental" src="os/img/memory/memory_virtual_page_replacement_LRU.png" />
-<p class="incremental">NRU vs LRU</p>
-<p class="h2 incremental">Least Recently Used(LRU)</p>
-<p class="h2 incremental">How to Impolement LRU</p>
-<ul class="h2 incremental simple">
+<div class="docutils container">
+<img alt="os/img/memory/memory_virtual_page_replacement_Optimal.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_Optimal.png" />
+<div class="incremental docutils container">
+<p class="h2">Not Recently Used Page(NRU)</p>
+<img alt="os/img/memory/memory_virtual_page_replacement_LRU.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_LRU.png" />
+</div>
+</div>
+<div class="docutils container">
+<ul class="incremental simple">
+<li><p>NRU vs LRU</p></li>
+<li><p>Least Recently Used(LRU)</p></li>
+<li><dl class="simple">
+<dt>How to Impolement LRU</dt>
+<dd><ul>
 <li><p>counters</p></li>
 <li><p>stacks</p></li>
 </ul>
-<p class="h2 incremental">LFU</p>
-<p class="h2 incremental">Least Frequently Used</p>
-<p class="h2 incremental">MFU</p>
-<p class="h2 incremental">Most Frequently Used</p>
-<p class="h2 incremental">page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used</p>
-<div class="slide-number">10</div></section>
+</dd>
+</dl>
+</li>
+<li><p>LFU</p></li>
+<li><p>Least Frequently Used</p></li>
+<li><p>MFU</p></li>
+<li><p>Most Frequently Used</p></li>
+</ul>
+<!-- :
+
+page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used -->
+</div>
+<div class="slide-number">9</div></section>
 <section class="slide">
 <h2>Second chance (clock)</h2>
-<p>Simplest implementation of NRU and LRU by using one bit</p>
-<div class="slide-number">11</div></section>
-<section class="slide">
-<ul class="simple">
-<li><p>access bit,</p></li>
-<li><p>reference bit, or</p></li>
-<li><p>use bit</p></li>
-</ul>
-<p>Some called this NRU</p>
-<div class="slide-number">12</div></section>
-<section class="slide">
-<ul class="simple">
-<li><p>as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)</p></li>
-<li><p>keep one bit called the &quot;used bit&quot; or &quot;reference bit&quot;, where 1 =&gt; used recently and 0 =&gt; not used recently</p></li>
-<li><p>variants of this scheme are used in many operating systems, including UNIX and MacIntosh</p></li>
-<li><p>most variations use a scan pointer and go through the page frames one by one, in some order, looking for a page that has not been used recently.</p></li>
-</ul>
-<div class="slide-number">13</div></section>
-<section class="slide">
-<img alt="os/img/memory/memory_virtual_page_replacement_second_chance.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_second_chance.png" style="height: 550px;" />
-<div class="slide-number">14</div></section>
-<section class="slide">
-<h2>Modefied Clock</h2>
-<p>Enhanced Second Chance</p>
-<div class="slide-number">15</div></section>
-<section class="slide">
-<p>By the usage of</p>
-<ul class="simple">
-<li><p>modify bit or</p></li>
-<li><p>dirty bit</p></li>
-</ul>
-<p>(&quot;modify bit&quot;, &quot;use bit&quot; or &quot;access bit&quot;)</p>
+<!-- container:
+
+Simplest implementation of NRU and LRU by using one bit
+
+* access bit,
+* reference bit, or
+* use bit
+
+Some called this NRU
+
+* as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)
+* keep one bit called the "used bit" or "reference bit", where 1 => used recently and 0 => not used recently
+* variants of this scheme are used in many operating systems, including UNIX and MacIntosh
+* most variations use a scan pointer and go through the page frames one by one, in some order, looking for a page that has not been used recently. -->
+<img alt="os/img/memory/memory_virtual_page_replacement_second_chance.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_second_chance.png" />
+<div class="slide-number">10</div></section>
+<section class="slide t2c">
+<h2>Modefied Clock - Enhanced Second Chance</h2>
 <ul class="incremental simple">
 <li><dl class="simple">
-<dt>Form 1</dt>
-<dd><ol class="arabic simple">
-<li><p>Search for (0, 0)</p></li>
-<li><p>Search for (1, 0) and access bit = 0</p></li>
-<li><p>goto 1</p></li>
-</ol>
+<dt><strong>Reference Bit (R)</strong></dt>
+<dd><ul>
+<li><p>Automatically set to <span class="docutils literal">1</span> by hardware</p></li>
+<li><p>when the page is read or written.</p></li>
+</ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>Form 2</dt>
-<dd><ol class="arabic simple">
-<li><p>Search for (0, 0)</p></li>
-<li><p>Search for (1, 0) and access bit = 0</p></li>
-<li><p>Search for (0, 0)</p></li>
-<li><p>Search for (1, 0)</p></li>
+<dt><strong>Modify/Dirty Bit (M)</strong></dt>
+<dd><ul>
+<li><p>Automatically set to <span class="docutils literal">1</span> by hardware</p></li>
+<li><p>when the page content is modified.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>(Reference Bit, Modify Bit)</strong></p></li>
+<li><p><strong>(R, M)</strong></p></li>
+</ul>
+<ol class="arabic simple incremental">
+<li><p>R=0, M=0 : not recently used, clean).</p></li>
+<li><p>R=0, M=1 : require write-back</p></li>
+<li><p>R=1, M=0 : clear R</p></li>
+<li><p>R=1, M=1 : R=0, M=1</p></li>
 </ol>
+<ul class="incremental simple">
+<li><p>This algorithm accesses the frame, right?</p></li>
+<li><p>Doesn't the R bit change to 1 <strong>automatically</strong>?</p></li>
+<li><p>Think about it!!</p></li>
+<li><p>Look at the YIC models and its changes</p></li>
+<li><p>Read the comments of this slide in its rst file.</p></li>
+<li><p>However, it is about something else.</p></li>
+</ul>
+<!-- :
+
+1. **(0, 0):** Neither recently used nor modified
+2. **(0, 1):** Not recently used, but modified.
+3. **(1, 0):** Strip of its reference bit if passed
+4. **(1, 1):** (0, 1)
+
+The Two-Pass Logic
+
+The clock hand performs a single rotation (or partial rotation), but it operates as a two-pass scan to find a victim.
+
+    Pass 1 (The "Soft" Scan): The hand looks for the "best" page (0,0) or (0,1). If it finds a page with R=1, it clears it to 0 as it passes. It does not replace anything in this pass. It is essentially "demoting" pages so they become candidates for replacement in the next pass.
+
+    Pass 2 (The "Hard" Scan): If the hand completes a full rotation without finding a (0,0) or (0,1), it performs a second pass. Since it cleared all R bits in the first pass, it will now find the pages it previously demoted (now (0,0) or (0,1)) and select one for replacement.
+
+To answer your specific point:
+Yes, the algorithm searches the frames at most twice (two passes). It clears the R bits during the first pass to prepare the frames for the second pass. -->
+<div class="slide-number">11</div></section>
+<section class="slide ts2c">
+<h2>Page Buffering History & Architecture</h2>
+<div class="graphviz-container" style="margin: 0 auto; text-align: center; transform: scale(1.0); transform-origin: top center;">
+<svg width="1011pt" height="142pt"
+ viewBox="0.00 0.00 1011.00 142.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 138)">
+<title>PageBuffering</title>
+<!-- victim -->
+<g id="node1" class="node">
+<title>victim</title>
+<path fill="#ffe0b2" stroke="#fb8c00" d="M170,-134C170,-134 12,-134 12,-134 6,-134 0,-128 0,-122 0,-122 0,-88 0,-88 0,-82 6,-76 12,-76 12,-76 170,-76 170,-76 176,-76 182,-82 182,-88 182,-88 182,-122 182,-122 182,-128 176,-134 170,-134"/>
+<text text-anchor="middle" x="91" y="-108.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Victim Page</text>
+<text text-anchor="middle" x="91" y="-93.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(Chosen for Eviction)</text>
+</g>
+<!-- free -->
+<g id="node2" class="node">
+<title>free</title>
+<path fill="#c8e6c9" stroke="#4caf50" stroke-width="2" d="M991,-105C991,-105 870,-105 870,-105 864,-105 858,-99 858,-93 858,-93 858,-59 858,-59 858,-53 864,-47 870,-47 870,-47 991,-47 991,-47 997,-47 1003,-53 1003,-59 1003,-59 1003,-93 1003,-93 1003,-99 997,-105 991,-105"/>
+<text text-anchor="middle" x="930.5" y="-79.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Free Frame Pool</text>
+<text text-anchor="middle" x="930.5" y="-64.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(Clean Pages)</text>
+</g>
+<!-- victim&#45;&gt;free -->
+<g id="edge1" class="edge">
+<title>victim&#45;&gt;free</title>
+<path fill="none" stroke="#4caf50" d="M182.05,-107.58C322.79,-110.66 603.33,-112.93 840,-91 842.54,-90.76 845.12,-90.5 847.71,-90.21"/>
+<polygon fill="#4caf50" stroke="#4caf50" points="848.31,-93.66 857.81,-88.97 847.46,-86.71 848.31,-93.66"/>
+<text text-anchor="middle" x="526" y="-111.2" font-family="Courier,monospace" font-size="11.00"> If Clean </text>
+</g>
+<!-- dirty -->
+<g id="node3" class="node">
+<title>dirty</title>
+<path fill="#ffccbc" stroke="#ff5722" stroke-width="2" d="M452,-77C452,-77 298,-77 298,-77 292,-77 286,-71 286,-65 286,-65 286,-31 286,-31 286,-25 292,-19 298,-19 298,-19 452,-19 452,-19 458,-19 464,-25 464,-31 464,-31 464,-65 464,-65 464,-71 458,-77 452,-77"/>
+<text text-anchor="middle" x="375" y="-51.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Modified Frame Pool</text>
+<text text-anchor="middle" x="375" y="-36.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(Dirty Pages)</text>
+</g>
+<!-- victim&#45;&gt;dirty -->
+<g id="edge2" class="edge">
+<title>victim&#45;&gt;dirty</title>
+<path fill="none" stroke="#ff5722" d="M182.07,-82.89C188.13,-81.53 194.15,-80.22 200,-79 224.42,-73.89 250.87,-68.9 275.61,-64.47"/>
+<polygon fill="#ff5722" stroke="#ff5722" points="276.5,-67.87 285.73,-62.67 275.27,-60.97 276.5,-67.87"/>
+<text text-anchor="middle" x="234" y="-82.2" font-family="Courier,monospace" font-size="11.00"> If Dirty </text>
+</g>
+<!-- disk -->
+<g id="node4" class="node">
+<title>disk</title>
+<path fill="#e0e0e0" stroke="black" d="M754,-71.73C754,-74.64 716.8,-77 671,-77 625.2,-77 588,-74.64 588,-71.73 588,-71.73 588,-24.27 588,-24.27 588,-21.36 625.2,-19 671,-19 716.8,-19 754,-21.36 754,-24.27 754,-24.27 754,-71.73 754,-71.73"/>
+<path fill="none" stroke="black" d="M754,-71.73C754,-68.82 716.8,-66.45 671,-66.45 625.2,-66.45 588,-68.82 588,-71.73"/>
+<text text-anchor="middle" x="671" y="-51.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">Secondary Storage</text>
+<text text-anchor="middle" x="671" y="-36.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(Disk Swap / Files)</text>
+</g>
+<!-- dirty&#45;&gt;disk -->
+<g id="edge3" class="edge">
+<title>dirty&#45;&gt;disk</title>
+<path fill="none" stroke="#757575" stroke-dasharray="5,2" d="M464.21,-48C500.08,-48 541.54,-48 577.8,-48"/>
+<polygon fill="#757575" stroke="#757575" points="577.88,-51.5 587.88,-48 577.88,-44.5 577.88,-51.5"/>
+<text text-anchor="middle" x="526" y="-63.2" font-family="Courier,monospace" font-size="11.00"> Asynchronous</text>
+<text text-anchor="middle" x="526" y="-51.2" font-family="Courier,monospace" font-size="11.00">Batch Write </text>
+</g>
+<!-- disk&#45;&gt;free -->
+<g id="edge4" class="edge">
+<title>disk&#45;&gt;free</title>
+<path fill="none" stroke="#757575" d="M754.18,-56.94C784.07,-60.19 817.82,-63.86 847.68,-67.1"/>
+<polygon fill="#757575" stroke="#757575" points="847.32,-70.58 857.64,-68.19 848.08,-63.63 847.32,-70.58"/>
+<text text-anchor="middle" x="806" y="-81.2" font-family="Courier,monospace" font-size="11.00"> Cleared &amp;</text>
+<text text-anchor="middle" x="806" y="-69.2" font-family="Courier,monospace" font-size="11.00">Recycled </text>
+</g>
+<!-- rescue -->
+<g id="node5" class="node">
+<title>rescue</title>
+<path fill="#f5f5f5" stroke="transparent" d="M152.5,-58C152.5,-58 29.5,-58 29.5,-58 23.5,-58 17.5,-52 17.5,-46 17.5,-46 17.5,-12 17.5,-12 17.5,-6 23.5,0 29.5,0 29.5,0 152.5,0 152.5,0 158.5,0 164.5,-6 164.5,-12 164.5,-12 164.5,-46 164.5,-46 164.5,-52 158.5,-58 152.5,-58"/>
+<text text-anchor="middle" x="91" y="-32.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00" fill="#0288d1">⚡ Soft Fault</text>
+<text text-anchor="middle" x="91" y="-17.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00" fill="#0288d1">(Instant Rescue)</text>
+</g>
+<!-- rescue&#45;&gt;dirty -->
+<g id="edge5" class="edge">
+<title>rescue&#45;&gt;dirty</title>
+<path fill="none" stroke="#0288d1" stroke-width="2" d="M174.77,-34.58C209.66,-36.93 250.32,-39.67 285.78,-42.06"/>
+<polygon fill="#0288d1" stroke="#0288d1" stroke-width="2" points="174.83,-31.07 164.62,-33.89 174.36,-38.06 174.83,-31.07"/>
+</g>
+</g>
+</svg>
+
+</div>
+<ul class="incremental simple">
+<li><dl class="simple">
+<dt><strong>Bottleneck</strong></dt>
+<dd><ul>
+<li><p>Writing dirty page to disk</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Page Buffering Solution</strong></dt>
+<dd><ul>
+<li><p>from VAX/VMS to all modern kernels</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Free Frame Pool</strong></dt>
+<dd><ul>
+<li><p>list of clean, unallocated frames</p></li>
+</ul>
 </dd>
 </dl>
 </li>
 </ul>
-<div class="slide-number">16</div></section>
+<ul class="incremental simple">
+<li><dl class="simple">
+<dt><strong>Modified Frame Pool</strong></dt>
+<dd><ul>
+<li><p>list of dirty frames in memory</p></li>
+<li><p>Written to disk in bulk asynchronously</p></li>
+<li><p>batch I/O rather than on-demand.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Page Fault</strong> in Modified Pool</p></li>
+<li><p><strong>Soft Page Fault</strong></p></li>
+<li><p>Can be added to FIFO,Clock, etc.</p></li>
+</ul>
+<blockquote>
+<!-- komento:
+
+* **Teaching Point:** Emphasize that the "Modified Frame Pool" effectively turns random write requests into sequential batch writes, heavily optimizing disk throughput.
+* Note the "Soft Fault" path—remind students that this serves as a safety net or cache before the page is written out and destroyed. -->
+</blockquote>
+<!-- :
+
+Historically, standard page replacement algorithms (like FIFO or LRU) suffered a severe performance penalty when a selected "victim" page was dirty:
+
+* **The Traditional Bottleneck:** The faulting process had to block and wait while the dirty page was actively written to disk *before* the new page could be read into that same frame.
+* **The Page Buffering Solution:** Pioneered extensively in systems like VAX/VMS and later refined in modern kernels, **Page Buffering** decouples page eviction from disk I/O by maintaining pools of readily available physical frames.
+
+.. class:: substep
+
+    Instead of discarding frames entirely, the system reallocates them into two logical system caches:
+
+    1. **Free Frame Pool:** A list of clean, unallocated frames. Faults are read into these immediately without waiting for an eviction clean-up.
+    2. **Modified Frame Pool:** A list of dirty frames. These are kept in memory and written to disk in bulk asynchronously (batch I/O) rather than on-demand.
+
+
+The system continuously cycles frames through pools.
+If a process faults for a page that is still sitting in the Modified Pool before it hits disk,
+it can be rescued instantly without any disk access (a *soft page fault*). -->
+<div class="slide-number">12</div></section>
 <section class="slide">
-<h2>PAGE BUFFERING</h2>
-<img alt="os/img/memory/page_buffer.png" src="os/img/memory/page_buffer.png" style="width: 800px;" />
-<div class="slide-number">17</div></section>
-<section class="slide">
+<h2>Page Buffering in Action</h2>
+<img alt="os/img/memory/page_buffer.png" class="center" height="754" src="os/img/memory/page_buffer.png" width="1251" />
+<p class="incremental"><a class="reference external" href="https://docs.google.com/spreadsheets/d/1WtKolLTw4UJijHHwvhO9yqOotsLl91838vSZ00m4xwc/edit?gid=0#gid=0">https://docs.google.com/spreadsheets/d/1WtKolLTw4UJijHHwvhO9yqOotsLl91838vSZ00m4xwc/edit?gid=0#gid=0</a></p>
+<div class="slide-number">13</div></section>
+<section class="slide t2c">
 <h2>Thrashing</h2>
 <img alt="os/img/memory/memory_virtual_thrashing.png" class="align-center" src="os/img/memory/memory_virtual_thrashing.png" />
-<pre class="code asm literal-block"><code><span class="name function">mov</span><span class="whitespace"> </span><span class="name constant">A</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name constant">B</span></code></pre>
-<div class="slide-number">18</div></section>
-<section class="slide">
-<h2>Principle of Locality(Locality of Reference)</h2>
-<img alt="os/img/memory/memory_virtual_locality_principle.png" class="align-center" src="os/img/memory/memory_virtual_locality_principle.png" style="height: 500px;" />
-<div class="slide-number">19</div></section>
+<pre class="code asm incremental literal-block"><code><span class="whitespace"> </span><span class="name function">mov</span><span class="whitespace"> </span><span class="name constant">A</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name constant">B</span><span class="whitespace">
+
+ </span><span class="comment single">; How many frames does it access?
+</span><span class="whitespace"> </span><span class="comment single">; What is the maximum?
+</span><span class="whitespace"> </span><span class="comment single">; What is the minimum?</span></code></pre>
+<div class="slide-number">14</div></section>
+<section class="slide t2c">
+<h2>Principle of Locality(Cache Memory & Locality in os.mem.rst)</h2>
+<ul class="simple">
+<li><p><strong>The Principle of Locality</strong></p></li>
+<li><p>Programs do not access memory completely at random</p></li>
+<li><p>They cluster around specific addresses.</p></li>
+<li><dl class="simple">
+<dt><strong>Temporal Locality</strong></dt>
+<dd><ul>
+<li><p>loop variables</p></li>
+<li><p>function parameters</p></li>
+<li><p>variable sum</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Spatial Locality</strong></dt>
+<dd><ul>
+<li><p>sequential array traversal</p></li>
+<li><p>a[i+1] after a[i]</p></li>
+<li><p>streaming instructions</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<img alt="os/img/memory/memory_virtual_locality_principle.png" class="align-center" src="os/img/memory/memory_virtual_locality_principle.png" />
+<pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">row_by_row</span><span class="punctuation">(</span><span class="keyword type">void</span><span class="punctuation">){</span><span class="whitespace">
+</span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">xa</span><span class="punctuation">[</span><span class="literal number integer">1000</span><span class="punctuation">][</span><span class="literal number integer">1000</span><span class="punctuation">];</span><span class="whitespace">
+</span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">  </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="keyword">for</span><span class="punctuation">(</span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">&lt;</span><span class="literal number integer">1000</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
+</span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace">    </span><span class="keyword">for</span><span class="punctuation">(</span><span class="name">j</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">j</span><span class="operator">&lt;</span><span class="literal number integer">1000</span><span class="punctuation">;</span><span class="name">j</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
+</span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace">      </span><span class="name">xa</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">][</span><span class="name">j</span><span class="punctuation">]</span><span class="operator">=</span><span class="name">i</span><span class="operator">*</span><span class="literal number integer">1000</span><span class="operator">+</span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
+<pre class="code cpp literal-block"><small class="ln">1 </small><code data-lineno="1 "><span class="keyword type">void</span><span class="whitespace"> </span><span class="name function">column_by_column</span><span class="punctuation">(</span><span class="keyword type">void</span><span class="punctuation">){</span><span class="whitespace">
+</span></code><small class="ln">2 </small><code data-lineno="2 "><span class="whitespace">  </span><span class="keyword type">double</span><span class="whitespace"> </span><span class="name">xa</span><span class="punctuation">[</span><span class="literal number integer">1000</span><span class="punctuation">][</span><span class="literal number integer">1000</span><span class="punctuation">];</span><span class="whitespace">
+</span></code><small class="ln">3 </small><code data-lineno="3 "><span class="whitespace">  </span><span class="keyword type">int</span><span class="whitespace"> </span><span class="name">i</span><span class="punctuation">,</span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span></code><small class="ln">4 </small><code data-lineno="4 "><span class="whitespace">  </span><span class="keyword">for</span><span class="punctuation">(</span><span class="name">j</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">j</span><span class="operator">&lt;</span><span class="literal number integer">1000</span><span class="punctuation">;</span><span class="name">j</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
+</span></code><small class="ln">5 </small><code data-lineno="5 "><span class="whitespace">    </span><span class="keyword">for</span><span class="punctuation">(</span><span class="name">i</span><span class="operator">=</span><span class="literal number integer">0</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">&lt;</span><span class="literal number integer">1000</span><span class="punctuation">;</span><span class="name">i</span><span class="operator">++</span><span class="punctuation">)</span><span class="whitespace">
+</span></code><small class="ln">6 </small><code data-lineno="6 "><span class="whitespace">      </span><span class="name">xa</span><span class="punctuation">[</span><span class="name">i</span><span class="punctuation">][</span><span class="name">j</span><span class="punctuation">]</span><span class="operator">=</span><span class="name">i</span><span class="operator">*</span><span class="literal number integer">1000</span><span class="operator">+</span><span class="name">j</span><span class="punctuation">;</span><span class="whitespace">
+</span></code><small class="ln">7 </small><code data-lineno="7 "><span class="whitespace"></span><span class="punctuation">}</span></code></pre>
+<div class="slide-number">15</div></section>
 <section class="slide">
 <h2>Working Set Model</h2>
-<img alt="os/img/memory/memory_virtual_thrashing_working_set_model.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model.png" style="width: 800px;" />
-<div class="slide-number">20</div></section>
+<img alt="os/img/memory/memory_virtual_thrashing_working_set_model.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model.png" />
+<div class="incremental docutils container">
+<img alt="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" class="align-center incremental" height="678" src="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" width="994" />
+</div>
+<div class="slide-number">16</div></section>
 <section class="slide">
-<img alt="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" style="width: 800px;" />
-<div class="slide-number">21</div></section>
-<section class="slide">
-<img alt="os/img/memory/memory_virtual_thrashing_working_set_model_graph.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model_graph.png" style="width: 800px;" />
-<div class="slide-number">22</div></section>
-<section class="slide">
-<p class="rtl-h1">روش شناسایی کوبیدگی به کمک فراوانی خطای نبود صفحه</p>
-<p>page-fault frequency ( PFF )</p>
+<h2>Page Fault Frequency (PFF)</h2>
 <img alt="os/img/memory/memory_virtual_thrashing_page_fault_frequency.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_page_fault_frequency.png" style="width: 800px;" />
-<div class="slide-number">23</div></section>
-<section class="slide">
-<p class="rtl-h1">روش‌های رویارویی با کوبیدگی پس از شناسایی آن</p>
+<p class="rtl-h2 incremental">روش‌های رویارویی با کوبیدگی پس از شناسایی آن</p>
 <ul class="rtl incremental simple">
 <li><p>معلق کردن تعدادی فرآیند برگزیده شده</p></li>
 <li><p>نپذیرفتن فرآیند جدید</p></li>
 </ul>
-<div class="slide-number">24</div></section>
-<section class="slide">
-<p class="rtl-h1">پرونده‌های نگاشت شده به حافظه (Memory-Mapped Files)</p>
-<img alt="os/img/memory/memory_virtual_memory_mapped_files.png" class="align-center" src="os/img/memory/memory_virtual_memory_mapped_files.png" style="width: 650px;" />
-<div class="slide-number">25</div></section>
-<section class="slide">
-<p class="rtl-h1">ورودی و خروجی‌های نگاشت شده به حافظه</p>
-<p>(I/O-Mapped Files)</p>
+<div class="slide-number">17</div></section>
+<section class="slide t2c">
+<h2>Memory and I/O Mapped Files</h2>
+<img alt="os/img/memory/memory_virtual_memory_mapped_files.png" class="align-center" src="os/img/memory/memory_virtual_memory_mapped_files.png" />
 <ol class="arabic simple incremental">
 <li><p>Graphic card</p></li>
 <li><p>Network</p></li>
 </ol>
-<div class="slide-number">26</div></section>
-<section class="slide">
-<p class="rtl-h1">قفل کردن برخی صفحه‌ها</p>
-<p>Lock pages</p>
-<div class="slide-number">27</div></section>
-<section class="slide">
+<ul class="incremental simple">
+<li><p><strong>Lock pages</strong></p></li>
+</ul>
+<div class="slide-number">18</div></section>
+<section class="slide t2c">
 <h2>Copy-on-Write</h2>
-<img alt="os/img/memory/memory_virtual_copy_on_write_before.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_before.png" style="width: 750px;" />
-<div class="slide-number">28</div></section>
-<section class="slide">
-<img alt="os/img/memory/memory_virtual_copy_on_write_after.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_after.png" style="width: 750px;" />
-<div class="slide-number">29</div></section>
+<img alt="os/img/memory/memory_virtual_copy_on_write_before.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_before.png" />
+<div class="incremental docutils container">
+<img alt="os/img/memory/memory_virtual_copy_on_write_after.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_after.png" />
+</div>
+<div class="slide-number">19</div></section>
 <section class="slide">
 <h2>References(I)</h2>
 <ul class="simple">
@@ -899,13 +1121,14 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing">https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing</a></p></li>
 <li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems">https://github.com/mor1/ia-operating-systems</a></p></li>
 <li><p><a class="reference external" href="https://slideplayer.com/slide/7084682/">https://slideplayer.com/slide/7084682/</a></p></li>
-</ul>
-<div class="slide-number">30</div></section>
-<section class="slide">
-<h2>References(II)</h2>
-<ul class="simple">
 <li><p><a class="reference external" href="http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png">http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png</a></p></li>
 <li><p><a class="reference external" href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938">https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938</a></p></li>
+<li><p>Gemini AI, Chatgpt, duck.ai</p></li>
+</ul>
+<div class="slide-number">20</div></section>
+<section class="slide">
+<h2>References(III)</h2>
+<ul class="simple">
 <li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg">https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg</a></p></li>
 <li><p><a class="reference external" href="https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg">https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg">https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg</a></p></li>
@@ -917,16 +1140,11 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Locality_of_reference">https://en.wikipedia.org/wiki/Locality_of_reference</a></p></li>
 <li><p><a class="reference external" href="http://www2.cs.uregina.ca/~hamilton/courses/330/notes/memory/page_replacement.html">http://www2.cs.uregina.ca/~hamilton/courses/330/notes/memory/page_replacement.html</a></p></li>
 <li><p><a class="reference external" href="https://prepinsta.com/operating-systems/page-replacement-algorithms/least-recently-used-lru-algorithm/">https://prepinsta.com/operating-systems/page-replacement-algorithms/least-recently-used-lru-algorithm/</a></p></li>
-</ul>
-<div class="slide-number">31</div></section>
-<section class="slide">
-<h2>References(III)</h2>
-<ul class="simple">
 <li><p><a class="reference external" href="https://examradar.com/nru-not-recently-used-page-replacement-algorithm-questions-answers/">https://examradar.com/nru-not-recently-used-page-replacement-algorithm-questions-answers/</a></p></li>
 <li><p><a class="reference external" href="https://japp.io/algorithms/page-replacement/lfu-page-replacement-algorithm-program-in-c-c/">https://japp.io/algorithms/page-replacement/lfu-page-replacement-algorithm-program-in-c-c/</a></p></li>
 <li><p><a class="reference external" href="https://www.kernel.org/doc/">https://www.kernel.org/doc/</a></p></li>
 <li><p><a class="reference external" href="https://codex.cs.yale.edu/avi/os-book/">https://codex.cs.yale.edu/avi/os-book/</a></p></li>
 </ul>
-<div class="slide-number">32</div></section>
+<div class="slide-number">21</div></section>
 </body>
 </html>

@@ -10,9 +10,7 @@
    :css: ./assets/style.css
 
 .. slido:: Operating Systems - Virtual Memory - Ahmad Yoosofan
-   :class: t3c
-
-    |nbsp|
+   :class: t2c
 
     * https://yoosofan.github.io/
     * https://yoosofan.github.io/slide/os.vm.presentation.html
@@ -21,57 +19,50 @@
     * https://yoosofan.github.io/course/os.html
     * https://yoosofan.github.io/slide/os.vm.concise4pdf.html
 
-    |nbsp|
-
-.. slido:: Virtual Memory
-   :class: t2c step
-
     .. image:: os/img/memory/memory_virtual_memory_general.png
        :align: center
 
-    .. image:: os/img/memory/virtual_memory_concept.png
+    .. image: os/img/memory/virtual_memory_concept.png
        :align: center
+       :class: step
 
 .. slido:: Virtual Memory Addressing
-   :class: t2c step
 
-    .. image:: os/img/memory/memory_virtual_with_TLB.png
-       :align: center
-       :scale: 120%
 
     .. image:: os/img/memory/memory_virtual_valid_invalid.png
        :align: center
+       :class: step
 
 .. slido:: Page Fault
-   :class: t2c step
 
     .. image:: os/img/memory/memory_virtual_handling_page_fault.png
        :align: center
 
-    .. image:: os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
+    .. image: os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
        :align: center
+       :class: step
 
 .. slido:: Effective Access Time of Virtual Memory
-   :class: step
+   :class: t2c
 
-    * effective access time = (1 − p) × ma + p × page fault time.
-    * effective access time = (1 − p) × (200) + p (8 milliseconds) = (1 − p) × 200 + p × 8,000,000 = 200 + 7,999,800 × p
+    .. class:: step
+
+    * effective access time =
+    * (1 − p) × ma + p × page fault time.
+    * EAT RAM = 200 nanosecond
+    * Page fault time = 8 milliseconds
+    * (1 − p) × (200) + p (8 )
+    * (1 − p) × 200 + p × 8,000,000
+    * 200 + 7,999,800 × p
     * 220 > 200 + 7,999,800 × p,
     * 20 > 7,999,800 × p,
     * p < 0.0000025
 
-    .. container:: step
+    .. image:: os/img/memory/memory_virtual_with_TLB.png
+        :align: center
+        :scale: 120%
 
-        .. class:: h2
-
-            Allocation of frames
-
-        .. class:: step
-
-        * On demand
-        * prepaging
-
-.. slido:: روش‌های تخصیص تعداد قاب به هر فرآیند
+.. slido:: Allocation of frames
    :class: t2c
 
     .. class:: step rtl
@@ -91,38 +82,36 @@
             *  تخصیص محلی
             *  تخصیص سراسری
 
-    .. container:: step
+    .. class:: step
 
-        .. class:: rtl-h1
+        * **Allocation Policies**
 
-            سیاست‌های پاک کردن
+            * On demand
+            * prepaging
 
-        .. class:: step rtl-h3
-
-            *  پاک کردن درخواستی demand cleaning
-            *  پیش پاک کردن precleaning
+        * **Cleaning Policies**
+            *  demand cleaning
+            *  precleaning
 
 .. slido:: Page Replacement
-   :class: t2c step
 
-    .. image:: os/img/memory/memory_virtual_need4replacement.png
+    .. image: os/img/memory/memory_virtual_need4replacement.png
        :align: center
 
     .. image:: os/img/memory/memory_virtual_page_replacement.png
        :align: center
+       :class: step
 
 .. slido:: Frame Allocation
-   :class: t2c step
+   :class: t2c
 
     .. container::
 
         .. class:: step
 
-        * frame-allocation algorithm and a page-replacement algorithm.
-        * reference string.
-        * 0100, 0432, 0101, 0612, 0102, 0103, 0104, 0101, 0611, 0102, 0103, 0104, 0101, 0610, 0102, 0103, 0104, 0101, 0609, 0102, 0105
-        * At 100 bytes per page, this sequence is reduced to the following reference
-        * string:
+        * frame allocation algorithm
+        * page replacement algorithm
+        * reference string of pages
         * 1, 4, 1, 6, 1, 6, 1, 6, 1, 6, 1
 
         .. class:: step rtl-h3
@@ -131,159 +120,271 @@
 
     .. image:: os/img/memory/memory_virtual_page_fault_per_frame_allocated.png
         :align: center
+        :class: step
 
 .. slido:: FIFO
-   :class: step
 
     .. image:: os/img/memory/memory_virtual_page_replacement_FIFO.png
        :align: center
-       :width: 700px
 
-    .. class:: h2
+    .. container:: step
 
-    Belady’s anomaly
+        .. class:: h2
 
-    .. image:: os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png
-       :align: center
+        Belady’s anomaly
+
+        .. image:: os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png
+           :align: center
+           :class: step
 
 .. slido:: Optimal
-   :class: step
+   :class: t2c
 
-    .. image:: os/img/memory/memory_virtual_page_replacement_Optimal.png
-       :align: center
+    .. container::
 
-    .. class:: h2
+        .. image:: os/img/memory/memory_virtual_page_replacement_Optimal.png
+           :align: center
 
-    Not Recently Used Page(NRU)
+        .. container:: step
 
-    .. image:: os/img/memory/memory_virtual_page_replacement_LRU.png
-       :align: center
+            .. class:: h2
 
-    NRU vs LRU
+                Not Recently Used Page(NRU)
 
-    .. class:: h2 step
+            .. image:: os/img/memory/memory_virtual_page_replacement_LRU.png
+               :align: center
 
-        Least Recently Used(LRU)
+    .. container::
 
-        How to Impolement LRU
+        .. class:: step
 
-        * counters
-        * stacks
+            * NRU vs LRU
+            * Least Recently Used(LRU)
+            * How to Impolement LRU
+                * counters
+                * stacks
+            * LFU
+            * Least Frequently Used
+            * MFU
+            * Most Frequently Used
 
-        LFU
 
-        Least Frequently Used
+        .. :
 
-        MFU
-
-        Most Frequently Used
-
-        page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used
+            page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used
 
 .. slido:: Second chance (clock)
 
-    Simplest implementation of NRU and LRU by using one bit
+    .. container:
 
-.. slido::
+        Simplest implementation of NRU and LRU by using one bit
 
-    * access bit,
-    * reference bit, or
-    * use bit
+        * access bit,
+        * reference bit, or
+        * use bit
 
-    Some called this NRU
+        Some called this NRU
 
-.. slido::
-
-    * as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)
-    * keep one bit called the "used bit" or "reference bit", where 1 => used recently and 0 => not used recently
-    * variants of this scheme are used in many operating systems, including UNIX and MacIntosh
-    * most variations use a scan pointer and go through the page frames one by one, in some order, looking for a page that has not been used recently.
-
-.. slido::
+        * as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)
+        * keep one bit called the "used bit" or "reference bit", where 1 => used recently and 0 => not used recently
+        * variants of this scheme are used in many operating systems, including UNIX and MacIntosh
+        * most variations use a scan pointer and go through the page frames one by one, in some order, looking for a page that has not been used recently.
 
     .. image:: os/img/memory/memory_virtual_page_replacement_second_chance.png
        :align: center
-       :height: 550px
 
-.. slido:: Modefied Clock
-
-    Enhanced Second Chance
-
-.. slido::
-
-    By the usage of
-
-    * modify bit or
-    * dirty bit
-
-    ("modify bit", "use bit" or "access bit")
+.. slido:: Modefied Clock - Enhanced Second Chance
+   :class: t2c
 
     .. class:: step
 
-        * Form 1
-            #. Search for (0, 0)
-            #. Search for (1, 0) and access bit = 0
-            #. goto 1
-        * Form 2
-            #. Search for (0, 0)
-            #. Search for (1, 0) and access bit = 0
-            #. Search for (0, 0)
-            #. Search for (1, 0)
+        * **Reference Bit (R)**
+            * Automatically set to ``1`` by hardware
+            * when the page is read or written.
+        * **Modify/Dirty Bit (M)**
+            * Automatically set to ``1`` by hardware
+            * when the page content is modified.
+        * **(Reference Bit, Modify Bit)**
+        * **(R, M)**
 
-.. slido:: PAGE BUFFERING
+        1. R=0, M=0 : not recently used, clean).
+        2. R=0, M=1 : require write-back
+        3. R=1, M=0 : clear R
+        4. R=1, M=1 : R=0, M=1
+
+        * This algorithm accesses the frame, right?
+        * Doesn't the R bit change to 1 **automatically**?
+        * Think about it!!
+        * Look at the YIC models and its changes
+        * Read the comments of this slide in its rst file.
+        * However, it is about something else.
+
+    .. :
+
+        1. **(0, 0):** Neither recently used nor modified
+        2. **(0, 1):** Not recently used, but modified.
+        3. **(1, 0):** Strip of its reference bit if passed
+        4. **(1, 1):** (0, 1)
+
+        The Two-Pass Logic
+
+        The clock hand performs a single rotation (or partial rotation), but it operates as a two-pass scan to find a victim.
+
+            Pass 1 (The "Soft" Scan): The hand looks for the "best" page (0,0) or (0,1). If it finds a page with R=1, it clears it to 0 as it passes. It does not replace anything in this pass. It is essentially "demoting" pages so they become candidates for replacement in the next pass.
+
+            Pass 2 (The "Hard" Scan): If the hand completes a full rotation without finding a (0,0) or (0,1), it performs a second pass. Since it cleared all R bits in the first pass, it will now find the pages it previously demoted (now (0,0) or (0,1)) and select one for replacement.
+
+        To answer your specific point:
+        Yes, the algorithm searches the frames at most twice (two passes). It clears the R bits during the first pass to prepare the frames for the second pass.
+
+
+.. slido:: Page Buffering History & Architecture
+   :class: ts2c
+
+    .. grafo::
+       :align: center
+       :scale: 100
+
+        digraph PageBuffering {
+            rankdir=LR;
+            fontname="Helvetica";
+            bgcolor="transparent";
+
+            node [shape=box, style="filled,rounded", fillcolor="#f5f5f5", fontname="Helvetica-Bold", width=1.6, height=0.8];
+
+            // Primary structures
+            victim  [label="Victim Page\n(Chosen for Eviction)", fillcolor="#ffe0b2", color="#fb8c00"];
+            free    [label="Free Frame Pool\n(Clean Pages)", fillcolor="#c8e6c9", color="#4caf50", penwidth=2];
+            dirty   [label="Modified Frame Pool\n(Dirty Pages)", fillcolor="#ffccbc", color="#ff5722", penwidth=2];
+            disk    [label="Secondary Storage\n(Disk Swap / Files)", shape=cylinder, fillcolor="#e0e0e0"];
+
+            // Routing logic
+            victim -> free [label=" If Clean ", fontname="Courier", fontsize=11, color="#4caf50"];
+            victim -> dirty [label=" If Dirty ", fontname="Courier", fontsize=11, color="#ff5722"];
+
+            dirty -> disk [label=" Asynchronous\nBatch Write ", fontname="Courier", fontsize=11, style=dashed, color="#757575"];
+            disk -> free [label=" Cleared &\nRecycled ", fontname="Courier", fontsize=11, color="#757575"];
+
+            // The Soft Fault Recovery path
+            rescue [shape=plaintext, label="⚡ Soft Fault\n(Instant Rescue)", fontcolor="#0288d1", fontname="Helvetica-Bold"];
+            rescue -> dirty [color="#0288d1", style=bold, dir=back, arrowtail=normal];
+        }
+
+    .. class:: step
+
+    * **Bottleneck**
+        * Writing dirty page to disk
+    * **Page Buffering Solution**
+        * from VAX/VMS to all modern kernels
+    * **Free Frame Pool**
+        * list of clean, unallocated frames
+
+    .. class:: step
+
+    + **Modified Frame Pool**
+        * list of dirty frames in memory
+        * Written to disk in bulk asynchronously
+        * batch I/O rather than on-demand.
+    + **Page Fault** in Modified Pool
+    + **Soft Page Fault**
+    + Can be added to FIFO,Clock, etc.
+
+     .. komento:
+
+        * **Teaching Point:** Emphasize that the "Modified Frame Pool" effectively turns random write requests into sequential batch writes, heavily optimizing disk throughput.
+        * Note the "Soft Fault" path—remind students that this serves as a safety net or cache before the page is written out and destroyed.
+
+
+    .. :
+
+        Historically, standard page replacement algorithms (like FIFO or LRU) suffered a severe performance penalty when a selected "victim" page was dirty:
+
+        * **The Traditional Bottleneck:** The faulting process had to block and wait while the dirty page was actively written to disk *before* the new page could be read into that same frame.
+        * **The Page Buffering Solution:** Pioneered extensively in systems like VAX/VMS and later refined in modern kernels, **Page Buffering** decouples page eviction from disk I/O by maintaining pools of readily available physical frames.
+
+        .. class:: substep
+
+            Instead of discarding frames entirely, the system reallocates them into two logical system caches:
+
+            1. **Free Frame Pool:** A list of clean, unallocated frames. Faults are read into these immediately without waiting for an eviction clean-up.
+            2. **Modified Frame Pool:** A list of dirty frames. These are kept in memory and written to disk in bulk asynchronously (batch I/O) rather than on-demand.
+
+
+        The system continuously cycles frames through pools.
+        If a process faults for a page that is still sitting in the Modified Pool before it hits disk,
+        it can be rescued instantly without any disk access (a *soft page fault*).
+
+.. slido:: Page Buffering in Action
 
     .. image:: os/img/memory/page_buffer.png
-      :width: 800px
+       :class: center
+       :scale: 180%
+
+    .. class:: step
+
+    https://docs.google.com/spreadsheets/d/1WtKolLTw4UJijHHwvhO9yqOotsLl91838vSZ00m4xwc/edit?gid=0#gid=0
 
 .. slido:: Thrashing
+   :class: t2c
 
     .. image:: os/img/memory/memory_virtual_thrashing.png
        :align: center
 
     .. code:: asm
+       :class: step
 
-      mov A, B
+        mov A, B
 
-.. slido:: Principle of Locality(Locality of Reference)
+        ; How many frames does it access?
+        ; What is the maximum?
+        ; What is the minimum?
+
+.. slido:: Principle of Locality(Cache Memory & Locality in os.mem.rst)
+   :class: t2c
+
+    * **The Principle of Locality**
+    * Programs do not access memory completely at random
+    * They cluster around specific addresses.
+    * **Temporal Locality**
+        * loop variables
+        * function parameters
+        * variable sum
+    * **Spatial Locality**
+        * sequential array traversal
+        * a[i+1] after a[i]
+        * streaming instructions
 
     .. image:: os/img/memory/memory_virtual_locality_principle.png
-      :align: center
-      :height: 500px
+       :align: center
+
+    .. include:: os/src/memory_virtual_effect_of_array_programming_row.cpp
+       :code: cpp
+       :number-lines:
+
+    .. include:: os/src/memory_virtual_effect_of_array_programming_column.cpp
+       :code: cpp
+       :number-lines:
+
 
 .. slido:: Working Set Model
 
     .. image:: os/img/memory/memory_virtual_thrashing_working_set_model.png
        :align: center
-       :width: 800px
 
-.. slido::
+    .. container:: step
 
-    .. image:: os/img/memory/memory_virtual_thrashing_working_set_model_example.png
-       :align: center
-       :width: 800px
+        .. image:: os/img/memory/memory_virtual_thrashing_working_set_model_example.png
+           :align: center
+           :class: step
+           :scale: 80%
 
-.. slido::
-
-    .. image:: os/img/memory/memory_virtual_thrashing_working_set_model_graph.png
-       :align: center
-       :width: 800px
-
-.. slido::
-
-    .. class:: rtl-h1
-
-        روش شناسایی کوبیدگی به کمک فراوانی خطای نبود صفحه
-
-
-    page-fault frequency ( PFF )
+.. slido:: Page Fault Frequency (PFF)
 
     .. image:: os/img/memory/memory_virtual_thrashing_page_fault_frequency.png
        :align: center
        :width: 800px
 
-.. slido::
-
-    .. class:: rtl-h1
+    .. class:: rtl-h2 step
 
         روش‌های رویارویی با کوبیدگی پس از شناسایی آن
 
@@ -292,48 +393,29 @@
        *  معلق کردن تعدادی فرآیند برگزیده شده
        * نپذیرفتن فرآیند جدید
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        پرونده‌های نگاشت شده به حافظه (Memory-Mapped Files)
+.. slido:: Memory and I/O Mapped Files
+   :class: t2c
 
     .. image:: os/img/memory/memory_virtual_memory_mapped_files.png
        :align: center
-       :width: 650px
-
-.. slido::
-
-    .. class:: rtl-h1
-
-      ورودی و خروجی‌های نگاشت شده به حافظه
-
-    (I/O-Mapped Files)
 
     .. class:: step
 
-    #. Graphic card
-    #. Network
+        #. Graphic card
+        #. Network
 
-.. slido::
-
-    .. class:: rtl-h1
-
-      قفل کردن برخی صفحه‌ها
-
-    Lock pages
+        * **Lock pages**
 
 .. slido:: Copy-on-Write
+   :class: t2c
 
     .. image:: os/img/memory/memory_virtual_copy_on_write_before.png
        :align: center
-       :width: 750px
 
-.. slido::
+    .. container:: step
 
-    .. image:: os/img/memory/memory_virtual_copy_on_write_after.png
-       :align: center
-       :width: 750px
+        .. image:: os/img/memory/memory_virtual_copy_on_write_after.png
+           :align: center
 
 .. slido:: References(I)
 
@@ -349,10 +431,12 @@
     * https://github.com/mor1/ia-operating-systems
     * https://slideplayer.com/slide/7084682/
 
-.. slido:: References(II)
-
     * http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png
     * https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938
+    * Gemini AI, Chatgpt, duck.ai
+
+.. slido:: References(III)
+
     * https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg
     * https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg
     * https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg
@@ -364,9 +448,6 @@
     * https://en.wikipedia.org/wiki/Locality_of_reference
     * http://www2.cs.uregina.ca/~hamilton/courses/330/notes/memory/page_replacement.html
     * https://prepinsta.com/operating-systems/page-replacement-algorithms/least-recently-used-lru-algorithm/
-
-.. slido:: References(III)
-
     * https://examradar.com/nru-not-recently-used-page-replacement-algorithm-questions-answers/
     * https://japp.io/algorithms/page-replacement/lfu-page-replacement-algorithm-program-in-c-c/
     * https://www.kernel.org/doc/

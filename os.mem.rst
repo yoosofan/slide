@@ -1120,12 +1120,10 @@
     .. include:: os/src/memory_virtual_effect_of_array_programming_row.cpp
       :code: cpp
       :number-lines:
-      :class: ltr
 
     .. include:: os/src/memory_virtual_effect_of_array_programming_column.cpp
       :code: cpp
       :number-lines:
-      :class: ltr
 
 .. slido:: Effective Access Time (EAT)
 
