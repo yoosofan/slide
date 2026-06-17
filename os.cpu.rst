@@ -630,7 +630,7 @@
 
        0, 2, 5, 7
 
-    .. csv-table:: t=6, Q: P2(1, 3)
+    .. csv-table:: t=7, Q: P2(1, 3)
        :class: yoo-gantt-chart2 step
        :width: 80%
        :widths: 10 15 10 5 2
