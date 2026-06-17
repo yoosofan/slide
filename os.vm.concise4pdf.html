@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>Operating Systems - Virtual Memory (By Ahmad Yoosofan)</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style type="text/css">
+
+/* Minimal style sheet for the HTML output of Docutils.                    */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: minimal.css 10018 2025-03-06 16:19:15Z milde $                                                               */
+/* :Copyright: © 2015, 2021 Günter Milde.                                  */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+
+/* This CSS3 stylesheet defines rules for Docutils elements without        */
+/* HTML equivalent. It is required to make the document semantics visible. */
+/*                                                                         */
+/* .. _validates: http://jigsaw.w3.org/css-validator/validator$link        */
+
+/* titles */
+p.topic-title,
+p.admonition-title,
+p.system-message-title {
+  font-weight: bold;
+}
+p.sidebar-title,
+p.rubric {
+  font-weight: bold;
+  font-size: larger;
+}
+p.rubric {
+  color: maroon;
+}
+p.subtitle,
+p.section-subtitle,
+p.sidebar-subtitle {
+  font-weight: bold;
+  margin-top: -0.5em;
+}
+h1 + p.subtitle {
+  font-size: 1.6em;
+}
+a.toc-backref {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Warnings, Errors */
+.system-messages h2,
+.system-message-title,
+pre.problematic,
+span.problematic {
+  color: red;
+}
+
+/* Inline Literals */
+.docutils.literal {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+/* do not wrap at hyphens and similar: */
+.literal > span.pre { white-space: nowrap; }
+
+/* keep line-breaks (\n) visible */
+.pre-wrap { white-space: pre-wrap; }
+
+/* Lists */
+
+/* compact and simple lists: no margin between items */
+.simple  li, .simple  ul, .simple  ol, .simple  > li p,
+.compact li, .compact ul, .compact ol, .compact > li p,
+dl.simple  > dd, dl.compact > dd, dl.docinfo > dd {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Nested Paragraphs */
+p:first-child { margin-top: 0; }
+p:last-child { margin-bottom: 0; }
+details > p:last-child { margin-bottom: 1em; }
+
+/* Table of Contents */
+.contents ul.auto-toc { /* section numbers present */
+  list-style-type: none;
+}
+
+/* Enumerated Lists */
+ol.arabic     { list-style: decimal }
+ol.loweralpha { list-style: lower-alpha }
+ol.upperalpha { list-style: upper-alpha }
+ol.lowerroman { list-style: lower-roman }
+ol.upperroman { list-style: upper-roman }
+
+/* Definition Lists and Derivatives */
+dt .classifier { font-style: italic }
+dt .classifier:before {
+  font-style: normal;
+  margin: 0.5em;
+  content: ":";
+}
+/* Field Lists and similar */
+/* bold field name, content starts on the same line */
+dl.field-list,
+dl.option-list,
+dl.docinfo {
+  display: flow-root;
+}
+dl.field-list > dt,
+dl.option-list > dt,
+dl.docinfo > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.25em;
+}
+/* Offset for field content (corresponds to the --field-name-limit option) */
+dl.field-list > dd,
+dl.option-list > dd,
+dl.docinfo > dd {
+  margin-left:  9em; /* ca. 14 chars in the test examples, fit all Docinfo fields */
+}
+/* start nested lists on new line */
+dd > dl:first-child,
+dd > ul:first-child,
+dd > ol:first-child {
+  clear: left;
+}
+/* start field-body on a new line after long field names */
+dl.field-list > dd > *:first-child,
+dl.option-list > dd > *:first-child
+{
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+}
+
+/* Bibliographic Fields (docinfo) */
+dl.docinfo pre.address {
+  font: inherit;
+  margin: 0;
+}
+dl.docinfo > dd.authors > p { margin: 0; }
+
+/* Option Lists */
+dl.option-list > dt { font-weight: normal; }
+span.option { white-space: nowrap; }
+
+/* Footnotes and Citations  */
+
+.footnote, .citation { margin: 1em 0; } /* default paragraph skip (Firefox) */
+/* hanging indent */
+.citation { padding-left: 2em; }
+.footnote { padding-left: 1.7em; }
+.footnote.superscript { padding-left: 1.0em; }
+.citation > .label { margin-left: -2em; }
+.footnote > .label { margin-left: -1.7em; }
+.footnote.superscript > .label { margin-left: -1.0em; }
+
+.footnote > .label + *,
+.citation > .label + * {
+  display: inline-block;
+  margin-top: 0;
+  vertical-align: top;
+}
+.footnote > .backrefs + *,
+.citation > .backrefs + * {
+  margin-top: 0;
+}
+.footnote > .label + p, .footnote > .backrefs + p,
+.citation > .label + p, .citation > .backrefs + p {
+  display: inline;
+  vertical-align: inherit;
+}
+
+.backrefs { user-select: none; }
+.backrefs > a { font-style: italic; }
+
+/* superscript footnotes */
+a[role="doc-noteref"].superscript,
+.footnote.superscript > .label,
+.footnote.superscript > .backrefs {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: 1;
+}
+a[role="doc-noteref"].superscript > .fn-bracket,
+.footnote.superscript > .label > .fn-bracket {
+  /* hide brackets in display but leave for copy/paste */
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+[role="doc-noteref"].superscript + [role="doc-noteref"].superscript {
+  padding-left: 0.15em; /* separate consecutive footnote references */
+  /* TODO: unfortunately, "+" also selects with text between the references. */
+}
+
+/* Alignment */
+.align-left   {
+  text-align: left;
+  margin-right: auto;
+}
+.align-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-right  {
+  text-align: right;
+  margin-left: auto;
+}
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+/* reset inner alignment in figures and tables */
+figure.align-left, figure.align-right,
+table.align-left, table.align-center, table.align-right {
+  text-align: inherit;
+}
+
+/* Text Blocks */
+.topic { margin: 1em 2em; }
+.sidebar,
+.admonition,
+.system-message {
+  margin: 1em 2em;
+  border: thin solid;
+  padding: 0.5em 1em;
+}
+div.line-block { display: block; }
+div.line-block div.line-block, pre { margin-left: 2em; }
+
+/* Code line numbers: don't copy with drag-and-drop */
+pre.code .ln { display: none; }
+pre.code code:before {
+  content: attr(data-lineno);
+  font-size: small;
+  color: gray;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+td, th {
+  border: thin solid silver;
+  padding: 0 1ex;
+}
+.borderless td, .borderless th {
+  border: 0;
+  padding: 0;
+  padding-right: 0.5em /* separate table cells */
+}
+
+table > caption, figcaption {
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+table.captionbelow {
+  caption-side: bottom;
+}
+
+/* MathML (see "math.css" for --math-output=HTML) */
+math .boldsymbol { font-weight: bold; }
+math.boxed, math .boxed {padding: 0.25em; border: thin solid; }
+/* style table similar to AMS "align" or "aligned" environment: */
+mtable.cases > mtr > mtd { text-align: left; }
+mtable.ams-align > mtr > mtd { padding-left: 0; padding-right: 0; }
+mtable.ams-align > mtr > mtd:nth-child(2n) { text-align: left; }
+mtable.ams-align > mtr > mtd:nth-child(2n+1) { text-align: right; }
+mtable.ams-align > mtr > mtd:nth-child(2n+3) { padding-left: 2em; }
+.mathscr mi, mi.mathscr {
+  font-family: STIX, XITSMathJax_Script, rsfs10,
+               "Asana Math", Garamond, cursive;
+}
+
+/* Document Header and Footer */
+header { border-bottom: 1px solid black; }
+footer { border-top: 1px solid black; }
+
+/* Images are block-level by default in Docutils */
+/* New HTML5 block elements: set display for older browsers */
+img, svg, header, footer, main, aside, nav, section, figure, video, details {
+  display: block;
+}
+svg { width: auto; height: auto; }  /* enable scaling of SVG images */
+/* inline images */
+
+p img, p svg, p video,
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img,
+h1 svg, h2 svg, h3 svg, h4 svg, h5 svg, h6 svg {
+  display: inline;
+}
+
+</style>
+<style type="text/css">
+
+/* CSS31_ style sheet for the output of Docutils HTML writers.             */
+/* Rules for easy reading and pre-defined style variants.                  */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: plain.css 10079 2025-04-10 12:01:48Z milde $                                                               */
+/* :Copyright: © 2015 Günter Milde.                                        */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+/* .. _CSS3: https://www.w3.org/Style/CSS/                                 */
+
+
+/* Document Structure */
+/* ****************** */
+
+/* "page layout" */
+body {
+  margin: 0;
+  background-color: #dbdbdb;
+  --field-indent: 9em; /* default indent of fields in field lists */
+}
+main, footer, header {
+  line-height:1.6;
+  /* avoid long lines --> better reading */
+  /* optimum is 45…75 characters/line <http://webtypography.net/2.1.2> */
+  /* OTOH: lines should not be too short because of missing hyphenation, */
+  max-width: 50rem;
+  padding: 1px 2%; /* 1px on top avoids grey bar above title (mozilla) */
+  margin: auto;
+}
+main {
+  counter-reset: table figure;
+  background-color: white;
+}
+footer, header {
+  font-size: smaller;
+  padding: 0.5em 2%;
+  border: none;
+}
+
+/* Table of Contents */
+ul.auto-toc > li > p {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+nav.contents ul {
+  padding-left: 1em;
+}
+main > nav.contents ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B29\ ';
+}
+main > nav.contents ul ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B1D\ ';
+}
+
+/* Transitions */
+hr.docutils {
+  width: 80%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  clear: both;
+}
+
+/* Paragraphs */
+
+/* vertical space (parskip) */
+p, ol, ul, dl, li,
+.footnote, .citation,
+div > math,
+table {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6,
+dd, details > p:last-child {
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+/* ===== */
+
+/* Definition Lists */
+/* Indent lists nested in definition lists */
+dd > ul:only-child, dd > ol:only-child { padding-left: 1em; }
+
+/* Description Lists */
+/* styled like in most dictionaries, encyclopedias etc. */
+dl.description {
+  display: flow-root;
+}
+dl.description > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.3em;
+}
+dl.description > dd:after {
+  display: table;
+  content: "";
+  clear: left; /* clearfix for empty descriptions */
+}
+
+/* Field Lists */
+
+dl.field-list > dd,
+dl.docinfo > dd {
+  margin-left: var(--field-indent); /* adapted in media queries or HTML */
+}
+
+/* example for custom field-name width */
+dl.field-list.narrow > dd {
+  --field-indent: 5em;
+}
+/* run-in: start field-body on same line after long field names */
+dl.field-list.run-in > dd p {
+  display: block;
+}
+
+/* Bibliographic Fields */
+
+/* generally, bibliographic fields use dl.docinfo */
+/* but dedication and abstract are placed into divs */
+div.abstract p.topic-title {
+  text-align: center;
+}
+div.dedication {
+  margin: 2em 5em;
+  text-align: center;
+  font-style: italic;
+}
+div.dedication p.topic-title {
+  font-style: normal;
+}
+
+/* disclosures */
+details { padding-left: 1em; }
+summary { margin-left: -1em; }
+
+/* Text Blocks */
+/* =========== */
+
+/* Literal Blocks */
+pre.literal-block, pre.doctest-block,
+pre.math, pre.code {
+  font-family: monospace;
+}
+
+/* Block Quotes and Topics */
+bockquote { margin: 1em 2em; }
+blockquote p.attribution {
+  text-align: right;
+  margin-left: 20%;
+}
+
+/* Tables */
+/* ====== */
+
+/* th { vertical-align: bottom; } */
+
+table tr { text-align: left; }
+
+/* "booktabs" style (no vertical lines) */
+table.booktabs {
+  border: 0;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.booktabs * {
+  border: 0;
+}
+table.booktabs th {
+  border-bottom: thin solid;
+}
+
+/* numbered tables (counter defined in div.document) */
+table.numbered > caption:before {
+  counter-increment: table;
+  content: "Table " counter(table) ": ";
+  font-weight: bold;
+}
+
+/* Explicit Markup Blocks */
+/* ====================== */
+
+/* Footnotes and Citations */
+/* ----------------------- */
+
+/* line on the left */
+.footnote-list {
+  border-left: solid thin;
+  padding-left: 0.25em;
+}
+
+/* Directives */
+/* ---------- */
+
+/* Body Elements */
+/* ~~~~~~~~~~~~~ */
+
+/* Images and Figures */
+
+/* let content flow to the side of aligned images and figures */
+figure.align-left,
+img.align-left,
+svg.align-left,
+video.align-left,
+div.align-left,
+object.align-left {
+  clear: left;
+  float: left;
+  margin-right: 1em;
+}
+figure.align-right,
+img.align-right,
+svg.align-right,
+video.align-right,
+div.align-right,
+object.align-right {
+  clear: right;
+  float: right;
+  margin-left: 1em;
+}
+/* Stop floating sidebars, images and figures */
+h1, h2, h3, h4, footer, header { clear: both; }
+
+/* Numbered figures */
+figure.numbered > figcaption > p:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  font-weight: bold;
+}
+
+/* Admonitions and System Messages */
+.caution p.admonition-title,
+.attention p.admonition-title,
+.danger p.admonition-title,
+.error p.admonition-title,
+.warning p.admonition-title,
+div.error {
+  color: red;
+}
+
+/* Sidebar */
+/* Move right. In a layout with fixed margins, */
+/* it can be moved into the margin.            */
+aside.sidebar {
+  width: 30%;
+  max-width: 26em;
+  float: right;
+  clear: right;
+  margin-left: 1em;
+  margin-right: -1%;
+  background-color: #fffffa;
+}
+
+
+/* Code */
+pre.code { padding: 0.7ex }
+pre.code, code { background-color: #eeeeee }
+/* basic highlighting: for a complete scheme, see */
+/* https://docutils.sourceforge.io/sandbox/stylesheets/ */
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+
+/* Epigraph           */
+/* Highlights         */
+/* Pull-Quote         */
+/* Compound Paragraph */
+/* Container          */
+
+/* Inline Markup */
+/* ============= */
+
+sup, sub { line-height: 0.8; } /* do not add leading for lines with sup/sub */
+
+/* Inline Literals                                          */
+/* possible values: normal, nowrap, pre, pre-wrap, pre-line */
+/*   span.docutils.literal { white-space: pre-wrap; }       */
+
+/* Hyperlink References */
+a { text-decoration: none; }
+
+/* External Targets       */
+/*   span.target.external */
+/* Internal Targets       */
+/*   span.target.internal */
+/* Footnote References    */
+/*   a[role="doc-noteref"] */
+/* Citation References    */
+/*   a.citation-reference */
+
+</style>
+</head>
+<body>
+
+
+<section class="slide t3c">
+<h2>Operating Systems - Virtual Memory - Ahmad Yoosofan</h2>
+<p> </p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://yoosofan.github.io/">https://yoosofan.github.io/</a></p></li>
+<li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.vm.presentation.html">https://yoosofan.github.io/slide/os.vm.presentation.html</a></p></li>
+<li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.vm.rst">https://yoosofan.github.io/slide/os.vm.rst</a></p></li>
+<li><p><a class="reference external" href="https://github.com/yoosofan/slide/blob/main/os.vm.rst">https://github.com/yoosofan/slide/blob/main/os.vm.rst</a></p></li>
+<li><p><a class="reference external" href="https://yoosofan.github.io/course/os.html">https://yoosofan.github.io/course/os.html</a></p></li>
+<li><p><a class="reference external" href="https://yoosofan.github.io/slide/os.vm.concise4pdf.html">https://yoosofan.github.io/slide/os.vm.concise4pdf.html</a></p></li>
+</ul>
+<p> </p>
+<div class="slide-number">1</div></section>
+<section class="slide t2c">
+<h2>Virtual Memory</h2>
+<img alt="os/img/memory/memory_virtual_memory_general.png" class="align-center" src="os/img/memory/memory_virtual_memory_general.png" />
+<img alt="os/img/memory/virtual_memory_concept.png" class="align-center" src="os/img/memory/virtual_memory_concept.png" />
+<div class="slide-number">2</div></section>
+<section class="slide t2c">
+<h2>Virtual Memory Addressing</h2>
+<img alt="os/img/memory/memory_virtual_with_TLB.png" class="align-center" height="599" src="os/img/memory/memory_virtual_with_TLB.png" width="889" />
+<img alt="os/img/memory/memory_virtual_valid_invalid.png" class="align-center" src="os/img/memory/memory_virtual_valid_invalid.png" />
+<div class="slide-number">3</div></section>
+<section class="slide t2c">
+<h2>Page Fault</h2>
+<img alt="os/img/memory/memory_virtual_handling_page_fault.png" class="align-center" src="os/img/memory/memory_virtual_handling_page_fault.png" />
+<img alt="os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png" class="align-center" src="os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png" />
+<div class="slide-number">4</div></section>
+<section class="slide">
+<h2>Effective Access Time of Virtual Memory</h2>
+<ul class="simple">
+<li><p>effective access time = (1 − p) × ma + p × page fault time.</p></li>
+<li><p>effective access time = (1 − p) × (200) + p (8 milliseconds) = (1 − p) × 200 + p × 8,000,000 = 200 + 7,999,800 × p</p></li>
+<li><p>220 &gt; 200 + 7,999,800 × p,</p></li>
+<li><p>20 &gt; 7,999,800 × p,</p></li>
+<li><p>p &lt; 0.0000025</p></li>
+</ul>
+<div class="step docutils container">
+<p class="h2">Allocation of frames</p>
+<ul class="step simple">
+<li><p>On demand</p></li>
+<li><p>prepaging</p></li>
+</ul>
+</div>
+<div class="slide-number">5</div></section>
+<section class="slide t2c">
+<h2>روش‌های تخصیص تعداد قاب به هر فرآیند</h2>
+<ul class="step rtl">
+<li><p>مجموعهٔ مقیم برای هر فرآیند.</p>
+<blockquote>
+<ul class="simple">
+<li><p>تعداد ثابت fixed-allocation</p></li>
+<li><p>تعداد متغیر  variable-allocation</p></li>
+</ul>
+</blockquote>
+</li>
+<li><p>بخش کردن قاب‌ها میان فرآیندها</p>
+<blockquote>
+<ul class="simple">
+<li><p>تعداد برابر</p></li>
+<li><p>تعداد به نسبت اندازهٔ فرآیند</p></li>
+</ul>
+</blockquote>
+</li>
+<li><p>چگونگی برگزیدن یک قاب برای تخصیص به یک فرآیند</p>
+<blockquote>
+<ul class="simple">
+<li><p>تخصیص محلی</p></li>
+<li><p>تخصیص سراسری</p></li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<div class="step docutils container">
+<p class="rtl-h1">سیاست‌های پاک کردن</p>
+<ul class="step rtl-h3 simple">
+<li><p>پاک کردن درخواستی demand cleaning</p></li>
+<li><p>پیش پاک کردن precleaning</p></li>
+</ul>
+</div>
+<div class="slide-number">6</div></section>
+<section class="slide t2c">
+<h2>Page Replacement</h2>
+<img alt="os/img/memory/memory_virtual_need4replacement.png" class="align-center" src="os/img/memory/memory_virtual_need4replacement.png" />
+<img alt="os/img/memory/memory_virtual_page_replacement.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement.png" />
+<div class="slide-number">7</div></section>
+<section class="slide t2c">
+<h2>Frame Allocation</h2>
+<div class="docutils container">
+<ul class="step simple">
+<li><p>frame-allocation algorithm and a page-replacement algorithm.</p></li>
+<li><p>reference string.</p></li>
+<li><p>0100, 0432, 0101, 0612, 0102, 0103, 0104, 0101, 0611, 0102, 0103, 0104, 0101, 0610, 0102, 0103, 0104, 0101, 0609, 0102, 0105</p></li>
+<li><p>At 100 bytes per page, this sequence is reduced to the following reference</p></li>
+<li><p>string:</p></li>
+<li><p>1, 4, 1, 6, 1, 6, 1, 6, 1, 6, 1</p></li>
+</ul>
+<ul class="step rtl-h3 simple">
+<li><p>تعداد خطای نبود صفحه بسته به تعداد قاب‌های تخصیص داده شده</p></li>
+</ul>
+</div>
+<img alt="os/img/memory/memory_virtual_page_fault_per_frame_allocated.png" class="align-center" src="os/img/memory/memory_virtual_page_fault_per_frame_allocated.png" />
+<div class="slide-number">8</div></section>
+<section class="slide">
+<h2>FIFO</h2>
+<img alt="os/img/memory/memory_virtual_page_replacement_FIFO.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_FIFO.png" style="width: 700px;" />
+<p class="h2">Belady’s anomaly</p>
+<img alt="os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png" />
+<div class="slide-number">9</div></section>
+<section class="slide">
+<h2>Optimal</h2>
+<img alt="os/img/memory/memory_virtual_page_replacement_Optimal.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_Optimal.png" />
+<p class="h2">Not Recently Used Page(NRU)</p>
+<img alt="os/img/memory/memory_virtual_page_replacement_LRU.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_LRU.png" />
+<p>NRU vs LRU</p>
+<p class="h2 step">Least Recently Used(LRU)</p>
+<p class="h2 step">How to Impolement LRU</p>
+<ul class="h2 step simple">
+<li><p>counters</p></li>
+<li><p>stacks</p></li>
+</ul>
+<p class="h2 step">LFU</p>
+<p class="h2 step">Least Frequently Used</p>
+<p class="h2 step">MFU</p>
+<p class="h2 step">Most Frequently Used</p>
+<p class="h2 step">page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used</p>
+<div class="slide-number">10</div></section>
+<section class="slide">
+<h2>Second chance (clock)</h2>
+<p>Simplest implementation of NRU and LRU by using one bit</p>
+<div class="slide-number">11</div></section>
+<section class="slide">
+<ul class="simple">
+<li><p>access bit,</p></li>
+<li><p>reference bit, or</p></li>
+<li><p>use bit</p></li>
+</ul>
+<p>Some called this NRU</p>
+<div class="slide-number">12</div></section>
+<section class="slide">
+<ul class="simple">
+<li><p>as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)</p></li>
+<li><p>keep one bit called the &quot;used bit&quot; or &quot;reference bit&quot;, where 1 =&gt; used recently and 0 =&gt; not used recently</p></li>
+<li><p>variants of this scheme are used in many operating systems, including UNIX and MacIntosh</p></li>
+<li><p>most variations use a scan pointer and go through the page frames one by one, in some order, looking for a page that has not been used recently.</p></li>
+</ul>
+<div class="slide-number">13</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_virtual_page_replacement_second_chance.png" class="align-center" src="os/img/memory/memory_virtual_page_replacement_second_chance.png" style="height: 550px;" />
+<div class="slide-number">14</div></section>
+<section class="slide">
+<h2>Modefied Clock</h2>
+<p>Enhanced Second Chance</p>
+<div class="slide-number">15</div></section>
+<section class="slide">
+<p>By the usage of</p>
+<ul class="simple">
+<li><p>modify bit or</p></li>
+<li><p>dirty bit</p></li>
+</ul>
+<p>(&quot;modify bit&quot;, &quot;use bit&quot; or &quot;access bit&quot;)</p>
+<ul class="step simple">
+<li><dl class="simple">
+<dt>Form 1</dt>
+<dd><ol class="arabic simple">
+<li><p>Search for (0, 0)</p></li>
+<li><p>Search for (1, 0) and access bit = 0</p></li>
+<li><p>goto 1</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Form 2</dt>
+<dd><ol class="arabic simple">
+<li><p>Search for (0, 0)</p></li>
+<li><p>Search for (1, 0) and access bit = 0</p></li>
+<li><p>Search for (0, 0)</p></li>
+<li><p>Search for (1, 0)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="slide-number">16</div></section>
+<section class="slide">
+<h2>PAGE BUFFERING</h2>
+<img alt="os/img/memory/page_buffer.png" src="os/img/memory/page_buffer.png" style="width: 800px;" />
+<div class="slide-number">17</div></section>
+<section class="slide">
+<h2>Thrashing</h2>
+<img alt="os/img/memory/memory_virtual_thrashing.png" class="align-center" src="os/img/memory/memory_virtual_thrashing.png" />
+<pre class="code asm literal-block"><code><span class="name function">mov</span><span class="whitespace"> </span><span class="name constant">A</span><span class="punctuation">,</span><span class="whitespace"> </span><span class="name constant">B</span></code></pre>
+<div class="slide-number">18</div></section>
+<section class="slide">
+<h2>Principle of Locality(Locality of Reference)</h2>
+<img alt="os/img/memory/memory_virtual_locality_principle.png" class="align-center" src="os/img/memory/memory_virtual_locality_principle.png" style="height: 500px;" />
+<div class="slide-number">19</div></section>
+<section class="slide">
+<h2>Working Set Model</h2>
+<img alt="os/img/memory/memory_virtual_thrashing_working_set_model.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model.png" style="width: 800px;" />
+<div class="slide-number">20</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model_example.png" style="width: 800px;" />
+<div class="slide-number">21</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_virtual_thrashing_working_set_model_graph.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_working_set_model_graph.png" style="width: 800px;" />
+<div class="slide-number">22</div></section>
+<section class="slide">
+<p class="rtl-h1">روش شناسایی کوبیدگی به کمک فراوانی خطای نبود صفحه</p>
+<p>page-fault frequency ( PFF )</p>
+<img alt="os/img/memory/memory_virtual_thrashing_page_fault_frequency.png" class="align-center" src="os/img/memory/memory_virtual_thrashing_page_fault_frequency.png" style="width: 800px;" />
+<div class="slide-number">23</div></section>
+<section class="slide">
+<p class="rtl-h1">روش‌های رویارویی با کوبیدگی پس از شناسایی آن</p>
+<ul class="step rtl simple">
+<li><p>معلق کردن تعدادی فرآیند برگزیده شده</p></li>
+<li><p>نپذیرفتن فرآیند جدید</p></li>
+</ul>
+<div class="slide-number">24</div></section>
+<section class="slide">
+<p class="rtl-h1">پرونده‌های نگاشت شده به حافظه (Memory-Mapped Files)</p>
+<img alt="os/img/memory/memory_virtual_memory_mapped_files.png" class="align-center" src="os/img/memory/memory_virtual_memory_mapped_files.png" style="width: 650px;" />
+<div class="slide-number">25</div></section>
+<section class="slide">
+<p class="rtl-h1">ورودی و خروجی‌های نگاشت شده به حافظه</p>
+<p>(I/O-Mapped Files)</p>
+<ol class="arabic simple step">
+<li><p>Graphic card</p></li>
+<li><p>Network</p></li>
+</ol>
+<div class="slide-number">26</div></section>
+<section class="slide">
+<p class="rtl-h1">قفل کردن برخی صفحه‌ها</p>
+<p>Lock pages</p>
+<div class="slide-number">27</div></section>
+<section class="slide">
+<h2>Copy-on-Write</h2>
+<img alt="os/img/memory/memory_virtual_copy_on_write_before.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_before.png" style="width: 750px;" />
+<div class="slide-number">28</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_virtual_copy_on_write_after.png" class="align-center" src="os/img/memory/memory_virtual_copy_on_write_after.png" style="width: 750px;" />
+<div class="slide-number">29</div></section>
+<section class="slide">
+<h2>References(I)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://os-book.com/">http://os-book.com/</a></p></li>
+<li><dl class="simple">
+<dt>Sean K. Barker (<a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/">https://tildesites.bowdoin.edu/~sbarker/</a>)</dt>
+<dd><ul>
+<li><p><a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/teaching/courses/os/14spring/slides/lec12.pdf">https://tildesites.bowdoin.edu/~sbarker/teaching/courses/os/14spring/slides/lec12.pdf</a></p></li>
+<li><p><a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/teaching/courses/os/14spring/lectures.html">https://tildesites.bowdoin.edu/~sbarker/teaching/courses/os/14spring/lectures.html</a></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference external" href="http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/">http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/</a></p></li>
+<li><p><a class="reference external" href="https://www.javatpoint.com/os-segmented-paging">https://www.javatpoint.com/os-segmented-paging</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/">https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/</a></p></li>
+<li><p><a class="reference external" href="https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html">https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing">https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems">https://github.com/mor1/ia-operating-systems</a></p></li>
+<li><p><a class="reference external" href="https://slideplayer.com/slide/7084682/">https://slideplayer.com/slide/7084682/</a></p></li>
+</ul>
+<div class="slide-number">30</div></section>
+<section class="slide">
+<h2>References(II)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png">http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png</a></p></li>
+<li><p><a class="reference external" href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938">https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938</a></p></li>
+<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg">https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg</a></p></li>
+<li><p><a class="reference external" href="https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg">https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg">https://en.wikipedia.org/wiki/File:Cache,hierarchy-example.svg</a></p></li>
+<li><p><a class="reference external" href="https://tutorialspoint.dev/image/Translation.png">https://tutorialspoint.dev/image/Translation.png</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
+<li><p><a class="reference external" href="http://harmanani.github.io/classes/csc320/Notes/ch05.pdf">http://harmanani.github.io/classes/csc320/Notes/ch05.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.mvorganizing.org/what-is-principle-of-locality-in-operating-system/">https://www.mvorganizing.org/what-is-principle-of-locality-in-operating-system/</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Locality_of_reference">https://en.wikipedia.org/wiki/Locality_of_reference</a></p></li>
+<li><p><a class="reference external" href="http://www2.cs.uregina.ca/~hamilton/courses/330/notes/memory/page_replacement.html">http://www2.cs.uregina.ca/~hamilton/courses/330/notes/memory/page_replacement.html</a></p></li>
+<li><p><a class="reference external" href="https://prepinsta.com/operating-systems/page-replacement-algorithms/least-recently-used-lru-algorithm/">https://prepinsta.com/operating-systems/page-replacement-algorithms/least-recently-used-lru-algorithm/</a></p></li>
+</ul>
+<div class="slide-number">31</div></section>
+<section class="slide">
+<h2>References(III)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://examradar.com/nru-not-recently-used-page-replacement-algorithm-questions-answers/">https://examradar.com/nru-not-recently-used-page-replacement-algorithm-questions-answers/</a></p></li>
+<li><p><a class="reference external" href="https://japp.io/algorithms/page-replacement/lfu-page-replacement-algorithm-program-in-c-c/">https://japp.io/algorithms/page-replacement/lfu-page-replacement-algorithm-program-in-c-c/</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/doc/">https://www.kernel.org/doc/</a></p></li>
+<li><p><a class="reference external" href="https://codex.cs.yale.edu/avi/os-book/">https://codex.cs.yale.edu/avi/os-book/</a></p></li>
+</ul>
+<div class="slide-number">32</div></section>
+</body>
+</html>

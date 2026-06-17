@@ -4,89 +4,77 @@
 .. role:: rtl
     :class: rtl
 
+.. |nbsp| unicode:: 0xA0
+
 .. prezento:: Operating Systems - Virtual Memory  (By Ahmad Yoosofan)
-   :skip-help: true
    :css: ./assets/style.css
-   :substep: true
-   :data-width: 1024
-   :data-height: 768
-   :slide-numbers: true
 
-.. slido:: Operating Systems
+.. slido:: Operating Systems - Virtual Memory - Ahmad Yoosofan
+   :class: t3c
 
-    Virtual Memory
+    |nbsp|
 
-.. slido::
+    * https://yoosofan.github.io/
+    * https://yoosofan.github.io/slide/os.vm.presentation.html
+    * https://yoosofan.github.io/slide/os.vm.rst
+    * https://github.com/yoosofan/slide/blob/main/os.vm.rst
+    * https://yoosofan.github.io/course/os.html
+    * https://yoosofan.github.io/slide/os.vm.concise4pdf.html
 
-    Ahmad Yoosofan
-
-    University of Kashan
+    |nbsp|
 
 .. slido:: Virtual Memory
+   :class: t2c step
 
     .. image:: os/img/memory/memory_virtual_memory_general.png
        :align: center
-       :height: 500px
-
-.. slido::
 
     .. image:: os/img/memory/virtual_memory_concept.png
        :align: center
-       :height: 500px
 
 .. slido:: Virtual Memory Addressing
-
-    .. image:: os/img/memory/virtual_memory_addressing.png
-       :align: center
-
-.. slido::
+   :class: t2c step
 
     .. image:: os/img/memory/memory_virtual_with_TLB.png
        :align: center
-       :height: 550px
-
-.. slido::
+       :scale: 120%
 
     .. image:: os/img/memory/memory_virtual_valid_invalid.png
        :align: center
-       :height: 550px
 
-.. slido::
+.. slido:: Page Fault
+   :class: t2c step
 
     .. image:: os/img/memory/memory_virtual_handling_page_fault.png
        :align: center
-       :height: 550px
-
-.. slido::
 
     .. image:: os/img/memory/memory_virtual_Operation_of_Paging_and_Translation_Lookaside_Buffer.png
        :align: center
-       :height: 550px
 
 .. slido:: Effective Access Time of Virtual Memory
+   :class: step
 
-    .. class:: substep
+    * effective access time = (1 − p) × ma + p × page fault time.
+    * effective access time = (1 − p) × (200) + p (8 milliseconds) = (1 − p) × 200 + p × 8,000,000 = 200 + 7,999,800 × p
+    * 220 > 200 + 7,999,800 × p,
+    * 20 > 7,999,800 × p,
+    * p < 0.0000025
 
-        * effective access time = (1 − p) × ma + p × page fault time.
-        * effective access time = (1 − p) × (200) + p (8 milliseconds) = (1 − p) × 200 + p × 8,000,000 = 200 + 7,999,800 × p
-        * 220 > 200 + 7,999,800 × p,
-        * 20 > 7,999,800 × p,
-        * p < 0.0000025
+    .. container:: step
 
-.. slido:: Allocation of frames
+        .. class:: h2
 
-    .. class:: substep
+            Allocation of frames
 
-    * On demand
-    * prepaging
+        .. class:: step
 
-.. slido::
+        * On demand
+        * prepaging
 
-    .. class:: rtl-h1
+.. slido:: روش‌های تخصیص تعداد قاب به هر فرآیند
+   :class: t2c
 
-        روش‌های تخصیص تعداد قاب به هر فرآیند
-
-    .. class:: substep rtl-h3
+    .. class:: step rtl
 
         * مجموعهٔ مقیم برای هر فرآیند.
 
@@ -103,104 +91,94 @@
             *  تخصیص محلی
             *  تخصیص سراسری
 
-.. slido::
+    .. container:: step
 
-    .. class:: rtl-h1
+        .. class:: rtl-h1
 
-        سیاست‌های پاک کردن
+            سیاست‌های پاک کردن
 
-    .. class:: substep rtl-h3
+        .. class:: step rtl-h3
 
-        *  پاک کردن درخواستی demand cleaning
-        *  پیش پاک کردن precleaning
+            *  پاک کردن درخواستی demand cleaning
+            *  پیش پاک کردن precleaning
 
 .. slido:: Page Replacement
+   :class: t2c step
 
     .. image:: os/img/memory/memory_virtual_need4replacement.png
        :align: center
-       :height: 540px
-
-.. slido::
 
     .. image:: os/img/memory/memory_virtual_page_replacement.png
        :align: center
-       :width: 700px
 
 .. slido:: Frame Allocation
+   :class: t2c step
 
-    .. class:: substep
+    .. container::
 
-    * frame-allocation algorithm and a page-replacement algorithm.
-    * reference string.
-    * 0100, 0432, 0101, 0612, 0102, 0103, 0104, 0101, 0611, 0102, 0103, 0104, 0101, 0610, 0102, 0103, 0104, 0101, 0609, 0102, 0105
-    * At 100 bytes per page, this sequence is reduced to the following reference
-    * string:
-    * 1, 4, 1, 6, 1, 6, 1, 6, 1, 6, 1
+        .. class:: step
 
-    .. class:: substep rtl-h3
+        * frame-allocation algorithm and a page-replacement algorithm.
+        * reference string.
+        * 0100, 0432, 0101, 0612, 0102, 0103, 0104, 0101, 0611, 0102, 0103, 0104, 0101, 0610, 0102, 0103, 0104, 0101, 0609, 0102, 0105
+        * At 100 bytes per page, this sequence is reduced to the following reference
+        * string:
+        * 1, 4, 1, 6, 1, 6, 1, 6, 1, 6, 1
 
-    *  تعداد خطای نبود صفحه بسته به تعداد قاب‌های تخصیص داده شده
+        .. class:: step rtl-h3
 
-.. slido::
+        *  تعداد خطای نبود صفحه بسته به تعداد قاب‌های تخصیص داده شده
 
     .. image:: os/img/memory/memory_virtual_page_fault_per_frame_allocated.png
         :align: center
-        :width: 750px
 
 .. slido:: FIFO
+   :class: step
 
     .. image:: os/img/memory/memory_virtual_page_replacement_FIFO.png
        :align: center
        :width: 700px
 
-.. slido:: Belady’s anomaly
+    .. class:: h2
+
+    Belady’s anomaly
 
     .. image:: os/img/memory/memory_virtual_page_replacement_FIFO_Blady_anomaly.png
        :align: center
-       :width: 700px
 
 .. slido:: Optimal
+   :class: step
 
     .. image:: os/img/memory/memory_virtual_page_replacement_Optimal.png
        :align: center
-       :width: 700px
 
-.. slido:: Not Recently Used Page(NRU)
+    .. class:: h2
+
+    Not Recently Used Page(NRU)
 
     .. image:: os/img/memory/memory_virtual_page_replacement_LRU.png
        :align: center
-       :width: 700px
 
     NRU vs LRU
 
-.. slido:: Least Recently Used(LRU)
+    .. class:: h2 step
 
-    How to Impolement LRU
+        Least Recently Used(LRU)
 
-.. slido::
+        How to Impolement LRU
 
-    * counters
-    * stacks
+        * counters
+        * stacks
 
-    LFU
+        LFU
 
-.. slido::
+        Least Frequently Used
 
-    Least Frequently Used
+        MFU
 
-    MFU
+        Most Frequently Used
 
-.. slido::
-
-    Most Frequently Used
-
-    page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used
-
-.. slido:: Use of a stack to record the most recent page references
-
-    .. image:: os/img/memory/memory_virtual_page_replacement_LRU_stack.png
-       :align: center
-       :width: 700px
+        page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used
 
 .. slido:: Second chance (clock)
 
@@ -240,7 +218,7 @@
 
     ("modify bit", "use bit" or "access bit")
 
-    .. class:: substep
+    .. class:: step
 
         * Form 1
             #. Search for (0, 0)
@@ -309,7 +287,7 @@
 
         روش‌های رویارویی با کوبیدگی پس از شناسایی آن
 
-    .. class:: substep rtl
+    .. class:: step rtl
 
        *  معلق کردن تعدادی فرآیند برگزیده شده
        * نپذیرفتن فرآیند جدید
@@ -332,7 +310,7 @@
 
     (I/O-Mapped Files)
 
-    .. class:: substep
+    .. class:: step
 
     #. Graphic card
     #. Network

@@ -1,4 +1,5 @@
-body{text-align: center;font-size: 24px; background-color: white !important;
+html{font-size: 24px;}
+body{text-align: center; background-color: white !important;
 /*
 counter-reset: slide;
 */
@@ -69,25 +70,25 @@ ol.trace-code li::marker {color: red;}
     top: 95%;
     /*font-size: 50%;*/
 }
-.rtl, .rtl * {direction:rtl;text-align:right;font-size:large;}
+.rtl, .rtl * {direction:rtl;text-align:right;font-size:1.1em;}
 .ltr, .ltr * {direction:ltr;text-align:left;}
 .rtl-h1{
   direction: rtl;
-  font-size: xx-large;
+  font-size: 1.4em;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
 }
 .rtl-h2{
   direction: rtl;
-  font-size: x-large;
+  font-size: 1.3em;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
 }
 .rtl-h3{
   direction: rtl;
-  font-size: large;
+  font-size: 1.2em;
   text-align: center;
   margin-bottom: 0.1em;
   margin-top: 0.1em;
@@ -98,6 +99,25 @@ ol.rtl-h1, ol.rtl-h2, ol.rtl-h3, ul.rtl-h1, ul.rtl-h2, ul.rtl-h3{
 ol.rtl-h1 li, ol.rtl-h2 li, ol.rtl-h3 li, ul.rtl-h1 li, ul.rtl-h2 li, ul.rtl-h3 li{
   text-align: right;
 }
+.h1{
+  font-size: 1.4em;
+  text-align: center;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+}
+.h2{
+  font-size: 1.3em;
+  text-align: center;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+}
+.h3{
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+}
+
 .grid-2col-class{
   display: grid;
   grid-template-columns: 1fr 1fr;
