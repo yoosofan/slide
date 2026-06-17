@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="Docutils 0.23: https://docutils.sourceforge.io/" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>body,footer,header{max-width:none!important;width:100%;padding:1px 2%;margin:0 auto;}</style><title>segmentation and more (By Ahmad Yoosofan)</title>
+<link rel="stylesheet" href="./assets/style.css" type="text/css" />
+<style type="text/css">
+
+/* Minimal style sheet for the HTML output of Docutils.                    */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: minimal.css 10018 2025-03-06 16:19:15Z milde $                                                               */
+/* :Copyright: © 2015, 2021 Günter Milde.                                  */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+
+/* This CSS3 stylesheet defines rules for Docutils elements without        */
+/* HTML equivalent. It is required to make the document semantics visible. */
+/*                                                                         */
+/* .. _validates: http://jigsaw.w3.org/css-validator/validator$link        */
+
+/* titles */
+p.topic-title,
+p.admonition-title,
+p.system-message-title {
+  font-weight: bold;
+}
+p.sidebar-title,
+p.rubric {
+  font-weight: bold;
+  font-size: larger;
+}
+p.rubric {
+  color: maroon;
+}
+p.subtitle,
+p.section-subtitle,
+p.sidebar-subtitle {
+  font-weight: bold;
+  margin-top: -0.5em;
+}
+h1 + p.subtitle {
+  font-size: 1.6em;
+}
+a.toc-backref {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Warnings, Errors */
+.system-messages h2,
+.system-message-title,
+pre.problematic,
+span.problematic {
+  color: red;
+}
+
+/* Inline Literals */
+.docutils.literal {
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+/* do not wrap at hyphens and similar: */
+.literal > span.pre { white-space: nowrap; }
+
+/* keep line-breaks (\n) visible */
+.pre-wrap { white-space: pre-wrap; }
+
+/* Lists */
+
+/* compact and simple lists: no margin between items */
+.simple  li, .simple  ul, .simple  ol, .simple  > li p,
+.compact li, .compact ul, .compact ol, .compact > li p,
+dl.simple  > dd, dl.compact > dd, dl.docinfo > dd {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+/* Nested Paragraphs */
+p:first-child { margin-top: 0; }
+p:last-child { margin-bottom: 0; }
+details > p:last-child { margin-bottom: 1em; }
+
+/* Table of Contents */
+.contents ul.auto-toc { /* section numbers present */
+  list-style-type: none;
+}
+
+/* Enumerated Lists */
+ol.arabic     { list-style: decimal }
+ol.loweralpha { list-style: lower-alpha }
+ol.upperalpha { list-style: upper-alpha }
+ol.lowerroman { list-style: lower-roman }
+ol.upperroman { list-style: upper-roman }
+
+/* Definition Lists and Derivatives */
+dt .classifier { font-style: italic }
+dt .classifier:before {
+  font-style: normal;
+  margin: 0.5em;
+  content: ":";
+}
+/* Field Lists and similar */
+/* bold field name, content starts on the same line */
+dl.field-list,
+dl.option-list,
+dl.docinfo {
+  display: flow-root;
+}
+dl.field-list > dt,
+dl.option-list > dt,
+dl.docinfo > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.25em;
+}
+/* Offset for field content (corresponds to the --field-name-limit option) */
+dl.field-list > dd,
+dl.option-list > dd,
+dl.docinfo > dd {
+  margin-left:  9em; /* ca. 14 chars in the test examples, fit all Docinfo fields */
+}
+/* start nested lists on new line */
+dd > dl:first-child,
+dd > ul:first-child,
+dd > ol:first-child {
+  clear: left;
+}
+/* start field-body on a new line after long field names */
+dl.field-list > dd > *:first-child,
+dl.option-list > dd > *:first-child
+{
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+}
+
+/* Bibliographic Fields (docinfo) */
+dl.docinfo pre.address {
+  font: inherit;
+  margin: 0;
+}
+dl.docinfo > dd.authors > p { margin: 0; }
+
+/* Option Lists */
+dl.option-list > dt { font-weight: normal; }
+span.option { white-space: nowrap; }
+
+/* Footnotes and Citations  */
+
+.footnote, .citation { margin: 1em 0; } /* default paragraph skip (Firefox) */
+/* hanging indent */
+.citation { padding-left: 2em; }
+.footnote { padding-left: 1.7em; }
+.footnote.superscript { padding-left: 1.0em; }
+.citation > .label { margin-left: -2em; }
+.footnote > .label { margin-left: -1.7em; }
+.footnote.superscript > .label { margin-left: -1.0em; }
+
+.footnote > .label + *,
+.citation > .label + * {
+  display: inline-block;
+  margin-top: 0;
+  vertical-align: top;
+}
+.footnote > .backrefs + *,
+.citation > .backrefs + * {
+  margin-top: 0;
+}
+.footnote > .label + p, .footnote > .backrefs + p,
+.citation > .label + p, .citation > .backrefs + p {
+  display: inline;
+  vertical-align: inherit;
+}
+
+.backrefs { user-select: none; }
+.backrefs > a { font-style: italic; }
+
+/* superscript footnotes */
+a[role="doc-noteref"].superscript,
+.footnote.superscript > .label,
+.footnote.superscript > .backrefs {
+  vertical-align: super;
+  font-size: smaller;
+  line-height: 1;
+}
+a[role="doc-noteref"].superscript > .fn-bracket,
+.footnote.superscript > .label > .fn-bracket {
+  /* hide brackets in display but leave for copy/paste */
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+}
+[role="doc-noteref"].superscript + [role="doc-noteref"].superscript {
+  padding-left: 0.15em; /* separate consecutive footnote references */
+  /* TODO: unfortunately, "+" also selects with text between the references. */
+}
+
+/* Alignment */
+.align-left   {
+  text-align: left;
+  margin-right: auto;
+}
+.align-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.align-right  {
+  text-align: right;
+  margin-left: auto;
+}
+.align-top    { vertical-align: top; }
+.align-middle { vertical-align: middle; }
+.align-bottom { vertical-align: bottom; }
+
+/* reset inner alignment in figures and tables */
+figure.align-left, figure.align-right,
+table.align-left, table.align-center, table.align-right {
+  text-align: inherit;
+}
+
+/* Text Blocks */
+.topic { margin: 1em 2em; }
+.sidebar,
+.admonition,
+.system-message {
+  margin: 1em 2em;
+  border: thin solid;
+  padding: 0.5em 1em;
+}
+div.line-block { display: block; }
+div.line-block div.line-block, pre { margin-left: 2em; }
+
+/* Code line numbers: don't copy with drag-and-drop */
+pre.code .ln { display: none; }
+pre.code code:before {
+  content: attr(data-lineno);
+  font-size: small;
+  color: gray;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+}
+td, th {
+  border: thin solid silver;
+  padding: 0 1ex;
+}
+.borderless td, .borderless th {
+  border: 0;
+  padding: 0;
+  padding-right: 0.5em /* separate table cells */
+}
+
+table > caption, figcaption {
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+table.captionbelow {
+  caption-side: bottom;
+}
+
+/* MathML (see "math.css" for --math-output=HTML) */
+math .boldsymbol { font-weight: bold; }
+math.boxed, math .boxed {padding: 0.25em; border: thin solid; }
+/* style table similar to AMS "align" or "aligned" environment: */
+mtable.cases > mtr > mtd { text-align: left; }
+mtable.ams-align > mtr > mtd { padding-left: 0; padding-right: 0; }
+mtable.ams-align > mtr > mtd:nth-child(2n) { text-align: left; }
+mtable.ams-align > mtr > mtd:nth-child(2n+1) { text-align: right; }
+mtable.ams-align > mtr > mtd:nth-child(2n+3) { padding-left: 2em; }
+.mathscr mi, mi.mathscr {
+  font-family: STIX, XITSMathJax_Script, rsfs10,
+               "Asana Math", Garamond, cursive;
+}
+
+/* Document Header and Footer */
+header { border-bottom: 1px solid black; }
+footer { border-top: 1px solid black; }
+
+/* Images are block-level by default in Docutils */
+/* New HTML5 block elements: set display for older browsers */
+img, svg, header, footer, main, aside, nav, section, figure, video, details {
+  display: block;
+}
+svg { width: auto; height: auto; }  /* enable scaling of SVG images */
+/* inline images */
+
+p img, p svg, p video,
+h1 img, h2 img, h3 img, h4 img, h5 img, h6 img,
+h1 svg, h2 svg, h3 svg, h4 svg, h5 svg, h6 svg {
+  display: inline;
+}
+
+</style>
+<style type="text/css">
+
+/* CSS31_ style sheet for the output of Docutils HTML writers.             */
+/* Rules for easy reading and pre-defined style variants.                  */
+/*                                                                         */
+/* :Author: Günter Milde, based on html4css1.css by David Goodger          */
+/* :Id: $Id: plain.css 10079 2025-04-10 12:01:48Z milde $                                                               */
+/* :Copyright: © 2015 Günter Milde.                                        */
+/* :License: Released under the terms of the `2-Clause BSD license`_,      */
+/*    in short:                                                            */
+/*                                                                         */
+/*    Copying and distribution of this file, with or without modification, */
+/*    are permitted in any medium without royalty provided the copyright   */
+/*    notice and this notice are preserved.                                */
+/*                                                                         */
+/*    This file is offered as-is, without any warranty.                    */
+/*                                                                         */
+/* .. _2-Clause BSD license: http://www.spdx.org/licenses/BSD-2-Clause     */
+/* .. _CSS3: https://www.w3.org/Style/CSS/                                 */
+
+
+/* Document Structure */
+/* ****************** */
+
+/* "page layout" */
+body {
+  margin: 0;
+  background-color: #dbdbdb;
+  --field-indent: 9em; /* default indent of fields in field lists */
+}
+main, footer, header {
+  line-height:1.6;
+  /* avoid long lines --> better reading */
+  /* optimum is 45…75 characters/line <http://webtypography.net/2.1.2> */
+  /* OTOH: lines should not be too short because of missing hyphenation, */
+  max-width: 50rem;
+  padding: 1px 2%; /* 1px on top avoids grey bar above title (mozilla) */
+  margin: auto;
+}
+main {
+  counter-reset: table figure;
+  background-color: white;
+}
+footer, header {
+  font-size: smaller;
+  padding: 0.5em 2%;
+  border: none;
+}
+
+/* Table of Contents */
+ul.auto-toc > li > p {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+nav.contents ul {
+  padding-left: 1em;
+}
+main > nav.contents ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B29\ ';
+}
+main > nav.contents ul ul ul ul ul:not(.auto-toc) {
+  list-style-type: '\2B1D\ ';
+}
+
+/* Transitions */
+hr.docutils {
+  width: 80%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  clear: both;
+}
+
+/* Paragraphs */
+
+/* vertical space (parskip) */
+p, ol, ul, dl, li,
+.footnote, .citation,
+div > math,
+table {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+h1, h2, h3, h4, h5, h6,
+dd, details > p:last-child {
+  margin-bottom: 0.5em;
+}
+
+/* Lists */
+/* ===== */
+
+/* Definition Lists */
+/* Indent lists nested in definition lists */
+dd > ul:only-child, dd > ol:only-child { padding-left: 1em; }
+
+/* Description Lists */
+/* styled like in most dictionaries, encyclopedias etc. */
+dl.description {
+  display: flow-root;
+}
+dl.description > dt {
+  font-weight: bold;
+  clear: left;
+  float: left;
+  margin: 0;
+  padding: 0;
+  padding-right: 0.3em;
+}
+dl.description > dd:after {
+  display: table;
+  content: "";
+  clear: left; /* clearfix for empty descriptions */
+}
+
+/* Field Lists */
+
+dl.field-list > dd,
+dl.docinfo > dd {
+  margin-left: var(--field-indent); /* adapted in media queries or HTML */
+}
+
+/* example for custom field-name width */
+dl.field-list.narrow > dd {
+  --field-indent: 5em;
+}
+/* run-in: start field-body on same line after long field names */
+dl.field-list.run-in > dd p {
+  display: block;
+}
+
+/* Bibliographic Fields */
+
+/* generally, bibliographic fields use dl.docinfo */
+/* but dedication and abstract are placed into divs */
+div.abstract p.topic-title {
+  text-align: center;
+}
+div.dedication {
+  margin: 2em 5em;
+  text-align: center;
+  font-style: italic;
+}
+div.dedication p.topic-title {
+  font-style: normal;
+}
+
+/* disclosures */
+details { padding-left: 1em; }
+summary { margin-left: -1em; }
+
+/* Text Blocks */
+/* =========== */
+
+/* Literal Blocks */
+pre.literal-block, pre.doctest-block,
+pre.math, pre.code {
+  font-family: monospace;
+}
+
+/* Block Quotes and Topics */
+bockquote { margin: 1em 2em; }
+blockquote p.attribution {
+  text-align: right;
+  margin-left: 20%;
+}
+
+/* Tables */
+/* ====== */
+
+/* th { vertical-align: bottom; } */
+
+table tr { text-align: left; }
+
+/* "booktabs" style (no vertical lines) */
+table.booktabs {
+  border: 0;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.booktabs * {
+  border: 0;
+}
+table.booktabs th {
+  border-bottom: thin solid;
+}
+
+/* numbered tables (counter defined in div.document) */
+table.numbered > caption:before {
+  counter-increment: table;
+  content: "Table " counter(table) ": ";
+  font-weight: bold;
+}
+
+/* Explicit Markup Blocks */
+/* ====================== */
+
+/* Footnotes and Citations */
+/* ----------------------- */
+
+/* line on the left */
+.footnote-list {
+  border-left: solid thin;
+  padding-left: 0.25em;
+}
+
+/* Directives */
+/* ---------- */
+
+/* Body Elements */
+/* ~~~~~~~~~~~~~ */
+
+/* Images and Figures */
+
+/* let content flow to the side of aligned images and figures */
+figure.align-left,
+img.align-left,
+svg.align-left,
+video.align-left,
+div.align-left,
+object.align-left {
+  clear: left;
+  float: left;
+  margin-right: 1em;
+}
+figure.align-right,
+img.align-right,
+svg.align-right,
+video.align-right,
+div.align-right,
+object.align-right {
+  clear: right;
+  float: right;
+  margin-left: 1em;
+}
+/* Stop floating sidebars, images and figures */
+h1, h2, h3, h4, footer, header { clear: both; }
+
+/* Numbered figures */
+figure.numbered > figcaption > p:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  font-weight: bold;
+}
+
+/* Admonitions and System Messages */
+.caution p.admonition-title,
+.attention p.admonition-title,
+.danger p.admonition-title,
+.error p.admonition-title,
+.warning p.admonition-title,
+div.error {
+  color: red;
+}
+
+/* Sidebar */
+/* Move right. In a layout with fixed margins, */
+/* it can be moved into the margin.            */
+aside.sidebar {
+  width: 30%;
+  max-width: 26em;
+  float: right;
+  clear: right;
+  margin-left: 1em;
+  margin-right: -1%;
+  background-color: #fffffa;
+}
+
+
+/* Code */
+pre.code { padding: 0.7ex }
+pre.code, code { background-color: #eeeeee }
+/* basic highlighting: for a complete scheme, see */
+/* https://docutils.sourceforge.io/sandbox/stylesheets/ */
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+
+/* Epigraph           */
+/* Highlights         */
+/* Pull-Quote         */
+/* Compound Paragraph */
+/* Container          */
+
+/* Inline Markup */
+/* ============= */
+
+sup, sub { line-height: 0.8; } /* do not add leading for lines with sup/sub */
+
+/* Inline Literals                                          */
+/* possible values: normal, nowrap, pre, pre-wrap, pre-line */
+/*   span.docutils.literal { white-space: pre-wrap; }       */
+
+/* Hyperlink References */
+a { text-decoration: none; }
+
+/* External Targets       */
+/*   span.target.external */
+/* Internal Targets       */
+/*   span.target.internal */
+/* Footnote References    */
+/*   a[role="doc-noteref"] */
+/* Citation References    */
+/*   a.citation-reference */
+
+</style>
+</head>
+<body>
+
+
+<section class="slide">
+<h2>Operating Systems</h2>
+<p>Two and more level paging, segmentation and more</p>
+<p>Ahmad Yoosofan</p>
+<div class="slide-number">1</div></section>
+<section class="slide">
+<h2>Frame Size(I)</h2>
+<p class="rtl-h2">کوچک یا بزرگ بودن اندازهٔ صفحه‌ها (همان قاب‌های حافظه) بر روی موضوع‌های گوناگونی اثر دارد</p>
+<p class="step">1</p>
+<ul class="step simple">
+<li><p>Max memory supported : 64 byte = 2 ^ 6</p></li>
+<li><p>frame size = page table 2 byte</p></li>
+<li><p>2 ^ 6 / 2 ^1 = 2 ^ 5 = 32</p></li>
+<li><p>?</p></li>
+</ul>
+<p class="step">2</p>
+<ul class="step simple">
+<li><p>Max memory supported : 64 byte = 2 ^ 6</p></li>
+<li><p>frame size = page table 4 byte</p></li>
+<li><p>2^6 / 2^2 = 2^4 = 16</p></li>
+<li><p>?</p></li>
+</ul>
+<p class="step">3</p>
+<ul class="step simple">
+<li><p>Max memory supported : 64 byte = 2 ^ 6</p></li>
+<li><p>frame size = page table 8 byte</p></li>
+<li><p>2^6 / 2^3 = 2^3 = 8</p></li>
+<li><p>? , Maximum Number of Processes</p></li>
+</ul>
+<div class="slide-number">2</div></section>
+<section class="slide">
+<h2>Frame Size(II)</h2>
+<p class="step">1</p>
+<ul class="step simple">
+<li><p>32 bit address</p></li>
+<li><p>1024 size of frame?</p></li>
+<li><p>32 - 10 = 22</p></li>
+<li><p>2^22 Frame</p></li>
+<li><p>2^22 page table entry</p></li>
+<li><p>Problem ?</p></li>
+</ul>
+<p class="step">2</p>
+<ul class="step simple">
+<li><p>32 bit address</p></li>
+<li><p>2^20 size of frame?</p></li>
+<li><p>32 - 20 = 12</p></li>
+<li><p>2^12 = 4096 Frame</p></li>
+<li><p>? , Maximum Number of Processes</p></li>
+</ul>
+<div class="slide-number">3</div></section>
+<section class="slide">
+<p class="rtl-h1">صفحه‌بندی دو سطحی</p>
+<img alt="os/img/memory/paging_two_level.png" class="align-center" src="os/img/memory/paging_two_level.png" />
+<!-- :
+
+access time -->
+<div class="slide-number">4</div></section>
+<section class="slide">
+<p class="rtl-h1">آدرس‌دهی در صفحه‌بندی دو سطحی</p>
+<img alt="os/img/memory/paging_address_translation_32bit.png" class="align-center" src="os/img/memory/paging_address_translation_32bit.png" />
+<img alt="os/img/memory/paging_two_level_32bit_address.png" class="align-center" src="os/img/memory/paging_two_level_32bit_address.png" />
+<div class="slide-number">5</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_paging_Address_Translation_in_a_Two_Level_Paging_System.png" class="align-center" height="462" src="os/img/memory/memory_paging_Address_Translation_in_a_Two_Level_Paging_System.png" width="742" />
+<div class="slide-number">6</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_paging_Two_Level_Hierarchical_Page_Table.png" class="align-center" src="os/img/memory/memory_paging_Two_Level_Hierarchical_Page_Table.png" />
+<div class="slide-number">7</div></section>
+<section class="slide">
+<p class="rtl-h1">صفحه‌بندی دو سطحی ۶۴ بیتی</p>
+<img alt="os/img/memory/paging_two_level_64bit.png" class="align-center" src="os/img/memory/paging_two_level_64bit.png" />
+<div class="slide-number">8</div></section>
+<section class="slide">
+<p class="rtl-h1">صفحه‌بندی سه سطحی ۶۴ بیتی</p>
+<img alt="os/img/memory/paging_three_level_64bit_address.png" class="align-center" src="os/img/memory/paging_three_level_64bit_address.png" />
+<div class="slide-number">9</div></section>
+<section class="slide">
+<p class="rtl-h1">صفحه‌بندی با جدول صفحهٔ معکوس</p>
+<img alt="os/img/memory/inverted_page_table.png" class="align-center" src="os/img/memory/inverted_page_table.png" />
+<div class="slide-number">10</div></section>
+<section class="slide">
+<p class="rtl-h1">صفحه‌بندی با جدول صفحهٔ معکوس با تابع درهم‌سازی</p>
+<img alt="os/img/memory/memory_paging_Inverted_Page_Table_Structure.png" class="align-center" src="os/img/memory/memory_paging_Inverted_Page_Table_Structure.png" />
+<div class="slide-number">11</div></section>
+<section class="slide">
+<h2>Windows 10 Inverted Page Table on Intel Itanium 64 bit platform</h2>
+<img alt="os/img/memory/Physical_and_Virtual_Memory_in_Windows_10_64bit_processors_inverted_page_table.png" src="os/img/memory/Physical_and_Virtual_Memory_in_Windows_10_64bit_processors_inverted_page_table.png" style="width: 780px;" />
+<div class="slide-number">12</div></section>
+<section class="slide">
+<p class="rtl-h1">قطعه‌بندی (segmentation)</p>
+<img alt="os/img/memory/memory_segmentation_logical_address.png" class="align-center" src="os/img/memory/memory_segmentation_logical_address.png" style="height: 500px;" />
+<div class="slide-number">13</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_segmentation_example.png" class="align-center" src="os/img/memory/memory_segmentation_example.png" style="width: 600px;" />
+<div class="slide-number">14</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_segmentation_hardware.png" class="align-center" src="os/img/memory/memory_segmentation_hardware.png" style="width: 650px;" />
+<div class="slide-number">15</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_segmentation_logical2physical_address.png" class="align-center" src="os/img/memory/memory_segmentation_logical2physical_address.png" style="height: 420px;" />
+<div class="slide-number">16</div></section>
+<section class="slide">
+<p class="rtl-h1">اشتراک گذاری در قطعه‌بندی</p>
+<p>Sharing segments</p>
+<div class="slide-number">17</div></section>
+<section class="slide">
+<p class="rtl-h1">ترکیب قطعه‌بندی و صفحه‌بندی</p>
+<p class="rtl-h2">مانند صفحه‌بندی دو سطحی با این تفاوت که در سطح یکم قطعه‌بندی انجام می‌شود و در سطح دوم صفحه‌بندی انجام می‌شود.</p>
+<img alt="os/img/memory/segmentation_paging.png" src="os/img/memory/segmentation_paging.png" style="width: 500px;" />
+<div class="slide-number">18</div></section>
+<section class="slide">
+<img alt="os/img/memory/segmentation_paging_details.png" src="os/img/memory/segmentation_paging_details.png" style="width: 580px;" />
+<!-- :
+
+https://www.javatpoint.com/os-segmented-paging -->
+<div class="slide-number">19</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_management_techniques.png" class="align-center" src="os/img/memory/memory_management_techniques.png" style="width: 500px;" />
+<div class="slide-number">20</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظهٔ قطعه‌بندی شده در پردازنده‌های اینتل ۳۲ بیتی (IA32)</p>
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_segmentation_logical2physical.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_segmentation_logical2physical.png" style="width: 700px;" />
+<!-- :
+
+https://en.wikipedia.org/wiki/Intel_8086 -->
+<div class="slide-number">21</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_segmentation.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_segmentation.png" />
+<div class="slide-number">22</div></section>
+<section class="slide">
+<h2>IA32 intel</h2>
+<ul class="rtl class step simple">
+<li><p>بیشترین حافظه‌ای که می‌تواند پشتیبانی کند: 4GB</p></li>
+<li><p>بیشترین تعداد قطعه در یک فرآیند: 16KB</p></li>
+<li><p>بیشترین تعداد قطعهٔ اختصاصی برای یک فرآیند: 8KB برای دسترسی این بخش local descriptor table ( LDT ) به کار برده می‌شود.</p></li>
+<li><p>بیشترین تعداد قطعهٔ اشتراکی برای یک فرآیند با دیگر فرآیندها: 8KB برای دسترسی به این بخش global descriptor table ( GDT ) به کار برده می‌شود.</p></li>
+</ul>
+<table class="ltr step">
+<caption>بخش انتخاب کنندهٔ واحد قطعه‌بندی</caption>
+<thead>
+<tr><th class="head"><p><cite>شمارهٔ قطعه</cite></p></th>
+<th class="head"><p><cite>اختصاصی یا اشتراکی</cite></p></th>
+<th class="head"><p><cite>حفاظت</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>13</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">23</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظهٔ صفحه‌بندی شده در پردازنده‌های اینتل ۳۲ بیتی (IA32)</p>
+<table class="ltr">
+<caption>صفحه‌بندی ۴ کیلوبایتی</caption>
+<thead>
+<tr><th class="head"><p><cite>جدولِ صفحهٔ یکم</cite></p></th>
+<th class="head"><p><cite>جدولِ صفحهٔ دوم</cite></p></th>
+<th class="head"><p><cite>جابجایی</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>۱۰</p></td>
+<td><p>۱۰</p></td>
+<td><p>۱۲</p></td>
+</tr>
+</tbody>
+</table>
+<table class="ltr">
+<caption>صفحه‌بندی ۴ مگابایتی</caption>
+<thead>
+<tr><th class="head"><p><cite>جدولِ صفحه</cite></p></th>
+<th class="head"><p><cite>جابجایی</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>۱۰</p></td>
+<td><p>۲۲</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">24</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB.png" style="width: 560px;" />
+<div class="slide-number">25</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png" style="width: 750px;" />
+<div class="slide-number">26</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png" class="align-center" src="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png" style="width: 700px;" />
+<div class="slide-number">27</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظه در پردازنده‌های «اِ اِم دی» ۶۴ بیتی (AMD64 یا <cite>x86_64</cite> )</p>
+<img alt="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size.png" class="align-center" src="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size.png" style="width: 650px;" />
+<div class="slide-number">28</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظه در پردازنده‌های «آرم» ۳۲ بیتی (ARM32)</p>
+<img alt="os/img/memory/memory_real_hardware_example_ARM32.png" class="align-center" src="os/img/memory/memory_real_hardware_example_ARM32.png" style="width: 700px;" />
+<div class="slide-number">29</div></section>
+<section class="slide">
+<h2>Page Translation for 4MB and 4KB Page Sizes</h2>
+<img alt="os/img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif" class="align-center" src="os/img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif" style="height: 450px;" />
+<div class="slide-number">30</div></section>
+<section class="slide">
+<h2>Linux Memory Mangement</h2>
+<img alt="os/img/memory/Linux_64bit_processors_page_table.png" src="os/img/memory/Linux_64bit_processors_page_table.png" />
+<div class="slide-number">31</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظهٔ قطعه‌بندی شده در پردازنده‌های اینتل ۳۲ بیتی (IA32)</p>
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_segmentation_logical2physical.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_segmentation_logical2physical.png" style="width: 700px;" />
+<!-- :
+
+https://en.wikipedia.org/wiki/Intel_8086 -->
+<div class="slide-number">32</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_segmentation.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_segmentation.png" />
+<div class="slide-number">33</div></section>
+<section class="slide">
+<h2>IA32 intel</h2>
+<ul class="rtl class step simple">
+<li><p>بیشترین حافظه‌ای که می‌تواند پشتیبانی کند: 4GB</p></li>
+<li><p>بیشترین تعداد قطعه در یک فرآیند: 16KB</p></li>
+<li><p>بیشترین تعداد قطعهٔ اختصاصی برای یک فرآیند: 8KB برای دسترسی این بخش local descriptor table ( LDT ) به کار برده می‌شود.</p></li>
+<li><p>بیشترین تعداد قطعهٔ اشتراکی برای یک فرآیند با دیگر فرآیندها: 8KB برای دسترسی به این بخش global descriptor table ( GDT ) به کار برده می‌شود.</p></li>
+</ul>
+<table class="ltr step">
+<caption>بخش انتخاب کنندهٔ واحد قطعه‌بندی</caption>
+<thead>
+<tr><th class="head"><p><cite>شمارهٔ قطعه</cite></p></th>
+<th class="head"><p><cite>اختصاصی یا اشتراکی</cite></p></th>
+<th class="head"><p><cite>حفاظت</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>13</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">34</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظهٔ صفحه‌بندی شده در پردازنده‌های اینتل ۳۲ بیتی (IA32)</p>
+<table class="ltr">
+<caption>صفحه‌بندی ۴ کیلوبایتی</caption>
+<thead>
+<tr><th class="head"><p><cite>جدولِ صفحهٔ یکم</cite></p></th>
+<th class="head"><p><cite>جدولِ صفحهٔ دوم</cite></p></th>
+<th class="head"><p><cite>جابجایی</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>۱۰</p></td>
+<td><p>۱۰</p></td>
+<td><p>۱۲</p></td>
+</tr>
+</tbody>
+</table>
+<table class="ltr">
+<caption>صفحه‌بندی ۴ مگابایتی</caption>
+<thead>
+<tr><th class="head"><p><cite>جدولِ صفحه</cite></p></th>
+<th class="head"><p><cite>جابجایی</cite></p></th>
+</tr>
+</thead>
+<tbody>
+<tr><td><p>۱۰</p></td>
+<td><p>۲۲</p></td>
+</tr>
+</tbody>
+</table>
+<div class="slide-number">35</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB.png" style="width: 560px;" />
+<div class="slide-number">36</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png" class="align-center" src="os/img/memory/memory_real_hardware_example_IA-32_paging_4KB_page_address_extension.png" style="width: 750px;" />
+<div class="slide-number">37</div></section>
+<section class="slide">
+<img alt="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png" class="align-center" src="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size_32_bit_pae_paging.png" style="width: 700px;" />
+<div class="slide-number">38</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظه در پردازنده‌های «اِ اِم دی» ۶۴ بیتی (AMD64 یا <cite>x86_64</cite> )</p>
+<img alt="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size.png" class="align-center" src="os/img/memory/memory_real_hardware_example_x86_64_4KB_page_size.png" style="width: 650px;" />
+<div class="slide-number">39</div></section>
+<section class="slide">
+<p class="rtl-h1">ساختار حافظه در پردازنده‌های «آرم» ۳۲ بیتی (ARM32)</p>
+<img alt="os/img/memory/memory_real_hardware_example_ARM32.png" class="align-center" src="os/img/memory/memory_real_hardware_example_ARM32.png" style="width: 700px;" />
+<div class="slide-number">40</div></section>
+<section class="slide">
+<h2>Page Translation for 4MB and 4KB Page Sizes</h2>
+<img alt="os/img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif" class="align-center" src="os/img/memory/Page_Translation_for_4MB_and_4KB_Page_Sizes.gif" style="height: 450px;" />
+<div class="slide-number">41</div></section>
+<section class="slide">
+<h2>Linux Memory Mangement</h2>
+<img alt="os/img/memory/Linux_64bit_processors_page_table.png" src="os/img/memory/Linux_64bit_processors_page_table.png" />
+<div class="slide-number">42</div></section>
+<section class="slide">
+<h2>References(I)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="http://os-book.com">http://os-book.com</a></p></li>
+<li><p>Sean K. Barker (<a class="reference external" href="https://tildesites.bowdoin.edu/~sbarker/">https://tildesites.bowdoin.edu/~sbarker/</a>)</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Page_(computer_memory">https://en.wikipedia.org/wiki/Page_(computer_memory</a>)</p></li>
+<li><p><a class="reference external" href="http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/">http://blog.cs.miami.edu/burt/2012/10/31/virtual-memory-pages-and-page-frames/</a></p></li>
+<li><p><a class="reference external" href="https://www.tldp.org/LDP/tlk/mm/memory.html">https://www.tldp.org/LDP/tlk/mm/memory.html</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/operating-system-paging/">https://www.geeksforgeeks.org/operating-system-paging/</a></p></li>
+<li><p><a class="reference external" href="https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/">https://samypesse.gitbooks.io/how-to-create-an-operating-system/Chapter-8/</a></p></li>
+<li><p><a class="reference external" href="https://www.cse.iitb.ac.in/~mythili/teaching/cs347_autumn2016/notes/07-memory.pdf">https://www.cse.iitb.ac.in/~mythili/teaching/cs347_autumn2016/notes/07-memory.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html">https://www.kernel.org/doc/html/latest/admin-guide/mm/index.html</a></p></li>
+<li><p><a class="reference external" href="https://www.javatpoint.com/os-segmented-paging">https://www.javatpoint.com/os-segmented-paging</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/">https://www.geeksforgeeks.org/difference-between-internal-and-external-fragmentation/</a></p></li>
+<li><p><a class="reference external" href="https://web.fe.up.pt/~arestivo/presentation/os-memory/#15">https://web.fe.up.pt/~arestivo/presentation/os-memory/#15</a></p></li>
+<li><p><a class="reference external" href="https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html">https://binaryterms.com/contiguous-memory-allocation-in-operating-system.html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing">https://github.com/mor1/ia-operating-systems/wiki/06-Virtual-Addressing</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mor1/ia-operating-systems">https://github.com/mor1/ia-operating-systems</a></p></li>
+<li><p><a class="reference external" href="https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/">https://www.faceprep.in/operating-systems/operating-systems-fragmentation-and-compaction/</a></p></li>
+<li><p><a class="reference external" href="https://slideplayer.com/slide/7084682/">https://slideplayer.com/slide/7084682/</a></p></li>
+</ul>
+<div class="slide-number">43</div></section>
+<section class="slide">
+<h2>References(II)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg">https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/images/Chapter1/1_4_StorageDeviceHierarchy.jpg</a></p></li>
+<li><p><a class="reference external" href="http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png">http://images.bit-tech.net/content_images/2007/11/the_secrets_of_pc_memory_part_1/hei.png</a></p></li>
+<li><p><a class="reference external" href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938">https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938</a></p></li>
+<li><p><a class="reference external" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg">https://upload.wikimedia.org/wikipedia/commons/c/c2/Write-back_with_write-allocation.svg</a></p></li>
+<li><p><a class="reference external" href="https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg">https://www.byclb.com/TR/Tutorials/dsp_advanced/ch1_1_dosyalar/image025.jpg</a></p></li>
+<li><p><a class="reference external" href="https://tutorialspoint.dev/computer-science/operating-systems/operating-systems-segmentation">https://tutorialspoint.dev/computer-science/operating-systems/operating-systems-segmentation</a></p></li>
+<li><p><a class="reference external" href="https://tutorialspoint.dev/image/segmentation.png">https://tutorialspoint.dev/image/segmentation.png</a></p></li>
+<li><p><a class="reference external" href="https://tutorialspoint.dev/image/Translation.png">https://tutorialspoint.dev/image/Translation.png</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
+<li><p><a class="reference external" href="http://harmanani.github.io/classes/csc320/Notes/ch05.pdf">http://harmanani.github.io/classes/csc320/Notes/ch05.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf">https://www.cs.princeton.edu/courses/archive/spr11/cos217/lectures/18MemoryMgmt.pdf</a></p></li>
+</ul>
+<div class="slide-number">44</div></section>
+<section class="slide">
+<h2>References(III)</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://answers.microsoft.com/en-us/windows/forum/all/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938">https://answers.microsoft.com/en-us/windows/forum/all/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938</a></p></li>
+<li><p><a class="reference external" href="https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938">https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/inverted-page-table-in-operating-system/">https://www.geeksforgeeks.org/inverted-page-table-in-operating-system/</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/doc/">https://www.kernel.org/doc/</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/doc/gorman/html/understand/understand006.html">https://www.kernel.org/doc/gorman/html/understand/understand006.html</a></p></li>
+<li><p><a class="reference external" href="https://www.kernel.org/doc/gorman/html/understand/understand-html006.png">https://www.kernel.org/doc/gorman/html/understand/understand-html006.png</a></p></li>
+<li><p><a class="reference external" href="https://connormcgarr.github.io/paging/">https://connormcgarr.github.io/paging/</a></p></li>
+<li><p><a class="reference external" href="https://www.amd.com/system/files/TechDocs/24593.pdf">https://www.amd.com/system/files/TechDocs/24593.pdf</a></p></li>
+<li><p><a class="reference external" href="http://www.rcollins.org/ddj/May96/">http://www.rcollins.org/ddj/May96/</a></p></li>
+<li><p><a class="reference external" href="https://commons.wikimedia.org/wiki/File:Intel_D945GCCR_Socket_775.png">https://commons.wikimedia.org/wiki/File:Intel_D945GCCR_Socket_775.png</a></p></li>
+<li><p><a class="reference external" href="https://codex.cs.yale.edu/avi/os-book/">https://codex.cs.yale.edu/avi/os-book/</a></p></li>
+</ul>
+<!-- comments:
+
+
+* operating systems paging kernel
+
+  **Physical and Virtual Memory in Windows 10**
+  https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/physical-and-virtual-memory-in-windows-10/e36fb5bc-9ac8-49af-951c-e7d39b979938
+
+
+  Android and IOS virtual memory
+  https://discussions.apple.com/thread/2732434
+  https://www.androidauthority.com/virtual-memory-explained-3143201/ -->
+<div class="slide-number">45</div></section>
+</body>
+</html>

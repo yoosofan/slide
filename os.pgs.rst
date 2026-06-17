@@ -4,23 +4,14 @@
 .. role:: rtl
     :class: rtl
 
-.. prezento:: Operating Systems - Memory paging, segmentation and more (By Ahmad Yoosofan)
-   :skip-help: true
+.. prezento:: segmentation and more (By Ahmad Yoosofan)
    :css: ./assets/style.css
-   :substep: true
-   :data-width: 1024
-   :data-height: 768
-   :slide-numbers: true
 
 .. slido:: Operating Systems
 
     Two and more level paging, segmentation and more
 
-.. slido::
-
     Ahmad Yoosofan
-
-    University of Kashan
 
 .. slido:: Frame Size(I)
 
@@ -29,7 +20,7 @@
         کوچک یا بزرگ بودن اندازهٔ صفحه‌ها (همان قاب‌های حافظه) بر روی موضوع‌های گوناگونی اثر دارد
 
 
-    .. class:: substep
+    .. class:: step
 
         1
 
@@ -38,7 +29,7 @@
         * 2 ^ 6 / 2 ^1 = 2 ^ 5 = 32
         * ?
 
-    .. class:: substep
+    .. class:: step
 
         2
 
@@ -47,7 +38,7 @@
         * 2^6 / 2^2 = 2^4 = 16
         * ?
 
-    .. class:: substep
+    .. class:: step
 
         3
 
@@ -58,7 +49,7 @@
 
 .. slido:: Frame Size(II)
 
-    .. class:: substep
+    .. class:: step
 
         1
 
@@ -69,7 +60,7 @@
         * 2^22 page table entry
         * Problem ?
 
-    .. class:: substep
+    .. class:: step
 
         2
 
@@ -243,18 +234,18 @@
 .. slido:: IA32 intel
 
     .. class:: rtl
-        :class: substep
+        :class: step
 
         *  بیشترین حافظه‌ای که می‌تواند پشتیبانی کند: 4GB
         *  بیشترین تعداد قطعه در یک فرآیند: 16KB
         *  بیشترین تعداد قطعهٔ اختصاصی برای یک فرآیند: 8KB برای دسترسی این بخش local descriptor table ( LDT ) به کار برده می‌شود.
         *  بیشترین تعداد قطعهٔ اشتراکی برای یک فرآیند با دیگر فرآیندها: 8KB برای دسترسی به این بخش global descriptor table ( GDT ) به کار برده می‌شود.
 
-    .. class:: substep
+    .. class:: step
 
       .. csv-table:: بخش انتخاب کنندهٔ واحد قطعه‌بندی
          :header: `شمارهٔ قطعه`, `اختصاصی یا اشتراکی`, `حفاظت`
-         :class: ltr substep
+         :class: ltr step
 
           13, 1, 2
 
@@ -346,18 +337,18 @@
 .. slido:: IA32 intel
 
     .. class:: rtl
-        :class: substep
+        :class: step
 
         *  بیشترین حافظه‌ای که می‌تواند پشتیبانی کند: 4GB
         *  بیشترین تعداد قطعه در یک فرآیند: 16KB
         *  بیشترین تعداد قطعهٔ اختصاصی برای یک فرآیند: 8KB برای دسترسی این بخش local descriptor table ( LDT ) به کار برده می‌شود.
         *  بیشترین تعداد قطعهٔ اشتراکی برای یک فرآیند با دیگر فرآیندها: 8KB برای دسترسی به این بخش global descriptor table ( GDT ) به کار برده می‌شود.
 
-    .. class:: substep
+    .. class:: step
 
       .. csv-table:: بخش انتخاب کنندهٔ واحد قطعه‌بندی
          :header: `شمارهٔ قطعه`, `اختصاصی یا اشتراکی`, `حفاظت`
-         :class: ltr substep
+         :class: ltr step
 
           13, 1, 2
 

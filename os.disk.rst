@@ -1,43 +1,21 @@
 .. role:: rtl
     :class: rtl
 
-.. prezento:: Operating System - Disk Management (By Ahmad Yoosofan)
-   :skip-help: true
+.. role:: rtl
+    :class: rtl
+
+.. prezento:: Disk Management (By Ahmad Yoosofan)
    :css: ./assets/style.css
-   :substep: true
-   :data-width: 1024
-   :data-heigh: 768
-   :slide-numbers: true
-
-.. slido::
-   :skip-help: true
-   :css: ./style.css
-   :substep: true
-   .. IGNORED_UNIMPLEMENTED: data-width: 1024
-   .. IGNORED_UNIMPLEMENTED: data-heigh: 768
-
-    .. title: Operating System - Disk Management (By Ahmad Yoosofan)
-
-    :slide-numbers: true
-
-    .. role:: rtl
-        :class: rtl
 
 .. slido:: Operating System
 
     Disk management
 
-.. slido::
-
     Ahmad Yoosofan
 
     Spring 2024
 
-.. slido:: Disk
-
-    Disk structure
-
-.. slido::
+.. slido:: Disk structure
 
     .. image:: os/img/disk/disk_Moving_head_disk_mechanism.png
        :align: center
