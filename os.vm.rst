@@ -296,21 +296,23 @@
 
         * unallocated frames
         * victim pages
-
-            .. class:: step
-
-            #. Unmodified
-            #. Modified
+    * **Soft Page Fault**
+    * Can be added to FIFO,Clock, etc.
 
     .. class:: step
 
-    + **Modified Frame Pool**
+    * victim pages
+
+        .. class:: step
+
+        #. Unmodified
+        #. Modified
+
+    * **Modified Frame Pool**
         * list of dirty frames in memory
         * Written to disk in bulk asynchronously
         * batch I/O rather than on-demand.
-    + **Page Fault** in Modified Pool
-    + **Soft Page Fault**
-    + Can be added to FIFO,Clock, etc.
+    * **Page Fault** in Modified Pool
 
     .. grafo::
        :align: center
@@ -365,6 +367,25 @@
         The system continuously cycles frames through pools.
         If a process faults for a page that is still sitting in the Modified Pool before it hits disk,
         it can be rescued instantly without any disk access (a *soft page fault*).
+
+        My Question to duck.ai
+
+        Operating System course is the main topic of this chat. Please remember it. My current question is related to page buffering in virtual memory. 1. Is it correct to say that Operating system don't use all frames for processes but always keep some percent of ram free for list of free frames? 2. Is it correct to use modefied/unmodifed for victim pages? 3. Please rewrite these previous question to an academic writing related to this topic
+
+
+        1. Not exactly. Operating systems typically maintain a pool of free frames, but the size and policy vary by design: some reserve a fraction of physical memory as free frames (to satisfy allocation spikes and reduce thrashing), while others allocate frames dynamically and rely on page-replacement and working-set algorithms to reclaim pages as needed. The OS may also reserve memory for kernel use and I/O buffers, but it does not universally keep a fixed percentage of RAM free for all workloads.
+
+
+        2. Partly. Victim pages chosen for replacement are commonly classified by whether they are modified (dirty) or unmodified (clean). Modified pages must be written back to backing store before reuse; unmodified pages can be reclaimed without disk I/O. However, replacement decisions typically consider access history (reference bits, age, frequency) in addition to dirty status.
+
+
+        3. Academic rephrasing (two questions):
+
+
+        - To what extent do contemporary operating systems maintain a reserved pool of free physical frames rather than allocating all available frames to user processes, and how do different allocation and reclamation policies (e.g., fixed free-frame reservations, working-set algorithms, and dynamic reclamation) affect system performance and thrashing behavior?
+
+
+        - In page-replacement algorithms, how is the dirty (modified) versus clean (unmodified) status of candidate victim pages used in the selection and reclamation process, and what is the impact of a page’s modification state on replacement cost and algorithmic design?
 
 .. slido:: Page Buffering in Action
 

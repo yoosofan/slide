@@ -982,10 +982,10 @@ Yes, the algorithm searches the frames at most twice (two passes). It clears the
 <div class="slide-number">11</div></section>
 <section class="slide t2cs">
 <h2>Page Buffering History & Architecture</h2>
-<ul class="incremental">
+<ul class="incremental simple">
 <li><dl class="simple">
 <dt>Problems</dt>
-<dd><ul class="incremental simple">
+<dd><ul class="incremental">
 <li><p>Choosing correct victim</p></li>
 <li><p>Writing dirty page to disk</p></li>
 </ul>
@@ -994,17 +994,26 @@ Yes, the algorithm searches the frames at most twice (two passes). It clears the
 </li>
 <li><dl class="simple">
 <dt><strong>Page Buffering Solution</strong></dt>
-<dd><ul class="incremental simple">
+<dd><ul class="incremental">
 <li><p>Reserve free pages</p></li>
 <li><p>from VAX/VMS to all modern kernels</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl>
+<li><dl class="simple">
 <dt><strong>Free Frame Pool</strong></dt>
 <dd><ul class="incremental">
 <li><p>unallocated frames</p></li>
+<li><p>victim pages</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Soft Page Fault</strong></p></li>
+<li><p>Can be added to FIFO,Clock, etc.</p></li>
+</ul>
+<ul class="incremental">
 <li><p>victim pages</p>
 <blockquote>
 <ol class="arabic simple incremental">
@@ -1013,15 +1022,9 @@ Yes, the algorithm searches the frames at most twice (two passes). It clears the
 </ol>
 </blockquote>
 </li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<ul class="incremental simple">
 <li><dl class="simple">
 <dt><strong>Modified Frame Pool</strong></dt>
-<dd><ul>
+<dd><ul class="simple">
 <li><p>list of dirty frames in memory</p></li>
 <li><p>Written to disk in bulk asynchronously</p></li>
 <li><p>batch I/O rather than on-demand.</p></li>
@@ -1030,8 +1033,6 @@ Yes, the algorithm searches the frames at most twice (two passes). It clears the
 </dl>
 </li>
 <li><p><strong>Page Fault</strong> in Modified Pool</p></li>
-<li><p><strong>Soft Page Fault</strong></p></li>
-<li><p>Can be added to FIFO,Clock, etc.</p></li>
 </ul>
 <div class="graphviz-container incremental" style="margin: 0 auto; text-align: center;">
 <svg width="1011pt" height="142pt"
@@ -1135,7 +1136,26 @@ Historically, standard page replacement algorithms (like FIFO or LRU) suffered a
 
 The system continuously cycles frames through pools.
 If a process faults for a page that is still sitting in the Modified Pool before it hits disk,
-it can be rescued instantly without any disk access (a *soft page fault*). -->
+it can be rescued instantly without any disk access (a *soft page fault*).
+
+My Question to duck.ai
+
+Operating System course is the main topic of this chat. Please remember it. My current question is related to page buffering in virtual memory. 1. Is it correct to say that Operating system don't use all frames for processes but always keep some percent of ram free for list of free frames? 2. Is it correct to use modefied/unmodifed for victim pages? 3. Please rewrite these previous question to an academic writing related to this topic
+
+
+1. Not exactly. Operating systems typically maintain a pool of free frames, but the size and policy vary by design: some reserve a fraction of physical memory as free frames (to satisfy allocation spikes and reduce thrashing), while others allocate frames dynamically and rely on page-replacement and working-set algorithms to reclaim pages as needed. The OS may also reserve memory for kernel use and I/O buffers, but it does not universally keep a fixed percentage of RAM free for all workloads.
+
+
+2. Partly. Victim pages chosen for replacement are commonly classified by whether they are modified (dirty) or unmodified (clean). Modified pages must be written back to backing store before reuse; unmodified pages can be reclaimed without disk I/O. However, replacement decisions typically consider access history (reference bits, age, frequency) in addition to dirty status.
+
+
+3. Academic rephrasing (two questions):
+
+
+- To what extent do contemporary operating systems maintain a reserved pool of free physical frames rather than allocating all available frames to user processes, and how do different allocation and reclamation policies (e.g., fixed free-frame reservations, working-set algorithms, and dynamic reclamation) affect system performance and thrashing behavior?
+
+
+- In page-replacement algorithms, how is the dirty (modified) versus clean (unmodified) status of candidate victim pages used in the selection and reclamation process, and what is the impact of a page’s modification state on replacement cost and algorithmic design? -->
 <div class="slide-number">12</div></section>
 <section class="slide">
 <h2>Page Buffering in Action</h2>
