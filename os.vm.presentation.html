@@ -668,8 +668,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <li><p>effective access time =</p></li>
 <li><p>(1 − p) × ma + p × page fault time.</p></li>
 <li><p>EAT RAM = 200 nanosecond</p></li>
-<li><p>Page fault time = 8 milliseconds</p></li>
-<li><p>(1 − p) × (200) + p (8 )</p></li>
+<li><p>Page fault time = 8  milliseconds</p></li>
 <li><p>(1 − p) × 200 + p × 8,000,000</p></li>
 <li><p>200 + 7,999,800 × p</p></li>
 <li><p>220 &gt; 200 + 7,999,800 × p,</p></li>
@@ -787,17 +786,137 @@ document.addEventListener("DOMContentLoaded", function() {
 page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used -->
 </div>
 <div class="slide-number">9</div></section>
-<section class="slide">
+<section class="slide t2c">
 <h2>Second chance (clock)</h2>
-<!-- container:
+<div class="docutils container">
+<ul class="simple">
+<li><p>NRU and LRU by using one bit</p></li>
+<li><p>access bit, reference bit, or use bit</p></li>
+<li><p>Some called this NRU</p></li>
+</ul>
+<img alt="os/img/memory/memory_paging_typical_page_table_entry.jpg" class="align-center incremental" height="152" src="os/img/memory/memory_paging_typical_page_table_entry.jpg" width="560" />
+<div class="graphviz-container" style="margin: 0 auto; text-align: center;">
+<svg width="373pt" height="333pt"
+ viewBox="0.00 0.00 372.89 333.37" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 329.37)">
+<title>ClockSecondChance</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-329.37 368.89,-329.37 368.89,4 -4,4"/>
+<!-- f0 -->
+<g id="node1" class="node">
+<title>f0</title>
+<ellipse fill="none" stroke="black" cx="151.44" cy="-270.39" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="151.44" y="-273.39" font-family="Helvetica,sans-Serif" font-size="10.00">F0</text>
+<text text-anchor="middle" x="151.44" y="-262.39" font-family="Helvetica,sans-Serif" font-size="10.00">R=0</text>
+</g>
+<!-- f1 -->
+<g id="node2" class="node">
+<title>f1</title>
+<ellipse fill="none" stroke="black" cx="235.55" cy="-235.55" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="235.55" y="-238.55" font-family="Helvetica,sans-Serif" font-size="10.00">F1</text>
+<text text-anchor="middle" x="235.55" y="-227.55" font-family="Helvetica,sans-Serif" font-size="10.00">R=1</text>
+</g>
+<!-- f0&#45;&gt;f1 -->
+<g id="edge1" class="edge">
+<title>f0&#45;&gt;f1</title>
+<path fill="none" stroke="black" d="M181.81,-257.81C189.52,-254.61 197.81,-251.18 205.51,-247.99"/>
+</g>
+<!-- f2 -->
+<g id="node3" class="node">
+<title>f2</title>
+<ellipse fill="none" stroke="black" cx="270.39" cy="-151.44" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="270.39" y="-154.44" font-family="Helvetica,sans-Serif" font-size="10.00">F2</text>
+<text text-anchor="middle" x="270.39" y="-143.44" font-family="Helvetica,sans-Serif" font-size="10.00">R=1</text>
+</g>
+<!-- f1&#45;&gt;f2 -->
+<g id="edge2" class="edge">
+<title>f1&#45;&gt;f2</title>
+<path fill="none" stroke="black" d="M248.13,-205.19C251.32,-197.47 254.76,-189.18 257.95,-181.48"/>
+</g>
+<!-- f3 -->
+<g id="node4" class="node">
+<title>f3</title>
+<ellipse fill="none" stroke="black" cx="235.55" cy="-67.34" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="235.55" y="-70.34" font-family="Helvetica,sans-Serif" font-size="10.00">F3</text>
+<text text-anchor="middle" x="235.55" y="-59.34" font-family="Helvetica,sans-Serif" font-size="10.00">R=0</text>
+</g>
+<!-- f2&#45;&gt;f3 -->
+<g id="edge3" class="edge">
+<title>f2&#45;&gt;f3</title>
+<path fill="none" stroke="black" d="M257.81,-121.08C254.61,-113.36 251.18,-105.08 247.99,-97.38"/>
+</g>
+<!-- f4 -->
+<g id="node5" class="node">
+<title>f4</title>
+<ellipse fill="none" stroke="black" cx="151.44" cy="-32.5" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="151.44" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00">F4</text>
+<text text-anchor="middle" x="151.44" y="-24.5" font-family="Helvetica,sans-Serif" font-size="10.00">R=1</text>
+</g>
+<!-- f3&#45;&gt;f4 -->
+<g id="edge4" class="edge">
+<title>f3&#45;&gt;f4</title>
+<path fill="none" stroke="black" d="M205.19,-54.76C197.47,-51.56 189.18,-48.13 181.48,-44.94"/>
+</g>
+<!-- f5 -->
+<g id="node6" class="node">
+<title>f5</title>
+<ellipse fill="none" stroke="black" cx="67.34" cy="-67.34" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="67.34" y="-70.34" font-family="Helvetica,sans-Serif" font-size="10.00">F5</text>
+<text text-anchor="middle" x="67.34" y="-59.34" font-family="Helvetica,sans-Serif" font-size="10.00">R=0</text>
+</g>
+<!-- f4&#45;&gt;f5 -->
+<g id="edge5" class="edge">
+<title>f4&#45;&gt;f5</title>
+<path fill="none" stroke="black" d="M121.08,-45.08C113.36,-48.27 105.08,-51.71 97.38,-54.9"/>
+</g>
+<!-- f6 -->
+<g id="node7" class="node">
+<title>f6</title>
+<ellipse fill="none" stroke="black" cx="32.5" cy="-151.44" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="32.5" y="-154.44" font-family="Helvetica,sans-Serif" font-size="10.00">F6</text>
+<text text-anchor="middle" x="32.5" y="-143.44" font-family="Helvetica,sans-Serif" font-size="10.00">R=0</text>
+</g>
+<!-- f5&#45;&gt;f6 -->
+<g id="edge6" class="edge">
+<title>f5&#45;&gt;f6</title>
+<path fill="none" stroke="black" d="M54.76,-97.7C51.56,-105.42 48.13,-113.71 44.94,-121.41"/>
+</g>
+<!-- f7 -->
+<g id="node8" class="node">
+<title>f7</title>
+<ellipse fill="none" stroke="black" cx="67.34" cy="-235.55" rx="32.5" ry="32.5"/>
+<text text-anchor="middle" x="67.34" y="-238.55" font-family="Helvetica,sans-Serif" font-size="10.00">F7</text>
+<text text-anchor="middle" x="67.34" y="-227.55" font-family="Helvetica,sans-Serif" font-size="10.00">R=1</text>
+</g>
+<!-- f6&#45;&gt;f7 -->
+<g id="edge7" class="edge">
+<title>f6&#45;&gt;f7</title>
+<path fill="none" stroke="black" d="M45.08,-181.81C48.27,-189.52 51.71,-197.81 54.9,-205.51"/>
+</g>
+<!-- f7&#45;&gt;f0 -->
+<g id="edge8" class="edge">
+<title>f7&#45;&gt;f0</title>
+<path fill="none" stroke="black" d="M97.7,-248.13C105.42,-251.32 113.71,-254.76 121.41,-257.95"/>
+</g>
+<!-- center -->
+<!-- center&#45;&gt;f0 -->
+<!-- hand -->
+<g id="node10" class="node">
+<title>hand</title>
+<text text-anchor="middle" x="337.89" y="-154.44" font-family="Helvetica,sans-Serif" font-size="10.00">clock</text>
+<text text-anchor="middle" x="337.89" y="-143.44" font-family="Helvetica,sans-Serif" font-size="10.00">hand</text>
+</g>
+<!-- hand&#45;&gt;f2 -->
+<g id="edge9" class="edge">
+<title>hand&#45;&gt;f2</title>
+<path fill="none" stroke="black" stroke-width="3" d="M310.83,-151.44C310.67,-151.44 310.51,-151.44 310.36,-151.44"/>
+<polygon fill="black" stroke="black" stroke-width="3" points="303.25,-151.44 313.25,-146.94 308.25,-150.44 313.25,-150.44 313.25,-151.44 313.25,-152.44 308.25,-152.44 313.25,-155.94 303.25,-151.44 303.25,-151.44"/>
+</g>
+</g>
+</svg>
 
-Simplest implementation of NRU and LRU by using one bit
-
-* access bit,
-* reference bit, or
-* use bit
-
-Some called this NRU
+</div>
+</div>
+<!-- :
 
 * as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)
 * keep one bit called the "used bit" or "reference bit", where 1 => used recently and 0 => not used recently
@@ -861,9 +980,60 @@ The clock hand performs a single rotation (or partial rotation), but it operates
 To answer your specific point:
 Yes, the algorithm searches the frames at most twice (two passes). It clears the R bits during the first pass to prepare the frames for the second pass. -->
 <div class="slide-number">11</div></section>
-<section class="slide ts2c">
+<section class="slide t2cs">
 <h2>Page Buffering History & Architecture</h2>
-<div class="graphviz-container" style="margin: 0 auto; text-align: center; transform: scale(1.0); transform-origin: top center;">
+<ul class="incremental">
+<li><dl class="simple">
+<dt>Problems</dt>
+<dd><ul class="incremental simple">
+<li><p>Choosing correct victim</p></li>
+<li><p>Writing dirty page to disk</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Page Buffering Solution</strong></dt>
+<dd><ul class="incremental simple">
+<li><p>Reserve free pages</p></li>
+<li><p>from VAX/VMS to all modern kernels</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Free Frame Pool</strong></dt>
+<dd><ul class="incremental">
+<li><p>unallocated frames</p></li>
+<li><p>victim pages</p>
+<blockquote>
+<ol class="arabic simple incremental">
+<li><p>Unmodified</p></li>
+<li><p>Modified</p></li>
+</ol>
+</blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<ul class="incremental simple">
+<li><dl class="simple">
+<dt><strong>Modified Frame Pool</strong></dt>
+<dd><ul>
+<li><p>list of dirty frames in memory</p></li>
+<li><p>Written to disk in bulk asynchronously</p></li>
+<li><p>batch I/O rather than on-demand.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Page Fault</strong> in Modified Pool</p></li>
+<li><p><strong>Soft Page Fault</strong></p></li>
+<li><p>Can be added to FIFO,Clock, etc.</p></li>
+</ul>
+<div class="graphviz-container incremental" style="margin: 0 auto; text-align: center;">
 <svg width="1011pt" height="142pt"
  viewBox="0.00 0.00 1011.00 142.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 138)">
@@ -944,53 +1114,10 @@ Yes, the algorithm searches the frames at most twice (two passes). It clears the
 </svg>
 
 </div>
-<ul class="incremental simple">
-<li><dl class="simple">
-<dt><strong>Bottleneck</strong></dt>
-<dd><ul>
-<li><p>Writing dirty page to disk</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>Page Buffering Solution</strong></dt>
-<dd><ul>
-<li><p>from VAX/VMS to all modern kernels</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><strong>Free Frame Pool</strong></dt>
-<dd><ul>
-<li><p>list of clean, unallocated frames</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<ul class="incremental simple">
-<li><dl class="simple">
-<dt><strong>Modified Frame Pool</strong></dt>
-<dd><ul>
-<li><p>list of dirty frames in memory</p></li>
-<li><p>Written to disk in bulk asynchronously</p></li>
-<li><p>batch I/O rather than on-demand.</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><p><strong>Page Fault</strong> in Modified Pool</p></li>
-<li><p><strong>Soft Page Fault</strong></p></li>
-<li><p>Can be added to FIFO,Clock, etc.</p></li>
-</ul>
-<blockquote>
 <!-- komento:
 
 * **Teaching Point:** Emphasize that the "Modified Frame Pool" effectively turns random write requests into sequential batch writes, heavily optimizing disk throughput.
 * Note the "Soft Fault" path—remind students that this serves as a safety net or cache before the page is written out and destroyed. -->
-</blockquote>
 <!-- :
 
 Historically, standard page replacement algorithms (like FIFO or LRU) suffered a severe performance penalty when a selected "victim" page was dirty:

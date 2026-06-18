@@ -1,8 +1,8 @@
 .. role:: rtl
     :class: rtl
 
-.. role:: rtl
-    :class: rtl
+.. role:: ltr
+    :class: ltr
 
 .. prezento:: Disk Management (By Ahmad Yoosofan)
    :css: ./assets/style.css

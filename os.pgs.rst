@@ -4,14 +4,19 @@
 .. role:: rtl
     :class: rtl
 
-.. prezento:: segmentation and more (By Ahmad Yoosofan)
+.. prezento:: Multi Level Paging and Segmentation (By Ahmad Yoosofan)
    :css: ./assets/style.css
 
-.. slido:: Operating Systems
-
-    Two and more level paging, segmentation and more
+.. slido:: Multi Level Paging and Segmentation
 
     Ahmad Yoosofan
+
+    * https://yoosofan.github.io/
+    * https://yoosofan.github.io/slide/os.pgs.presentation.html
+    * https://yoosofan.github.io/slide/os.pgs.rst
+    * https://github.com/yoosofan/slide/blob/main/os.pgs.rst
+    * https://yoosofan.github.io/course/os.html
+    * https://yoosofan.github.io/slide/os.pgs.concise4pdf.html
 
 .. slido:: Frame Size(I)
 
@@ -70,11 +75,7 @@
         * 2^12 = 4096 Frame
         * ? , Maximum Number of Processes
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        صفحه‌بندی دو سطحی
+.. slido:: Two Level Paging
 
     .. image:: os/img/memory/paging_two_level.png
        :align: center
@@ -83,11 +84,7 @@
 
         access time
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        آدرس‌دهی در صفحه‌بندی دو سطحی
+.. slido:: Addressing in 2 Level Paging
 
     .. image:: os/img/memory/paging_address_translation_32bit.png
        :align: center
@@ -95,94 +92,68 @@
     .. image:: os/img/memory/paging_two_level_32bit_address.png
        :align: center
 
-.. slido::
+.. slido:: Address_Translation
 
     .. image:: os/img/memory/memory_paging_Address_Translation_in_a_Two_Level_Paging_System.png
        :align: center
        :scale: 90%
 
-.. slido::
+.. slido:: Two_Level_Hierarchical_Page_Table
 
     .. image:: os/img/memory/memory_paging_Two_Level_Hierarchical_Page_Table.png
        :align: center
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        صفحه‌بندی دو سطحی ۶۴ بیتی
+.. slido:: 64 bits two level paging
 
     .. image:: os/img/memory/paging_two_level_64bit.png
        :align: center
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        صفحه‌بندی سه سطحی ۶۴ بیتی
+.. slido:: Three level Paging for 64 bits
 
     .. image:: os/img/memory/paging_three_level_64bit_address.png
        :align: center
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        صفحه‌بندی با جدول صفحهٔ معکوس
+.. slido:: Inverted Page Table
 
     .. image:: os/img/memory/inverted_page_table.png
        :align: center
 
-.. slido::
-
-    .. class:: rtl-h1
-
-        صفحه‌بندی با جدول صفحهٔ معکوس با تابع درهم‌سازی
-
+.. slido:: Hash Function and Inverted Page Table
 
     .. image:: os/img/memory/memory_paging_Inverted_Page_Table_Structure.png
        :align: center
 
-.. slido:: Windows 10 Inverted Page Table on Intel Itanium 64 bit platform
+.. slido:: Windows 10 Inverted Page Table on Intel Itanium 64
 
     .. image:: os/img/memory/Physical_and_Virtual_Memory_in_Windows_10_64bit_processors_inverted_page_table.png
         :width: 780px
 
-.. slido::
-
-    .. class:: rtl-h1
-
-      قطعه‌بندی (segmentation)
+.. slido:: Segmentation
 
     .. image:: os/img/memory/memory_segmentation_logical_address.png
        :align: center
        :height: 500px
 
-.. slido::
+.. slido:: Example of Segmentation
 
     .. image:: os/img/memory/memory_segmentation_example.png
        :align: center
        :width: 600px
 
-.. slido::
+.. slido:: Segmentation Hardware
 
     .. image:: os/img/memory/memory_segmentation_hardware.png
        :align: center
        :width: 650px
 
-.. slido::
+.. slido:: Logical to Physical Address
 
     .. image:: os/img/memory/memory_segmentation_logical2physical_address.png
        :align: center
        :height: 420px
 
-.. slido::
+.. slido:: Sharing segments
 
-    .. class:: rtl-h1
-
-      اشتراک گذاری در قطعه‌بندی
-
-    Sharing segments
 
 .. slido::
 

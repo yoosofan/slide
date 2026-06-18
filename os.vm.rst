@@ -50,8 +50,7 @@
     * effective access time =
     * (1 − p) × ma + p × page fault time.
     * EAT RAM = 200 nanosecond
-    * Page fault time = 8 milliseconds
-    * (1 − p) × (200) + p (8 )
+    * Page fault time = 8  milliseconds
     * (1 − p) × 200 + p × 8,000,000
     * 200 + 7,999,800 × p
     * 220 > 200 + 7,999,800 × p,
@@ -174,16 +173,55 @@
             page-replacement algorithm is based on the argument that the page with the smallest count was probably just brought in and has yet to be used
 
 .. slido:: Second chance (clock)
+   :class: t2c
 
-    .. container:
+    .. container::
 
-        Simplest implementation of NRU and LRU by using one bit
+        * NRU and LRU by using one bit
+        * access bit, reference bit, or use bit
+        * Some called this NRU
 
-        * access bit,
-        * reference bit, or
-        * use bit
+        .. image:: os/img/memory/memory_paging_typical_page_table_entry.jpg
+            :align: center
+            :class: step
+            :scale: 80%
 
-        Some called this NRU
+        .. grafo::
+
+            digraph ClockSecondChance {
+            // Use a circular layout engine (circo or neato with -Gstart=) when rendering:
+            // dot -Kcirco -Tpng -o clock.png clock.dot
+            graph [layout=circo, overlap=false];
+            node [shape=oval, style=rounded, fontsize=10, fontname="Helvetica"];
+            edge [arrowhead=none];
+
+            // Clock face (frames). Each node shows "Frame n\nR:x"
+            f0 [label="F0\nR=0", width=0.9, height=0.9];
+            f1 [label="F1\nR=1", width=0.9, height=0.9];
+            f2 [label="F2\nR=1", width=0.9, height=0.9];
+            f3 [label="F3\nR=0", width=0.9, height=0.9];
+            f4 [label="F4\nR=1", width=0.9, height=0.9];
+            f5 [label="F5\nR=0", width=0.9, height=0.9];
+            f6 [label="F6\nR=0", width=0.9, height=0.9];
+            f7 [label="F7\nR=1", width=0.9, height=0.9];
+
+            // Connect in a ring (clockwise)
+            f0 -> f1; f1 -> f2; f2 -> f3; f3 -> f4;
+            f4 -> f5; f5 -> f6; f6 -> f7; f7 -> f0;
+
+            // Optional central hub to draw a clock-hand to current candidate
+            center [label="", shape=circle, width=0.1, style=invis];
+
+            // Clock hand (thicker, directed) pointing to the next candidate (change target as needed)
+            hand [label="clock\nhand", shape=plaintext];
+            hand -> f2 [color=black, penwidth=3, arrowhead=open];
+
+            // Keep layout tidy: place center near nodes (in some renderers center isn't necessary)
+            center -> f0 [style=invis];
+            }
+
+
+    .. :
 
         * as an approximation to LRU, select one of the pages that has not been used recently (as opposed to identifying exactly which one has not been used for the longest amount of time)
         * keep one bit called the "used bit" or "reference bit", where 1 => used recently and 0 => not used recently
@@ -239,11 +277,44 @@
 
 
 .. slido:: Page Buffering History & Architecture
-   :class: ts2c
+   :class: t2cs
+
+    .. class:: step
+
+    * Problems
+        .. class:: step
+
+        * Choosing correct victim
+        * Writing dirty page to disk
+    * **Page Buffering Solution**
+        .. class:: step
+
+        * Reserve free pages
+        * from VAX/VMS to all modern kernels
+    * **Free Frame Pool**
+        .. class:: step
+
+        * unallocated frames
+        * victim pages
+
+            .. class:: step
+
+            #. Unmodified
+            #. Modified
+
+    .. class:: step
+
+    + **Modified Frame Pool**
+        * list of dirty frames in memory
+        * Written to disk in bulk asynchronously
+        * batch I/O rather than on-demand.
+    + **Page Fault** in Modified Pool
+    + **Soft Page Fault**
+    + Can be added to FIFO,Clock, etc.
 
     .. grafo::
        :align: center
-       :scale: 100
+       :class: step
 
         digraph PageBuffering {
             rankdir=LR;
@@ -270,26 +341,7 @@
             rescue -> dirty [color="#0288d1", style=bold, dir=back, arrowtail=normal];
         }
 
-    .. class:: step
-
-    * **Bottleneck**
-        * Writing dirty page to disk
-    * **Page Buffering Solution**
-        * from VAX/VMS to all modern kernels
-    * **Free Frame Pool**
-        * list of clean, unallocated frames
-
-    .. class:: step
-
-    + **Modified Frame Pool**
-        * list of dirty frames in memory
-        * Written to disk in bulk asynchronously
-        * batch I/O rather than on-demand.
-    + **Page Fault** in Modified Pool
-    + **Soft Page Fault**
-    + Can be added to FIFO,Clock, etc.
-
-     .. komento:
+    .. komento:
 
         * **Teaching Point:** Emphasize that the "Modified Frame Pool" effectively turns random write requests into sequential batch writes, heavily optimizing disk throughput.
         * Note the "Soft Fault" path—remind students that this serves as a safety net or cache before the page is written out and destroyed.
