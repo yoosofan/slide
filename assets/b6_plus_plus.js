@@ -1,8 +1,8 @@
-/* b6plus.js $Revision: 1.174 $ $Date: 2026/06/08 13:24:01 $
+/* b6plus.js $Revision: 1.177 $ $Date: 2026/08/15 14:06:07 $
  *
  * Script to simulate projection mode on browsers that don't support
- * media=projection or 'overflow-block: paged' (or ‘overflow-block:
- * optional-paged’, from the 2014 Media Queries draft) but do support
+ * media=projection or 'overflow-block: paged' (or â€˜overflow-block:
+ * optional-pagedâ€™, from the 2014 Media Queries draft) but do support
  * Javascript.
  *
  * Documentation and latest version:
@@ -40,7 +40,7 @@
  * More documentation:
  *   - https://www.w3.org/Talks/Tools/b6plus/Overview.html
  *     How to write and present slide decks and how to use features of
- *     the ‘simple.css’ style sheet.
+ *     the â€˜simple.cssâ€™ style sheet.
  *   - https://www.w3.org/Talks/Tools/b6plus/writing-style-sheets.html
  *     Everything for writing (advanced) style sheets for b6+.
  *
@@ -112,6 +112,21 @@
  *
  * TODO: A test suite.
  *
+ * TODO: Keyboard commands for quick navigation: jump to slide number
+ * N, jump N slides forward or N slides back. This could be done by
+ * typing digit keys followed by â€˜Gâ€™ (for â€˜goâ€™) or by a left or right
+ * arrow, and/or â€˜Fâ€™ or â€˜Bâ€™ keys (forward/backward). (Idea by Ahmad
+ * Yoosofan <yoosofan@gmx.com>)
+ *
+ * TODO: Enhanced drawing on a slide: choose from multiple colors,
+ * maybe arbitrary colors with a color picker; draw rectangles,
+ * circles and other shapes; add text, in different sizes and colors.
+ * (Idea by Ahmad Yoosofan <yoosofan@gmx.com>)
+ *
+ * TODO: When the C key is pressed in index mode, but there are no
+ * notes to show or hide, show a warning, e.g.,
+ * warningBanner(_("No speaker notes found"))
+ *
  * Originally derived from code by Dave Raggett.
  *
  * Author: Bert Bos <bert@w3.org>
@@ -123,7 +138,7 @@
  * Modified: Mar 2019 (support fixed aspect ratio, progress elements, b6 -> b6+)
  * Modified: Aug 2020 (add class=visited to past elts in incremental display)
  * Modified: Oct 2020 (start in slide mode if URL contains "?full")
- * Modified: Apr 2021 (disable navigation if URL contains ‘?static’)
+ * Modified: Apr 2021 (disable navigation if URL contains â€˜?staticâ€™)
  * Modified: May 2021 (rescale if window size changes while in slide mode)
  * Modified: Jun 2021 (only one incremental item active, as in Shower since 3.1)
  * Modified: Sep 2021 (a11y: added role=application and a live region)
@@ -161,8 +176,8 @@
 /* Localized strings */
 const translations = {
   "Remaining time. To change, add class 'duration=n' to body" : {
-    de: "Restzeit. Um sie zu ändern, fügen Sie die Klasse 'duration=n' zu BODY hinzu",
-    fr: "Temps restant. Pour le changer, ajoutez la classe 'duration=n' à BODY",
+    de: "Restzeit. Um sie zu Ã¤ndern, fÃ¼gen Sie die Klasse 'duration=n' zu BODY hinzu",
+    fr: "Temps restant. Pour le changer, ajoutez la classe 'duration=n' Ã  BODY",
     nl: "Resterende tijd. Om de tijd te veranderen, voeg de class 'duration=N' toe aan BODY"},
   "min": {			// Abbreviation for "minutes"
     de: "Min",
@@ -174,7 +189,7 @@ const translations = {
     nl: "huidige tijd"},
   "used": {
     de: "verbraucht",
-    fr: "utilisé",
+    fr: "utilisÃ©",
     nl: "gebruikt"},
   "remaining": {		// As in "remaining time"
     de: "Restzeit",
@@ -192,53 +207,53 @@ const translations = {
     de: "+1 Min",
     fr: "+1 min",
     nl: "+1 min"},
-  "−1 min": {			// Label on a button to shorten time by 1 minute
-    de: "−1 Min",
-    fr: "−1 min",
-    nl: "−1 min"},
+  "âˆ’1 min": {			// Label on a button to shorten time by 1 minute
+    de: "âˆ’1 Min",
+    fr: "âˆ’1 min",
+    nl: "âˆ’1 min"},
   "restart": {			// Label on a button to reset the clock
     de: "Neustart",
-    fr: "réinitialiser",
+    fr: "rÃ©initialiser",
     nl: "herstart"},
   "No navigation possible while sync mode is on.": {
-    de: "Bei aktiviertem Sync-Modus ist keine Navigation möglich.",
-    fr: "Aucune navigation possible lorsque le mode synchro est activé.",
+    de: "Bei aktiviertem Sync-Modus ist keine Navigation mÃ¶glich.",
+    fr: "Aucune navigation possible lorsque le mode synchro est activÃ©.",
     nl: "Geen navigatie mogelijk terwijl de synchronisatiemodus is ingeschakeld."},
   "Press S to toggle sync mode off.": {
-    de: "Drücken Sie S, um den Sync-Modus auszuschalten.",
-    fr: "Appuyez sur S pour désactiver le mode synchro.",
+    de: "DrÃ¼cken Sie S, um den Sync-Modus auszuschalten.",
+    fr: "Appuyez sur S pour dÃ©sactiver le mode synchro.",
     nl: "Druk op S om de synchronisatiemodus uit te schakelen."},
   "Synchronization error.": {
     de: "Synchronisierungsfehler",
     fr: "Erreur de synchronisation.",
     nl: "Synchronisatiefout."},
   "You can try to turn synchronization back on with the S key.": {
-    de: "Sie können versuchen, die Synchronisation mit der Taste S wieder einzuschalten.",
-    fr: "Vous pouvez essayer de réactiver la synchronisation avec la touche S.",
+    de: "Sie kÃ¶nnen versuchen, die Synchronisation mit der Taste S wieder einzuschalten.",
+    fr: "Vous pouvez essayer de rÃ©activer la synchronisation avec la touche S.",
     nl: "U kunt proberen de synchronisatie weer in te schakelen met de S-toets."},
   "An error occurred while trying to switch into fullscreen mode": {
     de: "Beim Wechsel in den Vollbildmodus ist ein Fehler aufgetreten",
-    fr: "Une erreur s'est produite en essayant de passer en mode plein écran",
+    fr: "Une erreur s'est produite en essayant de passer en mode plein Ã©cran",
     nl: "Er is een fout opgetreden bij het overschakelen naar volledig scherm"},
   "Fullscreen mode is not possible": {
-    de: "Der Vollbildmodus ist nicht möglich",
-    fr: "Le mode plein écran est impossible",
+    de: "Der Vollbildmodus ist nicht mÃ¶glich",
+    fr: "Le mode plein Ã©cran est impossible",
     nl: "Volledig scherm is niet mogelijk"},
   "You can try again with the F or F1 key.": {
-    de: "Sie können es mit der Taste F oder F1 erneut versuchen.",
-    fr: "Vous pouvez réessayer avec la touche F ou F1.",
+    de: "Sie kÃ¶nnen es mit der Taste F oder F1 erneut versuchen.",
+    fr: "Vous pouvez rÃ©essayer avec la touche F ou F1.",
     nl: "U kunt het opnieuw proberen met de toets F of F1."},
   "Syncing turned OFF.\nPress S to turn syncing back on.": {
-    de: "Synchronisierung ausgeschaltet.\nDrücken Sie S, um die Synchronisierung wieder einzuschalten.",
-    fr: "Synchronisation désactivée\nAppuyez sur S pour réactiver la synchronisation,",
+    de: "Synchronisierung ausgeschaltet.\nDrÃ¼cken Sie S, um die Synchronisierung wieder einzuschalten.",
+    fr: "Synchronisation dÃ©sactivÃ©e\nAppuyez sur S pour rÃ©activer la synchronisation,",
     nl: "Synchroniseren uitgeschakeld\nDruk op S om het synchroniseren weer in te schakelen"},
   "Syncing turned ON\nPress S to turn syncing off": {
-    de: "Synchronisierung eingeschaltet\nDrücken Sie S, um die Synchronisierung auszuschalten",
-    fr: "Synchronisation activée\nAppuyez sur S pour désactiver la synchronisation",
+    de: "Synchronisierung eingeschaltet\nDrÃ¼cken Sie S, um die Synchronisierung auszuschalten",
+    fr: "Synchronisation activÃ©e\nAppuyez sur S pour dÃ©sactiver la synchronisation",
     nl: "Synchronisatie ingeschakeld\nDruk op S om synchronisatie uit te schakelen"},
   "Stopped.": {
     de: "Gestoppt.",
-    fr: "Arrêté.",
+    fr: "ArrÃªtÃ©.",
     nl: "Gestopt."},
   "Mouse &amp; keyboard commands": {
     de: "Maus- und Tastaturbefehle",
@@ -246,7 +261,7 @@ const translations = {
     nl: "Muis- en toetsenbordopdrachten"},
   "<kbd>A</kbd>, double click, 3-finger touch": {
     de: "<kbd>A</kbd>, Doppelklick, 3-Finger-Touch",
-    fr: "<kbd>A</kbd>, double clic, toucher à 3 doigts",
+    fr: "<kbd>A</kbd>, double clic, toucher Ã  3 doigts",
     nl: "<kbd>A</kbd>, dubbelklik, 3-vinger touch"},
   "enter slide mode": {
     de: "Dia-Modus einschalten",
@@ -254,7 +269,7 @@ const translations = {
     nl: "naar de diamodus gaan"},
   "<kbd>A</kbd>, <kbd>Esc</kbd>, 3-finger touch": {
     de: "<kbd>A</kbd>, <kbd>Esc</kbd>, 3-Finger-Touch",
-    fr: "<kbd>A</kbd>, <kbd>Esc</kbd>, toucher à 3 doigts",
+    fr: "<kbd>A</kbd>, <kbd>Esc</kbd>, toucher Ã  3 doigts",
     nl: "<kbd>A</kbd>, <kbd>Esc</kbd>, 3-vinger touch"},
   "leave slide mode": {
     de: "Dia-Modus ausschalten",
@@ -269,8 +284,8 @@ const translations = {
     fr: "<kbd>espace</kbd>, <kbd>&rarr;</kbd>, <kbd>&darr;</kbd>, clic",
     nl: "<kbd>spatie</kbd>, <kbd>&rarr;</kbd>, <kbd>&darr;</kbd>, klik"},
   "next slide or incremental element": {
-    de: "nächstes Dia oder inkrementelles Element",
-    fr: "diapo suivante ou élément incrémentiel",
+    de: "nÃ¤chstes Dia oder inkrementelles Element",
+    fr: "diapo suivante ou Ã©lÃ©ment incrÃ©mentiel",
     nl: "volgende dia of incrementeel element"},
   "<kbd>PgDn</kbd>": {},
   "<kbd>PgDn</kbd>, swipe left": {
@@ -278,12 +293,12 @@ const translations = {
     fr: "<kbd>PgDn</kbd>, glisser vers la gauche",
     nl: "<kbd>PgDn</kbd>, veeg naar links"},
   "next slide": {
-    de: "nächstes Dia",
+    de: "nÃ¤chstes Dia",
     fr: "diapo suivante",
     nl: "volgende dia"},
   "Next slide: ": {
-    de: "Nächstes Dia: ",
-    fr: "Diapo suivante : ",
+    de: "NÃ¤chstes Dia: ",
+    fr: "Diapo suivanteÂ : ",
     nl: "Volgende dia: "},
   "<kbd>PgUp</kbd>, <kbd>&larr;</kbd>, <kbd>&uarr;</kbd>, swipe right": {
     de: "<kbd>PgUp</kbd>, <kbd>&larr;</kbd>, <kbd>&uarr;</kbd>, rechts wischen",
@@ -291,28 +306,28 @@ const translations = {
     nl: "<kbd>PgUp</kbd>, <kbd>&larr;</kbd>, <kbd>&uarr;</kbd>, veeg naar rechts"},
   "previous slide": {
     de: "vorheriges Dia",
-    fr: "diapo précédente",
+    fr: "diapo prÃ©cÃ©dente",
     nl: "vorige dia"},
   "<kbd>End</kbd>": {},
   "last slide": {
     de: "letztes Dia",
-    fr: "dernière diapo",
+    fr: "derniÃ¨re diapo",
     nl: "laatste dia"},
   "<kbd>Home</kbd>": {},
   "first slide": {
     de: "erstes Dia",
-    fr: "première diapo",
+    fr: "premiÃ¨re diapo",
     nl: "eerste dia"},
   "<kbd>F1</kbd>, <kbd>F</kbd>": {},
   "toggle fullscreen mode": {
     de: "Vollbildmodus umschalten",
-    fr: "basculer le mode plein écran",
+    fr: "basculer le mode plein Ã©cran",
     nl: "volledig scherm aan/uit"},
   "<kbd>2</kbd>": {},
   "<kbd>C</kbd>": {},
   "show slides in 2nd window": {
-    de: "abspielen in 2. Fenster",
-    fr: "lire dans 2<sup>e</sup> fenêtre",
+    de: "abspielen in 2.Â Fenster",
+    fr: "lire dans 2<sup>e</sup> fenÃªtre",
     nl: "afspelen in 2e venster"},
   "<kbd>?</kbd>": {},
   "this help": {
@@ -322,43 +337,43 @@ const translations = {
   "<kbd>S</kbd>": {},
   "toggle sync mode on/off": {
     de: "Sync-Modus ein-/ausschalten",
-    fr: "activer/désactiver le mode synchro",
+    fr: "activer/dÃ©sactiver le mode synchro",
     nl: "sync-modus aan/uit"},
   "<kbd>N</kbd>": {},
   "(screen reader) speak notes/next slide/current element": {
-    de: "(Screenreader) Notizen/nächste Folie/aktuelles Element vorlesen",
-    fr: "(lecteur d'écran) notes de présentation/diapo suivante/élément actuel",
+    de: "(Screenreader) Notizen/nÃ¤chste Folie/aktuelles Element vorlesen",
+    fr: "(lecteur d'Ã©cran) notes de prÃ©sentation/diapo suivante/Ã©lÃ©ment actuel",
     nl: "(schermlezer) notities/volgende dia/huidig element uitspreken"},
   "(More information in the <a target=_parent href='https://www.w3.org/Talks/Tools/b6plus/'>b6+ manual</a>)": {
     de: "(Weitere Informationen im <a target=_parent href='https://www.w3.org/Talks/Tools/b6plus/'>b6+ Handbuch</a>)",
     fr: "(Plus d'informations dans <a target=_parent href='https://www.w3.org/Talks/Tools/b6plus/'>le manuel de b6+</a>)",
     nl: "(Meer informatie in <a target=_parent href='https://www.w3.org/Talks/Tools/b6plus/'>de b6+ handleiding</a>)"},
-  "▶\uFE0E": {},
+  "â–¶\uFE0E": {},
   "play slides or stop playing": {
     de: "Dias abspielen oder halten",
-    fr: "lancer les diapos ou arrêter",
+    fr: "lancer les diapos ou arrÃªter",
     nl: "dia's afspelen of stoppen"},
   "play/<wbr>stop": {
     de: "abspielen/<wbr>halten",
-    fr: "lire/<wbr>arrêter",
+    fr: "lire/<wbr>arrÃªter",
     nl: "afspelen/<wbr>stoppen"},
-  "⧉": {},
+  "â§‰": {},
   "play in 2nd window": {
-    de: "abspielen in 2. Fenster",
-    fr: "lire dans 2eme fenêtre",
+    de: "abspielen in 2.Â Fenster",
+    fr: "lire dans 2eme fenÃªtre",
     nl: "afspelen in 2de venster"},
   "play/stop slides in a 2nd window": {
     de: "Dias abspielen/halten in einem zweiten Fenster",
-    fr: "lancer/arrêter les diapos dans une 2eme fenêtre",
+    fr: "lancer/arrÃªter les diapos dans une 2eme fenÃªtre",
     nl: "dia's afspelen/stoppen in een 2de venster"},
-  "❮": {},
+  "â®": {},
   "back": {
-    de: "zurück",
-    fr: "précédent",
+    de: "zurÃ¼ck",
+    fr: "prÃ©cÃ©dent",
     nl: "terug"},
-  "❯": {},
+  "â¯": {},
   "forward": {
-    de: "vorwärts",
+    de: "vorwÃ¤rts",
     fr: "suivant",
     nl: "vooruit"},
   "?": {},
@@ -366,14 +381,14 @@ const translations = {
     de: "Hilfe",
     fr: "aide",
     nl: "help"},
-  "◑": {},
+  "â—‘": {},
   "dark mode": {
     de: "Dunkel&shy;modus",
     fr: "mode sombre",
     nl: "donkere modus"},
   "toggle dark mode on/off": {
     de: "Dunkelmodus ein- oder ausschalten",
-    fr: "activer ou désactiver le mode sombre",
+    fr: "activer ou dÃ©sactiver le mode sombre",
     nl: "schakel de donkere modus aan of uit"},
   "Slide": {
     de: "Dia",
@@ -385,7 +400,7 @@ const translations = {
     nl: "notities"},
   "Notes: ": {
     de: "Notizen: ",
-    fr: "Notes : ",
+    fr: "NotesÂ : ",
     nl: "Notities: "},
   "No notes": {
     de: "Keine Notizen",
@@ -393,9 +408,9 @@ const translations = {
     nl: "Geen notities"},
   "(slide mode) table of contents<br>(index mode) show/hide notes": {
     de: "(Dia-modus) Inhaltsverzeichnis<br>(Indexmodus) Notizen anzeigen/ausblenden",
-    fr: "(en mode diapo) table des matières<br>(en mode index) afficher/masquer les notes",
+    fr: "(en mode diapo) table des matiÃ¨res<br>(en mode index) afficher/masquer les notes",
     nl: "(diamodus) inhoudsopgave<br>(index-modus) notities weergeven/verbergen"},
-  "<kbd>P</kbd>, <kbd>⏯</kbd>": {},
+  "<kbd>P</kbd>, <kbd>â¯</kbd>": {},
   "pause/resume automatic slide show": {
     de: "anhalten/fortsetzen der automatischen Dias",
     fr: "pause/reprise du diapo automatique",
@@ -403,18 +418,18 @@ const translations = {
   "<kbd>W</kbd>": {},
   "start/stop drawing on the slide": {
     de: "zeichnen auf dem Dia ein-/ausschalten",
-    fr: "dessiner sur la diapo activer/désactiver",
+    fr: "dessiner sur la diapo activer/dÃ©sactiver",
     nl: "tekenen op de dia aan/uit"},
   "F and F1 only work in the window with the slides. (Browser security restriction.)": {
-    de: "F und F1 funktonieren nur im Fenster mit den Dias. (Browsersicherheitsbeschränkung.)",
-    fr: "F et F1 ne fonctionnent que dans la fenêtre avec les diapo. (Restriction de sécurité du navigateur.)",
+    de: "F und F1 funktonieren nur im Fenster mit den Dias. (BrowsersicherheitsbeschrÃ¤nkung.)",
+    fr: "F et F1 ne fonctionnent que dans la fenÃªtre avec les diapo. (Restriction de sÃ©curitÃ© du navigateur.)",
     nl: "F en F1 werken alleen in het venster met de dia's. (Browser-beveiligingsbeperking.)"},
   "<kbd>Alt</kbd>, <kbd>Option</kbd>": {},
   "(index mode) show URL of slide": {
     de: "(Indexmodus) URL des Dias anzeigen",
     fr: "(en mode index) afficher l'URL de la diapo",
     nl: "(index-modus) toon URL van dia"},
-  "🗊": {},
+  "ðŸ—Š": {},
   "show/hide notes": {
     de: "Notizen anzeigen/ausblenden",
     fr: "Afficher/masquer les notes",
@@ -425,7 +440,7 @@ const translations = {
     nl: "Huidige inhoud (live region)"},
   "Current item: ": {
     de: "Aktuelles Element: ",
-    fr: "Objet actuel : ",
+    fr: "Objet actuelÂ : ",
     nl: "Huidig item: "},
 };
 
@@ -774,14 +789,6 @@ function ignoreEvent(ev)
 /* initClocks -- find and initialize clock elements */
 function initClocks()
 {
-  var t;
-
-  // Get the duration and warn time of the presentation from body.class.
-  for (const c of document.body.classList) {
-    if ((t = c.match(/^duration=(.*)/))) duration =timeToMillisec(t[1],MINUTES);
-    if ((t = c.match(/^warn=(.*)/))) warnTime = timeToMillisec(t[1], MINUTES);
-  }
-
   // Find and remember any clock elements. Turn the live
   // HTMLCollection into a static array for efficiency, because we
   // don't expect new clock elements to be created.
@@ -803,7 +810,7 @@ function initClocks()
 	  '<time><b class=minutes-remaining>00</b>&#x202F;' + _('min') +
 	  '</time>' +
 	  '<button class=timepause>' + _('pause') + '</button>' +
-	  '<button class=timedec>' + _('−1 min') + '</button>' +
+	  '<button class=timedec>' + _('âˆ’1 min') + '</button>' +
 	  '<button class=timeinc>' + _('+1 min') + '</button>' +
 	  '<button class=timereset>' + _('restart') + '</button>');
   }
@@ -816,10 +823,10 @@ function initClocks()
 	  '"><b class=minutes-remaining>00</b>&#x202F;min</time>' +
 	  '<span><span></span></span>' +
 	  '<button class=timepause><span title="' + _('resume') +
-	  '">▶\uFE0E</span><span title="' + _('pause') + '">⏸\uFE0E</span></button>' +
-	  '<button class=timedec title="' + _('−1 min') + '">−1</button>' +
+	  '">â–¶\uFE0E</span><span title="' + _('pause') + '">â¸\uFE0E</span></button>' +
+	  '<button class=timedec title="' + _('âˆ’1 min') + '">âˆ’1</button>' +
 	  '<button class=timeinc title="'  + _('+1 min') + '">+1</button>' +
-	  '<button class=timereset title="' + _('restart') + '">↺</button>');
+	  '<button class=timereset title="' + _('restart') + '">â†º</button>');
   }
 
   // Find all elements that will contain time.
@@ -1518,7 +1525,7 @@ async function toggleFullscreen(onoff)
 	screen: s});
     } catch (err) {
       alert(_("An error occurred while trying to switch into fullscreen mode")
-	  + ' (' + err.message + ' – ' + err.name + ")\n\n" +
+	  + ' (' + err.message + ' â€“ ' + err.name + ")\n\n" +
 	  _("You can try again with the F or F1 key."));
     }
   else if (onoff !== "off")
@@ -1598,7 +1605,7 @@ function createHelpText()
 	  "<tr><td>" + _("<kbd>Alt</kbd>, <kbd>Option</kbd>") +
 	  "<td>" + _("(index mode) show URL of slide") +
           (!slideTiming ? "" :
-              "<tr><td>" + _("<kbd>P</kbd>, <kbd>⏯</kbd>") +
+              "<tr><td>" + _("<kbd>P</kbd>, <kbd>â¯</kbd>") +
 	      "<td>" + _("pause/resume automatic slide show")) +
 	  "<tr><td>" + _("<kbd>N</kbd>") +
 	  "<td>" + _("(screen reader) speak notes/next slide/current element")) +
@@ -3207,7 +3214,7 @@ function addUI()
   playbuttons = document.getElementsByClassName("b6-playbutton");
   if (playbuttons.length == 0) {
     playbutton = document.createElement("button");
-    playbutton.innerHTML = "<span aria-hidden=true>" + _("▶\uFE0E") +
+    playbutton.innerHTML = "<span aria-hidden=true>" + _("â–¶\uFE0E") +
       "</span> <span>" + _("play/<wbr>stop") + "</span>";
     playbutton.setAttribute("class", "b6-playbutton");
     playbutton.setAttribute("title", _("play slides or stop playing"));
@@ -3225,7 +3232,7 @@ function addUI()
     document.getElementsByClassName("b6-secondwindowbutton");
   if (secondwindowbuttons.length == 0) {
     secondwindowbutton = document.createElement("button");
-    secondwindowbutton.innerHTML = "<span aria-hidden=true>" + _("⧉") +
+    secondwindowbutton.innerHTML = "<span aria-hidden=true>" + _("â§‰") +
       "</span> <span>" + _("play in 2nd window") + "</span>";
     secondwindowbutton.setAttribute("class", "b6-secondwindowbutton");
     secondwindowbutton.setAttribute("title",
@@ -3242,7 +3249,7 @@ function addUI()
   prevbuttons = document.getElementsByClassName("b6-prevbutton");
   if (prevbuttons.length == 0) {
     prevbutton = document.createElement("button");
-    prevbutton.innerHTML = "<span aria-hidden=true>" + _("❮") +
+    prevbutton.innerHTML = "<span aria-hidden=true>" + _("â®") +
       "</span> <span>" + _("back") + "</span>";
     prevbutton.setAttribute("class", "b6-prevbutton");
     prevbutton.setAttribute("title", _("previous slide"))
@@ -3256,7 +3263,7 @@ function addUI()
   nextbuttons = document.getElementsByClassName("b6-nextbutton");
   if (nextbuttons.length == 0) {
     nextbutton = document.createElement("button");
-    nextbutton.innerHTML = "<span aria-hidden=true>" + _("❯") +
+    nextbutton.innerHTML = "<span aria-hidden=true>" + _("â¯") +
       "</span> <span>" + _("forward") + "</span>";
     nextbutton.setAttribute("class", "b6-nextbutton");
     nextbutton.setAttribute("title", _("next slide or element"))
@@ -3274,7 +3281,7 @@ function addUI()
     darkmodebuttons = document.getElementsByClassName("b6-darkmodebutton");
     if (darkmodebuttons.length == 0) {
       darkmodebutton = document.createElement("button");
-      darkmodebutton.innerHTML = "<span aria-hidden=true>" + _("◑") +
+      darkmodebutton.innerHTML = "<span aria-hidden=true>" + _("â—‘") +
 	"</span> <span>" + _("dark mode") + "</span>";
       darkmodebutton.setAttribute("class", "b6-darkmodebutton");
       darkmodebutton.setAttribute("title", _("toggle dark mode on/off"));
@@ -3290,7 +3297,7 @@ function addUI()
   commentbuttons = document.getElementsByClassName("b6-commentbutton");
   if (commentbuttons.length == 0) {
     commentbutton = document.createElement("button");
-    commentbutton.innerHTML = "<span aria-hidden=true>" + _("🗊") +
+    commentbutton.innerHTML = "<span aria-hidden=true>" + _("ðŸ—Š") +
       "</span> <span>" + _("notes") + "</span>";
     commentbutton.setAttribute("class", "b6-commentbutton");
     commentbutton.setAttribute("title", _("show/hide notes"));
@@ -3380,6 +3387,10 @@ function checkOptions()
 	console.warn(`"${t[1]}" is not a valid value after "incremental-". Must be one of "symmetric", "reset", "forwardonly" or "freeze". Falling back to "${incrementalsBehavior}".`);
       else
 	incrementalsBehavior = t[1];
+    } else if ((t = c.match(/^duration=(.*)/))) {
+      duration = timeToMillisec(t[1],MINUTES);
+    } else if ((t = c.match(/^warn=(.*)/))) {
+      warnTime = timeToMillisec(t[1], MINUTES);
     } else if (c === 'loop') {
       loopSlideShow = true;
     } else if (c === 'visible-notes') {
@@ -3420,8 +3431,8 @@ function checkIfSecondWindow()
     firstwindow = window.opener;
 
     // Modify the title.
-    document.title = "Drag to 2nd screen, then press F for full screen  |  " +
-      document.title + "  |  b6+";
+    document.title = "Drag to 2nd screen, then press F for full screen Â |Â  " +
+      document.title + " Â |Â  b6+";
 
     // Accessibility hint.
     if (interactive && useApplication)
