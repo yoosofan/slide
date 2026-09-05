@@ -468,74 +468,74 @@ const MINUTES = 60 * 1000;
 const HOURS = 60 * 60 * 1000;
 
 /* Global variables */
-var curslide = null;
-var slidemode = false;		// In slide show mode or normal mode?
-var switchInProgress = false;	// True if waiting for finishToggleMode()
-var incrementals = null;	// Array of incrementally displayed items
-var gesture = {};		// Info about touch/pointer gesture
-var numslides = 0;		// Number of slides
-var stylesToLoad = 0;		// # of load events to wait for
-var limit = 0;			// A time limit used by toggleMode()
-var interactive = true;		// Allow navigating to a different slide?
-var fullmode = false;		// Whether "?full" was in the URL
-var progressElts = [];		// Elements with class=progress
-var slidenumElts = [];		// Elements with class=slidenum
-var numslidesElts = [];		// Elements with class=numslides
-var liveregion = null;		// Element [role=region][aria-live=assertive]
-var slideCopy = [];		// Elements that can be put in liveregion
-var commentCopy = [];		// Elements that can be put in liveregion
-var lastSpoken = SLIDE;		// For the "N" key
-var savedContent = [];		// Initial content of the liveregion
-var noclick = 0;		// If != 0, mouse clicks do not advance slides
-var hideMouseTime = null;	// If set, hide idle mouse pointer after N ms
-var helptext = null;		// List of keyboard and mouse commands
-var toctext = null;		// Table of contents
-var tocItems = [];		// The LI items in the table of contents
-var hideMouseID = null;		// ID of timer to hide the mouse pointer
-var singleClickTimer = null;	// Timeout to distinguish single & double click
-var secondwindow = null;	// Optional second window for slides
-var firstwindow = null;		// The window that opened this one
-var syncmode = false;		// Sync mode
-var syncURL = null;		// URL of sync server
-var eventsource = null;		// Sync server object
-var startTime = 0;		// Start time, used by displayed clocks
-var pauseStartTime = 0;		// 0 = clocks not paused, > 0 = start of pause
-var clockElts = null;		// Elements with class=clock
-var fullclockElts = null;	// Elements with class=fullclock
-var realHoursElts = null;	// Elements with wallclock time: hours
-var realMinutesElts = null;	// Elements with wallclock time: minutes
-var realSecondsElts = null;	// Elements with wallclock time: seconds
-var usedHoursElts = null;	// Elements with used time: hours
-var usedMinutesElts = null;	// Elements with used time: minutes
-var usedSecondsElts = null;	// Elements with used time: seconds
-var leftHoursElts = null;	// Elements with remaining time: hours
-var leftMinutesElts = null;	// Elements with remaining time: minutes
-var leftSecondsElts = null;	// Elements with remaining time: seconds
-var clockTimer = 0;		// Interval timer for clocks
-var duration = 30 * 60 * 1000;	// Default duration of a presentation 30 min
-var warnTime = 5 * 60 * 1000;	// Warn 5 minutes before end of duration
-var language = null;		// Language for localization
-var switchFullscreen = false;	// True = toggle fullscreen but not slide mode
-var hasDarkMode = false;	// Style sheet supports class=darkmode?
-var incrementalsBehavior = "symmetric"; // [Experimental]
-var slideTimer = null;		// Timer for automatically advancing slides
-var slideTiming = 0;		// Default time to advance slides, 0 means off
-var slideTimerPaused = false;	// True = do not advance slides automatically
-var loopSlideShow = false;	// Whether to wrap around to the first slide
-var scale = 1;			// How much to scale a slide to fill the screen
-var canvas = null;		// Canvas for drawing on slides
-var canvasContext = null;	// Drawing context for the canvas
-var canvasX = 0;		// Most recent mouse position on the canvas...
-var canvasY = 0;		// ... used for drawing lines.
-var hoverOverlay = null;	// For showing the URL of a slide in index mode
-var mouseX = 0, mouseY = 0;	// Last known mouse pointer location
-var commentsVisible = true;	// If speaker notes are currently visible
-var commentsWereVisible;	// If notes were visible when 2nd window opened
-var commentsDefault = false;	// If speaker notes should start out visible
-var visibleSlide;		// The last slide used in toggleComments()
-var forceClocks = false;	// Update clocks even when they are paused
-var clocksUpdateRequested = false; // True if a call is queued
-var useApplication = false;	// Whether to set role=application in slide mode
+let curslide = null;
+let slidemode = false; // In slide show mode or normal mode?
+let switchInProgress = false; // True if waiting for finishToggleMode()
+let incrementals = null; // Array of incrementally displayed items
+let gesture = {}; // Info about touch/pointer gesture
+let numslides = 0; // Number of slides
+let stylesToLoad = 0; // # of load events to wait for
+let limit = 0; // A time limit used by toggleMode()
+let interactive = true; // Allow navigating to a different slide?
+let fullmode = false; // Whether "?full" was in the URL
+let progressElts = []; // Elements with class=progress
+let slidenumElts = []; // Elements with class=slidenum
+let numslidesElts = []; // Elements with class=numslides
+let liveregion = null; // Element [role=region][aria-live=assertive]
+let slideCopy = []; // Elements that can be put in liveregion
+let commentCopy = []; // Elements that can be put in liveregion
+let lastSpoken = SLIDE; // For the "N" key
+let savedContent = []; // Initial content of the liveregion
+let noclick = 0; // If != 0, mouse clicks do not advance slides
+let hideMouseTime = null; // If set, hide idle mouse pointer after N ms
+let helptext = null; // List of keyboard and mouse commands
+let toctext = null; // Table of contents
+let tocItems = []; // The LI items in the table of contents
+let hideMouseID = null; // ID of timer to hide the mouse pointer
+let singleClickTimer = null; // Timeout to distinguish single & double click
+let secondwindow = null; // Optional second window for slides
+let firstwindow = null; // The window that opened this one
+let syncmode = false; // Sync mode
+let syncURL = null; // URL of sync server
+let eventsource = null; // Sync server object
+let startTime = 0; // Start time, used by displayed clocks
+let pauseStartTime = 0; // 0 = clocks not paused, > 0 = start of pause
+let clockElts = null; // Elements with class=clock
+let fullclockElts = null; // Elements with class=fullclock
+let realHoursElts = null; // Elements with wallclock time: hours
+let realMinutesElts = null; // Elements with wallclock time: minutes
+let realSecondsElts = null; // Elements with wallclock time: seconds
+let usedHoursElts = null; // Elements with used time: hours
+let usedMinutesElts = null; // Elements with used time: minutes
+let usedSecondsElts = null; // Elements with used time: seconds
+let leftHoursElts = null; // Elements with remaining time: hours
+let leftMinutesElts = null; // Elements with remaining time: minutes
+let leftSecondsElts = null; // Elements with remaining time: seconds
+let clockTimer = 0; // Interval timer for clocks
+let duration = 30 * 60 * 1000; // Default duration of a presentation 30 min
+let warnTime = 5 * 60 * 1000; // Warn 5 minutes before end of duration
+let language = null; // Language for localization
+let switchFullscreen = false; // True = toggle fullscreen but not slide mode
+let hasDarkMode = false; // Style sheet supports class=darkmode?
+let incrementalsBehavior = "symmetric"; // [Experimental]
+let slideTimer = null; // Timer for automatically advancing slides
+let slideTiming = 0; // Default time to advance slides, 0 means off
+let slideTimerPaused = false; // True = do not advance slides automatically
+let loopSlideShow = false; // Whether to wrap around to the first slide
+let scale = 1; // How much to scale a slide to fill the screen
+let canvas = null; // Canvas for drawing on slides
+let canvasContext = null; // Drawing context for the canvas
+let canvasX = 0; // Most recent mouse position on the canvas...
+let canvasY = 0; // ... used for drawing lines.
+let hoverOverlay = null; // For showing the URL of a slide in index mode
+let mouseX = 0, mouseY = 0; // Last known mouse pointer location
+let commentsVisible = true; // If speaker notes are currently visible
+let commentsWereVisible; // If notes were visible when 2nd window opened
+let commentsDefault = false; // If speaker notes should start out visible
+let visibleSlide; // The last slide used in toggleComments()
+let forceClocks = false; // Update clocks even when they are paused
+let clocksUpdateRequested = false; // True if a call is queued
+let useApplication = false; // Whether to set role=application in slide mode
 
 
 /* _ -- return translation for text, or text, if none is available */
