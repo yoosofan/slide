@@ -548,7 +548,7 @@ function _(text)
 /* setStyle -- set/unset multiple properties in an element's style attribute */
 function setStyle(elt, ...decls)
 {
-  var i, j, r = "", p;
+  let i, j, r = "", p;
 
   // The decls alternate property names and values. To remove a
   // property, pass an empty string or null as its value.
@@ -581,7 +581,7 @@ function setStyle(elt, ...decls)
 /* generateID -- make sure elt has a unique ID */
 function generateID(elt, slide)
 {
-  var base, nextid = 0;			// For generating unique IDs
+  let base, nextid = 0;			// For generating unique IDs
 
   /* This doesn't guarantee that elt has a unique ID, but only that it
    * is the first element in the document that has this ID. Which
@@ -597,7 +597,7 @@ function generateID(elt, slide)
 /* cloneNodeClean -- deep clone a node, without any attributes except lang */
 function cloneNodeClean(elt)
 {
-  var clone, a, h;
+  let clone, a, h;
 
   // The clone is only used for speaking by a screen reader, for which
   // it may be put in a live region. Nothing in the clone should ever
