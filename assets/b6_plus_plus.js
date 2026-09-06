@@ -620,7 +620,7 @@ function cloneNodeClean(elt)
 /* updateClocks -- update clock elements */
 function updateClocks()
 {
-  var now, s0, m0, h0, s1, m1, h1, s2, m2, h2, used, left, factor;
+  let now, s0, m0, h0, s1, m1, h1, s2, m2, h2, used, left, factor;
 
   // This function is called in an animation frame, set by
   // requestClocksUpdate().
@@ -2391,7 +2391,7 @@ function toggleDarkMode(onoff)
   /* timeToMillisec -- convert MM:SS, DDs, DDm and DDh, etc. to milliseconds */
 function timeToMillisec(s, unit)
 {
-  var m;
+  let m;
 
   // If no unit specified, xx:xx means minutes & seconds and xx means minutes.
   if (! unit) unit = SECONDS;
