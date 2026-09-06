@@ -874,7 +874,7 @@ function initClocks()
 /* initIncrementals -- find incremental elements in current slide */
 function initIncrementals()
 {
-  var e = curslide;
+  let e = curslide;
 
   // Collect all incremental elements into array incrementals.
   //
