@@ -1042,7 +1042,7 @@ function numberSlides()
 /* scaleImagesIfNeeded -- maybe shrink images with class=autosize */
 function scaleImagesIfNeeded(slide)
 {
-  var height, images, heights = [], f1, f2, f, saveHeight, saveMaxHeight;
+  let height, images, heights = [], f1, f2, f, saveHeight, saveMaxHeight;
 
   // Only handle slides that consist of one element.
   // TODO: Also handle other styles of markup.
@@ -1098,7 +1098,7 @@ function scaleImagesIfNeeded(slide)
 /* scaleFontIfNeeded -- if the slide has class=textfit, maybe shrink the font */
 function scaleFontIfNeeded(slide)
 {
-  var height, f, f1, f2, wrapper, saveHeight, saveMaxHeight;
+  let height, f, f1, f2, wrapper, saveHeight, saveMaxHeight;
 
   // The slide only needs to be checked if it has class=textfit or if
   // the body has that class. And then only if the slide is one
@@ -2151,7 +2151,7 @@ function toggleMedia()
 /* scaleBody -- if the BODY has a fixed size, scale it to fit the window */
 function scaleBody()
 {
-  var w, h, w2, h2, save;
+  let w, h, w2, h2, save;
 
   requestAnimationFrame(() => {
     if (!slidemode) return;	// In case the slide show just ended
@@ -2177,7 +2177,7 @@ function scaleBody()
 /* shrinkWindow -- give the 2nd window the same aspect ratio as the slides */
 function shrinkWindow()
 {
-  var r, w, h, safari_fix;
+  let r, w, h, safari_fix;
 
   // Only do somthing if this is a 2nd window, the body has a definite
   // height, and we're not in fullscreen mode.
@@ -2412,7 +2412,7 @@ function timeToMillisec(s, unit)
 /* scrollSlide -- ensure visible incrementals are above the bottom */
 function scrollSlide()
 {
-  var compStyle, i, h, border, pad, bottom;
+  let compStyle, i, h, border, pad, bottom;
 
   // Get the bottom of the current slide and the bottom padding and border.
   bottom = curslide.getBoundingClientRect().bottom;
