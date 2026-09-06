@@ -969,7 +969,7 @@ function isStartOfSlide(elt)
 /* updateProgress -- update the progress bars and slide numbers, if any */
 function updateProgress()
 {
-  var p = curslide.b6slidenum / numslides;
+  let p = curslide.b6slidenum / numslides;
 
   /* Set the width of the progress bars */
   for (const e of progressElts) e.style.width = 100 * p + "%";
@@ -1012,7 +1012,7 @@ function initProgress()
 /* numberSlides -- count slides, number them, and make sure they have IDs */
 function numberSlides()
 {
-  var s;
+  let s;
 
   // Count slides and make sure all slides have an ID.
   numslides = 0;
@@ -1656,7 +1656,7 @@ function help()
 /* getSlideTitle -- get the title of the slide that starts at elt */
 function getSlideTitle(elt)
 {
-  var title;
+  let title;
 
   if (elt.nodeType == 1 && elt.nodeName.match(/^H[1-6]$/))
     return elt.innerHTML;
