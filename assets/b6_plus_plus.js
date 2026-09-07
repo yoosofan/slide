@@ -1372,7 +1372,7 @@ function speakIt(text, elts)
 /* speak -- set the live region to the slide content or the speaker notes */
 function speak(what)
 {
-  var h, next, elts = [];
+  let h, next, elts = [];
 
   // NEXT is not expected as argument.
   console.assert(what === SLIDE || what === COMMENT || what === TOGGLE ||
