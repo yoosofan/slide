@@ -2434,7 +2434,7 @@ function scrollSlide()
 /* nextSlideOrElt -- next incremental element or next slide if none */
 function nextSlideOrElt()
 {
-  var m;
+  let m;
 
   console.assert(slidemode);
 
@@ -2486,7 +2486,7 @@ function nextSlideOrElt()
 /* nextSlide -- display the next slide, if any */
 function nextSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2546,7 +2546,7 @@ function previousSlideOrElt()
 /* previousSlide -- display the next slide, if any */
 function previousSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2571,7 +2571,7 @@ function previousSlide()
 /* firstSlide -- display the first slide */
 function firstSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2585,7 +2585,7 @@ function firstSlide()
 /* lastSlide -- display the last slide */
 function lastSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2599,7 +2599,7 @@ function lastSlide()
 /* findSlide -- find the slide with the ID or the number "target" */
 function findSlide(target)
 {
-  var h, n;
+  let h, n;
 
   if ((h = document.getElementById(target)))
     /* Find enclosing .slide or preceding start of slide */
@@ -2616,7 +2616,7 @@ function findSlide(target)
 /* targetSlide -- display slide containing ID=target, or the target'th slide */
 function targetSlide(target)
 {
-  var h;
+  let h;
 
   h = findSlide(target)
   /* If found, and it is not already displayed, display it */
