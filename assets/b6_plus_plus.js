@@ -1509,7 +1509,7 @@ function makeCurrent(elt)
 /* toggleFullscreen -- toggle fullscreen or turn it on ("on") or off ("off") */
 async function toggleFullscreen(onoff)
 {
-  var s, x;
+  let s, x;
 
   switchFullscreen = true;	// For the fullscreenchange event handler
 
