@@ -1306,7 +1306,7 @@ function unhideElement(elt)
 /* hideSlide -- make a slide invisible, return last element made invisible */
 function hideSlide(elt)
 {
-  var h;
+  let h;
 
   // Unlike hideElement(), hideSlide() only sets 'visibility: hidden'
   // and 'position: absolute'. We assume that the slide is not bigger
@@ -1332,7 +1332,7 @@ function hideSlide(elt)
 /* unhideSlide -- make a (previously hidden) slide visible */
 function unhideSlide(elt)
 {
-  var h;
+  let h;
 
   console.assert(typeof(elt.b6savedstyle) === "string");
   console.assert(isStartOfSlide(elt));
