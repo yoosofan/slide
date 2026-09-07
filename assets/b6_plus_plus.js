@@ -2627,7 +2627,7 @@ function targetSlide(target)
 /* mouseButtonClick -- handle mouse click event */
 function mouseButtonClick(e)
 {
-  var target = e.target;
+  let target = e.target;
 
   if (noclick) return;
   if (e.button != 0 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
@@ -2692,8 +2692,8 @@ function gestureMove(e)
     gesture.y2 = e.touches[0].clientY;
 
     /* Give some visual feedback: */
-    var dx = Math.abs(gesture.x2 - gesture.x1);
-    var dy = Math.abs(gesture.y2 - gesture.y1);
+    let dx = Math.abs(gesture.x2 - gesture.x1);
+    let dy = Math.abs(gesture.y2 - gesture.y1);
     if (gesture.touches != 1)
       document.body.style.opacity = gesture.opacity;
     else if (dx > dy)
@@ -2714,8 +2714,8 @@ function gestureEnd(e)
     if (slidemode)
       document.body.style.opacity = gesture.opacity;
 
-    var dx = gesture.x2 - gesture.x1;
-    var dy = gesture.y2 - gesture.y1;
+    let dx = gesture.x2 - gesture.x1;
+    let dy = gesture.y2 - gesture.y1;
 
     if (gesture.touches > 2) {		// 3-finger gesture
       if (syncmode) warnSyncMode();
@@ -2765,7 +2765,7 @@ function gestureCancel(ev)	// eslint-disable-line no-unused-vars
 /* doubleClick -- handle a double click on the body */
 function doubleClick(event)
 {
-  var h;
+  let h;
 
   if (event.button != 0 || event.altKey || event.ctrlKey ||
       event.metaKey || event.shiftKey) return;
