@@ -2244,7 +2244,7 @@ function finishToggleMode()
 /* toggleMode -- toggle between slide show and normal display */
 function toggleMode()
 {
-  var h;
+  let h;
 
   /* Do nothing if we are still in the process of switching to slide mode */
   if (switchInProgress) return;
@@ -2349,7 +2349,7 @@ function toggleModeAndFullscreen()
 /* toggleDarkMode -- add, remove or toggle darkmode/lightmode on the BODY */
 function toggleDarkMode(onoff)
 {
-  var darkmodeIsOn, lightmodeIsOn;
+  let darkmodeIsOn, lightmodeIsOn;
 
   if (! hasDarkMode) return;
 
