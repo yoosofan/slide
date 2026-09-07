@@ -1539,7 +1539,7 @@ async function toggleFullscreen(onoff)
 /* createHelpText -- fill the helptext element with help text */
 function createHelpText()
 {
-  var iframe, button;
+  let iframe, button;
 
   /* Put the help text in an IFRAME so it is not affected by the slide style */
   iframe = document.createElement('iframe');
