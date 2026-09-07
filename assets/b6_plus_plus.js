@@ -1439,7 +1439,7 @@ function speak(what)
 /* displaySlide -- make the current slide visible */
 function displaySlide()
 {
-  var h, m;
+  let h, m;
 
   /* curslide has class=slide, page-break-before=always or is an H1 */
   unhideSlide(curslide);
@@ -1480,7 +1480,7 @@ function displaySlide()
 /* undisplaySlide -- make the current slide invisible */
 function undisplaySlide()
 {
-  var h;
+  let h;
 
   if (!curslide) return;
 
