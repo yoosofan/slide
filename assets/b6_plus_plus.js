@@ -1672,7 +1672,7 @@ function getSlideTitle(elt)
 /* createTOCText -- fill the toctext element with the table of contents */
 function createTOCText()
 {
-  var button, ol;
+  let button, ol;
 
   /* Collect the titles of all slides and make them A elements inside LI. */
   ol = document.createElement("ol");
