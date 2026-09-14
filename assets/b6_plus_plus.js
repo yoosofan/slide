@@ -3462,7 +3462,7 @@ function showURL()
   // This shows the URL of the slide that the mouse is over, but only
   // when the Alt key is pressed and only in index mode.
   //
-  var url, button, span, h;
+  let url, button, span, h;
 
   console.assert(!slidemode);
 
