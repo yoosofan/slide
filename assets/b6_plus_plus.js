@@ -2091,16 +2091,16 @@ function load(e)
 /* toggleMedia -- swap styles for projection and screen */
 function toggleMedia()
 {
-  var i, h, s, links, styles;
+  let i, h, s, links, styles;
 
-  var re1 = /\(\s*overflow-block\s*:\s*(optional-)?paged\s*\)/gi;
-  var sub1 = "(overflow-block: scroll)";
-  var re2 = /\(\s*overflow-block\s*:\s*scroll\s*\)/gi;
-  var sub2 = "(overflow-block: paged)";
-  var re3 = /\bprojection\b/gi;
-  var sub3 = "screen";
-  var re4 = /\bscreen\b/gi;
-  var sub4 = "projection";
+  let re1 = /\(\s*overflow-block\s*:\s*(optional-)?paged\s*\)/gi;
+  let sub1 = "(overflow-block: scroll)";
+  let re2 = /\(\s*overflow-block\s*:\s*scroll\s*\)/gi;
+  let sub2 = "(overflow-block: paged)";
+  let re3 = /\bprojection\b/gi;
+  let sub3 = "screen";
+  let re4 = /\bscreen\b/gi;
+  let sub4 = "projection";
 
   /* Swap projection and screen in MEDIA attributes of LINK elements */
   links = document.getElementsByTagName("link");
