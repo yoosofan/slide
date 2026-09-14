@@ -3567,7 +3567,7 @@ function toggleComments()
 /* trackVisibleSlides -- keep track of which slides are in the viewport */
 function trackVisibleSlides()
 {
-  var observer;
+  let observer;
 
   // Slides that are visible have b6IsInViewport set to true. This is
   // used in toggleComments() to scroll the document to approximately
