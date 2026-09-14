@@ -3342,7 +3342,7 @@ function addUI()
 /* checkURL -- process query parameters ("full", "static" and "sync") */
 function checkURL()
 {
-  var h;
+  let h;
 
   const params = new URLSearchParams(location.search);
   if (params.get("full") != null) fullmode = true;
@@ -3355,7 +3355,7 @@ function checkURL()
 /* checkIfFramed -- if we're inside an iframe, add target=_parent to links */
 function checkIfFramed()
 {
-  var anchors, i;
+  let anchors, i;
 
   if (window.parent != window) { // Only if we're not the top document
     anchors = document.getElementsByTagName('a');
@@ -3374,7 +3374,7 @@ function checkIfFramed()
 /* checkOptions -- look for b6plus options in the class attribute on body */
 function checkOptions()
 {
-  var c, t;
+  let c, t;
 
   for (c of document.body.classList)
     if (c === 'noclick') {
@@ -3407,7 +3407,7 @@ function checkOptions()
 /* initLanguage -- determine the language to localize to */
 function initLanguage()
 {
-  var i;
+  let i;
 
   // Get language from the HTML element, default to en-us
   language = (document.documentElement.getAttribute("lang") ?? "en-us")
