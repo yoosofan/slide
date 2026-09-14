@@ -1804,7 +1804,7 @@ function warnFullscreen()
 /* warningBanner -- briefly show a banner with a warning */
 function warningBanner(...content)
 {
-  var banner;
+  let banner;
 
   banner = document.createElement("div");
   banner.style = "position: fixed; left: 0; right: 0; z-index: 2;\
