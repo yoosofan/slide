@@ -2807,7 +2807,7 @@ function doubleClick(event)
 /* hashchange -- handle fragment id event, make target slide the current one */
 function hashchange(ev)		// eslint-disable-line no-unused-vars
 {
-  var e;
+  let e;
 
   if (!location.hash) return;
   if (slidemode)
@@ -2828,7 +2828,7 @@ function hashchange(ev)		// eslint-disable-line no-unused-vars
 /* message -- handle a postMessage */
 function message(e)
 {
-  var newEvent, h;
+  let newEvent, h;
 
   if (e.source == firstwindow)	// Message from 1st window to 2nd
 
