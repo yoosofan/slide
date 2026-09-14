@@ -3514,8 +3514,8 @@ function showURL()
 /* toggleComments -- hide or show comments (speaker notes) after slides */
 function toggleComments()
 {
-  var e, fragment, after = false;
-  var oldrect, newrect;
+  let e, fragment, after = false;
+  let oldrect, newrect;
 
   // Get the position in the viewport of one of the slides that is
   // visible in the viewport, so we can scroll the page to the same
