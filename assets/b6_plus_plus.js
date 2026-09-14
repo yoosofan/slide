@@ -1742,7 +1742,7 @@ function tableOfContents()
 /* openSecondWindow -- open a 2nd window with the same slides */
 function openSecondWindow()
 {
-  var url;
+  let url;
 
   console.assert(!firstwindow);	// We're on the first window
 
