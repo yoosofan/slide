@@ -3194,7 +3194,7 @@ function initDarkMode()
 /* addUI -- add buttons for slide mode and help */
 function addUI()
 {
-  var playbutton, secondwindowbutton, helpbutton, prevbutton, nextbutton,
+  let playbutton, secondwindowbutton, helpbutton, prevbutton, nextbutton,
       darkmodebutton, commentbutton, div, playbuttons, secondwindowbuttons,
       helpbuttons, prevbuttons, nextbuttons, darkmodebuttons, commentbuttons;
 
