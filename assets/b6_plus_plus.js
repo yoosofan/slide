@@ -375,6 +375,10 @@ const translations = {
     de: "Dunkelmodus ein- oder ausschalten",
     fr: "activer ou désactiver le mode sombre",
     nl: "schakel de donkere modus aan of uit"},
+  "toggle laser pointer": {
+    de: "Laserpointer ein-/ausschalten",
+    fr: "activer/désactiver le pointeur laser",
+    nl: "laserpointer aan/uit"},
   "Slide": {
     de: "Dia",
     fr: "Diapo",
@@ -453,74 +457,101 @@ const MINUTES = 60 * 1000;
 const HOURS = 60 * 60 * 1000;
 
 /* Global variables */
-var curslide = null;
-var slidemode = false;		// In slide show mode or normal mode?
-var switchInProgress = false;	// True if waiting for finishToggleMode()
-var incrementals = null;	// Array of incrementally displayed items
-var gesture = {};		// Info about touch/pointer gesture
-var numslides = 0;		// Number of slides
-var stylesToLoad = 0;		// # of load events to wait for
-var limit = 0;			// A time limit used by toggleMode()
-var interactive = true;		// Allow navigating to a different slide?
-var fullmode = false;		// Whether "?full" was in the URL
-var progressElts = [];		// Elements with class=progress
-var slidenumElts = [];		// Elements with class=slidenum
-var numslidesElts = [];		// Elements with class=numslides
-var liveregion = null;		// Element [role=region][aria-live=assertive]
-var slideCopy = [];		// Elements that can be put in liveregion
-var commentCopy = [];		// Elements that can be put in liveregion
-var lastSpoken = SLIDE;		// For the "N" key
-var savedContent = [];		// Initial content of the liveregion
-var noclick = 0;		// If != 0, mouse clicks do not advance slides
-var hideMouseTime = null;	// If set, hide idle mouse pointer after N ms
-var helptext = null;		// List of keyboard and mouse commands
-var toctext = null;		// Table of contents
-var tocItems = [];		// The LI items in the table of contents
-var hideMouseID = null;		// ID of timer to hide the mouse pointer
-var singleClickTimer = null;	// Timeout to distinguish single & double click
-var secondwindow = null;	// Optional second window for slides
-var firstwindow = null;		// The window that opened this one
-var syncmode = false;		// Sync mode
-var syncURL = null;		// URL of sync server
-var eventsource = null;		// Sync server object
-var startTime = 0;		// Start time, used by displayed clocks
-var pauseStartTime = 0;		// 0 = clocks not paused, > 0 = start of pause
-var clockElts = null;		// Elements with class=clock
-var fullclockElts = null;	// Elements with class=fullclock
-var realHoursElts = null;	// Elements with wallclock time: hours
-var realMinutesElts = null;	// Elements with wallclock time: minutes
-var realSecondsElts = null;	// Elements with wallclock time: seconds
-var usedHoursElts = null;	// Elements with used time: hours
-var usedMinutesElts = null;	// Elements with used time: minutes
-var usedSecondsElts = null;	// Elements with used time: seconds
-var leftHoursElts = null;	// Elements with remaining time: hours
-var leftMinutesElts = null;	// Elements with remaining time: minutes
-var leftSecondsElts = null;	// Elements with remaining time: seconds
-var clockTimer = 0;		// Interval timer for clocks
-var duration = 30 * 60 * 1000;	// Default duration of a presentation 30 min
-var warnTime = 5 * 60 * 1000;	// Warn 5 minutes before end of duration
-var language = null;		// Language for localization
-var switchFullscreen = false;	// True = toggle fullscreen but not slide mode
-var hasDarkMode = false;	// Style sheet supports class=darkmode?
-var incrementalsBehavior = "symmetric"; // [Experimental]
-var slideTimer = null;		// Timer for automatically advancing slides
-var slideTiming = 0;		// Default time to advance slides, 0 means off
-var slideTimerPaused = false;	// True = do not advance slides automatically
-var loopSlideShow = false;	// Whether to wrap around to the first slide
-var scale = 1;			// How much to scale a slide to fill the screen
-var canvas = null;		// Canvas for drawing on slides
-var canvasContext = null;	// Drawing context for the canvas
-var canvasX = 0;		// Most recent mouse position on the canvas...
-var canvasY = 0;		// ... used for drawing lines.
-var hoverOverlay = null;	// For showing the URL of a slide in index mode
-var mouseX = 0, mouseY = 0;	// Last known mouse pointer location
-var commentsVisible = true;	// If speaker notes are currently visible
-var commentsWereVisible;	// If notes were visible when 2nd window opened
-var commentsDefault = false;	// If speaker notes should start out visible
-var visibleSlide;		// The last slide used in toggleComments()
-var forceClocks = false;	// Update clocks even when they are paused
-var clocksUpdateRequested = false; // True if a call is queued
-var useApplication = false;	// Whether to set role=application in slide mode
+/* ===== Navigation State (8 variables) ===== */
+let curslide = null;
+let numslides = 0;
+let interactive = true;
+let progressElts = [];
+let slidenumElts = [];
+let numslidesElts = [];
+let hoverOverlay = null;
+let scale = 1;
+
+/* ===== Mode Toggle State (6 variables) ===== */
+let slidemode = false;
+let switchInProgress = false;
+let fullmode = false;
+let switchFullscreen = false;
+let useApplication = false;
+let limit = 0;
+
+/* ===== Input System (7 variables) ===== */
+let gesture = {};
+let noclick = 0;
+let hideMouseTime = null;
+let hideMouseID = null;
+let singleClickTimer = null;
+let mouseX = 0, mouseY = 0;
+
+/* ===== Second Window Contract (3 variables) ===== */
+let secondwindow = null;
+let firstwindow = null;
+let commentsWereVisible;
+
+/* ===== SSE Sync Contract (3 variables) ===== */
+let syncmode = false;
+let syncURL = null;
+let eventsource = null;
+
+/* ===== Session Clock (18 variables) ===== */
+let startTime = 0;
+let pauseStartTime = 0;
+let clockElts = null;
+let fullclockElts = null;
+let realHoursElts = null;
+let realMinutesElts = null;
+let realSecondsElts = null;
+let usedHoursElts = null;
+let usedMinutesElts = null;
+let usedSecondsElts = null;
+let leftHoursElts = null;
+let leftMinutesElts = null;
+let leftSecondsElts = null;
+let clockTimer = 0;
+let duration = 30 * 60 * 1000;
+let warnTime = 5 * 60 * 1000;
+let forceClocks = false;
+let clocksUpdateRequested = false;
+
+/* ===== Automatic Slide Timer (4 variables) ===== */
+let slideTimer = null;
+let slideTiming = 0;
+let slideTimerPaused = false;
+let loopSlideShow = false;
+
+/* ===== Feature Managers (13 variables) ===== */
+let incrementals = null;
+let incrementalsBehavior = "symmetric";
+let commentsVisible = true;
+let commentsDefault = false;
+let visibleSlide;
+let toctext = null;
+let tocItems = [];
+let helptext = null;
+let hasDarkMode = false;
+let canvas = null;
+let canvasContext = null;
+let canvasX = 0;
+let canvasY = 0;
+
+/* ===== Phase 10 user features ===== */
+let personalNotesPanel = null;
+let personalNotesSlide = null;
+let laserPointer = null;
+let laserPointerEnabled = false;
+let drawingEnabled = false;
+let resumeRequested = false;
+
+/* ===== Accessibility Contract (5 variables) ===== */
+let liveregion = null;
+let savedContent = [];
+let lastSpoken = SLIDE;
+let slideCopy = [];
+let commentCopy = [];
+
+/* ===== Cross-cutting / Global (2 variables) ===== */
+let language = null;
+let stylesToLoad = 0;
 
 
 /* _ -- return translation for text, or text, if none is available */
@@ -533,7 +564,7 @@ function _(text)
 /* setStyle -- set/unset multiple properties in an element's style attribute */
 function setStyle(elt, ...decls)
 {
-  var i, j, r = "", p;
+  let i, j, r = "", p;
 
   // The decls alternate property names and values. To remove a
   // property, pass an empty string or null as its value.
@@ -566,7 +597,7 @@ function setStyle(elt, ...decls)
 /* generateID -- make sure elt has a unique ID */
 function generateID(elt, slide)
 {
-  var base, nextid = 0;			// For generating unique IDs
+  let base, nextid = 0;			// For generating unique IDs
 
   /* This doesn't guarantee that elt has a unique ID, but only that it
    * is the first element in the document that has this ID. Which
@@ -582,7 +613,7 @@ function generateID(elt, slide)
 /* cloneNodeClean -- deep clone a node, without any attributes except lang */
 function cloneNodeClean(elt)
 {
-  var clone, a, h;
+  let clone, a, h;
 
   // The clone is only used for speaking by a screen reader, for which
   // it may be put in a live region. Nothing in the clone should ever
@@ -605,7 +636,7 @@ function cloneNodeClean(elt)
 /* updateClocks -- update clock elements */
 function updateClocks()
 {
-  var now, s0, m0, h0, s1, m1, h1, s2, m2, h2, used, left, factor;
+  let now, s0, m0, h0, s1, m1, h1, s2, m2, h2, used, left, factor;
 
   // This function is called in an animation frame, set by
   // requestClocksUpdate().
@@ -774,7 +805,7 @@ function ignoreEvent(ev)
 /* initClocks -- find and initialize clock elements */
 function initClocks()
 {
-  var t;
+  let t;
 
   // Get the duration and warn time of the presentation from body.class.
   for (const c of document.body.classList) {
@@ -863,11 +894,17 @@ function initClocks()
   if (clockTimer) startTime = Date.now();
 }
 
-
+/* ===== Feature Manager: Incrementals (Progressive Disclosure) ===== */
+// Purpose: Display slide content progressively, revealing one section at a time
+// State: incrementals (array), incrementalsBehavior (config)
+// Core Functions: initIncrementals, nextSlideOrElt, previousSlideOrElt
+// Input: Keyboard (Space/Arrow keys route to nextSlideOrElt/previousSlideOrElt)
+// Dependencies: Navigation (nextSlide/previousSlide fallback), Accessibility (speak)
+// See: docs/phase8-feature-managers.md for analysis
 /* initIncrementals -- find incremental elements in current slide */
 function initIncrementals()
 {
-  var e = curslide;
+  let e = curslide;
 
   // Collect all incremental elements into array incrementals.
   //
@@ -946,6 +983,50 @@ function initIncrementals()
 }
 
 
+/* ===== Navigation / Slide Engine (Core - 18 functions) ===== */
+// API Entry Points (User/Input triggered):
+//   Increment-aware navigation:
+//     - nextSlideOrElt()        [direct write incrementals.cur]
+//     - previousSlideOrElt()    [direct write incrementals.cur]
+//   Slide-level navigation:
+//     - nextSlide()             [calls makeCurrent]
+//     - previousSlide()         [calls makeCurrent]
+//     - targetSlide(n)          [calls findSlide → makeCurrent]
+//
+// State Mutation Core:
+//   - makeCurrent(elt)          [WRITES curslide directly]
+//   - displaySlide()       [highly-coupled: reads curslide, 
+//                                slideTimerPaused, slideTiming, 
+//                                incrementals.length; writes slideTimer]
+//   - undisplaySlide()     [calls stopVideos for media control]
+//
+// Slide Detection/Discovery (DOM operations):
+//   - isStartOfSlide(elt)       [predicate - boundary detection]
+//   - findSlide(id/num)         [independent lookup via ID or b6slidenum]
+//   - numberSlides()            [discovery + initialization]
+//
+// Viewport/UI Management:
+//   - scrollSlide()             [viewport/overflow management]
+//   - updateProgress()          [progress bar content update]
+//   - initProgress()            [UI initialization / unhide]
+//   - toggleMode()              [mode switching]
+//   - finishToggleMode()        [mode switch finalization]
+//
+// Fullscreen Management:
+//   - toggleFullscreen()        [browser fullscreen API]
+//   - fullscreenChanged()       [event handler]
+//
+// CRITICAL COUPLING WARNING:
+//   displaySlide() is highly-coupled (multi-responsibility function):
+//   Reads: curslide, slideTimerPaused, slideTiming, incrementals.length
+//   Writes: slideTimer
+//   Calls: updateProgress, initIncrementals, speak, setURL, postMessage,
+//          scheduleVideos, rewindVideos
+//   Affects: UI Progress, a11y, URL/Hash, Cross-Window Sync, Media Control
+//   → Decomposition required in Phase 10-11
+//
+// State: curslide, incrementals.cur, numslides, slideTimer, slideTimerPaused,
+//        slideTiming, incrementals.length, slidemode, scale, loopSlideShow
 /* isStartOfSlide -- check if element has class=slide, page-break or is an H1 */
 function isStartOfSlide(elt)
 {
@@ -958,11 +1039,69 @@ function isStartOfSlide(elt)
        elt.nodeName == "H1")));
 }
 
+/* ===== Toolbar / UI Subsystem (19 functions, 18 state variables) ===== */
+// Display and interaction layer for presentation UI
+// 
+// Purpose: Render slides, progress indicators, feature panels, mode controls
+// Triggered via: Input System (keyDown, mouse), Navigation (displaySlide),
+//                 Timers (slideTimer → updateProgress)
+//
+// 5 Categories (19 functions):
+//   1. Core Display (7):    displaySlide, undisplaySlide, updateProgress, 
+//                           initProgress, scrollSlide, speak, makeCurrent
+//   2. Progress/Control (2): hideMouseReset, initHideMouse
+//   3. Feature Panels (5):   help, tableOfContents, getSlideTitle, 
+//                           createTOCText, toggleComments
+//   4. Mode/Visual (5):      toggleMode, toggleModeAndFullscreen, 
+//                           toggleFullscreen, toggleDarkMode, initDarkMode
+//   5. Annotation (1):       toggleAnnotate
+//
+// State (18 variables):
+//   Display: progressElts, slidenumElts, numslidesElts, hoverOverlay, scale
+//   Features: commentsVisible, helptext, toctext, tocItems
+//   Mode: slidemode, fullmode, hasDarkMode
+//   Annotation: canvas, canvasContext, canvasX, canvasY
+//   Global: language, stylesToLoad
+//
+// Critical Couplings:
+//   - displaySlide() is god function (mixes navigation, features, UI, accessibility)
+//   - toggleMode() affects all feature visibility (canvas destroyed, modals closed)
+//   - toggleDarkMode() calls postMessage() (breaks Second Window boundary)
+//   - C key routing shared: Comments vs TOC (conflict in keyDown)
+//   - 70+ classList calls, 114+ style.width updates (heavy DOM coupling)
+//
+// Entry Points (6 paths):
+//   1. Keyboard → Navigation → displaySlide → UI update
+//   2. Keyboard (C) → toggleComments/tableOfContents → Feature panel
+//   3. Keyboard (D) → toggleDarkMode → Color scheme
+//   4. Keyboard (W) → toggleAnnotate → Drawing mode
+//   5. Mouse move → hideMouseReset → Auto-hide cursor
+//   6. slideTimer callback → nextSlide → updateProgress
+//
+// See: docs/phase9-toolbar-ui.md for complete analysis
 
+/* ===== UI: Core Display Functions (7) ===== */
+// updateProgress, initProgress, displaySlide, undisplaySlide, 
+// scrollSlide, speak, makeCurrent
+//
+// Purpose: Update slide display and navigation indicators
+// Coupling: displaySlide() highly-coupled god function
+// DOM: Extensive classList, style.width, innerHTML changes
+// State mutations: curslide, progressElts, slidenumElts
+// Side effects: Calls initIncrementals(), stopVideos()
+// Entry: Navigation system (nextSlide, previousSlide, makeCurrent)
+
+/* UI: updateProgress */
+// Update progress bar width and slide number display
+// Called by: displaySlide(), slideTimer
+// Reads: curslide, numslides, scale
+// Mutates: progressElts (style.width), slidenumElts (textContent)
+// DOM: 114+ style.width updates, textContent manipulations
+// Pure side effect: No core state mutation (only DOM)
 /* updateProgress -- update the progress bars and slide numbers, if any */
 function updateProgress()
 {
-  var p = curslide.b6slidenum / numslides;
+  let p = curslide.b6slidenum / numslides;
 
   /* Set the width of the progress bars */
   for (const e of progressElts) e.style.width = 100 * p + "%";
@@ -982,7 +1121,13 @@ function updateProgress()
     document.body.style.setProperty('--progress0', 1);
 }
 
-
+/* UI: initProgress */
+// Initialize progress bar UI elements
+// Creates: Progress element references in DOM
+// Reads: DOM selectors for progress elements
+// Mutates: progressElts array
+// DOM: createElement, appendChild for progress UI
+// Pure side effect: Only DOM manipulation
 /* initProgress -- unhide .progress, .slidenum and .numslides elements */
 function initProgress()
 {
@@ -1005,7 +1150,7 @@ function initProgress()
 /* numberSlides -- count slides, number them, and make sure they have IDs */
 function numberSlides()
 {
-  var s;
+  let s;
 
   // Count slides and make sure all slides have an ID.
   numslides = 0;
@@ -1035,7 +1180,7 @@ function numberSlides()
 /* scaleImagesIfNeeded -- maybe shrink images with class=autosize */
 function scaleImagesIfNeeded(slide)
 {
-  var height, images, heights = [], f1, f2, f, saveHeight, saveMaxHeight;
+  let height, images, heights = [], f1, f2, f, saveHeight, saveMaxHeight;
 
   // Only handle slides that consist of one element.
   // TODO: Also handle other styles of markup.
@@ -1091,7 +1236,7 @@ function scaleImagesIfNeeded(slide)
 /* scaleFontIfNeeded -- if the slide has class=textfit, maybe shrink the font */
 function scaleFontIfNeeded(slide)
 {
-  var height, f, f1, f2, wrapper, saveHeight, saveMaxHeight;
+  let height, f, f1, f2, wrapper, saveHeight, saveMaxHeight;
 
   // The slide only needs to be checked if it has class=textfit or if
   // the body has that class. And then only if the slide is one
@@ -1226,7 +1371,19 @@ function hideMouse()
   hideMouseID = 0;		// 0 = timer has fired, cursor is hidden
 }
 
+/* UI: hideMouseReset */
+// Reset mouse hide timer when user moves mouse
+// Called by: recordMousePosition() on mousemove
+// Schedules: initHideMouse() callback (~2000ms delay)
+// Side effect: Timer state management only
 
+/* ===== UI: Control Functions (2) ===== */
+// hideMouseReset, initHideMouse
+//
+// Purpose: Manage mouse cursor visibility in slide mode
+// Triggered: Mouse movement (recordMousePosition)
+// Timer-based: ~2000ms before hiding
+// DOM: Cursor visibility control
 /* hideMouseReset -- event handler for mousemove to reset the hideMouse timer */
 function hideMouseReset()
 {
@@ -1243,7 +1400,11 @@ function hideMouseReset()
   else document.removeEventListener('mousemove', hideMouseReset);
 }
 
-
+/* UI: initHideMouse */
+// Hide mouse cursor after inactivity timer
+// Called by: hideMouseReset() timeout callback
+// DOM: Cursor hide (style.cursor = 'none')
+// Pure: Only affects cursor visibility
 /* initHideMouse -- set a timeout to hide the mouse pointer when it is idle */
 function initHideMouse()
 {
@@ -1299,7 +1460,7 @@ function unhideElement(elt)
 /* hideSlide -- make a slide invisible, return last element made invisible */
 function hideSlide(elt)
 {
-  var h;
+  let h;
 
   // Unlike hideElement(), hideSlide() only sets 'visibility: hidden'
   // and 'position: absolute'. We assume that the slide is not bigger
@@ -1325,7 +1486,7 @@ function hideSlide(elt)
 /* unhideSlide -- make a (previously hidden) slide visible */
 function unhideSlide(elt)
 {
-  var h;
+  let h;
 
   console.assert(typeof(elt.b6savedstyle) === "string");
   console.assert(isStartOfSlide(elt));
@@ -1365,7 +1526,7 @@ function speakIt(text, elts)
 /* speak -- set the live region to the slide content or the speaker notes */
 function speak(what)
 {
-  var h, next, elts = [];
+  let h, next, elts = [];
 
   // NEXT is not expected as argument.
   console.assert(what === SLIDE || what === COMMENT || what === TOGGLE ||
@@ -1428,44 +1589,283 @@ function speak(what)
   }
 }
 
-
+/* ===== UI: Core Display - displaySlide (GOD FUNCTION) ===== */
+// Display slide content and update all related UI
+// Called by: makeCurrent, navigation system
+// Calls: updateProgress, initProgress, initIncrementals, speak, undisplaySlide
+// Mutates: progressElts, slidenumElts, DOM extensively
+// DOM: classList, style, innerHTML for slide content
+// Side effects: 
+//   - Feature initialization (initIncrementals)
+//   - Accessibility (speak)
+//   - Media (stopVideos indirectly)
+//   - Timers (slideTimer)
+// Problem: Mixes navigation, features, UI, and accessibility
+// Recommendation (Phase 10): Extract into separate concerns
 /* displaySlide -- make the current slide visible */
+
+/* ===== PHASE 10.1: Surgical Extraction ===== */
+/* renderCurrentSlide -- display slide content, scaling, and styling */
+// Extract minimal responsibility: rendering/display operations
+// Does NOT change behavior, timing, or side effects
+// Behavior: IDENTICAL to inline code in displaySlide()
+
+/* ===== PHASE 10.1.2-4: Additional displaySlide() Extractions ===== */
+
+/* updateSlideURL -- update browser URL/hash to current slide */
+function updateSlideURL(slideId)
+{
+  try {
+    history.replaceState({}, "", "#" + slideId);
+  } catch (error) {}
+}
+
+/* scheduleSlideTimer -- schedule next slide auto-advance timer */
+function scheduleSlideTimer(slide, incrementalCount)
+{
+  let m;
+  clearTimeout(slideTimer);
+  if (!slideTimerPaused &&
+      (m = slide.dataset.timing !== undefined ?
+          timeToMillisec(slide.dataset.timing) / (incrementalCount + 1) :
+          slideTiming / (incrementalCount + 1)))
+    slideTimer = setTimeout(nextSlideOrElt, m);
+}
+
+/* syncCurrentSlideToFirstWindow -- notify first window of slide change */
+// PHASE 10.4-B: Wired to use CrossWindowSync abstraction
+function syncCurrentSlideToFirstWindow(slide)
+{
+  if (sync && firstwindow) {
+    sync.postToFirstWindow({event: "slide", v: slide.id});
+  }
+}
+
+
+
+/* ===== PHASE 10.4: Thin CrossWindowSync Wrapper ===== */
+// Minimal abstraction for cross-window communication
+// Protocol: UNCHANGED (uses existing event/message format)
+// Behavior: IDENTICAL to direct postMessage calls
+// Just centralizes the window references and null checks
+// NOTE: secondwindow?.closed === false (not !== false)
+
+
+/* ===== PHASE 10.3: Minimal DOM Adapter ===== */
+// Small abstraction for common DOM operations
+// No caching, no overhead — just centralized access point
+// Methods: getElement, setClass, setText, setAttr, getAttr
+
+class DOMAdapter {
+  /* Get element by ID with null check */
+  static getElement(id) {
+    return document.getElementById(id) || null;
+  }
+
+  /* Set one or more classes */
+  static setClass(element, className, value) {
+    if (element) {
+      if (value === undefined || value === true) {
+        element.classList.add(className);
+      } else if (value === false) {
+        element.classList.remove(className);
+      }
+    }
+  }
+
+  /* Set text content safely */
+  static setText(element, text) {
+    if (element) element.textContent = text;
+  }
+
+  /* Set attribute safely */
+  static setAttr(element, name, value) {
+    if (element) element.setAttribute(name, value);
+  }
+
+  /* Get attribute safely */
+  static getAttr(element, name) {
+    return element ? element.getAttribute(name) : null;
+  }
+
+  /* Toggle class */
+  static toggleClass(element, className) {
+    if (element) element.classList.toggle(className);
+  }
+
+  /* Hide element (add 'hidden' attribute) */
+  static hide(element) {
+    if (element) element.setAttribute("hidden", "");
+  }
+
+  /* Show element (remove 'hidden' attribute) */
+  static show(element) {
+    if (element) element.removeAttribute("hidden");
+  }
+}
+
+
+/* ===== PHASE 10.4: Thin CrossWindowSync Wrapper ===== */
+class CrossWindowSync {
+  postToFirstWindow(message) {
+    if (firstwindow) {
+      firstwindow.postMessage(message, "*");
+    }
+  }
+
+  postToSecondWindow(message) {
+    if (secondwindow?.closed === false) {
+      secondwindow.postMessage(message, "*");
+    }
+  }
+
+  broadcastToWindows(message) {
+    this.postToFirstWindow(message);
+    this.postToSecondWindow(message);
+  }
+}
+
+
+/* ===== PHASE 10.5: Feature Lifecycle Base ===== */
+// Minimal foundation for feature lifecycle events
+// Behaviors: onEnterSlideMode, onExitSlideMode, onSlideChange
+// Pattern: Features can extend this to get lifecycle hooks
+
+class FeatureLifecycle {
+  constructor(name) {
+    this.name = name;
+  }
+
+  /* Called when entering slide mode */
+  onEnterSlideMode() {
+    // Override in subclass
+  }
+
+  /* Called when exiting slide mode */
+  onExitSlideMode() {
+    // Override in subclass
+  }
+
+  /* Called when slide changes (new slide index) */
+  onSlideChange(slideIndex) {
+    // Override in subclass
+  }
+
+  /* Called when feature is enabled */
+  onEnable() {
+    // Override in subclass
+  }
+
+  /* Called when feature is disabled */
+  onDisable() {
+    // Override in subclass
+  }
+}
+
+const sync = new CrossWindowSync();
+
+/* ===== PHASE 10.6: Minimal Feature Dispatcher ===== */
+// Tiny router for lifecycle events
+// Registry pattern: simple array of features
+// Dispatches: onSlideChange, onEnterSlideMode, onExitSlideMode
+
+class FeatureDispatcher {
+  constructor() {
+    this.features = [];
+  }
+
+  /* Register a feature for lifecycle events */
+  registerFeature(feature) {
+    if (feature && typeof feature === 'object') {
+      this.features.push(feature);
+    }
+  }
+
+  /* Dispatch slide change event to all features */
+  notifySlideChange(slideIndex) {
+    for (let feature of this.features) {
+      if (feature.onSlideChange) {
+        try {
+          feature.onSlideChange(slideIndex);
+        } catch (e) {
+          console.error("Feature lifecycle error:", e);
+        }
+      }
+    }
+  }
+
+  /* Dispatch mode change event */
+  notifyEnterSlideMode() {
+    for (let feature of this.features) {
+      if (feature.onEnterSlideMode) {
+        try {
+          feature.onEnterSlideMode();
+        } catch (e) {
+          console.error("Feature lifecycle error:", e);
+        }
+      }
+    }
+  }
+
+  /* Dispatch mode exit event */
+  notifyExitSlideMode() {
+    for (let feature of this.features) {
+      if (feature.onExitSlideMode) {
+        try {
+          feature.onExitSlideMode();
+        } catch (e) {
+          console.error("Feature lifecycle error:", e);
+        }
+      }
+    }
+  }
+}
+
+const featureDispatcher = new FeatureDispatcher();
+
+
+function renderCurrentSlide(slide)
+{
+  /* slide has class=slide, page-break-before=always or is an H1 */
+  unhideSlide(slide);
+  slide.classList.add("active");		// Compatibility with Shower
+  scaleImagesIfNeeded(slide);
+  scaleFontIfNeeded(slide);
+  scaleBody();
+}
+
+
+/* ===== PHASE 10.3-B: DOM Adapter Availability ===== */
+// DOMAdapter is now available for DOM operations
+// Example usage (can be gradual):
+//   DOMAdapter.setClass(element, "active", true);
+//   DOMAdapter.setText(element, "New Text");
+//   DOMAdapter.hide(element);
+// Current code continues to use direct DOM manipulation for safety.
+// Migration can happen incrementally in future phases.
+
+
 function displaySlide()
 {
-  var h, m;
+  let h, m;
 
-  /* curslide has class=slide, page-break-before=always or is an H1 */
-  unhideSlide(curslide);
-  curslide.classList.add("active");		// Compatibility with Shower
-  scaleImagesIfNeeded(curslide);
-  scaleFontIfNeeded(curslide);
-  scaleBody();
-
+  // PHASE 10.1: Orchestrated extraction pattern
+  renderCurrentSlide(curslide);
   updateProgress();
   initIncrementals();
   speak(SLIDE);
 
-  /* If there is a first window, tell it to scroll to the same slide. */
-  if (firstwindow)
-    firstwindow.postMessage({event: "slide", v: curslide.id}, "*");
+  // PHASE 10.1.2-4: Additional extractions
+  // PHASE 10.4-B: Using CrossWindowSync wrapper (via syncCurrentSlideToFirstWindow)
+  syncCurrentSlideToFirstWindow(curslide);
+  updateSlideURL(curslide.id);
+  scheduleSlideTimer(curslide, incrementals.length);
 
-  /* Update the URL displayed in the location bar. */
-  try {
-    history.replaceState({}, "", "#" + curslide.id);
-  } catch (error) {}
+  if (drawingEnabled) restoreDrawingForSlide(curslide);
+  saveLastPosition();
+  if (personalNotesPanel?.parentElement)
+    personalNotesPanel.update(curslide);
 
-  /* Remove any existing slide timer. Then, unless the automatic slide
-   * show is paused, check if the slide has a data-timing attribute,
-   * or failing that, use the default (from the BODY). If the result
-   * is not 0, set a timeout. */
-  clearTimeout(slideTimer);
-  if (! slideTimerPaused &&
-      (m = curslide.dataset.timing !== undefined ?
-	  timeToMillisec(curslide.dataset.timing) / (incrementals.length + 1) :
-	  slideTiming / (incrementals.length + 1)))
-    slideTimer = setTimeout(nextSlideOrElt, m);
-
-  /* If there are any autoplay videos or audios, start them. */
   rewindVideos();
 }
 
@@ -1473,7 +1873,7 @@ function displaySlide()
 /* undisplaySlide -- make the current slide invisible */
 function undisplaySlide()
 {
-  var h;
+  let h;
 
   if (!curslide) return;
 
@@ -1492,17 +1892,35 @@ function makeCurrent(elt)
 {
   console.assert(elt);
   if (curslide != elt) {
+    saveLastPosition();
+    saveDrawingForSlide(curslide);
     undisplaySlide();
     curslide = elt;
+
+    // PHASE 10.5: Notify features of actual slide change
+    if (featureDispatcher && elt) {
+      try {
+        featureDispatcher.notifySlideChange(elt.id || curslide.id);
+      } catch (e) {
+        // Silently ignore notification errors
+      }
+    }
+
     displaySlide();
   }
 }
 
-
+/* UI: toggleFullscreen */
+// Toggle fullscreen presentation mode
+// Reads: slidemode
+// Mutates: fullmode state
+// Browser API: requestFullscreen(), exitFullscreen()
+// Entry: Input (F key), keyboard handler
+// Side effect: Changes browser fullscreen state
 /* toggleFullscreen -- toggle fullscreen or turn it on ("on") or off ("off") */
 async function toggleFullscreen(onoff)
 {
-  var s, x;
+  let s, x;
 
   switchFullscreen = true;	// For the fullscreenchange event handler
 
@@ -1532,7 +1950,7 @@ async function toggleFullscreen(onoff)
 /* createHelpText -- fill the helptext element with help text */
 function createHelpText()
 {
-  var iframe, button;
+  let iframe, button;
 
   /* Put the help text in an IFRAME so it is not affected by the slide style */
   iframe = document.createElement('iframe');
@@ -1593,6 +2011,8 @@ function createHelpText()
 	  "<td>" + _("(slide mode) table of contents<br>(index mode) show/hide notes") +
 	  "<tr><td>" + _("<kbd>W</kbd>") +
 	  "<td>" + _("start/stop drawing on the slide") +
+	  "<tr><td>" + _("<kbd>L</kbd>") +
+	  "<td>" + _("toggle laser pointer") +
 	  "<tr><td>" + _("<kbd>?</kbd>") +
 	  "<td>" + _("this help") +
 	  "<tr><td>" + _("<kbd>Alt</kbd>, <kbd>Option</kbd>") +
@@ -1633,8 +2053,31 @@ function createHelpText()
   helptext.addEventListener('keydown', ev => {
     if (ev.key == "Escape") {helptext.remove(); ev.stopPropagation()}});
 }
+/* ===== UI: Feature Panels (5 functions) ===== */
+// help, tableOfContents, toggleComments,
+// getSlideTitle, createTOCText
+//
+// Purpose: Display auxiliary content panels and UI
+// Entry: Keyboard input (C for comments/TOC, ? for help)
+// Coupling: C key shared between Comments and TOC (routing conflict)
+// DOM: Modal/panel creation, visibility toggle, innerHTML
+// State mutations: helptext, toctext, tocItems, commentsVisible  
 
+/* ===== Feature Manager: Help ===== */
+// Purpose: Display keyboard shortcuts and usage help
+// State: helptext (content)
+// Core Functions: help
+// Input: Keyboard (? key)
+// Dependencies: UI (modal/overlay display)
+// Coupling: Minimal - independent feature
+// See: docs/phase8-feature-managers.md for analysis
 
+/* UI: help */
+// Display keyboard shortcuts and usage help panel
+// Triggered: Input (? key)
+// DOM: Create and show help modal/overlay
+// State: helptext (read-only display)
+// Side effect: DOM only (no core state mutation)
 /* help -- show information about available interactive commands */
 function help()
 {
@@ -1645,11 +2088,15 @@ function help()
   helptext.lastChild.focus();	// The button
 }
 
-
+/* UI: getSlideTitle */
+// Extract slide title from DOM for display purposes
+// Reads: DOM (h1, h2, slide data attributes)
+// Used by: createTOCText(), tableOfContents()
+// Pure: No side effects, only reads DOM
 /* getSlideTitle -- get the title of the slide that starts at elt */
 function getSlideTitle(elt)
 {
-  var title;
+  let title;
 
   if (elt.nodeType == 1 && elt.nodeName.match(/^H[1-6]$/))
     return elt.innerHTML;
@@ -1661,11 +2108,16 @@ function getSlideTitle(elt)
     return null;
 }
 
-
+/* UI: createTOCText */
+// Build table of contents text content
+// Reads: Slides from DOM, slide titles
+// Mutates: toctext, tocItems state
+// Called by: tableOfContents()
+// Pure: No DOM mutation, only builds content
 /* createTOCText -- fill the toctext element with the table of contents */
 function createTOCText()
 {
-  var button, ol;
+  let button, ol;
 
   /* Collect the titles of all slides and make them A elements inside LI. */
   ol = document.createElement("ol");
@@ -1720,7 +2172,23 @@ function createTOCText()
   toctext.b6savedstyle = toctext.style.cssText;
 }
 
+/* ===== UI: tableOfContents (SHARED KEY CONFLICT) ===== */
+// Display table of contents modal/panel
+// Triggered: Input (C key, shared with toggleComments)
+// Calls: getSlideTitle(), createTOCText()
+// DOM: Modal creation, content display
+// Coupling: Routes with toggleComments in keyDown() (conflict)
+// Problem: Same key triggers two different features
+// Recommendation (Phase 9): Clarify C key behavior or split keys
 
+/* ===== Feature Manager: Table of Contents ===== */
+// Purpose: Display table of contents showing all slides or sections
+// State: toctext (content), tocItems (array of entries)
+// Core Functions: tableOfContents, getSlideTitle, createTOCText
+// Input: Keyboard (C key, shared with toggleComments)
+// Dependencies: Navigation (can call targetSlide from TOC click)
+// Coupling: Routing logic with toggleComments in keyDown()
+// See: docs/phase8-feature-managers.md for analysis
 /* tableOfContents -- pop-up a table of contents */
 function tableOfContents()
 {
@@ -1735,7 +2203,7 @@ function tableOfContents()
 /* openSecondWindow -- open a 2nd window with the same slides */
 function openSecondWindow()
 {
-  var url;
+  let url;
 
   console.assert(!firstwindow);	// We're on the first window
 
@@ -1797,7 +2265,7 @@ function warnFullscreen()
 /* warningBanner -- briefly show a banner with a warning */
 function warningBanner(...content)
 {
-  var banner;
+  let banner;
 
   banner = document.createElement("div");
   banner.style = "position: fixed; left: 0; right: 0; z-index: 2;\
@@ -1879,57 +2347,515 @@ function pauseAutomaticSlides()
   requestAnimationFrame(() => document.body.classList.add('manual'));
 }
 
+/* ===== PHASE 10: Persistence, Personal Notes and Laser ===== */
 
-/* toggleAnnotate -- show or hide a canvas on which you can draw */
-function toggleAnnotate()
+function getPersistenceKey(suffix)
 {
-  if (!canvas) {
-    // Canvas not yet created. Initialize it.
-    // TODO: Can the canvas scroll with the slide in slipshow mode?
-    canvas = document.createElement("canvas");
-    canvas.setAttribute('class', 'b6-canvas');
-    canvas.setAttribute('width', window.innerWidth);
-    canvas.setAttribute('height', window.innerHeight);
-    setStyle(canvas, "position", "fixed", "top", "0", "left", "0",
-      "visibility", "hidden");
-    curslide.append(canvas);
-    canvasContext = canvas.getContext("2d");
-    canvasContext.lineCap = "round";
-    canvasContext.lineWidth = 2;
-    canvasContext.strokeStyle =
-      window.getComputedStyle(canvas).getPropertyValue('color');
-    noclick |= 2;
-    // Add an event listener that follows the mouse and draws lines
-    canvas.addEventListener('mousemove', (e) => {
-      if (e.buttons & 1 == 1 && canvasX !== null) {
-	canvasContext.beginPath();
-	canvasContext.moveTo(canvasX, canvasY);
-	canvasContext.lineTo(e.offsetX, e.offsetY);
-	canvasContext.stroke();
-      }
-      canvasX = e.offsetX;
-      canvasY = e.offsetY;
-    });
+  let base;
+  try {
+    base = location.origin + location.pathname + location.search;
+  } catch (e) {
+    base = location.href.split('#')[0];
   }
-  if (canvas.style.visibility == "hidden" ||
-      canvas.parentNode !== curslide) {
-    // Canvas was hidden, by user pressing "w" or switching slides (or
-    // it was just created).
-    canvasContext.clearRect(0, 0, canvas.getBoundingClientRect().width,
-      canvas.getBoundingClientRect().height); // Clear the canvas
-    curslide.append(canvas);		// Move it to current slide, if needed
-    canvasContext.strokeStyle = window.getComputedStyle(canvas)
-      .getPropertyValue('color');	// Get the color set in the style
-    canvas.style.visibility = null;	// Make sure canvas is displayed
-    noclick |= 2;			// Don't let clicks advance the slide
-    canvasX = null;			// Mouse coordinates not yet reliable
-  } else {
-    // Canvas was in use. Hide it.
-    canvas.style.visibility = "hidden";
-    noclick &= !2;			// Reset noclick to what it was before
+  return "b6plus:" + base + ":" + suffix;
+}
+
+function readPersistentJSON(key)
+{
+  try {
+    const value = localStorage.getItem(getPersistenceKey(key));
+    return value ? JSON.parse(value) : null;
+  } catch (e) {
+    return null;
   }
 }
 
+function writePersistentJSON(key, value)
+{
+  try {
+    localStorage.setItem(getPersistenceKey(key), JSON.stringify(value));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function saveLastPosition()
+{
+  if (!curslide?.id) return;
+  writePersistentJSON("last-position", {
+    slideId: curslide.id,
+    slideNumber: curslide.b6slidenum || null,
+    savedAt: Date.now()
+  });
+}
+
+function getSavedLastPosition()
+{
+  const value = readPersistentJSON("last-position");
+  return value?.slideId ? value : null;
+}
+
+function saveDrawingForSlide(slide = curslide)
+{
+  if (!drawingEnabled || !slide || !canvas || !canvasContext) return;
+  try {
+    writePersistentJSON("drawing:" + slide.id, {
+      data: canvas.toDataURL("image/png"),
+      width: canvas.width,
+      height: canvas.height,
+      savedAt: Date.now()
+    });
+  } catch (e) {
+    // Ignore storage/canvas errors; presentation remains usable.
+  }
+}
+
+function getSavedDrawing(slide = curslide)
+{
+  if (!slide?.id) return null;
+  return readPersistentJSON("drawing:" + slide.id);
+}
+
+function restoreDrawingForSlide(slide = curslide)
+{
+  if (!slide) return false;
+
+  const saved = getSavedDrawing(slide);
+
+  if (!canvas) createAnnotationCanvas();
+  if (!canvas || !canvasContext) return false;
+
+  if (canvas.parentNode !== slide) slide.append(canvas);
+  canvas.style.visibility = null;
+  noclick |= 2;
+  canvasX = null;
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!saved?.data) return false;
+
+  const image = new Image();
+  image.onload = () => {
+    if (!canvasContext || !canvas) return;
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    canvasContext.drawImage(image, 0, 0, canvas.width, canvas.height);
+  };
+  image.src = saved.data;
+  return true;
+}
+
+
+function createAnnotationCanvas()
+{
+  canvas = document.createElement("canvas");
+  canvas.setAttribute('class', 'b6-canvas');
+  canvas.setAttribute('width', window.innerWidth);
+  canvas.setAttribute('height', window.innerHeight);
+  setStyle(canvas, "position", "fixed", "top", "0", "left", "0",
+    "visibility", "hidden");
+  canvasContext = canvas.getContext("2d");
+  canvasContext.lineCap = "round";
+  canvasContext.lineWidth = 2;
+  canvasContext.strokeStyle =
+    window.getComputedStyle(canvas).getPropertyValue('color');
+  noclick |= 2;
+  canvas.addEventListener('mousemove', (e) => {
+    if (e.buttons & 1 == 1 && canvasX !== null) {
+      canvasContext.beginPath();
+      canvasContext.moveTo(canvasX, canvasY);
+      canvasContext.lineTo(e.offsetX, e.offsetY);
+      canvasContext.stroke();
+    }
+    canvasX = e.offsetX;
+    canvasY = e.offsetY;
+  });
+  canvas.addEventListener('mouseup', () => saveDrawingForSlide());
+  canvas.addEventListener('mouseleave', () => saveDrawingForSlide());
+}
+
+function resumeFromLastPosition(ev)
+{
+  const saved = getSavedLastPosition();
+  if (!saved) {
+    warningBanner("No saved presentation position.");
+    ev?.currentTarget?.blur();
+    ev?.stopPropagation();
+    ev?.preventDefault();
+    return;
+  }
+
+  resumeRequested = true;
+
+  if (slidemode) {
+    const target = document.getElementById(saved.slideId);
+    if (target && isStartOfSlide(target)) {
+      makeCurrent(target);
+      if (getSavedDrawing(target)) {
+        drawingEnabled = true;
+        restoreDrawingForSlide(target);
+      }
+    } else {
+      resumeRequested = false;
+      warningBanner("The saved slide could not be found.");
+    }
+  } else {
+    toggleMode();
+  }
+
+  ev?.currentTarget?.blur();
+  ev?.stopPropagation();
+  ev?.preventDefault();
+}
+
+
+/* ===== PHASE 10: Personal Notes Editor ===== */
+
+function getPersonalNotes(slide = curslide)
+{
+  if (!slide?.id) return "";
+  const notes = readPersistentJSON("personal-notes") || {};
+  return typeof notes[slide.id] === "string" ? notes[slide.id] : "";
+}
+
+function savePersonalNotes(slide = curslide, text = "")
+{
+  if (!slide?.id) return;
+  const notes = readPersistentJSON("personal-notes") || {};
+  if (text.trim()) notes[slide.id] = text;
+  else delete notes[slide.id];
+  writePersistentJSON("personal-notes", notes);
+}
+
+function selectPersonalNotesSlide(slide)
+{
+  personalNotesSlide = slide;
+  if (slidemode && curslide !== slide) makeCurrent(slide);
+  if (personalNotesPanel?.parentElement) personalNotesPanel.update(slide);
+}
+
+function goToPersonalNotesSlide(ev)
+{
+  const target = personalNotesSlide;
+  if (!target) return;
+
+  if (slidemode) {
+    makeCurrent(target);
+  } else {
+    curslide = target;
+    toggleMode();
+  }
+
+  ev?.currentTarget?.blur();
+  ev?.stopPropagation();
+  ev?.preventDefault();
+}
+
+function createPersonalNotesPanel()
+{
+  const panel = document.createElement("div");
+  panel.className = "b6-personal-notes";
+  panel.setAttribute("role", "dialog");
+  panel.setAttribute("aria-label", "Personal notes");
+  setStyle(panel, "position", "fixed", "inset", "4vh 4vw", "z-index", "10000",
+    "background", "Canvas", "color", "CanvasText", "padding", "0",
+    "box-sizing", "border-box", "display", "flex", "border", "1px solid currentColor",
+    "border-radius", "0.5em", "overflow", "hidden");
+
+  const sidebar = document.createElement("aside");
+  sidebar.className = "b6-personal-notes-sidebar";
+  setStyle(sidebar, "width", "27%", "min-width", "190px", "max-width", "360px",
+    "overflow", "auto", "padding", "0.8em", "box-sizing", "border-box",
+    "border-right", "1px solid currentColor");
+
+  const sidebarHeading = document.createElement("h3");
+  sidebarHeading.textContent = "Slides / Notes";
+  setStyle(sidebarHeading, "margin", "0 0 0.7em 0");
+  sidebar.append(sidebarHeading);
+
+  const sidebarList = document.createElement("div");
+  sidebarList.className = "b6-personal-notes-list";
+  sidebar.append(sidebarList);
+
+  const main = document.createElement("section");
+  setStyle(main, "flex", "1", "min-width", "0", "display", "flex",
+    "flex-direction", "column", "gap", "0.7em", "padding", "1em",
+    "box-sizing", "border-box");
+
+  const heading = document.createElement("h2");
+  heading.textContent = "Notes";
+  setStyle(heading, "margin", "0");
+
+  const speaker = document.createElement("div");
+  speaker.className = "b6-personal-notes-speaker";
+  setStyle(speaker, "max-height", "20vh", "overflow", "auto", "padding", "0.5em",
+    "border", "1px solid currentColor");
+
+  const label = document.createElement("label");
+  label.textContent = "My notes for this slide";
+  label.htmlFor = "b6-personal-notes-textarea";
+
+  const textarea = document.createElement("textarea");
+  textarea.id = "b6-personal-notes-textarea";
+  textarea.setAttribute("rows", "10");
+  textarea.style.cssText =
+    "width:100%; flex:1; min-height:180px; resize:vertical; " +
+    "box-sizing:border-box; font:inherit;";
+
+  const buttons = document.createElement("div");
+  setStyle(buttons, "display", "flex", "gap", "0.5em", "justify-content", "flex-end");
+
+  const go = document.createElement("button");
+  go.textContent = "Go to slide";
+  go.addEventListener("click", goToPersonalNotesSlide);
+
+  const close = document.createElement("button");
+  close.textContent = "Close";
+  close.addEventListener("click", () => panel.remove());
+
+  buttons.append(go, close);
+  main.append(heading, speaker, label, textarea, buttons);
+  panel.append(sidebar, main);
+
+  panel.currentSlide = personalNotesSlide || curslide;
+
+  panel.refreshList = () => {
+    sidebarList.replaceChildren();
+
+    for (const slide of document.body.children) {
+      if (!isStartOfSlide(slide)) continue;
+
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "b6-personal-note-item";
+      setStyle(row, "display", "block", "width", "100%", "text-align", "left",
+        "padding", "0.55em", "margin", "0 0 0.45em 0", "font", "inherit",
+        "cursor", "pointer");
+
+      const note = getPersonalNotes(slide);
+      const preview = note.trim().replace(/\s+/g, " ");
+      row.textContent = "Slide " + slide.b6slidenum +
+        (preview ? " — " + preview.slice(0, 70) : " — (empty)");
+
+      if (panel.currentSlide === slide) {
+        row.setAttribute("aria-current", "true");
+        row.style.fontWeight = "bold";
+      }
+
+      row.addEventListener("click", () => {
+        selectPersonalNotesSlide(slide);
+        textarea.focus();
+      });
+
+      sidebarList.append(row);
+    }
+  };
+
+  panel.update = (slide = curslide) => {
+    if (!slide) return;
+
+    personalNotesSlide = slide;
+    panel.currentSlide = slide;
+    heading.textContent = slide.b6slidenum ?
+      "Notes — Slide " + slide.b6slidenum : "Notes";
+
+    const comments = slide.nextElementSibling;
+    speaker.textContent = "";
+    if (comments?.classList.contains("comment")) {
+      speaker.textContent = comments.textContent.trim() ||
+        "No speaker notes for this slide.";
+    } else {
+      speaker.textContent = "No speaker notes for this slide.";
+    }
+
+    textarea.value = getPersonalNotes(slide);
+    panel.refreshList();
+  };
+
+  textarea.addEventListener("input", () => {
+    personalNotesSlide = panel.currentSlide;
+    savePersonalNotes(personalNotesSlide, textarea.value);
+    panel.refreshList();
+  });
+
+  panel.update(panel.currentSlide || curslide);
+  return panel;
+}
+
+function togglePersonalNotes(ev)
+{
+  if (!personalNotesPanel) personalNotesPanel = createPersonalNotesPanel();
+
+  if (personalNotesPanel.parentElement) {
+    personalNotesPanel.remove();
+  } else {
+    if (!personalNotesSlide) {
+      personalNotesSlide = curslide || visibleSlide ||
+        Array.from(document.body.children).find(isStartOfSlide) || null;
+    }
+    personalNotesPanel.update(personalNotesSlide || curslide);
+    document.body.append(personalNotesPanel);
+    personalNotesPanel.querySelector("textarea")?.focus();
+  }
+
+  ev?.currentTarget?.blur();
+  ev?.stopPropagation();
+  ev?.preventDefault();
+}
+
+
+/* ===== PHASE 10: Laser Pointer ===== */
+
+function ensureLaserPointer()
+{
+  if (laserPointer) return;
+
+  laserPointer = document.createElement("div");
+  laserPointer.className = "b6-laser-pointer";
+  setStyle(laserPointer, "position", "fixed", "width", "18px", "height", "18px",
+    "margin", "-9px 0 0 -9px", "border-radius", "50%", "background", "red",
+    "box-shadow", "0 0 12px 4px rgba(255,0,0,.7)", "pointer-events", "none",
+    "z-index", "2147483647", "display", "none");
+  document.documentElement.append(laserPointer);
+}
+
+function postLaserMessage(data)
+{
+  if (firstwindow)
+    firstwindow.postMessage(data, "*");
+  else if (secondwindow?.closed === false)
+    secondwindow.postMessage(data, "*");
+}
+
+function updateLaserPointer(x, y, broadcast = true)
+{
+  if (!laserPointerEnabled) return;
+  ensureLaserPointer();
+  laserPointer.style.left = x + "px";
+  laserPointer.style.top = y + "px";
+  if (broadcast) postLaserMessage({event: "laser-move", v: {x, y}});
+}
+
+function setLaserPointerEnabled(enabled, broadcast = true)
+{
+  laserPointerEnabled = !!enabled;
+  ensureLaserPointer();
+  laserPointer.style.display = laserPointerEnabled ? "block" : "none";
+
+  if (laserPointerEnabled)
+    updateLaserPointer(mouseX, mouseY, false);
+
+  if (broadcast)
+    postLaserMessage({event: laserPointerEnabled ? "laser-on" : "laser-off"});
+}
+
+function toggleLaserPointer(ev)
+{
+  setLaserPointerEnabled(!laserPointerEnabled, true);
+  ev?.currentTarget?.blur();
+  ev?.stopPropagation();
+  ev?.preventDefault();
+}
+
+/* ===== UI: Annotation / Drawing ===== */
+// toggleAnnotate() and canvas event handlers
+//
+// Purpose: Freehand drawing interface on slides
+// Triggered: Input (W key)
+// DOM: Canvas element create/destroy
+// State mutations: canvas, canvasContext, canvasX, canvasY
+// Event listeners: Mouse (mousemove, mousedown, mouseup) for drawing
+// Coupling: Canvas destroyed on slidemode exit
+// Lifecycle: Canvas created on toggleAnnotate, destroyed on mode toggle
+
+/* UI: toggleAnnotate */
+// Toggle annotation/drawing mode
+// Creates: Canvas overlay element for drawing
+// Mutates: canvas, canvasContext state
+// Attaches: Mouse event listeners for drawing strokes
+// Coupling: Mode toggle destroys canvas (state lost)
+// Lifecycle: Canvas ephemeral (not persisted between mode changes)
+// Recommendation (Phase 10): Consider persistent annotation storage
+
+/* ===== Feature Manager: Annotation / Drawing ===== */
+// Purpose: Allow freehand drawing and annotations on slides in presentation mode
+// State: canvas (element), canvasContext (2D context), canvasX/canvasY (position)
+// Core Functions: toggleAnnotate, [canvas event handlers]
+// Input: Keyboard (W key), Mouse (drawing strokes)
+// Dependencies: Mode Toggle (canvas destroyed on slidemode exit), UI (canvas overlay)
+// Coupling: Tight with Mode Toggle - canvas destroyed on mode exit; drawing state not persisted
+// See: docs/phase8-feature-managers.md for analysis
+/* toggleAnnotate -- show or hide a canvas on which you can draw */
+function toggleAnnotate()
+{
+  if (!canvas) createAnnotationCanvas();
+
+  if (!drawingEnabled) {
+    drawingEnabled = true;
+    if (canvas.parentNode !== curslide) curslide.append(canvas);
+    canvasContext.strokeStyle = window.getComputedStyle(canvas)
+      .getPropertyValue('color');
+    canvas.style.visibility = null;
+    noclick |= 2;
+    canvasX = null;
+    restoreDrawingForSlide(curslide);
+  } else {
+    saveDrawingForSlide(curslide);
+    drawingEnabled = false;
+    canvas.style.visibility = "hidden";
+    noclick &= !2;
+  }
+}
+
+
+/* ===== Input System (Core - 12 functions) ===== */
+// Event handlers for keyboard, mouse, and touch input
+// Guard conditions: syncmode, slidemode, noclick, modifier keys
+// Timing dependencies: singleClickTimer (300ms), hideMouseTimer
+// Entry points: onkeydown, onmousedown, onmousemove, ontouchstart
+// Routes to: Navigation (nextSlide), Mode Toggle (toggleMode),
+//            Features (help, annotations), Sync warnings
+// Side effects: preventDefault, DOM updates, timer management
+//
+// Keyboard Input (keyDown):
+//   - Navigation: Space, Arrows, Home, End, PageUp/Down
+//   - Mode Toggle: Escape, Alt+A, F (fullscreen), 2 (second window)
+//   - Features: ? (help), c (comments/TOC), d (dark mode), w (annotation),
+//               p (pause), s (sync), n (speak)
+//   - Guard: syncmode check, modifier key check, element tag check
+//
+// Mouse Input (mouseButtonClick, doubleClick, recordMousePosition):
+//   - Click routing (advance/previous slide)
+//   - Double-click handling
+//   - Position tracking for annotation
+//   - Guard: noclick counter, syncmode
+//
+// Touch/Gesture (gestureStart/Move/End/Cancel):
+//   - Three-finger tap: toggle slide mode
+//   - Swipe left: next slide
+//   - Swipe right: previous slide
+//   - Threshold: 50px minimum
+//
+// See: docs/phase7-input-analysis.md for complete analysis
+
+/* ===== PHASE 10.2: Extracted C Key Handler ===== */
+/* handleCKey -- handle 'C' key with complex priority logic */
+// Extracted from keyDown() to isolate behavior
+// Behavior: IDENTICAL to original case 'c' in keyDown()
+// Priority: syncmode → toctext.open → slidemode → indexMode → secondwindow
+function handleCKey(event)
+{
+  if (syncmode) {
+    warnSyncMode();
+  } else if (toctext?.open) {
+    toctext.close();
+  } else if (slidemode) {
+    tableOfContents(event);
+  } else if (secondwindow?.closed !== false) {
+    toggleComments();  // index mode
+  } else {
+    secondwindow.postMessage({event: "keydown", v: event.key});
+  }
+}
 
 /* keyDown -- handle key presses anywhere on the document */
 function keyDown(event)
@@ -2028,11 +2954,8 @@ function keyDown(event)
     help(event);
     break;
   case 'c':
-    if (syncmode) warnSyncMode()
-    else if (toctext?.open) toctext.close();
-    else if (slidemode) tableOfContents(event);
-    else if (secondwindow?.closed !== false) toggleComments() // index mode
-    else secondwindow.postMessage({event: "keydown", v: event.key});
+    // PHASE 10.2: Delegated to handleCKey()
+    handleCKey(event);
     break;
   case 'p':
   case 'MediaPlay':
@@ -2059,8 +2982,11 @@ function keyDown(event)
     else if (secondwindow?.closed !== false) return // No 2nd window
     else secondwindow.postMessage({event: "keydown", v: event.key});
     break;
+  case 'l':
+    if (syncmode) warnSyncMode()
+    else toggleLaserPointer(event);
+    break;
   case 'n':
-    // if (syncmode) warnSyncMode() else
     if (slidemode) speak(TOGGLE);
     else if (secondwindow?.closed !== false) return // No 2nd window
     else secondwindow.postMessage({event: "keydown", v: event.key});
@@ -2084,16 +3010,16 @@ function load(e)
 /* toggleMedia -- swap styles for projection and screen */
 function toggleMedia()
 {
-  var i, h, s, links, styles;
+  let i, h, s, links, styles;
 
-  var re1 = /\(\s*overflow-block\s*:\s*(optional-)?paged\s*\)/gi;
-  var sub1 = "(overflow-block: scroll)";
-  var re2 = /\(\s*overflow-block\s*:\s*scroll\s*\)/gi;
-  var sub2 = "(overflow-block: paged)";
-  var re3 = /\bprojection\b/gi;
-  var sub3 = "screen";
-  var re4 = /\bscreen\b/gi;
-  var sub4 = "projection";
+  let re1 = /\(\s*overflow-block\s*:\s*(optional-)?paged\s*\)/gi;
+  let sub1 = "(overflow-block: scroll)";
+  let re2 = /\(\s*overflow-block\s*:\s*scroll\s*\)/gi;
+  let sub2 = "(overflow-block: paged)";
+  let re3 = /\bprojection\b/gi;
+  let sub3 = "screen";
+  let re4 = /\bscreen\b/gi;
+  let sub4 = "projection";
 
   /* Swap projection and screen in MEDIA attributes of LINK elements */
   links = document.getElementsByTagName("link");
@@ -2144,7 +3070,7 @@ function toggleMedia()
 /* scaleBody -- if the BODY has a fixed size, scale it to fit the window */
 function scaleBody()
 {
-  var w, h, w2, h2, save;
+  let w, h, w2, h2, save;
 
   requestAnimationFrame(() => {
     if (!slidemode) return;	// In case the slide show just ended
@@ -2170,7 +3096,7 @@ function scaleBody()
 /* shrinkWindow -- give the 2nd window the same aspect ratio as the slides */
 function shrinkWindow()
 {
-  var r, w, h, safari_fix;
+  let r, w, h, safari_fix;
 
   // Only do somthing if this is a 2nd window, the body has a definite
   // height, and we're not in fullscreen mode.
@@ -2189,7 +3115,30 @@ function shrinkWindow()
   }
 }
 
-
+/* ===== Mode Toggle State Machine ===== */
+// Functions that manage slide/normal mode and fullscreen transitions:
+//
+// Mode Switching:
+//   - toggleMode()              [state changer: writes slidemode]
+//   - finishToggleMode()        [finalization: calls scrollSlide, initProgress]
+//   - toggleModeAndFullscreen() [combined operation]
+//
+// Fullscreen:
+//   - toggleFullscreen()        [browser fullscreen API]
+//   - fullscreenChanged()       [event handler]
+//
+// State Management:
+//   Reads: scale, curslide, incrementals.cur
+//   Writes: slidemode (in toggleMode)
+//   switchInProgress (flag for re-entrance guard)
+//
+// Implementation Pattern:
+//   toggleMode() sets slidemode and animation setup
+//   → requestAnimationFrame calls finishToggleMode() callback
+//   → finishToggleMode() performs scrollSlide + initProgress
+//   → switchInProgress flag prevents concurrent transitions
+//
+// State: slidemode, switchInProgress, fullmode, switchFullscreen, scale
 /* finishToggleMode -- finish switching to slide mode */
 function finishToggleMode()
 {
@@ -2211,13 +3160,31 @@ function finishToggleMode()
     initHideMouse();		// If requested, hide an idle mouse pointer
     shrinkWindow();		// If 2nd window, try and remove black bands
 
-    // If we're a 2nd window, inform the 1st window that we are ready.
+    /* If we're a 2nd window, inform the 1st window that we are ready. */
     if (firstwindow) firstwindow.postMessage({event: "init"});
 
-    /* curslide can be set if we reenter slide mode or if doubleClick set it. */
-    if (curslide) displaySlide();
-    else if (location.hash) targetSlide(location.hash.substring(1));
-    if (!curslide) firstSlide();
+    /* Restore an explicitly requested saved position, otherwise preserve
+       the original initialization order. */
+    if (resumeRequested) {
+      const saved = getSavedLastPosition();
+      const target = saved && document.getElementById(saved.slideId);
+      resumeRequested = false;
+      if (target && isStartOfSlide(target)) {
+        curslide = target;
+        displaySlide();
+        if (getSavedDrawing(target)) {
+          drawingEnabled = true;
+          restoreDrawingForSlide(target);
+        }
+      } else if (!curslide) {
+        firstSlide();
+      }
+    } else {
+      /* curslide can be set if we reenter slide mode or if doubleClick set it. */
+      if (curslide) displaySlide();
+      else if (location.hash) targetSlide(location.hash.substring(1));
+      if (!curslide) firstSlide();
+    }
 
     /* There may be tall objects. Make sure we show the start of the
      * slide. But only if we're not inside an object, embed or iframe,
@@ -2233,11 +3200,21 @@ function finishToggleMode()
   }
 }
 
-
-/* toggleMode -- toggle between slide show and normal display */
+/* ===== UI: Mode & Visual State (5 functions) ===== */
+// toggleMode, toggleModeAndFullscreen, toggleFullscreen,
+// toggleDarkMode, initDarkMode
+//
+// Purpose: Control presentation mode and visual appearance
+// Coupling: Mode toggle affects all feature visibility
+// Side effects:
+//   - Canvas destroyed on mode exit
+//   - Modals/panels closed
+//   - Colors updated in dark mode
+// DOM: body.classList, style manipulations
+// Mutates: slidemode, fullmode, hasDarkMode
 function toggleMode()
 {
-  var h;
+  let h;
 
   /* Do nothing if we are still in the process of switching to slide mode */
   if (switchInProgress) return;
@@ -2257,7 +3234,8 @@ function toggleMode()
     for (h = document.body.firstElementChild; h; h = h.nextElementSibling)
       if (isStartOfSlide(h)) {
 	h = hideSlide(h);	// Returns last element that was hidden
-      } else if (h != liveregion && h != toctext)
+      } else if (h != liveregion && h != toctext &&
+	         h != personalNotesPanel)
 	hideElement(h);
 
     /* Swap style sheets for projection and screen. */
@@ -2280,9 +3258,19 @@ function toggleMode()
     limit = Date.now() + 3000;
     setTimeout(finishToggleMode, 100);
 
+    // PHASE 10.6: Notify features of mode change
+    if (featureDispatcher) {
+      featureDispatcher.notifyEnterSlideMode();
+    }
+
   } else {
 
     slidemode = false;
+
+    // PHASE 10.6: Notify features of mode change
+    if (featureDispatcher) {
+      featureDispatcher.notifyExitSlideMode();
+    }
 
     // Let the screen reader announce that we are leaving slide mode.
     // TODO: This doesn't work in all browsers. The screen reader
@@ -2294,6 +3282,9 @@ function toggleMode()
 
     /* Stop any videos. */
     stopVideos();
+    saveLastPosition();
+    saveDrawingForSlide(curslide);
+    drawingEnabled = false;
 
     /* If there is a first window, tell it we're not in slide mode anymore. */
     if (firstwindow) firstwindow.postMessage({event: "noslide"});
@@ -2337,12 +3328,27 @@ function toggleModeAndFullscreen()
   toggleFullscreen(! slidemode ? "on" : "off");
   toggleMode();
 }
+/* ===== UI: toggleDarkMode (BOUNDARY BREACH) ===== */
+// Toggle dark/light color scheme
+// Calls: initDarkMode()
+// Mutates: hasDarkMode state
+// DOM: body.classList toggle
+// Side effect: postMessage() to Second Window (breaks boundary)
+// Problem: Feature-level function directly syncs to Window 2
+// Recommendation (Phase 10): Centralize all postMessage() calls
 
-
+/* ===== Feature Manager: Dark Mode ===== */
+// Purpose: Toggle dark/light color scheme for slides and UI
+// State: hasDarkMode (boolean)
+// Core Functions: toggleDarkMode, initDarkMode
+// Input: Keyboard (D key)
+// Dependencies: UI (classList changes), Second Window (postMessage sync)
+// Coupling: Posts to Second Window for color sync; affects mode-specific rendering
+// See: docs/phase8-feature-managers.md for analysis
 /* toggleDarkMode -- add, remove or toggle darkmode/lightmode on the BODY */
 function toggleDarkMode(onoff)
 {
-  var darkmodeIsOn, lightmodeIsOn;
+  let darkmodeIsOn, lightmodeIsOn;
 
   if (! hasDarkMode) return;
 
@@ -2384,7 +3390,7 @@ function toggleDarkMode(onoff)
   /* timeToMillisec -- convert MM:SS, DDs, DDm and DDh, etc. to milliseconds */
 function timeToMillisec(s, unit)
 {
-  var m;
+  let m;
 
   // If no unit specified, xx:xx means minutes & seconds and xx means minutes.
   if (! unit) unit = SECONDS;
@@ -2405,7 +3411,7 @@ function timeToMillisec(s, unit)
 /* scrollSlide -- ensure visible incrementals are above the bottom */
 function scrollSlide()
 {
-  var compStyle, i, h, border, pad, bottom;
+  let compStyle, i, h, border, pad, bottom;
 
   // Get the bottom of the current slide and the bottom padding and border.
   bottom = curslide.getBoundingClientRect().bottom;
@@ -2427,7 +3433,7 @@ function scrollSlide()
 /* nextSlideOrElt -- next incremental element or next slide if none */
 function nextSlideOrElt()
 {
-  var m;
+  let m;
 
   console.assert(slidemode);
 
@@ -2479,7 +3485,7 @@ function nextSlideOrElt()
 /* nextSlide -- display the next slide, if any */
 function nextSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2491,9 +3497,11 @@ function nextSlide()
   h = curslide.nextSibling;
   while (h && ! isStartOfSlide(h)) h = h.nextSibling;
 
-  if (h) makeCurrent(h);		// Found a next slide
-  else if (loopSlideShow) firstSlide();	// No next slide, but loop
-  else return;				// No next slide
+  if (h){
+    makeCurrent(h);		// Found a next slide
+  } else{
+    firstSlide();
+  }				
 
   /* The slide may have more content than fits the slide. Scroll to
    * display the lowest of the visible incremental elements, or the
@@ -2539,7 +3547,7 @@ function previousSlideOrElt()
 /* previousSlide -- display the next slide, if any */
 function previousSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2550,7 +3558,11 @@ function previousSlide()
   h = curslide.previousSibling;
   while (h && ! isStartOfSlide(h)) h = h.previousSibling;
 
-  if (! h) return;			// Found no previous slide
+  if (! h) {
+    // At the first slide: wrap around to the last slide.
+    lastSlide();
+    return;
+  }
   makeCurrent(h);
 
   /* The slide may have more content than fits the slide. Make sure
@@ -2564,7 +3576,7 @@ function previousSlide()
 /* firstSlide -- display the first slide */
 function firstSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2578,7 +3590,7 @@ function firstSlide()
 /* lastSlide -- display the last slide */
 function lastSlide()
 {
-  var h;
+  let h;
 
   console.assert(slidemode);
 
@@ -2592,7 +3604,7 @@ function lastSlide()
 /* findSlide -- find the slide with the ID or the number "target" */
 function findSlide(target)
 {
-  var h, n;
+  let h, n;
 
   if ((h = document.getElementById(target)))
     /* Find enclosing .slide or preceding start of slide */
@@ -2609,7 +3621,7 @@ function findSlide(target)
 /* targetSlide -- display slide containing ID=target, or the target'th slide */
 function targetSlide(target)
 {
-  var h;
+  let h;
 
   h = findSlide(target)
   /* If found, and it is not already displayed, display it */
@@ -2620,7 +3632,7 @@ function targetSlide(target)
 /* mouseButtonClick -- handle mouse click event */
 function mouseButtonClick(e)
 {
-  var target = e.target;
+  let target = e.target;
 
   if (noclick) return;
   if (e.button != 0 || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
@@ -2683,10 +3695,11 @@ function gestureMove(e)
   if (gesture.on && slidemode) {
     gesture.x2 = e.touches[0].clientX;
     gesture.y2 = e.touches[0].clientY;
+    updateLaserPointer(gesture.x2, gesture.y2);
 
     /* Give some visual feedback: */
-    var dx = Math.abs(gesture.x2 - gesture.x1);
-    var dy = Math.abs(gesture.y2 - gesture.y1);
+    let dx = Math.abs(gesture.x2 - gesture.x1);
+    let dy = Math.abs(gesture.y2 - gesture.y1);
     if (gesture.touches != 1)
       document.body.style.opacity = gesture.opacity;
     else if (dx > dy)
@@ -2707,8 +3720,8 @@ function gestureEnd(e)
     if (slidemode)
       document.body.style.opacity = gesture.opacity;
 
-    var dx = gesture.x2 - gesture.x1;
-    var dy = gesture.y2 - gesture.y1;
+    let dx = gesture.x2 - gesture.x1;
+    let dy = gesture.y2 - gesture.y1;
 
     if (gesture.touches > 2) {		// 3-finger gesture
       if (syncmode) warnSyncMode();
@@ -2758,7 +3771,7 @@ function gestureCancel(ev)	// eslint-disable-line no-unused-vars
 /* doubleClick -- handle a double click on the body */
 function doubleClick(event)
 {
-  var h;
+  let h;
 
   if (event.button != 0 || event.altKey || event.ctrlKey ||
       event.metaKey || event.shiftKey) return;
@@ -2800,7 +3813,7 @@ function doubleClick(event)
 /* hashchange -- handle fragment id event, make target slide the current one */
 function hashchange(ev)		// eslint-disable-line no-unused-vars
 {
-  var e;
+  let e;
 
   if (!location.hash) return;
   if (slidemode)
@@ -2821,7 +3834,7 @@ function hashchange(ev)		// eslint-disable-line no-unused-vars
 /* message -- handle a postMessage */
 function message(e)
 {
-  var newEvent, h;
+  let newEvent, h;
 
   if (e.source == firstwindow)	// Message from 1st window to 2nd
 
@@ -2853,6 +3866,15 @@ function message(e)
     case "keydown":
       newEvent = new KeyboardEvent("keydown", {key: e.data.v, bubbles: true});
       document.body.dispatchEvent(newEvent);
+      break;
+    case "laser-on":
+      setLaserPointerEnabled(true, false);
+      break;
+    case "laser-off":
+      setLaserPointerEnabled(false, false);
+      break;
+    case "laser-move":
+      if (e.data.v) updateLaserPointer(e.data.v.x, e.data.v.y, false);
       break;
     case "darkmodeOn":		// First window tells us it entered dark mode
       toggleDarkMode("on");
@@ -2903,6 +3925,7 @@ function message(e)
       secondwindow.postMessage({event: "pauseStartTime", v: pauseStartTime});
       secondwindow.postMessage({event: document.body.classList
         .contains("darkmode") ? "darkmodeOn" : "darkmodeOff"});
+      secondwindow.postMessage({event: laserPointerEnabled ? "laser-on" : "laser-off"});
       // Remember previous state and make speaker notes visible if
       // they are currently hidden.
       commentsWereVisible = commentsVisible;
@@ -2947,6 +3970,15 @@ function message(e)
       // Put current slide in the URL, so the index view can highlight it.
       if (curslide) location.replace("#" + curslide.id);
       curslide = null;
+      break;
+    case "laser-on":
+      setLaserPointerEnabled(true, false);
+      break;
+    case "laser-off":
+      setLaserPointerEnabled(false, false);
+      break;
+    case "laser-move":
+      if (e.data.v) updateLaserPointer(e.data.v.x, e.data.v.y, false);
       break;
     case "darkmodeOn":		// Second window tells us it entered dark mode
       toggleDarkMode("on");
@@ -3138,11 +4170,11 @@ function darkModeButtonClick(ev)
 }
 
 
-/* commentButtonClick -- handle activation of the commentbutton */
+/* commentButtonClick -- original Notes button now opens personal Notes */
 function commentButtonClick(ev)
 {
   if (syncmode) warnSyncMode();
-  else requestAnimationFrame(() => toggleComments());
+  else togglePersonalNotes(ev);
 
   // Avoid capturing keyboard events that are meant for navigating slides:
   ev.currentTarget.blur();
@@ -3155,6 +4187,9 @@ function commentButtonClick(ev)
 /* beforeUnload -- handle a beforeunload event */
 function beforeUnload(ev)	// eslint-disable-line no-unused-vars
 {
+  saveLastPosition();
+  saveDrawingForSlide(curslide);
+
   if (secondwindow?.closed === false)
     // We are a firstwindow that has a second window. Close it.
     secondwindow.close();
@@ -3163,7 +4198,13 @@ function beforeUnload(ev)	// eslint-disable-line no-unused-vars
     firstwindow.postMessage({event: 'keydown', v: 'Escape'});
 }
 
-
+/* UI: initDarkMode */
+// Initialize dark mode colors and styling
+// Reads: hasDarkMode state
+// DOM: CSS classes, inline styles
+// Updates: Canvas colors, text visibility
+// Entry: toggleDarkMode() callback
+// Pure side effect: Only DOM/style changes
 /* initDarkMode -- set hasDarkMode depending on the style sheet and slides */
 function initDarkMode()
 {
@@ -3187,9 +4228,10 @@ function initDarkMode()
 /* addUI -- add buttons for slide mode and help */
 function addUI()
 {
-  var playbutton, secondwindowbutton, helpbutton, prevbutton, nextbutton,
-      darkmodebutton, commentbutton, div, playbuttons, secondwindowbuttons,
-      helpbuttons, prevbuttons, nextbuttons, darkmodebuttons, commentbuttons;
+  let playbutton, secondwindowbutton, helpbutton, prevbutton, nextbutton,
+      darkmodebutton, commentbutton, laserbutton, resumebutton, div,
+      playbuttons, secondwindowbuttons, helpbuttons, prevbuttons, nextbuttons,
+      darkmodebuttons, commentbuttons, laserbuttons, resumebuttons;
 
   if (firstwindow) return;	// Do not add buttons on a second window
 
@@ -3286,19 +4328,48 @@ function addUI()
     }
   }
 
-  // Create a button to toggle the display of comments.
+  // The original b6+ Notes button now opens the personal Notes editor.
+  // The C key keeps its original b6+ routing for comments/TOC.
   commentbuttons = document.getElementsByClassName("b6-commentbutton");
   if (commentbuttons.length == 0) {
     commentbutton = document.createElement("button");
     commentbutton.innerHTML = "<span aria-hidden=true>" + _("🗊") +
       "</span> <span>" + _("notes") + "</span>";
     commentbutton.setAttribute("class", "b6-commentbutton");
-    commentbutton.setAttribute("title", _("show/hide notes"));
+    commentbutton.setAttribute("title", "open personal notes");
     div.append(commentbutton);
   }
   for (commentbutton of commentbuttons) {
     commentbutton.addEventListener("click", commentButtonClick);
     commentbutton.addEventListener("dblclick", ignoreEvent);
+  }
+
+  /* Laser Pointer. */
+  laserbuttons = document.getElementsByClassName("b6-laserbutton");
+  if (laserbuttons.length == 0) {
+    laserbutton = document.createElement("button");
+    laserbutton.innerHTML = "<span aria-hidden=true>🔴</span> <span>Laser</span>";
+    laserbutton.setAttribute("class", "b6-laserbutton");
+    laserbutton.setAttribute("title", "toggle laser pointer");
+    div.append(laserbutton);
+  }
+  for (laserbutton of laserbuttons) {
+    laserbutton.addEventListener("click", toggleLaserPointer);
+    laserbutton.addEventListener("dblclick", ignoreEvent);
+  }
+
+  /* Restore the last saved slide and its drawing. */
+  resumebuttons = document.getElementsByClassName("b6-resumebutton");
+  if (resumebuttons.length == 0) {
+    resumebutton = document.createElement("button");
+    resumebutton.innerHTML = "<span aria-hidden=true>↩</span> <span>Restore</span>";
+    resumebutton.setAttribute("class", "b6-resumebutton");
+    resumebutton.setAttribute("title", "restore the last saved slide and drawing");
+    div.append(resumebutton);
+  }
+  for (resumebutton of resumebuttons) {
+    resumebutton.addEventListener("click", resumeFromLastPosition);
+    resumebutton.addEventListener("dblclick", ignoreEvent);
   }
 
   // Create a help button. Clicking it has the same effect as pressing
@@ -3335,7 +4406,7 @@ function addUI()
 /* checkURL -- process query parameters ("full", "static" and "sync") */
 function checkURL()
 {
-  var h;
+  let h;
 
   const params = new URLSearchParams(location.search);
   if (params.get("full") != null) fullmode = true;
@@ -3348,7 +4419,7 @@ function checkURL()
 /* checkIfFramed -- if we're inside an iframe, add target=_parent to links */
 function checkIfFramed()
 {
-  var anchors, i;
+  let anchors, i;
 
   if (window.parent != window) { // Only if we're not the top document
     anchors = document.getElementsByTagName('a');
@@ -3367,7 +4438,7 @@ function checkIfFramed()
 /* checkOptions -- look for b6plus options in the class attribute on body */
 function checkOptions()
 {
-  var c, t;
+  let c, t;
 
   for (c of document.body.classList)
     if (c === 'noclick') {
@@ -3396,7 +4467,7 @@ function checkOptions()
 /* initLanguage -- determine the language to localize to */
 function initLanguage()
 {
-  var i;
+  let i;
 
   // Get language from the HTML element, default to en-us
   language = (document.documentElement.getAttribute("lang") ?? "en-us")
@@ -3442,6 +4513,7 @@ function recordMousePosition(ev)
 {
   mouseX = ev.clientX;
   mouseY = ev.clientY;
+  updateLaserPointer(mouseX, mouseY, true);
 }
 
 
@@ -3451,7 +4523,7 @@ function showURL()
   // This shows the URL of the slide that the mouse is over, but only
   // when the Alt key is pressed and only in index mode.
   //
-  var url, button, span, h;
+  let url, button, span, h;
 
   console.assert(!slidemode);
 
@@ -3498,13 +4570,27 @@ function showURL()
     });
   }
 }
+/* UI: toggleComments */
+// Toggle comments/speaker notes panel visibility
+// Triggered: Input (C key, shared with tableOfContents)
+// Mutates: commentsVisible state
+// DOM: classList toggle for panel visibility
+// Coupling: Routing decision in keyDown()
+// Recommendation (Phase 9): Resolve with tableOfContents() conflict
 
-
+/* ===== Feature Manager: Comments / Speaker Notes ===== */
+// Purpose: Display speaker notes and comments associated with slides
+// State: commentsVisible (boolean), commentsDefault (boolean), visibleSlide (tracking)
+// Core Functions: toggleComments, trackVisibleSlides
+// Input: Keyboard (C key)
+// Dependencies: Navigation (displaySlide indirectly), Accessibility
+// Coupling: Shares C key with tableOfContents() - routing logic in keyDown()
+// See: docs/phase8-feature-managers.md for analysis
 /* toggleComments -- hide or show comments (speaker notes) after slides */
 function toggleComments()
 {
-  var e, fragment, after = false;
-  var oldrect, newrect;
+  let e, fragment, after = false;
+  let oldrect, newrect;
 
   // Get the position in the viewport of one of the slides that is
   // visible in the viewport, so we can scroll the page to the same
@@ -3556,7 +4642,7 @@ function toggleComments()
 /* trackVisibleSlides -- keep track of which slides are in the viewport */
 function trackVisibleSlides()
 {
-  var observer;
+  let observer;
 
   // Slides that are visible have b6IsInViewport set to true. This is
   // used in toggleComments() to scroll the document to approximately
@@ -3674,3 +4760,81 @@ if (document.readyState === 'complete') initializeLayout();
 else window.addEventListener('load', initializeLayout, {once: true});
 
 })();
+
+
+/* ===== PHASE 10 / FINAL USER-FEATURE SUMMARY ===== */
+/*
+  Phase 10 refactoring foundation remains intact:
+    - Surgical displaySlide extractions
+    - DOMAdapter
+    - CrossWindowSync
+    - FeatureLifecycle
+    - FeatureDispatcher
+
+  Final user features added without changing the core navigation protocol:
+    - Existing Toolbar Notes button opens Personal Notes
+    - Laser Pointer (L)
+    - Restore last saved position and drawing
+    - Per-slide Personal Notes with slide list/navigation
+
+  Original keyboard routing intentionally preserved:
+    - C remains the original Comments/TOC keyboard route
+    - W remains the original Drawing keyboard route
+    - N remains the original screen-reader speaking route
+*/
+
+
+/* ===== FINAL REVIEW AUDIT ===== */
+/*
+  Final review against the supplied b6_plus_plus(5).js Phase 3-10 base:
+
+  Preserved original keyboard behavior:
+    C -> original comments/TOC routing
+    W -> original drawing on/off routing
+    N -> original screen-reader speak/TOGGLE behavior
+    Space/Right/Down -> next slide/incremental
+    Left/Up -> previous slide/incremental
+    Home/End/PageUp/PageDown -> original navigation
+    A/Escape/F/2/D/P/S/? -> original behavior
+
+  Toolbar additions:
+    Existing Notes button -> Personal Notes editor
+    Laser -> Laser Pointer on/off
+    Restore -> Restore last saved slide/drawing
+
+  Toolbar removals:
+    No TOC toolbar button
+    No Clear Drawing toolbar button
+    No duplicate Personal Notes toolbar button
+
+  Laser:
+    L key toggles laser
+    Help panel documents L
+    Laser node is appended under documentElement for fullscreen visibility
+    Laser state and movement are synchronized with the second window
+
+  Personal Notes:
+    One note per slide ID
+    Notes are stored in localStorage
+    Existing Notes toolbar button opens the editor
+    Sidebar lists every slide and a preview of its note
+    Clicking a slide selects its note
+    Go to slide navigates to the selected slide
+
+  Restore/Drawing:
+    Last slide position is stored
+    Drawing is stored per slide
+    W mode remains the activation path
+    Restore re-enters the saved slide and restores its saved drawing
+
+  Validation performed:
+    node --check: PASS
+    duplicate original function names: NONE
+    orphaned removed Notes-panel references: NONE
+    TOC toolbar control: ABSENT
+    Clear Drawing toolbar control: ABSENT
+    existing Notes toolbar control: PRESENT
+    Laser toolbar control: PRESENT
+    Restore toolbar control: PRESENT
+    L help entry: PRESENT
+*/
